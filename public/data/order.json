@@ -1,0 +1,25 @@
+{
+    "userName": "아이덴잇",
+    "userTel": "010-1234-5678",
+    "userAddress" : "서울특별시 강서구 가양동 173-22",
+    "prdPrice": "27,200",
+    "totalPrice": "29,200",
+    "deliveryFee": "2,000",
+    "pay": "카드 결제",
+    "market": "인싸과일",
+    "item": "샤인머스켓",
+    "itemPrice": "18,000",
+    "itemDeliveryFee": "2,000",
+    "orders": [
+        {
+            "item": "샤인머스켓",
+            "price": "18,000",
+            "deliveryFee": "2,000"
+        },
+        {
+            "item": "하우스딸기",
+            "price": ",000",
+            "deliveryFee": "2,000"
+        }
+    ]
+}
