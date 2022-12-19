@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import LoginHeader from '../components/Login/LoginHeader'
 import Logo from "../assets/logo.png";
@@ -384,21 +384,17 @@ function LoginPage() {
           {/* <LoginButtonActive onclick={sumitInput}>로그인</LoginButtonActive> */}
         </InputForm>
         <FindStyle>
-          <FindAccount
-            onClick={() => {
-              navigate("find/email");
-            }}
-          >
+        <Link to="/member/find/email">
+          <FindAccount>
             이메일 찾기
           </FindAccount>
+          </Link>
           <Bar />
-          <FindAccount
-            onClick={() => {
-              navigate("find/password");
-            }}
-          >
+          <Link to="/member/find/password">
+          <FindAccount>
             비밀번호 찾기
           </FindAccount>
+          </Link>
         </FindStyle>
         <GapContainer>
           <SnsStyle>
@@ -416,16 +412,14 @@ function LoginPage() {
           </SnsStyle>
           <LoginFooter>
             <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
-            <Button
-              onClick={() => {
-                navigate("signup");
-              }}
-            >
+            <Link to="/member/signup">
+            <Button>
               <SignupText>회원가입</SignupText>
               <ArrowStyle>
                 <Arrow />
               </ArrowStyle>
             </Button>
+            </Link>
           </LoginFooter>
         </GapContainer>
       </LoginBody>

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components'
 import maindata from '../../assets/data/maindata'
 import { ReactComponent as StarIcon } from "../../assets/main/ratestar.svg";
-import DetailPage from '../../pages/DetailPage';
+import DetailsPage from '../../pages/DetailsPage';
 
 const LastChanceBody = styled.div`
   padding: 20px;
@@ -183,7 +183,7 @@ function MainLastChance() {
           </LastChanceContent>
         </LastChanceDiv>
         {/* <Routes>
-          <Route path='/detail/:id' element={<DetailPage item={item}/>}/>
+          <Route path='/detail/:id' element={<DetailsPage item={item}/>}/>
         </Routes> */}
       </LastChanceBody>
 

@@ -653,7 +653,7 @@ const MarketComments = styled.div`
 
 
 
-function DetailPage(props) {
+function DetailsPage(props) {
 
 
   let [detailTab, setDetailTab] = useState(0)
@@ -1012,4 +1012,4 @@ function TabContent(props){
   ][props.detailTab]
 }
 
-export default DetailPage
+export default DetailsPage

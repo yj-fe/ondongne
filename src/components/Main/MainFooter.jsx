@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as Home } from "../../assets/Home.svg";
 import { ReactComponent as Search } from "../../assets/Search.svg";
 import { ReactComponent as Market } from "../../assets/Market.svg";
@@ -75,8 +75,11 @@ function MainFooter() {
         <NavIcon>
           <Market />
         </NavIcon>
-        <NavIcon>
+        <NavIcon
+        >
+        <Link to="/order/new/:id" style={{ textDecoration: 'none' }}>
           <Order />
+        </Link>
         </NavIcon>
         <NavIcon
           onClick={() => {
