@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const SignupBody = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const SignupBody = styled.div`
     right: 0px;
     width: 390px;
   }
-`
+`;
 export const RequestTextStyle = styled.p`
   display: flex;
   flex-direction: column;
@@ -35,17 +35,17 @@ export const RequestTextStyle = styled.p`
   @media only screen and (max-width: 390px) {
     width: 350px;
   }
-`
+`;
 export const RequestText = styled.div`
   font-weight: 600;
   font-size: 24px;
   color: #212121;
-`
+`;
 export const RequestInfo = styled.p`
   font-weight: 300;
   font-size: 15px;
   color: #424242;
-`
+`;
 export const RequesInputContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,7 +55,7 @@ export const RequesInputContainer = styled.div`
   @media only screen and (max-width: 390px) {
     width: 350px;
   }
-`
+`;
 
 export const RequestInputForm = styled.form`
   display: flex;
@@ -66,15 +66,15 @@ export const RequestInputForm = styled.form`
 
   width: 648px;
   /* height: auto; */
-`
+`;
 export const RequesInputTitle = styled.p`
   font-weight: 500;
   font-size: 16px;
   color: #212121;
-`
+`;
 export const RequestInputDiv = styled.div`
   display: flex;
-  flex-direction: ${props => props.direction };
+  flex-direction: ${(props) => props.direction};
   align-items: center;
   padding: 0px;
   gap: 12px;
@@ -84,30 +84,30 @@ export const RequestInputDiv = styled.div`
   @media only screen and (max-width: 390px) {
     width: 350px;
   }
-`
+`;
 export const RequestInput = styled.input`
   box-sizing: border-box;
   width: 546px;
   height: 48px;
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 12px;
-  border-bottom: 1px solid #E0E0E0;
-  
+  border-bottom: ${(props) => `1px solid ${props.borderColor}`};
+
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #BDBDBD;
-  
+  color: #bdbdbd;
+
   &:focus {
     outline: none;
     border-bottom: 1px solid #616161;
     color: #212121;
   }
-  
+
   @media only screen and (max-width: 390px) {
     width: 257px;
   }
-  `
+`;
 export const RequestButton = styled.button`
   box-sizing: border-box;
   display: flex;
@@ -118,21 +118,21 @@ export const RequestButton = styled.button`
   gap: 4px;
   width: 90px;
   height: 48px;
-  background: #FFFFFF;
-  border: 1px solid #EEEEEE;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
   border-radius: 4px;
   flex: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   color: #212121;
-`
+`;
 export const PwdContainer = styled.div`
   box-sizing: border-box;
   /* align-items: center; */
   width: 648px;
   height: 48px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: ${(props) => `1px solid ${props.borderColor}`};
   padding: 12px;
 
   font-family: "Pretendard";
@@ -155,7 +155,7 @@ export const PwdInput = styled.input`
   color: #bdbdbd;
   outline: none;
   &::-ms-reveal {
-   display: none;
+    display: none;
   }
 `;
 export const EyeOffStyle = styled.div`
@@ -169,16 +169,26 @@ export const SignupButton = styled.button`
   bottom: 0;
   width: 728px;
   height: 56px;
-  background: ${ props => props.color  ? "#0B806F" : "#e0e0e0"};
+  background: ${(props) => (props.color ? "#0B806F" : "#e0e0e0")};
   font-weight: 700;
   font-size: 18px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   left: 31%;
-  
+
   @media only screen and (max-width: 390px) {
     align-items: center;
     width: 390px;
     left: auto;
-  } 
-`
+  }
+`;
+
+export const ValidText = styled.p`
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+
+  color: ${(props) => (props.color ? "#388E3C" : "#d32f2f")};
+`;

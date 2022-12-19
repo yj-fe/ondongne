@@ -1,72 +1,160 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as EyeOn } from "../../../../assets/login/Eyeon.svg";
 import { ReactComponent as EyeOff } from "../../../../assets/login/Eyeoff.svg";
-import ModalPage from "../../../Login/ModalPage";
-import {SignupBody, RequestTextStyle, RequestText, EyeOffStyle, PwdInput, PwdContainer, RequestButton, RequestInput, RequestInputDiv, RequestInfo, RequesInputContainer, RequestInputForm, RequesInputTitle, SignupButton } from './SignupInfoStyle';
+import { EyeOffStyle, PwdContainer, PwdInput, RequesInputContainer, RequesInputTitle, RequestButton, RequestInfo, RequestInput, RequestInputDiv, RequestInputForm, SignupButton, ValidText } from "./SignupInfoStyle";
+import { memberEmailValidation, memberNicknameValidation, signup } from "../../../../service/member";
+import { useNavigate } from "react-router-dom";
+import Alert from './../../../commonUi/Alert';
+import { SignupBody, RequestText } from './../signuprequest/SignupRequestStyle';
+import { RequestTextStyle } from './../../Password/PwdReset/PwdResetStyle';
 
-function SignupInfo() {
+function SignupInfo({ data, setData }) {
 
   const [email, setEmail] = useState('');
-  let [password, setPassword] = useState('');
-  let [passwordCheck, setPasswordCheck] = useState('');
-  let [active, setActive] = useState(false);
-  let [disabled, setDisabled] = useState(true);
-  let [modal, setModal] = useState(false);
+  const [emailValidMessage, setEmailValidMessage] = useState('');
+  const [emailValid, setEmailValid] = useState(null);
 
-
-
-  const onEmailChange = (e) => {
-    setEmail(e.currentTarget.value);
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const onChangePasswordCheck = (e) => {
-    setPasswordCheck(e.target.value);
-  };
+  const [password, setPassword] = useState(''); 
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [passwordValid, setPasswordValid] = useState(null);
+  const [passwordValidMessage, setPasswordValidMessage] = useState('');
+ 
+  const [nickname, setNickname] = useState('');
+  const [nicknameValidMessage, setNicknameValidMessage] = useState('');
+  const [nicknameValid, setNicknameValid] = useState(null);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
+  const [active, setActive] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const [alert, setAlert] = useState(null);
 
-  const togglePassWordPut = () => {
-    /* e.preventDefault() */
-    setShowPassword(!showPassword);
-  };
+  const navigate = useNavigate();
+  
+  // 이메일 중복체크
+  const emailValidation = async () => {
+    if (email === '') {
+      setAlert({
+        contents: "이메일을 입력해주세요.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(null),
+        onOverlayClick: () => setAlert(null),
+      })
+    }
 
-  const togglePassWordCheck = () => {
-    /* e.preventDefault() */
-    setShowPasswordCheck(!showPasswordCheck);
-  };
+    await memberEmailValidation(email)
+      .then(response => {
+        const {data, message} = response.data;
+        setEmailValid(data);
+        setEmailValidMessage(message);
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
-  const goToLogin = () => {
-    // api
-    alert('api request');
+  // 닉네임 중복체크
+  const nicknameValidation = async () => {
+    if (nickname === '') {
+      setAlert({
+        contents: "닉네임을 입력해주세요.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(null),
+        onOverlayClick: () => setAlert(null),
+      })
+    }
 
-    // success
-    console.log('goToLogin');
-    
-    // fail
+    await memberNicknameValidation(nickname)
+      .then(response => {
+        const {data, message} = response.data;
+        setNicknameValid(data);
+        setNicknameValidMessage(message);
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
-  } 
-  // const acctiveSignup = () => {
-  //   if (중복체크모두 true && password === passwordCheck ) {
-  //     setActive(true)
-  //   }else{
-  //     setActive(false)
-  //   }
-  // };
+  // 회원가입
+  const onSubmit = async () => {
+    await signup(data)
+      .then(response => {
+        if(response.status == 200) {
+          setAlert({
+            contents: "회원가입을 축하드립니다. \n 로그인 후 이용해 주세요.",
+            buttonText: "확인",
+            onButtonClick: () => navigate('/member/login'),
+            onOverlayClick: () => navigate('/member/login'),
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error)
+    })
+  }
+
+  // 비밀번호 유효성 검사
+  const passwordValidation = () => {
+    const regExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+    return regExp.test(password);
+  }
+  
+  //비밀번호 체크
+  useEffect(() => {
+
+    if(!password) {
+      return;
+    }
+
+    if(!passwordValidation()) {
+      setPasswordValid(false);
+      setPasswordValidMessage("비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 20이하로 입력해주세요.");
+      return;
+    }
+
+    if(!passwordCheck) {
+      setPasswordValid(false);
+      setPasswordValidMessage("비밀번호 확인이 필요합니다.");
+      return
+    }
+
+    if(password === passwordCheck) {      
+      setPasswordValid(true);
+      setPasswordValidMessage("");
+    } else {
+      setPasswordValid(false);
+      setPasswordValidMessage("비밀번호가 서로 일치하지 않습니다.");
+    }
+  }, [password, passwordCheck])
 
   useEffect(() => {
-    setActive(email.length > 0);
-  }, [email])
+    if(emailValid && passwordValid && nicknameValid) {
+      setActive(true)
+      setDisabled(false)
 
-  // const ActiveButton = () => {
-  //   if (이메일,비번,닉네임 성공){
-  //     setActive(true);
-  //     setDisabled(false);
-  //   }else{}
-  // }
+      setData((prevState) => {
+        return { 
+          ...prevState,
+          email,
+          password,
+          nickname
+        }
+      });
+
+    } else {
+      setActive(false)
+      setDisabled(true)
+      
+      setData((prevState) => {
+        return { 
+          ...prevState,
+          email: '',
+          password: '',
+          nickname: ''
+        }
+      });
+    }
+  }, [emailValid, passwordValid, nicknameValid])
 
   return (
     <div>
@@ -80,86 +168,104 @@ function SignupInfo() {
             <RequesInputTitle>이메일</RequesInputTitle>
             <RequestInputDiv direction="row">
               <RequestInput
-                id='email '
-                name='email'
                 type='text'
                 placeholder='이메일 입력'
                 outline='none'
                 value={email}
-                onChange={onEmailChange}
-              >
-              </RequestInput>
+                borderColor={emailValid == null ?'#E0E0E0' : emailValid ? '#388E3C' : '#D32F2F'}
+                onChange={e => setEmail(e.target.value)}
+              />
+              
               <RequestButton
                 type="button"
-                // onClick={이메일중복확인}
+                onClick={emailValidation}
               >
                 중복확인
               </RequestButton>
             </RequestInputDiv>
+            {
+              emailValidMessage && 
+              <ValidText color={emailValid}>{emailValidMessage}</ValidText>
+            }
           </RequestInputForm>
+
           <RequestInputForm>
             <RequesInputTitle>비밀번호</RequesInputTitle>
             <RequestInputDiv direction="column">
-              <PwdContainer>
+              <PwdContainer
+                borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
                 <PwdInput
-                  id="password"
-                  name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="비밀번호 입력"
-                  // onKeyUp={acctiveSignup}
-                  onChange={onChangePassword}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
                 />
-                <EyeOffStyle onClick={togglePassWordPut}>
+                <EyeOffStyle onClick={()=>setShowPassword(!showPassword)}>
                   {showPassword ? <EyeOn /> : <EyeOff />}
                 </EyeOffStyle>
               </PwdContainer>
-              <PwdContainer>
+              <PwdContainer
+                borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
                 <PwdInput
-                  id="Check"
-                  name="Check"
                   type={showPasswordCheck ? "text" : "password"}
                   placeholder="비밀번호 확인"
-                  // onKeyUp={acctiveSignup}
-                  onChange={onChangePasswordCheck}
+                  value={passwordCheck}
+                  onChange={e => setPasswordCheck(e.target.value)}
                 />
-                <EyeOffStyle onClick={togglePassWordCheck}>
+                <EyeOffStyle onClick={()=>setShowPasswordCheck(!showPasswordCheck)}>
                   {showPasswordCheck ? <EyeOn /> : <EyeOff />}
                 </EyeOffStyle>
               </PwdContainer>
+              {
+                passwordValidMessage && 
+                <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
+              }
             </RequestInputDiv>
           </RequestInputForm>
           <RequestInputForm>
             <RequesInputTitle>닉네임</RequesInputTitle>
             <RequestInputDiv direction="row">
               <RequestInput
-                id='id '
-                name='id'
                 type='text'
                 placeholder='닉네임 입력'
                 outline='none'
-                // onChange={onChangeInput}
+                value={nickname}
+                borderColor={nicknameValid == null ?'#E0E0E0' : nicknameValid ? '#388E3C' : '#D32F2F'}
+                onChange={e => setNickname(e.target.value)}
               >
               </RequestInput>
               <RequestButton
                 type="button"
-                // onClick={닉네임중복확인}
+                onClick={nicknameValidation}
               >
                 중복확인
               </RequestButton>
             </RequestInputDiv>
+            {
+              nicknameValidMessage && 
+              <ValidText color={nicknameValid}>{nicknameValidMessage}</ValidText>
+            }
           </RequestInputForm>
         </RequesInputContainer>
-        </SignupBody>
+      </SignupBody>
       <SignupButton
         type="button"
-        // onClick={()=>{goToLogin(); errorCheck();}}
         color={active}
-        onClick={()=>{setModal(true)}}
+        disabled={disabled}
+        onClick={onSubmit}
       >
         가입하기
       </SignupButton>
-      {modal === true ? <ModalPage modaltext="비밀번호는 영문, 숫자, 특수문자 조합으로
-8자 이상 입력해주세요." modalroute="/member/login" modalbutton="확인"/> : null}
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
     </div>
   )
 }

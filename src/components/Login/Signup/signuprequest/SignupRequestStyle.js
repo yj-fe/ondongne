@@ -132,3 +132,16 @@ export const RequestButton = styled.button`
   line-height: 20px;
   color: #212121;
 `
+
+export const AuthTimer = styled.div`
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 80px;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #4361EE;
+`;
