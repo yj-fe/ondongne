@@ -1,9 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-
-
-let SignupBody = styled.div`
+export const SignupBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +22,7 @@ let SignupBody = styled.div`
     width: 390px;
   }
 `
-let RequestTextStyle = styled.p`
+export const RequestTextStyle = styled.p`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -39,7 +36,7 @@ let RequestTextStyle = styled.p`
     width: 350px;
   }
 `
-let RequestText = styled.p`
+export const RequestText = styled.p`
   width: 648px;
   height: 32px;
   font-weight: 600;
@@ -50,7 +47,7 @@ let RequestText = styled.p`
   align-self: stretch;
   flex-grow: 0;
 `
-let RequestInfo = styled.p`
+export const RequestInfo = styled.p`
   width: 648px;
   height: 20px;
   font-weight: 300;
@@ -61,7 +58,7 @@ let RequestInfo = styled.p`
   align-self: stretch;
   flex-grow: 0;
 `
-let InputForm = styled.form`
+export const InputForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,7 +71,7 @@ let InputForm = styled.form`
     width: 350px;
   }
 `
-let RequesInputForm = styled.form`
+export const RequesInputForm = styled.form`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -87,7 +84,7 @@ let RequesInputForm = styled.form`
     width: 350px;
   }
 `
-let RequesInput = styled.input`
+export const RequesInput = styled.input`
   display: flex;
   flex-direction: row;
 
@@ -116,7 +113,7 @@ let RequesInput = styled.input`
     width: 255px;
   }
 `
-let RequestButton = styled.button`
+export const RequestButton = styled.button`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -135,51 +132,3 @@ let RequestButton = styled.button`
   line-height: 20px;
   color: #212121;
 `
-
-
-
-
-
-function SignupRequest() {
-  return (
-    <div>
-      <SignupBody>
-        <RequestTextStyle>
-          <RequestText>온동네마켓 회원가입</RequestText>
-          <RequestInfo>회원가입을 위해 휴대폰 번호를 인증해 주세요.</RequestInfo>
-        </RequestTextStyle>
-        <InputForm>
-          <RequesInputForm>
-            <RequesInput
-              id='phone'
-              name='phone'
-              type='number'
-              placeholder='-를 제외한 휴대폰번호 입력'
-              outline='none'
-              // onChange={onChangeInput}
-              >
-            </RequesInput>
-            <RequestButton
-              type='button'
-              // onClick={}
-            >
-              인증요청
-            </RequestButton>
-          </RequesInputForm>
-          {/* <TimeOut/> */}
-        </InputForm>
-      </SignupBody>
-    </div>
-  )
-}
-
-
-function ToggleRequest(){
-  return(
-    <div>
-      
-    </div>
-  )
-}
-
-export default SignupRequest
