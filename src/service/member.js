@@ -7,6 +7,7 @@ const urls = {
     nicknameValidation: '/member/validation/nickname',
     findEmail: '/member/find/email',
     findPassword: '/member/find/password',
+    passwordChange: '/member/password/change'
 };
 
 /* ==============================
@@ -50,4 +51,11 @@ export function memberFindEmail(phone) {
 ============================== */
 export function memberFindPassword(email, phone) {
     return client.post(`${urls.findPassword}?email=${email}&phone=${phone}`);
+};
+
+/* ==============================
+    비밀번호 변경
+============================== */
+export function memberPasswordChange(id, password) {
+    return client.post(`${urls.passwordChange}/${id}?password=${password}`);
 };

@@ -1,78 +1,87 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as EyeOn } from "../../../../assets/login/Eyeon.svg";
 import { ReactComponent as EyeOff } from "../../../../assets/login/Eyeoff.svg";
-import ModalPage from "../../ModalPage";
-import ModalError from "../../ModalError.jsx";
 import { RequestTextStyle, RequestText, RequestInfo, RequesInputForm, RequestInputDiv, PwdContainer, PwdInput, EyeOffStyle, ResetButton } from './PwdResetStyle'
+import { ValidText } from "../../Signup/signupinfo/SignupInfoStyle";
+import { memberPasswordChange } from "../../../../service/member";
+import Alert from "../../../commonUi/Alert";
 
 
 
-function PwdReset() {
+function PwdReset({ id }) {
 
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [passwordValid, setPasswordValid] = useState(null);
+  const [passwordValidMessage, setPasswordValidMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordCheck, setShowPasswordCheck] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const navigate = useNavigate();
 
+  const onSubmit = async () => {
+    await memberPasswordChange(id, password)
+      .then(response => {
+        const {data, message} = response.data
 
-  let [password, setPassword] = useState('');
-  let [passwordCheck, setPasswordCheck] = useState('');
-  let [active, setActive] = useState(false);
-  let [disabled, setDisabled] = useState(true);
+        if(data) {
+          setAlert({
+            contents: message,
+            buttonText: "확인",
+            onButtonClick: () => navigate('/member/login'),
+            onOverlayClick: () => navigate('/member/login'),
+          })
+        } else {
+          setAlert({
+            contents: message,
+            buttonText: "확인",
+            onButtonClick: () => setAlert(false),
+            onOverlayClick: () => setAlert(false),
+          })
+        }
 
-  let [error, setError] = useState(false)
+      })
+      .catch(error => {
+        console.log(error)
+    })
+  }
   
-  let [showPassword, setShowPassword] = useState(false);
-  let [showPasswordCheck, setShowPasswordCheck] = useState(false);
+  // 비밀번호 유효성 검사
+  const passwordValidation = () => {
+    const regExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+    return regExp.test(password);
+  }
   
-  let [modal, setModal] = useState(false);
-  let [modalError, setModalError] = useState(false)
+  //비밀번호 체크
+  useEffect(() => {
 
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const onChangePasswordCheck = (e) => {
-    setPasswordCheck(e.target.value);
-  };
+    if(password === '') {
+      setPasswordValid(false);
+      setPasswordValidMessage("변경하실 비밀번호를 입력해주세요.");
+      return;
+    }
 
+    if(!passwordValidation()) {
+      setPasswordValid(false);
+      setPasswordValidMessage("비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 20이하로 입력해주세요.");
+      return;
+    }
 
-  const togglePassWordPut = () => {
-    /* e.preventDefault() */
-    setShowPassword(!showPassword);
-  };
+    if(!passwordCheck) {
+      setPasswordValid(false);
+      setPasswordValidMessage("비밀번호 확인이 필요합니다.");
+      return;
+    }
 
-  const togglePassWordCheck = () => {
-    /* e.preventDefault() */
-    setShowPasswordCheck(!showPasswordCheck);
-  };
-
-  const ErrorCheck = () => {
-    if (password.length > 7 && password === passwordCheck){
-      setModal(true)
-    } else if(password !== passwordCheck){
-      console.log('password <> passwordCheck');
-      setError(true)
+    if(password === passwordCheck) {      
+      setPasswordValid(true);
+      setPasswordValidMessage("");
     } else {
-      setModalError(true)
+      setPasswordValid(false);
+      setPasswordValidMessage("비밀번호가 서로 일치하지 않습니다.");
     }
-  }
-  const ActiveButton = () => {
-    if (password && passwordCheck.length >= 5){
-      setActive(true);
-      setDisabled(false);
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }, [password, passwordCheck])
 
   return (
     <div>
@@ -87,49 +96,50 @@ function PwdReset() {
               <RequestInputDiv direction="column">
                 <PwdContainer>
                   <PwdInput
-                    id="password"
-                    name="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="새 비밀번호"
-                    // onKeyUp={acctiveSignup}
-                    onChange={onChangePassword}
-                    onKeyUp={ActiveButton}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                   />
-                  <EyeOffStyle onClick={togglePassWordPut}>
+                  <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? <EyeOn /> : <EyeOff />}
                   </EyeOffStyle>
                 </PwdContainer>
                 <PwdContainer>
                   <PwdInput
-                    id="passwordCheck"
-                    name="passwordCheck"
                     type={showPasswordCheck ? "text" : "password"}
                     placeholder="새 비밀번호 확인"
-                    // onKeyUp={acctiveSignup}
-                    onChange={onChangePasswordCheck}
-                    onKeyUp={ActiveButton}
+                    value={passwordCheck}
+                    onChange={e => setPasswordCheck(e.target.value)}
                   />
-                  <EyeOffStyle onClick={togglePassWordCheck}>
+                  <EyeOffStyle onClick={() => setShowPasswordCheck(!showPasswordCheck)}>
                     {showPasswordCheck ? <EyeOn /> : <EyeOff />}
                   </EyeOffStyle>
                 </PwdContainer>
               </RequestInputDiv>
+              {
+                passwordValidMessage && 
+                <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
+              }
             <ResetButton
               type="button" 
-              onClick={ErrorCheck}
-              // onClick={()=>{goToLogin(); errorCheck();}}
-              // onClick={ErrorCheck}
-              color={active}
-              disabled={disabled}
+              onClick={onSubmit}
+              color={passwordValid}
+              disabled={!passwordValid}
             >
               비밀번호 변경
             </ResetButton>
         </RequesInputForm>
-
-  {modal === true ? <ModalPage modaltext1="비밀번호 설정이 완료되었습니다."  modaltext2="로그인 후 이용해주세요." modalbutton="확인"/> : null}
-  {modalError === true ? <ModalError errortext1="비밀번호는 영문, 숫자, 특수문자 조합으로" errortext2="8자 이상 입력해주세요." errorbutton="확인"/> : null}
-
-
+        {
+        alert &&
+          <Alert
+            title={alert.title}
+            contents={alert.contents}
+            buttonText={alert.buttonText}
+            onButtonClick={alert.onButtonClick}
+            onOverlayClick={alert.onOverlayClick}
+          />
+        }
     </div>
   )
 }

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import LoginHeader from '../../../components/Login/Common/LoginHeader/LoginHeader'
 import Logo from "../../../assets/logo.png";
 import { ReactComponent as EyeOn } from "../../../assets/login/Eyeon.svg";
@@ -11,74 +11,55 @@ import { ReactComponent as Kakao } from "../../../assets/login/kakao.svg";
 import { ReactComponent as Google } from "../../../assets/login/google.svg";
 import { ReactComponent as Apple } from "../../../assets/login/apple.svg";
 import { ReactComponent as Arrow } from "../../../assets/login/Arrow-Right.svg";
-import ErrorToggle from "../../../components/Login/Common/ErrorToggle/ErrorToggle";
 import { LoginBody, LogoImg, InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, LoginFooter, LoginText, Button, GapContainer, SignupText, ArrowStyle } from "./LoginPageStyle";
+import Alert from './../../../components/commonUi/Alert';
+import { login } from "../../../service/auth";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../../store/slices/auth";
 
 
 function LoginPage() {
   const navigate = useNavigate();
-  // const [account, setAccount] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-  // const onChangeInput = (e) => {
+  const dispatch = useDispatch();
 
-  //   setAccount({
-  //     ...account,
-  //     [e.target.name]: e.target.value,
-  //   });
-  //   console.log(account);
-  // };
-  const [active, setActive] = useState(false);
-  const [errorEmail, setErrorEmail] = useState(false);
-  const [errorPwd, setErrorPwd] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [disabled, setDisable] = useState(false);
+  const [account, setAccount] = useState({
+    email: "",
+    password: "",
+  });
 
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
   const [showPassword, setShowPassword] = useState(false);
-  const togglePassWord = () => {
-    /* e.preventDefault() */
-    setShowPassword(!showPassword);
-  };
+  const [active, setActive] = useState(false);
+  const [alert, setAlert] = useState(false);
 
-  const acctiveLogin = () => {
-    if (email && password.length >= 5 ) {
-      setActive(true)
-    }else{
-      setActive(false)
-    }
+  const onChangeInput = (e) => {
+    setAccount({
+      ...account,
+      [e.target.name]: e.target.value,
+    });
   };
-  const errorCheckEmail = () => {
-    if (email.includes('@')) {
-      setErrorEmail(false)
-    }else{
-      setErrorEmail(true)
-    }
-    console.log(errorEmail);
-  }
-
   
-  const errorCheckPwd = () => {
-    // if(이메일, 비밀번호 !== 회원정보){setErrorPwd(false)}
+  const onSubmut = async () => {
+    await login(account)
+      .then(response => {
+        if(response.status === 200) {
+          const {message, data} = response.data;
+
+          dispatch(authActions.login(data));
+          navigate('/main')
+        } else {
+          setAlert({
+            contents: "아이디 또느 비밀번호를 확인해주세요.",
+            buttonText: "확인",
+            onButtonClick: () => setAlert(false),
+            onOverlayClick: () => setAlert(false),
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
-
-  const goToMain = () => {
-    console.log('gotomain');
-    // if(input===회원정보){로그인 후 navigate('/main')}else{오류문구띄우기}
-  } 
-  const sumitInput = (e) => {
-    e.preventDefault();
-    setEmail('');
-  };
-
-
+  
   const loginNaver = () =>{
 
   }
@@ -92,12 +73,13 @@ function LoginPage() {
 
   }
 
-
-
-
-
-
-  
+  useEffect(() => {
+    if(account.email.length > 0 && account.password.length > 0) {
+      setActive(true)
+    } else {
+      setActive(false)
+    }
+  }, [account])
 
   return (
     <div>
@@ -107,44 +89,31 @@ function LoginPage() {
         <InputForm>
           <Input
             placeholder="이메일"
-            id="email"
             name="email"
             type='text'
-            value={email}
-            onKeyUp={acctiveLogin}
-            onChange={onChangeEmail}
-            errorEmail={errorEmail}
+            value={account.email}
+            onChange={onChangeInput}
           />
-          {errorEmail && <ErrorToggle errormessage="올바르지 않은 이메일 형식입니다."/>}
           <PwdContainer>
             <PwdInput
-              id="password"
               name="password"
               type={showPassword ? "text" : "password"}
+              value={account.password}
               placeholder="비밀번호"
-              onKeyUp={acctiveLogin}
-              onChange={onChangePassword}
-              errorPwd={true}
-              // errorPwd={errorPwd}
+              onChange={onChangeInput}
             />
-            <EyeOffStyle onClick={togglePassWord}>
+            <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <EyeOn /> : <EyeOff />}
             </EyeOffStyle>
           </PwdContainer>
-            {errorPwd && <ErrorToggle errormessage="이메일 또는 비밀번호가 일치하지 않습니다."/>}
-             {/* <ErrorToggle errormessage="이메일 또는 비밀번호가 일치하지 않습니다."/> */}
-
 
           <LoginButton
             type="button"
-            onClick={()=>{goToMain(); errorCheckEmail(); errorCheckPwd();}}
-            disabled={disabled}
-            // disabled={email === '' || password === ''  ? true : false}
-            // active={active}
+            onClick={onSubmut}
+            disabled={!active}
             color={active}
             >
             로그인</LoginButton>
-          {/* <LoginButtonActive onclick={sumitInput}>로그인</LoginButtonActive> */}
         </InputForm>
         <FindStyle>
         <Link to="/member/find/email">
@@ -186,6 +155,16 @@ function LoginPage() {
           </LoginFooter>
         </GapContainer>
       </LoginBody>
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
     </div>
   );
 }

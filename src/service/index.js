@@ -33,15 +33,8 @@ client.interceptors.request.use(function(config) {
 });
 
 client.interceptors.response.use(function(response) {
-    console.log(response)
-
     if(executingRequests[response.request.reponseURL]) {
         delete executingRequests[response.request.reponseURL];
-    }
-
-    if (response.status !== 200) {
-        const error = new Error(response.data.message);
-        return Promise.reject(error);
     }
 
     return response;   
