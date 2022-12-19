@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../../components/layout/Layout';
-import OrderForm from '../../components/orders/OrderForm';
+import Layout from '../../components/layout/Layout/Layout';
+import OrderForm from '../../components/orders/orderform/OrderForm';
 import Confirm from '../../components/commonUi/Confirm';
 import { useNavigate } from 'react-router-dom';
 

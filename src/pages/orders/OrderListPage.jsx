@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import OrderList from '../../components/orders/OrderList'
-import Layout from '../../components/layout/Layout'
+import OrderList from '../../components/orders/orderlist/OrderList'
+import Layout from '../../components/layout/Layout/Layout'
 
 const OrderListPage = props => {
     return (

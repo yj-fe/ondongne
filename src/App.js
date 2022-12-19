@@ -1,35 +1,27 @@
 import { Routes, Route, Link, useNavigate, Outlet, createBrowserRouter,  RouterProvider } from 'react-router-dom'
 import { useState } from 'react';
 /* ========== LOGIN ========== */
-import LoginPage from './pages/LoginPage';
-import FindEmail from './pages/FindEmail';
-import FindPwd from './pages/FindPwd';
-import SignupPage from './pages/signup/SignupPage';
+import LoginPage from './pages/login/loginpage/LoginPage';
+import FindEmail from './pages/login/email/FindEmail';
+import FindPwd from './pages/login/password/FindPwd';
 
 /* ========== MAIN ========== */
 import MyPage from './components/MyPage';
-import CategoryPage from './pages/CategoryPage';
-import CollectionPage from './pages/CollectionPage';
-import MainPage from './pages/MainPage';
-import DetailsPage from './pages/DetailsPage';
-import CartPage from './pages/CartPage'
-import MorePage from './pages/MorePage'
+import MainPage from './pages/main/MainPage/MainPage';
+import DetailsPage from './pages/main/DetailsPage/DetailsPage';
+import CollectionPage from './pages/main/Product/CollectionPage/CollectionPage';
+import CategoryPage from './pages/main/Product/CategoryPage/CategoryPage';
+import CartPage from './pages/main/CartPage/CartPage'
+import MorePage from './pages/main/MorePage/MorePage'
 /* ========== ORDER ========== */
 import OrderListPage from './pages/orders/OrderListPage';
 import OrderFormPage from './pages/orders/OrderFormPage';
 import OrderDetailsPage from './pages/orders/OrderDetailsPage';
-import MemberManagement from './pages/login/member/MemberManagement';
-import MemberWithdrawal from './pages/login/member/MemberWithdrawal';
+import MemberManagement from './pages/login/member/MemberManagement/MemberManagement';
+import MemberWithdrawal from './pages/login/member/MemberWithdrawal/MemberWithdrawal';
+import SignupPage from './pages/login/signup/SignupPage';
 
-/* ========== COMPONENT ========== */
-// import MainHeader from './components/Main/MainHeader';
-// import Agreement from './components/Login/Agreement';
-// import FindResult from './components/Login/FindResult';
-// import SignupInfo from './components/Login/SignupInfo';
-// import CheckComponent from './components/Login/CheckComponent';
-// import TimeOut from './components/Login/TimeOut';
-// import ModalPage from './components/Login/ModalPage';
-// import ToggleDetail from './components/Login/ToggleDetail';
+
 
 
 function App() { 

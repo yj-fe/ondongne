@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Overlay from '../layout/Overlay'
+import Overlay from '../layout/Overlay/Overlay'
 import styled from 'styled-components';
 import { FlexCols } from './Layout';
 import { Text } from './Text';

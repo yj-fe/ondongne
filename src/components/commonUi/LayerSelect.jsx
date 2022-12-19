@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import * as L from './Layout';
 import styled, { keyframes } from 'styled-components';
-import Overlay from '../layout/Overlay';
+import Overlay from '../layout/Overlay/Overlay';
 import { useState } from 'react';
 
 const S = {
