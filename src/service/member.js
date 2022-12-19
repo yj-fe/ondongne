@@ -5,6 +5,8 @@ const urls = {
     phoneValidation: '/member/validation/phone',
     emailValidation: '/member/validation/email',
     nicknameValidation: '/member/validation/nickname',
+    findEmail: '/member/find/email',
+    findPassword: '/member/find/password',
 };
 
 /* ==============================
@@ -34,4 +36,18 @@ export function memberNicknameValidation(nickname) {
 ============================== */
 export function signup(userData) {
     return client.post(urls.signup, userData);
+};
+
+/* ==============================
+    이메일 찾기
+============================== */
+export function memberFindEmail(phone) {
+    return client.post(`${urls.findEmail}?phone=${phone}`);
+};
+
+/* ==============================
+    비밀번호 찾기
+============================== */
+export function memberFindPassword(email, phone) {
+    return client.post(`${urls.findPassword}?email=${email}&phone=${phone}`);
 };

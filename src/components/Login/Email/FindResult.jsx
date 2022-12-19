@@ -128,24 +128,9 @@ const RequestButtonDisable = styled.button`
   color: #424242;
 `
 
-
-
-
-
-
-
-
-function FindResult() {
+function FindResult({data}) {
   let navigate = useNavigate()
-
-  let email = "abcd@naver.com"
-  let date = "2022. 01. 01"
-
-
-
-
-
-
+  const [date, time] = data.date.split('T')
 
   return (
     <div>
@@ -154,7 +139,7 @@ function FindResult() {
           <RequestInfo>회원님의 가입 정보는 아래 내용과 같습니다.</RequestInfo>
         </RequestTextStyle>
         <RequestFindEmail>
-          <RequestFindEmailText>이메일 : {email}</RequestFindEmailText>
+          <RequestFindEmailText>이메일 : {data.email}</RequestFindEmailText>
           <RequestFindEmailText>가입일 : {date}</RequestFindEmailText>
         </RequestFindEmail>  
         <RequestButtonContainer>
