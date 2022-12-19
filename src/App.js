@@ -4,7 +4,8 @@ import { useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import FindEmail from './pages/FindEmail';
 import FindPwd from './pages/FindPwd';
-import SignupPage from './pages/SignupPage';
+import SignupPage from './pages/signup/SignupPage';
+
 /* ========== MAIN ========== */
 import MyPage from './components/MyPage';
 import CategoryPage from './pages/CategoryPage';
