@@ -17,6 +17,8 @@ import MorePage from './pages/MorePage'
 import OrderListPage from './pages/orders/OrderListPage';
 import OrderFormPage from './pages/orders/OrderFormPage';
 import OrderDetailsPage from './pages/orders/OrderDetailsPage';
+import MemberManagement from './pages/login/member/MemberManagement';
+import MemberWithdrawal from './pages/login/member/MemberWithdrawal';
 
 /* ========== COMPONENT ========== */
 // import MainHeader from './components/Main/MainHeader';
@@ -42,6 +44,9 @@ function App() {
         <Route path="find/email" element={<FindEmail />} />
         <Route path="find/password" element={<FindPwd />} />
         <Route path="signup" element={<SignupPage />} />
+      {/* ========== 회원관리 ========== */}
+        <Route path="management" element={<MemberManagement />} />
+        <Route path="withdrawal" element={<MemberWithdrawal />} />
       </Route>
 
       {/* ========== 메인 ========== */}
