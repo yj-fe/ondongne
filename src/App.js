@@ -4,7 +4,7 @@ import { useState } from 'react';
 import LoginPage from './pages/login/loginpage/LoginPage';
 import FindEmail from './pages/login/email/FindEmail';
 import FindPwd from './pages/login/password/FindPwd';
-
+import LocationSetting from './pages/login/LocationSetting/LocationSetting';
 /* ========== MAIN ========== */
 import MyPage from './components/MyPage';
 import MainPage from './pages/main/MainPage/MainPage';
@@ -20,6 +20,8 @@ import OrderDetailsPage from './pages/orders/OrderDetailsPage';
 import MemberManagement from './pages/login/member/MemberManagement/MemberManagement';
 import MemberWithdrawal from './pages/login/member/MemberWithdrawal/MemberWithdrawal';
 import SignupPage from './pages/login/signup/SignupPage';
+import Alert from './components/commonUi/Alert';
+import NotFound from './pages/NotFound';
 
 
 
@@ -40,6 +42,7 @@ function App() {
       {/* ========== 회원관리 ========== */}
         <Route path="management" element={<MemberManagement />} />
         <Route path="withdrawal" element={<MemberWithdrawal />} />
+        <Route path="location" element={<LocationSetting />} />
       </Route>
 
       {/* ========== 메인 ========== */}
@@ -54,6 +57,7 @@ function App() {
 
       {/* ========== 주문 ========== */}
       <Route path="/order">
+        <Route path="a" element={<NotFound />} />
         <Route path="all" element={<OrderListPage />} />
         <Route path="new/:id" element={<OrderFormPage />} />
         <Route path="details/:id" element={<OrderDetailsPage />} />

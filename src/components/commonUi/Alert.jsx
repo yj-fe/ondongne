@@ -14,10 +14,10 @@ const S = {
         border-radius: 12px;
         overflow: hidden;
     `,
-        Body: styled.div`
-        padding: 24px 24px 32px;
-        text-align: center;
-        background-color: #FFF;
+    Body: styled.div`
+    padding: 24px 24px 32px;
+    text-align: center;
+    background-color: #FFF;
     `,
     Button: styled.button`
         width: 100%;

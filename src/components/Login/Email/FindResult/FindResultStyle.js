@@ -1,10 +1,5 @@
-import React from 'react'
-import { useNavigate, Link } from 'react-router-dom'
 import styled from 'styled-components'
-import LoginPage from '../../../pages/login/loginpage/LoginPage'
-
-
-let RequestTextStyle = styled.p`
+export const RequestTextStyle = styled.p`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -19,7 +14,7 @@ let RequestTextStyle = styled.p`
     width: 350px;
   }
 `
-let RequestText = styled.div`
+export const RequestText = styled.div`
   /* width: 648px; */
   height: 32px;
   font-family: 'Pretendard';
@@ -32,7 +27,7 @@ let RequestText = styled.div`
   align-self: stretch;
   flex-grow: 0;
 `
-let RequestInfo = styled.p`
+export const RequestInfo = styled.p`
   /* width: 648px; */
   height: 20px;
   font-family: 'Pretendard';
@@ -45,7 +40,7 @@ let RequestInfo = styled.p`
   align-self: stretch;
   flex-grow: 0;
 `
-const RequestFindEmail = styled.div`
+export const RequestFindEmail = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -64,7 +59,7 @@ const RequestFindEmail = styled.div`
     width: 350px;
   }
 `
-const RequestFindEmailText = styled.p`
+export const RequestFindEmailText = styled.p`
   height: 20px;
 
   font-family: 'Pretendard';
@@ -79,7 +74,7 @@ const RequestFindEmailText = styled.p`
 
   color: #212121;
 `
-const RequestButtonContainer = styled.div`
+export const RequestButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -94,7 +89,7 @@ const RequestButtonContainer = styled.div`
     width: 350px;
   }
 `
-const RequestButton = styled.button`
+export const RequestButton = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -110,7 +105,7 @@ const RequestButton = styled.button`
   line-height: 24px;
   color: #FFFFFF;
 `
-const RequestButtonDisable = styled.button`
+export const RequestButtonDisable = styled.button`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
