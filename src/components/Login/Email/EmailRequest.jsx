@@ -7,7 +7,7 @@ import { AuthTimer, RequesInputForm } from '../Signup/signuprequest/SignupReques
 import { RequesInput } from './../Password/PwdRequest/PwdRequestStyle';
 import { RequestToggleDiv, RequestToggleTextStyle, RequestToggleTextLink } from './../Common/RequestToggle/RequestToggleStyle';
 import ErrorToggle from './../Common/ErrorToggle/ErrorToggle';
-import { memberFindEmail } from './../../../service/member';
+import { memberFindEmail } from './../../../service/common';
 import Alert from './../../commonUi/Alert';
 
 const EmailRequestBody = styled.div``

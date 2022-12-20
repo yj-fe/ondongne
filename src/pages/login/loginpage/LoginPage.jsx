@@ -16,7 +16,7 @@ import Alert from './../../../components/commonUi/Alert';
 import { login } from "../../../service/auth";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../store/slices/auth";
-
+import { client } from "../../../service";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -43,12 +43,13 @@ function LoginPage() {
       .then(response => {
         if(response.status === 200) {
           const {message, data} = response.data;
-
           dispatch(authActions.login(data));
+          client.defaults.headers.common['Authorization'] = data.accessToken;
           navigate('/main')
         } else {
           setAlert({
-            contents: "아이디 또느 비밀번호를 확인해주세요.",
+            title: "로그인 실패",
+            contents: "이메일 또는 비밀번호가 일치하지 않습니다.",
             buttonText: "확인",
             onButtonClick: () => setAlert(false),
             onOverlayClick: () => setAlert(false),
@@ -61,16 +62,16 @@ function LoginPage() {
   }
   
   const loginNaver = () =>{
-
+    window.location.href='http://localhost:8080/oauth2/authorization/naver';
   }
   const loginKakao = () =>{
-    
+    window.location.href='http://localhost:8080/oauth2/authorization/kakao';
   }
   const loginGoogle = () =>{
-    
+    window.location.href='http://localhost:8080/oauth2/authorization/google';
   }
   const loginApple = () =>{
-
+    window.location.href='http://localhost:8080/oauth2/authorization/apple';
   }
 
   useEffect(() => {
@@ -136,9 +137,9 @@ function LoginPage() {
               <Horizon />
             </SnsTextStyle>
             <SnsIcon>
-              <Naver onClick={loginNaver}/>
+              {/* <Naver onClick={loginNaver}/>
               <Kakao onClick={loginKakao}/>
-              <Google onClick={loginGoogle}/>
+              <Google onClick={loginGoogle}/> */}
               {/* <Apple onClick={loginApple}/> */}
             </SnsIcon>
           </SnsStyle>

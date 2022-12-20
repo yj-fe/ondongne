@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from "react";
 import { sendSMS } from "../../../../service/common";
-import { memberFindPassword } from "../../../../service/member";
+import { memberFindPassword } from "../../../../service/common";
 import Alert from "../../../commonUi/Alert";
 import ErrorToggle from "../../Common/ErrorToggle/ErrorToggle";
 import { RequestToggleBody, RequestToggleButton, RequestToggleForm, RequestToggleText, RequestToggleTextLink, RequestToggleTextStyle } from "../../Common/RequestToggle/RequestToggleStyle";

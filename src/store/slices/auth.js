@@ -5,6 +5,7 @@ const authenticationState = {
     isAuthenticated: false,
     accessToken: '',
     tokenExpiresIn: '',
+    member: {}
 }
 
 const authSlice = createSlice({
@@ -13,11 +14,14 @@ const authSlice = createSlice({
     reducers: {
         login(state, action) {
             const data = action.payload;
-
-            localStorage.setItem('accessToken', `${data.grantType} ${data.accessToken}`);
-            state.accessToken = `${data.grantType} ${data.accessToken}`;
+            localStorage.setItem('accessToken', data.accessToken);
+            state.accessToken = data.accessToken;
             state.tokenExpiresIn = data.tokenExpiresIn;
             state.isAuthenticated = true;
+        },
+        save(state, action) {
+            const member = action.payload;
+            state.member = member;
         },
         profileUpdate(state, action) {
             const photo = action.payload;

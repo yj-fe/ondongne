@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { sendSMS } from './../../../../service/common';
-import { memberPhoneValidation } from './../../../../service/member';
+import { memberPhoneValidation } from './../../../../service/common';
 import { AuthTimer, InputForm, RequesInput, RequesInputForm, RequestButton, RequestInfo, RequestText, RequestTextStyle, SignupBody } from './SignupRequestStyle'
 import Alert from './../../../commonUi/Alert';
 import { SignupButton } from '../signupinfo/SignupInfoStyle';

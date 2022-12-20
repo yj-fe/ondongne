@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, useParams } from "react-router-dom";
 import styled from 'styled-components'
 import BannerImg from '../../../assets/Img.png'
@@ -15,17 +15,16 @@ import MainBanner from '../../../components/Main/Main/MainBanner/MainBanner';
 import MainCategory from '../../../components/Main/Main/MainCategory/MainCategory';
 
 function MainPage() {
-  let navigate = useNavigate()
+  const navigate = useNavigate()
+
   return (
     <div>
       <MainNav />
 
       <MainNavBody
-        onClick={() => {
-          navigate("detail/:id")}}
+        // onClick={() => {
+        //   navigate("detail/:id")}}
       >
-
-
         <MainContainer>
           <Img src={BannerImg}></Img>
           {/* <MainBanner/> */}
