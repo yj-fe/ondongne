@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { sendSMS } from '../../../service/common';
-import RequestToggle from '../Common/RequestToggle/RequestToggle'
-import { RequestToggleBody, RequestToggleButton, RequestToggleCount, RequestToggleForm, RequestToggleInput, RequestToggleText } from '../Common/RequestToggle/RequestToggleStyle';
-import { AuthTimer, RequesInputForm } from '../Signup/signuprequest/SignupRequestStyle';
-import { RequesInput } from './../Password/PwdRequest/PwdRequestStyle';
-import { RequestToggleDiv, RequestToggleTextStyle, RequestToggleTextLink } from './../Common/RequestToggle/RequestToggleStyle';
-import ErrorToggle from './../Common/ErrorToggle/ErrorToggle';
-import { memberFindEmail } from './../../../service/common';
-import Alert from './../../commonUi/Alert';
+import { RequestToggleBody, RequestToggleButton, RequestToggleCount, RequestToggleForm, RequestToggleInput, RequestToggleText } from '../../Common/RequestToggle/RequestToggleStyle';
+import { AuthTimer, RequesInputForm } from '../../Signup/signuprequest/SignupRequestStyle';
+import { RequesInput } from '../../Password/PwdRequest/PwdRequestStyle';
+import { RequestToggleDiv, RequestToggleTextStyle, RequestToggleTextLink } from '../../Common/RequestToggle/RequestToggleStyle';
+import ErrorToggle from '../../Common/ErrorToggle/ErrorToggle';
+import Alert from '../../../commonUi/Alert';
+import { memberFindEmail, sendSMS } from '../../../../service/common';
 
 const EmailRequestBody = styled.div``
 const RequestTextStyle = styled.p`

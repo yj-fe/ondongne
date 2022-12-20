@@ -1,6 +1,5 @@
 import React from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import LoginPage from '../../../../pages/login/loginpage/LoginPage'
+import { useNavigate } from 'react-router-dom'
 
 import {RequestInfo,RequestText,RequestTextStyle,RequestButton,RequestButtonContainer,RequestFindEmail,RequestFindEmailText,RequestButtonDisable} from './FindResultStyle'
 
