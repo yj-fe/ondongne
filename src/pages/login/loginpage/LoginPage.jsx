@@ -48,7 +48,7 @@ function LoginPage() {
           navigate('/main')
         } else {
           setAlert({
-            contents: "아이디 또느 비밀번호를 확인해주세요.",
+            contents: "아이디 또는 비밀번호를 확인해주세요.",
             buttonText: "확인",
             onButtonClick: () => setAlert(false),
             onOverlayClick: () => setAlert(false),

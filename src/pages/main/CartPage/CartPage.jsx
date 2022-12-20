@@ -8,9 +8,9 @@ import {CarContentDiv,CarProfiletDiv,CartBody,CartContainer,CartDiv,ProductInfo,
 import ModalDelete from '../../../components/Main/Cart/ModalDelete/ModalDelete';
 
 
-function CartPage() {
+function CartPage({}) {
 
-  let [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false);
 
 
 
@@ -115,8 +115,7 @@ function CartPage() {
         </CartContainer>
 
       </CartBody>
-      {modal && <ModalDelete PropsModal={PropsModal} />}
-
+      {modal && <ModalDelete PropsModal={PropsModal} closeText="취소" buttonText="삭제" titleText="상품을 장바구니에서 삭제하시겠습니까?"/>}
     </div>
   )
 }

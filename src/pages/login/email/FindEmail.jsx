@@ -1,6 +1,6 @@
 import React from 'react'
-import EmailRequest from '../../../components/Login/Email/EmailRequest'
-import FindResult from '../../../components/Login/Email/FindResult'
+import EmailRequest from '../../../components/Login/Email/EmailRequest/EmailRequest'
+import FindResult from '../../../components/Login/Email/FindResult/FindResult'
 import LoginHeader from '../../../components/Login/Common/LoginHeader/LoginHeader'
 import {EmailBody} from './FindEmailStyle'
 import { useState } from 'react';

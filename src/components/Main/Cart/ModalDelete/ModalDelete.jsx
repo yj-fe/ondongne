@@ -4,27 +4,29 @@ import { useNavigate, useParams } from "react-router-dom";
 import {ModalBody,TextDiv,ButtonClose,ButtonDelete,ButtonDiv,ModalOutside} from './ModalDeleteStyle'
 
 
-function ModalDelete({PropsModal}) {
+function ModalDelete({PropsModal, PropsWithdrwal, closeText, titleText, buttonText}) {
   const navigate = useNavigate();
 
   return (
     <div>
       <ModalOutside>
         <ModalBody>
-          <TextDiv>상품을 장바구니에서 삭제하시겠습니까?</TextDiv>
+          <TextDiv>{titleText}</TextDiv>
           <ButtonDiv>
             <ButtonDelete
               type="button"
-              onClick={PropsModal}
+              onClick={PropsWithdrwal}
             >
-            삭제
+            {buttonText}
+            {/* 삭제 */}
             </ButtonDelete>
 
             <ButtonClose
               type="button"
               onClick={PropsModal}
             >
-            취소
+            {closeText}
+            {/* 취소 */}
             </ButtonClose>
           </ButtonDiv>
         </ModalBody>

@@ -185,7 +185,7 @@ function PwdRequest({setFindSuccess, setId}) {
 
               <RequestToggleButton
                 active={authNum.length > 1}
-                disabled={authNum.length == 1}
+                disabled={authNum.length === 1}
                 onClick={onAuthNumSubmit}
               >
                 인증확인
