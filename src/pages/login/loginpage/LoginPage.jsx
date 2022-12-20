@@ -37,14 +37,17 @@ function LoginPage() {
       [e.target.name]: e.target.value,
     });
   };
-  
+
   const onSubmut = async () => {
     await login(account)
       .then(response => {
-        if(response.status === 200) {
-          const {message, data} = response.data;
-          dispatch(authActions.login(data));
+        if (response.status === 200) {
+          const { message, data } = response.data;
+    
           client.defaults.headers.common['Authorization'] = data.accessToken;
+        
+          dispatch(authActions.login(data));
+  
           navigate('/main')
         } else {
           setAlert({
@@ -60,22 +63,22 @@ function LoginPage() {
         console.log(error)
       })
   }
-  
-  const loginNaver = () =>{
-    window.location.href='http://localhost:8080/oauth2/authorization/naver';
+
+  const loginNaver = () => {
+    window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
   }
-  const loginKakao = () =>{
-    window.location.href='http://localhost:8080/oauth2/authorization/kakao';
+  const loginKakao = () => {
+    window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
   }
-  const loginGoogle = () =>{
-    window.location.href='http://localhost:8080/oauth2/authorization/google';
+  const loginGoogle = () => {
+    window.location.href = 'http://localhost:8080/oauth2/authorization/google';
   }
-  const loginApple = () =>{
-    window.location.href='http://localhost:8080/oauth2/authorization/apple';
+  const loginApple = () => {
+    window.location.href = 'http://localhost:8080/oauth2/authorization/apple';
   }
 
   useEffect(() => {
-    if(account.email.length > 0 && account.password.length > 0) {
+    if (account.email.length > 0 && account.password.length > 0) {
       setActive(true)
     } else {
       setActive(false)
@@ -84,7 +87,7 @@ function LoginPage() {
 
   return (
     <div>
-      <LoginHeader title="로그인"/>
+      <LoginHeader title="로그인" />
       <LoginBody>
         <LogoImg src={Logo} />
         <InputForm>
@@ -113,20 +116,20 @@ function LoginPage() {
             onClick={onSubmut}
             disabled={!active}
             color={active}
-            >
+          >
             로그인</LoginButton>
         </InputForm>
         <FindStyle>
-        <Link to="/member/find/email">
-          <FindAccount>
-            이메일 찾기
-          </FindAccount>
+          <Link to="/member/find/email">
+            <FindAccount>
+              이메일 찾기
+            </FindAccount>
           </Link>
           <Bar />
           <Link to="/member/find/password">
-          <FindAccount>
-            비밀번호 찾기
-          </FindAccount>
+            <FindAccount>
+              비밀번호 찾기
+            </FindAccount>
           </Link>
         </FindStyle>
         <GapContainer>
@@ -137,21 +140,21 @@ function LoginPage() {
               <Horizon />
             </SnsTextStyle>
             <SnsIcon>
-              {/* <Naver onClick={loginNaver}/>
-              <Kakao onClick={loginKakao}/>
-              <Google onClick={loginGoogle}/> */}
+              <Naver onClick={loginNaver} />
+              <Kakao onClick={loginKakao} />
+              <Google onClick={loginGoogle} />
               {/* <Apple onClick={loginApple}/> */}
             </SnsIcon>
           </SnsStyle>
           <LoginFooter>
             <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
             <Link to="/member/signup">
-            <Button>
-              <SignupText>회원가입</SignupText>
-              <ArrowStyle>
-                <Arrow />
-              </ArrowStyle>
-            </Button>
+              <Button>
+                <SignupText>회원가입</SignupText>
+                <ArrowStyle>
+                  <Arrow />
+                </ArrowStyle>
+              </Button>
             </Link>
           </LoginFooter>
         </GapContainer>

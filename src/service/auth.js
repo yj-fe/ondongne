@@ -2,7 +2,8 @@ import { client } from ".";
 
 const urls = {
     signup: '/auth/signup',
-    login: '/auth/login'
+    login: '/auth/login',
+    reissue: '/auth/reissue'
 };
 
 /* ==============================
@@ -16,6 +17,13 @@ export function signup(userData) {
     로그인
 ============================== */
 export function login(account) {
-    console.log("account : ",account)
     return client.post(urls.login, account);
+};
+
+/* ==============================
+    토큰 재발급
+============================== */
+export function tokenReissue() {
+    const refreshToken = localStorage.getItem("refreshToken")
+    return client.post(urls.reissue, { refreshToken });
 };
