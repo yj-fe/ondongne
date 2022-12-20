@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import PropTypes from 'prop-types'
-import * as Common from '../../commonUi/Layout';
+
 import Header from '../Header/Header';
 
 import { S } from './LayoutStyle';

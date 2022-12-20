@@ -16,8 +16,8 @@ function MemberManagement() {
   const [namevalue,setNamevalue] = useState('아이덴잇')
   const [phonevalue,setPhonevalue] = useState('01012345678')
   const [showNameToggle,setShowNameToggle] = useState(true)
-  const [showPhoneToggle,setShowPhoneToggle] = useState(true)
-  const [showPhoneRequestToggle,setShowPhoneRequestToggle] = useState(false)
+  // const [showPhoneToggle,setShowPhoneToggle] = useState(true)
+  // const [showPhoneRequestToggle,setShowPhoneRequestToggle] = useState(false)
   const [showPwdToggle,setShowPwdToggle] = useState(true)
   const [showNameModal,setShowNameModal] = useState(false)
 
@@ -64,8 +64,8 @@ function MemberManagement() {
             <InfoDiv>
               <TitleText>전화번호</TitleText>
 
-{ showPhoneToggle ? <PhoneResetToggle phonevalue={phonevalue} setShowPhoneToggle={setShowPhoneToggle}/> : <PhoneToggle/> }
-{ showPhoneRequestToggle && <PhoneRequestToggle setShowPhoneRequestToggle={setShowPhoneRequestToggle}/>}
+{/* { showPhoneToggle ? <PhoneResetToggle phonevalue={phonevalue} setShowPhoneToggle={setShowPhoneToggle}/> : <PhoneToggle/> }
+{ showPhoneRequestToggle && <PhoneRequestToggle setShowPhoneRequestToggle={setShowPhoneRequestToggle}/>} */}
 
             </InfoDiv>
 
