@@ -10,6 +10,7 @@ import { ReactComponent as EyeOff } from "../../../../assets/login/Eyeoff.svg";
 import { AuthTimerStyle,PhoneRequestForm,PhoneRequestInput,PhoneRequestButton,PhoneToggleInput,PhoneToggleInputForm,RequestButton,NameToggleInput,NameToggleInputForm,PwdResetToggleForm,PwdResetToggleInput,EyeOffStyle,PwdToggleButton,PwdToggleInput,PwdToggleInputForm,MemberBar,MemberLinkText,MemberBody,MemberContainer,MemberInfoDiv,MemberLinkDiv,MemberProfileDiv,CameraStyle,TextEmail,TextName,TitleText,ProfileDiv,ProfileTextDiv,ImgStyle,InfoDiv,Input,ChangeButton,InputForm} from './MemberManagementStyle'
 import Alert from "../../../../components/commonUi/Alert";
 import ModalPage from '../../../../components/Login/ModalPage';
+import ManagementPhone from '../../../../components/Login/Member/ManagementPhone/ManagementPhone';
 // import Alert from "../../../commonUi/Alert";
 
 function MemberManagement() {
@@ -63,7 +64,7 @@ function MemberManagement() {
 {/* ========================== 전화번호 ========================== */}
             <InfoDiv>
               <TitleText>전화번호</TitleText>
-
+              <ManagementPhone/>
 {/* { showPhoneToggle ? <PhoneResetToggle phonevalue={phonevalue} setShowPhoneToggle={setShowPhoneToggle}/> : <PhoneToggle/> }
 { showPhoneRequestToggle && <PhoneRequestToggle setShowPhoneRequestToggle={setShowPhoneRequestToggle}/>} */}
 
@@ -141,64 +142,64 @@ function NameToggle ({namevalue, setShowNameModal}){
 }
 
 
-// 전화번호 변경전
-function PhoneResetToggle ({setShowPhoneToggle, phonevalue}){
+// // 전화번호 변경전
+// function PhoneResetToggle ({setShowPhoneToggle, phonevalue}){
 
-  return(
-    <div>
-      <InputForm>
-        <Input
-          value={phonevalue}
-          disabled
-        />
-        <ChangeButton onClick={()=>{setShowPhoneToggle(false)}}>변경</ChangeButton>
-      </InputForm>
-    </div>
-  )
-}
-// 전화번호 인증 토글
-function PhoneToggle ({setShowPhoneRequestToggle}){
-  const [showPhoneRequestToggle,setShowPhoneRequestToggle] = useState(false)
+//   return(
+//     <div>
+//       <InputForm>
+//         <Input
+//           value={phonevalue}
+//           disabled
+//         />
+//         <ChangeButton onClick={()=>{setShowPhoneToggle(false)}}>변경</ChangeButton>
+//       </InputForm>
+//     </div>
+//   )
+// }
+// // 전화번호 인증 토글
+// function PhoneToggle ({setShowPhoneRequestToggle}){
+//   const [showPhoneRequestToggle,setShowPhoneRequestToggle] = useState(false)
 
-  return(
-    <div>
-      <PhoneToggleInputForm>
-        <PhoneToggleInput
-          placeholder='-를 제외한 휴대폰번호 입력'
-        />
-        <RequestButton
-          onClick={()=>setShowPhoneRequestToggle(true)}
-        >인증요청</RequestButton>
-      </PhoneToggleInputForm>
-      {/* { showPhoneRequestToggle && <PhoneRequestToggle />} */}
-    </div>
-  )
-}
-// 전화번호 인증번호 토글
-function PhoneRequestToggle ({setShowPhoneRequestToggle}){
-  const [authTime, setAuthTime] = useState(-1);
-  return(
-    <div>
-      <PhoneRequestForm>
-        <PhoneRequestInput
-          placeholder='인증번호 입력'
-        />
-        <AuthTimerStyle>{getFormattedTime(authTime)}</AuthTimerStyle>
+//   return(
+//     <div>
+//       <PhoneToggleInputForm>
+//         <PhoneToggleInput
+//           placeholder='-를 제외한 휴대폰번호 입력'
+//         />
+//         <RequestButton
+//           onClick={()=>setShowPhoneRequestToggle(true)}
+//         >인증요청</RequestButton>
+//       </PhoneToggleInputForm>
+//       {/* { showPhoneRequestToggle && <PhoneRequestToggle />} */}
+//     </div>
+//   )
+// }
+// // 전화번호 인증번호 토글
+// function PhoneRequestToggle ({setShowPhoneRequestToggle}){
+//   const [authTime, setAuthTime] = useState(-1);
+//   return(
+//     <div>
+//       <PhoneRequestForm>
+//         <PhoneRequestInput
+//           placeholder='인증번호 입력'
+//         />
+//         <AuthTimerStyle>{getFormattedTime(authTime)}</AuthTimerStyle>
         
-      </PhoneRequestForm>
-      <PhoneRequestButton>인증 확인</PhoneRequestButton>
-    </div>
-  )
-}
-/* ==============================
-    180 => 3: 00 문자열 반환
-  ============================== */
-  function getFormattedTime(seconds) {
-    const m = Math.floor(seconds / 60);
-    const s = (seconds - (m * 60)) + '';
+//       </PhoneRequestForm>
+//       <PhoneRequestButton>인증 확인</PhoneRequestButton>
+//     </div>
+//   )
+// }
+// /* ==============================
+//     180 => 3: 00 문자열 반환
+//   ============================== */
+//   function getFormattedTime(seconds) {
+//     const m = Math.floor(seconds / 60);
+//     const s = (seconds - (m * 60)) + '';
   
-    return `${m}:${s.length < 2 ? '0' + s : s}`;
-  };
+//     return `${m}:${s.length < 2 ? '0' + s : s}`;
+//   };
 
 
 // 비밀번호 변경전
