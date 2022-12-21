@@ -71,7 +71,6 @@ export const ModalTitle = styled.div`
 `
 export const ModalButton = styled.button`
   box-sizing: border-box;
-
   display: flex;
   flex-direction: row;
   justify-content: center;

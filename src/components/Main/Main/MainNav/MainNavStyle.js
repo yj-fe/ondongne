@@ -56,8 +56,8 @@ export const ArrowStyle = styled.div`
   margin-bottom: 5px;
 `
 export const LogoImg = styled.img`
-  width: 72px;
-  height: 32px;
+  width: 120px;
+  height: 28px;
   display: flex;
   justify-content: center;
   justify-items: center;

@@ -1,6 +1,6 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-import MainLogo from "../../../../assets/logos.png";
+import MainLogo from "../../../../assets/images/Logonew.png";
 import { ReactComponent as News } from "../../../../assets/news.svg";
 import { ReactComponent as Cart } from "../../../../assets/main/nav/cart.svg";
 import { ReactComponent as Pin } from "../../../../assets/main/pin.svg";

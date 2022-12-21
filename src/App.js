@@ -16,6 +16,10 @@ import MyPage from "./components/MyPage";
 import LocationSetting from "./pages/login/LocationSetting/LocationSetting";
 import MemberManagement from "./pages/login/member/MemberManagement/MemberManagement";
 import MemberWithdrawal from "./pages/login/member/MemberWithdrawal/MemberWithdrawal";
+/* ========== BUSINESS ========== */
+import BusinessPage from "./pages/business/BusinessPage/BusinessPage";
+import BusinessApplication from "./pages/business/BusinessPage/BusinessApplication/BusinessApplication";
+import BusinessUpload from "./pages/business/BusinessPage/BusinessUpload/BusinessUpload";
 /* ========== LOGIN ========== */
 import LoginPage from "./pages/login/loginpage/LoginPage";
 import FindEmail from "./pages/login/email/FindEmail";
@@ -92,6 +96,13 @@ function App() {
           <Route path="management" element={<MemberManagement />} />
           <Route path="withdrawal" element={<MemberWithdrawal />} />
           <Route path="location" element={<LocationSetting />} />
+        </Route>
+
+        {/* ========== 비즈회원관리 ========== */}
+        <Route path="/business">
+          <Route path="" element={<BusinessPage />} />
+          <Route path="application" element={<BusinessApplication />} />
+          <Route path="upload" element={<BusinessUpload />} />
         </Route>
 
         {/* ========== 로그인 ========== */}

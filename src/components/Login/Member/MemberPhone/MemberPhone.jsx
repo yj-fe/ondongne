@@ -32,13 +32,18 @@ function PhoneResetToggle ({setShowPhoneToggle, phonevalue}){
 function PhoneToggle ({}){
   const [showPhoneRequestToggle,setShowPhoneRequestToggle] = useState(false)
   const [phonenumber,setPhoneNumber] = useState('')
-  const [showAlert,setShowAlert] = useState(false)
+  const [showAlert1,setShowAlert1] = useState(true)
+  const [showAlert2,setShowAlert2] = useState(false)
   const KeyAlert = () => {
-    if(phonenumber.length === 0){
-      setShowAlert(true)
+    if(phonenumber.length >= 1){
+      setShowAlert1(false)
+    }if(phonenumber.length < 10){
+      setShowAlert2(true)
+    }if(phonenumber.length >= 10){
+      setShowAlert2(false)
     }
   }
-  console.log(showAlert);
+  console.log(showAlert1);
   console.log(phonenumber);
   return(
     <div>
@@ -56,16 +61,24 @@ function PhoneToggle ({}){
           onClick={()=>setShowPhoneRequestToggle(true)}
           >인증요청</RequestButton>
       </PhoneToggleInputForm>
-          {showAlert && <AlertToggle/>}
+          {showAlert1 && <AlertToggle1/>}
+          {showAlert2 && <AlertToggle2/>}
       { showPhoneRequestToggle && <MemberPhoneToggle />}
     </div>
   )
 }
 
-function AlertToggle(){
+function AlertToggle1(){
   return(
     <div>
       <AlertText>변경하실 전화번호를 입력해 주세요.</AlertText>
+    </div>
+  )
+}
+function AlertToggle2(){
+  return(
+    <div>
+      <AlertText>잘못된 번호입니다. 다시 확인해 주세요.</AlertText>
     </div>
   )
 }

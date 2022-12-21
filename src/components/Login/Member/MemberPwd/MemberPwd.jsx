@@ -9,12 +9,21 @@ import { memberPasswordChange } from "../../../../service/member";
 
 import {EyeOffStyle,PwdToggleButton,PwdResetToggleForm,PwdResetToggleInput,ChangeButton,PwdToggleInputForm,PwdToggleInput} from './MemberPwdStyle'
 import Alert from '../../../commonUi/Alert';
-import ModalPage from '../../ModalPage';
+// import ModalPage from '../../ModalPage';
+import SimpleConfirm from '../../../commonUi/SimpleConfirm';
 
-// 비밀번호 변경전
+
 function MemberPwd() {
-  const [showPwdToggle,setShowPwdToggle] = useState(false)
+  const [showPwdToggle,setShowPwdToggle] = useState(true)
   return (
+    <div>
+      { showPwdToggle ? <PwdResetToggle setShowPwdToggle={setShowPwdToggle}/> : <PwdToggle/> }
+    </div>
+  )
+}
+// 비밀번호 변경전
+function PwdResetToggle({setShowPwdToggle}){
+  return(
     <div>
       <PwdResetToggleForm>
         <PwdResetToggleInput
@@ -22,7 +31,7 @@ function MemberPwd() {
           disabled
         />
         <ChangeButton
-        onClick={()=>{setShowPwdToggle(true)}}
+          onClick={()=>{setShowPwdToggle(false)}}
         >
           변경
         </ChangeButton>
@@ -33,7 +42,6 @@ function MemberPwd() {
           disabled
         />
       </PwdResetToggleForm> 
-      { showPwdToggle && <PwdToggle/> }
 
     </div>
   )
@@ -41,67 +49,75 @@ function MemberPwd() {
 
 // 비밀번호 변경 토글
 function PwdToggle({ id }){
+  
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState('');
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
   const [passwordValid, setPasswordValid] = useState(null);
   const [passwordValidMessage, setPasswordValidMessage] = useState('');
-  const [alert, setAlert] = useState(null);
-  const [resetModal, setResetModal] = useState(false);
-
-  const navigate = useNavigate();
-
-  const onSubmit = async () => {
-    await memberPasswordChange(id, password)
-      .then(response => {
-        const {data, message} = response.data
-
-        if(data) {
-          setAlert({
-            contents: message,
-            buttonText: "확인",
-            onButtonClick: () => navigate('/member/login'),
-            onOverlayClick: () => navigate('/member/login'),
-          })
-        } else {
-          setAlert({
-            contents: message,
-            buttonText: "확인",
-            onButtonClick: () => setAlert(false),
-            onOverlayClick: () => setAlert(false),
-          })
-        }
-
-      })
-      .catch(error => {
-        console.log(error)
+  
+  const [confirm, setConfirm] = useState(null)
+  const openConfirm = () => {
+    return setConfirm({
+      contents: "비밀번호가 변경되었습니다.",
+      confirmText: "확인",
+      onConfirmClick: () => setConfirm(null),
     })
   }
 
-  // 비밀번호 유효성 검사
-  const passwordValidation = () => {
-    const regExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
-    return regExp.test(password);
-  }
+  const navigate = useNavigate();
+
+  // const onSubmit = async () => {
+  //   await memberPasswordChange(id, password)
+  //     .then(response => {
+  //       const {data, message} = response.data
+
+  //       if(data) {
+  //         setAlert({
+  //           contents: message,
+  //           buttonText: "확인",
+  //           onButtonClick: () => navigate('/member/login'),
+  //           onOverlayClick: () => navigate('/member/login'),
+  //         })
+  //       } else {
+  //         setAlert({
+  //           contents: message,
+  //           buttonText: "확인",
+  //           onButtonClick: () => setAlert(false),
+  //           onOverlayClick: () => setAlert(false),
+  //         })
+  //       }
+
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //   })
+  // }
+
+  // // 비밀번호 유효성 검사
+  // const passwordValidation = () => {
+  //   const regExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+  //   return regExp.test(password);
+  // }
   
-  //비밀번호 체크
-  useEffect(() => {
+  // //비밀번호 체크
+  // useEffect(() => {
 
-    if(!passwordValidation()) {
-      setPasswordValid(false);
-      setPasswordValidMessage("8자 이상 영문, 숫자, 특수문자 조합으로 입력해주세요.");
-      return;
-    }
+  //   if(!passwordValidation()) {
+  //     setPasswordValid(false);
+  //     setPasswordValidMessage("8자 이상 영문, 숫자, 특수문자 조합으로 입력해주세요.");
+  //     return;
+  //   }
 
-    if(password === passwordCheck) {      
-      setPasswordValid(true);
-      setPasswordValidMessage("");
-    } else {
-      setPasswordValid(false);
-      setPasswordValidMessage("비밀번호가 서로 일치하지 않습니다.");
-    }
-  }, [password, passwordCheck])
+  //   if(password === passwordCheck) {      
+  //     setPasswordValid(true);
+  //     setPasswordValidMessage("");
+  //   } else {
+  //     setPasswordValid(false);
+  //     setPasswordValidMessage("비밀번호가 서로 일치하지 않습니다.");
+  //   }
+  // }, [password, passwordCheck])
 
   return(
     <div>
@@ -130,23 +146,20 @@ function PwdToggle({ id }){
 
         <PwdToggleButton
           type="button" 
-          onClick={()=>{onSubmit(); setResetModal(true);}}
-          color={passwordValid}
-          disabled={!passwordValid}
+          onClick={openConfirm}
         >
           변경 완료
         </PwdToggleButton>
         {
-        alert &&
-          <Alert
-            title={alert.title}
-            contents={alert.contents}
-            buttonText={alert.buttonText}
-            onButtonClick={alert.onButtonClick}
-            onOverlayClick={alert.onOverlayClick}
+          confirm &&
+          <SimpleConfirm
+            contents={confirm.contents}
+            confirmText={confirm.confirmText}
+            onConfirmClick={confirm.onConfirmClick}
+            warn={confirm.warn}
+            active={confirm.active}
           />
         }
-        {resetModal && <ModalPage modaltext1="비밀번호가 변경되었습니다." modalbutton="확인"/>}
     </div>
   )
 }
