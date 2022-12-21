@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-
 import ToggleDetail from './../../Password/ToggleDetail/ToggleDetail';
 import { ReactComponent as Check } from "../../../../assets/login/check.svg";
 import { ReactComponent as Checked } from "../../../../assets/login/checked.svg";

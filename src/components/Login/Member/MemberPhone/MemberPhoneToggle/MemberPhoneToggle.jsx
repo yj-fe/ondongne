@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import SimpleConfirm from '../../../../commonUi/SimpleConfirm';
 import {PhoneRequestForm,PhoneRequestInput,PhoneRequestButton,AuthTimerStyle,} from './MemberPhoneToggleStyle'
 
 
@@ -6,6 +7,15 @@ function MemberPhoneToggle() {
   const [authTime, setAuthTime] = useState(-1);
   const [authnumber, setAuthnumber] = useState('');
   const [buttonColor, setButtonColor] = useState(false)
+  const [confirm, setConfirm] = useState(null)
+
+  const openConfirm = () => {
+    return setConfirm({
+      contents: "전화번호 변경이 완료되었습니다.",
+      confirmText: "확인",
+      onConfirmClick: () => setConfirm(null),
+    })
+  }
   const ActiveButton = () => {
     if(authnumber.length > 1){
       setButtonColor(true)
@@ -30,10 +40,21 @@ function MemberPhoneToggle() {
         
       </PhoneRequestForm>
       <PhoneRequestButton
+        onClick={openConfirm}
         color={buttonColor}
       >
         인증 확인
       </PhoneRequestButton>
+      {
+        confirm &&
+        <SimpleConfirm
+          contents={confirm.contents}
+          confirmText={confirm.confirmText}
+          onConfirmClick={confirm.onConfirmClick}
+          warn={confirm.warn}
+          active={confirm.active}
+        />
+      }
     </div>
   )
 }

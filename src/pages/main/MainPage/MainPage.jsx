@@ -13,6 +13,7 @@ import MainNav from '../../../components/Main/Main/MainNav/MainNav'
 import {MainNavBody, MainContainer, Footer, Img, Logo, FooterStyle, FooterText} from './MainPageStyle'
 import MainBanner from '../../../components/Main/Main/MainBanner/MainBanner';
 import MainCategory from '../../../components/Main/Main/MainCategory/MainCategory';
+import MainProductTest from '../../../components/Main/Main/MainProductTest/MainProductTest';
 
 function MainPage() {
   const navigate = useNavigate()
@@ -33,6 +34,11 @@ function MainPage() {
 
 
         <MainContainer>
+          <MainProductTest/>
+        </MainContainer>
+
+
+        {/* <MainContainer>
           <MainBestCoupon/>
         </MainContainer>
 
@@ -53,7 +59,7 @@ function MainPage() {
 
         <MainContainer>
           <MainBestCollection/>
-        </MainContainer>
+        </MainContainer> */}
 
       <Footer>
         <Logo  src={FooterImg}/>

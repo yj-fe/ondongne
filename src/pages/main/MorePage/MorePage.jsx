@@ -53,7 +53,7 @@ function MorePage() {
             !auth.isAuthenticated &&
             <MoreLoginDiv>
               <MoreLoginText><p>회원가입 하고</p><p>내 주변 상점을 둘러보세요!</p></MoreLoginText>
-              <MoreLoginButton onClick={() => navigate('/member/login')}>로그인/회원가입</MoreLoginButton>
+              <MoreLoginButton onClick={() => navigate('/login')}>로그인/회원가입</MoreLoginButton>
             </MoreLoginDiv>
           }
 
@@ -70,14 +70,14 @@ function MorePage() {
 
         <MoreContainer>
           <MoreDiv>
-            <Link to="/main/service">
+            <Link to="/service">
             <MoreContainerDiv>고객센터</MoreContainerDiv>
             </Link>
-            <Link to="/main/terms">
+            <Link to="/terms">
             <MoreContainerDiv
             >약관 및 정책</MoreContainerDiv>
             </Link>
-            <Link to="/main/configuration">
+            <Link to="/configuration">
             <MoreContainerDiv>환경설정</MoreContainerDiv>
             </Link>
             <MoreContainerDiv>공지사항</MoreContainerDiv>

@@ -151,13 +151,13 @@ function LoginPage() {
             로그인</LoginButton>
         </InputForm>
         <FindStyle>
-          <Link to="/member/find/email">
+          <Link to="/login/find/email">
             <FindAccount>
               이메일 찾기
             </FindAccount>
           </Link>
           <Bar />
-          <Link to="/member/find/password">
+          <Link to="/login/find/password">
             <FindAccount>
               비밀번호 찾기
             </FindAccount>
@@ -179,7 +179,7 @@ function LoginPage() {
           </SnsStyle>
           <LoginFooter>
             <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
-            <Link to="/member/signup">
+            <Link to="/login/signup">
               <Button>
                 <SignupText>회원가입</SignupText>
                 <ArrowStyle>
@@ -206,10 +206,10 @@ function LoginPage() {
             contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
             confirmText="네"
             cancelText="아니오"
-            onConfirmClick={() => {navigate('/member/signup')}}
+            onConfirmClick={() => {navigate('/login/signup')}}
             onCancelClick={() => {
               setConfirm(false)
-              navigate('/member/login')
+              navigate('/login/login')
             }}
         />
       }
