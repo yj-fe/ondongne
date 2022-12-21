@@ -23,7 +23,6 @@ export function login(account) {
 /* ==============================
     토큰 재발급
 ============================== */
-export function tokenReissue() {
-    const refreshToken = localStorage.getItem("refreshToken")
+export function tokenReissue(refreshToken) {
     return client.post(urls.reissue, { refreshToken });
 };
