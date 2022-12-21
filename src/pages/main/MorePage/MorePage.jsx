@@ -3,6 +3,7 @@ import FooterImg from '../../../assets/main/footerlogo.svg'
 import BasicHeader from '../../../components/Main/Main/BasicHeader/BasicHeader'
 import Avatar from '../../../assets/common/avatar.png'
 import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainer, MoreContainerDiv, MoreDiv, MoreNavBody, AccountBadge, AccountName, Footer, Logo, FooterText, MoreLoginDiv, MoreLoginText, MoreLoginButton } from './MorePageStyle'
+import { Link } from 'react-router-dom'
 
 function MorePage() {
   return (
@@ -43,9 +44,16 @@ function MorePage() {
 
         <MoreContainer>
           <MoreDiv>
+            <Link to="/main/service">
             <MoreContainerDiv>고객센터</MoreContainerDiv>
-            <MoreContainerDiv>약관 및 정책</MoreContainerDiv>
+            </Link>
+            <Link to="/main/terms">
+            <MoreContainerDiv
+            >약관 및 정책</MoreContainerDiv>
+            </Link>
+            <Link to="/main/configuration">
             <MoreContainerDiv>환경설정</MoreContainerDiv>
+            </Link>
             <MoreContainerDiv>공지사항</MoreContainerDiv>
           </MoreDiv>
         </MoreContainer>
