@@ -24,6 +24,7 @@ function LoginPage() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const isAuth = searchParams.get('isAuth');
+  const error = searchParams.get('error');
   
   const [account, setAccount] = useState({
     email: "",
@@ -61,6 +62,7 @@ function LoginPage() {
             onButtonClick: () => setAlert(false),
             onOverlayClick: () => setAlert(false),
           })
+          client.defaults.headers.common['Authorization'] = '';
         }
       })
       .catch(error => {
@@ -115,6 +117,18 @@ function LoginPage() {
       navigate('/main')
     }
   }, [isAuth])
+
+  useEffect(() => {
+    if(error) {
+      setAlert({
+        title: "로그인 실패",
+        contents: "SNS 로그인을 실패하였습니다.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(false),
+        onOverlayClick: () => setAlert(false),
+      })
+    }
+  }, [error])
 
   return (
     <div>

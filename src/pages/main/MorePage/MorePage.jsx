@@ -3,24 +3,54 @@ import FooterImg from '../../../assets/main/footerlogo.svg'
 import BasicHeader from '../../../components/Main/Main/BasicHeader/BasicHeader'
 import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainer, MoreContainerDiv, MoreDiv, MoreNavBody, AccountBadge, AccountName, Footer, Logo, FooterText, MoreLoginDiv, MoreLoginText, MoreLoginButton, MoreAccountImgBox } from './MorePageStyle'
 import { Link, useNavigate } from 'react-router-dom'
-import { getMember } from '../../../service/member'
-import { useSelector } from 'react-redux'
+import { getMember, logout } from '../../../service/member'
+import { useDispatch, useSelector } from 'react-redux'
+import Alert from '../../../components/commonUi/Alert'
+import { authActions } from '../../../store/slices/auth'
+import { client } from '../../../service'
 
 function MorePage() {
   const navigate = useNavigate()
   const [member, setMember] = useState({});
   const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const [alert, setAlert] = useState(null);
+  const memberLogout = async () => {
+    await logout()
+      .then(response => {
+        if (response.status === 200) {
+          dispatch(authActions.logout())
+          client.defaults.headers.common['Authorization'] = '';
+          setAlert({
+            title: "로그아웃 성공",
+            contents: "로그아웃 되었습니다.",
+            buttonText: "확인",
+            onButtonClick: () => setAlert(false),
+            onOverlayClick: () => setAlert(false),
+          })
+        } else {
+          setAlert({
+            title: "로그아웃 실패",
+            contents: "다시 한번 시도해주세요.",
+            buttonText: "확인",
+            onButtonClick: () => setAlert(false),
+            onOverlayClick: () => setAlert(false),
+          })
+        }
+      })
+
+  }
 
   const getMemberProfile = async () => {
     await getMember()
       .then(response => {
-        const {data, message} = response.data;
+        const { data, message } = response.data;
         setMember(data);
       })
   }
 
   useEffect(() => {
-    if(auth.isAuthenticated) {
+    if (auth.isAuthenticated) {
       getMemberProfile()
     }
   }, [auth])
@@ -32,7 +62,7 @@ function MorePage() {
 
 
         <MoreContainer>
-        {
+          {
             auth.isAuthenticated &&
             <MoreAccountDiv>
               <MoreAccountProfile>
@@ -71,16 +101,20 @@ function MorePage() {
         <MoreContainer>
           <MoreDiv>
             <Link to="/service">
-            <MoreContainerDiv>고객센터</MoreContainerDiv>
+              <MoreContainerDiv>고객센터</MoreContainerDiv>
             </Link>
             <Link to="/terms">
-            <MoreContainerDiv
-            >약관 및 정책</MoreContainerDiv>
+              <MoreContainerDiv
+              >약관 및 정책</MoreContainerDiv>
             </Link>
             <Link to="/configuration">
-            <MoreContainerDiv>환경설정</MoreContainerDiv>
+              <MoreContainerDiv>환경설정</MoreContainerDiv>
             </Link>
             <MoreContainerDiv>공지사항</MoreContainerDiv>
+            {
+              auth.isAuthenticated &&
+              <MoreContainerDiv onClick={memberLogout}>로그아웃</MoreContainerDiv>
+            }
           </MoreDiv>
         </MoreContainer>
 
@@ -95,7 +129,16 @@ function MorePage() {
         </Footer>
       </MoreNavBody>
 
-
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
 
     </div>
   )
