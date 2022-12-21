@@ -87,6 +87,13 @@ function SignupInfo({ data, setData }) {
             onButtonClick: () => navigate('/member/login'),
             onOverlayClick: () => navigate('/member/login'),
           })
+        } else {
+          setAlert({
+            contents: "회원가입을 실패하였습니다.",
+            buttonText: "확인",
+            onButtonClick: () => setAlert(null),
+            onOverlayClick: () => setAlert(null),
+          })
         }
       })
       .catch(error => {
@@ -102,6 +109,10 @@ function SignupInfo({ data, setData }) {
   
   //비밀번호 체크
   useEffect(() => {
+
+    if(data.isAuth) {
+      return;
+    }
 
     if(!password) {
       return;
@@ -129,6 +140,23 @@ function SignupInfo({ data, setData }) {
   }, [password, passwordCheck])
 
   useEffect(() => {
+    if(data.isAuth) {
+      if(emailValid && nicknameValid) {
+        setActive(true)
+        setDisabled(false)
+  
+        setData((prevState) => {
+          return { 
+            ...prevState,
+            email,
+            password,
+            nickname
+          }
+        });
+      }
+      return;
+    }
+
     if(emailValid && passwordValid && nicknameValid) {
       setActive(true)
       setDisabled(false)
@@ -156,6 +184,14 @@ function SignupInfo({ data, setData }) {
       });
     }
   }, [emailValid, passwordValid, nicknameValid])
+
+  useEffect(() => {
+    if(data.isAuth) {
+      setEmail(data.email)
+      setPassword(data.password)
+      setNickname(data.nickname)
+    }
+  }, [data])
 
   return (
     <div>
@@ -189,40 +225,43 @@ function SignupInfo({ data, setData }) {
               <ValidText color={emailValid}>{emailValidMessage}</ValidText>
             }
           </RequestInputForm>
+          {
+            !data.isAuth && 
+            <RequestInputForm>
+              <RequesInputTitle>비밀번호</RequesInputTitle>
+              <RequestInputDiv direction="column">
+                <PwdContainer
+                  borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
+                  <PwdInput
+                    type={showPassword ? "text" : "password"}
+                    placeholder="비밀번호 입력"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                  <EyeOffStyle onClick={()=>setShowPassword(!showPassword)}>
+                    {showPassword ? <EyeOn /> : <EyeOff />}
+                  </EyeOffStyle>
+                </PwdContainer>
+                <PwdContainer
+                  borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
+                  <PwdInput
+                    type={showPasswordCheck ? "text" : "password"}
+                    placeholder="비밀번호 확인"
+                    value={passwordCheck}
+                    onChange={e => setPasswordCheck(e.target.value)}
+                  />
+                  <EyeOffStyle onClick={()=>setShowPasswordCheck(!showPasswordCheck)}>
+                    {showPasswordCheck ? <EyeOn /> : <EyeOff />}
+                  </EyeOffStyle>
+                </PwdContainer>
+                {
+                  passwordValidMessage && 
+                  <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
+                }
+              </RequestInputDiv>
+            </RequestInputForm>
+          }
 
-          <RequestInputForm>
-            <RequesInputTitle>비밀번호</RequesInputTitle>
-            <RequestInputDiv direction="column">
-              <PwdContainer
-                borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
-                <PwdInput
-                  type={showPassword ? "text" : "password"}
-                  placeholder="비밀번호 입력"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
-                <EyeOffStyle onClick={()=>setShowPassword(!showPassword)}>
-                  {showPassword ? <EyeOn /> : <EyeOff />}
-                </EyeOffStyle>
-              </PwdContainer>
-              <PwdContainer
-                borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
-                <PwdInput
-                  type={showPasswordCheck ? "text" : "password"}
-                  placeholder="비밀번호 확인"
-                  value={passwordCheck}
-                  onChange={e => setPasswordCheck(e.target.value)}
-                />
-                <EyeOffStyle onClick={()=>setShowPasswordCheck(!showPasswordCheck)}>
-                  {showPasswordCheck ? <EyeOn /> : <EyeOff />}
-                </EyeOffStyle>
-              </PwdContainer>
-              {
-                passwordValidMessage && 
-                <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
-              }
-            </RequestInputDiv>
-          </RequestInputForm>
           <RequestInputForm>
             <RequesInputTitle>닉네임</RequesInputTitle>
             <RequestInputDiv direction="row">

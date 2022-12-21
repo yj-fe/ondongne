@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import LoginHeader from './../../../components/Login/Common/LoginHeader/LoginHeader';
 import SignupRequest from './../../../components/Login/Signup/signuprequest/SignupRequest';
 import Agreement from './../../../components/Login/Signup/agreement/Agreement';
@@ -7,6 +7,7 @@ import SignupInfo from './../../../components/Login/Signup/signupinfo/SignupInfo
 
 function SignupPage() {
 
+  const authData = localStorage.getItem("auth");
   const [data, setData] = useState({
     phone: '',
     phoneAuthStatus: false,
@@ -17,7 +18,11 @@ function SignupPage() {
     policy02: false,
     policy03: false,
     policy04: false,
+    provider: '',
+    providerId: '',
+    isAuth: false,
   })
+
   const [depth01, setDepth01] = useState(true)
   const [depth02, setDepth02] = useState(false)
   const [depth03, setDepth03] = useState(false)
@@ -35,6 +40,24 @@ function SignupPage() {
         break;
     }
   }
+
+  useEffect(() => {
+    if(authData) {
+        const parasedData = JSON.parse(authData)
+        setData({
+            ...data,
+            email: parasedData.email,
+            password: parasedData.providerId,
+            nickname: parasedData.name,
+            provider: parasedData.provider,
+            providerId: parasedData.providerId,
+            isAuth: true
+        })
+        localStorage.removeItem('auth');
+    }
+  }, [authData]);
+
+  console.log(data);
 
   return (
     <div>

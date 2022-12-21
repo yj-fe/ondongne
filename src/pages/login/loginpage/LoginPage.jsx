@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import LoginHeader from '../../../components/Login/Common/LoginHeader/LoginHeader'
 import Logo from "../../../assets/logo.png";
 import { ReactComponent as EyeOn } from "../../../assets/login/Eyeon.svg";
@@ -13,6 +13,7 @@ import { ReactComponent as Apple } from "../../../assets/login/apple.svg";
 import { ReactComponent as Arrow } from "../../../assets/login/Arrow-Right.svg";
 import { LoginBody, LogoImg, InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, LoginFooter, LoginText, Button, GapContainer, SignupText, ArrowStyle } from "./LoginPageStyle";
 import Alert from './../../../components/commonUi/Alert';
+import Confirm from './../../../components/commonUi/Confirm';
 import { login } from "../../../service/auth";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../store/slices/auth";
@@ -21,7 +22,9 @@ import { client } from "../../../service";
 function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isAuth = searchParams.get('isAuth');
+  
   const [account, setAccount] = useState({
     email: "",
     password: "",
@@ -30,6 +33,7 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [active, setActive] = useState(false);
   const [alert, setAlert] = useState(false);
+  const [confirm, setConfirm] = useState(false);
 
   const onChangeInput = (e) => {
     setAccount({
@@ -84,6 +88,33 @@ function LoginPage() {
       setActive(false)
     }
   }, [account])
+
+  useEffect(() => {
+    const provider = searchParams.get('provider');
+    const providerId = searchParams.get('providerId');
+    const email = searchParams.get('email');
+    const name = searchParams.get('name');
+    const accessToken = searchParams.get('accessToken');
+    const refreshToken = searchParams.get('refreshToken');
+    const tokenExpiresIn = searchParams.get('tokenExpiresIn');
+  
+    if(isAuth == null) {
+      return;
+    }
+
+    if(!JSON.parse(isAuth)) {
+      const data = { provider, providerId, email, name };
+      localStorage.setItem('auth', JSON.stringify(data))
+      setConfirm(true);
+    }
+
+    if(JSON.parse(isAuth)) {
+      client.defaults.headers.common['Authorization'] = accessToken;
+      const data = { accessToken, refreshToken, tokenExpiresIn };
+      dispatch(authActions.login(data));
+      navigate('/main')
+    }
+  }, [isAuth])
 
   return (
     <div>
@@ -167,6 +198,19 @@ function LoginPage() {
           buttonText={alert.buttonText}
           onButtonClick={alert.onButtonClick}
           onOverlayClick={alert.onOverlayClick}
+        />
+      }
+      {
+        confirm &&
+        <Confirm
+            contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
+            confirmText="네"
+            cancelText="아니오"
+            onConfirmClick={() => {navigate('/member/signup')}}
+            onCancelClick={() => {
+              setConfirm(false)
+              navigate('/member/login')
+            }}
         />
       }
     </div>

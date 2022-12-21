@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FooterImg from '../../../assets/main/footerlogo.svg'
 import BasicHeader from '../../../components/Main/Main/BasicHeader/BasicHeader'
-import Avatar from '../../../assets/common/avatar.png'
-import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainer, MoreContainerDiv, MoreDiv, MoreNavBody, AccountBadge, AccountName, Footer, Logo, FooterText, MoreLoginDiv, MoreLoginText, MoreLoginButton } from './MorePageStyle'
-import { Link } from 'react-router-dom'
+import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainer, MoreContainerDiv, MoreDiv, MoreNavBody, AccountBadge, AccountName, Footer, Logo, FooterText, MoreLoginDiv, MoreLoginText, MoreLoginButton, MoreAccountImgBox } from './MorePageStyle'
+import { Link, useNavigate } from 'react-router-dom'
+import { getMember } from '../../../service/member'
+import { useSelector } from 'react-redux'
 
 function MorePage() {
+  const navigate = useNavigate()
+  const [member, setMember] = useState({});
+  const auth = useSelector(state => state.auth);
+
+  const getMemberProfile = async () => {
+    await getMember()
+      .then(response => {
+        const {data, message} = response.data;
+        setMember(data);
+      })
+  }
+
+  useEffect(() => {
+    if(auth.isAuthenticated) {
+      getMemberProfile()
+    }
+  }, [auth])
+
   return (
     <div>
       <BasicHeader title="더보기" />
@@ -13,23 +32,30 @@ function MorePage() {
 
 
         <MoreContainer>
-          <MoreLoginDiv>
-            <MoreLoginText><p>회원가입 하고</p><p>내 주변 상점을 둘러보세요!</p></MoreLoginText>
-            <MoreLoginButton>로그인/회원가입</MoreLoginButton>
-          </MoreLoginDiv>
-          {/* <MoreAccountDiv>
-            <MoreAccountProfile>
-              <MoreAccountImg src={Avatar} />
-              <MoreAccountTextDiv>
-                <AccountBadge>일반회원</AccountBadge>
-                <AccountName>아이덴잇</AccountName>
-              </MoreAccountTextDiv>
-            </MoreAccountProfile>
-            <MoreAccountButtonDiv>
-              <MoreAccountButton>회원정보 관리</MoreAccountButton>
-              <MoreAccountButton>비즈회원 전환</MoreAccountButton>
-            </MoreAccountButtonDiv>
-          </MoreAccountDiv> */}
+        {
+            auth.isAuthenticated &&
+            <MoreAccountDiv>
+              <MoreAccountProfile>
+                {member.profile && <MoreAccountImg src={member.profile} />}
+                {!member.profile && <MoreAccountImgBox />}
+                <MoreAccountTextDiv>
+                  <AccountBadge>{member.role == 'MEMBER' ? '일반회원' : '비즈회원'}</AccountBadge>
+                  <AccountName>{member.nickname}</AccountName>
+                </MoreAccountTextDiv>
+              </MoreAccountProfile>
+              <MoreAccountButtonDiv>
+                <MoreAccountButton>회원정보 관리</MoreAccountButton>
+                <MoreAccountButton>비즈회원 전환</MoreAccountButton>
+              </MoreAccountButtonDiv>
+            </MoreAccountDiv>
+          }
+          {
+            !auth.isAuthenticated &&
+            <MoreLoginDiv>
+              <MoreLoginText><p>회원가입 하고</p><p>내 주변 상점을 둘러보세요!</p></MoreLoginText>
+              <MoreLoginButton onClick={() => navigate('/member/login')}>로그인/회원가입</MoreLoginButton>
+            </MoreLoginDiv>
+          }
 
         </MoreContainer>
 

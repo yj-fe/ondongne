@@ -15,6 +15,7 @@ const authSlice = createSlice({
         login(state, action) {
             const data = action.payload;
             state.accessToken = data.accessToken;
+            state.refreshToken = data.refreshToken;
             state.tokenExpiresIn = data.tokenExpiresIn;
             state.isAuthenticated = true;
 

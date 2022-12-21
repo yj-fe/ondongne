@@ -69,6 +69,14 @@ width: 52px;
 height: 52px;
 border-radius: 50%;
 `
+export const MoreAccountImgBox = styled.div`
+width: 52px;
+height: 52px;
+background-color: #F5F5F5;
+border: 0;
+border-radius: 50%;
+`
+
 export const MoreAccountTextDiv = styled.div`
 display: flex;
 flex-direction: column;
