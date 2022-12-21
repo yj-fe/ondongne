@@ -24,7 +24,7 @@ const OrderFormPage = props => {
                     contents="진행중인 주문을 취소하시겠습니까?"
                     confirmText="네"
                     cancelText="아니오"
-                    onConfirmClick={() => {navigate('/order/all')}}
+                    onConfirmClick={() => {navigate('/details/:id')}}
                     onCancelClick={() => {setCancelConfirm(false)}}
                 />
             }

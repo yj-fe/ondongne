@@ -53,7 +53,7 @@ function LoginPage() {
         
           dispatch(authActions.login(data));
   
-          navigate('/main')
+          navigate('/')
         } else {
           setAlert({
             title: "로그인 실패",
@@ -114,7 +114,7 @@ function LoginPage() {
       client.defaults.headers.common['Authorization'] = accessToken;
       const data = { accessToken, refreshToken, tokenExpiresIn };
       dispatch(authActions.login(data));
-      navigate('/main')
+      navigate('/')
     }
   }, [isAuth])
 

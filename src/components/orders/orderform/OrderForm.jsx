@@ -1,11 +1,12 @@
 import React, {useRef, useState, useEffect} from 'react'
+import { loadTossPayments } from '@tosspayments/payment-sdk'
 import * as L from '../../commonUi/Layout';
 import * as T from '../../commonUi/Text';
 import * as B from '../../commonUi/Button'
 // import * as B from '../../commonUi/Button';
 import * as Tb from '../../commonUi/Table';
 import * as IP from '../../commonUi/Input';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import CheckBox from '../../commonUi/CheckBox';
 import { Profile32 } from '../../commonUi/Icon';
 import LayerSelect from '../../commonUi/LayerSelect';
@@ -16,8 +17,8 @@ const dummyData = JSON.stringify({
     userName: '아이덴잇',
     userTel: '010-1234-5678',
     userAddress : '서울특별시 강서구 가양동 173-22',
-    prdPrice: '27,200',
-    totalPrice: '29,200',
+    prdPrice: '18,000',
+    totalPrice: '20,000',
     deliveryFee: '2,000',
     pay: '카드 결제'
 });
@@ -39,6 +40,11 @@ const OrderForm = props => {
     const [alert, setAlert] = useState(null);
     // 
     const navigate = useNavigate();
+
+    const clientKey = 'test_ck_d26DlbXAaV0KNDOejNd3qY50Q9RB'
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const status = searchParams.get('status');
 
     /* ==============================
         배송지, 상품, 결제 정보 등 요청
@@ -86,19 +92,56 @@ const OrderForm = props => {
                 onOverlayClick: () => {setAlert(null)}, 
             })
         } else {
-            setAlert({
-                title:"주문 완료",
-                contents:"주문이 완료되었습니다.",
-                buttonText:"확인",
-                onButtonClick: () => {navigate('/order/all')}, 
-                onOverlayClick: () => {setAlert(null)}, 
+
+            // 토스
+            loadTossPayments(clientKey).then(tossPayments => {
+                tossPayments.requestPayment('카드', { // 결제 수단 파라미터
+                    // 결제 정보 파라미터
+                    amount: 20000,
+                    orderId: 'MGBqsi2t-uitzPyJaVXdw',
+                    orderName: '샤인머스켓',
+                    customerName: '인싸과일',
+                    successUrl: 'http://localhost:8080/payment/call-back/success',
+                    failUrl: 'http://localhost:8080/payment/call-back/fail',
+                  })
+                  .catch(function (error) {
+                    if (error.code === 'USER_CANCEL') {
+                      // 결제 고객이 결제창을 닫았을 때 에러 처리
+                    } else if (error.code === 'INVALID_CARD_COMPANY') {
+                      // 유효하지 않은 카드 코드에 대한 에러 처리
+                    }
+                  })
             })
+
+
+
+            // setAlert({
+            //     title:"주문 완료",
+            //     contents:"주문이 완료되었습니다.",
+            //     buttonText:"확인",
+            //     onButtonClick: () => {navigate('/order/all')}, 
+            //     onOverlayClick: () => {setAlert(null)}, 
+            // })
         }
     };
+
+    const orderSuccess = () => {
+        setAlert({
+            title: status ? "주문 완료" : "주문 실패",
+            contents: status ? "주문이 완료되었습니다." : "주문이 실패되었습니다.",
+            buttonText:"확인",
+            onButtonClick: () => {status ? navigate('/order/all') : setAlert(null)}, 
+            onOverlayClick: () => {setAlert(null)}, 
+        })
+    }
 
     useEffect(() => {
         loadData(id);
     }, [id])
+
+    useEffect(() => {
+        if(status) orderSuccess();
+    }, [status])
 
     return (
         orderData
@@ -217,7 +260,7 @@ const OrderForm = props => {
                     selectName="결제 수단"
                     options={[
                         { text: '카드 결제', value: '카드 결제' },
-                        { text: '방문 결제', value: '방문 결제' },
+                        // { text: '방문 결제', value: '방문 결제' },
                     ]}
                     onChange={e => { 
                         setPayType(e.currentTarget.value);

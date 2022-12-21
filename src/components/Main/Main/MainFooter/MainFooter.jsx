@@ -28,7 +28,7 @@ function MainFooter() {
         </NavIcon>
         <NavIcon
         >
-        <Link to="/order/new/:id" style={{ textDecoration: 'none' }}>
+        <Link to="/order/all" style={{ textDecoration: 'none' }}>
           <Order />
         </Link>
         </NavIcon>

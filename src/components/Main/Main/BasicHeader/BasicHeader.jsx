@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom'
 
 import {MainFooterDiv,LoginNavDiv,TitleStyle,BackStyle,LoginNavTitle} from './BasicHeaderStyle'
 
-function BasicHeader({title}) {
+function BasicHeader({title, to=-1}) {
   const navigate = useNavigate()
 
   return (
     <MainFooterDiv>
       <LoginNavDiv>
         <TitleStyle>
-          <BackStyle onClick={()=>{ navigate(-1)}}>
+          <BackStyle onClick={()=>{ navigate(to)}}>
             <Arrow />
           </BackStyle>
           <LoginNavTitle>{title}</LoginNavTitle>
