@@ -70,17 +70,17 @@ function LoginPage() {
       })
   }
 
-  const loginNaver = () => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
+  function loginNaver() {
+    window.location.href = 'https://ondongnemarket.com/oauth2/authorization/naver';
   }
   const loginKakao = () => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
+    window.location.href = '/oauth2/authorization/kakao';
   }
   const loginGoogle = () => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+    window.location.href = '/oauth2/authorization/google';
   }
   const loginApple = () => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/apple';
+    window.location.href = '/oauth2/authorization/apple';
   }
 
   useEffect(() => {
@@ -223,7 +223,7 @@ function LoginPage() {
             onConfirmClick={() => {navigate('/login/signup')}}
             onCancelClick={() => {
               setConfirm(false)
-              navigate('/login/login')
+              navigate('/login')
             }}
         />
       }

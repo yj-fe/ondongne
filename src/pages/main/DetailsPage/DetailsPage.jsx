@@ -16,6 +16,8 @@ import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, Detail
 import MainHeader from '../../../components/Main/Main/BasicHeader/BasicHeader';
 import ModalMorePage from '../../../components/Main/More/ModalMorePage'
 import Layout from '../../../components/layout/Layout/Layout';
+import { useSelector } from 'react-redux';
+import Confirm from '../../../components/commonUi/Confirm';
 
 
 
@@ -28,6 +30,8 @@ function DetailsPage(props) {
   // let {id} = useParams()
   const [modal, setModal] = useState(false);
   const navigate = useNavigate();
+  const auth = useSelector(state => state.auth);
+  const [confirm, setConfirm] = useState(false);
 
   // const{ 
   //   state: {
@@ -41,6 +45,15 @@ function DetailsPage(props) {
   }
   const PropsModal = () => {
     setModal(!modal);
+  }
+
+  const paymentsOrder = () => {
+    console.log(auth)
+    if(auth.isAuthenticated) {
+      navigate('/order/new/:id')
+    } else {
+      setConfirm(true)
+    }
   }
 
 
@@ -178,12 +191,23 @@ function DetailsPage(props) {
         </DetailContainer>
         <ButtonStyle>
           <DetailButtonDiv>
-            <DetailButtonStyle onClick={()=>navigate('/order/new/:id')}>구매하기</DetailButtonStyle>
+            <DetailButtonStyle onClick={paymentsOrder}>구매하기</DetailButtonStyle>
           </DetailButtonDiv>
         </ButtonStyle>
       </DetailBody>
       {modal && <ModalMorePage PropsModal={PropsModal} />}
-
+      {
+        confirm &&
+        <Confirm
+            contents="로그인 후 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
+            confirmText="네"
+            cancelText="아니오"
+            onConfirmClick={() => {navigate('/login')}}
+            onCancelClick={() => {
+              setConfirm(false)
+            }}
+        />
+      }
 
 
     </div>

@@ -84,8 +84,8 @@ function SignupInfo({ data, setData }) {
           setAlert({
             contents: "회원가입을 축하드립니다. \n 로그인 후 이용해 주세요.",
             buttonText: "확인",
-            onButtonClick: () => navigate('/member/login'),
-            onOverlayClick: () => navigate('/member/login'),
+            onButtonClick: () => navigate('/login'),
+            onOverlayClick: () => navigate('/login'),
           })
         } else {
           setAlert({

@@ -29,8 +29,8 @@ function PwdReset({ id }) {
           setAlert({
             contents: message,
             buttonText: "확인",
-            onButtonClick: () => navigate('/member/login'),
-            onOverlayClick: () => navigate('/member/login'),
+            onButtonClick: () => navigate('/login'),
+            onOverlayClick: () => navigate('/login'),
           })
         } else {
           setAlert({

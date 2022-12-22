@@ -19,8 +19,8 @@ function FindResult({data}) {
           <RequestFindEmailText>가입일 : {date}</RequestFindEmailText>
         </RequestFindEmail>  
         <RequestButtonContainer>
-          <RequestButton onClick={()=>{navigate("/member/login")}}>로그인 하기</RequestButton>
-          <RequestButtonDisable onClick={()=>{navigate("/member/login/find/password")}}>비밀번호 찾기</RequestButtonDisable>
+          <RequestButton onClick={()=>{navigate("/login")}}>로그인 하기</RequestButton>
+          <RequestButtonDisable onClick={()=>{navigate("/login/find/password")}}>비밀번호 찾기</RequestButtonDisable>
         </RequestButtonContainer>
     </div>
   )

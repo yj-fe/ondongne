@@ -101,8 +101,8 @@ const OrderForm = props => {
                     orderId: 'MGBqsi2t-uitzPyJaVXdw',
                     orderName: '샤인머스켓',
                     customerName: '인싸과일',
-                    successUrl: 'http://localhost:8080/payment/call-back/success',
-                    failUrl: 'http://localhost:8080/payment/call-back/fail',
+                    successUrl: 'https://ondongnemarket.com/api/payment/call-back/success',
+                    failUrl: 'https://ondongnemarket.com/api/payment/call-back/fail',
                   })
                   .catch(function (error) {
                     if (error.code === 'USER_CANCEL') {

@@ -69,6 +69,8 @@ function App() {
 
           dispatch(authActions.login(data));
         } else {
+          client.defaults.headers.common["Authorization"] = '';
+          localStorage.removeItem('refreshToken');
           setAlert({
             title: "인증 기간 만료",
             contents: "인증 기간이 만료되었습니다.\n다시 로그인해주세요.",
