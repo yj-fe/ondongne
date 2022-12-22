@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { ReactComponent as Right } from "../../../assets/main/right.svg";
+import { ReactComponent as Down } from "../../../assets/icons/arrow/Arrow-Down.svg";
 import { Text } from '../../commonUi/Text';
 
-import {TextCenter,InfoBoxDiv,TabDiv,TabContent,RowDiv,ContentDiv,ContentTitle,TitleInfo,TitleInfoDiv,RightStyle,TabBtn,InputBox,Input} from './BusinessManagementTabStyle'
+import {BankListDiv,BankToggleDiv,TextCenter,InfoBoxDiv,TabDiv,TabContent,ContentDiv,ContentTitle,TitleInfo,TitleInfoDiv,RightStyle,TabBtn,InputBox,Input} from './BusinessManagementTabStyle'
 
 
 function BusinessManagementTab2() {
+  const [select, setSelect] = useState(false)
+
   return (
     <div>
       <TabDiv>
@@ -45,8 +48,12 @@ function BusinessManagementTab2() {
             <ContentTitle>통장 정보</ContentTitle>
             <InfoBoxDiv>
               <TitleInfo>은행 선택</TitleInfo>
-              <RightStyle><Right/></RightStyle>
+              <RightStyle
+                onClick={()=>setSelect(!select)}
+              ><Down/></RightStyle>
             </InfoBoxDiv>
+            {select && <BankToggle/>}
+
             <InfoBoxDiv>
               <Input
                 placeholder='-를 제외한 계좌번호 입력'
@@ -56,20 +63,11 @@ function BusinessManagementTab2() {
           <ContentDiv>
             <ContentTitle>첨부파일</ContentTitle>
               <Text _size={14} _color={'gray600'} >사업자 관련 파일 첨부(파일은 pdf, jpg, png만 첨부 가능)</Text>
-            <InfoBoxDiv>
-              <TextCenter>파일 첨부</TextCenter>
-            </InfoBoxDiv>
+            <TextCenter>
+              <TitleInfo >파일 첨부</TitleInfo>
+            </TextCenter>
           </ContentDiv>
 
-
-
-          <ContentDiv>
-            <ContentTitle>첨부파일</ContentTitle>
-            <TitleInfoDiv>
-              <TitleInfo>파일 첨부</TitleInfo>
-              <Text>파일 첨부</Text>
-            </TitleInfoDiv>
-          </ContentDiv>
 
         </TabContent>
 
@@ -78,6 +76,36 @@ function BusinessManagementTab2() {
 
       </TabDiv>
 
+    </div>
+  )
+}
+
+function BankToggle (){
+  return(
+    <div>
+      <BankToggleDiv>
+        <BankListDiv>
+          <TitleInfo weight={600} color={'#0B806F'}>은행 선택</TitleInfo>
+        </BankListDiv>
+        <BankListDiv>
+          <TitleInfo>NH은행</TitleInfo>
+        </BankListDiv>
+        <BankListDiv>
+          <TitleInfo>우리은행</TitleInfo>
+        </BankListDiv>
+        <BankListDiv>
+          <TitleInfo>기업은행</TitleInfo>
+        </BankListDiv>
+        <BankListDiv>
+          <TitleInfo>NH은행</TitleInfo>
+        </BankListDiv>
+        <BankListDiv>
+          <TitleInfo>우리은행</TitleInfo>
+        </BankListDiv>
+        <BankListDiv>
+          <TitleInfo>기업은행</TitleInfo>
+        </BankListDiv>
+      </BankToggleDiv>
     </div>
   )
 }

@@ -7,8 +7,8 @@ export const TextInput = styled.input`
     border-width: ${props => props._border || 1}px;
     border-radius: 4px;
     border-style: solid;
-    border-color: ${props => props.theme.color.gray200};
-    background-color: ${props => props.theme.color.gray50};
+    border-color: ${props => props._borcolor || '#EEEEEE'};
+    background-color: ${props => props._boccolor || '#FAFAFA'};
 
     &:placeholder {
         color: ${props => props.theme.color.gray400};

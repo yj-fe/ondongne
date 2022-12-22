@@ -26,7 +26,6 @@ function BusinessPage() {
   const [item] = useState(maindata)
 
   const [floating, setFloating] = useState(false)
-console.log(floating);
 
   return (
     <div>

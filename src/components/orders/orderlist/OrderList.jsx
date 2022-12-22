@@ -4,7 +4,7 @@ import * as T from '../../commonUi/Text';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Clsoe, More, Profile48 } from '../../commonUi/Icon';
+import { Close, More, Profile48 } from '../../commonUi/Icon';
 import styled from 'styled-components';
 import LayerSelect from '../../commonUi/LayerSelect';
 import Confirm from '../../commonUi/Confirm';
@@ -159,7 +159,7 @@ const OrderList = props => {
                                 style={{background: '#FFF'}}
                                 onClick={() => {setDeliveryPopup(false)}}
                             >
-                                <Clsoe />
+                                <Close />
                             </button>
                             <div className="top">
                                 <div className="img" />

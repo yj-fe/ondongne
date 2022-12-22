@@ -87,9 +87,9 @@ export const RowTitle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items:  ${props => props.align || 'flex-start'};
   width: 100%;
-  height: auto;
+  height: ${props => props.height || 'auto'};
 `
 export const ContentTitle = styled.p`
   font-weight: 600;
@@ -123,14 +123,23 @@ export const InfoBoxDiv = styled.div`
   border-radius: 4px;
 `
 export const TitleInfo = styled.p`
-  font-weight: 400;
+  font-weight: ${props => props.weight || 400};
   font-size: 16px;
-  color: #212121;
+  color: ${props => props.color || 'gray900'};
+  
 `
 export const TextCenter = styled.p`
-  font-weight: 400;
-  font-size: 16px;
-  color: #212121;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 12px;
+  width: 688px;
+  height: 48px;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 4px;
 `
 export const RightStyle = styled.div`
   width: 24px;
@@ -154,10 +163,15 @@ export const Input = styled.input`
   font-weight: 400;
   font-size: 16px;
   width: 100%;
+  text-align: ${props => props.align || null};
   color: #BDBDBD;
   &:focus{
     color: #212121;
   }
+  &::-ms-reveal {
+  display: none;
+  }
+
 `
 export const RowInput = styled.input`
   font-weight: 400;
@@ -201,4 +215,63 @@ export const DayBox = styled.div`
   font-weight: 400;
   font-size: 16px;
   color: #424242;
+`
+export const BankToggleDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  isolation: isolate;
+  position: absolute;
+  width: 688px;
+  height: 192px;
+  background: #FFFFFF;
+  box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  overflow: scroll;
+  &::-webkit-scrollbar-thumb {
+      background-color: #BDBDBD;
+      border-radius: 99px;
+  }
+  &::-webkit-scrollbar {
+      width: 4px; 
+  }
+`
+export const BankListDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 16px;
+  width: 100%;
+  height: 48px;
+`
+export const RowTimeDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  width: 609px;
+  height: 44px;
+`
+export const TimeDiv = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  width: 291.5px;
+  height: 100%;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 4px;
+`
+export const TimeBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 8px;
+  width: 143.75px;
+  height: 100%;
 `

@@ -3,10 +3,9 @@ import BusinessManagementTab1 from '../../../components/Buisness/BusinessManagem
 import BusinessManagementTab2 from '../../../components/Buisness/BusinessManagement/BusinessManagementTab2'
 import BasicHeader from '../../../components/Main/Main/BasicHeader/BasicHeader'
 
-
-import {MemberBody} from '../../login/member/MemberManagement/MemberManagementStyle'
+import {MoreNavBody,MoreContainer} from '../../../pages/main/MorePage/MorePageStyle'
+// import {MemberBody} from '../../login/member/MemberManagement/MemberManagementStyle'
 import {DetailTabDiv,TabButtonStyle,DetailTabInfo,DetailTabReview,TabContentStyle} from '../../main/DetailsPage/DetailsPageStyle'
-import {Container} from './BusinessManagementStyle'
 
 function BusinessManagement() {
 
@@ -20,8 +19,8 @@ function BusinessManagement() {
 {/* ============  ============ */}
 
 
-      <MemberBody>
-        <Container>
+      <MoreNavBody>
+        <MoreContainer>
           <DetailTabDiv>
 
             <TabButtonStyle>
@@ -45,8 +44,8 @@ function BusinessManagement() {
 
 
           </DetailTabDiv>
-        </Container>
-      </MemberBody>
+        </MoreContainer>
+      </MoreNavBody>
     </div>
   )
 }
