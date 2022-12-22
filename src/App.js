@@ -46,6 +46,8 @@ import Alert from "./components/commonUi/Alert";
 import { tokenReissue } from "./service/auth";
 import { client } from "./service";
 import { authActions } from "./store/slices/auth";
+import BusinessManagement from "./pages/business/BusinessManagement/BusinessManagement";
+import CheckBox from "./components/commonUi/CheckBox";
 
 function App() {
   const navigate = useNavigate();
@@ -93,15 +95,22 @@ function App() {
         {/* ========== 회원관리 ========== */}
         <Route path="/member">
           <Route path="" element={<MyPage />} />
+          {/* 1주차-회원-회원수정 */}
           <Route path="management" element={<MemberManagement />} />
+          {/* 1주차-회원-회원탈퇴 */}
           <Route path="withdrawal" element={<MemberWithdrawal />} />
+          {/* 1주차-회원-위치설정 */}
           <Route path="location" element={<LocationSetting />} />
         </Route>
 
         {/* ========== 비즈회원관리 ========== */}
         <Route path="/business">
+          {/* 1주차-비즈회원-메인페이지 */}
           <Route path="" element={<BusinessPage />} />
+          {/* 1주차-비즈회원-비즈회원신청 */}
           <Route path="application" element={<BusinessApplication />} />
+          {/* 1주차-비즈회원-비즈정보관리(상점, 사업자) */}
+          <Route path="management" element={<BusinessManagement />} />
           <Route path="upload" element={<BusinessUpload />} />
         </Route>
 

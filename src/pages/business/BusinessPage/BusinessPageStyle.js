@@ -217,9 +217,73 @@ export const EmptyText = styled.p`
   width: 814px;
   height: 316px;
   `
-  export const FloatingDiv = styled.div`
-  position: absolute;
-  gap: 16px;
-  bottom: 40px;
+  export const FooterDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 728px;
+  padding: 0 24px 0 0;
   `
+  export const FloatingDiv = styled.div`
+  position: sticky;
+  /* gap: 16px; */
+  /* bottom: 40px; */
+  /* right: 24px; */
+  justify-content: right;
+  align-items: center;
+  display: flex;
+  `
+export const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 500px;
+  height: 156px;
+  padding: 20px;
+  gap: 12px;
+  
+  > div {
+    max-width: 728px;
+    width: 100%;
 
+    @media only screen and (max-width: 728px) { 
+      width: 100vw;
+    }
+  }
+`
+export const FloatingToggleDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+
+  position: absolute;
+  justify-content: center;
+  bottom: 120px;
+  right: 0;
+  width: 152px;
+  height: 256px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.16);
+  border-radius: 20px;
+`
+export const FloatingContentIcon = styled.div`
+  width: 24px;
+  height: 24px;
+`
+export const FloatingContentTitle = styled.div`
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+`
+export const FloatingContentDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 16px 16px 8px;
+  gap: 12px;
+
+  width: 120px;
+  height: 56px;
+`

@@ -1,18 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import BasicHeader from '../../../../components/Main/Main/BasicHeader/BasicHeader'
-import Profile from '../../../../assets/common/Profile.png'
-import Camera from '../../../../assets/common/Camera.png'
 // import { memberPasswordChange } from "../../../../service/member";
 // import { ReactComponent as EyeOn } from "../../../../assets/login/Eyeon.svg";
 // import { ReactComponent as EyeOff } from "../../../../assets/login/Eyeoff.svg";
 
-import { NameToggleInput,NameToggleInputForm,PwdResetToggleForm,PwdResetToggleInput,EyeOffStyle,PwdToggleButton,PwdToggleInput,PwdToggleInputForm,MemberBar,MemberLinkText,MemberBody,MemberContainer,MemberInfoDiv,MemberLinkDiv,MemberProfileDiv,CameraStyle,TextEmail,TextName,TitleText,ProfileDiv,ProfileTextDiv,ImgStyle,InfoDiv,Input,ChangeButton,InputForm} from './MemberManagementStyle'
+import { NameToggleInput,NameToggleInputForm,PwdResetToggleForm,PwdResetToggleInput,EyeOffStyle,PwdToggleButton,PwdToggleInput,PwdToggleInputForm,MemberBar,MemberLinkText,MemberBody,MemberContainer,MemberInfoDiv,MemberLinkDiv,MemberProfileDiv,TextEmail,TextName,TitleText,ProfileTextDiv,InfoDiv,Input,ChangeButton,InputForm} from './MemberManagementStyle'
 import Alert from "../../../../components/commonUi/Alert";
 import ModalPage from '../../../../components/Login/ModalPage';
 import MemberPhone from '../../../../components/Login/Member/MemberPhone/MemberPhone';
 import SimpleConfirm from '../../../../components/commonUi/SimpleConfirm';
 import MemberPwd from '../../../../components/Login/Member/MemberPwd/MemberPwd';
+import ProfileAvatar from '../../../../components/commonUi/ProfileAvatar';
 
 function MemberManagement() {
   const [namevalue,setNamevalue] = useState('아이덴잇')
@@ -31,17 +30,7 @@ function MemberManagement() {
 {/* ============ 회원정보관리 ============ */}
         <MemberContainer>
           <MemberProfileDiv>    
-            <ProfileDiv>
-              <ImgStyle
-              src={Profile}
-              >
-                {/* <Avatar src={Avatar}> */}
-              </ImgStyle>
-              <CameraStyle
-                src={Camera}
-              >
-              </CameraStyle>
-            </ProfileDiv> 
+            <ProfileAvatar/>
             <ProfileTextDiv>
               <TextName>아이덴잇</TextName>
               <TextEmail>sosangongin@email.com</TextEmail>

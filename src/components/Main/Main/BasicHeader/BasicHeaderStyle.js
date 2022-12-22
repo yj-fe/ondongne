@@ -11,6 +11,7 @@ export const MainFooterDiv = styled.div`
   top: 0px;
   background: #ffffff;
   border-bottom: 1px solid #eeeeee;
+  z-index: 100;
   
   @media only screen and (max-width: 728px) {
     filter: drop-shadow(0px 3px 12px rgba(0, 0, 0, 0.06));

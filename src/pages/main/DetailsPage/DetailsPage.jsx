@@ -48,7 +48,7 @@ function DetailsPage(props) {
 
   return (
     <div>
-      <MainHeader title="아재의 과일" to={'/'}/>
+      <MainHeader title="아재의 과일" />
       {/* <MainHeader title="아재의 과일"/> */}
       <DetailBody>
         <DetailContainer>
