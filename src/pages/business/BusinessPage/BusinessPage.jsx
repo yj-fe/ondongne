@@ -11,14 +11,23 @@ import { ReactComponent as NewReview } from "../../../assets/icons/business/newr
 import FooterImg from '../../../assets/main/footerlogo.svg'
 import { ReactComponent as StarIcon } from "../../../assets/main/ratestar.svg";
 import { ReactComponent as Floating } from "../../../assets/icons/business/floating.svg";
+import { ReactComponent as FloatingPush } from "../../../assets/icons/business/floatingpush.svg";
+import { ReactComponent as Coupon } from "../../../assets/icons/business/Coupon.svg";
+import { ReactComponent as Trans } from "../../../assets/icons/business/Trans.svg";
+import { ReactComponent as Product } from "../../../assets/icons/business/Product.svg";
+import { ReactComponent as Order } from "../../../assets/icons/business/Order.svg";
 
-import {MoreNavBody,MoreContainer,MoreDiv,Footer,FooterText,Logo} from '../../../pages/main/MorePage/MorePageStyle'
+import {MoreNavBody,MoreContainer,MoreDiv,FooterText,Logo} from '../../../pages/main/MorePage/MorePageStyle'
 import {TermsDiv,TermsTitle,TermsIconStyle} from '../../main/TermsPage/TermsPageStyle'
-import {TitleText,InfoCard,InfoIconStyle,CardCount,CardText,InfoDiv,CardTextDiv,CouponDiv,CouponInfoDiv,DownloadDiv,DownloadText,DownloadCount,DownloadCountTextB,DownloadCountTextN,MyBestProductContent,FloatingDiv} from './BusinessPageStyle'
+import {TitleText,InfoCard,InfoIconStyle,CardCount,CardText,Footer,InfoDiv,FloatingContentDiv,FloatingContentTitle,FloatingContentIcon,FloatingToggleDiv,CardTextDiv,CouponDiv,CouponInfoDiv,DownloadDiv,DownloadText,DownloadCount,DownloadCountTextB,DownloadCountTextN,MyBestProductContent,FloatingDiv,FooterDiv} from './BusinessPageStyle'
 import {ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,ContentTitle,Discount,DiscountStyle,Price,FinalPrice,RateStyle,Star,Number} from '../../../components/Main/Main/MainBestCollection/MainBestCollectionStyle'
 
 function BusinessPage() {
-  let [item] = useState(maindata)
+  const [item] = useState(maindata)
+
+  const [floating, setFloating] = useState(false)
+console.log(floating);
+
   return (
     <div>
       <BusinessHeader/>
@@ -116,7 +125,7 @@ function BusinessPage() {
                   })
                 }
                 </MyBestProductContent>
-            {/* ? <Produ : <EmptyDiv/>  */}
+            {/* item있으면 ? <MyBestProductContent/> : <EmptyDiv/>  */}
           </MoreDiv>
         </MoreContainer>
 
@@ -125,7 +134,7 @@ function BusinessPage() {
           <MoreDiv>
         <TermsDiv>
             <TermsTitle>비즈 정보 관리</TermsTitle>
-            <Link to="">
+            <Link to="/business/management">
               <TermsIconStyle><Right/></TermsIconStyle>
             </Link>
           </TermsDiv>
@@ -160,7 +169,8 @@ function BusinessPage() {
             </Link>
           </TermsDiv>
           </MoreDiv>
-
+        </MoreContainer>
+        <FooterDiv>
           <Footer>
             <Logo src={FooterImg} />
             <FooterText>
@@ -170,17 +180,21 @@ function BusinessPage() {
               <span>고객센터: 123-456-78912 / 이메일문의: example@email.com</span>
             </FooterText>
           </Footer>
-        </MoreContainer>
-
-          <FloatingDiv>
-            <Floating/>
+          <FloatingDiv
+           onClick={()=>setFloating(!floating)}
+          >
+            {floating && <FloatingToggle/>}
+            {floating ? <FloatingPush/> : <Floating/>}
           </FloatingDiv>
+          </FooterDiv>
+
       </MoreNavBody>
 
 
     </div>
   )
 }
+
 function MyBestProductCard(props){
   return(
   <div>
@@ -204,4 +218,29 @@ function MyBestProductCard(props){
   </div>
   )
 }
+function FloatingToggle(props){
+  return(
+  <div>
+    <FloatingToggleDiv>
+      <FloatingContentDiv>
+        <FloatingContentIcon><Product/></FloatingContentIcon>
+        <FloatingContentTitle>상품 등록</FloatingContentTitle>
+      </FloatingContentDiv>
+      <FloatingContentDiv>
+        <FloatingContentIcon><Order/></FloatingContentIcon>
+        <FloatingContentTitle>소식 등록</FloatingContentTitle>
+      </FloatingContentDiv>
+      <FloatingContentDiv>
+        <FloatingContentIcon><Coupon/></FloatingContentIcon>
+        <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
+      </FloatingContentDiv>
+      <FloatingContentDiv>
+        <FloatingContentIcon><Trans/></FloatingContentIcon>
+        <FloatingContentTitle>일반 전환</FloatingContentTitle>
+      </FloatingContentDiv>
+    </FloatingToggleDiv>
+  </div>
+  )
+}
+
 export default BusinessPage

@@ -90,7 +90,6 @@ export const ContentDate = styled.div`
 export const ContentTitle = styled.p`
   font-weight: 400;
   font-size: 14px;
-  line-height: 20px;
   color: #212121;
 `
 export const DiscountStyle = styled.p`
