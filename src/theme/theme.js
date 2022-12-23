@@ -29,6 +29,7 @@ const color = {
     red700: '#B01225',
     red800: '#780C19',
     red900: '#3C060D',
+    red: '#ED2A2A',
     error: '#D32F2F'
 };
 

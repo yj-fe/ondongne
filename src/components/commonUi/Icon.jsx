@@ -12,6 +12,12 @@ export const ArrowLeft = () => (
     </svg>
 );
 
+export const ArrowRight = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.91076 4.41205C7.2362 4.08661 7.76384 4.08661 8.08928 4.41205L13.0893 9.41205C13.4147 9.73748 13.4147 10.2651 13.0893 10.5906L8.08928 15.5906C7.76384 15.916 7.2362 15.916 6.91076 15.5906C6.58533 15.2651 6.58533 14.7375 6.91076 14.412L11.3215 10.0013L6.91076 5.59056C6.58533 5.26512 6.58533 4.73748 6.91076 4.41205Z" fill="#BDBDBD"/>
+    </svg>
+);
+
 export const Profile32 = () => (
     <div style={{width: "32px", height: "32px", borderRadius: "16px", overflow: "hidden"}}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

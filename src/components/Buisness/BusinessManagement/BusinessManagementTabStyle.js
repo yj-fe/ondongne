@@ -39,7 +39,7 @@ export const CameraImg = styled.img`
 `
 export const AvatarDiv = styled.div`
   position: absolute;
-  top: 267px;
+  top: 207px;
 `
 export const TabContent = styled.div`
   display: flex;
@@ -163,6 +163,7 @@ export const Input = styled.input`
   font-weight: 400;
   font-size: 16px;
   width: 100%;
+  background-color:  ${props => props.color ? '#EEEEEE' : 'none'};
   text-align: ${props => props.align || null};
   color: #BDBDBD;
   &:focus{
@@ -210,11 +211,11 @@ export const DayBox = styled.div`
   gap: 4px;
   width: 100%;
   height: 48px;
-  background: #F5F5F5;
+  background: ${props=>props.color ? '#E1F3F2' : '#F5F5F5'};
   border-radius: 4px;
   font-weight: 400;
   font-size: 16px;
-  color: #424242;
+  color: ${props=>props.color ? '#0B806F' : '#424242'};
 `
 export const BankToggleDiv = styled.div`
   display: flex;
@@ -225,6 +226,7 @@ export const BankToggleDiv = styled.div`
   position: absolute;
   width: 688px;
   height: 192px;
+  justify-content: center;
   background: #FFFFFF;
   box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.06);
   border-radius: 4px;
@@ -262,7 +264,7 @@ export const TimeDiv = styled.div`
   padding: 0px;
   width: 291.5px;
   height: 100%;
-  background: #FFFFFF;
+  background: ${props=>props.color ? '#EEEEEE' : '#FFFFFF'};
   border: 1px solid #EEEEEE;
   border-radius: 4px;
 `

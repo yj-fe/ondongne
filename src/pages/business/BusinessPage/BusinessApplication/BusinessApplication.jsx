@@ -7,10 +7,14 @@ import Alert from '../../../../components/commonUi/Alert';
 import { Final } from '../../../../components/commonUi/Icon';
 
 import { NextButton } from '../../../../components/Login/Signup/agreement/AgreementStyle'
-import BasicHeader from '../../../../components/Main/Main/BasicHeader/BasicHeader'
-import {MoreNavBody,MoreContainer} from '../../../../pages/main/MorePage/MorePageStyle'
 import {ConfirmButton,CenterDiv,FinalPageDiv} from './BusinessApplicationStyle'
+import LayoutPage from '../../../../components/Common/LayoutPage';
+import { Body, Container, Div } from '../../../../components/Common/LayoutPageStyle';
+import { useNavigate } from 'react-router-dom';
+
+
 function BusinessApplication() {
+  const navigate = useNavigate();
   const [select, setSelect] = useState(false)
   const [alert, setAlert] = useState(null)
 
@@ -25,17 +29,17 @@ function BusinessApplication() {
     })
   }
 
+
+
   return (
     <div>
-      <BasicHeader title="비즈 정보 관리"/>
-{/* ============  ============ */}
-      <MoreNavBody>
-        
-        
-    <MoreContainer>
-      <TabDiv>
-          <TabContent>
-            <div>
+{/* ============= 3. 비즈회원신청페이지 ============= */}
+      <LayoutPage title="비즈 정보 관리"/>
+      <Body>
+        <Container>
+          <Div>
+        <TabContent>
+          <div>
               <Text _weight={600} _size={24} _color={'gray900'}><p>나만의 상점을</p><p>직접 등록해 보세요.</p></Text>
               <Text _weight={300} _size={15} _color={'gray800'}>관리자 승인 후 상점 활동이 가능합니다.</Text>
             </div>
@@ -88,10 +92,10 @@ function BusinessApplication() {
           >
          비즈 신청하기
        </NextButton> 
-                 </TabContent>      </TabDiv>        </MoreContainer>
+       </TabContent>
+       </Div>
 
-
-{/* ============= 신청완료페이지 ============= */}
+{/* ============= 4. 비즈회원신청 완료페이지 ============= */}
           {/* <FinalPageDiv>
             <CenterDiv>
               <Final/>
@@ -99,17 +103,18 @@ function BusinessApplication() {
               <Text _size={15} _weight={400} _color={'gray800'} _align={'center'}><p>관리자 검토 후 2영업일 이내로 승인 처리 예정입니다.</p><p>승인이 완료되면 알림으로 알려드립니다.</p></Text>
             </CenterDiv>
             <ConfirmButton
-                type="button"
-                >
+              type="button"
+              onClick={() => {navigate('/more')}}
+              >
               확인
             </ConfirmButton>
           </FinalPageDiv> */}
 
+        </Container>
+      </Body>
 
+      
 
-
-
-      </MoreNavBody>
       {
         alert &&
         <Alert
@@ -121,9 +126,6 @@ function BusinessApplication() {
           onOverlayClick={alert.onOverlayClick}
         />
       }
-
-
-
     </div>
   )
 }
@@ -133,6 +135,9 @@ function CateToggle (){
   return(
     <div>
       <BankToggleDiv>
+        <BankListDiv>
+          <TitleInfo weight={600} color={'#0B806F'}>야채/과일</TitleInfo>
+        </BankListDiv>
         <BankListDiv>
           <TitleInfo weight={600} color={'#0B806F'}>야채/과일</TitleInfo>
         </BankListDiv>

@@ -1,7 +1,7 @@
 
 import styled from 'styled-components'
 export const MoreNavBody = styled.div`
-  /* margin-top: 60px; */
+  margin-top: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@ export const MoreContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #6e6868;
+  background: #F5F5F5;
   width: 728px;
   height: auto;
   /* margin-top: 60px; */

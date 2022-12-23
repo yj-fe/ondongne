@@ -10,8 +10,8 @@ const StyledCheckBox = styled.div`
     label {
         width: auto;
         line-height: 20px;
-        font-weight: 500;
-        font-size: 14px;
+        font-weight: 600;
+        font-size: 15px;
     }
 
     input {
@@ -25,7 +25,7 @@ const StyledCheckBox = styled.div`
 `;
 
 
-const CheckBox = props => {
+const CheckBoxTitle = props => {
 
     return (
         <StyledCheckBox>
@@ -57,7 +57,7 @@ const CheckBox = props => {
     )
 }
 
-CheckBox.propTypes = {
+CheckBoxTitle.propTypes = {
     name: PropTypes.string,
     value: PropTypes.string,
     label: PropTypes.string,
@@ -65,4 +65,4 @@ CheckBox.propTypes = {
     onChange: PropTypes.func
 }
 
-export default CheckBox
+export default CheckBoxTitle

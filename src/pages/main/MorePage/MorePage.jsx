@@ -8,6 +8,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import Alert from '../../../components/commonUi/Alert'
 import { authActions } from '../../../store/slices/auth'
 import { client } from '../../../service'
+import Modal, { Body, Container } from '../../../components/layout/Modal/Modal'
+import { AgreementDiv, Button, ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle, SpaceBet } from '../../../components/Main/More/ModalPageStyle'
+import { Text } from '../../../components/commonUi/Text'
+import CheckBox from '../../../components/commonUi/CheckBox'
+import CheckBoxTitle from '../../../components/commonUi/CheckBoxTitle'
+import { Line } from '../DetailsPage/DetailsPageStyle'
+import { ArrowRight } from '../../../components/commonUi/Icon'
+import { RowDiv } from '../../../components/Buisness/BusinessManagement/BusinessManagementTabStyle'
 
 function MorePage() {
   const navigate = useNavigate()
@@ -15,6 +23,9 @@ function MorePage() {
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const [alert, setAlert] = useState(null);
+  const [coachmark, setCoachmark] = useState(null);
+  const [agreementModal, setAgreementModal] = useState(false);
+
   const memberLogout = async () => {
     await logout()
       .then(response => {
@@ -75,7 +86,9 @@ function MorePage() {
               </MoreAccountProfile>
               <MoreAccountButtonDiv>
                 <MoreAccountButton>회원정보 관리</MoreAccountButton>
-                <MoreAccountButton>비즈회원 전환</MoreAccountButton>
+                <MoreAccountButton
+                  onClick={()=>setCoachmark(true)}
+                >비즈회원 전환</MoreAccountButton>
               </MoreAccountButtonDiv>
             </MoreAccountDiv>
           }
@@ -139,9 +152,84 @@ function MorePage() {
           onOverlayClick={alert.onOverlayClick}
         />
       }
-
+{/* ============= 1. 비즈회원코치모달 ============= */}
+      {
+        coachmark &&
+        <Modal/>
+      }
+{/* ============= 2. 비즈회원약관동의 ============= */}
+      {
+        agreementModal &&
+        <BusinessAgreementModal/>
+      }
+{/* ============= 3-4 비즈회원신청페이지 => <BusinessApplication/> ============= */}
     </div>
   )
 }
 
+function BusinessAgreementModal (){
+  // 체크버튼
+  const [requestSave, setRequestSave] = useState(false);
+  const [servicerequestSave, setServiceRequestSave] = useState(false);
+  const [privrequestSave, setPrivRequestSave] = useState(false);
+  const [snsrequestSave, setSnsRequestSave] = useState(false);
+
+  return(
+    <div>
+      <ModalOutside>
+        <ModalBody>
+          <ModalDiv1/>
+          <ModalDiv2>
+            <ModalTitle>
+            <Text _size={18} _weight={500} _color={'gray900'}><p>비즈회원으로 전환하시려면</p><p>약관동의가 필요합니다.</p></Text>
+            </ModalTitle>
+            </ModalDiv2>
+          <AgreementDiv>
+
+          <CheckBoxTitle
+            label="모두 동의합니다"
+            name="requestSave"
+            checked={requestSave}
+            onChange={e => {setRequestSave(e.currentTarget.checked)}}
+          />
+          <Line/>
+          <SpaceBet>
+            <CheckBox
+              label="[필수] 비즈회원 이용약관"
+              name="servicerequestSave"
+              checked={servicerequestSave}
+              onChange={e => {setServiceRequestSave(e.currentTarget.checked)}}
+            />
+            <ArrowRight/>
+          </SpaceBet>
+          <SpaceBet>
+            <CheckBox
+              label="[필수] 개인정보 수집 이용 동의"
+              name="privrequestSave"
+              checked={privrequestSave}
+              onChange={e => {setPrivRequestSave(e.currentTarget.checked)}}
+            />
+            <ArrowRight/>
+          </SpaceBet>
+          <SpaceBet>
+            <CheckBox
+              label="[선택] 마케팅 수신 동의"
+              name="snsrequestSave"
+              checked={snsrequestSave}
+              onChange={e => {setSnsRequestSave(e.currentTarget.checked)}}
+            />
+            <ArrowRight/>
+          </SpaceBet>
+
+          <Button>확인</Button>
+
+
+
+          </AgreementDiv>
+          
+        </ModalBody>
+      </ModalOutside>
+    </div>
+  )
+}
 export default MorePage

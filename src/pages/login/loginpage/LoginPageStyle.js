@@ -63,7 +63,7 @@ export const Input = styled.input`
   }
 `;
 export const InputError = styled.p`
-align-items: flex-start;
+  align-items: flex-start;
   font-weight: 400;
   font-size: 13px;
   color: #D32F2F;

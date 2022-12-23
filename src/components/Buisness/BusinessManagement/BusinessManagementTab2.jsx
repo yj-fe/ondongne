@@ -17,13 +17,17 @@ function BusinessManagementTab2() {
           <ContentDiv>
             <ContentTitle>대표자 명</ContentTitle>
             <TitleInfoDiv>
-              <TitleInfo>홍길동</TitleInfo>
+              <Input
+                placeholder='홍길동'
+              />
             </TitleInfoDiv>
           </ContentDiv>
           <ContentDiv>
             <ContentTitle>전화번호</ContentTitle>
             <TitleInfoDiv>
-              <TitleInfo>021234567</TitleInfo>
+              <Input
+                placeholder='0123456789'
+              />
             </TitleInfoDiv>
           </ContentDiv>
           <ContentDiv>
@@ -41,7 +45,9 @@ function BusinessManagementTab2() {
           <ContentDiv>
             <ContentTitle>사업자등록번호</ContentTitle>
             <TitleInfoDiv>
-              <TitleInfo>012-34-567891</TitleInfo>
+              <Input
+                placeholder='012-34-567891'
+              />
             </TitleInfoDiv>
           </ContentDiv>
           <ContentDiv>
@@ -86,15 +92,6 @@ function BankToggle (){
       <BankToggleDiv>
         <BankListDiv>
           <TitleInfo weight={600} color={'#0B806F'}>은행 선택</TitleInfo>
-        </BankListDiv>
-        <BankListDiv>
-          <TitleInfo>NH은행</TitleInfo>
-        </BankListDiv>
-        <BankListDiv>
-          <TitleInfo>우리은행</TitleInfo>
-        </BankListDiv>
-        <BankListDiv>
-          <TitleInfo>기업은행</TitleInfo>
         </BankListDiv>
         <BankListDiv>
           <TitleInfo>NH은행</TitleInfo>

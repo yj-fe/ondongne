@@ -67,7 +67,7 @@ function BusinessPage() {
           <MoreDiv>
             <TitleText>발행한 쿠폰</TitleText>
             <CouponDiv>
-              
+{/* ========== 쿠폰배너생성시 뜨는 예시 ======= */}
               {/* <CouponCard>
                 <CouponTitleDiv>
                   <CouponBadge>발행중</CouponBadge>

@@ -6,7 +6,7 @@ export const ModalOutside = styled.body`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +28,7 @@ export const ModalDiv1 = styled.div`
   gap: 4px;
 
   width: 728px;
-  height: 44px;
+  height: auto;
 
   background: #FFFFFF;
   border-radius: 20px 20px 0px 0px;
@@ -47,7 +47,6 @@ export const ModalDiv2 = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-
   width: 728px;
   height: auto;
   background: #FFFFFF;
@@ -86,4 +85,37 @@ export const ModalButton = styled.button`
   font-size: 16px;
   line-height: 24px;
   color: #212121;
+`
+export const AgreementDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #FFFFFF;
+  padding: 32px 20px;
+  gap: 16px;
+  width: 728px;
+  height: auto;
+`
+export const SpaceBet = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 688px;
+`
+export const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 4px;
+  margin-top: 10px;
+  gap: 4px;
+  width: 100%;
+  height: 48px;
+  background: #0B806F;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #FFFFFF;
 `

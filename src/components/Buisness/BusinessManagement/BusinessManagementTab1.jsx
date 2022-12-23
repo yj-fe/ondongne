@@ -10,6 +10,13 @@ import {TimeBox,TimeDiv,RowTimeDiv,DayDiv,DayBox,RowTitle,RowInput,InputText,Tab
 // 상점정보
 function BusinessManagementTab1() {
 
+  const [mobox, setMoBox] = useState(false);
+  const [tubox, setTuBox] = useState(false);
+  const [webox, setWeBox] = useState(false);
+  const [thbox, setThBox] = useState(false);
+  const [fibox, setFiBox] = useState(false);
+  const [sabox, setSaBox] = useState(false);
+  const [subox, setSuBox] = useState(false);
   const [requestSave, setRequestSave] = useState(false);
 
   return (
@@ -26,12 +33,19 @@ function BusinessManagementTab1() {
         </AvatarDiv>
 
         <TabContent>
+
+{/* ============== 상점명 ============== */}
           <ContentDiv>
             <ContentTitle>상점명</ContentTitle>
             <TitleInfoDiv>
-              <TitleInfo>아재의 과일</TitleInfo>
+              <Input
+                placeholder='아재의 과일'
+              />
             </TitleInfoDiv>
           </ContentDiv>
+
+
+{/* ============== 활동지역 ============== */}
           <ContentDiv>
             <ContentTitle>활동지역</ContentTitle>
             <TitleInfoDiv>
@@ -39,6 +53,9 @@ function BusinessManagementTab1() {
               <RightStyle><Right/></RightStyle>
             </TitleInfoDiv>
           </ContentDiv>
+
+
+{/* ============== 상점 소개 ============== */}
           <ContentDiv>
             <ContentTitle>상점 소개</ContentTitle>
             <InputBox
@@ -49,22 +66,30 @@ function BusinessManagementTab1() {
                 />
             </InputBox>
           </ContentDiv>
+
+
+{/* ============== 배달 금액/최소 주문 ============== */}
           <RowDiv>
             <ContentDiv>
               <ContentTitle>배달 금액(원)</ContentTitle>
               <TitleInfoDiv>
+              <InputText>￦ </InputText>
                 <Input
-                placeholder='￦ 0'/>
+                placeholder='0'/>
               </TitleInfoDiv>
             </ContentDiv>
             <ContentDiv>
               <ContentTitle>최소 주문 금액(원)</ContentTitle>
               <TitleInfoDiv>
+              <InputText>￦ </InputText>
               <Input
-                placeholder='￦ 0'/>
+                placeholder='0'/>
               </TitleInfoDiv>
             </ContentDiv>
           </RowDiv>
+
+
+{/* ============== 매장 오픈 날짜 ============== */}
           <ContentDiv>
             <ContentTitle>매장 오픈 날짜</ContentTitle>
             <RowDiv>
@@ -91,6 +116,9 @@ function BusinessManagementTab1() {
               </TitleInfoDiv>
             </RowDiv>
           </ContentDiv>
+
+
+{/* ============== 휴무일 ============== */}
           <RowDiv>
             <ContentDiv>
               <RowTitle>
@@ -103,86 +131,119 @@ function BusinessManagementTab1() {
                   />
               </RowTitle>
               <DayDiv>
-                <DayBox>월</DayBox>
-                <DayBox>화</DayBox>
-                <DayBox>수</DayBox>
-                <DayBox>목</DayBox>
-                <DayBox>금</DayBox>
-                <DayBox>토</DayBox>
-                <DayBox>일</DayBox>
+                <DayBox
+                  onClick={()=>{setMoBox(!mobox)}}
+                  color={mobox}
+                >
+                월</DayBox>
+                <DayBox
+                  onClick={()=>{setTuBox(!tubox)}}
+                  color={tubox}
+                >
+                화</DayBox>
+                <DayBox
+                  onClick={()=>{setWeBox(!webox)}}
+                  color={webox}
+                >
+                수</DayBox>
+                <DayBox
+                  onClick={()=>{setThBox(!thbox)}}
+                  color={thbox}
+                >
+                목</DayBox>
+                <DayBox
+                  onClick={()=>{setFiBox(!fibox)}}
+                  color={fibox}
+                >
+                금</DayBox>
+                <DayBox
+                  onClick={()=>{setSaBox(!sabox)}}
+                  color={sabox}
+                >
+                토</DayBox>
+                <DayBox
+                  onClick={()=>{setSuBox(!subox)}}
+                  color={subox}
+                >
+                일</DayBox>
               </DayDiv>
             </ContentDiv>
           </RowDiv>
 
+
+{/* ============== 운영 시간 ============== */}
           <ContentDiv>
               <ContentTitle>운영 시간</ContentTitle>
             <RowTitle align={'center'}>
               <Text _size={15} height={'44px'}>월요일</Text>
               <RowTimeDiv>
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={mobox}><TimeBox><Input color={mobox} align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input color={mobox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
                 ~
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={mobox}><TimeBox><Input color={mobox} align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input color={mobox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
               </RowTimeDiv>
             </RowTitle>
             <RowTitle align={'center'}>
               <Text _size={15} height={'44px'}>화요일</Text>
               <RowTimeDiv>
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={tubox}><TimeBox><Input color={tubox} align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input color={tubox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
                 ~
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={tubox}><TimeBox><Input color={tubox} align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input color={tubox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
               </RowTimeDiv>
             </RowTitle>
             <RowTitle align={'center'}>
               <Text _size={15} height={'44px'}>수요일</Text>
               <RowTimeDiv>
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={webox}><TimeBox><Input color={webox} align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input color={webox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
                 ~
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={webox}><TimeBox><Input color={webox} align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input color={webox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
               </RowTimeDiv>
             </RowTitle>
             <RowTitle align={'center'}>
               <Text _size={15} height={'44px'}>목요일</Text>
               <RowTimeDiv>
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={thbox}><TimeBox><Input color={thbox} align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input color={thbox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
                 ~
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={thbox}><TimeBox><Input color={thbox} align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input color={thbox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
               </RowTimeDiv>
             </RowTitle>
             <RowTitle align={'center'}>
               <Text _size={15} height={'44px'}>금요일</Text>
               <RowTimeDiv>
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={fibox}><TimeBox><Input color={fibox} align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input color={fibox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
                 ~
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={fibox}><TimeBox><Input color={fibox} align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input color={fibox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
               </RowTimeDiv>
             </RowTitle>
             <RowTitle align={'center'}>
               <Text _size={15} height={'44px'}>토요일</Text>
               <RowTimeDiv>
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={sabox}><TimeBox><Input color={sabox} align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input color={sabox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
                 ~
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={sabox}><TimeBox><Input color={sabox} align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input color={sabox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
               </RowTimeDiv>
             </RowTitle>
             <RowTitle align={'center'}>
               <Text _size={15} height={'44px'}>일요일</Text>
               <RowTimeDiv>
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={subox}><TimeBox><Input color={subox} align={'center'} placeholder='09'/></TimeBox>:<TimeBox><Input color={subox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
                 ~
-                <TimeDiv><TimeBox><Input  align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input  align={'center'} placeholder='00'/></TimeBox></TimeDiv>
+                <TimeDiv color={subox}><TimeBox><Input color={subox} align={'center'} placeholder='22'/></TimeBox>:<TimeBox><Input color={subox} align={'center'} placeholder='00'/></TimeBox></TimeDiv>
               </RowTimeDiv>
             </RowTitle>
           </ContentDiv>
-
-
-        <ContentDiv>
-          <ContentTitle>수령 안내</ContentTitle>
-          <InputBox height={120}>
+          
+          
+{/* ============== 수령 안내 ============== */}
+          <ContentDiv>
+            <ContentTitle>수령 안내</ContentTitle>
+            <InputBox height={120}>
             <Input
               placeholder='수령 안내 메시지를 입력해주세요.'
             />
-          </InputBox>
-        </ContentDiv>
+            </InputBox>
+          </ContentDiv>
+
+
         </TabContent>
 
 

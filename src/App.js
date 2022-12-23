@@ -48,6 +48,8 @@ import { client } from "./service";
 import { authActions } from "./store/slices/auth";
 import BusinessManagement from "./pages/business/BusinessManagement/BusinessManagement";
 import CheckBox from "./components/commonUi/CheckBox";
+import LayoutPage from "./components/Common/LayoutPage";
+import Modal from "./components/layout/Modal/Modal";
 
 function App() {
   const navigate = useNavigate();
@@ -94,6 +96,23 @@ function App() {
   return (
     <>
       <Routes>
+        {/* ========== 메인 ========== */}
+        <Route path="/">
+          <Route path="" element={<MainPage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="categories" element={<CategoryPage />} />
+          <Route path="collections" element={<CollectionPage />} />
+          <Route path="details/:id" element={<DetailsPage />} />
+          <Route path="configuration" element={<ConfigurationPage />} />
+          {/* 고객센터&약관 */}
+          <Route path="more" element={<MorePage />} />
+          <Route path="service" element={<CustomerService />} />
+          <Route path="terms" element={<TermsPage />} />
+          <Route path="terms/service" element={<ServiceTerms />} />
+          <Route path="terms/location" element={<LocationTerms />} />
+          <Route path="terms/privacy" element={<PrivacyTerms />} />
+        </Route>
+
         {/* ========== 회원관리 ========== */}
         <Route path="/member">
           <Route path="" element={<MyPage />} />
@@ -122,23 +141,6 @@ function App() {
           <Route path="find/email" element={<FindEmail />} />
           <Route path="find/password" element={<FindPwd />} />
           <Route path="signup" element={<SignupPage />} />
-        </Route>
-
-        {/* ========== 메인 ========== */}
-        <Route path="/">
-          <Route path="" element={<MainPage />} />
-          <Route path="cart" element={<CartPage />} />
-          <Route path="categories" element={<CategoryPage />} />
-          <Route path="collections" element={<CollectionPage />} />
-          <Route path="details/:id" element={<DetailsPage />} />
-          <Route path="configuration" element={<ConfigurationPage />} />
-          {/* 고객센터&약관 */}
-          <Route path="more" element={<MorePage />} />
-          <Route path="service" element={<CustomerService />} />
-          <Route path="terms" element={<TermsPage />} />
-          <Route path="terms/service" element={<ServiceTerms />} />
-          <Route path="terms/location" element={<LocationTerms />} />
-          <Route path="terms/privacy" element={<PrivacyTerms />} />
         </Route>
 
         {/* ========== 주문 ========== */}
