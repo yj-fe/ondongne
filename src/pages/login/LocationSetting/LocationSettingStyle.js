@@ -3,7 +3,7 @@ export const LocationBody = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #cccccc;
+  background: #F5F5F5;
   flex-direction: column;
   /* padding-bottom: 56px; */
   height: 100vh;

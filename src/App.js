@@ -56,6 +56,8 @@ import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAsk
 import SettingPage from "pages/setting/SettingPage";
 import NoticePage from "pages/notice/NoticePage";
 import NoticeDetailsPage from "pages/notice/NoticeDetailsPage";
+import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
+import MemberNews from "pages/login/member/MemberNews/MemberNews";
 
 function App() {
   const navigate = useNavigate();
@@ -124,6 +126,7 @@ function App() {
           <Route path="withdrawal" element={<MemberWithdrawal />} />
           {/* 1주차-회원-위치설정 */}
           <Route path="location" element={<LocationSetting />} />
+          <Route path="news" element={<MemberNews />} />
         </Route>
 
         {/* ========== 비즈회원관리 ========== */}
@@ -137,6 +140,7 @@ function App() {
           {/* 2주차-비즈회원-비즈상품 관리/등록/수정 */}
           <Route path="product" element={<BusinessProductManagement />} />
           <Route path="upload" element={<BusinessUpload />} />
+          <Route path="news" element={<BusinessNews />} />
         </Route>
 
         {/* ========== 로그인 ========== */}
