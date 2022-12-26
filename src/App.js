@@ -12,45 +12,46 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 /* ========= MEMBER ========= */
-import MyPage from "./components/MyPage";
-import LocationSetting from "./pages/login/LocationSetting/LocationSetting";
-import MemberManagement from "./pages/login/member/MemberManagement/MemberManagement";
-import MemberWithdrawal from "./pages/login/member/MemberWithdrawal/MemberWithdrawal";
+import MyPage from "components/MyPage";
+import LocationSetting from "pages/login/LocationSetting/LocationSetting";
+import MemberManagement from "pages/login/member/MemberManagement/MemberManagement";
+import MemberWithdrawal from "pages/login/member/MemberWithdrawal/MemberWithdrawal";
 /* ========== BUSINESS ========== */
-import BusinessPage from "./pages/business/BusinessPage/BusinessPage";
-import BusinessApplication from "./pages/business/BusinessPage/BusinessApplication/BusinessApplication";
-import BusinessUpload from "./pages/business/BusinessPage/BusinessUpload/BusinessUpload";
+import BusinessPage from "pages/business/BusinessPage/BusinessPage";
+import BusinessApplication from "pages/business/BusinessPage/BusinessApplication/BusinessApplication";
+import BusinessUpload from "pages/business/BusinessPage/BusinessUpload/BusinessUpload";
+import BusinessManagement from "pages/business/BusinessManagement/BusinessManagement";
+import BusinessProductManagement from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagement";
 /* ========== LOGIN ========== */
-import LoginPage from "./pages/login/loginpage/LoginPage";
-import FindEmail from "./pages/login/email/FindEmail";
-import FindPwd from "./pages/login/password/FindPwd";
+import LoginPage from "pages/login/loginpage/LoginPage";
+import FindEmail from "pages/login/email/FindEmail";
+import FindPwd from "pages/login/password/FindPwd";
 /* ========== MAIN ========== */
-import MainPage from "./pages/main/MainPage/MainPage";
-import DetailsPage from "./pages/main/DetailsPage/DetailsPage";
-import CollectionPage from "./pages/main/Product/CollectionPage/CollectionPage";
-import CategoryPage from "./pages/main/Product/CategoryPage/CategoryPage";
-import CartPage from "./pages/main/CartPage/CartPage";
-import MorePage from "./pages/main/MorePage/MorePage";
+import MainPage from "pages/main/MainPage/MainPage";
+import DetailsPage from "pages/main/DetailsPage/DetailsPage";
+import CollectionPage from "pages/main/Product/CollectionPage/CollectionPage";
+import CategoryPage from "pages/main/Product/CategoryPage/CategoryPage";
+import CartPage from "pages/main/CartPage/CartPage";
+import MorePage from "pages/main/MorePage/MorePage";
 /* ========== ORDER ========== */
-import OrderListPage from "./pages/orders/OrderListPage";
-import OrderFormPage from "./pages/orders/OrderFormPage";
-import OrderDetailsPage from "./pages/orders/OrderDetailsPage";
-import SignupPage from "./pages/login/signup/SignupPage";
-import CustomerService from "./pages/main/CustomerService/CustomerService";
-import TermsPage from "./pages/main/TermsPage/TermsPage";
-import ServiceTerms from "./components/Main/TermsPage/ServiceTerms";
-import LocationTerms from "./components/Main/TermsPage/LocationTerms";
-import PrivacyTerms from "./components/Main/TermsPage/PrivacyTerms";
-import ConfigurationPage from "./pages/main/ConfigurationPage/ConfigurationPage";
-import Alert from "./components/commonUi/Alert";
-import { tokenReissue } from "./service/auth";
-import { client } from "./service";
-import { authActions } from "./store/slices/auth";
-import BusinessManagement from "./pages/business/BusinessManagement/BusinessManagement";
-import CheckBox from "./components/commonUi/CheckBox";
-import LayoutPage from "./components/Common/LayoutPage";
-import Modal from "./components/layout/Modal/Modal";
-import BusinessProductManagement from "./pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagement";
+import OrderListPage from "pages/orders/OrderListPage";
+import OrderFormPage from "pages/orders/OrderFormPage";
+import OrderDetailsPage from "pages/orders/OrderDetailsPage";
+import SignupPage from "pages/login/signup/SignupPage";
+/* ========== SERVICE ========== */
+import CustomerService from "pages/service/CustomerService/CustomerService";
+import TermsPage from "pages/service/TermsPage/TermsPage";
+import ServiceTerms from "components/service/TermsPage/ServiceTerms";
+import LocationTerms from "components/service/TermsPage/LocationTerms";
+import PrivacyTerms from "components/service/TermsPage/PrivacyTerms";
+import ConfigurationPage from "pages/main/ConfigurationPage/ConfigurationPage";
+import Alert from "components/commonUi/Alert";
+import { tokenReissue } from "service/auth";
+import { client } from "service";
+import { authActions } from "store/slices/auth";
+import InquiryPage from "pages/service/CustomerService/InquiryPage";
+import VocPage from "pages/service/CustomerService/VocPage";
+import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAskedQuestion";
 
 function App() {
   const navigate = useNavigate();
@@ -107,11 +108,7 @@ function App() {
           <Route path="configuration" element={<ConfigurationPage />} />
           {/* 고객센터&약관 */}
           <Route path="more" element={<MorePage />} />
-          <Route path="service" element={<CustomerService />} />
-          <Route path="terms" element={<TermsPage />} />
-          <Route path="terms/service" element={<ServiceTerms />} />
-          <Route path="terms/location" element={<LocationTerms />} />
-          <Route path="terms/privacy" element={<PrivacyTerms />} />
+
         </Route>
 
         {/* ========== 회원관리 ========== */}
@@ -152,6 +149,20 @@ function App() {
           <Route path="new/:id" element={<OrderFormPage />} />
           <Route path="details/:id" element={<OrderDetailsPage />} />
         </Route>
+
+        {/* ========== 고객센터 ========== */}
+        <Route path="/service">
+          <Route path="" element={<CustomerService />} />
+          <Route path="faq" element={<FrequentlyAskedQuestion />} />
+          <Route path="inquiry" element={<InquiryPage />} />
+          <Route path="voc" element={<VocPage />} />
+        {/* 약관 */}
+          <Route path="terms" element={<TermsPage />} />
+          <Route path="terms/service" element={<ServiceTerms />} />
+          <Route path="terms/location" element={<LocationTerms />} />
+          <Route path="terms/privacy" element={<PrivacyTerms />} />
+        </Route>
+
       </Routes>
       {alert && (
         <Alert

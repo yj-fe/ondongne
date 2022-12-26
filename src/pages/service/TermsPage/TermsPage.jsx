@@ -11,19 +11,19 @@ function TermsPage() {
         <TermsContainer>
           <TermsDiv>
             <TermsTitle>서비스 이용약관</TermsTitle>
-            <Link to="/terms/service">
+            <Link to="/service/terms/service">
               <TermsIconStyle><Right/></TermsIconStyle>
             </Link>
           </TermsDiv>
           <TermsDiv>
             <TermsTitle>위치기반 서비스 이용약관</TermsTitle>
-            <Link to="/terms/location">
+            <Link to="/service/terms/location">
               <TermsIconStyle><Right/></TermsIconStyle>
             </Link>
           </TermsDiv>
           <TermsDiv>
             <TermsTitle>개인정보 처리방침</TermsTitle>
-            <Link to="/terms/privacy">
+            <Link to="/service/terms/privacy">
               <TermsIconStyle><Right/></TermsIconStyle>
             </Link>
           </TermsDiv>

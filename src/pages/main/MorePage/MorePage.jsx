@@ -116,7 +116,7 @@ function MorePage() {
             <Link to="/service">
               <MoreContainerDiv>고객센터</MoreContainerDiv>
             </Link>
-            <Link to="/terms">
+            <Link to="/service/terms">
               <MoreContainerDiv
               >약관 및 정책</MoreContainerDiv>
             </Link>

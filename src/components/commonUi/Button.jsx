@@ -49,3 +49,19 @@ export const FixedActionButton = styled.button`
     font-size: 18px;
     font-weight: 700;
 `;
+export const FixedPaddingActionButton = styled.button`
+    z-index: 29;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    width: 688px;
+    max-width: ${props => props.theme.breakpoint.tablet}px;
+    height: 56px;
+    padding: 0 16px;
+    background-color: ${props => props.theme.color.green700};
+    border-radius: 4px;
+    color: #FFF;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: 600;
+`;

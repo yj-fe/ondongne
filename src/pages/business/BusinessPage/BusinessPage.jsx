@@ -18,7 +18,7 @@ import { ReactComponent as Product } from "assets/icons/business/Product.svg";
 import { ReactComponent as Order } from "assets/icons/business/Order.svg";
 
 import {MoreNavBody,MoreContainer,MoreDiv,FooterText,Logo} from 'pages/main/MorePage/MorePageStyle'
-import {TermsDiv,TermsTitle,TermsIconStyle} from 'pages/main/TermsPage/TermsPageStyle'
+import {TermsDiv,TermsTitle,TermsIconStyle} from 'pages/service/TermsPage/TermsPageStyle'
 import {TitleText,InfoCard,InfoIconStyle,CardCount,CardText,Footer,InfoDiv,FloatingContentDiv,FloatingContentTitle,FloatingContentIcon,FloatingToggleDiv,CardTextDiv,CouponDiv,CouponInfoDiv,DownloadDiv,DownloadText,DownloadCount,DownloadCountTextB,DownloadCountTextN,MyBestProductContent,FloatingDiv,FooterDiv} from './BusinessPageStyle'
 import {ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,ContentTitle,Discount,DiscountStyle,Price,FinalPrice,RateStyle,Star,Number} from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
-import {TermsBody,TermsContainer,TermsTextDiv} from 'pages/main/TermsPage/TermsPageStyle'
+import {TermsBody,TermsContainer,TermsTextDiv} from 'pages/service/TermsPage/TermsPageStyle'
 function PrivacyTerms() {
   return (
     <div>
