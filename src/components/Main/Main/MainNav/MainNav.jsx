@@ -1,10 +1,10 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-import MainLogo from "../../../../assets/images/Logonew.png";
-import { ReactComponent as News } from "../../../../assets/news.svg";
-import { ReactComponent as Cart } from "../../../../assets/main/nav/cart.svg";
-import { ReactComponent as Pin } from "../../../../assets/main/pin.svg";
-import { ReactComponent as ArrowDown } from "../../../../assets/login/Arrow-Down.svg";
+import MainLogo from "assets/images/Logonew.png";
+import { ReactComponent as News } from "assets/news.svg";
+import { ReactComponent as Cart } from "assets/main/nav/cart.svg";
+import { ReactComponent as Pin } from "assets/main/pin.svg";
+import { ReactComponent as ArrowDown } from "assets/login/Arrow-Down.svg";
 
 import {MainLocation,NavContainer,MainNavDiv,PinStyle,LocationText,ArrowStyle,LogoImg,Icon,NewsStyle,CartStyle} from './MainNavStyle'
 

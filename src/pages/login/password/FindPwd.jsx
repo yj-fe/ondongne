@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import LoginHeader from '../../../components/Login/Common/LoginHeader/LoginHeader'
-import PwdRequest from "../../../components/Login/Password/PwdRequest/PwdRequest";
-import PwdReset from "../../../components/Login/Password/PwdReset/PwdReset";
+import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader'
+import PwdRequest from "components/Login/Password/PwdRequest/PwdRequest";
+import PwdReset from "components/Login/Password/PwdReset/PwdReset";
 import {PwdBody} from './FindPwdStyle'
 
 

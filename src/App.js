@@ -50,6 +50,7 @@ import BusinessManagement from "./pages/business/BusinessManagement/BusinessMana
 import CheckBox from "./components/commonUi/CheckBox";
 import LayoutPage from "./components/Common/LayoutPage";
 import Modal from "./components/layout/Modal/Modal";
+import BusinessProductManagement from "./pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagement";
 
 function App() {
   const navigate = useNavigate();
@@ -132,6 +133,8 @@ function App() {
           <Route path="application" element={<BusinessApplication />} />
           {/* 1주차-비즈회원-비즈정보관리(상점, 사업자) */}
           <Route path="management" element={<BusinessManagement />} />
+          {/* 2주차-비즈회원-비즈상품 관리/등록/수정 */}
+          <Route path="product" element={<BusinessProductManagement />} />
           <Route path="upload" element={<BusinessUpload />} />
         </Route>
 

@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import LoginHeader from '../../../components/Login/Common/LoginHeader/LoginHeader'
-import Logo from "../../../assets/logo.png";
-import { ReactComponent as EyeOn } from "../../../assets/login/Eyeon.svg";
-import { ReactComponent as EyeOff } from "../../../assets/login/Eyeoff.svg";
-import { ReactComponent as Bar } from "../../../assets/bar.svg";
-import { ReactComponent as Horizon } from "../../../assets/horizon.svg";
-import { ReactComponent as Naver } from "../../../assets/login/naver.svg";
-import { ReactComponent as Kakao } from "../../../assets/login/kakao.svg";
-import { ReactComponent as Google } from "../../../assets/login/google.svg";
-import { ReactComponent as Apple } from "../../../assets/login/apple.svg";
-import { ReactComponent as Arrow } from "../../../assets/login/Arrow-Right.svg";
+import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader'
+import Logo from "assets/logo.png";
+import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
+import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
+import { ReactComponent as Bar } from "assets/bar.svg";
+import { ReactComponent as Horizon } from "assets/horizon.svg";
+import { ReactComponent as Naver } from "assets/login/naver.svg";
+import { ReactComponent as Kakao } from "assets/login/kakao.svg";
+import { ReactComponent as Google } from "assets/login/google.svg";
+import { ReactComponent as Apple } from "assets/login/apple.svg";
+import { ReactComponent as Arrow } from "assets/login/Arrow-Right.svg";
 import { LoginBody, LogoImg, InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, LoginFooter, LoginText, Button, GapContainer, SignupText, ArrowStyle } from "./LoginPageStyle";
-import Alert from './../../../components/commonUi/Alert';
-import Confirm from './../../../components/commonUi/Confirm';
-import { login } from "../../../service/auth";
+import Alert from 'components/commonUi/Alert';
+import Confirm from 'components/commonUi/Confirm';
+import { login } from "service/auth";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../../store/slices/auth";
-import { client } from "../../../service";
+import { authActions } from "store/slices/auth";
+import { client } from "service";
 
 function LoginPage() {
   const navigate = useNavigate();

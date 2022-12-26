@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactComponent as Icon } from "../../../../assets/checkinput.svg";
+import { ReactComponent as Icon } from "assets/checkinput.svg";
 
 export const AgreementBody = styled.div`
   display: flex;

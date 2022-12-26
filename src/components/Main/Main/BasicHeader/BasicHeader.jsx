@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as Arrow } from "../../../../assets/login/Arrow.svg";
+import { ReactComponent as Arrow } from "assets/login/Arrow.svg";
 import { useNavigate } from 'react-router-dom'
 
 import {MainFooterDiv,LoginNavDiv,TitleStyle,BackStyle,LoginNavTitle} from './BasicHeaderStyle'

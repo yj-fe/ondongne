@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { TabDiv,TabContent, ContentDiv, ContentTitle, TitleInfoDiv, TitleInfo, Input, RightStyle, BankToggleDiv, BankListDiv, TextCenter, } from '../../../../components/Buisness/BusinessManagement/BusinessManagementTabStyle'
-import { Text } from '../../../../components/commonUi/Text'
-import { ReactComponent as Right } from "../../../../assets/main/right.svg";
-import { ReactComponent as Down } from "../../../../assets/icons/arrow/Arrow-Down.svg";
-import Alert from '../../../../components/commonUi/Alert';
-import { Final } from '../../../../components/commonUi/Icon';
+import { TabDiv,TabContent, ContentDiv, ContentTitle, TitleInfoDiv, TitleInfo, Input, RightStyle, BankToggleDiv, BankListDiv, TextCenter, } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle'
+import { Text } from 'components/commonUi/Text'
+import { ReactComponent as Right } from "assets/main/right.svg";
+import { ReactComponent as Down } from "assets/icons/arrow/Arrow-Down.svg";
+import Alert from 'components/commonUi/Alert';
+import { Final } from 'components/commonUi/Icon';
 
-import { NextButton } from '../../../../components/Login/Signup/agreement/AgreementStyle'
+import { NextButton } from 'components/Login/Signup/agreement/AgreementStyle'
 import {ConfirmButton,CenterDiv,FinalPageDiv} from './BusinessApplicationStyle'
-import LayoutPage from '../../../../components/Common/LayoutPage';
-import { Body, Container, Div } from '../../../../components/Common/LayoutPageStyle';
+import LayoutPage from 'components/Common/LayoutPage';
+import { Body, Container, Div } from 'components/Common/LayoutPageStyle';
 import { useNavigate } from 'react-router-dom';
 
 

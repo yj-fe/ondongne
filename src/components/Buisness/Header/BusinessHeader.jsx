@@ -1,8 +1,8 @@
 import React from 'react'
-import MainLogo from "../../../assets/images/Logonew.png";
-import { ReactComponent as News } from "../../../assets/news.svg";
+import MainLogo from "assets/images/Logonew.png";
+import { ReactComponent as News } from "assets/news.svg";
 
-import {NavContainer,MainNavDiv,LogoImg,Icon,NewsStyle} from '../../Main/Main/MainNav/MainNavStyle'
+import {NavContainer,MainNavDiv,LogoImg,Icon,NewsStyle} from 'components/Main/Main/MainNav/MainNavStyle'
 
 function BusinessHeader() {
 

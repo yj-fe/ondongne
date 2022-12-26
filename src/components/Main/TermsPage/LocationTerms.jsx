@@ -1,6 +1,7 @@
 import React from 'react'
-import BasicHeader from '../Main/BasicHeader/BasicHeader'
-import {TermsBody,TermsContainer,TermsTextDiv} from '../../../pages/main/TermsPage/TermsPageStyle'
+import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
+import {TermsBody,TermsContainer,TermsTextDiv} from 'pages/main/TermsPage/TermsPageStyle'
+
 function LocationTerms() {
   return (
     <div>

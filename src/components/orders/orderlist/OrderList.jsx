@@ -1,14 +1,14 @@
 import React from 'react'
-import * as L from '../../commonUi/Layout';
-import * as T from '../../commonUi/Text';
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Close, More, Profile48 } from '../../commonUi/Icon';
+import { Close, More, Profile48 } from 'components/commonUi/Icon';
 import styled from 'styled-components';
-import LayerSelect from '../../commonUi/LayerSelect';
-import Confirm from '../../commonUi/Confirm';
-import Overlay from '../../layout/Overlay/Overlay';
+import LayerSelect from 'components/commonUi/LayerSelect';
+import Confirm from 'components/commonUi/Confirm';
+import Overlay from 'components/layout/Overlay/Overlay';
 import { S } from "./OrderListStyle";
 
 

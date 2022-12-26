@@ -1,7 +1,7 @@
 import React from 'react'
-import BasicHeader from '../../../components/Main/Main/BasicHeader/BasicHeader'
+import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
 import {TermsBody,TermsContainer,TermsDiv,TermsTitle,TermsIconStyle} from './TermsPageStyle'
-import { ReactComponent as Right } from "../../../assets/main/right.svg";
+import { ReactComponent as Right } from "assets/main/right.svg";
 import { Link } from 'react-router-dom';
 function TermsPage() {
   return (

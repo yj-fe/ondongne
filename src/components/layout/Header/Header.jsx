@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
-import { ArrowLeft_tail, ArrowLeft } from '../../commonUi/Icon';
+import { ArrowLeft_tail, ArrowLeft } from 'components/commonUi/Icon';
 import { useNavigate } from 'react-router-dom';
-import Bell from '../../../assets/icons/utils/Bell.svg';
-import Cart from '../../../assets/icons/utils/Cart.svg';
+import Bell from 'assets/icons/utils/Bell.svg';
+import Cart from 'assets/icons/utils/Cart.svg';
 
 import { S } from './HeaderStyle';
 

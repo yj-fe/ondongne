@@ -1,7 +1,7 @@
 import React from 'react'
-import { BackStyle, LoginNavDiv, LoginNavTitle, MainFooterDiv, TitleStyle } from '../Main/Main/BasicHeader/BasicHeaderStyle'
+import { BackStyle, LoginNavDiv, LoginNavTitle, MainFooterDiv, TitleStyle } from 'components/Main/Main/BasicHeader/BasicHeaderStyle'
 import { useNavigate } from 'react-router-dom'
-import { ReactComponent as Arrow } from "../../assets/login/Arrow.svg";
+import { ReactComponent as Arrow } from "assets/login/Arrow.svg";
 import { Body, Container, Div } from './LayoutPageStyle'
 
 

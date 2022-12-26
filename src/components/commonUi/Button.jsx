@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import arrowBottom from '../../assets/icons/arrow/Arrow-Bottom.svg';
+import arrowBottom from 'assets/icons/arrow/Arrow-Bottom.svg';
 
 export const Button = styled.button`
     width: ${props => props._width || '100%'};

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as EyeOn } from "../../../../assets/login/Eyeon.svg";
-import { ReactComponent as EyeOff } from "../../../../assets/login/Eyeoff.svg";
+import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
+import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
 import { RequestTextStyle, RequestText, RequestInfo, RequesInputForm, RequestInputDiv, PwdContainer, PwdInput, EyeOffStyle, ResetButton } from './PwdResetStyle'
-import { ValidText } from "../../Signup/signupinfo/SignupInfoStyle";
-import { memberPasswordChange } from "../../../../service/member";
-import Alert from "../../../commonUi/Alert";
+import { ValidText } from "components/Login/Signup/signupinfo/SignupInfoStyle";
+import { memberPasswordChange } from "service/member";
+import Alert from "components/commonUi/Alert";
 
 
 

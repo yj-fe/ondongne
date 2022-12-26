@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import LoginHeader from '../../../components/Login/Common/LoginHeader/LoginHeader';
+import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader';
 import {LocationListContainer,LocationListText,Bounce1,Bounce2,Bounce3,Spinner,LocationBody,Line,LocationContainer,MyLocationResult,LocationDiv,Div1,Div2,LocationIcon,MyLocationDiv,MyLocationText,SearchDiv,SearchIcon,SearchInput, LocationListDiv,} from './LocationSettingStyle'
-import { ReactComponent as Location } from "../../../assets/login/Location.svg";
-import { ReactComponent as Search } from "../../../assets/login/Search.svg";
+import { ReactComponent as Location } from "assets/login/Location.svg";
+import { ReactComponent as Search } from "assets/login/Search.svg";
 
 
 

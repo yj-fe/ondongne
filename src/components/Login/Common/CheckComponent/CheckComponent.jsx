@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from "react";
-import { ReactComponent as Check } from "../../assets/check.svg";
-import { ReactComponent as Checked } from "../../assets/checked.svg";
-import { ReactComponent as Icon } from "../../assets/checkinput.svg";
+import { ReactComponent as Check } from "assets/check.svg";
+import { ReactComponent as Checked } from "assets/checked.svg";
+import { ReactComponent as Icon } from "assets/checkinput.svg";
 import {CheckInput,Body} from './CheckComponentStyle'
 
 

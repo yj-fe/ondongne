@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import newmarket from '../../../../assets/data/newmarket'
-import { ReactComponent as StarIcon } from "../../../../assets/main/ratestar.svg";
+import newmarket from 'assets/data/newmarket'
+import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 
-import {NewMarketBody,NewMarketContent,NewMarketDiv,NewMarketTop,N,TopAll,TopTitle,ContentDiv,ContentImg,ContentImgBadge,ContentImgDiv,ContentInfo,ContentMarket,ContentMarketImg,ContentProduct,ContentStyle,ContentTextStyle} from './MainNewMarketStyle'
+import {NewMarketBody,NewMarketContent,NewMarketDiv,NewMarketTop,TopAll,TopTitle,ContentDiv,ContentImg,ContentImgBadge,ContentImgDiv,ContentInfo,ContentMarket,ContentMarketImg,ContentProduct,ContentStyle,ContentTextStyle} from './MainNewMarketStyle'
 
 
 function MainNewMarket() {

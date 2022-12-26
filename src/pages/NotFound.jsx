@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Alert from '../components/commonUi/Alert'
+import Alert from 'components/commonUi/Alert'
 
 function NotFound() {
 

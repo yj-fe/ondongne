@@ -1,10 +1,10 @@
 import React, { useState , useEffect } from "react";
-import { sendSMS } from "../../../../service/common";
-import { memberFindPassword } from "../../../../service/common";
-import Alert from "../../../commonUi/Alert";
-import ErrorToggle from "../../Common/ErrorToggle/ErrorToggle";
-import { RequestToggleBody, RequestToggleButton, RequestToggleForm, RequestToggleText, RequestToggleTextLink, RequestToggleTextStyle } from "../../Common/RequestToggle/RequestToggleStyle";
-import { AuthTimer } from "../../Signup/signuprequest/SignupRequestStyle";
+import { sendSMS } from "service/common";
+import { memberFindPassword } from "service/common";
+import Alert from "components/commonUi/Alert";
+import ErrorToggle from "components/Login/Common/ErrorToggle/ErrorToggle";
+import { RequestToggleBody, RequestToggleButton, RequestToggleForm, RequestToggleText, RequestToggleTextLink, RequestToggleTextStyle } from "components/Login/Common/RequestToggle/RequestToggleStyle";
+import { AuthTimer } from "components/Login/Signup/signuprequest/SignupRequestStyle";
 import {RequestTextStyle, RequestText, RequestInfo, RequesInputForm,Input, InputContainer, RequesInput, RequestButton  } from './PwdRequestStyle'
 
 /* ==============================

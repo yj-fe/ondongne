@@ -2,15 +2,15 @@ import React, {useState, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 
-import { ReactComponent as EyeOn } from "../../../../assets/login/Eyeon.svg";
-import { ReactComponent as EyeOff } from "../../../../assets/login/Eyeoff.svg";
+import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
+import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
 
-import { memberPasswordChange } from "../../../../service/member";
+import { memberPasswordChange } from "service/member";
 
 import {EyeOffStyle,PwdToggleButton,PwdResetToggleForm,PwdResetToggleInput,ChangeButton,PwdToggleInputForm,PwdToggleInput} from './MemberPwdStyle'
-import Alert from '../../../commonUi/Alert';
-// import ModalPage from '../../ModalPage';
-import SimpleConfirm from '../../../commonUi/SimpleConfirm';
+import Alert from 'components/commonUi/Alert';
+// import ModalPage from 'components/Login/ModalPage';
+import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 
 
 function MemberPwd() {

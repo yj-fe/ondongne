@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import BusinessManagementTab1 from '../../../components/Buisness/BusinessManagement/BusinessManagementTab1'
-import BusinessManagementTab2 from '../../../components/Buisness/BusinessManagement/BusinessManagementTab2'
-import { MarginBDiv } from '../../../components/Common/LayoutPageStyle'
-import BasicHeader from '../../../components/Main/Main/BasicHeader/BasicHeader'
+import BusinessManagementTab1 from 'components/Buisness/BusinessManagement/BusinessManagementTab1'
+import BusinessManagementTab2 from 'components/Buisness/BusinessManagement/BusinessManagementTab2'
+import { MarginBDiv } from 'components/Common/LayoutPageStyle'
+import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
 
-import {MoreNavBody,MoreContainer} from '../../../pages/main/MorePage/MorePageStyle'
+import {MoreNavBody,MoreContainer} from 'pages/main/MorePage/MorePageStyle'
 // import {MemberBody} from '../../login/member/MemberManagement/MemberManagementStyle'
-import {DetailTabDiv,TabButtonStyle,DetailTabInfo,DetailTabReview,TabContentStyle} from '../../main/DetailsPage/DetailsPageStyle'
+import {DetailTabDiv,TabButtonStyle,DetailTabInfo,DetailTabReview,TabContentStyle} from 'pages/main/DetailsPage/DetailsPageStyle'
 
 function BusinessManagement() {
 

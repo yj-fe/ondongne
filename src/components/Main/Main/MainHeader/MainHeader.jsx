@@ -1,7 +1,7 @@
 import React from 'react'
-import { ReactComponent as Arrow } from "../../../assets/Arrow.svg";
-import { ReactComponent as News } from "../../../assets/news.svg";
-import { ReactComponent as Cart } from "../../../assets/main/nav/cart.svg";
+import { ReactComponent as Arrow } from "assets/Arrow.svg";
+import { ReactComponent as News } from "assets/news.svg";
+import { ReactComponent as Cart } from "assets/main/nav/cart.svg";
 import { Link } from 'react-router-dom'
 
 import {MainHeaderDiv,LoginNavDiv,TitleStyle,BackStyle,LoginNavTitle,IconStyle,NewsStyle,CartStyle,} from './MainHeaderStyle'

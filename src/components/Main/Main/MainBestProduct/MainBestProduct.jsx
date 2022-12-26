@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import maindata from '../../../../assets/data/maindata'
-import { ReactComponent as StarIcon } from "../../../../assets/main/ratestar.svg";
+import maindata from 'assets/data/maindata'
+import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 
 import {LastChanceBody,LastChanceContent,LastChanceDiv,TopAll,TopTitle,ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,LastChanceTop,ContentTitle,Discount,DiscountStyle,Price,RateStyle,Star,Number,FinalPrice} from './MainBestProductStyle'
 

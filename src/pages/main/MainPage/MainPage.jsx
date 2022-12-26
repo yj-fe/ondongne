@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from "react-router-dom";
 import styled from 'styled-components'
-import BannerImg from '../../../assets/Img.png'
-import FooterImg from '../../../assets/main/footerlogo.svg'
-import MainBestCoupon from '../../../components/Main/Main/MainBestCoupon/MainBestCoupon'
-import MainLastChance from '../../../components/Main/Main/MainLastChance/MainLastChance'
-import MainBestProduct from '../../../components/Main/Main/MainBestProduct/MainBestProduct'
-import MainNewMarket from '../../../components/Main/Main/MainNewMarket/MainNewMarket'
-import MainBestCollection from '../../../components/Main/Main/MainBestCollection/MainBestCollection'
-import MainFooter from '../../../components/Main/Main/MainFooter/MainFooter'
-import MainNav from '../../../components/Main/Main/MainNav/MainNav'
+import BannerImg from 'assets/Img.png'
+import FooterImg from 'assets/main/footerlogo.svg'
+import MainBestCoupon from 'components/Main/Main/MainBestCoupon/MainBestCoupon'
+import MainLastChance from 'components/Main/Main/MainLastChance/MainLastChance'
+import MainBestProduct from 'components/Main/Main/MainBestProduct/MainBestProduct'
+import MainNewMarket from 'components/Main/Main/MainNewMarket/MainNewMarket'
+import MainBestCollection from 'components/Main/Main/MainBestCollection/MainBestCollection'
+import MainFooter from 'components/Main/Main/MainFooter/MainFooter'
+import MainNav from 'components/Main/Main/MainNav/MainNav'
 import {MainNavBody, MainContainer, Footer, Img, Logo, FooterStyle, FooterText} from './MainPageStyle'
-import MainBanner from '../../../components/Main/Main/MainBanner/MainBanner';
-import MainCategory from '../../../components/Main/Main/MainCategory/MainCategory';
-import MainProductTest from '../../../components/Main/Main/MainProductTest/MainProductTest';
+import MainBanner from 'components/Main/Main/MainBanner/MainBanner';
+import MainCategory from 'components/Main/Main/MainCategory/MainCategory';
+import MainProductTest from 'components/Main/Main/MainProductTest/MainProductTest';
 
 function MainPage() {
   const navigate = useNavigate()

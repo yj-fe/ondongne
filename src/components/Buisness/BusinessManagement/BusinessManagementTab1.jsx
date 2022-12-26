@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Camera from '../../../assets/common/Camera.png'
-import { ReactComponent as Right } from "../../../assets/main/right.svg";
-import CheckBox from '../../commonUi/CheckBox';
+import Camera from 'assets/common/Camera.png'
+import { ReactComponent as Right } from "assets/main/right.svg";
+import CheckBox from 'components/commonUi/CheckBox';
 
-import ProfileAvatar from '../../commonUi/ProfileAvatar'
-import { Text } from '../../commonUi/Text';
+import ProfileAvatar from 'components/commonUi/ProfileAvatar'
+import { Text } from 'components/commonUi/Text';
 import {TimeBox,TimeDiv,RowTimeDiv,DayDiv,DayBox,RowTitle,RowInput,InputText,TabDiv,TabProfileDiv,ProfileBtnDiv,CameraImg,AvatarDiv,TabContent,RowDiv,ContentDiv,ContentTitle,TitleInfo,TitleInfoDiv,RightStyle,TabBtn,InputBox,RowInfoDiv,Input} from './BusinessManagementTabStyle'
 
 // 상점정보

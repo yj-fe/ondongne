@@ -4,7 +4,7 @@ import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 
-function BusinessUpload() {
+function BusinessProductManagement() {
   
   const navigate = useNavigate();
   const [modal, setConfirm] = useState(null)
@@ -47,4 +47,4 @@ function BusinessUpload() {
   )
 }
 
-export default BusinessUpload
+export default BusinessProductManagement

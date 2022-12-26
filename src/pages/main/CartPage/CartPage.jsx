@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import BasicHeader from '../../../components/Main/Main/BasicHeader/BasicHeader'
-import Avatar from '../../../assets/common/avatar.png'
-import { ReactComponent as Delete } from "../../../assets/main/delete.svg";
-import { ReactComponent as Minus } from "../../../assets/main/cart/minus.svg";
-import { ReactComponent as Plus } from "../../../assets/main/cart/plus.svg";
+import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
+import Avatar from 'assets/common/avatar.png'
+import { ReactComponent as Delete } from "assets/main/delete.svg";
+import { ReactComponent as Minus } from "assets/main/cart/minus.svg";
+import { ReactComponent as Plus } from "assets/main/cart/plus.svg";
 import {CarContentDiv,CarProfiletDiv,CartBody,CartContainer,CartDiv,ProductInfo,ProductInfoText,ProductTitle,ProductTitleDiv,ProfileImg,ProfileName,ButtonText,CountAddDiv,DeleteStyle,ContentProductDiv,CountText,CoundAddNum,CountAddIconStyle,ContentCountDiv,ContentButton,} from './CartPageStyle'
-import ModalDelete from '../../../components/Main/Cart/ModalDelete/ModalDelete';
+import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 
 
 function CartPage({}) {

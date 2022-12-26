@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import OrderList from '../../components/orders/orderlist/OrderList'
-import Layout from '../../components/layout/Layout/Layout'
+import OrderList from 'components/orders/orderlist/OrderList'
+import Layout from 'components/layout/Layout/Layout'
 import { useNavigate } from 'react-router-dom'
 
 const OrderListPage = props => {

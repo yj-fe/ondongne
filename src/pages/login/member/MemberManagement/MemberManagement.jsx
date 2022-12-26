@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import BasicHeader from '../../../../components/Main/Main/BasicHeader/BasicHeader'
-// import { memberPasswordChange } from "../../../../service/member";
-// import { ReactComponent as EyeOn } from "../../../../assets/login/Eyeon.svg";
-// import { ReactComponent as EyeOff } from "../../../../assets/login/Eyeoff.svg";
+import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
+// import { memberPasswordChange } from "service/member";
+// import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
+// import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
 
 import { NameToggleInput,NameToggleInputForm,PwdResetToggleForm,PwdResetToggleInput,EyeOffStyle,PwdToggleButton,PwdToggleInput,PwdToggleInputForm,MemberBar,MemberLinkText,MemberBody,MemberContainer,MemberInfoDiv,MemberLinkDiv,MemberProfileDiv,TextEmail,TextName,TitleText,ProfileTextDiv,InfoDiv,Input,ChangeButton,InputForm} from './MemberManagementStyle'
-import Alert from "../../../../components/commonUi/Alert";
-import ModalPage from '../../../../components/Login/ModalPage';
-import MemberPhone from '../../../../components/Login/Member/MemberPhone/MemberPhone';
-import SimpleConfirm from '../../../../components/commonUi/SimpleConfirm';
-import MemberPwd from '../../../../components/Login/Member/MemberPwd/MemberPwd';
-import ProfileAvatar from '../../../../components/commonUi/ProfileAvatar';
+import Alert from "components/commonUi/Alert";
+import ModalPage from 'components/Login/ModalPage';
+import MemberPhone from 'components/Login/Member/MemberPhone/MemberPhone';
+import SimpleConfirm from 'components/commonUi/SimpleConfirm';
+import MemberPwd from 'components/Login/Member/MemberPwd/MemberPwd';
+import ProfileAvatar from 'components/commonUi/ProfileAvatar';
 
 function MemberManagement() {
   const [namevalue,setNamevalue] = useState('아이덴잇')

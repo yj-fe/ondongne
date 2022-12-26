@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import data from '../../../assets/data/detailtest'
-import { ReactComponent as StarIcon } from "../../../assets/main/ratestar.svg";
-import { ReactComponent as StarIcon2 } from "../../../assets/main/ratestar2.svg";
-import { ReactComponent as Reviewstar } from "../../../assets/main/reviewstar.svg";
-import { ReactComponent as ReviewLike } from "../../../assets/main/reviewlike.svg";
-import { ReactComponent as ReviewLike0 } from "../../../assets/main/reviewlikedisable.svg";
-import { ReactComponent as Flag } from "../../../assets/main/flag.svg";
-import { ReactComponent as More } from "../../../assets/main/moreverti.svg";
-import { ReactComponent as Filter } from "../../../assets/main/filter.svg";
-import Image from '../../../assets/main/shine.png'
-import ReviewImg from '../../../assets/main/reviewimg.png'
-import Avatar from '../../../assets/common/avatar.png'
+import data from 'assets/data/detailtest'
+import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
+import { ReactComponent as StarIcon2 } from "assets/main/ratestar2.svg";
+import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
+import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
+import { ReactComponent as ReviewLike0 } from "assets/main/reviewlikedisable.svg";
+import { ReactComponent as Flag } from "assets/main/flag.svg";
+import { ReactComponent as More } from "assets/main/moreverti.svg";
+import { ReactComponent as Filter } from "assets/main/filter.svg";
+import Image from 'assets/main/shine.png'
+import ReviewImg from 'assets/main/reviewimg.png'
+import Avatar from 'assets/common/avatar.png'
 import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailImg, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketLocation, MarketName, MarketProfile, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileImg, ProfileName, ProfileTextDiv, MoreStyle, FinalPrice, FlagStyle, FlagText, IconStyle, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile } from './DetailsPageStyle'
-import MainHeader from '../../../components/Main/Main/BasicHeader/BasicHeader';
-import ModalMorePage from '../../../components/Main/More/ModalMorePage'
-import Layout from '../../../components/layout/Layout/Layout';
+import MainHeader from 'components/Main/Main/BasicHeader/BasicHeader';
+import ModalMorePage from 'components/Main/More/ModalMorePage'
+import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
-import Confirm from '../../../components/commonUi/Confirm';
+import Confirm from 'components/commonUi/Confirm';
 
 
 

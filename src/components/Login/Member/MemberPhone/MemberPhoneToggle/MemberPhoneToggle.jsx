@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import SimpleConfirm from '../../../../commonUi/SimpleConfirm';
+import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import {PhoneRequestForm,PhoneRequestInput,PhoneRequestButton,AuthTimerStyle,} from './MemberPhoneToggleStyle'
 
 

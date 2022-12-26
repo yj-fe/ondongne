@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import BasicHeader from '../../../../components/Main/Main/BasicHeader/BasicHeader'
-import { ReactComponent as Check } from '../../../../assets/login/checkgray.svg'
-import { ReactComponent as Checked } from '../../../../assets/login/checked.svg'
+import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
+import { ReactComponent as Check } from 'assets/login/checkgray.svg'
+import { ReactComponent as Checked } from 'assets/login/checked.svg'
 import {InputDiv,MemberBody,MemberContainer,WithdrawalDiv1,WithdrawalDiv2,ButtonDiv,CheckForm,TextDiv1,TextDiv2,TextInfo,TextTitle,TextTitleBold,TextTitleNomal,InfoText,InfoTitle, CheckTitleDiv,CheckInput,CheckStyle,CheckTitle} from './MemberWithdrawalStyle'
-import ModalDelete from '../../../../components/Main/Cart/ModalDelete/ModalDelete'
+import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete'
 
 
 function MemberWithdrawal() {

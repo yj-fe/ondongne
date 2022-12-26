@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { ReactComponent as EyeOn } from "../../../../assets/login/Eyeon.svg";
-import { ReactComponent as EyeOff } from "../../../../assets/login/Eyeoff.svg";
+import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
+import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
 import { EyeOffStyle, PwdContainer, PwdInput, RequesInputContainer, RequesInputTitle, RequestButton, RequestInfo, RequestInput, RequestInputDiv, RequestInputForm, SignupButton, ValidText } from "./SignupInfoStyle";
 import { useNavigate } from "react-router-dom";
-import Alert from './../../../commonUi/Alert';
-import { SignupBody, RequestText } from './../signuprequest/SignupRequestStyle';
-import { RequestTextStyle } from './../../Password/PwdReset/PwdResetStyle';
-import { signup } from "../../../../service/auth";
-import { memberEmailValidation, memberNicknameValidation } from "../../../../service/common";
+import Alert from 'components/commonUi/Alert';
+import { SignupBody, RequestText } from 'components/Login/Signup/signuprequest/SignupRequestStyle';
+import { RequestTextStyle } from 'components/Login/Password/PwdReset/PwdResetStyle';
+import { signup } from "service/auth";
+import { memberEmailValidation, memberNicknameValidation } from "service/common";
 
 function SignupInfo({ data, setData }) {
 

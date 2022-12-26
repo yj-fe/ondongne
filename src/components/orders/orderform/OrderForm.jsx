@@ -1,17 +1,17 @@
 import React, {useRef, useState, useEffect} from 'react'
 import { loadTossPayments } from '@tosspayments/payment-sdk'
-import * as L from '../../commonUi/Layout';
-import * as T from '../../commonUi/Text';
-import * as B from '../../commonUi/Button'
-// import * as B from '../../commonUi/Button';
-import * as Tb from '../../commonUi/Table';
-import * as IP from '../../commonUi/Input';
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+import * as B from 'components/commonUi/Button'
+// import * as B from 'components/commonUi/Button';
+import * as Tb from 'components/commonUi/Table';
+import * as IP from 'components/commonUi/Input';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import CheckBox from '../../commonUi/CheckBox';
-import { Profile32 } from '../../commonUi/Icon';
-import LayerSelect from '../../commonUi/LayerSelect';
-import Alert from '../../commonUi/Alert';
-import Confirm from '../../commonUi/Confirm';
+import CheckBox from 'components/commonUi/CheckBox';
+import { Profile32 } from 'components/commonUi/Icon';
+import LayerSelect from 'components/commonUi/LayerSelect';
+import Alert from 'components/commonUi/Alert';
+import Confirm from 'components/commonUi/Confirm';
 
 const dummyData = JSON.stringify({
     userName: '아이덴잇',

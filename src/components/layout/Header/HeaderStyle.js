@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import * as Common from '../../commonUi/Layout';
+import * as Common from 'components/commonUi/Layout';
 
 export const S = {
     Header: styled.header`

@@ -1,13 +1,13 @@
 import React from 'react'
-import * as L from '../../commonUi/Layout';
-import * as T from '../../commonUi/Text';
-import * as Tb from '../../commonUi/Table';
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+import * as Tb from 'components/commonUi/Table';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { Profile48 } from '../../commonUi/Icon';
-import Confirm from '../../commonUi/Confirm';
-import Alert from '../../commonUi/Alert';
+import { Profile48 } from 'components/commonUi/Icon';
+import Confirm from 'components/commonUi/Confirm';
+import Alert from 'components/commonUi/Alert';
 import { S } from './OrderDetailsStyle'
 
 const dummyData = JSON.stringify({

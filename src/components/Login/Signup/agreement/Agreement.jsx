@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ToggleDetail from './../../Password/ToggleDetail/ToggleDetail';
-import { ReactComponent as Check } from "../../../../assets/login/check.svg";
-import { ReactComponent as Checked } from "../../../../assets/login/checked.svg";
-import { ReactComponent as ToggleDown } from "../../../../assets/login/toggledown.svg";
-import { ReactComponent as ToggleUp } from "../../../../assets/login/toggleup.svg";
+import ToggleDetail from 'components/Login/Password/ToggleDetail/ToggleDetail';
+import { ReactComponent as Check } from "assets/login/check.svg";
+import { ReactComponent as Checked } from "assets/login/checked.svg";
+import { ReactComponent as ToggleDown } from "assets/login/toggledown.svg";
+import { ReactComponent as ToggleUp } from "assets/login/toggleup.svg";
 
 import { AgreementBody, AgreementInfo, AgreementText, AgreementTextStyle, CheckboxButton, CheckboxForm, CheckboxInput, CheckboxText, CheckboxToggle, Line, NextButton } from "./AgreementStyle";
 

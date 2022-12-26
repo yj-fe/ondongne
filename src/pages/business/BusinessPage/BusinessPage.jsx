@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 
-import maindata from '../../../assets/data/maindata'
+import maindata from 'assets/data/maindata'
 
-import BusinessHeader from '../../../components/Buisness/Header/BusinessHeader'
-import { ReactComponent as Right } from "../../../assets/main/right.svg";
-import { ReactComponent as OrderIcon } from "../../../assets/icons/business/neworder.svg";
-import { ReactComponent as Pickup } from "../../../assets/icons/business/pickup.svg";
-import { ReactComponent as NewReview } from "../../../assets/icons/business/newreview.svg";
-import FooterImg from '../../../assets/main/footerlogo.svg'
-import { ReactComponent as StarIcon } from "../../../assets/main/ratestar.svg";
-import { ReactComponent as Floating } from "../../../assets/icons/business/floating.svg";
-import { ReactComponent as FloatingPush } from "../../../assets/icons/business/floatingpush.svg";
-import { ReactComponent as Coupon } from "../../../assets/icons/business/Coupon.svg";
-import { ReactComponent as Trans } from "../../../assets/icons/business/Trans.svg";
-import { ReactComponent as Product } from "../../../assets/icons/business/Product.svg";
-import { ReactComponent as Order } from "../../../assets/icons/business/Order.svg";
+import BusinessHeader from 'components/Buisness/Header/BusinessHeader'
+import { ReactComponent as Right } from "assets/main/right.svg";
+import { ReactComponent as OrderIcon } from "assets/icons/business/neworder.svg";
+import { ReactComponent as Pickup } from "assets/icons/business/pickup.svg";
+import { ReactComponent as NewReview } from "assets/icons/business/newreview.svg";
+import FooterImg from 'assets/main/footerlogo.svg'
+import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
+import { ReactComponent as Floating } from "assets/icons/business/floating.svg";
+import { ReactComponent as FloatingPush } from "assets/icons/business/floatingpush.svg";
+import { ReactComponent as Coupon } from "assets/icons/business/Coupon.svg";
+import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
+import { ReactComponent as Product } from "assets/icons/business/Product.svg";
+import { ReactComponent as Order } from "assets/icons/business/Order.svg";
 
-import {MoreNavBody,MoreContainer,MoreDiv,FooterText,Logo} from '../../../pages/main/MorePage/MorePageStyle'
-import {TermsDiv,TermsTitle,TermsIconStyle} from '../../main/TermsPage/TermsPageStyle'
+import {MoreNavBody,MoreContainer,MoreDiv,FooterText,Logo} from 'pages/main/MorePage/MorePageStyle'
+import {TermsDiv,TermsTitle,TermsIconStyle} from 'pages/main/TermsPage/TermsPageStyle'
 import {TitleText,InfoCard,InfoIconStyle,CardCount,CardText,Footer,InfoDiv,FloatingContentDiv,FloatingContentTitle,FloatingContentIcon,FloatingToggleDiv,CardTextDiv,CouponDiv,CouponInfoDiv,DownloadDiv,DownloadText,DownloadCount,DownloadCountTextB,DownloadCountTextN,MyBestProductContent,FloatingDiv,FooterDiv} from './BusinessPageStyle'
-import {ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,ContentTitle,Discount,DiscountStyle,Price,FinalPrice,RateStyle,Star,Number} from '../../../components/Main/Main/MainBestCollection/MainBestCollectionStyle'
+import {ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,ContentTitle,Discount,DiscountStyle,Price,FinalPrice,RateStyle,Star,Number} from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
 
 function BusinessPage() {
   const [item] = useState(maindata)

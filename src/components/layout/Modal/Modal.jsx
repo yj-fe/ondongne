@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text } from '../../commonUi/Text'
+import { Text } from 'components/commonUi/Text'
 import SwiperPage from '../Swiper/Swiper'
 
 

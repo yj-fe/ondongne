@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import bestcoupon from '../../../../assets/data/bestcoupon'
-import newmarket from '../../../../assets/data/newmarket'
+import bestcoupon from 'assets/data/bestcoupon'
+import newmarket from 'assets/data/newmarket'
 
 import {MainBestCouponBody,MainBestCouponContent,MainBestCouponTop,TopAll,TopTitle,ContentCoupon,ContentCouponDiv,ContentDrive,ContentImg,ContentMarket,ContentPick,ContentProduct} from './MainBestCouponStyle'
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { ReactComponent as Right } from "../../../assets/main/right.svg";
-import { ReactComponent as Down } from "../../../assets/icons/arrow/Arrow-Down.svg";
-import { Text } from '../../commonUi/Text';
+import { ReactComponent as Right } from "assets/main/right.svg";
+import { ReactComponent as Down } from "assets/icons/arrow/Arrow-Down.svg";
+import { Text } from 'components/commonUi/Text';
 
 import {BankListDiv,BankToggleDiv,TextCenter,InfoBoxDiv,TabDiv,TabContent,ContentDiv,ContentTitle,TitleInfo,TitleInfoDiv,RightStyle,TabBtn,InputBox,Input} from './BusinessManagementTabStyle'
 

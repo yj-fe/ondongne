@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
-import maindata from '../../../../assets/data/maindata'
-import { ReactComponent as StarIcon } from "../../../../assets/main/ratestar.svg";
+import maindata from 'assets/data/maindata'
+import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 import {LastChanceBody,LastChanceContent,LastChanceDiv,LastChanceTop,TopAll,TopTitle,ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,ContentTitle,Discount,DiscountStyle,Price,FinalPrice,RateStyle,Star,Number} from './MainBestCollectionStyle'
 
 
