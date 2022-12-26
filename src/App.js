@@ -38,6 +38,7 @@ import OrderListPage from "pages/orders/OrderListPage";
 import OrderFormPage from "pages/orders/OrderFormPage";
 import OrderDetailsPage from "pages/orders/OrderDetailsPage";
 import SignupPage from "pages/login/signup/SignupPage";
+/* ========== SETTING ========== */
 /* ========== SERVICE ========== */
 import CustomerService from "pages/service/CustomerService/CustomerService";
 import TermsPage from "pages/service/TermsPage/TermsPage";
@@ -52,6 +53,9 @@ import { authActions } from "store/slices/auth";
 import InquiryPage from "pages/service/CustomerService/InquiryPage";
 import VocPage from "pages/service/CustomerService/VocPage";
 import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAskedQuestion";
+import SettingPage from "pages/setting/SettingPage";
+import NoticePage from "pages/notice/NoticePage";
+import NoticeDetailsPage from "pages/notice/NoticeDetailsPage";
 
 function App() {
   const navigate = useNavigate();
@@ -148,6 +152,17 @@ function App() {
           <Route path="all" element={<OrderListPage />} />
           <Route path="new/:id" element={<OrderFormPage />} />
           <Route path="details/:id" element={<OrderDetailsPage />} />
+        </Route>
+
+        {/* ========== 환경설정 ========== */}
+        <Route path="/setting">
+          <Route path="" element={<SettingPage />} />
+        </Route>
+
+        {/* ========== 공지사항 ========== */}
+        <Route path="/notice">
+          <Route path="" element={<NoticePage />} />
+          <Route path="details/:id" element={<NoticeDetailsPage />} />
         </Route>
 
         {/* ========== 고객센터 ========== */}

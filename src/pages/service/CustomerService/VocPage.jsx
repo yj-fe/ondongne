@@ -6,7 +6,6 @@ import * as T from 'components/commonUi/Text';
 import * as I from 'components/commonUi/Input';
 import * as B from 'components/commonUi/Button';
 import CheckBox from 'components/commonUi/CheckBox';
-import { ButtonDiv } from 'pages/login/member/MemberWithdrawal/MemberWithdrawalStyle';
 import { InfoBoxDiv, RightStyle, TitleInfo } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { Down } from 'components/commonUi/Icon';
 
