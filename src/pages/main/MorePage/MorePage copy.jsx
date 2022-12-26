@@ -24,10 +24,9 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as I from 'components/commonUi/Input';
 import * as B from 'components/commonUi/Button';
-import FooterLayout from 'components/layout/Footer/Footer'
 
 
-function MorePage() {
+function MorePageTest() {
   const navigate = useNavigate()
   const [member, setMember] = useState({});
   const auth = useSelector(state => state.auth);
@@ -94,7 +93,7 @@ function MorePage() {
                 {member.profile && <MoreAccountImg src={member.profile} />}
                 {!member.profile && <MoreAccountImgBox />}
                 <MoreAccountTextDiv>
-                  <AccountBadge>{member.role === 'MEMBER' ? '일반회원' : '비즈회원'}</AccountBadge>
+                  <AccountBadge>{member.role == 'MEMBER' ? '일반회원' : '비즈회원'}</AccountBadge>
                   <AccountName>{member.nickname}</AccountName>
                 </MoreAccountTextDiv>
               </MoreAccountProfile>
@@ -144,7 +143,18 @@ function MorePage() {
 
         </L.Container>
 
-        <FooterLayout/>
+        <Footer>
+          <Logo src={FooterImg} />
+          <FooterText>
+            <span>하이퍼로컬리티</span><br />
+            {/* <span>대표자: 윤원규 / 사업자등록번호: 893-62-00579 / 통신판매신고: 김포마산-1234</span><br />
+            <span>주소: 경기도 김포시 김포한강8로 173-28 108동 103호 / 개인정보관리책임자: 홍길동</span><br />
+            <span>고객센터: 123-456-78912 / 이메일문의: example@email.com</span> */}
+            <span>대표자: 윤원규 / 사업자등록번호: 893-62-00579</span><br/>
+            <span>주소: 경기도 김포시 김포한강8로 173-28 108동 103호 / 개인정보관리책임자: 윤원규</span><br/>
+            <span>고객센터: 010-2481-2002 / 이메일문의: pay.hyperlocality@gmail.com</span>
+          </FooterText>
+        </Footer>
 
       
       </Layout>
@@ -239,4 +249,4 @@ function BusinessAgreementModal (){
     </div>
   )
 }
-export default MorePage
+export default MorePageTest

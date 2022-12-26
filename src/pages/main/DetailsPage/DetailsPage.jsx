@@ -18,6 +18,7 @@ import ModalMorePage from 'components/Main/More/ModalMorePage'
 import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
 import Confirm from 'components/commonUi/Confirm';
+import { Cart } from 'components/commonUi/Icon';
 
 
 
@@ -189,7 +190,9 @@ function DetailsPage(props) {
 
 
         </DetailContainer>
+        
         <ButtonStyle>
+        {/* <Cart/> */}
           <DetailButtonDiv>
             <DetailButtonStyle onClick={paymentsOrder}>구매하기</DetailButtonStyle>
           </DetailButtonDiv>

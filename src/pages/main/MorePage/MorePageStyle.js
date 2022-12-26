@@ -17,8 +17,7 @@ export const MoreContainer = styled.div`
   justify-content: center;
   background: #F5F5F5;
   width: 728px;
-  height: auto;
-  /* margin-top: 60px; */
+  /* height: auto; */
   padding: 0px;
 
   > div {

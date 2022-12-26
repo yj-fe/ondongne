@@ -58,6 +58,7 @@ import NoticePage from "pages/notice/NoticePage";
 import NoticeDetailsPage from "pages/notice/NoticeDetailsPage";
 import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
 import MemberNews from "pages/login/member/MemberNews/MemberNews";
+import MarketDetail from "pages/main/MarketDetail/MarketDetail";
 
 function App() {
   const navigate = useNavigate();
@@ -111,9 +112,8 @@ function App() {
           <Route path="categories" element={<CategoryPage />} />
           <Route path="collections" element={<CollectionPage />} />
           <Route path="details/:id" element={<DetailsPage />} />
-          <Route path="configuration" element={<ConfigurationPage />} />
-          {/* 고객센터&약관 */}
           <Route path="more" element={<MorePage />} />
+          <Route path="market/detail/:id" element={<MarketDetail />} />
 
         </Route>
 

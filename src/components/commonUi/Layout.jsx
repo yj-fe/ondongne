@@ -10,7 +10,7 @@ export const Inner = styled.div`
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: ${props => props._gap || 8}px;
     padding: ${props => props._padding || '0 0 8px'};
 `;
 
