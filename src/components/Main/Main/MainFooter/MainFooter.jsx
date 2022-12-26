@@ -26,18 +26,19 @@ function MainFooter() {
         <NavIcon>
           <Market />
         </NavIcon>
+
         <NavIcon
         >
         <Link to="/order/all" style={{ textDecoration: 'none' }}>
           <Order />
         </Link>
         </NavIcon>
+
         <NavIcon
-          onClick={() => {
-            navigate("more");
-          }}
         >
-          <More />
+          <Link to="/more" style={{ textDecoration: 'none' }}>
+            <More />
+          </Link>
         </NavIcon>
       </FooterNav>
     </MainFooterDiv>
