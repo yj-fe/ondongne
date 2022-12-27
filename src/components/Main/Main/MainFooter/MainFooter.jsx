@@ -21,10 +21,14 @@ function MainFooter() {
           <Home />
         </NavIcon>
         <NavIcon>
-          <Search />
+          <Link to="/search" style={{ textDecoration: 'none' }}>
+            <Search />
+          </Link>
         </NavIcon>
         <NavIcon>
-          <Market />
+          <Link to="/member/market" style={{ textDecoration: 'none' }}>
+            <Market />
+          </Link>
         </NavIcon>
 
         <NavIcon

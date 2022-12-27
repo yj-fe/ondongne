@@ -1,5 +1,5 @@
 import React from 'react'
-import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainer, MoreContainerDiv, MoreDiv, MoreNavBody, AccountBadge, AccountName, Footer, Logo, FooterText, MoreLoginDiv, MoreLoginText, MoreLoginButton, MoreAccountImgBox } from 'pages/main/MorePage/MorePageStyle'
+import {  Footer, Logo, FooterText,} from 'pages/main/MorePage/MorePageStyle'
 import FooterImg from 'assets/main/footerlogo.svg'
 
 function FooterLayout() {

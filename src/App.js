@@ -61,6 +61,8 @@ import MemberNews from "pages/member/MemberNews/MemberNews";
 import MarketDetail from "pages/main/MarketDetail/MarketDetail";
 import MyCoupon from "pages/member/MyCoupon/MyCoupon";
 import MyMarket from "pages/member/MyMarket/MyMarket";
+import SearchPage from "pages/main/Search/SearchPage";
+import BusinessCoupon from "pages/business/BusinessPage/BusinessCoupon";
 
 function App() {
   const navigate = useNavigate();
@@ -110,6 +112,7 @@ function App() {
         {/* ========== 메인 ========== */}
         <Route path="/">
           <Route path="" element={<MainPage />} />
+          <Route path="search" element={<SearchPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="categories" element={<CategoryPage />} />
           <Route path="collections" element={<CollectionPage />} />
@@ -150,6 +153,8 @@ function App() {
           <Route path="upload" element={<BusinessUpload />} />
           {/* 비즈회원알림 */}
           <Route path="news" element={<BusinessNews />} />
+          {/* 쿠폰관리 */}
+          <Route path="coupon" element={<BusinessCoupon />} />
         </Route>
 
         {/* ========== 로그인 ========== */}
