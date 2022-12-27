@@ -37,37 +37,31 @@ function MorePage() {
   const [agreementModal, setAgreementModal] = useState(false);
 
   const memberLogout = async () => {
-    await logout()
-      .then(response => {
-        if (response.status === 200) {
-          dispatch(authActions.logout())
-          client.defaults.headers.common['Authorization'] = '';
-          setAlert({
-            title: "로그아웃 성공",
-            contents: "로그아웃 되었습니다.",
-            buttonText: "확인",
-            onButtonClick: () => setAlert(false),
-            onOverlayClick: () => setAlert(false),
-          })
-        } else {
-          setAlert({
-            title: "로그아웃 실패",
-            contents: "다시 한번 시도해주세요.",
-            buttonText: "확인",
-            onButtonClick: () => setAlert(false),
-            onOverlayClick: () => setAlert(false),
-          })
-        }
+    const response = await logout();
+    if (response.status === 200) {
+      dispatch(authActions.logout())
+      setAlert({
+        title: "로그아웃 성공",
+        contents: "로그아웃 되었습니다.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(false),
+        onOverlayClick: () => setAlert(false),
       })
-
+    } else {
+      setAlert({
+        title: "로그아웃 실패",
+        contents: "다시 한번 시도해주세요.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(false),
+        onOverlayClick: () => setAlert(false),
+      })
+    }
   }
 
   const getMemberProfile = async () => {
-    await getMember()
-      .then(response => {
-        const { data, message } = response.data;
-        setMember(data);
-      })
+    const response = await getMember()
+    const {message, data} = response.data;
+    if(data) setMember(data);
   }
 
   useEffect(() => {
@@ -99,7 +93,9 @@ function MorePage() {
                 </MoreAccountTextDiv>
               </MoreAccountProfile>
               <MoreAccountButtonDiv>
-                <MoreAccountButton>회원정보 관리</MoreAccountButton>
+                <Link to="/member/management">
+                  <MoreAccountButton>회원정보 관리</MoreAccountButton>
+                </Link>
                 <MoreAccountButton
                   onClick={()=>setCoachmark(true)}
                 >비즈회원 전환</MoreAccountButton>

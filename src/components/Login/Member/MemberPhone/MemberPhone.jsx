@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react'
 import {AlertText,Input,InputForm,ChangeButton,PhoneToggleInput,PhoneToggleInputForm,RequestButton,PhoneRequestForm,PhoneRequestInput,AuthTimerStyle,PhoneRequestButton} from './MemberPhoneStyle'
 import MemberPhoneToggle from './MemberPhoneToggle/MemberPhoneToggle'
 
-function MemberPhone() {
-  const [phonevalue,setPhonevalue] = useState('01012345678')
+function MemberPhone({phone}) { 
   
   const [showPhoneToggle,setShowPhoneToggle] = useState(true)
   // const [showPhoneRequestToggle, setShowPhoneRequestToggle] = useState(false)
+
   return (
     <div>
-      { showPhoneToggle ? <PhoneResetToggle phonevalue={phonevalue} setShowPhoneToggle={setShowPhoneToggle}/> : <PhoneToggle/> }
+      { showPhoneToggle ? <PhoneResetToggle phonevalue={phone} setShowPhoneToggle={setShowPhoneToggle}/> : <PhoneToggle/> }
     </div>
   )
 }
