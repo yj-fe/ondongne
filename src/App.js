@@ -14,8 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 /* ========= MEMBER ========= */
 import MyPage from "components/MyPage";
 import LocationSetting from "pages/login/LocationSetting/LocationSetting";
-import MemberManagement from "pages/login/member/MemberManagement/MemberManagement";
-import MemberWithdrawal from "pages/login/member/MemberWithdrawal/MemberWithdrawal";
+import MemberManagement from "pages/member/MemberManagement/MemberManagement";
+import MemberWithdrawal from "pages/member/MemberWithdrawal/MemberWithdrawal";
 /* ========== BUSINESS ========== */
 import BusinessPage from "pages/business/BusinessPage/BusinessPage";
 import BusinessApplication from "pages/business/BusinessPage/BusinessApplication/BusinessApplication";
@@ -57,8 +57,9 @@ import SettingPage from "pages/setting/SettingPage";
 import NoticePage from "pages/notice/NoticePage";
 import NoticeDetailsPage from "pages/notice/NoticeDetailsPage";
 import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
-import MemberNews from "pages/login/member/MemberNews/MemberNews";
+import MemberNews from "pages/member/MemberNews/MemberNews";
 import MarketDetail from "pages/main/MarketDetail/MarketDetail";
+import MyCoupon from "pages/member/MyCoupon/MyCoupon";
 
 function App() {
   const navigate = useNavigate();
@@ -113,6 +114,7 @@ function App() {
           <Route path="collections" element={<CollectionPage />} />
           <Route path="details/:id" element={<DetailsPage />} />
           <Route path="more" element={<MorePage />} />
+          {/* 상점정보 */}
           <Route path="market/detail/:id" element={<MarketDetail />} />
 
         </Route>
@@ -126,7 +128,9 @@ function App() {
           <Route path="withdrawal" element={<MemberWithdrawal />} />
           {/* 1주차-회원-위치설정 */}
           <Route path="location" element={<LocationSetting />} />
+          {/* 회원알림 */}
           <Route path="news" element={<MemberNews />} />
+          <Route path="coupon" element={<MyCoupon />} />
         </Route>
 
         {/* ========== 비즈회원관리 ========== */}
@@ -140,6 +144,7 @@ function App() {
           {/* 2주차-비즈회원-비즈상품 관리/등록/수정 */}
           <Route path="product" element={<BusinessProductManagement />} />
           <Route path="upload" element={<BusinessUpload />} />
+          {/* 비즈회원알림 */}
           <Route path="news" element={<BusinessNews />} />
         </Route>
 
@@ -172,8 +177,11 @@ function App() {
         {/* ========== 고객센터 ========== */}
         <Route path="/service">
           <Route path="" element={<CustomerService />} />
+          {/* 자주하는질문 */}
           <Route path="faq" element={<FrequentlyAskedQuestion />} />
+          {/* 1:1 */}
           <Route path="inquiry" element={<InquiryPage />} />
+          {/* voc */}
           <Route path="voc" element={<VocPage />} />
         {/* 약관 */}
           <Route path="terms" element={<TermsPage />} />
