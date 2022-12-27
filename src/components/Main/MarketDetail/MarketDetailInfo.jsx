@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import Layout from 'components/layout/Layout/Layout';
+import { MarketTable } from 'components/commonUi/Table';
 
 function MarketDetailInfo() {
   return (
     <div>
-      {/* <L.Container _padding=" 24px 20px"> */}
+      {/* 상점 소개 */}
       <L.Container>
         <L.Contents>
           <L.FlexCols>
@@ -15,11 +15,72 @@ function MarketDetailInfo() {
           </L.FlexCols>
         </L.Contents>
       </L.Container>
-      <L.Container _padding=" 24px 20px">
+
+
+      {/* 영업정보 */}
+      <L.Container >
+        <L.Contents _padding=" 24px 20px">
           <L.FlexCols>
             <T.Text _weight={700} _size={16} _color="gray900">영업정보</T.Text>
+            <MarketTable>
+              <tbody>
+                <tr>
+                  <th>상호명</th>
+                  <td>인싸과일</td>
+                </tr>
+                <tr>
+                  <th>운영시간</th>
+                  <td>평일, 토요일 : 10:00 ~ 19:00</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td>일요일 : 11:00 ~ 15:00</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td>공휴일 휴무</td>
+                </tr>
+                <tr>
+                  <th>전화번호</th>
+                  <td>070-1234-5678</td>
+                </tr>
+                <tr>
+                  <th>배달지역</th>
+                  <td>김포시 풍무동</td>
+                </tr>
+              </tbody>
+            </MarketTable>
           </L.FlexCols>
-          </L.Container>
+        </L.Contents>
+      </L.Container>
+
+      
+      {/* 사업자 정보 */}
+      <L.Container >
+        <L.Contents _padding=" 24px 20px">
+          <L.FlexCols>
+            <T.Text _weight={700} _size={16} _color="gray900">사업자 정보</T.Text>
+            <MarketTable>
+              <tbody>
+                <tr>
+                  <th>대표자명</th>
+                  <td>아이덴잇</td>
+                </tr>
+                <tr>
+                  <th>상호명</th>
+                  <td>아이덴잇</td>
+                </tr>
+                <tr>
+                  <th>사업자주소</th>
+                  <td>서울시 강서구 가양동 가양 데시앙플렉스센터</td>
+                </tr>
+              </tbody>
+            </MarketTable>
+          </L.FlexCols>
+        </L.Contents>
+      </L.Container>
+
+
     </div>
   )
 }

@@ -10,8 +10,10 @@ import FooterLayout from 'components/layout/Footer/Footer';
 import Layout from 'components/layout/Layout/Layout';
 import { Link, useNavigate } from 'react-router-dom'
 import MarketImg from 'assets/images/marketdetail.png'
-import ModalMorePage from 'components/Main/More/ModalMorePage'
 import MarketDetailInfo from 'components/Main/MarketDetail/MarketDetailInfo';
+import MarketDetailProduct from 'components/Main/MarketDetail/MarketDetailProduct';
+import MarketDetailCoupon from 'components/Main/MarketDetail/MarketDetailCoupon';
+import ModalMorePage from 'components/Main/More/ModalMorePage'
 
 
 function MarketDetail() {
@@ -20,13 +22,13 @@ function MarketDetail() {
   const [modal, setModal] = useState(false);
 
 
+  const ShowMoreModal = () => {
+    setModal(!modal);
+  }
   const PropsModal = () => {
     setModal(!modal);
   }
 
-  const ShowMoreModal = () => {
-    setModal(!modal);
-  }
 
   return (
     <div>
@@ -54,10 +56,12 @@ function MarketDetail() {
 
                   <L.FlexRows _padding={0} _gap={16} _items="center" _width={64}>
                     <Flag/>
-                    <More 
+                    <button
                       type='button'
                       onClick={ShowMoreModal}
-                    />
+                    >
+                      <More/>
+                    </button>
                   </L.FlexRows>
                 </L.FlexRows>
               </L.Contents>
@@ -84,23 +88,15 @@ function MarketDetail() {
               </DetailTabReview>
             </TabButtonStyle>
 
-            <TabContentStyle>
-              <TabContent detailTab={detailTab} />
-            </TabContentStyle>
-
           </L.FlexCols>
           </L.Contents>
         </L.Container>
 
+            <TabContentStyle>
+              <TabContent detailTab={detailTab} />
+            </TabContentStyle>
 
 
-
-
-
-
-
-
-          
         {modal && <ModalMorePage PropsModal={PropsModal} />}
 
 
@@ -123,12 +119,12 @@ function TabContent(props) {
 
     //=====================상품=====================
     <div>
-
+      <MarketDetailProduct/>
     </div>,
 
     //=====================쿠폰 소식=====================
     <div>
- 
+      <MarketDetailCoupon/>
     </div>
   ][props.detailTab]
 }

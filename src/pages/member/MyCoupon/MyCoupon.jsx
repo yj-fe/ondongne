@@ -2,27 +2,15 @@ import React, { useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as C from 'components/commonUi/Coupon';
-import { DetailMarketInfo, DetailTabDiv, DetailTabInfo, DetailTabReview, FlagStyle, FlagText, IconStyle, Line, MarketIcon, MarketLocation, MarketName, MarketProfile, MoreStyle, TabButtonStyle, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
+import { DetailTabInfo, DetailTabReview, TabButtonStyle, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import { Link, useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout';
-import { TabContent } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
-import ModalMorePage from 'components/Main/More/ModalMorePage'
 import { ArrowRightC } from 'components/commonUi/Icon';
 import Confirm from 'components/commonUi/Confirm';
 
 function MyCoupon() {
   const navigate = useNavigate()
   const [detailTab, setDetailTab] = useState(0)
-  const [modal, setModal] = useState(false);
-
-
-  const PropsModal = () => {
-    setModal(!modal);
-  }
-
-  const ShowMoreModal = () => {
-    setModal(!modal);
-  }
 
   return (
     <div>
@@ -37,7 +25,7 @@ function MyCoupon() {
             <L.FlexCols _padding={0} _gap={0}>
 
 
-{/* =================== Tab버튼 =================== */}
+{/* =================== Tab버튼 ( 사용 가능 / 기간 만료 ) =================== */}
             <TabButtonStyle>
               <DetailTabInfo
                 onClick={() => { setDetailTab(0); }}
@@ -58,41 +46,9 @@ function MyCoupon() {
             </TabContentStyle>
 
 
-
-
-
-{/* =================== 쿠폰 있을 때 =================== */}
-              {/* <L.Contents _padding="16px 20px">
-                <L.FlexRows _content="space-between" _items="center" _gap={12}>
-                  <L.FlexRows >
-                    <L.FlexCols _padding={0} _gap={4}>
-                      <T.Text _weight={600} _size={18} _color="gray900">아재의 과일</T.Text>
-                      <T.Text _weight={400} _size={14} _color="gray800">배달비 2,000원, 최소주문 10,000원</T.Text>
-                    </L.FlexCols>
-                  </L.FlexRows>
-
-                  <L.FlexRows _padding={0} _gap={16} _items="center" _width={64}>
-                  </L.FlexRows>
-                </L.FlexRows>
-              </L.Contents> */}
-
-
-
-
           </L.FlexCols>
           </L.Contents>
         </L.Container>
-
-
-
-
-
-
-
-
-
-          
-        {modal && <ModalMorePage PropsModal={PropsModal} />}
 
 
 
