@@ -116,9 +116,13 @@ function MorePage() {
 
           <MoreDiv>
             <MoreContainerDiv>My 주문</MoreContainerDiv>
-            <MoreContainerDiv>My 단골</MoreContainerDiv>
+            <Link to="">
+              <MoreContainerDiv>My 단골</MoreContainerDiv>
+            </Link>
             <MoreContainerDiv>내가 쓴 리뷰</MoreContainerDiv>
-            <MoreContainerDiv>쿠폰함</MoreContainerDiv>
+            <Link to="/member/coupon">
+              <MoreContainerDiv>쿠폰함</MoreContainerDiv>
+            </Link>
           </MoreDiv>
           <MoreDiv>
 

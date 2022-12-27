@@ -15,7 +15,7 @@ function FrequentlyAskedQuestion() {
           title="자주하는 질문"
           cart={false}
           bell={false}
-          onBackClick={() => navigate('/')}
+          onBackClick={() => navigate(-1)}
       >
         <L.Container>
           <L.Contents _height="100vh">

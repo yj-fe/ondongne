@@ -60,6 +60,7 @@ import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews"
 import MemberNews from "pages/member/MemberNews/MemberNews";
 import MarketDetail from "pages/main/MarketDetail/MarketDetail";
 import MyCoupon from "pages/member/MyCoupon/MyCoupon";
+import MyMarket from "pages/member/MyMarket/MyMarket";
 
 function App() {
   const navigate = useNavigate();
@@ -130,7 +131,10 @@ function App() {
           <Route path="location" element={<LocationSetting />} />
           {/* 회원알림 */}
           <Route path="news" element={<MemberNews />} />
+          {/* 받은쿠폰함 */}
           <Route path="coupon" element={<MyCoupon />} />
+          {/* MY단골 */}
+          <Route path="market" element={<MyMarket />} />
         </Route>
 
         {/* ========== 비즈회원관리 ========== */}

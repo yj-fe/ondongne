@@ -18,7 +18,7 @@ function MyCoupon() {
         title="받은 쿠폰함"
         cart={false}
         bell={false}
-        onBackClick={() => navigate('/')}
+        onBackClick={() => navigate(-1)}
       >
         <L.Container >
           <L.Contents _padding="0" _height={'100vh'}>
@@ -73,7 +73,7 @@ function TabCoupon(props) {
   }
   return [
 
-    //=====================사용 가능=====================
+    //=====================1. Tab 1 사용 가능=====================
     <div>
 
 {/* =================== 쿠폰 없을 때 =================== */}
@@ -163,7 +163,7 @@ function TabCoupon(props) {
         }
     </div>,
 
-    //=====================지난 쿠폰=====================
+    //=====================2. Tab 2 지난 쿠폰=====================
     <div>
         <L.Contents _padding="24px 20px" _gap={20}>
           <L.FlexCols>

@@ -24,7 +24,7 @@ function InquiryPage() {
           title="1:1 문의"
           cart={false}
           bell={false}
-          onBackClick={() => navigate('/')}
+          onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px" >
           <L.Contents  _height='100vh'>

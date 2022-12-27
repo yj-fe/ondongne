@@ -15,7 +15,7 @@ function CustomerService() {
           title="고객센터"
           cart={false}
           bell={false}
-          onBackClick={() => navigate('/')}
+          onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px">
           <L.Contents  >

@@ -1,4 +1,5 @@
 const color = {
+    white: '#FFFFFF',
     green50: '#E1F3F2',
     green100: '#B4E1DC',
     green200: '#83CFC6',

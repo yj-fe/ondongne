@@ -53,7 +53,7 @@ function MarketDetailProduct() {
   )
 }
 
-function MarketProductCard(props){
+export function MarketProductCard(props){
   return(
   <div>
 
@@ -85,7 +85,7 @@ function MarketProductCard(props){
   )
 }
 
-function ModalFilter(props){
+export function ModalFilter(props){
   return(
     <div>
       <ModalOutside>

@@ -65,3 +65,32 @@ export const FixedPaddingActionButton = styled.button`
     font-size: 18px;
     font-weight: 600;
 `;
+export const FilterButton = styled.button`
+    width: 200px;
+    height: 36px;
+    padding:    5px 8px;
+    background-color: ${props => props.theme.color.gray50};
+    border: 1px solid #EEEEEE;
+    border-radius: 99px;
+    color: #FFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+`;
+export const Badge = styled.button`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 6px;
+    gap: 4px;
+    width: 53px;
+    height: 22px;
+    background: ${props => props.theme.color[props._bg || 'gray100']};
+    border-radius: 2px;
+    color: ${props => props.theme.color[props._color || 'gray800']};
+    font-weight: 500;
+    font-size: 11px;
+`;

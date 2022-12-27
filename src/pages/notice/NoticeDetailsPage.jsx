@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import * as I from 'components/commonUi/Input';
-import * as B from 'components/commonUi/Button';
 import { Line } from 'components/Login/Signup/agreement/AgreementStyle';
 
 function NoticeDetailsPage() {
@@ -16,7 +14,7 @@ function NoticeDetailsPage() {
         title="공지사항"
         cart={false}
         bell={false}
-        onBackClick={() => navigate('/')}
+        onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px" 
         >
