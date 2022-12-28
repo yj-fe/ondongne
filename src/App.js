@@ -1,15 +1,6 @@
-import {
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-  Outlet,
-  createBrowserRouter,
-  RouterProvider,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 /* ========= MEMBER ========= */
 import MyPage from "components/MyPage";
@@ -63,52 +54,32 @@ import InquiryPage from "pages/service/CustomerService/InquiryPage";
 import VocPage from "pages/service/CustomerService/VocPage";
 import ConfigurationPage from "pages/main/ConfigurationPage/ConfigurationPage";
 import Alert from "components/commonUi/Alert";
-import { tokenReissue } from "service/auth";
-import { client } from "service";
 import { authActions } from "store/slices/auth";
 import BusinessProductManagementDetail from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagementDetail";
 
 function App() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const auth = useSelector((state) => state.auth);
   const [alert, setAlert] = useState(null);
-  const refreshToken = localStorage.getItem("refreshToken");
-
-  const onSilentRefresh = async () => {
-    if (!refreshToken) {
-      return;
-    }
-
-    await tokenReissue(refreshToken)
-      .then((response) => {
-        if (response.status === 200) {
-          const { message, data } = response.data;
-
-          client.defaults.headers.common["Authorization"] = data.accessToken;
-
-          dispatch(authActions.login(data));
-        } else {
-          client.defaults.headers.common["Authorization"] = '';
-          localStorage.removeItem('refreshToken');
-          setAlert({
-            title: "인증 기간 만료",
-            contents: "인증 기간이 만료되었습니다.\n다시 로그인해주세요.",
-            buttonText: "확인",
-            onButtonClick: () => setAlert(false),
-            onOverlayClick: () => setAlert(false),
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   useEffect(() => {
-    onSilentRefresh();
-  }, [location]);
+    const data = getExpiry('accessToken');
+    if(data !== null) {
+
+      if(data.status) {
+        dispatch(authActions.logout());
+        return setAlert({
+          title: "인증 기간 만료",
+          contents: "인증 기간이 만료되었습니다.\n다시 로그인해주세요.",
+          buttonText: "확인",
+          onButtonClick: () => setAlert(false),
+          onOverlayClick: () => setAlert(false),
+        });
+      }
+
+      dispatch(authActions.login(data));
+    }
+  }, [location])
 
   return (
     <>

@@ -1,10 +1,9 @@
 
 import { createSlice } from "@reduxjs/toolkit";
+import { client } from "service";
 
 const authenticationState = {
     isAuthenticated: false,
-    accessToken: '',
-    tokenExpiresIn: '',
     member: {}
 }
 
@@ -14,34 +13,23 @@ const authSlice = createSlice({
     reducers: {
         login(state, action) {
             const data = action.payload;
-
             state.isAuthenticated = true;
-            state.accessToken = data.accessToken;
-            state.refreshToken = data.refreshToken;
-            state.tokenExpiresIn = data.tokenExpiresIn;
-            localStorage.setItem('refreshToken', data.refreshToken);
+            
+            const token = {
+                accessToken: data.accessToken,
+                expiry: data.expiresIn
+            }
+
+            localStorage.setItem('accessToken', JSON.stringify(token));
+            client.defaults.headers.common['Authorization'] = data.accessToken;
         },
         save(state, action) {
             const member = action.payload;
             state.member = member;
         },
-        profileUpdate(state, action) {
-            const photo = action.payload;
-            if(state.member) state.member.memberProfileImg = photo;
-        },
-        appPushUpdate(state, action) {
-            const appPush = action.payload;
-            if(state.member) state.member.appPush = appPush;
-        },
-        update(state, action) {
-            const newMember = action.payload;
-            state.member = newMember;
-        },
         logout(state) {
-            localStorage.removeItem('refreshToken');
-            state.accessToken = '';
-            state.refreshToken = '';
-            state.tokenExpiresIn = '';
+            localStorage.removeItem('accessToken');
+            delete client.defaults.headers.common['Authorization']
             state.isAuthenticated = false;
         }
     }

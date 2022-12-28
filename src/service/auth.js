@@ -3,7 +3,6 @@ import { client } from ".";
 const urls = {
     signup: '/auth/signup',
     login: '/auth/login',
-    reissue: '/auth/reissue'
 };
 
 /* ==============================
@@ -18,11 +17,4 @@ export function signup(userData) {
 ============================== */
 export function login(account) {
     return client.post(urls.login, account);
-};
-
-/* ==============================
-    토큰 재발급
-============================== */
-export function tokenReissue(refreshToken) {
-    return client.post(urls.reissue, { refreshToken });
 };

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Profile from '../../assets/common/Profile.png'
+import defaultProfile from '../../assets/common/Profile.png'
 import Camera from '../../assets/common/Camera.png'
+import { memberProfileChange } from 'service/member'
 
-export const ProfileDiv = styled.div`
+export const ProfileDiv = styled.label`
   width: 100px;
   height: 100px;
   background: #FAFAFA;
@@ -27,12 +28,29 @@ export const CameraStyle = styled.img`
   z-index: 10;
 `
 
-function ProfileAvatar() {
+const FileInput = styled.input`
+  display: none;
+`;
+
+function ProfileAvatar({profile}) {
+  const [file, setFile] = useState()
+
+  const fileUpload = async (e) => {
+    const file = e.target.files[0];
+    const response = await memberProfileChange(file);
+    const {data, message} = response.data;
+    if(data) setFile(data)
+  }
+
+  useEffect(() => {
+    if(profile) setFile(profile)
+  }, [profile])
+
   return (
     <div>
-      <ProfileDiv>
+      <ProfileDiv for="profile">
         <ImgStyle
-        src={Profile}
+        src={file ? file : defaultProfile}
         >
           {/* <Avatar src={Avatar}> */}
         </ImgStyle>
@@ -41,6 +59,7 @@ function ProfileAvatar() {
         >
         </CameraStyle>
       </ProfileDiv> 
+      <FileInput type="file" id="profile" onChange={fileUpload}/>
     </div>
   )
 }

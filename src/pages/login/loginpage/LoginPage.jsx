@@ -15,9 +15,8 @@ import { LoginBody, LogoImg, InputForm, Input, PwdContainer, PwdInput, EyeOffSty
 import Alert from 'components/commonUi/Alert';
 import Confirm from 'components/commonUi/Confirm';
 import { login } from "service/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "store/slices/auth";
-import { client } from "service";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -25,6 +24,7 @@ function LoginPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const isAuth = searchParams.get('isAuth');
   const error = searchParams.get('error');
+  const auth = useSelector(state => state.auth);
   
   const [account, setAccount] = useState({
     email: "",
@@ -48,11 +48,8 @@ function LoginPage() {
       .then(response => {
         if (response.status === 200) {
           const { message, data } = response.data;
-    
-          client.defaults.headers.common['Authorization'] = data.accessToken;
-        
+          console.log(data);
           dispatch(authActions.login(data));
-  
           navigate('/')
         } else {
           setAlert({
@@ -62,7 +59,6 @@ function LoginPage() {
             onButtonClick: () => setAlert(false),
             onOverlayClick: () => setAlert(false),
           })
-          client.defaults.headers.common['Authorization'] = '';
         }
       })
       .catch(error => {
@@ -71,7 +67,7 @@ function LoginPage() {
   }
 
   function loginNaver() {
-    window.location.href = 'https://ondongnemarket.com/oauth2/authorization/naver';
+    window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
   }
   const loginKakao = () => {
     window.location.href = '/oauth2/authorization/kakao';
@@ -97,8 +93,7 @@ function LoginPage() {
     const email = searchParams.get('email');
     const name = searchParams.get('name');
     const accessToken = searchParams.get('accessToken');
-    const refreshToken = searchParams.get('refreshToken');
-    const tokenExpiresIn = searchParams.get('tokenExpiresIn');
+    const expiresIn = searchParams.get('expiresIn');
   
     if(isAuth == null) {
       return;
@@ -111,8 +106,7 @@ function LoginPage() {
     }
 
     if(JSON.parse(isAuth)) {
-      client.defaults.headers.common['Authorization'] = accessToken;
-      const data = { accessToken, refreshToken, tokenExpiresIn };
+      const data = { accessToken, expiresIn };
       dispatch(authActions.login(data));
       navigate('/')
     }
@@ -129,6 +123,12 @@ function LoginPage() {
       })
     }
   }, [error])
+
+  useEffect(() => {
+    if(auth.isAuthenticated) {
+      return navigate('/')
+    }
+  }, [auth])
 
   return (
     <div>
