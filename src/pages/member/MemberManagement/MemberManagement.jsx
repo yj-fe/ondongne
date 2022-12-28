@@ -15,8 +15,10 @@ import ProfileAvatar from 'components/commonUi/ProfileAvatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMember, logout, memberNicknameChange } from 'service/member';
 import { authActions } from 'store/slices/auth';
+import { Text } from 'components/commonUi/Text';
 
 function MemberManagement() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showNameToggle, setShowNameToggle] = useState(true)
   const [member, setMember] = useState({});
@@ -37,8 +39,8 @@ function MemberManagement() {
         title: "로그아웃 성공",
         contents: "로그아웃 되었습니다.",
         buttonText: "확인",
-        onButtonClick: () => setAlert(false),
-        onOverlayClick: () => setAlert(false),
+        onButtonClick: () => navigate("/more"),
+        onOverlayClick: () => navigate("/more"),
       })
     } else {
       setAlert({
@@ -78,14 +80,18 @@ function MemberManagement() {
             <InfoDiv>
               <TitleText>닉네임</TitleText>
 
-              {showNameToggle ? <NameResetToggle namevalue={member.nickname} setShowNameToggle={setShowNameToggle} /> : <NameToggle namevalue={member.nickname} />}
+              {
+                showNameToggle 
+                  ? <NameResetToggle namevalue={member.nickname} setToggle={() => setShowNameToggle(false)} /> 
+                  : <NameToggle namevalue={member.nickname} setToggle={() => setShowNameToggle(true)} getMemberProfile={getMemberProfile}/>
+              }
 
             </InfoDiv>
 
             {/* ========================== 전화번호 ========================== */}
             <InfoDiv>
               <TitleText>전화번호</TitleText>
-              <MemberPhone phone={member.phone} />
+              <MemberPhone phone={member.phone} getMemberProfile={getMemberProfile}/>
             </InfoDiv>
 
             {/* ========================== 비밀번호 ========================== */}
@@ -129,7 +135,7 @@ function MemberManagement() {
 
 
 // 닉네임 변경전
-function NameResetToggle({ setShowNameToggle, namevalue }) {
+function NameResetToggle({ setToggle, namevalue }) {
 
   return (
     <div>
@@ -139,27 +145,38 @@ function NameResetToggle({ setShowNameToggle, namevalue }) {
           value={namevalue}
         />
         <ChangeButton
-          onClick={() => { setShowNameToggle(false) }}
+          onClick={ setToggle }
         >변경</ChangeButton>
       </InputForm>
     </div>
   )
 }
 // 닉네임 변경 토글
-function NameToggle({ namevalue }) {
-  const [confirm, setConfirm] = useState(null)
-  const [id, setId] = useState('')
+function NameToggle({ namevalue, setToggle, getMemberProfile }) {
+  const [confirm, setConfirm] = useState(null);
+  const [id, setId] = useState('');
+  const [error, setError] = useState('');
 
   const nicknameChange = async () => {
+    setError('');
     const response = await memberNicknameChange(id);
-    const {data, message} = response;
-    if(!data) {
-      return setConfirm({
-        contents: "닉네임이 변경되었습니다.",
-        confirmText: "확인",
-        onConfirmClick: () => setConfirm(null),
-      })
-    } 
+    const { data, message, code } = response.data;
+
+    if (code && code == '500') {
+      console.log('에러')
+      console.log(message)
+      return setError(message);
+    }
+
+    setConfirm({
+      contents: message,
+      confirmText: "확인",
+      onConfirmClick: () => {
+        setToggle()
+        getMemberProfile();
+      },
+    })
+    
   }
 
   return (
@@ -177,6 +194,15 @@ function NameToggle({ namevalue }) {
           onClick={nicknameChange}
         >적용</ChangeButton>
       </NameToggleInputForm>
+      {
+        error && (
+          <Text  
+            style={{ marginTop: 8, color: '#D32F2F' }}
+            _size={14}>
+            {error}
+          </Text>
+        )
+      }
       {
         confirm &&
         <SimpleConfirm

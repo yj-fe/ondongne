@@ -87,4 +87,5 @@ export const AlertText = styled.p`
   font-weight: 400;
   font-size: 14px;
   color: #D32F2F;
+  margin-top: 8px;
 `

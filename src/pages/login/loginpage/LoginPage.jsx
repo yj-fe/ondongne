@@ -44,26 +44,23 @@ function LoginPage() {
   };
 
   const onSubmut = async () => {
-    await login(account)
-      .then(response => {
-        if (response.status === 200) {
-          const { message, data } = response.data;
-          console.log(data);
-          dispatch(authActions.login(data));
-          navigate('/')
-        } else {
-          setAlert({
-            title: "로그인 실패",
-            contents: "이메일 또는 비밀번호가 일치하지 않습니다.",
-            buttonText: "확인",
-            onButtonClick: () => setAlert(false),
-            onOverlayClick: () => setAlert(false),
-          })
-        }
+    const response = await login(account);
+    const { message, data, code } = response.data;
+    
+    if(code == '500') {
+      setAlert({
+        title: "로그인 실패",
+        contents: "이메일 또는 비밀번호가 일치하지 않습니다.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(false),
+        onOverlayClick: () => setAlert(false),
       })
-      .catch(error => {
-        console.log(error)
-      })
+    }
+
+    if(data) {
+      dispatch(authActions.login(data));
+      navigate('/')
+    }
   }
 
   function loginNaver() {

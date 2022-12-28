@@ -125,7 +125,6 @@ export const CheckTitle = styled.p`
 `
 export const InputDiv = styled.div`
   box-sizing: border-box;
-  padding: 12px;
   gap: 4px;
   width: 688px;
   height: 100px;
@@ -133,10 +132,18 @@ export const InputDiv = styled.div`
   border: 1px solid #EEEEEE;
   border-radius: 4px;
 `
-export const CheckInput = styled.input`
+export const CheckInput = styled.textarea`
   font-weight: 400;
   font-size: 15px;
   color: #9E9E9E;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 4px;
+  resize: none;
+  outline: none;
 `
 export const ButtonDiv = styled.button`
   display: flex;
