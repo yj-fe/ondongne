@@ -34,6 +34,19 @@ export const LayerOptionButton = styled.button`
     }
 `;
 
+export const LayerTextButton = styled.button`
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    gap: 8px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
+    border: 1px solid ${props => props.theme.color.gray200};
+    border-radius: 4px; 
+`;
+
 export const FixedActionButton = styled.button`
     z-index: 29;
     position: fixed;

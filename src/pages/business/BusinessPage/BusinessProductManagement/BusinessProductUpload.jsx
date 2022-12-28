@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import * as I from 'components/commonUi/Input';
 import * as B from 'components/commonUi/Button';
 import CheckBox from 'components/commonUi/CheckBox';
-import { ContentDiv, InfoBoxDiv, Input, RightStyle, TextCenter, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
-import { Down, ArrowRight, ArrowRightB } from 'components/commonUi/Icon';
+import { ContentDiv, Input, RightStyle, TextCenter, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { Down,  ArrowRightB } from 'components/commonUi/Icon';
 
 
 
@@ -34,7 +33,7 @@ function BusinessProductUpload() {
           onBackClick={() => navigate(-1)}
       >
 
-<L.Container _padding="0px 0px 8px" >
+        <L.Container _padding="0px 0px 60px" >
           <L.Contents  _height='100vh'>
             <L.FlexCols _gap={40} _padding="8px 20px">
               <L.FlexCols _gap={16}>
@@ -60,9 +59,9 @@ function BusinessProductUpload() {
                 <T.Text _weight={600} _size={16} _color="gray900">상품 이미지</T.Text>
                 <T.Text _weight={400} _size={14} _color="gray600">상세페이지 상단에 노출할 상품 이미지를 등록해주세요.</T.Text>
               </L.FlexCols>
-              <TextCenter>
-              <T.Text _weight={400} _size={15} _color="gray900">이미지 업로드</T.Text>
-              </TextCenter>
+              <B.LayerTextButton>
+                <T.Text _weight={400} _size={15} _color="gray900" _align='center' _content='center'>이미지 업로드</T.Text>
+              </B.LayerTextButton>
             </ContentDiv>
 
               <L.FlexCols _gap={16}>

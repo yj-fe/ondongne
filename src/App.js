@@ -57,6 +57,7 @@ import Alert from "components/commonUi/Alert";
 import { authActions } from "store/slices/auth";
 import BusinessProductManagementDetail from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagementDetail";
 import { getExpiry } from "utils/localStorage";
+import BusinessProductEditInfo from './pages/business/BusinessPage/BusinessProductManagement/BusinessProductEditInfo';
 
 function App() {
   const dispatch = useDispatch();
@@ -132,6 +133,7 @@ function App() {
           <Route path="upload" element={<BusinessProductUpload />} />
           {/* 상품 수정 */}
           <Route path="edit" element={<BusinessProductEdit />} />
+          <Route path="edit/info" element={<BusinessProductEditInfo />} />
           {/* 쿠폰관리 */}
           <Route path="coupon" element={<BusinessCoupon />} />
           {/* 리뷰관리 */}

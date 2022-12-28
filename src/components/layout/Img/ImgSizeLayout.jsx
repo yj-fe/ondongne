@@ -24,6 +24,17 @@ export const AbsoluteDiv = styled.div`
     margin: 0;
     padding: 18px 12px;
 `;
+export const AbsoluteTopDiv = styled.div`
+    border-radius: ${props => props._bdr}px;
+    width: ${props => props._width}px;
+    height: ${props => props._height}px;
+    display: flex;
+    position: absolute;
+    left: 70px;
+    top: -10px;
+    bottom: 0%;
+    margin: 0;
+`;
 export const OverlayDiv = styled.div`
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width}px;
