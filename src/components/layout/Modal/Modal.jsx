@@ -5,26 +5,27 @@ import SwiperPage from '../Swiper/Swiper'
 
 
 
-function Modal() {
+function Modal({setAgreementModal, closeModel}) {
 
-  const goToMore=()=>{
+  const goToMore = () => {
     // 더보기>비즈회원신청>약관동의토글이동
+    closeModel();
+    setAgreementModal(true);
   }
   return (
-    <div>
-      <Body>
-        <Container>
-          <Header
-          ><Text onClick={goToMore} _align={'right'} _size={14} _weight={400} _color={'gray600'}>건너뛰기</Text></Header>
-          <Content>
-            <SwiperPage/>
-            <Btn
-              onClick={goToMore}
-            >시작하기</Btn>
-          </Content>
-        </Container>
-      </Body>
-    </div>
+    <Body>
+      <Container>
+        <Header>
+          <Text onClick={closeModel} _align={'right'} _size={14} _weight={400} _color={'gray600'}>건너뛰기</Text>
+        </Header>
+        <Content>
+          <SwiperPage />
+          <Btn
+            onClick={goToMore}
+          >시작하기</Btn>
+        </Content>
+      </Container>
+    </Body>
   )
 }
 
@@ -33,11 +34,15 @@ export default Modal
 
 export const Body = styled.div`
   background: rgba(0, 0, 0, 0.6);
-  width: 100wh;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 `
 export const Container = styled.div`
   display: flex;

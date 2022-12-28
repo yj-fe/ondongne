@@ -60,8 +60,8 @@ function MorePage() {
 
   const getMemberProfile = async () => {
     const response = await getMember()
-    const {message, data} = response.data;
-    if(data) setMember(data);
+    const { message, data } = response.data;
+    if (data) setMember(data);
   }
 
   useEffect(() => {
@@ -70,16 +70,16 @@ function MorePage() {
     }
   }, [auth])
 
-  
+
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <Layout
         title="더보기"
         cart={false}
         bell={false}
         onBackClick={() => navigate('/')}
       >
-      <L.Container _padding="0px 0px 8px" >
+        <L.Container _padding="0px 0px 8px" >
 
           {
             auth.isAuthenticated &&
@@ -97,7 +97,7 @@ function MorePage() {
                   <MoreAccountButton>회원정보 관리</MoreAccountButton>
                 </Link>
                 <MoreAccountButton
-                  onClick={()=>setCoachmark(true)}
+                  onClick={() => setCoachmark(true)}
                 >비즈회원 전환</MoreAccountButton>
               </MoreAccountButtonDiv>
             </MoreAccountDiv>
@@ -144,9 +144,9 @@ function MorePage() {
 
         </L.Container>
 
-        <FooterLayout/>
+        <FooterLayout />
 
-      
+
       </Layout>
 
       {
@@ -159,84 +159,111 @@ function MorePage() {
           onOverlayClick={alert.onOverlayClick}
         />
       }
-{/* ============= 1. 비즈회원코치모달 ============= */}
+      {/* ============= 1. 비즈회원코치모달 ============= */}
       {
         coachmark &&
-        <Modal/>
+        <Modal
+          setAgreementModal={setAgreementModal}
+          closeModel={() => setCoachmark(false)}
+        />
       }
-{/* ============= 2. 비즈회원약관동의 ============= */}
+      {/* ============= 2. 비즈회원약관동의 ============= */}
       {
         agreementModal &&
-        <BusinessAgreementModal/>
+        <BusinessAgreementModal />
       }
-{/* ============= 3-4 비즈회원신청페이지 => <BusinessApplication/> ============= */}
+      {/* ============= 3-4 비즈회원신청페이지 => <BusinessApplication/> ============= */}
     </div>
   )
 }
 
-function BusinessAgreementModal (){
+function BusinessAgreementModal() {
   // 체크버튼
   const [requestSave, setRequestSave] = useState(false);
   const [servicerequestSave, setServiceRequestSave] = useState(false);
   const [privrequestSave, setPrivRequestSave] = useState(false);
   const [snsrequestSave, setSnsRequestSave] = useState(false);
+  // 버튼 활성화 여부
+  const [active, setActive] = useState(false);
+  const navigate = useNavigate();
 
-  return(
-    <div>
-      <ModalOutside>
-        <ModalBody>
-          <ModalDiv1/>
-          <ModalDiv2>
-            <ModalTitle>
+  const allChecked = () => {
+    setRequestSave(!requestSave)
+    setServiceRequestSave(!servicerequestSave)
+    setPrivRequestSave(!privrequestSave)
+    setSnsRequestSave(!snsrequestSave)
+  }
+
+  useEffect(() => {
+    if(servicerequestSave && privrequestSave) {
+      setActive(true)
+    } else {
+      setActive(false)
+    }
+
+  }, [servicerequestSave, privrequestSave])
+
+  return (
+    <ModalOutside>
+      <ModalBody>
+        <ModalDiv1 />
+        <ModalDiv2>
+          <ModalTitle>
             <Text _size={18} _weight={500} _color={'gray900'}><p>비즈회원으로 전환하시려면</p><p>약관동의가 필요합니다.</p></Text>
-            </ModalTitle>
-            </ModalDiv2>
-          <AgreementDiv>
+          </ModalTitle>
+        </ModalDiv2>
+        <AgreementDiv>
 
           <CheckBoxTitle
             label="모두 동의합니다"
             name="requestSave"
             checked={requestSave}
-            onChange={e => {setRequestSave(e.currentTarget.checked)}}
+            onChange={allChecked}
           />
-          <Line/>
+          <Line />
           <SpaceBet>
             <CheckBox
               label="[필수] 비즈회원 이용약관"
               name="servicerequestSave"
               checked={servicerequestSave}
-              onChange={e => {setServiceRequestSave(e.currentTarget.checked)}}
+              onChange={e => { setServiceRequestSave(e.currentTarget.checked) }}
             />
-            <ArrowRight/>
+            <ArrowRight />
           </SpaceBet>
           <SpaceBet>
             <CheckBox
               label="[필수] 개인정보 수집 이용 동의"
               name="privrequestSave"
               checked={privrequestSave}
-              onChange={e => {setPrivRequestSave(e.currentTarget.checked)}}
+              onChange={e => { setPrivRequestSave(e.currentTarget.checked) }}
             />
-            <ArrowRight/>
+            <ArrowRight />
           </SpaceBet>
           <SpaceBet>
             <CheckBox
               label="[선택] 마케팅 수신 동의"
               name="snsrequestSave"
               checked={snsrequestSave}
-              onChange={e => {setSnsRequestSave(e.currentTarget.checked)}}
+              onChange={e => { setSnsRequestSave(e.currentTarget.checked) }}
             />
-            <ArrowRight/>
+            <ArrowRight />
           </SpaceBet>
 
-          <Button>확인</Button>
+          <Button 
+            active={active}
+            type='button'
+            disabled={!active}
+            onClick={() => navigate('/business/application')}
+          >
+            확인
+          </Button>
 
 
 
-          </AgreementDiv>
-          
-        </ModalBody>
-      </ModalOutside>
-    </div>
+        </AgreementDiv>
+
+      </ModalBody>
+    </ModalOutside>
   )
 }
 export default MorePage

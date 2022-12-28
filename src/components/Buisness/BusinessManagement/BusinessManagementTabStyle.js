@@ -226,7 +226,7 @@ export const BankToggleDiv = styled.div`
   position: absolute;
   width: 688px;
   height: 192px;
-  justify-content: center;
+  justify-content: flex-start;
   background: #FFFFFF;
   box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.06);
   border-radius: 4px;

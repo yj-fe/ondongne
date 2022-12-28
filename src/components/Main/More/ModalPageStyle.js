@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModalOutside = styled.body`
+export const ModalOutside = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -10,6 +10,7 @@ export const ModalOutside = styled.body`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 `
 export const ModalBody = styled.div`
   display: flex;
@@ -113,7 +114,8 @@ export const Button = styled.button`
   gap: 4px;
   width: 100%;
   height: 48px;
-  background: #0B806F;
+  /* background: #0B806F; */
+  background: ${props => props.active ? '#0B806F' : '#E0E0E0'};
   border-radius: 4px;
   font-weight: 600;
   font-size: 18px;
