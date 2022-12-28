@@ -139,7 +139,7 @@ function BusinessPage() {
           </TermsDiv>
           <TermsDiv>
             <TermsTitle>상품 관리</TermsTitle>
-            <Link to="">
+            <Link to="/business/product">
               <TermsIconStyle><Right/></TermsIconStyle>
             </Link>
           </TermsDiv>
@@ -151,7 +151,7 @@ function BusinessPage() {
           </TermsDiv>
           <TermsDiv>
             <TermsTitle>리뷰 관리</TermsTitle>
-            <Link to="">
+            <Link to="/business/review">
               <TermsIconStyle><Right/></TermsIconStyle>
             </Link>
           </TermsDiv>
@@ -223,7 +223,9 @@ function FloatingToggle(props){
     <FloatingToggleDiv>
       <FloatingContentDiv>
         <FloatingContentIcon><Product/></FloatingContentIcon>
-        <FloatingContentTitle>상품 등록</FloatingContentTitle>
+        <Link to="/business/upload">
+          <FloatingContentTitle>상품 등록</FloatingContentTitle>
+        </Link>
       </FloatingContentDiv>
       <FloatingContentDiv>
         <FloatingContentIcon><Order/></FloatingContentIcon>
@@ -231,7 +233,9 @@ function FloatingToggle(props){
       </FloatingContentDiv>
       <FloatingContentDiv>
         <FloatingContentIcon><Coupon/></FloatingContentIcon>
-        <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
+        <Link to="/business/coupon">
+          <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
+        </Link>
       </FloatingContentDiv>
       <FloatingContentDiv>
         <FloatingContentIcon><Trans/></FloatingContentIcon>

@@ -52,4 +52,5 @@ export const FlexRows = styled.div`
     justify-content: ${props => props._content || 'inherit'};
     align-items: ${props => props._items || 'inherit'};
     width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
 `;

@@ -9,8 +9,9 @@ const S = {
     Wrap: styled.div`
         display: flex;
         align-items: end;
-        width: 100%;
+        width: 728px;
         height: 100%;
+        justify-content: center;
     `,
     SelectBox: styled.div`
         width: 100%;
@@ -19,6 +20,7 @@ const S = {
         padding-bottom: ${props => props._pb? '16px' : '0'};
         background-color: #FFF;
         transform: translateY(100%);
+
         animation: ${ props => 
             props.close
             ? keyframes`
@@ -39,9 +41,9 @@ const S = {
         font-size: 14px;
     `,
     Body: styled.div`
-        max-heigh: 50vh;
+        max-height: 50vh;
         overflow-x: hidden;
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
     `,
     Option: styled.div`
         position: relative;

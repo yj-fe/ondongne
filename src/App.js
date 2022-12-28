@@ -16,12 +16,19 @@ import MyPage from "components/MyPage";
 import LocationSetting from "pages/login/LocationSetting/LocationSetting";
 import MemberManagement from "pages/member/MemberManagement/MemberManagement";
 import MemberWithdrawal from "pages/member/MemberWithdrawal/MemberWithdrawal";
+import MyCoupon from "pages/member/MyCoupon/MyCoupon";
+import MyMarket from "pages/member/MyMarket/MyMarket";
+import MemberNews from "pages/member/MemberNews/MemberNews";
 /* ========== BUSINESS ========== */
 import BusinessPage from "pages/business/BusinessPage/BusinessPage";
 import BusinessApplication from "pages/business/BusinessPage/BusinessApplication/BusinessApplication";
-import BusinessUpload from "pages/business/BusinessPage/BusinessUpload/BusinessUpload";
 import BusinessManagement from "pages/business/BusinessManagement/BusinessManagement";
 import BusinessProductManagement from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagement";
+import BusinessCoupon from "pages/business/BusinessPage/BusinessCoupon";
+import BusinessReview from "pages/business/BusinessReview";
+import BusinessProductUpload from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductUpload";
+import BusinessProductEdit from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductEdit";
+import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
 /* ========== LOGIN ========== */
 import LoginPage from "pages/login/loginpage/LoginPage";
 import FindEmail from "pages/login/email/FindEmail";
@@ -33,36 +40,33 @@ import CollectionPage from "pages/main/Product/CollectionPage/CollectionPage";
 import CategoryPage from "pages/main/Product/CategoryPage/CategoryPage";
 import CartPage from "pages/main/CartPage/CartPage";
 import MorePage from "pages/main/MorePage/MorePage";
+import MarketDetail from "pages/main/MarketDetail/MarketDetail";
+import SearchPage from "pages/main/Search/SearchPage";
 /* ========== ORDER ========== */
 import OrderListPage from "pages/orders/OrderListPage";
 import OrderFormPage from "pages/orders/OrderFormPage";
 import OrderDetailsPage from "pages/orders/OrderDetailsPage";
 import SignupPage from "pages/login/signup/SignupPage";
 /* ========== SETTING ========== */
+import SettingPage from "pages/setting/SettingPage";
+/* ========== NOTICE ========== */
+import NoticePage from "pages/notice/NoticePage";
+import NoticeDetailsPage from "pages/notice/NoticeDetailsPage";
 /* ========== SERVICE ========== */
 import CustomerService from "pages/service/CustomerService/CustomerService";
 import TermsPage from "pages/service/TermsPage/TermsPage";
 import ServiceTerms from "components/service/TermsPage/ServiceTerms";
 import LocationTerms from "components/service/TermsPage/LocationTerms";
 import PrivacyTerms from "components/service/TermsPage/PrivacyTerms";
+import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAskedQuestion";
+import InquiryPage from "pages/service/CustomerService/InquiryPage";
+import VocPage from "pages/service/CustomerService/VocPage";
 import ConfigurationPage from "pages/main/ConfigurationPage/ConfigurationPage";
 import Alert from "components/commonUi/Alert";
 import { tokenReissue } from "service/auth";
 import { client } from "service";
 import { authActions } from "store/slices/auth";
-import InquiryPage from "pages/service/CustomerService/InquiryPage";
-import VocPage from "pages/service/CustomerService/VocPage";
-import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAskedQuestion";
-import SettingPage from "pages/setting/SettingPage";
-import NoticePage from "pages/notice/NoticePage";
-import NoticeDetailsPage from "pages/notice/NoticeDetailsPage";
-import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
-import MemberNews from "pages/member/MemberNews/MemberNews";
-import MarketDetail from "pages/main/MarketDetail/MarketDetail";
-import MyCoupon from "pages/member/MyCoupon/MyCoupon";
-import MyMarket from "pages/member/MyMarket/MyMarket";
-import SearchPage from "pages/main/Search/SearchPage";
-import BusinessCoupon from "pages/business/BusinessPage/BusinessCoupon";
+import BusinessProductManagementDetail from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagementDetail";
 
 function App() {
   const navigate = useNavigate();
@@ -150,11 +154,15 @@ function App() {
           <Route path="management" element={<BusinessManagement />} />
           {/* 2주차-비즈회원-비즈상품 관리/등록/수정 */}
           <Route path="product" element={<BusinessProductManagement />} />
-          <Route path="upload" element={<BusinessUpload />} />
+          <Route path="product/details/:id" element={<BusinessProductManagementDetail />} />
+          <Route path="upload" element={<BusinessProductUpload />} />
+          <Route path="edit" element={<BusinessProductEdit />} />
           {/* 비즈회원알림 */}
           <Route path="news" element={<BusinessNews />} />
           {/* 쿠폰관리 */}
           <Route path="coupon" element={<BusinessCoupon />} />
+          {/* 리뷰관리 */}
+          <Route path="review" element={<BusinessReview />} />
         </Route>
 
         {/* ========== 로그인 ========== */}

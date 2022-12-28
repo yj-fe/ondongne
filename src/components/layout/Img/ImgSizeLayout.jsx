@@ -19,10 +19,10 @@ export const AbsoluteDiv = styled.div`
     height: ${props => props._height}px;
     display: flex;
     position: absolute;
-    flex-direction: row;
-    
+    right: 0%;
+    bottom: 0%;
     margin: 0;
-    padding: 12px;
+    padding: 18px 12px;
 `;
 export const OverlayDiv = styled.div`
     border-radius: ${props => props._bdr}px;
