@@ -5,6 +5,7 @@ import { ArrowLeft_tail, ArrowLeft } from 'components/commonUi/Icon';
 import { useNavigate } from 'react-router-dom';
 import Bell from 'assets/icons/utils/Bell.svg';
 import Cart from 'assets/icons/utils/Cart.svg';
+import Search from 'assets/icons/utils/Search.svg';
 
 import { S } from './HeaderStyle';
 
@@ -13,6 +14,7 @@ const Header = ({
     bell = false,
     cart = false,
     back = true,
+    search = false,
     backArrow = true,
     ...props
 }) => {
@@ -56,6 +58,12 @@ const Header = ({
                 </S.Block>
                 <S.Block>
                     {
+                        search &&
+                        <S.UtilBtn as={Link} to="/search">
+                            <img src={Search} alt="검색" />
+                        </S.UtilBtn>
+                    }
+                    {
                         bell &&
                         <S.UtilBtn>
                             <img src={Bell} alt="알림" />
@@ -76,6 +84,7 @@ const Header = ({
 Header.propTypes = {
     title: PropTypes.string,
     bell: PropTypes.bool,
+    search: PropTypes.bool,
     cart: PropTypes.bool,
     back: PropTypes.bool,
     backArrow: PropTypes.bool,

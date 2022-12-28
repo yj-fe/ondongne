@@ -106,7 +106,7 @@ function TabCoupon(props) {
 
 {/* =================== 있을 때 =================== */}
         <L.Contents _padding="24px 20px" _gap={20}>
-          <L.FlexRows _gap={20} _padding={0}>
+          <L.FlexRows _gap={20} _padding={0} _height='382px'>
             <MarketProductCard item={item[0]}/>
             <MarketProductCard item={item[1]}/>
             <MarketProductCard item={item[2]}/>

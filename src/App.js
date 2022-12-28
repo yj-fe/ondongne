@@ -7,13 +7,13 @@ import MyPage from "components/MyPage";
 import LocationSetting from "pages/login/LocationSetting/LocationSetting";
 import MemberManagement from "pages/member/MemberManagement/MemberManagement";
 import MemberWithdrawal from "pages/member/MemberWithdrawal/MemberWithdrawal";
-import MyCoupon from "pages/member/MyCoupon/MyCoupon";
-import MyMarket from "pages/member/MyMarket/MyMarket";
-import MemberNews from "pages/member/MemberNews/MemberNews";
+import MyCoupon from "pages/member/MyCoupon";
+import MyMarket from "pages/member/MyMarket";
+import MemberNews from "pages/member/MemberNews";
 /* ========== BUSINESS ========== */
 import BusinessPage from "pages/business/BusinessPage/BusinessPage";
 import BusinessApplication from "pages/business/BusinessPage/BusinessApplication/BusinessApplication";
-import BusinessManagement from "pages/business/BusinessManagement/BusinessManagement";
+import BusinessManagement from "pages/business/BusinessPage/BusinessManagement";
 import BusinessProductManagement from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagement";
 import BusinessCoupon from "pages/business/BusinessPage/BusinessCoupon";
 import BusinessReview from "pages/business/BusinessReview";
@@ -27,8 +27,8 @@ import FindPwd from "pages/login/password/FindPwd";
 /* ========== MAIN ========== */
 import MainPage from "pages/main/MainPage/MainPage";
 import DetailsPage from "pages/main/DetailsPage/DetailsPage";
-import CollectionPage from "pages/main/Product/CollectionPage/CollectionPage";
-import CategoryPage from "pages/main/Product/CategoryPage/CategoryPage";
+import CollectionPage from "pages/main/Product/CollectionPage";
+import CategoryPage from "pages/main/Product/CategoryPage";
 import CartPage from "pages/main/CartPage/CartPage";
 import MorePage from "pages/main/MorePage/MorePage";
 import MarketDetail from "pages/main/MarketDetail/MarketDetail";
@@ -58,6 +58,7 @@ import { authActions } from "store/slices/auth";
 import BusinessProductManagementDetail from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagementDetail";
 import { getExpiry } from "utils/localStorage";
 import BusinessProductEditInfo from './pages/business/BusinessPage/BusinessProductManagement/BusinessProductEditInfo';
+import ReviewPage from "pages/member/ReviewPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -115,6 +116,8 @@ function App() {
           <Route path="coupon" element={<MyCoupon />} />
           {/* MY단골 */}
           <Route path="market" element={<MyMarket />} />
+          {/* 리뷰 */}
+          <Route path="review" element={<ReviewPage />} />
         </Route>
 
         {/* ========== 비즈회원관리 ========== */}

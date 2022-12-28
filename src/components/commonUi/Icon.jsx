@@ -158,3 +158,9 @@ export const Calendar = () => (
     </svg>
 );
 
+export const Check = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8334 6.92279L8.57266 14.1663L4.16675 9.77088L5.36564 8.68109L8.57266 11.8805L14.6345 5.83301L15.8334 6.92279Z" fill="#0B806F"/>
+    </svg>
+);
+

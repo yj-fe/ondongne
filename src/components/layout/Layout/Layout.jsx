@@ -21,6 +21,7 @@ const Layout = (props) => {
 
 Layout.props = {
     title: PropTypes.string,
+    search: PropTypes.bool,
     bell: PropTypes.bool,
     cart: PropTypes.bool,
     back: PropTypes.bool,
