@@ -56,6 +56,7 @@ import ConfigurationPage from "pages/main/ConfigurationPage/ConfigurationPage";
 import Alert from "components/commonUi/Alert";
 import { authActions } from "store/slices/auth";
 import BusinessProductManagementDetail from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagementDetail";
+import { getExpiry } from "utils/localStorage";
 
 function App() {
   const dispatch = useDispatch();
@@ -124,16 +125,18 @@ function App() {
           {/* 1주차-비즈회원-비즈정보관리(상점, 사업자) */}
           <Route path="management" element={<BusinessManagement />} />
           {/* 2주차-비즈회원-비즈상품 관리/등록/수정 */}
+          {/* 상품 관리 */}
           <Route path="product" element={<BusinessProductManagement />} />
           <Route path="product/details/:id" element={<BusinessProductManagementDetail />} />
+          {/* 상품 등록 */}
           <Route path="upload" element={<BusinessProductUpload />} />
+          {/* 상품 수정 */}
           <Route path="edit" element={<BusinessProductEdit />} />
-          {/* 비즈회원알림 */}
-          <Route path="news" element={<BusinessNews />} />
           {/* 쿠폰관리 */}
           <Route path="coupon" element={<BusinessCoupon />} />
           {/* 리뷰관리 */}
           <Route path="review" element={<BusinessReview />} />
+          <Route path="news" element={<BusinessNews />} />
         </Route>
 
         {/* ========== 로그인 ========== */}
