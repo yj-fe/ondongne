@@ -176,8 +176,8 @@ function TabCoupon(props) {
                   </L.FlexRows>
                 </L.FlexCols>              
               </L.FlexRows>
-                <FlagC/>
-              </L.FlexRows>
+              <FlagC/>
+            </L.FlexRows>
 
 
 

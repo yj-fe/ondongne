@@ -19,7 +19,7 @@ function BusinessProductManagement() {
           title="상품관리"
           cart={false}
           bell={false}
-          onBackClick={() => navigate('/')}
+          onBackClick={() => navigate(-1)}
       >
 
       <L.Container >

@@ -64,8 +64,6 @@ export function SortLayout({CloseModal}) {
   return (
     <div>
       <ModalOutside
-        type="button"
-        onClick={CloseModal}
       >
         <ModalBody>
           <ModalDiv1>정렬</ModalDiv1>
@@ -78,9 +76,15 @@ export function SortLayout({CloseModal}) {
               <T.Text _weight={400} _size={15} _color="gray800" >주문 많은 순</T.Text>
               <T.Text _weight={400} _size={15} _color="gray800" >리뷰 별점 순</T.Text>
               <T.Text _weight={400} _size={15} _color="gray800" >신규 매장 순</T.Text>
+              <T.Text _weight={400} _size={15} _color="gray800" >쿠폰 인기 순</T.Text>
             </L.FlexCols>
           </L.Contents>
-
+          <ModalButton
+            type="button"
+            onClick={CloseModal}
+          >
+          닫기
+          </ModalButton>
         </ModalBody>
       </ModalOutside>
     </div>

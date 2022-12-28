@@ -12,6 +12,7 @@ import { MarketProductCard } from 'components/Main/MarketDetail/MarketDetailProd
 import Swiper from 'swiper';
 import { FilterLayout, SortLayout } from './../../../components/layout/Layout/MoreLayout';
 
+// 메뉴슬라이드예정
 const menu = new Swiper(".mySwiper",{
   spaceBetween: 24,
   slidesPerView : 'auto',
@@ -48,7 +49,7 @@ function CategoryPage() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          <L.Contents _padding="0" _height={'100vh'}>
+          <L.Contents _padding="0" >
             <L.FlexCols _padding={0} _gap={0} >
 
 {/* =================== 메뉴 =================== */}
@@ -129,7 +130,12 @@ function CategoryCard(props) {
           <MarketProductCard item={item[1]}/>
           <MarketProductCard item={item[2]}/>
         </L.FlexRows>
-        <L.FlexRows _gap={20} _padding={0}>
+        <L.FlexRows _gap={20} _padding={0} _height='382px'>
+          <MarketProductCard item={item[3]}/>
+          <MarketProductCard item={item[4]}/>
+          <MarketProductCard item={item[5]}/>
+        </L.FlexRows>
+        <L.FlexRows _gap={20} _padding={0} _height='382px'>
           <MarketProductCard item={item[3]}/>
           <MarketProductCard item={item[4]}/>
           <MarketProductCard item={item[5]}/>

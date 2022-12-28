@@ -107,3 +107,25 @@ export const Badge = styled.button`
     font-weight: 500;
     font-size: 11px;
 `;
+export const MapListButton = styled.button`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 29;
+    position: fixed;
+    bottom: 0;
+    left: 50%; 
+    width: 100%;
+    transform: translateX(-50%);
+    gap: 8px;
+    width: 123px;
+    height: 48px;
+    bottom: 24px;
+    background: ${props => props.theme.color[props._bg || 'green400']};
+    border-radius: 99px;
+    color: ${props => props.theme.color[props._color || 'white']};
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+    font-weight: 700;
+    font-size: 16px;
+`;
