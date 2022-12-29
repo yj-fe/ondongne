@@ -25,7 +25,7 @@ function LoginPage() {
   const isAuth = searchParams.get('isAuth');
   const error = searchParams.get('error');
   const auth = useSelector(state => state.auth);
-  
+
   const [account, setAccount] = useState({
     email: "",
     password: "",
@@ -46,8 +46,8 @@ function LoginPage() {
   const onSubmut = async () => {
     const response = await login(account);
     const { message, data, code } = response.data;
-    
-    if(code == '500') {
+
+    if (code == '500') {
       setAlert({
         title: "로그인 실패",
         contents: "이메일 또는 비밀번호가 일치하지 않습니다.",
@@ -57,7 +57,7 @@ function LoginPage() {
       })
     }
 
-    if(data) {
+    if (data) {
       dispatch(authActions.login(data));
       navigate('/')
     }
@@ -91,18 +91,18 @@ function LoginPage() {
     const name = searchParams.get('name');
     const accessToken = searchParams.get('accessToken');
     const expiresIn = searchParams.get('expiresIn');
-  
-    if(isAuth == null) {
+
+    if (isAuth == null) {
       return;
     }
 
-    if(!JSON.parse(isAuth)) {
+    if (!JSON.parse(isAuth)) {
       const data = { provider, providerId, email, name };
       localStorage.setItem('auth', JSON.stringify(data))
       setConfirm(true);
     }
 
-    if(JSON.parse(isAuth)) {
+    if (JSON.parse(isAuth)) {
       const data = { accessToken, expiresIn };
       dispatch(authActions.login(data));
       navigate('/')
@@ -110,7 +110,7 @@ function LoginPage() {
   }, [isAuth])
 
   useEffect(() => {
-    if(error) {
+    if (error) {
       setAlert({
         title: "로그인 실패",
         contents: "SNS 로그인을 실패하였습니다.",
@@ -122,7 +122,7 @@ function LoginPage() {
   }, [error])
 
   useEffect(() => {
-    if(auth.isAuthenticated) {
+    if (auth.isAuthenticated) {
       return navigate('/')
     }
   }, [auth])
@@ -214,14 +214,14 @@ function LoginPage() {
       {
         confirm &&
         <Confirm
-            contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
-            confirmText="네"
-            cancelText="아니오"
-            onConfirmClick={() => {navigate('/login/signup')}}
-            onCancelClick={() => {
-              setConfirm(false)
-              navigate('/login')
-            }}
+          contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
+          confirmText="네"
+          cancelText="아니오"
+          onConfirmClick={() => { navigate('/login/signup') }}
+          onCancelClick={() => {
+            setConfirm(false)
+            navigate('/login')
+          }}
         />
       }
     </div>

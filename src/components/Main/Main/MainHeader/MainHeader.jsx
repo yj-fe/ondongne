@@ -2,18 +2,18 @@ import React from 'react'
 import { ReactComponent as Arrow } from "assets/Arrow.svg";
 import { ReactComponent as News } from "assets/news.svg";
 import { ReactComponent as Cart } from "assets/main/nav/cart.svg";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-import {MainHeaderDiv,LoginNavDiv,TitleStyle,BackStyle,LoginNavTitle,IconStyle,NewsStyle,CartStyle,} from './MainHeaderStyle'
+import { MainHeaderDiv, LoginNavDiv, TitleStyle, BackStyle, LoginNavTitle, IconStyle, NewsStyle, CartStyle, } from './MainHeaderStyle'
 
-function MainHeader({title}) {
+function MainHeader({ title }) {
   const navigate = useNavigate()
 
   return (
     <MainHeaderDiv>
       <LoginNavDiv>
         <TitleStyle>
-          <BackStyle onClick={()=>{ navigate(-1)}}>
+          <BackStyle onClick={() => { navigate(-1) }}>
             <Arrow />
           </BackStyle>
           <LoginNavTitle>{title}</LoginNavTitle>
@@ -21,11 +21,11 @@ function MainHeader({title}) {
 
         <IconStyle>
           <NewsStyle>
-            <News/>
+            <News />
           </NewsStyle>
           <Link to="/cart" >
             <CartStyle>
-              <Cart/>
+              <Cart />
             </CartStyle>
           </Link>
         </IconStyle>
