@@ -3,7 +3,8 @@ import {ModalBody,ModalButton,ModalDiv1,ModalDiv2,ModalOutside,ModalTitle} from 
 import * as T from 'components/commonUi/Text';
 import * as L from 'components/commonUi/Layout';
 import { Check } from 'components/commonUi/Icon';
-
+import { ImgSizeLayout } from '../Img/ImgSizeLayout';
+import Review from 'assets/images/Review.png'
 
 
 function MoreLayout({PropsModal}) {
@@ -79,6 +80,39 @@ export function SortLayout({CloseModal}) {
               <T.Text _weight={400} _size={15} _color="gray800" >쿠폰 인기 순</T.Text>
             </L.FlexCols>
           </L.Contents>
+          <ModalButton
+            type="button"
+            onClick={CloseModal}
+          >
+          닫기
+          </ModalButton>
+        </ModalBody>
+      </ModalOutside>
+    </div>
+  )
+}
+
+export function ReviewLayout({CloseModal}) {
+  return (
+    <div>
+      <ModalOutside
+      >
+        <ModalBody>
+          <ModalDiv1>
+
+          <L.Contents _padding='16px 20px' _gap={32}>
+            <L.FlexCols _gap={32}>
+              <L.FlexRows _content='center' >
+                <ImgSizeLayout src={Review}/>
+              </L.FlexRows>
+
+            <L.FlexCols >
+              <T.Text _align='center' _weight={700} _size={20} _color="gray900" >리뷰 작성 완료!</T.Text>
+              <T.Text _align='center' _weight={400} _size={15} _color="gray600" >리뷰를 남겨주셔서 감사합니다.</T.Text>
+            </L.FlexCols>
+            </L.FlexCols>
+          </L.Contents>
+          </ModalDiv1>
           <ModalButton
             type="button"
             onClick={CloseModal}

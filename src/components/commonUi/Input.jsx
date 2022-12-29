@@ -11,6 +11,9 @@ export const TextInput = styled.input`
     border-style: solid;
     border-color: ${props => props._borcolor || '#EEEEEE'};
     background-color: ${props => props._boccolor || '#FAFAFA'};
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
     &::placeholder {
         color: ${props => props.theme.color.gray400};
     }
@@ -26,7 +29,6 @@ export const CouponTitleInput = styled.input`
     font-size: 16px;
     font-family: 'Pretendard';
     font-style: normal;
-justify-content: ;
     &::placeholder {
         color: ${props => props.theme.color.gray400};
     }

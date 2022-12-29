@@ -63,6 +63,7 @@ import SearchDetailPage from "pages/main/Search/SearchDetailPage";
 import SearchResultPage from "pages/main/Search/SearchResultPage";
 import BusinessCouponUpload from './pages/business/BusinessPage/BusinessCouponUpload';
 import NotFound from './pages/NotFound';
+import ReviewUploadPage from './pages/member/ReviewUploadPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -125,8 +126,10 @@ function App() {
           <Route path="coupon" element={<MyCoupon />} />
           {/* MY단골 */}
           <Route path="market" element={<MyMarket />} />
-          {/* 리뷰 */}
+          {/* 리뷰 - 1) 내가쓴리뷰 */}
           <Route path="review" element={<ReviewPage />} />
+          {/* 리뷰 - 2) 리뷰작성 */}
+          <Route path="review/upload" element={<ReviewUploadPage />} />
         </Route>
 
         {/* ========== 비즈회원관리 ========== */}
