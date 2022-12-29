@@ -210,7 +210,7 @@ export const DayBox = styled.div`
   padding: 12px 16px;
   gap: 4px;
   width: 100%;
-  height: 48px;
+  height: ${props => props._height || '48px'};
   background: ${props=>props.color ? '#E1F3F2' : '#F5F5F5'};
   border-radius: 4px;
   font-weight: 400;

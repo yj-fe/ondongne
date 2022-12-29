@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
-import Alert from 'components/commonUi/Alert'
+import CouponAlert from 'components/commonUi/CouponAlert'
 
 function NotFound() {
 
-  const [alert, setAlert] = useState(null)
+  const [alert, setAlert] = useState('')
 
   const openAlert = () => {
     return setAlert({
+      title: '쿠폰 등록',
       contents: "현재 사용중인 번호와 일치합니다.\n새로운 전화번호를 입력해주세요.",
       buttonText: "확인",
       onButtonClick: () => setAlert(null),
@@ -19,7 +20,7 @@ function NotFound() {
       <button onClick={openAlert}>alert</button>
       {
         alert &&
-        <Alert
+        <CouponAlert
           title={alert.title}
           contents={alert.contents}
           buttonText={alert.buttonText}

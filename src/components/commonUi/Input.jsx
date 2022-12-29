@@ -11,8 +11,23 @@ export const TextInput = styled.input`
     border-style: solid;
     border-color: ${props => props._borcolor || '#EEEEEE'};
     background-color: ${props => props._boccolor || '#FAFAFA'};
-
-    &:placeholder {
+    &::placeholder {
+        color: ${props => props.theme.color.gray400};
+    }
+`;
+export const CouponTitleInput = styled.input`
+    width: '100%';
+    height: 56px;
+    padding: 16px;
+    border-style: solid;
+    background-color:'#FFFFFF';
+    border-bottom: 1px solid #EEEEEE;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: 'Pretendard';
+    font-style: normal;
+justify-content: ;
+    &::placeholder {
         color: ${props => props.theme.color.gray400};
     }
 `;

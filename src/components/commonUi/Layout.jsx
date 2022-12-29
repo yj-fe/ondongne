@@ -11,6 +11,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: ${props => props._gap || 8}px;
+    height: ${props => props._height || 'auto'};
     padding: ${props => props._padding || '0 0 8px'};
 `;
 

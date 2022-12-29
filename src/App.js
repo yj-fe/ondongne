@@ -61,6 +61,8 @@ import BusinessProductEditInfo from './pages/business/BusinessPage/BusinessProdu
 import ReviewPage from "pages/member/ReviewPage";
 import SearchDetailPage from "pages/main/Search/SearchDetailPage";
 import SearchResultPage from "pages/main/Search/SearchResultPage";
+import BusinessCouponUpload from './pages/business/BusinessPage/BusinessCouponUpload';
+import NotFound from './pages/NotFound';
 
 function App() {
   const dispatch = useDispatch();
@@ -146,6 +148,8 @@ function App() {
           <Route path="edit/info" element={<BusinessProductEditInfo />} />
           {/* 쿠폰관리 */}
           <Route path="coupon" element={<BusinessCoupon />} />
+          {/* 쿠폰등록 */}
+          <Route path="coupon/upload" element={<BusinessCouponUpload />} />
           {/* 리뷰관리 */}
           <Route path="review" element={<BusinessReview />} />
           <Route path="news" element={<BusinessNews />} />

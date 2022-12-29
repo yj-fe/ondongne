@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import arrowBottom from 'assets/icons/arrow/Arrow-Bottom.svg';
+import right from 'assets/main/right.svg';
+import Calendar from 'assets/icons/utils/Calendar.svg';
+
+
 
 export const Button = styled.button`
     width: ${props => props._width || '100%'};
@@ -33,14 +37,65 @@ export const LayerOptionButton = styled.button`
         transform: rotate(${props => props.active? 180 : 0}deg);
     }
 `;
+export const BorderBox = styled.button`
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    gap: 8px;
+    height: 48px;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.5;
+    border: 1px solid ${props => props.theme.color.gray200};
+    border-radius: 4px; 
+    font-size: 15px;
+    font-weight: 500;
 
+    &::after {
+        content: '';
+        width: 24px;
+        height: 24px;
+        background: url(${Calendar}) ;
+        transform: rotate(${props => props.active? 180 : 0}deg);
+    }
+`;
+
+
+export const CouponButton = styled.button`
+    bottom: 57px;
+    width: 100%;
+    padding: 0 16px;
+    position: fixed;
+    display: flex;
+    gap: 8px;
+    height: 48px;
+    justify-content: space-between;
+    left: 50%;
+    width: 100%;
+    max-width: ${props => props.theme.breakpoint.tablet}px;
+    transform: translateX(-50%);
+    align-items: center;
+    line-height: 1.5;
+    background: #FFFFFF;
+    font-size: 15px;
+    font-weight: 500;
+
+
+    &::after {
+        content: '';
+        width: 24px;
+        height: 24px;
+        background: url(${right}) center no-repeat;
+        transform: rotate(${props => props.active? 180 : 0}deg);
+    }
+`;
 export const LayerTextButton = styled.button`
     width: 100%;
     padding: 0 16px;
     display: flex;
     gap: 8px;
     height: 48px;
-    justify-content: center;
+    justify-content: ${props=> props._content || 'center'};
     align-items: center;
     line-height: 1.5;
     border: 1px solid ${props => props.theme.color.gray200};
@@ -97,12 +152,12 @@ export const Badge = styled.button`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 2px 6px;
+    padding: ${props => props._padding || '2px 6px'};
     gap: 4px;
     width: fit-content;
-    height: 22px;
+    height: ${props => props._height || '22px'};
     background: ${props => props.theme.color[props._bg || 'gray100']};
-    border-radius: 2px;
+    border-radius: ${props => props._bdr || '2px'};
     color: ${props => props.theme.color[props._color || 'gray800']};
     font-weight:  ${props => props._weight || 500};
     font-size: ${props => props._size || '11px'};
