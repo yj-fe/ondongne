@@ -3,7 +3,7 @@ import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader';
 import {LocationListContainer,LocationListText,Bounce1,Bounce2,Bounce3,Spinner,LocationBody,Line,LocationContainer,MyLocationResult,LocationDiv,Div1,Div2,LocationIcon,MyLocationDiv,MyLocationText,SearchDiv,SearchIcon,SearchInput, LocationListDiv,} from './LocationSettingStyle'
 import { ReactComponent as Location } from "assets/login/Location.svg";
 import { ReactComponent as Search } from "assets/login/Search.svg";
-
+import './LocationSetting.css'
 
 
 function LocationSetting() {
@@ -36,11 +36,16 @@ function LocationSetting() {
           </LocationDiv>
           <Line/>
 {/* ============ 로딩 ============ */}
-          <Spinner>
+          {/* <Spinner>
             <Bounce1/>
             <Bounce2/>
             <Bounce3/>
-          </Spinner>
+          </Spinner> */}
+          <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
 {/* ============ 검색리스트 ============ */}
           <LocationListContainer>
             <LocationListDiv>

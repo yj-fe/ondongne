@@ -5,7 +5,7 @@ export const DetailBody = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #cccccc;
+  background: #F5F5F5;
   flex-direction: column;
   padding-bottom: 56px;
 `
@@ -14,7 +14,7 @@ export const DetailContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #6e6868;
+  background: #F5F5F5;
   width: 728px;
   height: auto;
   padding: 0;

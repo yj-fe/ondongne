@@ -3,7 +3,7 @@ export const MainNavBody = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #E0E0E0;
+  background: #F5F5F5;
   flex-direction: column;
   gap: 8px;
   padding-bottom: 56px;

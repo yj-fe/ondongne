@@ -140,8 +140,8 @@ export const Bounce1 = styled.div`
 export const Bounce2 = styled.div`
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  -webkit-animation: sk-bouncedelay 1s infinite ease-in-out both;
+  animation: sk-bouncedelay 1s infinite ease-in-out both;
   
   @keyframes sk-bouncedelay {
   0%, 80%, 100% { 
@@ -154,8 +154,10 @@ export const Bounce2 = styled.div`
 }
 `
 export const Bounce3 = styled.div`
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+  -webkit-animation: sk-bouncedelay 0.8s infinite ease-in-out both;
+  animation: sk-bouncedelay 0.8s infinite ease-in-out both;
   
   @keyframes sk-bouncedelay {
   0%, 80%, 100% { 
