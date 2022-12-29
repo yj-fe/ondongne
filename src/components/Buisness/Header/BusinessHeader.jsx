@@ -16,7 +16,7 @@ function BusinessHeader() {
       <Icon>
         <Link to='/business/news'>
           <NewsStyle>
-          <News/>
+            <News/>
           </NewsStyle>
         </Link>
       </Icon>

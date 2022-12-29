@@ -59,6 +59,8 @@ import BusinessProductManagementDetail from "pages/business/BusinessPage/Busines
 import { getExpiry } from "utils/localStorage";
 import BusinessProductEditInfo from './pages/business/BusinessPage/BusinessProductManagement/BusinessProductEditInfo';
 import ReviewPage from "pages/member/ReviewPage";
+import SearchDetailPage from "pages/main/Search/SearchDetailPage";
+import SearchResultPage from "pages/main/Search/SearchResultPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -90,7 +92,12 @@ function App() {
         {/* ========== 메인 ========== */}
         <Route path="/">
           <Route path="" element={<MainPage />} />
+          {/* 1) 검색페이지 */}
           <Route path="search" element={<SearchPage />} />
+          {/* 2) 검색누르면나오는페이지 */}
+          <Route path="search/detailpage" element={<SearchDetailPage />} />
+          {/* 3) 검색어입력후페이지 */}
+          <Route path="search/result" element={<SearchResultPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="categories" element={<CategoryPage />} />
           <Route path="collections" element={<CollectionPage />} />

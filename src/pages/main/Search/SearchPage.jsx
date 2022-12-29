@@ -68,9 +68,9 @@ function SearchPage() {
 {/* 없을 때 */}
             {/* <ListEmpty/> */}
 {/* 있을 때 */}
-            <L.FlexCols>
-              <ListCard/>
-            </L.FlexCols>
+              <L.FlexCols>
+                <ListCard/>
+              </L.FlexCols>
             </L.FlexCols>
           </L.FlexCols>
           
@@ -100,7 +100,7 @@ const ListEmpty=()=>{
     </div>
   )
 }
-const ListCard=()=>{
+export const ListCard=()=>{
   return(
     <div>
       <L.FlexCols _gap={20}>

@@ -26,7 +26,7 @@ export const S = {
     Block: styled.div`
         display: flex;
         gap: 20px;
-        align-item: center;
+        align-items: center;
     `,
     UtilBtn: styled.button`
         display: flex;
@@ -35,6 +35,19 @@ export const S = {
         width: 24px;
         height: 24px;
         padding: 0;
+        
+    `,
+    SearchUtilBtn: styled.button`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+    
+        @media(${props => props.theme.media.tablet}) {
+            display: none;
+        }
     `,
     Title: styled.h1`
         font-size: 18px;

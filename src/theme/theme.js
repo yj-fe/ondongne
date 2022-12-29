@@ -1,4 +1,5 @@
 const color = {
+    black: '#000000',
     white: '#FFFFFF',
     green50: '#E1F3F2',
     green100: '#B4E1DC',
@@ -31,7 +32,8 @@ const color = {
     red800: '#780C19',
     red900: '#3C060D',
     red: '#ED2A2A',
-    error: '#D32F2F'
+    error: '#D32F2F',
+    blue: '#1E88E5',
 };
 
 const breakpoint = {

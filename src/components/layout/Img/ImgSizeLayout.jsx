@@ -13,6 +13,14 @@ export const RelativDiv = styled.div`
     margin: 0;
     padding: 0;
 `;
+export const RelativDivS = styled.div`
+    border-radius: ${props => props._bdr}px;
+    width: 100%;
+    height: ${props => props._height}px;
+    position: relative;
+    margin: 0px 28px 0px 0px;
+    padding: 0;
+`;
 export const AbsoluteDiv = styled.div`
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width}px;
@@ -23,6 +31,18 @@ export const AbsoluteDiv = styled.div`
     bottom: 0%;
     margin: 0;
     padding: 18px 12px;
+`;
+export const AbsoluteDivS = styled.div`
+    border-radius: ${props => props._bdr}px;
+    width: ${props => props._width}px;
+    height: ${props => props._height}px;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    right: 0%;
+    bottom: 0%;
+    margin: 0;
+    padding: 10px 0px;
 `;
 export const AbsoluteTopDiv = styled.div`
     border-radius: ${props => props._bdr}px;

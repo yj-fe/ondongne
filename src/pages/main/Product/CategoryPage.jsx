@@ -119,7 +119,7 @@ function CategoryEmpty() {
 }
 
 
-function CategoryCard(props) {
+export function CategoryCard(props) {
   let [item] = useState(maindata)
 
   return(

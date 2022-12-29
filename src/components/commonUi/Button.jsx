@@ -99,13 +99,13 @@ export const Badge = styled.button`
     align-items: center;
     padding: 2px 6px;
     gap: 4px;
-    width: 53px;
+    width: fit-content;
     height: 22px;
     background: ${props => props.theme.color[props._bg || 'gray100']};
     border-radius: 2px;
     color: ${props => props.theme.color[props._color || 'gray800']};
-    font-weight: 500;
-    font-size: 11px;
+    font-weight:  ${props => props._weight || 500};
+    font-size: ${props => props._size || '11px'};
 `;
 export const MapListButton = styled.button`
     display: flex;
