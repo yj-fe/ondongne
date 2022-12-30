@@ -196,7 +196,7 @@ export const Badge = styled.button`
     align-items: center;
     padding: ${props => props._padding || '2px 6px'};
     gap: 4px;
-    width: fit-content;
+    width:  ${props => props._width || 'fit-content'};
     height: ${props => props._height || '22px'};
     background: ${props => props.theme.color[props._bg || 'gray100']};
     border-radius: ${props => props._bdr || '2px'};

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FlexCols } from './Layout';
 import { Text } from './Text';
 
-const S = {
+export const S = {
     ConfirmBox: styled.div`
         width: 342px;
         height: auto;
