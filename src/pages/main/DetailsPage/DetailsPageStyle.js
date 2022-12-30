@@ -587,7 +587,7 @@ export const MarketReviewDiv = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 16px;
-  width: 688px;
+  width: 100%;
   height: auto;
 `
 export const MarketCommentsStyle = styled.div`
@@ -596,7 +596,7 @@ export const MarketCommentsStyle = styled.div`
   align-items: flex-start;
   padding: 16px;
   gap: 16px;
-  width: 632px;
+  width: 100%;
   height: auto;
   background: #F5F5F5;
   border-radius: 8px;

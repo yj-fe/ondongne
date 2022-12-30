@@ -1,40 +1,39 @@
 import styled from "styled-components";
 
 export const ModalOutside = styled.body`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    z-index: 90;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.6);
+    > * {
+        position: relative;
+        z-index: 91;
+    }
 `
 export const ModalBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 28px 24px;
   gap: 32px;
-
+  padding: 28px 24px;
   position: absolute;
   width: 350px;
-  height: 216px;
-  left: 785px;
-  top: 432px;
-
+  height: auto;
   background: #FFFFFF;
   border-radius: 20px;
+  overflow: hidden;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 40px);
+  text-align: center;
 `
 export const TextDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
   padding: 0px;
   gap: 12px;
-  width: 302px;
-  height: 24px;
+
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -45,19 +44,19 @@ export const ButtonDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
+  padding-top: 30px;
   gap: 8px;
-  width: 302px;
+  width: 100%;
   height: 104px;
 `
 export const ButtonDelete = styled.button`
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   justify-content: center;
   align-items: center;
   padding: 8px 4px;
   gap: 4px;
-  width: 302px;
+  width: 100%;
   height: 48px;
   background: #D32F2F;
   border-radius: 4px;
@@ -75,7 +74,7 @@ export const ButtonClose = styled.button`
   align-items: center;
   padding: 8px 4px;
   gap: 4px;
-  width: 302px;
+  width: 100%;
   height: 48px;
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
