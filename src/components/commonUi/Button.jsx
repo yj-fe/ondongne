@@ -86,6 +86,7 @@ export const BorderBox = styled.button`
 `;
 
 
+
 export const CouponButton = styled.button`
     bottom: 57px;
     width: 100%;

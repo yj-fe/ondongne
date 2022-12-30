@@ -5,7 +5,7 @@ import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
 // import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
 // import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
 
-import { NameToggleInput, NameToggleInputForm, PwdResetToggleForm, PwdResetToggleInput, EyeOffStyle, PwdToggleButton, PwdToggleInput, PwdToggleInputForm, MemberBar, MemberLinkText, MemberBody, MemberContainer, MemberInfoDiv, MemberLinkDiv, MemberProfileDiv, TextEmail, TextName, TitleText, ProfileTextDiv, InfoDiv, Input, ChangeButton, InputForm } from './MemberManagementStyle'
+import { NameToggleInput, NameToggleInputForm, PwdResetToggleForm, PwdResetToggleInput, EyeOffStyle, PwdToggleButton, PwdToggleInput, PwdToggleInputForm, MemberBar, MemberLinkText, MemberBody, MemberContainer, MemberInfoDiv, MemberLinkDiv, MemberProfileDiv, TextEmail, TextName, TitleText, ProfileTextDiv, InfoDiv, Input, ChangeButton, InputForm, MaxWidth } from './MemberManagementStyle'
 import Alert from "components/commonUi/Alert";
 import ModalPage from 'components/Login/ModalPage';
 import MemberPhone from 'components/Login/Member/MemberPhone/MemberPhone';
@@ -180,7 +180,8 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
   }
 
   return (
-    <div>
+    <MaxWidth>
+
       <NameToggleInputForm>
         <NameToggleInput
           id='id'
@@ -213,7 +214,7 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
           active={confirm.active}
         />
       }
-    </div>
+    </MaxWidth>
   )
 }
 

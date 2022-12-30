@@ -110,11 +110,15 @@ export const NameToggleInputForm = styled.form`
   align-items: center;
   padding: 12px 16px;
   gap: 24px;
-  width: 688px;
-  height: 48px;
+  width: 100%;
+  height: ${props=>props._height || '48px'};
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
   border-radius: 4px;
+`
+export const MaxWidth = styled.div`
+  max-width: ${props => props.theme.breakpoint.tablet}px;
+  width: 100%;
 `
 // export const PwdResetToggleInput = styled.input`
 //   width: 550px;
@@ -216,7 +220,7 @@ export const Input = styled.input`
 //   color: #1565C0;
 // `
 export const NameToggleInput = styled.input`
-  width: 550px;
+  width: 80%;
   height: 24px;
   font-weight: 400;
   font-size: 16px;
@@ -225,6 +229,15 @@ export const NameToggleInput = styled.input`
   line-height: 24px;
   color: #212121;
   background-color: #FFFFFF;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  align-self: start;
+  &::placeholder{
+    color: #BDBDBD;
+  }
 `
 // export const PwdToggleInputForm = styled.form`
 //   box-sizing: border-box;
