@@ -4,9 +4,9 @@ import BusinessManagementTab2 from 'components/Buisness/BusinessManagement/Busin
 import { MarginBDiv } from 'components/Common/LayoutPageStyle'
 import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
 
-import {MoreNavBody,MoreContainer} from 'pages/main/MorePage/MorePageStyle'
+import { MoreNavBody, MoreContainer } from 'pages/main/MorePage/MorePageStyle'
 // import {MemberBody} from '../../login/member/MemberManagement/MemberManagementStyle'
-import {DetailTabDiv,TabButtonStyle,DetailTabInfo,DetailTabReview,TabContentStyle} from 'pages/main/DetailsPage/DetailsPageStyle'
+import { DetailTabDiv, TabButtonStyle, DetailTabInfo, DetailTabReview, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle'
 
 function BusinessManagement() {
 
@@ -16,8 +16,8 @@ function BusinessManagement() {
 
   return (
     <div>
-      <BasicHeader title="비즈 정보 관리"/>
-{/* ============  ============ */}
+      <BasicHeader title="비즈 정보 관리" />
+      {/* ============  ============ */}
 
 
       <MoreNavBody>
@@ -42,7 +42,7 @@ function BusinessManagement() {
             <TabContentStyle>
               <TabContent detailTab={detailTab} />
             </TabContentStyle>
-            <MarginBDiv/>
+            <MarginBDiv />
 
 
 
@@ -57,12 +57,12 @@ function TabContent(props) {
 
     //=====================상세정보=====================
     <div>
-      <BusinessManagementTab1/>
+      <BusinessManagementTab1 />
     </div>,
 
     //=====================상품리뷰=====================
     <div>
-      <BusinessManagementTab2/>
+      <BusinessManagementTab2 />
     </div>
   ][props.detailTab]
 }

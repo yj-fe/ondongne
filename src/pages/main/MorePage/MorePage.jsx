@@ -25,6 +25,7 @@ import * as T from 'components/commonUi/Text';
 import * as I from 'components/commonUi/Input';
 import * as B from 'components/commonUi/Button';
 import FooterLayout from 'components/layout/Footer/Footer'
+import { getBizMember } from 'service/biz'
 
 
 function MorePage() {
@@ -64,6 +65,34 @@ function MorePage() {
     if (data) setMember(data);
   }
 
+  const bizMemberCheck = async () => {
+
+    const response = await getBizMember();
+    const { data } = response.data;
+
+    // 비즈 신청하기
+    if (!data) {
+      return setCoachmark(true)
+    }
+
+    // 비즈 심사 대기 중
+    if (!data.bizStatus) {
+      return setAlert({
+        title: "비즈 심사 대기 중입니다.",
+        contents: "관리자 검토 후 2영업일 이내로 승인 처리 예정입니다.\n승인이 완료되면 알림으로 알려드립니다.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(false),
+        onOverlayClick: () => setAlert(false),
+      })
+    }
+
+    // 비즈 홈
+    if (data.bizStatus) {
+      return navigate("/business")
+    }
+
+  }
+
   useEffect(() => {
     if (auth.isAuthenticated) {
       getMemberProfile()
@@ -97,7 +126,7 @@ function MorePage() {
                   <MoreAccountButton>회원정보 관리</MoreAccountButton>
                 </Link>
                 <MoreAccountButton
-                  onClick={() => setCoachmark(true)}
+                  onClick={bizMemberCheck}
                 >비즈회원 전환</MoreAccountButton>
               </MoreAccountButtonDiv>
             </MoreAccountDiv>
@@ -195,7 +224,7 @@ function BusinessAgreementModal() {
   }
 
   useEffect(() => {
-    if(servicerequestSave && privrequestSave) {
+    if (servicerequestSave && privrequestSave) {
       setActive(true)
     } else {
       setActive(false)
@@ -249,7 +278,7 @@ function BusinessAgreementModal() {
             <ArrowRight />
           </SpaceBet>
 
-          <Button 
+          <Button
             active={active}
             type='button'
             disabled={!active}

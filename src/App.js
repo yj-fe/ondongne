@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 /* ========= MEMBER ========= */
 import MyPage from "components/MyPage";
@@ -71,7 +71,7 @@ function App() {
 	const location = useLocation();
 	const [alert, setAlert] = useState(null);
 
-	useEffect(() => {
+	const member = () => {
 		const data = getExpiry("accessToken");
 		const localState = localStorage.getItem("localState");
 		if (data !== null) {
@@ -93,6 +93,11 @@ function App() {
 		if (localState) {
 			dispatch(localActions.save(JSON.parse(localState)));
 		}
+	};
+
+	// 로그인 유지
+	useEffect(() => {
+		member();
 	}, [location]);
 
 	return (

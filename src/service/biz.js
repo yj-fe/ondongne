@@ -1,8 +1,24 @@
 import { client } from ".";
 
 const urls = {
+	getMember: "/biz/getMember",
+	getBiz: "/biz/getBiz",
 	signup: "/biz/signup",
 };
+
+/* ==============================
+   비즈 회원 조회
+============================== */
+export function getBizMember() {
+	return client.get(urls.getMember);
+}
+
+/* ==============================
+   비즈 사업자 정보 조회
+============================== */
+export function getBiz() {
+	return client.get(urls.getBiz);
+}
 
 /* ==============================
    비즈 신청

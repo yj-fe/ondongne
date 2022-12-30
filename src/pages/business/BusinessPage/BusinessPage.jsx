@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import maindata from 'assets/data/maindata'
 
@@ -17,42 +17,59 @@ import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
 import { ReactComponent as Product } from "assets/icons/business/Product.svg";
 import { ReactComponent as Order } from "assets/icons/business/Order.svg";
 
-import {MoreNavBody,MoreContainer,MoreDiv,FooterText,Logo} from 'pages/main/MorePage/MorePageStyle'
-import {TermsDiv,TermsTitle,TermsIconStyle} from 'pages/service/TermsPage/TermsPageStyle'
-import {TitleText,InfoCard,InfoIconStyle,CardCount,CardText,Footer,InfoDiv,FloatingContentDiv,FloatingContentTitle,FloatingContentIcon,FloatingToggleDiv,CardTextDiv,CouponDiv,CouponInfoDiv,DownloadDiv,DownloadText,DownloadCount,DownloadCountTextB,DownloadCountTextN,MyBestProductContent,FloatingDiv,FooterDiv} from './BusinessPageStyle'
-import {ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,ContentTitle,Discount,DiscountStyle,Price,FinalPrice,RateStyle,Star,Number} from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
+import { MoreNavBody, MoreContainer, MoreDiv, FooterText, Logo } from 'pages/main/MorePage/MorePageStyle'
+import { TermsDiv, TermsTitle, TermsIconStyle } from 'pages/service/TermsPage/TermsPageStyle'
+import { TitleText, InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDiv, FloatingContentDiv, FloatingContentTitle, FloatingContentIcon, FloatingToggleDiv, CardTextDiv, CouponDiv, CouponInfoDiv, DownloadDiv, DownloadText, DownloadCount, DownloadCountTextB, DownloadCountTextN, MyBestProductContent, FloatingDiv, FooterDiv } from './BusinessPageStyle'
+import { ContentDate, ContentImg, ContentMarket, ContentProduct, ContentStyle, ContentTitle, Discount, DiscountStyle, Price, FinalPrice, RateStyle, Star, Number } from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
+import { getBizMember } from 'service/biz';
+import { useSelector } from 'react-redux';
 
 function BusinessPage() {
+  const navigate = useNavigate();
   const [item] = useState(maindata)
-
+  const auth = useSelector(state => state.auth);
   const [floating, setFloating] = useState(false)
+
+  // 비즈 회원 체크
+  const bizMember = async () => {
+    const response = await getBizMember();
+    const { data } = response.data;
+
+    if (!data || !data.bizStatus) {
+      return navigate("/")
+    }
+  }
+
+  useEffect(() => {
+    if (auth.isAuthenticated) bizMember()
+  }, [auth])
 
   return (
     <div>
-      <BusinessHeader/>
+      <BusinessHeader />
 
       <MoreNavBody>
-{/* ==================== 가게 정보 ==================== */}
+        {/* ==================== 가게 정보 ==================== */}
         <MoreContainer>
           <MoreDiv>
             <TitleText>가게 정보</TitleText>
             <InfoDiv>
               <InfoCard>
-                <InfoIconStyle><OrderIcon/></InfoIconStyle>
+                <InfoIconStyle><OrderIcon /></InfoIconStyle>
                 <CardTextDiv>
                   <CardText>신규 주문</CardText>
                   <CardCount>0 건</CardCount>
                 </CardTextDiv>
               </InfoCard>
               <InfoCard>
-                <InfoIconStyle><Pickup/></InfoIconStyle>
+                <InfoIconStyle><Pickup /></InfoIconStyle>
                 <CardTextDiv>
                   <CardText>배달/픽업</CardText>
                   <CardCount>0 건</CardCount>
                 </CardTextDiv>
               </InfoCard>
               <InfoCard>
-                <InfoIconStyle><NewReview/></InfoIconStyle>
+                <InfoIconStyle><NewReview /></InfoIconStyle>
                 <CardTextDiv>
                   <CardText>신규 리뷰</CardText>
                   <CardCount>0 건</CardCount>
@@ -62,12 +79,12 @@ function BusinessPage() {
           </MoreDiv>
         </MoreContainer>
 
-{/* ==================== 발행한 쿠폰 ==================== */}
+        {/* ==================== 발행한 쿠폰 ==================== */}
         <MoreContainer>
           <MoreDiv>
             <TitleText>발행한 쿠폰</TitleText>
             <CouponDiv>
-{/* ========== 쿠폰배너생성시 뜨는 예시 ======= */}
+              {/* ========== 쿠폰배너생성시 뜨는 예시 ======= */}
               {/* <CouponCard>
                 <CouponTitleDiv>
                   <CouponBadge>발행중</CouponBadge>
@@ -99,7 +116,7 @@ function BusinessPage() {
           </MoreDiv>
         </MoreContainer>
 
-{/* ==================== 내 상점 인기상품 ==================== */}
+        {/* ==================== 내 상점 인기상품 ==================== */}
         <MoreContainer>
           <MoreDiv>
             <TitleText>내 상점 인기상품</TitleText>
@@ -111,62 +128,62 @@ function BusinessPage() {
                 <EmptyButtonIcon><Right/></EmptyButtonIcon>
               </EmptyButton>
             </EmptyDiv> */}
-              <MyBestProductContent
-                // onClick={()=>{navigate(`/item/${}`, { state: {item}})}}
-              >
-                {
-                  item.map((a, i)=>{
-                    if(i%2 === 0){
-                    return(
-                      <MyBestProductCard item={item[i]} i={i}/>
-                      )
-                    }
-                  })
-                }
-                </MyBestProductContent>
+            <MyBestProductContent
+            // onClick={()=>{navigate(`/item/${}`, { state: {item}})}}
+            >
+              {
+                item.map((a, i) => {
+                  if (i % 2 === 0) {
+                    return (
+                      <MyBestProductCard item={item[i]} i={i} />
+                    )
+                  }
+                })
+              }
+            </MyBestProductContent>
             {/* item있으면 ? <MyBestProductContent/> : <EmptyDiv/>  */}
           </MoreDiv>
         </MoreContainer>
 
-{/* ==================== 비즈 정보 관리 ==================== */}
+        {/* ==================== 비즈 정보 관리 ==================== */}
         <MoreContainer>
           <MoreDiv>
-        <TermsDiv>
-            <TermsTitle>비즈 정보 관리</TermsTitle>
-            <Link to="/business/management">
-              <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
-          <TermsDiv>
-            <TermsTitle>상품 관리</TermsTitle>
-            <Link to="/business/product">
-              <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
-          <TermsDiv>
-            <TermsTitle>주문 관리</TermsTitle>
-            <Link to="">
-              <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
-          <TermsDiv>
-            <TermsTitle>리뷰 관리</TermsTitle>
-            <Link to="/business/review">
-              <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
-          <TermsDiv>
-            <TermsTitle>정산 관리</TermsTitle>
-            <Link to="">
-              <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
-          <TermsDiv>
-            <TermsTitle>상점 소식 관리</TermsTitle>
-            <Link to="">
-              <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
+            <TermsDiv>
+              <TermsTitle>비즈 정보 관리</TermsTitle>
+              <Link to="/business/management">
+                <TermsIconStyle><Right /></TermsIconStyle>
+              </Link>
+            </TermsDiv>
+            <TermsDiv>
+              <TermsTitle>상품 관리</TermsTitle>
+              <Link to="/business/product">
+                <TermsIconStyle><Right /></TermsIconStyle>
+              </Link>
+            </TermsDiv>
+            <TermsDiv>
+              <TermsTitle>주문 관리</TermsTitle>
+              <Link to="">
+                <TermsIconStyle><Right /></TermsIconStyle>
+              </Link>
+            </TermsDiv>
+            <TermsDiv>
+              <TermsTitle>리뷰 관리</TermsTitle>
+              <Link to="/business/review">
+                <TermsIconStyle><Right /></TermsIconStyle>
+              </Link>
+            </TermsDiv>
+            <TermsDiv>
+              <TermsTitle>정산 관리</TermsTitle>
+              <Link to="">
+                <TermsIconStyle><Right /></TermsIconStyle>
+              </Link>
+            </TermsDiv>
+            <TermsDiv>
+              <TermsTitle>상점 소식 관리</TermsTitle>
+              <Link to="">
+                <TermsIconStyle><Right /></TermsIconStyle>
+              </Link>
+            </TermsDiv>
           </MoreDiv>
         </MoreContainer>
         <FooterDiv>
@@ -180,12 +197,12 @@ function BusinessPage() {
             </FooterText>
           </Footer>
           <FloatingDiv
-           onClick={()=>setFloating(!floating)}
+            onClick={() => setFloating(!floating)}
           >
-            {floating && <FloatingToggle/>}
-            {floating ? <FloatingPush/> : <Floating/>}
+            {floating && <FloatingToggle />}
+            {floating ? <FloatingPush /> : <Floating />}
           </FloatingDiv>
-          </FooterDiv>
+        </FooterDiv>
 
       </MoreNavBody>
 
@@ -194,55 +211,57 @@ function BusinessPage() {
   )
 }
 
-function MyBestProductCard(props){
-  return(
-  <div>
-    <ContentProduct>
-      <ContentImg src={props.item.img}/>
-      <ContentStyle>
-        <ContentDate >{props.item.countdown}</ContentDate>
-        <ContentMarket>{props.item.market}</ContentMarket>
-        <ContentTitle>{props.item.title}</ContentTitle>
-        <DiscountStyle>
-          <Discount>{props.item.discount}</Discount>
-          <Price>{props.item.price}</Price>
-        </DiscountStyle>
-        <FinalPrice>{props.item.finalprice}</FinalPrice>
-        <RateStyle>
-          <Star><StarIcon/></Star>
-          <Number>(4.5)</Number>
-        </RateStyle>
-      </ContentStyle>
-    </ContentProduct>
-  </div>
+function MyBestProductCard(props) {
+  return (
+    <div>
+      <ContentProduct>
+        <ContentImg src={props.item.img} />
+        <ContentStyle>
+          <ContentDate >{props.item.countdown}</ContentDate>
+          <ContentMarket>{props.item.market}</ContentMarket>
+          <ContentTitle>{props.item.title}</ContentTitle>
+          <DiscountStyle>
+            <Discount>{props.item.discount}</Discount>
+            <Price>{props.item.price}</Price>
+          </DiscountStyle>
+          <FinalPrice>{props.item.finalprice}</FinalPrice>
+          <RateStyle>
+            <Star><StarIcon /></Star>
+            <Number>(4.5)</Number>
+          </RateStyle>
+        </ContentStyle>
+      </ContentProduct>
+    </div>
   )
 }
-function FloatingToggle(props){
-  return(
-  <div>
-    <FloatingToggleDiv>
-      <FloatingContentDiv>
-        <FloatingContentIcon><Product/></FloatingContentIcon>
-        <Link to="/business/upload">
-          <FloatingContentTitle>상품 등록</FloatingContentTitle>
-        </Link>
-      </FloatingContentDiv>
-      <FloatingContentDiv>
-        <FloatingContentIcon><Order/></FloatingContentIcon>
-        <FloatingContentTitle>소식 등록</FloatingContentTitle>
-      </FloatingContentDiv>
-      <FloatingContentDiv>
-        <FloatingContentIcon><Coupon/></FloatingContentIcon>
-        <Link to="/business/coupon">
-          <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
-        </Link>
-      </FloatingContentDiv>
-      <FloatingContentDiv>
-        <FloatingContentIcon><Trans/></FloatingContentIcon>
-        <FloatingContentTitle>일반 전환</FloatingContentTitle>
-      </FloatingContentDiv>
-    </FloatingToggleDiv>
-  </div>
+function FloatingToggle(props) {
+  return (
+    <div>
+      <FloatingToggleDiv>
+        <FloatingContentDiv>
+          <FloatingContentIcon><Product /></FloatingContentIcon>
+          <Link to="/business/upload">
+            <FloatingContentTitle>상품 등록</FloatingContentTitle>
+          </Link>
+        </FloatingContentDiv>
+        <FloatingContentDiv>
+          <FloatingContentIcon><Order /></FloatingContentIcon>
+          <FloatingContentTitle>소식 등록</FloatingContentTitle>
+        </FloatingContentDiv>
+        <FloatingContentDiv>
+          <FloatingContentIcon><Coupon /></FloatingContentIcon>
+          <Link to="/business/coupon">
+            <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
+          </Link>
+        </FloatingContentDiv>
+        <FloatingContentDiv>
+          <FloatingContentIcon><Trans /></FloatingContentIcon>
+          <Link to="/">
+            <FloatingContentTitle>일반 전환</FloatingContentTitle>
+          </Link>
+        </FloatingContentDiv>
+      </FloatingToggleDiv>
+    </div>
   )
 }
 
