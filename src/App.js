@@ -65,6 +65,7 @@ import BusinessCouponUpload from "./pages/business/BusinessPage/BusinessCouponUp
 import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 import { localActions } from "store/location/location";
+import DetailsPageT from './pages/main/DetailsPage/DetailsPageT';
 
 function App() {
 	const dispatch = useDispatch();
@@ -116,7 +117,8 @@ function App() {
 					<Route path="cart" element={<CartPage />} />
 					<Route path="categories" element={<CategoryPage />} />
 					<Route path="collections" element={<CollectionPage />} />
-					<Route path="details/:id" element={<DetailsPage />} />
+					{/* <Route path="details/:id" element={<DetailsPage />} /> */}
+					<Route path="details/:id" element={<DetailsPageT />} />
 					<Route path="more" element={<MorePage />} />
 					{/* 상점정보 */}
 					<Route
