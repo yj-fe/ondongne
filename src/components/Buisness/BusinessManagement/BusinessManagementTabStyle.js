@@ -141,7 +141,7 @@ export const TitleInfo = styled.p`
 	font-size: 16px;
 	color: ${(props) => props.color || "gray900"};
 `;
-export const TextCenter = styled.p`
+export const TextCenter = styled.label`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;

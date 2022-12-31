@@ -29,7 +29,7 @@ import "./LocationSetting.css";
 import Alert from "components/commonUi/Alert";
 import { getLocal, searchLocation } from "service/common";
 import { useNavigate } from "react-router-dom";
-import { localActions } from "store/location/location";
+import { localActions } from "store/slices/location";
 
 function LocationSetting() {
   const localState = useSelector(state => state.local);

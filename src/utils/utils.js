@@ -28,3 +28,16 @@ export const businessNumberFormatter = (value) => {
 	num = value.replace(/(\d{3})(\d{2})(\d{5})/, "$1-$2-$3");
 	return num;
 };
+
+// 사진 객체 반환
+export const fileFormatter = async (url, name, defaultType = 'image/jpeg') => {
+	console.log(url)
+	console.log(name)
+	console.log(defaultType);
+	
+    const response = await fetch(url);
+    const data = await response.blob();
+    return new File([data], name, {
+      type: data.type || defaultType,
+    });
+  }

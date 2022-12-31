@@ -64,7 +64,7 @@ import SearchResultPage from "pages/main/Search/SearchResultPage";
 import BusinessCouponUpload from "./pages/business/BusinessPage/BusinessCouponUpload";
 import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
-import { localActions } from "store/location/location";
+import { localActions } from "store/slices/location";
 import DetailsPageT from './pages/main/DetailsPage/DetailsPageT';
 
 function App() {

@@ -65,7 +65,7 @@ function MorePage() {
     if (data) setMember(data);
   }
 
-  const bizMemberCheck = async () => {
+  const bizMember = async () => {
 
     const response = await getBizMember();
     const { data } = response.data;
@@ -126,7 +126,7 @@ function MorePage() {
                   <MoreAccountButton>회원정보 관리</MoreAccountButton>
                 </Link>
                 <MoreAccountButton
-                  onClick={bizMemberCheck}
+                  onClick={bizMember}
                 >비즈회원 전환</MoreAccountButton>
               </MoreAccountButtonDiv>
             </MoreAccountDiv>

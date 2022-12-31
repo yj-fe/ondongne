@@ -7,7 +7,7 @@ import { BankListDiv, BankToggleDiv, TextCenter, InfoBoxDiv, TabDiv, TabContent,
 import { useSelector } from 'react-redux';
 import { getBiz } from 'service/biz';
 import { useNavigate } from 'react-router-dom';
-import { businessNumberFormatter } from 'utils/utils';
+import { businessNumberFormatter, fileFormatter } from 'utils/utils';
 import DaumPost from 'components/DaumPost';
 
 
@@ -18,6 +18,10 @@ function BusinessManagementTab2() {
   const [biz, setBiz] = useState({});
   const [isDaumPost, setIsDaumPost] = useState(false);
   const [daumPostAddress, setDaumPostAddress] = useState('');
+  // 파일
+  const [files, setFiles] = useState([]);
+  const [deleteFiles, setDeleteFiles] = useState([]);
+  const [fileErrorMessage, setFileErrorMessage] = useState('');
 
   // 카테고리 데이터
   const [category, setCategory] = useState();
@@ -27,6 +31,27 @@ function BusinessManagementTab2() {
     setBiz({ ...biz, [name]: value });
   }
 
+  //비즈 파일 삭제
+  const deleteFile = id => {
+    console.log(id);
+    setDeleteFiles({
+      ...deleteFiles,
+      id
+    })
+
+    setBiz({
+      ...biz,
+      bizFiles: biz.bizFiles.filter(item => item.bizFileId !== id)
+    })
+  }
+
+  // 비즈 수정 완료
+  const bizUpdate = async () => {
+    const response = await bizUpdate(biz, files, deleteFiles);
+    console.log(response);
+    const {data, message, code} = response.data;
+  }
+
   const bizMember = async () => {
     const response = await getBiz();
     const { data } = response.data;
@@ -34,10 +59,10 @@ function BusinessManagementTab2() {
       navigate("/");
     }
 
+    console.log(data);
+
     setBiz(data);
   }
-
-  console.log(biz);
 
   useEffect(() => {
     if (auth.isAuthenticated) bizMember()
@@ -50,7 +75,6 @@ function BusinessManagementTab2() {
       bank: category,
     });
   }, [daumPostAddress, category])
-
 
   return (
     <div>
@@ -84,7 +108,7 @@ function BusinessManagementTab2() {
             <TitleInfoDiv
               onClick={() => setIsDaumPost(true)}
             >
-              <TitleInfo>{biz.address ? biz.address : '우편번호 검색'}</TitleInfo>
+              <TitleInfo>{biz.address ?? '우편번호 검색'}</TitleInfo>
               <RightStyle><Right /></RightStyle>
             </TitleInfoDiv>
             <TitleInfoDiv>
@@ -135,19 +159,42 @@ function BusinessManagementTab2() {
           <ContentDiv>
             <ContentTitle>첨부파일</ContentTitle>
             <Text _size={14} _color={'gray600'} >사업자 관련 파일 첨부(파일은 pdf, jpg, png만 첨부 가능)</Text>
-            <TextCenter>
+            <TextCenter
+              for={"files"}
+            >
               <TitleInfo >파일 첨부</TitleInfo>
             </TextCenter>
-            <input type="file" id="files" onChange={() => { }} />
+            {fileErrorMessage && <Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{fileErrorMessage}</Text>}
+            <input type="file" id="files" onChange={e => {
+              if (files.length === 5) {
+                return setFileErrorMessage('최대 5개까지 추가 가능합니다.')
+              }
+              setFiles([...files, e.target.files[0]])
+            }} />
+            {
+              files.length > 0 &&
+              <FileForm>
+                {files.map(file => (
+                  <div>
+                    <p>{file.name}</p>
+                    <button
+                      type='button'
+                      onClick={() => setFiles(files.filter(item => item.name !== file.name))}
+                    >x</button>
+                  </div>
+                ))}
+              </FileForm>
+            }
             {
               biz.bizFiles && biz.bizFiles.length > 0 &&
-              <FileForm>
+              <FileForm>            
+                {/* 저장되어있는 파일 */}
                 {biz.bizFiles.map(file => (
                   <div>
                     <p>{file.originalName}</p>
                     <button
                       type='button'
-
+                      onClick={()=>deleteFile(file.bizFileId)}
                     >x</button>
                   </div>
                 ))}
@@ -159,7 +206,7 @@ function BusinessManagementTab2() {
         </TabContent>
 
 
-        <TabBtn>수정 완료</TabBtn>
+        <TabBtn onClick={bizUpdate}>수정 완료</TabBtn>
 
       </TabDiv>
       {

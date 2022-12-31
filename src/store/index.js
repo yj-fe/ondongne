@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import localSlice from "./location/location";
+import localSlice from "./slices/location";
 import authSlice from "./slices/auth";
 
 const store = configureStore({
