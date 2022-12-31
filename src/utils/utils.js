@@ -30,14 +30,14 @@ export const businessNumberFormatter = (value) => {
 };
 
 // 사진 객체 반환
-export const fileFormatter = async (url, name, defaultType = 'image/jpeg') => {
-	console.log(url)
-	console.log(name)
-	console.log(defaultType);
-	
+export const fileFormatter = async (url, name, defaultType = 'image/jpeg') => {	
     const response = await fetch(url);
     const data = await response.blob();
     return new File([data], name, {
       type: data.type || defaultType,
     });
   }
+
+export const numberFormatter = value => {
+	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

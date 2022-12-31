@@ -32,7 +32,7 @@ const FileInput = styled.input`
   display: none;
 `;
 
-function ProfileAvatar({ profile }) {
+function ProfileAvatar({ profile, onChange=null }) {
   const [file, setFile] = useState()
 
   const fileUpload = async (e) => {
@@ -43,6 +43,7 @@ function ProfileAvatar({ profile }) {
   }
 
   useEffect(() => {
+    console.log("profile : ",profile)
     if (profile) setFile(profile)
   }, [profile])
 
@@ -59,7 +60,7 @@ function ProfileAvatar({ profile }) {
         >
         </CameraStyle>
       </ProfileDiv>
-      <FileInput type="file" id="profile" onChange={fileUpload} />
+      <FileInput type="file" id="profile" onChange={onChange ?? fileUpload} />
     </div>
   )
 }

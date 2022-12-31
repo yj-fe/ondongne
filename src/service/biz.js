@@ -4,6 +4,7 @@ const urls = {
 	getMember: "/biz/getMember",
 	getBiz: "/biz/getBiz",
 	signup: "/biz/signup",
+	update: "/biz/update",
 };
 
 /* ==============================
@@ -56,33 +57,27 @@ export function bizSignup(bizData) {
 /* ==============================
    비즈 사업자 정보 수정
 ============================== */
-export function bizUpdate(bizData, updateFile, deleteFile) {
+export function bizUpdate(bizData, updateFiles, deleteFiles) {
 	const headers = { "Content-Type": "multipart/form-data" };
-	const data = new FormData();
 
-	// 상점
-	data.append("storeName", bizData.storeName);
+	const formData = new FormData();
+	formData.append("bizId", bizData.bizId);
+	formData.append("ceo", bizData.ceo);
+	formData.append("phone", bizData.phone);
+	formData.append("address", bizData.address);
+	formData.append("addressDetails", bizData.addressDetails);
+	formData.append("businessNumber", bizData.businessNumber);
+	formData.append("bank", bizData.bank);
+	formData.append("accountNumber", bizData.accountNumber);
 
-	// 사업자 번호
-	data.append("businessNumber", bizData.businessNumber);
-
-	//카테고리
-	const categories = bizData.category.split(",");
-	categories.forEach((category) => {
-		data.append("categories", category);
+	updateFiles.forEach((file) => {
+		formData.append("files", file);
 	});
 
-	//활동지역
-	const deliveries = bizData.delivery.split(",");
-	deliveries.forEach((delivery) => {
-		data.append("deliveries", delivery);
+	deleteFiles.forEach((file) => {
+		formData.append("deleteFileIds", file);
 	});
 
-	//파일
-	bizData.files.forEach((file) => {
-		data.append("files", file);
-	});
-
-	return client.post(urls.signup, data, { headers });
+	return client.post(urls.update, formData, { headers });
 }
 

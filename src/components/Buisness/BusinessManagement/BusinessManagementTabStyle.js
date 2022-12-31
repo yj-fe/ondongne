@@ -6,7 +6,7 @@ export const TabDiv = styled.p`
 	padding: 0px;
 	width: 728px;
 `;
-export const TabProfileDiv = styled.p`
+export const TabProfileDiv = styled.div`
 	width: 100%;
 	height: 228px;
 	background: #e0e0e0;
@@ -14,8 +14,13 @@ export const TabProfileDiv = styled.p`
 	display: flex;
 	flex-direction: row;
 	justify-content: right;
+	background-image: url(${(props) => props.banner || ""});
+
+	& input[type="file"] {
+		display: none;
+	}
 `;
-export const ProfileBtnDiv = styled.p`
+export const ProfileBtnDiv = styled.label`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

@@ -13,7 +13,7 @@ import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import MemberPwd from 'components/Login/Member/MemberPwd/MemberPwd';
 import ProfileAvatar from 'components/commonUi/ProfileAvatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMember, logout, memberNicknameChange } from 'service/member';
+import { getMember, logout, memberNicknameChange, memberProfileChange } from 'service/member';
 import { authActions } from 'store/slices/auth';
 import { Text } from 'components/commonUi/Text';
 
@@ -67,7 +67,9 @@ function MemberManagement() {
         {/* ============ 회원정보관리 ============ */}
         <MemberContainer>
           <MemberProfileDiv>
-            <ProfileAvatar profile={member.profile} />
+            <ProfileAvatar 
+              profile={member.profile}
+            />
             <ProfileTextDiv>
               <TextName>{member.nickname}</TextName>
               <TextEmail>{member.email}</TextEmail>

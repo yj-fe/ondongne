@@ -5,16 +5,18 @@ import { Text } from 'components/commonUi/Text';
 
 import { BankListDiv, BankToggleDiv, TextCenter, InfoBoxDiv, TabDiv, TabContent, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, Input, FileForm } from './BusinessManagementTabStyle'
 import { useSelector } from 'react-redux';
-import { getBiz } from 'service/biz';
+import { bizUpdate, getBiz } from 'service/biz';
 import { useNavigate } from 'react-router-dom';
 import { businessNumberFormatter, fileFormatter } from 'utils/utils';
 import DaumPost from 'components/DaumPost';
+import Alert from 'components/commonUi/Alert';
 
 
 function BusinessManagementTab2() {
   const navigate = useNavigate();
   const auth = useSelector(state => state.auth)
   const [select, setSelect] = useState(false)
+  const [alert, setAlert] = useState(null)
   const [biz, setBiz] = useState({});
   const [isDaumPost, setIsDaumPost] = useState(false);
   const [daumPostAddress, setDaumPostAddress] = useState('');
@@ -33,11 +35,10 @@ function BusinessManagementTab2() {
 
   //비즈 파일 삭제
   const deleteFile = id => {
-    console.log(id);
-    setDeleteFiles({
+    setDeleteFiles([
       ...deleteFiles,
       id
-    })
+    ])
 
     setBiz({
       ...biz,
@@ -46,20 +47,25 @@ function BusinessManagementTab2() {
   }
 
   // 비즈 수정 완료
-  const bizUpdate = async () => {
+  const businessInfoUpdate = async () => {
     const response = await bizUpdate(biz, files, deleteFiles);
-    console.log(response);
     const {data, message, code} = response.data;
+
+    return setAlert({
+      contents: message,
+      buttonText: "확인",
+      onButtonClick: () => setAlert(false),
+      onOverlayClick: () => setAlert(false),
+    })
   }
 
+  // 비즈 회원 조회
   const bizMember = async () => {
     const response = await getBiz();
     const { data } = response.data;
     if (!data) {
       navigate("/");
     }
-
-    console.log(data);
 
     setBiz(data);
   }
@@ -71,10 +77,16 @@ function BusinessManagementTab2() {
   useEffect(() => {
     setBiz({
       ...biz,
-      address: daumPostAddress,
       bank: category,
     });
-  }, [daumPostAddress, category])
+  }, [category])
+
+  useEffect(() => {
+    setBiz({
+      ...biz,
+      address: daumPostAddress,
+    });
+  }, [daumPostAddress])
 
   return (
     <div>
@@ -171,25 +183,21 @@ function BusinessManagementTab2() {
               }
               setFiles([...files, e.target.files[0]])
             }} />
-            {
-              files.length > 0 &&
-              <FileForm>
-                {files.map(file => (
-                  <div>
-                    <p>{file.name}</p>
-                    <button
-                      type='button'
-                      onClick={() => setFiles(files.filter(item => item.name !== file.name))}
-                    >x</button>
-                  </div>
-                ))}
-              </FileForm>
-            }
-            {
-              biz.bizFiles && biz.bizFiles.length > 0 &&
-              <FileForm>            
+              <FileForm>  
+                {
+                  files.length > 0 &&
+                    files.map(file => (
+                      <div>
+                        <p>{file.name}</p>
+                        <button
+                          type='button'
+                          onClick={() => setFiles(files.filter(item => item.name !== file.name))}
+                        >x</button>
+                      </div>
+                    ))
+                }          
                 {/* 저장되어있는 파일 */}
-                {biz.bizFiles.map(file => (
+                {biz.bizFiles && biz.bizFiles.length > 0 && biz.bizFiles.map(file => (
                   <div>
                     <p>{file.originalName}</p>
                     <button
@@ -198,15 +206,14 @@ function BusinessManagementTab2() {
                     >x</button>
                   </div>
                 ))}
-              </FileForm>
-            }
+            </FileForm>
           </ContentDiv>
 
 
         </TabContent>
 
 
-        <TabBtn onClick={bizUpdate}>수정 완료</TabBtn>
+        <TabBtn onClick={businessInfoUpdate}>수정 완료</TabBtn>
 
       </TabDiv>
       {
@@ -214,6 +221,17 @@ function BusinessManagementTab2() {
         <DaumPost
           closeModel={() => setIsDaumPost(false)}
           setAddress={setDaumPostAddress}
+        />
+      }
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          desc={alert.desc}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
         />
       }
     </div>
