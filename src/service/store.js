@@ -40,27 +40,7 @@ export function storeImageBannerUpdate(file, id) {
 /* ==============================
    비즈 상점 정보 수정
 ============================== */
-export function storeUpdate(bizData, updateFiles, deleteFiles) {
-	const headers = { "Content-Type": "multipart/form-data" };
-
-	const formData = new FormData();
-	formData.append("bizId", bizData.bizId);
-	formData.append("ceo", bizData.ceo);
-	formData.append("phone", bizData.phone);
-	formData.append("address", bizData.address);
-	formData.append("addressDetails", bizData.addressDetails);
-	formData.append("businessNumber", bizData.businessNumber);
-	formData.append("bank", bizData.bank);
-	formData.append("accountNumber", bizData.accountNumber);
-
-	updateFiles.forEach((file) => {
-		formData.append("files", file);
-	});
-
-	deleteFiles.forEach((file) => {
-		formData.append("deleteFileIds", file);
-	});
-
-	return client.post(urls.update, formData, { headers });
+export function storeUpdate(data) {
+	return client.post(urls.update, data);
 }
 

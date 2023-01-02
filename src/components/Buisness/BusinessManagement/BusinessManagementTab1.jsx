@@ -5,51 +5,54 @@ import CheckBox from 'components/commonUi/CheckBox';
 
 import ProfileAvatar from 'components/commonUi/ProfileAvatar'
 import { Text } from 'components/commonUi/Text';
-import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, CameraImg, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv } from './BusinessManagementTabStyle'
+import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, CameraImg, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel } from './BusinessManagementTabStyle'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate } from 'service/store';
+import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/store';
 import { Down } from 'components/commonUi/Icon';
-import { numberFormatter } from 'utils/utils';
-const FILEURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store';
+import { deliveryToString, hourValidtion, minValidtion, numberFormatter } from 'utils/utils';
+import AddressModel from 'components/AddressModel';
+import Alert from 'components/commonUi/Alert';
+import CalendarModel from 'components/commonUi/CalendarModel';
+import { setHours } from 'date-fns';
 
 // 상점정보
 function BusinessManagementTab1() {
 
   const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
+  const [alert, setAlert] = useState(null);
   const [store, setStore] = useState({});
-  const [banner, setBanner] = useState(null);
-  const [profile, setProfile] = useState(null);
   const [select, setSelect] = useState(false);
   // 카테고리 데이터
   const [categories, setCategories] = useState([
-    { id: 0, name: '야채/과일', checked: false },
-    { id: 1, name: '정육', checked: false },
-    { id: 2, name: '수산/해산', checked: false },
-    { id: 3, name: '쌀/잡곡', checked: false },
-    { id: 4, name: '식품', checked: false },
-    { id: 5, name: '생활용품', checked: false },
-    { id: 6, name: '디저트', checked: false },
-    { id: 7, name: '음료/주류', checked: false },
-    { id: 8, name: '반려동물', checked: false },
-    { id: 9, name: '기타', checked: false },
+    { "id": 0, "name": "야채/과일", "checked": false },
+    { "id": 1, "name": "정육", "checked": false },
+    { "id": 2, "name": "수산/해산", "checked": false },
+    { "id": 3, "name": "쌀/잡곡", "checked": false },
+    { "id": 4, "name": "식품", "checked": false },
+    { "id": 5, "name": "생활용품", "checked": false },
+    { "id": 6, "name": "디저트", "checked": false },
+    { "id": 7, "name": "음료/주류", "checked": false },
+    { "id": 8, "name": "반려동물", "checked": false },
+    { "id": 9, "name": "기타", "checked": false }
   ]);
   const [categoryErroMessage, setCategoryErrorMessage] = useState('');
-  const [category, setCategory] = useState('');
-  const [mobox, setMoBox] = useState(false);
-  const [tubox, setTuBox] = useState(false);
-  const [webox, setWeBox] = useState(false);
-  const [thbox, setThBox] = useState(false);
-  const [fibox, setFiBox] = useState(false);
-  const [sabox, setSaBox] = useState(false);
-  const [subox, setSuBox] = useState(false);
-  const [requestSave, setRequestSave] = useState(false);
+
+  // 딜리버리 데이터
+  const [deliveries, setDeliverise] = useState([]);
+  const [deliveryModel, isDeliveryModel] = useState(false);
+
+  // 달력
+  const [calendar, setCalendar] = useState(false);
 
   // input 체인지 핸들러
   const onChange = (e) => {
     const { name, value } = e.target;
-    setStore({ ...store, [name]: value });
+    setStore({
+      ...store,
+      [name]: value
+    });
   }
 
   // 카테고리 핸들러
@@ -90,43 +93,104 @@ function BusinessManagementTab1() {
     if (data) getStore()
   }
 
+  // 오픈 날짜 변경
+  const openDateHandler = (date) => {
+    setStore({
+      ...store,
+      openDate: date,
+    })
+  }
+
+  // 휴무일 변경
+  const dayOffHandler = (dayWeek) => {
+    setStore({
+      ...store,
+      sales: store.sales.map(item =>
+        item.dayWeek == dayWeek ? { ...item, dayOffStatus: !item.dayOffStatus } : item
+      )
+    })
+  }
+
+  // 운영시간 변경
+  const salesOpenTimeHandler = (dayWeek, time) => {
+    setStore({
+      ...store,
+      sales: store.sales.map(item =>
+        item.dayWeek == dayWeek ? { ...item, openTime: time} : item
+      )
+    })
+  }
+
+  // 운영시간 변경
+  const salesCloseTimeHandler = (dayWeek, time) => {
+    setStore({
+      ...store,
+      sales: store.sales.map(item =>
+        item.dayWeek == dayWeek ? { ...item, closeTime: time} : item
+      )
+    })
+  }
+
+
+  // 상점 수정
+  const onSubmit = async () => {
+    const response = await storeUpdate(store);
+    console.log(response)
+  }
 
   // 상점 조회
   const getStore = async () => {
     const response = await getBizStore();
     const { data } = response.data;
     if (!data) {
-      navigate("/");
+      return navigate("/");
     }
 
-    if (data.storeImages.length > 0) {
-      setProfile(data.storeImages.filter(image => image.storeImageType == 'PROFILE'));
-      setBanner(data.storeImages.filter(image => image.storeImageType == 'BANNER'));
-    }
-
-    if (data.storeCategories.length > 0) {
-
-      const category = [];
-      data.storeCategories.forEach(item => {
-        category.push(item.category);
-      });
-      
-      setCategory(category.join(','));
-    }
+    //카테고리
+    setCategories(
+      categories.map(category =>
+        data.categories.includes(category.name) ? { ...category, checked: true } : category
+      )
+    )
 
     setStore(data);
   }
 
+  // 카테고리 데이터 핸들러
+  useEffect(() => {
+
+    if (!store) {
+      return false;
+    }
+    setStore({
+      ...store,
+      categories: categories.filter(category => category.checked === true).map(category => category.name),
+    })
+  }, [categories]);
+
+  // 활동 지역 데이터 핸들러
+  useEffect(() => {
+
+    if (!store) {
+      return false;
+    }
+    setStore({
+      ...store,
+      deliveries: deliveries,
+    })
+  }, [deliveries]);
+
+  // 상점 조회
   useEffect(() => {
     if (auth.isAuthenticated) getStore()
-  }, [auth])
+  }, [auth]);
 
   return (
     <div>
       <TabDiv>
         {/* 배너 */}
         <TabProfileDiv
-          banner={banner && `${FILEURL}/${banner[0].name}`}
+          banner={store.banner && store.banner}
         >
           <ProfileBtnDiv for="bannerFile">
             <CameraImg src={Camera} />
@@ -138,7 +202,7 @@ function BusinessManagementTab1() {
         {/* 프로필 */}
         <AvatarDiv>
           <ProfileAvatar
-            profile={profile && profile.length > 0 && `${FILEURL}/${profile[0]?.name}`}
+            profile={store.profile && store.profile}
             onChange={profileUpdate}
           />
         </AvatarDiv>
@@ -163,7 +227,7 @@ function BusinessManagementTab1() {
             <ContentTitle>카테고리</ContentTitle>
             <TitleInfoDiv>
               <TitleInfo>
-                { category ?? '카테고리 선택'}
+                {store.categories?.length > 0 ? store.categories.join(', ') : '카테고리 선택'}
               </TitleInfo>
               <RightStyle
                 onClick={() => setSelect(!select)}
@@ -184,8 +248,10 @@ function BusinessManagementTab1() {
           {/* ============== 활동지역 ============== */}
           <ContentDiv>
             <ContentTitle>활동지역</ContentTitle>
-            <TitleInfoDiv>
-              <TitleInfo>풍무동, 사우동, 걸포동 외 4개</TitleInfo>
+            <TitleInfoDiv onClick={() => isDeliveryModel(true)}>
+              <TitleInfo>
+                {store.deliveries?.length > 0 ? deliveryToString(store.deliveries.join(',')) : '활동 지역 선택'}
+              </TitleInfo>
               <RightStyle><Right /></RightStyle>
             </TitleInfoDiv>
           </ContentDiv>
@@ -197,11 +263,12 @@ function BusinessManagementTab1() {
             <InputBox
               height={200}
             >
-              <Input
+              <Textarea
                 name='description'
                 value={store.description}
                 onChange={onChange}
                 placeholder='어떤 상점인지 소개해 주세요!'
+                maxLength={255}
               />
             </InputBox>
           </ContentDiv>
@@ -215,10 +282,15 @@ function BusinessManagementTab1() {
                 <InputText>￦ </InputText>
                 <Input
                   name='deliveryPrice'
-                  value={numberFormatter(store.deliveryPrice)}
-                  onChange={onChange}
+                  value={store.deliveryPrice ?? ''}
+                  onChange={e => {
+                    setStore({
+                      ...store,
+                      deliveryPrice: numberFormatter(e.target.value)
+                    })
+                  }}
                   placeholder='0'
-                  maxLength={12}/>
+                  maxLength={12} />
               </TitleInfoDiv>
             </ContentDiv>
             <ContentDiv>
@@ -227,10 +299,15 @@ function BusinessManagementTab1() {
                 <InputText>￦ </InputText>
                 <Input
                   name='orderMinPrice'
-                  value={numberFormatter(store.orderMinPrice)}
-                  onChange={onChange}
+                  value={store.orderMinPrice ?? ''}
+                  onChange={e => {
+                    setStore({
+                      ...store,
+                      orderMinPrice: numberFormatter(e.target.value)
+                    })
+                  }}
                   placeholder='0'
-                  maxLength={12}/>
+                  maxLength={12} />
               </TitleInfoDiv>
             </ContentDiv>
           </RowDiv>
@@ -239,25 +316,30 @@ function BusinessManagementTab1() {
           {/* ============== 매장 오픈 날짜 ============== */}
           <ContentDiv>
             <ContentTitle>매장 오픈 날짜</ContentTitle>
-            <RowDiv>
+            <RowDiv
+              onClick={() => setCalendar(true)}
+            >
               <TitleInfoDiv>
                 <RowInput
                   placeholder='YY'
-                  type='number'
+                  type='text'
+                  value={store.openDate?.split('-')[0]}
                 />
                 <InputText>년</InputText>
               </TitleInfoDiv>
               <TitleInfoDiv>
                 <RowInput
                   placeholder='MM'
-                  type='number'
+                  type='text'
+                  value={store.openDate?.split('-')[1]}
                 />
                 <InputText>월</InputText>
               </TitleInfoDiv>
               <TitleInfoDiv>
                 <RowInput
                   placeholder='DD'
-                  type='number'
+                  type='text'
+                  value={store.openDate?.split('-')[2]}
                 />
                 <InputText>일</InputText>
               </TitleInfoDiv>
@@ -272,47 +354,26 @@ function BusinessManagementTab1() {
                 <ContentTitle>휴무일</ContentTitle>
                 <CheckBox
                   label="공휴일 휴무"
-                  name="requestSave"
-                  checked={requestSave}
-                  onChange={e => { setRequestSave(e.currentTarget.checked) }}
+                  name="holidayStatus"
+                  checked={store.holidayStatus}
+                  onChange={e => {
+                    setStore({
+                      ...store,
+                      holidayStatus: e.currentTarget.checked
+                    })
+                  }}
                 />
               </RowTitle>
               <DayDiv>
-                <DayBox
-                  onClick={() => { setMoBox(!mobox) }}
-                  color={mobox}
-                >
-                  월</DayBox>
-                <DayBox
-                  onClick={() => { setTuBox(!tubox) }}
-                  color={tubox}
-                >
-                  화</DayBox>
-                <DayBox
-                  onClick={() => { setWeBox(!webox) }}
-                  color={webox}
-                >
-                  수</DayBox>
-                <DayBox
-                  onClick={() => { setThBox(!thbox) }}
-                  color={thbox}
-                >
-                  목</DayBox>
-                <DayBox
-                  onClick={() => { setFiBox(!fibox) }}
-                  color={fibox}
-                >
-                  금</DayBox>
-                <DayBox
-                  onClick={() => { setSaBox(!sabox) }}
-                  color={sabox}
-                >
-                  토</DayBox>
-                <DayBox
-                  onClick={() => { setSuBox(!subox) }}
-                  color={subox}
-                >
-                  일</DayBox>
+                {
+                  store.sales && store.sales.length > 0 &&
+                  store.sales.map(item => (
+                    <DayOffForm 
+                      sales={item}
+                      dayOffHandler={dayOffHandler}
+                    />
+                  ))
+                }
               </DayDiv>
             </ContentDiv>
           </RowDiv>
@@ -321,71 +382,31 @@ function BusinessManagementTab1() {
           {/* ============== 운영 시간 ============== */}
           <ContentDiv>
             <ContentTitle>운영 시간</ContentTitle>
-            <RowTitle align={'center'}>
-              <Text _size={15} height={'44px'}>월요일</Text>
-              <RowTimeDiv>
-                <TimeDiv color={mobox}><TimeBox><Input color={mobox} align={'center'} placeholder='09' /></TimeBox>:<TimeBox><Input color={mobox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-                ~
-                <TimeDiv color={mobox}><TimeBox><Input color={mobox} align={'center'} placeholder='22' /></TimeBox>:<TimeBox><Input color={mobox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-              </RowTimeDiv>
-            </RowTitle>
-            <RowTitle align={'center'}>
-              <Text _size={15} height={'44px'}>화요일</Text>
-              <RowTimeDiv>
-                <TimeDiv color={tubox}><TimeBox><Input color={tubox} align={'center'} placeholder='09' /></TimeBox>:<TimeBox><Input color={tubox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-                ~
-                <TimeDiv color={tubox}><TimeBox><Input color={tubox} align={'center'} placeholder='22' /></TimeBox>:<TimeBox><Input color={tubox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-              </RowTimeDiv>
-            </RowTitle>
-            <RowTitle align={'center'}>
-              <Text _size={15} height={'44px'}>수요일</Text>
-              <RowTimeDiv>
-                <TimeDiv color={webox}><TimeBox><Input color={webox} align={'center'} placeholder='09' /></TimeBox>:<TimeBox><Input color={webox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-                ~
-                <TimeDiv color={webox}><TimeBox><Input color={webox} align={'center'} placeholder='22' /></TimeBox>:<TimeBox><Input color={webox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-              </RowTimeDiv>
-            </RowTitle>
-            <RowTitle align={'center'}>
-              <Text _size={15} height={'44px'}>목요일</Text>
-              <RowTimeDiv>
-                <TimeDiv color={thbox}><TimeBox><Input color={thbox} align={'center'} placeholder='09' /></TimeBox>:<TimeBox><Input color={thbox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-                ~
-                <TimeDiv color={thbox}><TimeBox><Input color={thbox} align={'center'} placeholder='22' /></TimeBox>:<TimeBox><Input color={thbox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-              </RowTimeDiv>
-            </RowTitle>
-            <RowTitle align={'center'}>
-              <Text _size={15} height={'44px'}>금요일</Text>
-              <RowTimeDiv>
-                <TimeDiv color={fibox}><TimeBox><Input color={fibox} align={'center'} placeholder='09' /></TimeBox>:<TimeBox><Input color={fibox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-                ~
-                <TimeDiv color={fibox}><TimeBox><Input color={fibox} align={'center'} placeholder='22' /></TimeBox>:<TimeBox><Input color={fibox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-              </RowTimeDiv>
-            </RowTitle>
-            <RowTitle align={'center'}>
-              <Text _size={15} height={'44px'}>토요일</Text>
-              <RowTimeDiv>
-                <TimeDiv color={sabox}><TimeBox><Input color={sabox} align={'center'} placeholder='09' /></TimeBox>:<TimeBox><Input color={sabox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-                ~
-                <TimeDiv color={sabox}><TimeBox><Input color={sabox} align={'center'} placeholder='22' /></TimeBox>:<TimeBox><Input color={sabox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-              </RowTimeDiv>
-            </RowTitle>
-            <RowTitle align={'center'}>
-              <Text _size={15} height={'44px'}>일요일</Text>
-              <RowTimeDiv>
-                <TimeDiv color={subox}><TimeBox><Input color={subox} align={'center'} placeholder='09' /></TimeBox>:<TimeBox><Input color={subox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-                ~
-                <TimeDiv color={subox}><TimeBox><Input color={subox} align={'center'} placeholder='22' /></TimeBox>:<TimeBox><Input color={subox} align={'center'} placeholder='00' /></TimeBox></TimeDiv>
-              </RowTimeDiv>
-            </RowTitle>
+            {
+              store.sales && store.sales.length > 0 &&
+              store.sales.map(item => (
+                <SalesForm 
+                  sales={item}
+                  salesOpenTimeHandler={salesOpenTimeHandler}
+                  salesCloseTimeHandler={salesCloseTimeHandler}
+                />
+              ))
+            }
           </ContentDiv>
 
 
           {/* ============== 수령 안내 ============== */}
           <ContentDiv>
             <ContentTitle>수령 안내</ContentTitle>
-            <InputBox height={120}>
-              <Input
-                placeholder='수령 안내 메시지를 입력해주세요.'
+            <InputBox
+              height={200}
+            >
+              <Textarea
+                name='recetiveDescription'
+                value={store.recetiveDescription}
+                onChange={onChange}
+                placeholder='수령 안내 메세지를 입력해주세요.'
+                maxLength={255}
               />
             </InputBox>
           </ContentDiv>
@@ -394,14 +415,142 @@ function BusinessManagementTab1() {
         </TabContent>
 
 
-        <TabBtn>수정 완료</TabBtn>
+        <TabBtn onClick={onSubmit}>수정 완료</TabBtn>
 
       </TabDiv>
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          desc={alert.desc}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
+      {
+        deliveryModel &&
+        <AddressModel
+          setModelClose={() => isDeliveryModel(false)}
+          setDeliverise={setDeliverise}
+        />
+      }
+      {
+        calendar &&
+        <CalendarModel
+          modelClose={() => setCalendar(false)}
+          now={store?.openDate}
+          onChange={openDateHandler} />
+      }
 
     </div>
   )
 }
 
+const DayOffForm = ({sales, dayOffHandler}) => {
+  const {dayWeek, dayOffStatus} = sales;
+  return (
+    <DayBox
+      onClick={() => dayOffHandler(dayWeek)}
+      color={dayOffStatus}
+    >
+      {dayWeek.charAt(0)}
+    </DayBox>
+  )
+}
+
+const SalesForm = ({sales, salesOpenTimeHandler, salesCloseTimeHandler}) => {
+  const {dayWeek, dayOffStatus, openTime, closeTime} = sales;
+  const [openHour, setOpenHour] = useState(openTime.split(':')[0]);
+  const [openMin, setOpenMin] = useState(openTime.split(':')[1]);
+  const [closeHour, setCloseHour] = useState(closeTime.split(':')[0]);
+  const [closeMin, setCloseMin] = useState(closeTime.split(':')[1]);
+
+
+  const timeValid = (value, handler, maxNumber) => {
+    const num = Number(value);
+    if(num === NaN) return handler(``)
+
+    if(num < 0 || num > maxNumber) {
+      return handler(``)
+    }
+
+    return handler(`${num}`);
+    
+  }
+
+  useEffect(()=>{
+    salesOpenTimeHandler(dayWeek, `${openHour}:${openMin}:00`)
+  }, [openHour, openMin])
+
+  useEffect(() => {
+    salesCloseTimeHandler(dayWeek, `${closeHour}:${closeMin}:00`)
+  }, [closeHour, closeMin])
+
+  return (
+    <RowTitle align={'center'}>
+      <Text _size={15} height={'44px'}>{dayWeek}</Text>
+      <RowTimeDiv>
+        <TimeDiv 
+          color={dayOffStatus}
+        >
+          <TimeBox>
+            <Input
+              color={dayOffStatus}
+              align={'center'}
+              placeholder='00'
+              disabled={dayOffStatus}
+              value={openHour}
+              maxLength={2}
+              onChange={e => timeValid(e.target.value, setOpenHour ,23)}
+            />
+          </TimeBox>
+          :
+          <TimeBox>
+            <Input
+              color={dayOffStatus}
+              align={'center'}
+              placeholder='00'
+              disabled={dayOffStatus}
+              value={openMin}
+              maxLength={2}
+              onChange={e => timeValid(e.target.value, setOpenMin ,59)}
+            />
+          </TimeBox>
+        </TimeDiv>
+        ~
+        <TimeDiv 
+          color={dayOffStatus}
+        >
+          <TimeBox>
+            <Input
+              maxLength={2}
+              color={dayOffStatus}
+              align={'center'}
+              placeholder='00'
+              disabled={dayOffStatus}
+              value={closeHour}
+              onChange={e => timeValid(e.target.value, setCloseHour ,23)}
+            />
+          </TimeBox>
+          :
+          <TimeBox>
+            <Input
+              maxLength={2}
+              color={dayOffStatus}
+              align={'center'}
+              placeholder='00'
+              disabled={dayOffStatus}
+              value={closeMin}
+              onChange={e => timeValid(e.target.value, setCloseMin ,59)}
+            />
+          </TimeBox>
+        </TimeDiv>
+      </RowTimeDiv>
+    </RowTitle>
+  )
+}
 
 function CateToggle({ close, categories, categoryHandler }) {
 

@@ -8,6 +8,8 @@ import theme from './theme/theme';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux'
 import store from './store';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

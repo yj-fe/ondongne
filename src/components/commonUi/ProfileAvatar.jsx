@@ -43,7 +43,6 @@ function ProfileAvatar({ profile, onChange=null }) {
   }
 
   useEffect(() => {
-    console.log("profile : ",profile)
     if (profile) setFile(profile)
   }, [profile])
 

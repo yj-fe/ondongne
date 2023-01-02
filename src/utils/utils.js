@@ -39,5 +39,29 @@ export const fileFormatter = async (url, name, defaultType = 'image/jpeg') => {
   }
 
 export const numberFormatter = value => {
-	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	if(!value) return;
+
+	if(value.charAt(0) == 0) return '';
+
+	const num = value.toString().replaceAll(',', '');
+	const valid = !/[^0-9]/g.test(num);
+
+	if(!valid) return '';
+	
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+export const hourValidtion = (value) => {
+	const valid = /[^0-9]/g.test(value);
+
+	if(!valid) return false;
+
+
+	
+}
+export const minValidtion = (value) => {
+	const valid = /[^0-9]/g.test(value);
+
+	if(!valid) return false;
+
 }

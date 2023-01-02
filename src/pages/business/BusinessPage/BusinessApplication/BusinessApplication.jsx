@@ -85,15 +85,10 @@ function BusinessApplication() {
       categories.filter(category => category.checked === true).map(category => category.name)
     ]
 
-    // 활동지역
-    const newDelivery = [
-      deliveries.filter(delivery => delivery.checked === true).map(delivery => delivery.name)
-    ]
-
     setData({
       ...data,
       category: newCategory.join(', '),
-      delivery: newDelivery.join(','),
+      delivery: deliveries.join(','),
       files: files
     })
   }
@@ -115,7 +110,6 @@ function BusinessApplication() {
     }
 
   }
-
 
   useEffect(() => {
     dataHandler();
@@ -285,7 +279,6 @@ function BusinessApplication() {
         addressModelIsOpen &&
         <AddressModel
           setModelClose={() => setAddressModelIsOpen(false)}
-          deliveries={deliveries}
           setDeliverise={setDeliverise}
         />
       }

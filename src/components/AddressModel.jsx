@@ -75,11 +75,12 @@ const S = {
 };
 
 const AddressModel = ({
-    setModelClose, deliveries, setDeliverise
+    setModelClose, setDeliverise
 }) => {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [address, setAddress] = useState('');
+    const [list, setList] = useState([]);
 
     // 위치 검색
     const searchHandler = async () => {
@@ -87,7 +88,7 @@ const AddressModel = ({
             return false;
         }
 
-        setDeliverise([]);
+        setList([]);
         setErrorMessage('');
 
         const response = await searchLocation(address);
@@ -95,7 +96,7 @@ const AddressModel = ({
         if (message) setErrorMessage(message);
         if (data) {
             data.forEach(item => {
-                setDeliverise(state => ([
+                setList(state => ([
                     ...state,
                     { name: item, checked: false }
                 ]))
@@ -104,25 +105,32 @@ const AddressModel = ({
     }
 
     // 체크 핸들러
-    const checkHanler = (item, checked) => {
+    const checkHanler = (name, checked) => {
 
         setErrorMessage('')
 
         if (!checked) {
-            const count = deliveries.filter(delivery => delivery.checked === true)
+            const count = list.filter(item => item.checked === true)
             if (count.length == 7) {
                 return setErrorMessage('최대 7개까지 추가 가능합니다.');
             }
         }
 
-        setDeliverise(
-            deliveries.map(delivery =>
-                delivery.name === item
-                    ? { ...delivery, checked: !delivery.checked }
-                    : delivery
+        setList(
+            list.map(item =>
+                item.name === name
+                    ? { ...item, checked: !item.checked }
+                    : item
             )
         )
+    }
 
+    // 적용
+    const onSubmit = () => {
+        setDeliverise(
+            list.filter(item => item.checked === true).map(item => item.name)
+        );
+        setModelClose();
     }
 
     return (
@@ -158,8 +166,8 @@ const AddressModel = ({
                     {/* ============ 검색리스트 ============ */}
                     <S.List>
                         {
-                            deliveries.length > 0 &&
-                            deliveries.map((item, i) => (
+                            list.length > 0 &&
+                            list.map((item, i) => (
                                 <S.Item
                                     key={i}
                                     checked={item.checked}
@@ -177,7 +185,7 @@ const AddressModel = ({
                         }
                     </S.List>
                 </S.Body>
-                <S.Button onClick={setModelClose}>적용</S.Button>
+                <S.Button onClick={onSubmit}>적용</S.Button>
             </S.AlertBox>
         </Overlay>
     )
