@@ -1,67 +1,103 @@
 import React, { useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
-import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
-import ReactQuill, { Quill } from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import Confirm from 'components/commonUi/Confirm';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { editorFileUpload } from 'service/common';
+import 'utils/Editor.css';
 
-
-function BusinessProductEditInfo() {
-
-
-  const navigate = useNavigate();
+const BusinessProductEditInfo = ({ isOpen, close, data, dataHanler }) => {
   const [value, setValue] = useState('');
   const [confirm, setConfirm] = useState(null);
 
-  const modules = useMemo(
-    () => ({
-        toolbar: {
-          container: [
-            ["bold", "italic", "underline", "strike", "blockquote"],
-            [{ size: ["small", false, "large", "huge"] }, { color: [] }],
-            [
-                { list: "ordered" },
-                { list: "bullet" },
-                { indent: "-1" },
-                { indent: "+1" },
-                { align: [] },
-            ],
-            ["image", "video"],
-          ],
-        },
-    }), []);
+  // 파일업로드 이벤트
+  const customUploadAdapter = (loader) => {
+    return {
+      upload() {
+        return new Promise((resolve, reject) => {
+          loader.file.then(async (file) => {
+            await editorFileUpload(file)
+              .then((res) => {
+                resolve({
+                  default: res.data.data
+                });
+              })
+              .catch((err) => reject(err));
+          })
+        })
+      }
+    }
+  }
 
   return (
-    <div>
+    <L.Overlay
+      style={{ display: isOpen ? 'block' : 'none' }}
+    >
       <Layout
-          title="상품 수정"
-          cart={false}
-          bell={false}
-          onBackClick={() => {navigate(-1); }}
+        title="돌아가기"
+        cart={false}
+        bell={false}
+        onBackClick={() => {
+          setConfirm({
+            warn: true,
+            contents: `지금 페이지를 나가시면\n작성중인 데이터가 저장되지 않을 수 있습니다.`,
+            confirmText: "나가기",
+            cancelText: "취소",
+            onConfirmClick: () => {
+              setConfirm(null);
+              close();
+            },
+            onCancelClick: () => {
+              setConfirm(null);
+            }
+          });
+        }}
       >
-
         <L.Container _padding="0px" >
           <L.Contents _padding="0px" _height='100vh'>
-            <ReactQuill
-              theme="snow"
-              value={value}
-              modules={modules}
-              onChange={setValue}
+            <CKEditor
+              editor={ClassicEditor}
+              config={{
+                extraPlugins: [(function (editor) {
+                  editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                    return customUploadAdapter(loader);
+                  }
+                })],
+              }}
+              data={data.description}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                setValue(data);
+              }}
             />
-            <B.FixedActionButton>저장</B.FixedActionButton>
+            <B.FixedActionButton
+              onClick={() => {
+                dataHanler({
+                  ...data,
+                  description: value
+                })
+                close();
+              }}
+            >저장
+            </B.FixedActionButton>
           </L.Contents>
         </L.Container>
       </Layout>
       {
         confirm &&
         <Confirm
+          warn={confirm.warn}
+          contents={confirm.contents}
+          confirmText={confirm.confirmText}
+          cancelText={confirm.cancelText}
+          onConfirmClick={confirm.onConfirmClick}
+          onCancelClick={confirm.onCancelClick}
         />
       }
-    </div>
+    </L.Overlay>
   )
 }
 
-export default BusinessProductEditInfo
+export default BusinessProductEditInfo;

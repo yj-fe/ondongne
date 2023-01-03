@@ -30,38 +30,52 @@ export const businessNumberFormatter = (value) => {
 };
 
 // 사진 객체 반환
-export const fileFormatter = async (url, name, defaultType = 'image/jpeg') => {	
-    const response = await fetch(url);
-    const data = await response.blob();
-    return new File([data], name, {
-      type: data.type || defaultType,
-    });
-  }
+export const fileFormatter = async (url, name, defaultType = "image/jpeg") => {
+	const response = await fetch(url);
+	const data = await response.blob();
+	return new File([data], name, {
+		type: data.type || defaultType,
+	});
+};
 
-export const numberFormatter = value => {
-	if(!value) return;
+// 숫자 쉼표 처리
+export const numberFormatter = (value) => {
+	if (!value) return;
 
-	if(value.charAt(0) == 0) return '';
+	if (value.charAt(0) == 0) return "";
 
-	const num = value.toString().replaceAll(',', '');
+	const num = value.toString().replaceAll(",", "");
 	const valid = !/[^0-9]/g.test(num);
 
-	if(!valid) return '';
-	
-	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
+	if (!valid) return "";
 
-export const hourValidtion = (value) => {
-	const valid = /[^0-9]/g.test(value);
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
 
-	if(!valid) return false;
+// 파일 체크
+export const imageValidation = (file) => {
+	const fileSize = file.size;
+	const maxSize = 10 * 1024 * 1024;
+	const reg = /(.*?)\.(jpg|jpeg|png)$/;
 
+	if (!file.name.toLowerCase().match(reg)) {
+		return ".jpg/.jpeg/.png 형식의 파일을 첨부해주세요.";
+	}
 
-	
-}
-export const minValidtion = (value) => {
-	const valid = /[^0-9]/g.test(value);
+	if (fileSize > maxSize) {
+		return "사진 용량은 10MB 이내로 등록 가능합니다.";
+	}
+};
 
-	if(!valid) return false;
+export const totalPrice = (price, rate) => {
+	if (!price) return 0;
+	if (!rate) return price;
 
-}
+	const originPrice = Number(price.replaceAll(",", ""));
+
+	const result = numberFormatter(
+		(originPrice - originPrice * (Number(rate) / 100)).toString()
+	);
+
+	return result ? result : "0";
+};

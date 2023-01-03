@@ -9,6 +9,7 @@ const urls = {
 	findPassword: "/find/password",
 	searchLocation: "/search/location",
 	getLocal: "/getLocal",
+	editorFileUpload: "/editor/fileUpload",
 };
 
 /* ==============================
@@ -65,4 +66,15 @@ export function searchLocation(address) {
 ============================== */
 export function getLocal(address) {
 	return client.get(`${urls.getLocal}?address=${address}`);
+}
+
+/* ==============================
+    에디터 사진 업로드
+============================== */
+export function editorFileUpload(file) {
+	const headers = { "Content-Type": "multipart/form-data" };
+	const data = new FormData();
+	data.append("uploadFile", file);
+
+	return client.post(urls.editorFileUpload, data, { headers });
 }
