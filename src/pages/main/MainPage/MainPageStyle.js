@@ -8,6 +8,16 @@ export const MainNavBody = styled.div`
   gap: 8px;
   padding-bottom: 56px;
 `
+export const Body = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5F5F5;
+  gap: 8px;
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+`
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;

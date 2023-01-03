@@ -1,36 +1,45 @@
 import styled from "styled-components";
 
 export const LoginNavDiv = styled.div`
+		z-index: 30;
+		position: fixed;
+		display: flex;
+		justify-content: center;
+		top: 0;
+		left: 0;
+		width: 100%; 
+		height: 60px;
+		background: #FFF;
+		border-bottom: 1px solid ${props => props.theme.color.gray200};
+
+		@media(${props => props.theme.media.tablet}) {
+				border-bottom: 0;
+		}
+`;
+export const Inner = styled.div`
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 16px;
+	width: 728px;
+`;
+
+export const UtilBtn = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-sizing: border-box;
-	position: fixed;
-	height: 60px;
-	left: 0px;
-	right: 0px;
-	top: 0px;
-	background: #ffffff;
-	border-bottom: 1px solid #eeeeee;
-
-	@media only screen and (max-width: 390px) {
-		filter: drop-shadow(0px 3px 12px rgba(0, 0, 0, 0.06));
-	}
+	width: 24px;
+	height: 24px;
+	padding: 0;
 `;
-export const BackStyle = styled.svg`
-	position: absolute;
-	left: 31%;
-	top: calc(50% - 20px / 2);
-	height: 60px;
 
-	@media only screen and (max-width: 390px) {
-		left: 5%;
-	}
-`;
 export const LoginNavTitle = styled.div`
-	font-family: "Pretendard";
-	font-style: normal;
+	width: 100%;
 	font-weight: 600;
 	font-size: 18px;
 	color: #212121;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;

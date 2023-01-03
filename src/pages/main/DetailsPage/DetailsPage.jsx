@@ -21,7 +21,7 @@ import { ArrowBottom, Cart, MinusB, PlusB } from 'components/commonUi/Icon';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { ImgSize100, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
-import { LayerTextButton } from 'components/commonUi/Button';
+import { Badge, LayerTextButton } from 'components/commonUi/Button';
 
 function DetailsPage(props) {
 
@@ -110,22 +110,29 @@ function DetailsPage(props) {
 
                 <Line/>
                 <L.Contents _padding='16px 20px'>
-                  <L.FlexCols _gap={16}>
-                    <L.FlexCols _gap={4}>
-                      <T.Text _size={18} _weight={500} _color='gray900' >송이송이 달달 상큼 샤인머스켓 1송이 + 딸기 300g 증정</T.Text>
-                      <L.FlexRows _gap={4} _items='center'>
-                        <StarIcon/>
-                        <T.Text _size={11} _weight={400} _color='gray800' >(4.5)</T.Text>
-                      </L.FlexRows>
+                  <L.FlexRows _gap={12} _items='flex-start'>
+                    <L.FlexCols _gap={16}>
+                      <L.FlexCols _gap={4}>
+                        <Badge _width='95px' _height ='22px' _bg='red100' _size='12px' _color='red500' _weight={700}>1일 11시간 59분</Badge>
+                        <T.Text _size={18} _weight={500} _color='gray900' >송이송이 달달 상큼 샤인머스켓 1송이 + 딸기 300g 증정</T.Text>
+                        <L.FlexRows _gap={4} _items='center'>
+                          <StarIcon/>
+                          <T.Text _size={11} _weight={400} _color='gray800' >(4.5)</T.Text>
+                        </L.FlexRows>
+                      </L.FlexCols>
+                      <L.FlexCols _gap={4}>
+                        <L.FlexRows _gap={4} _items='center'>
+                          <T.Text _size={16} _weight={600} _color='red' >40%</T.Text>
+                          <Price>25,200원</Price>
+                        </L.FlexRows>
+                        <T.Text _size={20} _weight={600} _color='gray900' >18,000원</T.Text>
+                      </L.FlexCols>
                     </L.FlexCols>
-                    <L.FlexCols _gap={4}>
-                    <L.FlexRows _gap={4} _items='center'>
-                      <T.Text _size={16} _weight={600} _color='red' >40%</T.Text>
-                      <Price>25,200원</Price>
-                    </L.FlexRows>
-                      <T.Text _size={20} _weight={600} _color='gray900' >18,000원</T.Text>
-                    </L.FlexCols>
-                  </L.FlexCols>
+                    <Badge _fdir='column' _width='115px' _height ='74px' _bg='gray50' _padding='16px'>
+                      <T.Text _size={12} _weight={400} _color='gray600' >최소 주문량</T.Text>
+                      <T.Text _size={16} _weight={600} _color='gray800' >10/100개</T.Text>
+                    </Badge>
+                  </L.FlexRows>
                 </L.Contents>
               </L.FlexCols>
 

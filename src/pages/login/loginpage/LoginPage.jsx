@@ -17,6 +17,11 @@ import Confirm from 'components/commonUi/Confirm';
 import { login } from "service/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "store/slices/auth";
+import { Body } from "pages/main/MainPage/MainPageStyle";
+import * as L from 'components/commonUi/Layout';
+import { S } from 'components/layout/Layout/LayoutStyle'
+import { LayerOptionButton } from "components/commonUi/Button";
+
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -129,101 +134,117 @@ function LoginPage() {
 
   return (
     <div>
-      <LoginHeader title="로그인" />
-      <LoginBody>
-        <LogoImg src={Logo} />
-        <InputForm>
-          <Input
-            placeholder="이메일"
-            name="email"
-            type='text'
-            value={account.email}
-            onChange={onChangeInput}
-          />
-          <PwdContainer>
-            <PwdInput
-              name="password"
-              type={showPassword ? "text" : "password"}
-              value={account.password}
-              placeholder="비밀번호"
-              onChange={onChangeInput}
-            />
-            <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <EyeOn /> : <EyeOff />}
-            </EyeOffStyle>
-          </PwdContainer>
+      <S.Wrapper>
+        <LoginHeader title="로그인" />
 
-          <LoginButton
-            type="button"
-            onClick={onSubmut}
-            disabled={!active}
-            color={active}
-          >
-            로그인</LoginButton>
-        </InputForm>
-        <FindStyle>
-          <Link to="/login/find/email">
-            <FindAccount>
-              이메일 찾기
-            </FindAccount>
-          </Link>
-          <Bar />
-          <Link to="/login/find/password">
-            <FindAccount>
-              비밀번호 찾기
-            </FindAccount>
-          </Link>
-        </FindStyle>
-        <GapContainer>
-          <SnsStyle>
-            <SnsTextStyle>
-              <Horizon />
-              <Snstext>SNS로 1초만에 시작하기</Snstext>
-              <Horizon />
-            </SnsTextStyle>
-            <SnsIcon>
-              <Naver onClick={loginNaver} />
-              <Kakao onClick={loginKakao} />
-              <Google onClick={loginGoogle} />
-              {/* <Apple onClick={loginApple}/> */}
-            </SnsIcon>
-          </SnsStyle>
-          <LoginFooter>
-            <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
-            <Link to="/login/signup">
-              <Button>
-                <SignupText>회원가입</SignupText>
-                <ArrowStyle>
-                  <Arrow />
-                </ArrowStyle>
-              </Button>
-            </Link>
-          </LoginFooter>
-        </GapContainer>
-      </LoginBody>
-      {
-        alert &&
-        <Alert
-          title={alert.title}
-          contents={alert.contents}
-          buttonText={alert.buttonText}
-          onButtonClick={alert.onButtonClick}
-          onOverlayClick={alert.onOverlayClick}
-        />
-      }
-      {
-        confirm &&
-        <Confirm
-          contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
-          confirmText="네"
-          cancelText="아니오"
-          onConfirmClick={() => { navigate('/login/signup') }}
-          onCancelClick={() => {
-            setConfirm(false)
-            navigate('/login')
-          }}
-        />
-      }
+        <S.Main>
+          <L.Contents _padding='32px 40px' _height='100vh'>
+            <L.FlexCols _gap={60}>
+              <L.FlexRows _content='center'>
+                <LogoImg src={Logo} />
+              </L.FlexRows>
+              <L.FlexCols _gap={16}>
+                <InputForm>
+                  <Input
+                    placeholder="이메일"
+                    name="email"
+                    type='text'
+                    value={account.email}
+                    onChange={onChangeInput}
+                  />
+                  <PwdContainer>
+                    <PwdInput
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      value={account.password}
+                      placeholder="비밀번호"
+                      onChange={onChangeInput}
+                    />
+                    <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? <EyeOn /> : <EyeOff />}
+                    </EyeOffStyle>
+                  </PwdContainer>
+
+                  <LoginButton
+                    type="button"
+                    onClick={onSubmut}
+                    disabled={!active}
+                    color={active}
+                  >
+                    로그인</LoginButton>
+
+                </InputForm>
+                <FindStyle>
+                  <Link to="/login/find/email">
+                    <FindAccount>
+                      이메일 찾기
+                    </FindAccount>
+                  </Link>
+                  <Bar />
+                  <Link to="/login/find/password">
+                    <FindAccount>
+                      비밀번호 찾기
+                    </FindAccount>
+                  </Link>
+                </FindStyle>
+              </L.FlexCols>
+
+              <GapContainer>
+                <SnsStyle>
+                  <SnsTextStyle>
+                    <Horizon />
+                    <Snstext>SNS로 1초만에 시작하기</Snstext>
+                    <Horizon />
+                  </SnsTextStyle>
+                  <SnsIcon>
+                    <Naver onClick={loginNaver} />
+                    <Kakao onClick={loginKakao} />
+                    <Google onClick={loginGoogle} />
+                    {/* <Apple onClick={loginApple}/> */}
+                  </SnsIcon>
+                </SnsStyle>
+              </GapContainer>                     
+
+
+            {
+              alert &&
+              <Alert
+              title={alert.title}
+              contents={alert.contents}
+              buttonText={alert.buttonText}
+              onButtonClick={alert.onButtonClick}
+              onOverlayClick={alert.onOverlayClick}
+              />
+            }
+            {
+              confirm &&
+              <Confirm
+              contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
+              confirmText="네"
+              cancelText="아니오"
+              onConfirmClick={() => { navigate('/login/signup') }}
+              onCancelClick={() => {
+                setConfirm(false)
+                navigate('/login')
+              }}
+              />
+            }
+
+                <LoginFooter>
+                  <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
+                  <Link to="/login/signup">
+                    <Button>
+                      <SignupText>회원가입</SignupText>
+                      <ArrowStyle>
+                        <Arrow />
+                      </ArrowStyle>
+                    </Button>
+                  </Link>
+                </LoginFooter>
+            </L.FlexCols>
+          </L.Contents>
+        </S.Main>
+      </S.Wrapper>
     </div>
   );
 }

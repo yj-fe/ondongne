@@ -192,7 +192,7 @@ export const FilterButton = styled.button`
 `;
 export const Badge = styled.button`
     display: flex;
-    flex-direction: row;
+    flex-direction: ${props => props._fdir || 'row'};
     justify-content: center;
     align-items: center;
     padding: ${props => props._padding || '2px 6px'};
