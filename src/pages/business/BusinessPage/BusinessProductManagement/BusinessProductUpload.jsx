@@ -7,18 +7,22 @@ import * as B from 'components/commonUi/Button';
 import * as C from 'components/commonUi/CommonStyles';
 import CheckBox from 'components/commonUi/CheckBox';
 import { ContentDiv, Input, RightStyle, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
-import { Down, ArrowRightB, X_Icon, Delete } from 'components/commonUi/Icon';
+import { Down, ArrowRightB, X_Icon, Delete, Calendar } from 'components/commonUi/Icon';
 import { useEffect } from 'react';
 import { imageValidation, numberFormatter, totalPrice } from 'utils/utils';
 import CategorySelect from 'components/commonUi/CategorySelect';
 import BusinessProductEditInfo from './BusinessProductEditInfo';
 import { createItem } from 'service/item';
+import Alert from 'components/commonUi/Alert';
+import CalendarModel from 'components/commonUi/CalendarModel';
 
 function BusinessProductUpload() {
 
   const navigate = useNavigate();
   const [select, setSelect] = useState(false);
   const [editor, isEditor] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const [calendar, setCalendar] = useState(false);
   const [categoryError, setCategoryError] = useState('');
   const [data, setData] = useState({
     type: '',
@@ -34,6 +38,14 @@ function BusinessProductUpload() {
     files: [],
   })
 
+  // 종료일 설정
+  const endDateHandler = (date) => {
+    setData({
+      ...data,
+      endDate: date,
+    })
+  }
+
   const recetiveTypeHandler = (value) => {
     return setData({
       ...data,
@@ -46,6 +58,15 @@ function BusinessProductUpload() {
   const onSubmit = async () => {
     const response = await createItem(data);
     console.log(response)
+
+    if (response.data.data) {
+      setAlert({
+        contents: response.data.message,
+        buttonText: "확인",
+        onButtonClick: () => navigate(-1),
+        onOverlayClick: () => navigate(-1),
+      })
+    }
   }
 
   return (
@@ -58,7 +79,7 @@ function BusinessProductUpload() {
       >
 
         <L.Container _padding="0px 0px 60px" >
-          <L.Contents _height='100vh'>
+          <L.Contents _height='auto'>
             <L.FlexCols _gap={40} _padding="8px 20px">
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">판매 종류</T.Text>
@@ -202,6 +223,57 @@ function BusinessProductUpload() {
                 </L.FlexCols>
               </L.FlexRows>
 
+              {
+                data.type === 'GROUP' &&
+                <>
+                  <L.FlexRows>
+                    <L.FlexCols _gap={16}>
+                      <T.Text _weight={600} _size={16} _color="gray900">최소 수량</T.Text>
+                      <TitleInfoDiv>
+                        <Input
+                          name='minCount'
+                          placeholder='0'
+                          value={data.minCount}
+                          onChange={e => setData({ ...data, minCount: numberFormatter(e.target.value) })}
+                          maxLength={10}
+                        />
+                        <span>개</span>
+                      </TitleInfoDiv>
+                    </L.FlexCols>
+
+                    <L.FlexCols _gap={16}>
+                      <T.Text _weight={600} _size={16} _color="gray900">최대 수량</T.Text>
+                      <TitleInfoDiv>
+                        <Input
+                          name='maxCount'
+                          placeholder='0'
+                          value={data.maxCount}
+                          onChange={e => setData({ ...data, maxCount: numberFormatter(e.target.value) })}
+                          maxLength={10}
+                        />
+                        <span>개</span>
+                      </TitleInfoDiv>
+                    </L.FlexCols>
+                  </L.FlexRows>
+
+                  <L.FlexCols _gap={16}>
+                    <T.Text _weight={600} _size={16} _color="gray900">판매 종료일</T.Text>
+                    <TitleInfoDiv
+                      onClick={() => setCalendar(true)}
+                    >
+                      <Input 
+                        disabled
+                        name='endDate'
+                        placeholder='판매 종료일 선택'
+                        style={{ background: '#fff' }}
+                        value={data.endDate ? data.endDate.split(' ')[0] : ''}
+                      />
+                      <span><Calendar /></span>
+                    </TitleInfoDiv>
+                  </L.FlexCols>
+                </>
+              }
+
 
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">배달/픽업 여부</T.Text>
@@ -251,6 +323,24 @@ function BusinessProductUpload() {
         data={data}
         dataHanler={setData}
       />
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
+      {
+        calendar &&
+        <CalendarModel
+          modelClose={() => setCalendar(false)}
+          onChange={endDateHandler}
+          dateFormat={'yyyy-MM-dd HH:mm:ss'}
+        />
+      }
     </div>
   )
 }

@@ -8,8 +8,6 @@ const urls = {
    비즈 상점 프로필 이미지 수정
 ============================== */
 export function createItem(data) {
-	console.log(data);
-
 	const headers = { "Content-Type": "multipart/form-data" };
 	const formData = new FormData();
 	formData.append("type", data.type);
