@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 export const MainBestCouponBody = styled.div`
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  /* padding: 20px 0px 20px 20px; */
   gap: 32px;
-  width: 728px;
+  max-width: 728px;
   height: 310px;
   background: #FFFFFF;
 `
@@ -11,16 +13,19 @@ export const MainBestCouponTop = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px;
-  gap: 40px;
-  width: 688px;
-  height: 26px;
+  max-width: 100%;
+  height: auto;
+  margin-right: 20px;
+  @media only screen and (max-width: 728px) { 
+      max-width: 100%;
+    }
 `
 export const TopTitle = styled.p`
   font-weight: 700;
   font-size: 18px;
   line-height: 26px;
   color: #000000;
+  width: 150px;
 `
 export const TopAll = styled.p`
   font-weight: 500;
@@ -34,8 +39,11 @@ export const MainBestCouponContent = styled.div`
   align-items: flex-start;
   padding-top: 32px;
   gap: 16px;
-  width: 688px;
-  height: 212px;
+  width: 100%;
+  height: auto;
+  @media only screen and (max-width: 728px) { 
+      max-width: 100%;
+    }
 `
 export const ContentProduct = styled.div`
   display: flex;

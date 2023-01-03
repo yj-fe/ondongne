@@ -187,23 +187,28 @@ export const Logo = styled.img`
   width: 72px;
   height: 32px;
 `
+export const FooterDiv = styled.div`
+  width: 728px;
+  @media only screen and (max-width: 728px) { 
+      width: 100%;
+    } 
+`
 export const Footer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  width: 728px;
+  /* text-align: left; */
+  width: 100%;
   height: 156px;
   padding: 20px;
   gap: 12px;
   
-  > div {
-    max-width: 728px;
+  /* > div {
     width: 100%;
 
     @media only screen and (max-width: 728px) { 
-      width: 100vw;
-    }
+      width: 100%;
+    } */
   }
 `
 export const FooterText = styled.div`

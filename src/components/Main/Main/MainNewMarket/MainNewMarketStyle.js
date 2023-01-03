@@ -35,16 +35,15 @@ export const NewMarketDiv = styled.div`
   padding: 0px;
   gap: 32px;
   width: 688px;
-  height: 496px;
+  height: auto;
 `
 export const NewMarketContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding-top: 32px;
   gap: 16px;
   width: 688px;
-  height: 232px;
+  height: auto;
 `
 export const ContentProduct = styled.div`
   display: flex;

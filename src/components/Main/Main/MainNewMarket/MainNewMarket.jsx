@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import newmarket from 'assets/data/newmarket'
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
-
-import {NewMarketBody,NewMarketContent,NewMarketDiv,NewMarketTop,TopAll,TopTitle,ContentDiv,ContentImg,ContentImgBadge,ContentImgDiv,ContentInfo,ContentMarket,ContentMarketImg,ContentProduct,ContentStyle,ContentTextStyle} from './MainNewMarketStyle'
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+import {NewMarketContent,NewMarketDiv,ContentDiv,ContentImg,ContentImgBadge,ContentImgDiv,ContentInfo,ContentMarket,ContentMarketImg,ContentProduct,ContentStyle,ContentTextStyle} from './MainNewMarketStyle'
 
 
 function MainNewMarket() {
@@ -10,12 +11,10 @@ function MainNewMarket() {
 
   return (
     <div>
-      <NewMarketBody>
-        <NewMarketTop>
-          <TopTitle>우리동네 신규 입점</TopTitle>
-          <TopAll>전체 보기</TopAll>
-        </NewMarketTop>
-
+        <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
+          <T.Text _size={18} _weight={700} _color='black'>우리동네 신규 입점</T.Text>
+          <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+        </L.FlexRows>
         <NewMarketDiv>
           <NewMarketContent>
           {
@@ -40,7 +39,6 @@ function MainNewMarket() {
             }
           </NewMarketContent>
         </NewMarketDiv>
-      </NewMarketBody>
 
 
 

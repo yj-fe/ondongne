@@ -44,6 +44,7 @@ export const FlexCols = styled.div`
     flex-wrap: wrap;
     gap: ${props => props._gap || 8}px;
     width: ${props => props._width || '100%'};
+    padding: ${props => props._padding || '0px'};
 
 `;
 

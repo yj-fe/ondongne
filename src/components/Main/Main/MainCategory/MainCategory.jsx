@@ -10,7 +10,7 @@ import { ReactComponent as Drink } from "assets/main/category/drink.svg";
 import { ReactComponent as Pet } from "assets/main/category/Pet.svg";
 import { ReactComponent as Etc } from "assets/main/category/Etc.svg";
 
-import {MainCategoryBody,MainCategoryIcon,MainCategoryItem,MainCategoryRow,MainCategoryText} from './MainCategoryStyle'
+import {MainCategoryBody,MainCategoryItem,MainCategoryRow,MainCategoryText} from './MainCategoryStyle'
 
 
 function MainCategory() {
@@ -18,61 +18,52 @@ function MainCategory() {
     <div>
       <MainCategoryBody>
 
-
         <MainCategoryRow>
-
           <MainCategoryItem>
-            <MainCategoryIcon><Vege/></MainCategoryIcon>
+            <Vege/>
             <MainCategoryText>야채/과일</MainCategoryText>
           </MainCategoryItem>
           <MainCategoryItem>
-            <MainCategoryIcon><Meat/></MainCategoryIcon>
+            <Meat/>
             <MainCategoryText>정육</MainCategoryText>
           </MainCategoryItem>
           <MainCategoryItem>
-            <MainCategoryIcon><Sea/></MainCategoryIcon>
+            <Sea/>
             <MainCategoryText>수산/해산</MainCategoryText>
           </MainCategoryItem>
           <MainCategoryItem>
-            <MainCategoryIcon><Rice/></MainCategoryIcon>
+            <Rice/>
             <MainCategoryText>쌀/잡곡</MainCategoryText>
           </MainCategoryItem>
           <MainCategoryItem>
-            <MainCategoryIcon><Food/></MainCategoryIcon>
+            <Food/>
             <MainCategoryText>식품</MainCategoryText>
           </MainCategoryItem>
-
         </MainCategoryRow>
 
 
         <MainCategoryRow>
-
           <MainCategoryItem>
-            <MainCategoryIcon><Daily/></MainCategoryIcon>
+            <Daily/>
             <MainCategoryText>생활용품</MainCategoryText>
           </MainCategoryItem>
           <MainCategoryItem>
-            <MainCategoryIcon><Dessert/></MainCategoryIcon>
+            <Dessert/>
             <MainCategoryText>디저트</MainCategoryText>
           </MainCategoryItem>
           <MainCategoryItem>
-            <MainCategoryIcon><Drink/></MainCategoryIcon>
+            <Drink/>
             <MainCategoryText>음료/주류</MainCategoryText>
           </MainCategoryItem>
           <MainCategoryItem>
-            <MainCategoryIcon><Pet/></MainCategoryIcon>
+            <Pet/>
             <MainCategoryText>반려동물</MainCategoryText>
           </MainCategoryItem>
           <MainCategoryItem>
-            <MainCategoryIcon><Etc/></MainCategoryIcon>
+            <Etc/>
             <MainCategoryText>기타</MainCategoryText>
           </MainCategoryItem>
-
         </MainCategoryRow>
-
-
-
-
 
       </MainCategoryBody>
     </div>

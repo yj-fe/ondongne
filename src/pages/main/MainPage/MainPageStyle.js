@@ -14,7 +14,7 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: #6e6868;
-  width: 728px;
+  max-width: 728px;
   height: auto;
   padding: 0;
 
@@ -28,6 +28,7 @@ export const MainContainer = styled.div`
   }
 `
 export const Img = styled.img`
+  margin-top: 60px;
   width: 100%;
   height: auto;  
 `

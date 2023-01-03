@@ -12,16 +12,16 @@ import { ReactComponent as Filter } from "assets/main/filter.svg";
 import Image from 'assets/main/shine.png'
 import ReviewImg from 'assets/main/reviewimg.png'
 import Avatar from 'assets/common/avatar.png'
-import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailImg, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketLocation, MarketName, MarketProfile, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileImg, ProfileName, ProfileTextDiv, MoreStyle, FinalPrice, FlagStyle, FlagText, IconStyle, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile } from './DetailsPageStyle'
-import MainHeader from 'components/Main/Main/BasicHeader/BasicHeader';
+import { DetailButtonDiv, DetailButtonStyle, DetailImg, DetailTabInfo, DetailTabReview, MarketComments, TabInfoContentText, TabInfoContentTitle, TypeLabel, TypeLabelInfo, TypeTextStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketReviewDiv, Price, ProfileDiv, ProfileTextDiv, MoreStyle, FlagStyle, FlagText, IconStyle, Line, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, ButtonStyle, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, OrderToggleBox } from './DetailsPageStyle'
 import ModalMorePage from 'components/Main/More/ModalMorePage'
 import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
 import Confirm from 'components/commonUi/Confirm';
-import { Cart } from 'components/commonUi/Icon';
-
-
-
+import { ArrowBottom, Cart, MinusB, PlusB } from 'components/commonUi/Icon';
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+import { ImgSize100, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { LayerTextButton } from 'components/commonUi/Button';
 
 function DetailsPage(props) {
 
@@ -30,6 +30,7 @@ function DetailsPage(props) {
   // let [item] = useState(data)
   // let {id} = useParams()
   const [modal, setModal] = useState(false);
+  const [orderToggle, setOrderToggle] = useState(false);
   const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
   const [confirm, setConfirm] = useState(false);
@@ -57,25 +58,78 @@ function DetailsPage(props) {
     }
   }
 
+  const openOrderToggle = () => {
+    setOrderToggle(true);
+  }
+  const closeOrderToggle = () => {
+    setOrderToggle(false);
+  }
 
 
 
   return (
     <div>
-      <MainHeader title="아재의 과일" to={"/"}/>
-      {/* <MainHeader title="아재의 과일"/> */}
-      <DetailBody>
-        <DetailContainer>
+
+      <Layout
+        title="아재의 과일"
+        bell={false}
+        cart={true}
+        onBackClick={() => navigate(-1)}
+      >
+        <L.Container >
+
+          <L.Contents _padding='0px 0px 60px 0px'>
+            <L.FlexCols >
+              <DetailImg src={Image} />
+
+              <L.FlexCols >
+                <L.FlexRows _content='space-between' _items='center' _padding=' 16px 20px'>
+                  <L.FlexRows _width='150px' _content='left'>
+                    <ImgSizeLayout  _bdr={50} _width={40} _height={40} src={Image} />
+                    <L.FlexCols _gap={1}>
+                      <T.Text _size={16} _weight={500} _color='gray900' >아재의 과일</T.Text>
+                      <T.Text _size={13} _weight={400} _color='gray600' >김포 풍무동</T.Text>
+                    </L.FlexCols>
+                  </L.FlexRows>
+                  <MarketIcon>
+                    <FlagStyle>
+                      <IconStyle>
+                        <Flag />
+                      </IconStyle>
+                      <FlagText>단골찜</FlagText>
+                    </FlagStyle>
+                    <MoreStyle
+                      type='button'
+                      onClick={ShowMoreModal}
+                    >
+                      <More />
+                    </MoreStyle>
+                </MarketIcon>
+
+                </L.FlexRows>
+
+                <Line/>
+                <L.Contents _padding='16px 20px'>
+                  <L.FlexCols _gap={16}>
+                    <L.FlexCols _gap={4}>
+                      <T.Text _size={18} _weight={500} _color='gray900' >송이송이 달달 상큼 샤인머스켓 1송이 + 딸기 300g 증정</T.Text>
+                      <L.FlexRows _gap={4} _items='center'>
+                        <StarIcon/>
+                        <T.Text _size={11} _weight={400} _color='gray800' >(4.5)</T.Text>
+                      </L.FlexRows>
+                    </L.FlexCols>
+                    <L.FlexCols _gap={4}>
+                    <L.FlexRows _gap={4} _items='center'>
+                      <T.Text _size={16} _weight={600} _color='red' >40%</T.Text>
+                      <Price>25,200원</Price>
+                    </L.FlexRows>
+                      <T.Text _size={20} _weight={600} _color='gray900' >18,000원</T.Text>
+                    </L.FlexCols>
+                  </L.FlexCols>
+                </L.Contents>
+              </L.FlexCols>
+
           {/* <DetailImg src={props.item[id].img}/> */}
-          <DetailImg src={Image} />
-
-
-
-
-
-
-
-
           {/* <DetailMarketDiv>
             <DetailMarketInfo>
               <MarketProfile>
@@ -85,18 +139,6 @@ function DetailsPage(props) {
                   <MarketLocation>{props.item[id].location}</MarketLocation>
                 </ProfileName>
               </MarketProfile>
-
-              <MarketIcon>
-                <IconStyle>
-                  <Flag/>
-                </IconStyle>
-                <IconStyle>
-                  <More/>
-                </IconStyle>
-              </MarketIcon>
-            </DetailMarketInfo>
-
-            <Line/>
 
             <DetailMarketTitle>
               <MarketTitle>{props.item[id].title}</MarketTitle>
@@ -112,92 +154,42 @@ function DetailsPage(props) {
             </DetailMarketTitle>
           </DetailMarketDiv> */}
 
-          <DetailMarketDiv>
-            <DetailMarketInfo>
-              <MarketProfile>
-                <ProfileImg src={Image} />
-                <ProfileName>
-                  <MarketName>아재의 과일</MarketName>
-                  <MarketLocation>김포 풍무동</MarketLocation>
-                </ProfileName>
-              </MarketProfile>
 
-              <MarketIcon>
-                <FlagStyle>
-                  <IconStyle>
-                    <Flag />
-                  </IconStyle>
-                  <FlagText>단골찜</FlagText>
-                </FlagStyle>
-                <MoreStyle
-                  type='button'
-                  onClick={ShowMoreModal}
+              <L.FlexRows _content='center' _items='center' _gap='0px' _height='40px'>
+                <DetailTabInfo
+                  onClick={() => { setDetailTab(0); }}
+                  infocolor={detailTab === 0}
                 >
-                  <More />
-                </MoreStyle>
-              </MarketIcon>
-            </DetailMarketInfo>
+                  상세정보
+                </DetailTabInfo>
+                <DetailTabReview
+                  onClick={() => { setDetailTab(1); }}
+                  reviewcolor={detailTab === 1}
+                >
+                  상품리뷰
+                </DetailTabReview>
+              </L.FlexRows>
 
-            <Line />
+              <L.Contents _content='center' _items='center' _gap='0px' _padding='16px 20px'>
+                <TabContent detailTab={detailTab} />
+              </L.Contents>
 
-            <DetailMarketTitle>
-              <MarketTitle>송이송이 달달 상큼 샤인머스켓 1송이 + 딸기 300g 증정</MarketTitle>
-              <RateStyle>
-                <Star><StarIcon /></Star>
-                <Number>(4.5)</Number>
-              </RateStyle>
-              <DiscountStyle>
-                <Discount>40%</Discount>
-                <Price>25,200원</Price>
-              </DiscountStyle>
-              <FinalPrice>18,000원</FinalPrice>
-            </DetailMarketTitle>
-          </DetailMarketDiv>
-
-
-
-
-
-
-
-
-          <DetailTabDiv>
-
-            <TabButtonStyle>
-              <DetailTabInfo
-                onClick={() => { setDetailTab(0); }}
-                infocolor={detailTab === 0}
-              >
-                상세정보
-              </DetailTabInfo>
-              <DetailTabReview
-                onClick={() => { setDetailTab(1); }}
-                reviewcolor={detailTab === 1}
-              >
-                상품리뷰
-              </DetailTabReview>
-            </TabButtonStyle>
-
-            <TabContentStyle>
-              <TabContent detailTab={detailTab} />
-            </TabContentStyle>
-
-
-          </DetailTabDiv>
-
-
-
-
-
-        </DetailContainer>
         
-        <ButtonStyle>
-        {/* <Cart/> */}
-          <DetailButtonDiv>
-            <DetailButtonStyle onClick={paymentsOrder}>구매하기</DetailButtonStyle>
-          </DetailButtonDiv>
-        </ButtonStyle>
-      </DetailBody>
+              <ButtonStyle>
+              {orderToggle && <OrderToggle closeOrderToggle={closeOrderToggle}/>}
+                <DetailButtonDiv>
+                  <LayerTextButton _padding='0px' _width='48px'>
+                    <Cart/>
+                  </LayerTextButton>
+                  <DetailButtonStyle onClick={()=>{paymentsOrder(); openOrderToggle();}}>구매하기</DetailButtonStyle>
+                </DetailButtonDiv>
+              </ButtonStyle>
+
+
+          </L.FlexCols>
+        </L.Contents>
+      </L.Container>
+    </Layout>
       {modal && <ModalMorePage PropsModal={PropsModal} />}
       {
         confirm &&
@@ -226,102 +218,102 @@ function TabContent(props) {
 
     //=====================상세정보=====================
     <div>
-      <TabBody>
-        <TabInfoType>
-          <TypeTextStyle>
-            <TypeLabel>구매 형태</TypeLabel>
-            <TypeLabelInfo>공동구매</TypeLabelInfo>
-          </TypeTextStyle>
-          <TypeTextStyle>
-            <TypeLabel>카테고리</TypeLabel>
-            <TypeLabelInfo>야채/과일</TypeLabelInfo>
-          </TypeTextStyle>
-          <TypeTextStyle>
-            <TypeLabel>배달/주문금액</TypeLabel>
-            <TypeLabelInfo>배달비 2,000원, 최소주문 10,000원</TypeLabelInfo>
-          </TypeTextStyle>
-          <TypeTextStyle>
-            <TypeLabel>배달/픽업</TypeLabel>
-            <TypeLabelInfo>배달 가능, 픽업 가능</TypeLabelInfo>
-          </TypeTextStyle>
-          <CouponTextStyle>
-            <CouponLabel>쿠폰</CouponLabel>
-            <CouponLabelInfoDiv>
-              <CouponLabelInfo1>해당 상점에 쿠폰이 있습니다.</CouponLabelInfo1>
-              <CouponLabelInfo2>해당 상점에 쿠폰이 있습니다.</CouponLabelInfo2>
-            </CouponLabelInfoDiv>
-          </CouponTextStyle>
-
-        </TabInfoType>
-      </TabBody>
+      <L.FlexCols>
+        <TypeTextStyle>
+          <TypeLabel>구매 형태</TypeLabel>
+          <TypeLabelInfo>공동구매</TypeLabelInfo>
+        </TypeTextStyle>
+        <TypeTextStyle>
+          <TypeLabel>카테고리</TypeLabel>
+          <TypeLabelInfo>야채/과일</TypeLabelInfo>
+        </TypeTextStyle>
+        <TypeTextStyle>
+          <TypeLabel>배달/주문금액</TypeLabel>
+          <TypeLabelInfo>배달비 2,000원, 최소주문 10,000원</TypeLabelInfo>
+        </TypeTextStyle>
+        <TypeTextStyle>
+          <TypeLabel>배달/픽업</TypeLabel>
+          <TypeLabelInfo>배달 가능, 픽업 가능</TypeLabelInfo>
+        </TypeTextStyle>
+        <CouponTextStyle>
+          <CouponLabel>쿠폰</CouponLabel>
+          <CouponLabelInfoDiv>
+            <CouponLabelInfo1>해당 상점에 쿠폰이 있습니다.</CouponLabelInfo1>
+            <CouponLabelInfo2>상점(스토어) > 소식을 확인해 주세요.</CouponLabelInfo2>
+          </CouponLabelInfoDiv>
+        </CouponTextStyle>
+      </L.FlexCols>
       <Line />
-      <TabBody>
-        <TabInfoContent>
-          <TabInfoContentTitle>상품 정보</TabInfoContentTitle>
-          <TabInfoContentText>
-            <p>과일 행사 안내(10.20)</p>
-            <p>샤인머스켓 한송이를 마진 낮게 잡고 알뜰 구매하실 수 있도록 할인 판매 합니다.</p>
-            <br />
-            <p>* 발주 방법</p>
-            <p>장바구니에 담아 결제까지 앱에서 한번에</p>
-            <br />
-            <p>*수령 방법</p>
-            <p>직접배달, 수령 선택에 따라 진행합니다.</p>
-            <p>수령 시 앱에서 구매 이력을 보여 주세요~</p>
-            <br />
-            <p>* 구매자 특별 혜택</p>
-            <p>직접 수령을 통해 방문 주시면</p>
-            <p>특별한 서비스를 드려요~</p>
-            <br />
-            <p>많은 방문 부탁드립니다.</p>
-          </TabInfoContentText>
-        </TabInfoContent>
-      </TabBody>
+      <L.FlexCols>
+      <TabInfoContentTitle>상품 정보</TabInfoContentTitle>
+      <TabInfoContentText>
+        <p>과일 행사 안내(10.20)</p>
+        <p>샤인머스켓 한송이를 마진 낮게 잡고 알뜰 구매하실 수 있도록 할인 판매 합니다.</p>
+        <br />
+        <p>* 발주 방법</p>
+        <p>장바구니에 담아 결제까지 앱에서 한번에</p>
+        <br />
+        <p>*수령 방법</p>
+        <p>직접배달, 수령 선택에 따라 진행합니다.</p>
+        <p>수령 시 앱에서 구매 이력을 보여 주세요~</p>
+        <br />
+        <p>* 구매자 특별 혜택</p>
+        <p>직접 수령을 통해 방문 주시면</p>
+        <p>특별한 서비스를 드려요~</p>
+        <br />
+        <p>많은 방문 부탁드립니다.</p>
+      </TabInfoContentText>
+    </L.FlexCols>
     </div>,
 
     //=====================상품리뷰=====================
     <div>
-      <TabBody>
-        <TabReviewType>
-          <ReviewRateStyle>
-            <ReviewRateDiv>
-              <ReviewStar><StarIcon2 /></ReviewStar>
-            </ReviewRateDiv>
-            <ReviewRateDiv>
-              <ReviewNum color="#212121">4.5</ReviewNum>
-              <ReviewNum color="#BDBDBD">/ 5</ReviewNum>
-            </ReviewRateDiv>
-          </ReviewRateStyle>
+      <L.FlexCols _gap='0px'>
+        <L.FlexCols _gap={4} _padding='20px 0px'>
+          <L.FlexRows _gap={4} _content='center' _items='center'>
+            <StarIcon2 />
+          </L.FlexRows>
+          <L.FlexRows _gap={4} _content='center' _items='center'>
+            <T.Text _size={20} _weight={500} _color='gray900' >4.5</T.Text>
+            <T.Text _size={20} _weight={500} _color='gray400' >/ 5</T.Text>
+          </L.FlexRows>
+        </L.FlexCols>
 
-
-          <ReviewListStyle>
-
-            <ReviewMenu>
-              <MenuQuantity>총 리뷰 3 건</MenuQuantity>
-              <MenuFilterDiv>
-                <MenuFilterText>최신 순</MenuFilterText>
-                <MenuFilterIcon><Filter /></MenuFilterIcon>
-              </MenuFilterDiv>
-            </ReviewMenu>
+        <L.FlexCols _gap={12} _padding='0px'>
+          <L.FlexRows _content='space-between' _items='center'>
+            <L.FlexRows  _content='left' _items='center' _gap={4}>
+              <T.Text _size={15} _weight={400} _color='gray900' >총 리뷰</T.Text>
+              <T.Text _size={15} _weight={400} _color='gray900' >3</T.Text>
+              <T.Text _size={15} _weight={400} _color='gray900' >건</T.Text>
+            </L.FlexRows>
+            <L.FlexRows  _content='right' _items='center' _gap={4}>
+              <T.Text _size={13} _weight={400} _color='gray900' >최신 순</T.Text>
+              <Filter />
+            </L.FlexRows>
+          </L.FlexRows>
 
             <Line />
 
             {/* =======Review1====== */}
-            <ReviewContentDiv>
-              <ReviewContentProfile>
-                <ReviewProfileStyle>
-                  <ReviewProfileImg src={Avatar} />
-                  <ProfileDiv>
-                    <ProfileTextDiv>
-                      <ReviewId>과일싹쓸이</ReviewId>
-                      <ReviewDate>2일 전</ReviewDate>
-                    </ProfileTextDiv>
-                    <div><Reviewstar /></div>
-                  </ProfileDiv>
-                </ReviewProfileStyle>
-                {/* <ReportText>신고하기</ReportText> */}
-              </ReviewContentProfile>
-              <UploadImg src={ReviewImg} />
+            <L.FlexRows _content='space-between' _items='center'>
+              <L.FlexRows>
+                <ReviewProfileImg src={Avatar} />
+                <L.FlexCols _gap={4}>
+                  <L.FlexRows _items='center' _content='left'>
+                    <T.Text _size={16} _weight={600}>과일싹쓸이</T.Text>
+                    <ReviewDate>2일 전</ReviewDate>
+                  </L.FlexRows>
+                  <L.FlexRows _gap={8}  _items='center' _content='left'>
+                    <Reviewstar />
+                  </L.FlexRows>
+                </L.FlexCols>
+              </L.FlexRows>
+              <L.FlexRows _width='50px'>
+                <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+              </L.FlexRows>
+            </L.FlexRows>
+
+            <UploadImg src={ReviewImg} />
               <Comments>맛있습니다~</Comments>
               <ReviewLikeStyle>
                 <ReviewLikeFrame color={true}>
@@ -330,32 +322,32 @@ function TabContent(props) {
                   <ReviewLikeText color={true}>1</ReviewLikeText>
                 </ReviewLikeFrame>
               </ReviewLikeStyle>
-            </ReviewContentDiv>
             {/* =======Review2====== */}
-            <ReviewContentDiv>
-              <ReviewContentProfile>
-                <ReviewProfileStyle>
-                  <ReviewProfileImg src={Avatar} />
-                  <ProfileDiv>
-                    <ProfileTextDiv>
-                      <ReviewId>우리동네</ReviewId>
-                      <ReviewDate>2일 전</ReviewDate>
-                    </ProfileTextDiv>
-                    <div><Reviewstar /></div>
-                  </ProfileDiv>
-                </ReviewProfileStyle>
-                {/* <ReportText>신고하기</ReportText> */}
-              </ReviewContentProfile>
-              {/* <UploadImg src={ReviewImg}/> */}
-              <Comments>담에 또 먹을래요~~~~~~~~</Comments>
-              <ReviewLikeStyle>
-                <ReviewLikeFrame color={false}>
-                  <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
-                  <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
-                  <ReviewLikeText color={false}>0</ReviewLikeText>
-                </ReviewLikeFrame>
-              </ReviewLikeStyle>
-            </ReviewContentDiv>
+            <L.FlexRows _content='space-between' _items='center'>
+              <L.FlexRows>
+                <ReviewProfileImg src={Avatar} />
+                <L.FlexCols _gap={4}>
+                  <L.FlexRows _items='center' _content='left'>
+                    <T.Text _size={16} _weight={600}>우리동네</T.Text>
+                    <ReviewDate>2일 전</ReviewDate>
+                  </L.FlexRows>
+                  <L.FlexRows _gap={8}  _items='center' _content='left'>
+                    <Reviewstar />
+                  </L.FlexRows>
+                </L.FlexCols>
+              </L.FlexRows>
+              <L.FlexRows _width='50px'>
+                <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+              </L.FlexRows>
+            </L.FlexRows>
+            <Comments>담에 또 먹을래요~~~~~~~~</Comments>
+            <ReviewLikeStyle>
+              <ReviewLikeFrame color={false}>
+                <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
+                <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
+                <ReviewLikeText color={false}>0</ReviewLikeText>
+              </ReviewLikeFrame>
+            </ReviewLikeStyle>
 
             {/* =======MarketReview====== */}
             <MarketReviewDiv>
@@ -373,38 +365,73 @@ function TabContent(props) {
               </MarketCommentsStyle>
             </MarketReviewDiv>
             {/* =======Review3====== */}
-            <ReviewContentDiv>
-              <ReviewContentProfile>
-                <ReviewProfileStyle>
-                  <ReviewProfileImg src={Avatar} />
-                  <ProfileDiv>
-                    <ProfileTextDiv>
-                      <ReviewId>우리동네</ReviewId>
-                      <ReviewDate>2일 전</ReviewDate>
-                    </ProfileTextDiv>
-                    <div><Reviewstar /></div>
-                  </ProfileDiv>
-                </ReviewProfileStyle>
-                {/* <ReportText>신고하기</ReportText> */}
-              </ReviewContentProfile>
-              {/* <UploadImg src={ReviewImg}/> */}
-              <Comments>싱싱하고 맛있어요</Comments>
-              <ReviewLikeStyle>
-                <ReviewLikeFrame color={false}>
-                  <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
-                  <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
-                  <ReviewLikeText color={false}>0</ReviewLikeText>
-                </ReviewLikeFrame>
-              </ReviewLikeStyle>
-            </ReviewContentDiv>
+            <L.FlexRows _content='space-between' _items='center'>
+              <L.FlexRows>
+                <ReviewProfileImg src={Avatar} />
+                <L.FlexCols _gap={4}>
+                  <L.FlexRows _items='center' _content='left'>
+                    <T.Text _size={16} _weight={600}>아이덴잇</T.Text>
+                    <ReviewDate>22.11.30</ReviewDate>
+                  </L.FlexRows>
+                  <L.FlexRows _gap={8}  _items='center' _content='left'>
+                    <Reviewstar />
+                  </L.FlexRows>
+                </L.FlexCols>
+              </L.FlexRows>
+              <L.FlexRows _width='50px'>
+                <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+              </L.FlexRows>
+            </L.FlexRows>
+            
+            <Comments>싱싱하고 맛있어요</Comments>
+            <ReviewLikeStyle>
+              <ReviewLikeFrame color={false}>
+                <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
+                <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
+                <ReviewLikeText color={false}>0</ReviewLikeText>
+              </ReviewLikeFrame>
+            </ReviewLikeStyle>
 
 
 
-          </ReviewListStyle>
-        </TabReviewType>
-      </TabBody>
+        </L.FlexCols>
+      </L.FlexCols>
     </div>
   ][props.detailTab]
+}
+
+
+function OrderToggle(props){
+  return(
+    <div>
+      <OrderToggleBox>
+      <L.FlexCols _gap='0px' _padding='16px 20px'>
+        <button
+          type='button'
+          onClick={props.closeOrderToggle}
+        >
+          <L.FlexRows _content='center' _gap='0px' _items='center'>
+            <ArrowBottom/>
+          </L.FlexRows>
+        </button>
+        <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
+          <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
+          <L.FlexRows _content='right' _gap={12} _items='center' _width='112px'>
+            <MinusB/>
+            <T.Text _weight={500}>1</T.Text>
+            <PlusB/>
+          </L.FlexRows>
+        </L.FlexRows>
+        <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
+          <T.Text _size={16} _weight={500} _color='gray800' >상품 금액</T.Text>
+          <T.Text _size={16} _weight={600} _color='gray800' >270,000 원</T.Text>
+        </L.FlexRows>
+
+
+      </L.FlexCols>
+      </OrderToggleBox>
+    </div>
+  )
 }
 
 export default DetailsPage

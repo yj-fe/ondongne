@@ -23,6 +23,7 @@ export const NavContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	max-width: 728px;
+	padding: 0px 20px;
 	width: 100%;
 `;
 export const MainLocation = styled.div`

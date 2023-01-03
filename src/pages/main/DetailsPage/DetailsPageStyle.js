@@ -186,7 +186,7 @@ export const FinalPrice = styled.p`
 `
 export const DetailTabDiv = styled.div`
   height: auto;
-  
+
 `
 export const TabButtonStyle = styled.div`
   box-sizing: border-box;
@@ -195,7 +195,7 @@ export const TabButtonStyle = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0px;
-  width: 728px;
+  width: 100%;
   height: 40px;
   background: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
@@ -208,7 +208,7 @@ export const DetailTabInfo = styled.div`
   align-items: center;
   padding: 8px 20px;
   gap: 4px;
-  width: 364px;
+  width: 50%;
   height: 40px;
   border-bottom: 2px solid ${ props => props.infocolor  ? "#0B806F" : "#BDBDBD"};;
   /* border-bottom: 2px solid #0B806F; */
@@ -227,7 +227,7 @@ export const DetailTabReview = styled.div`
   padding: 8px 20px;
   gap: 4px;
   border-bottom: 2px solid ${ props => props.reviewcolor  ? "#0B806F" : "#BDBDBD"};;
-  width: 364px;
+  width: 50%;
   height: 40px;
 
   font-weight: 600;
@@ -245,7 +245,6 @@ export const ButtonStyle = styled.div`
   bottom: 0;
   justify-items: center;
   width: 100%;
-  width: 728px;
   height: 70px;
 `
 export const DetailButtonDiv = styled.div`
@@ -255,16 +254,18 @@ export const DetailButtonDiv = styled.div`
   align-items: center;
   padding: 4px 20px;
   gap: 8px;
-  width: 728px;
+  /* width: 100%; */
+  max-width: 728px; 
   height: 70px;
   background: #FFFFFF;
   box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.08);
+  
 `
 export const DetailButtonStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 688px;
+  width: 100%;
 
   height: 48px;
   bottom: 0;
@@ -293,7 +294,7 @@ export const TabInfoType = styled.div`
   align-items: flex-start;
   padding: 24px 20px;
   gap: 12px;
-  width: 728px;
+  width: 100%;
   height: 214px;
 `
 export const TypeTextStyle = styled.div`
@@ -370,6 +371,7 @@ export const TabInfoContent = styled.div`
   align-items: flex-start;
   padding: 24px 20px;
   gap: 12px;
+  width: 100%;
 `
 export const TabInfoContentTitle = styled.div`
   font-weight: 700;
@@ -390,7 +392,7 @@ export const TabReviewType = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 16px 20px;
-  width: 728px;
+  width: 100%;
   height: auto;
   background: #FFFFFF;
 `
@@ -408,7 +410,7 @@ export const ReviewListStyle = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  width: 688px;
+  width: 100%;
   height: auto;
 `
 export const ReviewMenu = styled.div`
@@ -511,8 +513,8 @@ export const ReportText = styled.p`
   font-size: 12px;
   color: #BDBDBD;`
 export const UploadImg = styled.img`
-  width: 688px;
-  height: 350px;
+  width: 100%;
+  height: auto;
   border-radius: 4px;
 `
 export const Comments = styled.p`
@@ -624,5 +626,20 @@ export const MarketComments = styled.div`
   font-weight: 400;
   font-size: 15px;
   color: #424242;
+`
+export const OrderToggleBox = styled.div`
+  position: absolute;
+  bottom: 0;
+  padding: 16px 20px;
+  margin-bottom: 70px;
+  border-radius: 20px 20px 0px 0px;
+  gap: 16px;
+  width: 728px;
+  height: 158px;
+  background: #FFFFFF;
+  box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.08);
+  @media only screen and (max-width: 728px) { 
+    width: 100%;
+  }
 `
 

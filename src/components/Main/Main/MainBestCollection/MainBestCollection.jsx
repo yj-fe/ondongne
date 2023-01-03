@@ -3,7 +3,8 @@ import {useNavigate} from 'react-router-dom'
 import maindata from 'assets/data/maindata'
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 import {LastChanceBody,LastChanceContent,LastChanceDiv,LastChanceTop,TopAll,TopTitle,ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,ContentTitle,Discount,DiscountStyle,Price,FinalPrice,RateStyle,Star,Number} from './MainBestCollectionStyle'
-
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 
 
 function MainBestCollection() {
@@ -20,12 +21,10 @@ function MainBestCollection() {
 
   return (
     <div>
-      <LastChanceBody>
-        <LastChanceTop>
-          <TopTitle>우리동네 인기 추천</TopTitle>
-          <TopAll>전체 보기</TopAll>
-        </LastChanceTop>
-
+        <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
+          <T.Text _size={18} _weight={700} _color='black'>우리동네 인기 추천</T.Text>
+          <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+        </L.FlexRows>
         <LastChanceDiv>
           <LastChanceContent
             // onClick={()=>{navigate(`/item/${}`, { state: {item}})}}
@@ -52,7 +51,6 @@ function MainBestCollection() {
             }
           </LastChanceContent>
         </LastChanceDiv>
-      </LastChanceBody>
 
 
 

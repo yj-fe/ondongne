@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import maindata from 'assets/data/maindata'
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 
 import {LastChanceBody,LastChanceContent,LastChanceDiv,LastChanceTop,ContentDate,ContentImg,Price,Discount,ContentMarket,ContentProduct,RateStyle,TopAll,TopTitle,ContentStyle,ContentTitle,Star,Number,DiscountStyle,FinalPrice} from './MainLastChanceStyle'
@@ -11,11 +13,10 @@ function MainLastChance() {
 
   return (
     <div>
-      <LastChanceBody>
-        <LastChanceTop>
-          <TopTitle>공동구매 마지막 찬스</TopTitle>
-          <TopAll>전체 보기</TopAll>
-        </LastChanceTop>
+        <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
+          <T.Text _size={18} _weight={700} _color='black'>공동구매 마지막 찬스</T.Text>
+          <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+        </L.FlexRows>
 
         <LastChanceDiv>
           <LastChanceContent>
@@ -44,7 +45,6 @@ function MainLastChance() {
         {/* <Routes>
           <Route path='/detail/:id' element={<DetailsPage item={item}/>}/>
         </Routes> */}
-      </LastChanceBody>
 
 
 

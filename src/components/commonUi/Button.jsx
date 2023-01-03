@@ -116,8 +116,8 @@ export const CouponButton = styled.button`
     }
 `;
 export const LayerTextButton = styled.button`
-    width: 100%;
-    padding: 0 16px;
+    width: ${props=> props._width || '100%'};
+    padding:${props=> props._padding || '0px 16px'} ;
     display: flex;
     gap: 8px;
     height: 48px;

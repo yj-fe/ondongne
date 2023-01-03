@@ -5,6 +5,7 @@ export const ImgSizeLayout = styled.img`
     width: ${props => props._width}px;
     height: ${props => props._height}px;
 `;
+
 export const RelativDiv = styled.div`
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width}px;

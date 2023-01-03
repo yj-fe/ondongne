@@ -275,3 +275,24 @@ export const Green_Search = () => (
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7689 13.7895C11.5982 14.7362 10.1077 15.3032 8.48482 15.3032C4.71923 15.3032 1.66663 12.2506 1.66663 8.48511C1.66663 4.71957 4.71923 1.66699 8.48482 1.66699C12.2504 1.66699 15.303 4.71957 15.303 8.48511C15.303 10.1081 14.7359 11.5986 13.7891 12.7694L18.122 17.1023C18.4037 17.384 18.4037 17.8407 18.122 18.1224C17.8403 18.4041 17.3836 18.4041 17.1019 18.1224L12.7689 13.7895ZM13.8636 8.48511C13.8636 11.4557 11.4554 13.8638 8.48482 13.8638C5.51419 13.8638 3.10602 11.4557 3.10602 8.48511C3.10602 5.51451 5.51419 3.10637 8.48482 3.10637C11.4554 3.10637 13.8636 5.51451 13.8636 8.48511Z" fill="#0B806F" />
     </svg>
 );
+
+export const ArrowBottom = () => (
+    <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L10 7L19 1" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+);
+
+export const MinusB = () => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="32" height="32" rx="4" fill="#F5F5F5"/>
+    <path d="M16 10V22" stroke="#424242" stroke-width="2" stroke-linecap="round"/>
+    <path d="M22 16H10" stroke="#424242" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+);
+
+export const PlusB = () => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="32" height="32" rx="4" fill="#F5F5F5"/>
+    <path d="M22 16H10" stroke="#424242" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+);

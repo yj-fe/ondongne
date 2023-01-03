@@ -8,11 +8,14 @@ export const ModalOutside = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: center;
   align-items: center;
   z-index: 9999;
 `
 export const ModalBody = styled.div`
+  left: 50%;
+  width: 100%;
+  max-width: ${props => props.theme.breakpoint.tablet}px;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -28,7 +31,6 @@ export const ModalDiv1 = styled.div`
   padding: 12px 4px;
   gap: 4px;
 
-  width: 728px;
   height: auto;
 
   background: #FFFFFF;
@@ -48,9 +50,9 @@ export const ModalDiv2 = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  width: 728px;
   height: auto;
   background: #FFFFFF;
+  width: 728px;
 `
 export const ModalTitle = styled.div`
   font-weight: 400;
@@ -63,7 +65,7 @@ export const ModalTitle = styled.div`
   padding: 16px 24px;
   gap: 4px;
 
-  width: 728px;
+  width: 100%;
   height: 56px;
 
   background: #FFFFFF;
@@ -78,7 +80,7 @@ export const ModalButton = styled.button`
   padding: 16px 20px;
   gap: 4px;
 
-  width: 728px;
+  width: 100%;
   height: 56px;
   background: #FFFFFF;
   border-top: 1px solid #EEEEEE;

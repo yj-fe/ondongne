@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import maindata from 'assets/data/maindata'
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
-
-import {LastChanceBody,LastChanceContent,LastChanceDiv,TopAll,TopTitle,ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,LastChanceTop,ContentTitle,Discount,DiscountStyle,Price,RateStyle,Star,Number,FinalPrice} from './MainBestProductStyle'
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+import {LastChanceContent,LastChanceDiv,ContentDate,ContentImg,ContentMarket,ContentProduct,ContentStyle,LastChanceTop,ContentTitle,Discount,DiscountStyle,Price,RateStyle,Star,Number,FinalPrice} from './MainBestProductStyle'
 
 
 function MainBestProduct() {
@@ -17,12 +18,10 @@ function MainBestProduct() {
 
   return (
     <div>
-      <LastChanceBody>
-        <LastChanceTop>
-          <TopTitle>My단골 인기 상품</TopTitle>
-          <TopAll>전체 보기</TopAll>
-        </LastChanceTop>
-
+        <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
+          <T.Text _size={18} _weight={700} _color='black'>My단골 인기 상품</T.Text>
+          <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+        </L.FlexRows>
         <LastChanceDiv>
           <LastChanceContent>
             {
@@ -47,7 +46,6 @@ function MainBestProduct() {
             }
           </LastChanceContent>
         </LastChanceDiv>
-      </LastChanceBody>
 
 
 

@@ -34,6 +34,7 @@ export const LastChanceDiv = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 32px;
+  height: auto;
 `
 export const LastChanceContent = styled.div`
   display: flex;
@@ -42,7 +43,7 @@ export const LastChanceContent = styled.div`
   padding-top: 32px;
   gap: 16px;
   width: 814px;
-  height: 316px;
+  height: 340px;
 `
 export const ContentProduct = styled.div`
   display: flex;

@@ -3,7 +3,7 @@ export const MainCategoryBody = styled.div`
   padding: 20px 60px;
   gap: 12px;
   background: #FFFFFF;
-  width: 728px;
+  width: 100%;
   height: 196px;
   display: flex;
   flex-direction: column;
@@ -21,12 +21,9 @@ export const MainCategoryRow = styled.div`
   justify-content: center;
   padding: 0px;
 
-  width: 608px;
+  width: 100%;
   height: 72px;
-@media only screen and (max-width: 600px) { 
-  width: 350px;
-height: 60px;
-  }
+
 `
 export const MainCategoryItem = styled.div`
   display: flex;
@@ -38,16 +35,8 @@ export const MainCategoryItem = styled.div`
   height: 72px;
   @media only screen and (max-width: 600px) { 
     /* width: 100%; */
-    width: 70px;
+    width: 100%;
     height: 60px;
-  }
-`
-export const MainCategoryIcon = styled.div`
-  width: 48px;
-  height: 48px;
-  @media only screen and (max-width: 600px) { 
-    width: 36px;
-    height: 36px;
   }
 `
 export const MainCategoryText = styled.div`

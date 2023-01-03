@@ -1,10 +1,14 @@
 import React from 'react'
 import {  Footer, Logo, FooterText,} from 'pages/main/MorePage/MorePageStyle'
 import FooterImg from 'assets/main/footerlogo.svg'
+import * as L from 'components/commonUi/Layout';
+import { FooterDiv } from 'pages/business/BusinessPage/BusinessPageStyle';
+
 
 function FooterLayout() {
   return (
     <div>
+      <FooterDiv>
         <Footer>
           <Logo src={FooterImg} />
           <FooterText>
@@ -14,6 +18,7 @@ function FooterLayout() {
             <span>고객센터: 010-2481-2002 / 이메일문의: pay.hyperlocality@gmail.com</span>
           </FooterText>
         </Footer>
+        </FooterDiv>
     </div>
   )
 }

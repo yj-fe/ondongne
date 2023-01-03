@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import bestcoupon from 'assets/data/bestcoupon'
 import newmarket from 'assets/data/newmarket'
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 
 import {MainBestCouponBody,MainBestCouponContent,MainBestCouponTop,TopAll,TopTitle,ContentCoupon,ContentCouponDiv,ContentDrive,ContentImg,ContentMarket,ContentPick,ContentProduct} from './MainBestCouponStyle'
 
@@ -10,11 +12,10 @@ function MainBestCoupon() {
 
   return (
     <div>
-      <MainBestCouponBody>
-        <MainBestCouponTop>
-          <TopTitle>우리동네 인기 쿠폰</TopTitle>
-          <TopAll>전체 보기</TopAll>
-        </MainBestCouponTop>
+        <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
+          <T.Text _size={18} _weight={700} _color='black'>우리동네 인기 쿠폰</T.Text>
+          <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+        </L.FlexRows>
 
         <MainBestCouponContent>
           {
@@ -25,7 +26,6 @@ function MainBestCoupon() {
             })
           }
         </MainBestCouponContent>
-      </MainBestCouponBody>
 
 
 

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import detailtest from 'assets/data/detailtest'
-
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 import {MainBestCouponBody,MainBestCouponContent,MainBestCouponTop,TopAll,TopTitle,ContentCoupon,ContentCouponDiv,ContentDrive,ContentImg,ContentMarket,ContentPick,ContentProduct} from './MainProductTestStyle'
 
 
@@ -10,23 +11,14 @@ function MainProductTest() {
 
   return (
     <div>
-      <MainBestCouponBody>
-        <MainBestCouponTop>
-          <TopTitle>우리동네 인기 상품</TopTitle>
-          <TopAll>전체 보기</TopAll>
-        </MainBestCouponTop>
+        <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
+          <T.Text _size={18} _weight={700} _color='black'>우리동네 인기 상품</T.Text>
+          <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+        </L.FlexRows>
 
         <MainBestCouponContent>
-          {
-            item.map((a, i)=>{
-              return(
-                <BestCouponCard item={item[i]} i={i}/>
-                )
-            })
-          }
+          <BestCouponCard item={item[0]}/>
         </MainBestCouponContent>
-      </MainBestCouponBody>
-
 
 
     </div>

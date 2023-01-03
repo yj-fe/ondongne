@@ -35,7 +35,7 @@ export const MainBestCouponContent = styled.div`
   padding-top: 32px;
   gap: 16px;
   width: 688px;
-  height: 212px;
+  height: auto;
 `
 export const ContentProduct = styled.div`
   display: flex;
