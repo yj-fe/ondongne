@@ -41,6 +41,17 @@ function CategorySelect({ isOpen, data, dataHanler, errorHandler }) {
         });
     }, [categories])
 
+    // 체크된거 체크하기
+    useEffect(() => {
+        if (data.categories.length > 0) {
+            setCategories(
+                categories.map(category =>
+                    data.categories.includes(category.name) ? { ...category, checked: true } : category
+                )
+            )
+        }
+    }, [])
+
     return (
         <div
             style={{ display: isOpen ? 'block' : 'none' }}

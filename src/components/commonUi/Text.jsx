@@ -7,4 +7,26 @@ export const Text = styled.p`
     line-height: ${props => props._line || 1.5};
     white-space: pre-wrap;
     text-align: ${props => props._align || 'left'};
+    text-decoration: ${props => props._decoration || 'none'};
 `;
+
+export const SoldoutText = styled.p`
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    text-align: left;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+`

@@ -78,3 +78,24 @@ export const FlexRows = styled.div`
     height: ${props => props._height || 'auto'};
     padding: ${props => props._padding || '0px'};
 `;
+
+export const FlexRowsWrap = styled.div`
+    display: flex;
+    flex-direction: rows;
+    flex-wrap: wrap;
+    gap: ${props => props._gap || 8}px;
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+`;
+
+export const NoneDataContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+`;

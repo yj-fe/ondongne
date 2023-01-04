@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
@@ -8,22 +8,23 @@ import * as C from 'components/commonUi/CommonStyles';
 import CheckBox from 'components/commonUi/CheckBox';
 import { ContentDiv, Input, RightStyle, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { Down, ArrowRightB, X_Icon, Delete, Calendar } from 'components/commonUi/Icon';
-import { useEffect } from 'react';
-import { imageValidation, numberFormatter, totalPrice } from 'utils/utils';
+import { fileFormatter, imageValidation, numberFormatter, totalPrice } from 'utils/utils';
 import CategorySelect from 'components/commonUi/CategorySelect';
 import BusinessProductEditInfo from './BusinessProductEditInfo';
-import { createItem } from 'service/item';
+import { createItem, getBizItem } from 'service/item';
 import Alert from 'components/commonUi/Alert';
 import CalendarModel from 'components/commonUi/CalendarModel';
 
 function BusinessProductUpload() {
 
+  const { id } = useParams();
   const navigate = useNavigate();
   const [select, setSelect] = useState(false);
   const [editor, isEditor] = useState(false);
   const [alert, setAlert] = useState(null);
   const [calendar, setCalendar] = useState(false);
   const [categoryError, setCategoryError] = useState('');
+  const [deleteFiles, setDeleteFiles] = useState([]);
   const [data, setData] = useState({
     type: '',
     name: '',
@@ -36,6 +37,7 @@ function BusinessProductUpload() {
     recetiveType: [],
     categories: [],
     files: [],
+    images: [],
   })
 
   // 종료일 설정
@@ -69,10 +71,36 @@ function BusinessProductUpload() {
     }
   }
 
+  const getItem = async () => {
+    const response = await getBizItem(id);
+
+    const responseData = response.data.data;
+
+    setData({
+      type: responseData.type,
+      name: responseData.name,
+      description: responseData.description,
+      price: responseData.price,
+      salePercent: responseData.salePercent,
+      minCount: responseData.minCount,
+      maxCount: responseData.maxCount,
+      endDate: responseData.endDate,
+      recetiveType: responseData.recetiveType,
+      categories: responseData.categories,
+      images: responseData.files,
+      files: [],
+    })
+  }
+
+  useEffect(() => {
+    if (!id) return;
+    getItem();
+  }, [id])
+
   return (
     <div>
       <Layout
-        title="상품 등록"
+        title={id ? '상품 수정' : '상품 등록'}
         cart={false}
         bell={false}
         onBackClick={() => navigate(-1)}
@@ -114,7 +142,18 @@ function BusinessProductUpload() {
                 {
                   data.files.length > 0 &&
                   <L.FlexRows _gap={20}>
+                    {/* {
+                      data.images.length > 0 &&
+                      data.images.map((file, index) => (
+                        <FileListForm
+                          key={index}
+                          file={file}
+                          deleteFile={() => setDeleteFiles([...deleteFiles, file.itemImageId])}
+                        />
+                      ))
+                    } */}
                     {
+                      data.files.length > 0 &&
                       data.files.map((file, index) => (
                         <FileList
                           key={index}
@@ -159,12 +198,15 @@ function BusinessProductUpload() {
                   </TitleInfoDiv>
                 </L.FlexRows>
                 {categoryError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{categoryError}</T.Text>}
-                <CategorySelect
-                  isOpen={select}
-                  data={data}
-                  dataHanler={setData}
-                  errorHandler={setCategoryError}
-                />
+                {
+                  select &&
+                  <CategorySelect
+                    isOpen={select}
+                    data={data}
+                    dataHanler={setData}
+                    errorHandler={setCategoryError}
+                  />
+                }
               </L.FlexCols>
 
               <L.FlexCols _gap={16}>
@@ -261,7 +303,7 @@ function BusinessProductUpload() {
                     <TitleInfoDiv
                       onClick={() => setCalendar(true)}
                     >
-                      <Input 
+                      <Input
                         disabled
                         name='endDate'
                         placeholder='판매 종료일 선택'
@@ -342,6 +384,20 @@ function BusinessProductUpload() {
         />
       }
     </div>
+  )
+}
+
+const FileListForm = ({ file, deleteFile }) => {
+
+  const url = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/'
+
+  return (
+    <C.ImageBox>
+      <C.DeleteBtn onClick={deleteFile}>
+        <Delete />
+      </C.DeleteBtn>
+      <img src={url + file.url} width={"100%"} height={"100%"} />
+    </C.ImageBox>
   )
 }
 

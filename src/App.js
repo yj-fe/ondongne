@@ -178,11 +178,14 @@ function App() {
 					{/* 상품 등록 */}
 					<Route path="upload" element={<BusinessProductUpload />} />
 					{/* 상품 수정 */}
-					<Route path="edit" element={<BusinessProductEdit />} />
 					<Route
+						path="edit/:id"
+						element={<BusinessProductUpload />}
+					/>
+					{/* <Route
 						path="edit/info"
 						element={<BusinessProductEditInfo />}
-					/>
+					/> */}
 					{/* 쿠폰관리 */}
 					<Route path="coupon" element={<BusinessCoupon />} />
 					{/* 쿠폰등록 */}

@@ -29,16 +29,7 @@ export const businessNumberFormatter = (value) => {
 	return num;
 };
 
-// 사진 객체 반환
-export const fileFormatter = async (url, name, defaultType = "image/jpeg") => {
-	const response = await fetch(url);
-	const data = await response.blob();
-	return new File([data], name, {
-		type: data.type || defaultType,
-	});
-};
-
-// 숫자 쉼표 처리
+// 숫자 정규식 검사 후 쉼표 처리
 export const numberFormatter = (value) => {
 	if (!value) return;
 
@@ -50,6 +41,13 @@ export const numberFormatter = (value) => {
 	if (!valid) return "";
 
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+// 숫자 쉼표 처리
+export const numberFormat = (value) => {
+	if (!value) return;
+
+	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 // 파일 체크
@@ -69,9 +67,10 @@ export const imageValidation = (file) => {
 
 export const totalPrice = (price, rate) => {
 	if (!price) return 0;
-	if (!rate) return price;
+	if (!rate)
+		return price.toString().includes(",") ? price : numberFormat(price);
 
-	const originPrice = Number(price.replaceAll(",", ""));
+	const originPrice = Number(price.toString().replaceAll(",", ""));
 
 	const result = numberFormatter(
 		(originPrice - originPrice * (Number(rate) / 100)).toString()
