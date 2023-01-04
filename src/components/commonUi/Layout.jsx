@@ -46,6 +46,16 @@ export const FlexCols = styled.div`
     width: ${props => props._width || '100%'};
     padding: ${props => props._padding || '0px'};
 `;
+export const BottomCols = styled.div`
+    position: fixed;
+    width: 688px;
+    bottom: 24px;
+    width: 728px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: ${props => props._gap || 8}px;
+    padding: ${props => props._padding || '0px'};
+`;
 export const CateCols = styled.div`
     display: flex;
     flex-direction: column;

@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
-import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
 import { ReactComponent as Check } from 'assets/login/checkgray.svg'
 import { ReactComponent as Checked } from 'assets/login/checked.svg'
-import { InputDiv, MemberBody, MemberContainer, WithdrawalDiv1, WithdrawalDiv2, ButtonDiv, CheckForm, TextDiv1, TextDiv2, TextInfo, TextTitle, TextTitleBold, TextTitleNomal, InfoText, InfoTitle, CheckTitleDiv, CheckInput, CheckStyle, CheckTitle } from './MemberWithdrawalStyle'
+import { InputDiv, ButtonDiv, CheckForm, TextInfo, TextTitle, TextTitleBold, TextTitleNomal, InfoText, InfoTitle, CheckTitleDiv, CheckInput, CheckStyle, CheckTitle, WithdrawalDiv2, Bottom } from './MemberWithdrawalStyle'
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete'
 import { memberDelete } from 'service/member'
 import SimpleConfirm from 'components/commonUi/SimpleConfirm'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from 'store/slices/auth'
+import Layout from 'components/layout/Layout/Layout'
+import * as L from 'components/commonUi/Layout';
+import { NameToggleInput } from '../MemberManagement/MemberManagementStyle'
 
 
 function MemberWithdrawal() {
@@ -30,7 +32,7 @@ function MemberWithdrawal() {
   const PropsWithdrwal = async () => {
     const response = await memberDelete(deleteReason);
     const {data, message, code} = response.data;
-    if(code == '500') {
+    if(code === '500') {
       setConfirm({
         contents: message,
         confirmText: "확인",
@@ -54,12 +56,18 @@ function MemberWithdrawal() {
 
   return (
     <div>
-      <BasicHeader title="회원탈퇴" />
-      <MemberBody>
+      <Layout
+        title="회원탈퇴"
+        cart={false}
+        bell={false}
+        onBackClick={() => navigate(-1)}
+      >
+        <L.Container >
+          <L.Contents _height={'100vh'}>
+            <L.FlexCols _padding={0} _gap={40}>
 
         {/* ============ 회원탈퇴 ============ */}
-        <MemberContainer>
-          <WithdrawalDiv1>
+          <L.FlexCols>
             <TextTitle>
               <TextTitleBold>
                 <p>온동네마켓을 탈퇴하시면</p>
@@ -67,7 +75,9 @@ function MemberWithdrawal() {
               </TextTitleBold>
               <TextTitleNomal>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</TextTitleNomal>
             </TextTitle>
+          </L.FlexCols>
 
+          <L.FlexCols>
             <TextInfo>
               <InfoTitle>[회원 탈퇴 시 유의사항]</InfoTitle>
               <InfoText>
@@ -75,29 +85,26 @@ function MemberWithdrawal() {
                 <p>2. 탈퇴 후 동일 아이디로 재 가입이 불가합니다.</p>
               </InfoText>
             </TextInfo>
+          </L.FlexCols>
 
-          </WithdrawalDiv1>
-
-
-          <WithdrawalDiv2>
-            <CheckForm>
-              <CheckTitleDiv>
+          <L.BottomCols>
+            <CheckForm >
+              <CheckTitleDiv onClick={() => { setCheck((s) => !s); setBtn((s) => !s) }}>
                 <CheckStyle
                   id="confirm"
                   type="button"
-                  onClick={() => { setCheck((s) => !s); setBtn((s) => !s) }}
                 >
                   {check ? <Checked /> : <Check />}
                 </CheckStyle>
                 <CheckTitle>유의사항을 모두 확인하였으며, 탈퇴 시 포인트, 쿠폰 소멸에 동의합니다.</CheckTitle>
               </CheckTitleDiv>
               <InputDiv>
-                <CheckInput
+                <NameToggleInput
                   placeholder="탈퇴 사유를 입력해 주세요."
                   value={deleteReason}
                   onChange={(e) => setDeleteReason(e.target.value)}
                 >
-                </CheckInput>
+                </NameToggleInput>
               </InputDiv>
             </CheckForm>
             <ButtonDiv
@@ -107,10 +114,8 @@ function MemberWithdrawal() {
             >
               회원탈퇴
             </ButtonDiv>
-          </WithdrawalDiv2>
+          </L.BottomCols>
 
-        </MemberContainer>
-      </MemberBody>
       {modal && <ModalDelete PropsWithdrwal={PropsWithdrwal} PropsModal={PropsModal} closeText="취소" buttonText="탈퇴하기" titleText="정말로 탈퇴하시겠습니까?" />}
       {
         confirm &&
@@ -122,6 +127,10 @@ function MemberWithdrawal() {
           active={confirm.active}
         />
       }
+            </L.FlexCols>
+          </L.Contents>
+        </L.Container>
+      </Layout>
     </div>
   )
 }

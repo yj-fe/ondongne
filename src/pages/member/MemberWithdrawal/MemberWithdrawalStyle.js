@@ -37,15 +37,7 @@ export const WithdrawalDiv1 = styled.div`
   width: 688px;
   height: 204px;
 `
-export const WithdrawalDiv2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 24px;
-  width: 688px;
-  height: 216px;
-`
+
 export const TextTitle = styled.p`
   display: flex;
   flex-direction: column;
@@ -75,8 +67,8 @@ export const TextInfo = styled.p`
   align-items: flex-start;
   padding: 0px;
   /* gap: 12px; */
-  width: 688px;
-  height: 76px;
+  width: 100%;
+  height: auto;
 `
 export const InfoTitle = styled.p`
   font-weight: 600;
@@ -99,8 +91,16 @@ export const CheckForm = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 16px;
-  width: 688px;
+  width: 100%;
   height: 136px;
+`
+export const Bottom = styled.div`
+
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  bottom: 24px;
 `
 export const CheckTitleDiv = styled.div`
   display: flex;
@@ -108,9 +108,9 @@ export const CheckTitleDiv = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
+  width: 100%;
+  height: auto;
 
-  width: 688px;
-  height: 20px;
 `
 export const CheckStyle = styled.div`
   width: 20px;
@@ -126,24 +126,30 @@ export const CheckTitle = styled.p`
 export const InputDiv = styled.div`
   box-sizing: border-box;
   gap: 4px;
-  width: 688px;
+  width: 100%;
   height: 100px;
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
   border-radius: 4px;
+  padding: 12px;
 `
 export const CheckInput = styled.textarea`
   font-weight: 400;
   font-size: 15px;
   color: #9E9E9E;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   padding: 12px;
   background: #FFFFFF;
-  border: 1px solid #EEEEEE;
-  border-radius: 4px;
-  resize: none;
-  outline: none;
+  /* border: 1px solid #EEEEEE; */
+  /* border-radius: 4px; */
+  /* resize: none; */
+  /* outline: none; */
+  font-family: 'Pretendard';
+  font-style: normal;
+&::placeholder{
+  color: #9E9E9E;
+}
 `
 export const ButtonDiv = styled.button`
   display: flex;
@@ -152,7 +158,7 @@ export const ButtonDiv = styled.button`
   align-items: center;
   padding: 4px;
   gap: 4px;
-  width: 688px;
+  width: 100%;
   height: 56px;
   background: ${props => props.btn ? "#0B806F" :"#E0E0E0"};
   border-radius: 4px;
