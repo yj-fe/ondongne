@@ -11,7 +11,7 @@ import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import Avatar from 'assets/common/avatar.png';
 import ReviewImg from 'assets/main/reviewimg.png'
 import { Badge } from 'components/commonUi/Button';
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer } from 'components/layout/Img/ImgSizeLayout';
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Confirm from 'components/commonUi/Confirm';
 
@@ -65,15 +65,15 @@ function ReviewPage() {
 
             {/* 리뷰 있을 때 */}
             <L.Contents>
-            <L.FlexCols _gap={12}>
-              <L.FlexRows >
-                  <T.Text _size={15} _weight={400} _color='gray900'>전체 3건</T.Text>
-              </L.FlexRows>
-              <Line/>
+              <L.FlexCols _gap={12}>
+                <L.FlexRows >
+                    <T.Text _size={15} _weight={400} _color='gray900'>전체 3건</T.Text>
+                </L.FlexRows>
+                <Line/>
 
 
  {/* =======Review1====== */}
-            <L.FlexCols _padding='20px 0px' _gap={16}>
+                <L.FlexCols _padding='20px 0px' _gap={16}>
                   <L.FlexRows _content='space-between' _items='center'>
                     <L.FlexCols _gap={4}>
                       <L.FlexRows _gap='0px'  _items='center' _content='left'>
@@ -102,7 +102,7 @@ function ReviewPage() {
                     </L.FlexRows>
                   </L.FlexRows>
 
-              <ImgSizeLayout src={ReviewImg}/>
+              <ImgPer _bdr={4}  src={ReviewImg}/>
               <Comments>맛있습니다~</Comments>
               <ReviewLikeStyle>
                 <ReviewLikeFrame color={false}>

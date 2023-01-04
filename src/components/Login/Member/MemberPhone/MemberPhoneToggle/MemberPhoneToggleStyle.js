@@ -6,7 +6,7 @@ export const PhoneRequestForm = styled.form`
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  width: 688px;
+  width: 100%;
   height: 48px;
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
@@ -15,14 +15,19 @@ export const PhoneRequestForm = styled.form`
   margin-bottom: 16px;
 `
 export const PhoneRequestInput = styled.input`
-  width: 450px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  width: calc(100% - 80px);
   height: 24px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #BDBDBD;
+  color: black;
   &::-webkit-inner-spin-button { 
    display: none;
+  }
+  &::placeholder{
+    color: #BDBDBD;
   }
 `
 export const AuthTimerStyle = styled.div`

@@ -1,9 +1,10 @@
 import SimpleConfirm from 'components/commonUi/SimpleConfirm'
 import React, {useState, useEffect} from 'react'
 import { sendSMS } from 'service/common'
-import {AlertText,Input,InputForm,ChangeButton,PhoneToggleInput,PhoneToggleInputForm,RequestButton,PhoneRequestForm,PhoneRequestInput,AuthTimerStyle,PhoneRequestButton} from './MemberPhoneStyle'
+import {AlertText,PhoneToggleInput,PhoneToggleInputForm,RequestButton,PhoneRequestForm,PhoneRequestInput,AuthTimerStyle,PhoneRequestButton} from './MemberPhoneStyle'
 import MemberPhoneToggle from './MemberPhoneToggle/MemberPhoneToggle'
 import { memberPhoneChange } from 'service/member';
+import { ChangeButton, Input, InputForm } from 'pages/member/MemberManagement/MemberManagementStyle'
 
 function MemberPhone({phone, getMemberProfile}) { 
   
@@ -33,7 +34,7 @@ function PhoneResetToggle ({setToggle, phone}){
 // 2. 전화번호 인증 토글
 function PhoneToggle ({getMemberProfile, setToggle}){
   const [confirm, setConfirm] = useState(null);
-  const [toggle02, setToggle02] = useState(false);
+  const [toggle02, setToggle02] = useState(true);
   const [phone, setPhone] = useState('');
   const [authCode, setAuthCode] = useState('');
   const [error, setError] = useState('');

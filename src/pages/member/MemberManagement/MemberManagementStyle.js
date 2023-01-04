@@ -37,7 +37,7 @@ export const MemberProfileDiv = styled.div`
   gap: 16px;
   isolation: isolate;
 
-  width: 350px;
+  width: 100%;
   height: 166px;
 `
 
@@ -45,7 +45,7 @@ export const ProfileTextDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px;
-  width: 350px;
+  width: 100%;
   height: 50px;
 `
 export const TextName = styled.p`
@@ -75,7 +75,7 @@ export const InfoDiv = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-  width: 688px;
+  width: 100%;
   height: auto;
 `
 export const TitleText = styled.p`
@@ -84,15 +84,13 @@ export const TitleText = styled.p`
   color: #212121;
 `
 export const InputForm = styled.form`
-
-  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
   gap: 24px;
-  width: 688px;
+  width: 100%;
   height: 48px;
   background: #F5F5F5;
   border: 1px solid #EEEEEE;
@@ -178,15 +176,20 @@ export const MaxWidth = styled.div`
 //   margin-bottom: 8px;
 // `
 export const Input = styled.input`
-  width: 550px;
+  width: calc(100% - 40px);
   height: 24px;
   font-weight: 400;
   font-size: 16px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #1E1E1E;
+  color: black;
   background-color: #F5F5F5;
+  font-family: 'Pretendard';
+  font-style: normal;
+  &::placeholder{
+    color: #BDBDBD;
+  }
 `
 // export const PhoneRequestForm = styled.form`
 //   box-sizing: border-box;
@@ -298,6 +301,7 @@ export const ChangeButton = styled.button`
   font-weight: 500;
   font-size: 14px;
   color: #0B806F;
+  width: 40px;
 `
 // export const RequestButton = styled.button`
 //   display: flex;
@@ -322,10 +326,11 @@ export const MemberLinkDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0px;
+  padding: 40px 0px 0px 0px; 
   gap: 8px;
-  width: 101px;
+  width: 100%;
   height: 18px;
+  
 `
 export const MemberBar = styled.div`
   width: 1px;

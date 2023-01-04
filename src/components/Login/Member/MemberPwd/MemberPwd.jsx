@@ -7,11 +7,13 @@ import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
 
 import { memberPasswordChange } from "service/member";
 
-import {EyeOffStyle,PwdToggleButton,PwdResetToggleForm,PwdResetToggleInput,ChangeButton,PwdToggleInputForm,PwdToggleInput} from './MemberPwdStyle'
+import {EyeOffStyle,PwdToggleButton,PwdResetToggleForm,PwdResetToggleInput,PwdToggleInputForm,PwdToggleInput} from './MemberPwdStyle'
 import Alert from 'components/commonUi/Alert';
 // import ModalPage from 'components/Login/ModalPage';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import { Text } from 'components/commonUi/Text';
+import { ChangeButton, Input, InputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
+import * as L from 'components/commonUi/Layout';
 
 
 function MemberPwd() {
@@ -26,8 +28,9 @@ function MemberPwd() {
 function PwdResetToggle({setShowPwdToggle}){
   return(
     <div>
-      <PwdResetToggleForm>
-        <PwdResetToggleInput
+      <L.FlexCols>
+      <InputForm>
+        <Input
           placeholder='8자 이상 영문,숫자,특수문자 조합'
           disabled
         />
@@ -36,13 +39,14 @@ function PwdResetToggle({setShowPwdToggle}){
         >
           변경
         </ChangeButton>
-      </PwdResetToggleForm>
-      <PwdResetToggleForm>
-        <PwdResetToggleInput
+      </InputForm>
+      <InputForm>
+        <Input
           placeholder='비밀번호 확인'
           disabled
         />
-      </PwdResetToggleForm> 
+      </InputForm> 
+      </L.FlexCols>
 
     </div>
   )

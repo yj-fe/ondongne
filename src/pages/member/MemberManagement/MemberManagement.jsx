@@ -16,6 +16,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMember, logout, memberNicknameChange, memberProfileChange } from 'service/member';
 import { authActions } from 'store/slices/auth';
 import { Text } from 'components/commonUi/Text';
+import Layout from 'components/layout/Layout/Layout';
+import * as L from 'components/commonUi/Layout';
+
+
 
 function MemberManagement() {
   const navigate = useNavigate();
@@ -61,11 +65,17 @@ function MemberManagement() {
 
   return (
     <div>
-      <BasicHeader title="회원정보 관리" />
-      <MemberBody>
+      <Layout
+        title="회원정보 관리"
+        cart={false}
+        bell={false}
+        onBackClick={() => navigate(-1)}
+      >
+       <L.Container >
+          <L.Contents _height={'100vh'}>
+            <L.FlexCols _padding={0} _gap={0}>
 
         {/* ============ 회원정보관리 ============ */}
-        <MemberContainer>
           <MemberProfileDiv>
             <ProfileAvatar 
               profile={member.profile}
@@ -74,35 +84,35 @@ function MemberManagement() {
               <TextName>{member.nickname}</TextName>
               <TextEmail>{member.email}</TextEmail>
             </ProfileTextDiv>
-
           </MemberProfileDiv>
 
-          <MemberInfoDiv>
-            {/* =========================== 닉네임 =========================== */}
-            <InfoDiv>
-              <TitleText>닉네임</TitleText>
 
+          <L.FlexCols _gap={24}>
+            {/* =========================== 닉네임 =========================== */}
+            <L.FlexCols>
+              <TitleText>닉네임</TitleText>
+              
               {
                 showNameToggle 
                   ? <NameResetToggle namevalue={member.nickname} setToggle={() => setShowNameToggle(false)} /> 
                   : <NameToggle namevalue={member.nickname} setToggle={() => setShowNameToggle(true)} getMemberProfile={getMemberProfile}/>
-              }
+                }
+            </L.FlexCols>
 
-            </InfoDiv>
 
             {/* ========================== 전화번호 ========================== */}
-            <InfoDiv>
+            <L.FlexCols>
               <TitleText>전화번호</TitleText>
               <MemberPhone phone={member.phone} getMemberProfile={getMemberProfile}/>
-            </InfoDiv>
+            </L.FlexCols>
 
             {/* ========================== 비밀번호 ========================== */}
-            <InfoDiv>
+            <L.FlexCols>
               <TitleText>비밀번호 변경</TitleText>
               <MemberPwd />
+            </L.FlexCols>
 
-            </InfoDiv>
-          </MemberInfoDiv>
+            </L.FlexCols>
 
           <MemberLinkDiv>
             <Link to="/member/withdrawal" >
@@ -118,8 +128,6 @@ function MemberManagement() {
               로그아웃
             </MemberLinkText>
           </MemberLinkDiv>
-        </MemberContainer>
-      </MemberBody>
       {
         alert &&
         <Alert
@@ -130,6 +138,12 @@ function MemberManagement() {
           onOverlayClick={alert.onOverlayClick}
         />
       }
+        </L.FlexCols>
+        
+        </L.Contents>
+      </L.Container>
+
+      </Layout>
     </div>
   )
 }
@@ -141,15 +155,15 @@ function NameResetToggle({ setToggle, namevalue }) {
 
   return (
     <div>
-      <InputForm>
-        <Input
-          disabled
-          value={namevalue}
-        />
-        <ChangeButton
-          onClick={ setToggle }
-        >변경</ChangeButton>
-      </InputForm>
+        <InputForm>
+          <Input
+            disabled
+            value={namevalue}
+          />
+          <ChangeButton
+            onClick={ setToggle }
+          >변경</ChangeButton>
+        </InputForm>
     </div>
   )
 }
@@ -164,7 +178,7 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
     const response = await memberNicknameChange(id);
     const { data, message, code } = response.data;
 
-    if (code && code == '500') {
+    if (code && code === '500') {
       console.log('에러')
       console.log(message)
       return setError(message);

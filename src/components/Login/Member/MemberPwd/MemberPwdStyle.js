@@ -46,7 +46,7 @@ export const PwdToggleInputForm = styled.form`
   align-items: center;
   padding: 12px 16px;
   gap: 24px;
-  width: 688px;
+  width: 100%;
   height: 48px;
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
@@ -54,7 +54,9 @@ export const PwdToggleInputForm = styled.form`
   margin-bottom: 8px;
 `
 export const PwdToggleInput = styled.input`
-  width: 550px;
+  width: calc(100% - 30px);
+  font-family: 'Pretendard';
+  font-style: normal;
   height: 24px;
   font-weight: 400;
   font-size: 16px;
@@ -69,9 +71,13 @@ export const PwdToggleInput = styled.input`
   &::-ms-reveal {
    display: none;
   }
+  &::placeholder{
+    color: #BDBDBD;
+  }
 `
 export const EyeOffStyle = styled.div`
-  float: right;
+  width: 20px;
+  height: 20px;
 `;
 export const PwdToggleButton = styled.button`
   width: 100%;
