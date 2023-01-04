@@ -1,28 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoginHeader from "components/Login/Common/LoginHeader/LoginHeader";
-import {
-  LocationListContainer,
-  LocationListText,
-  Bounce1,
-  Bounce2,
-  Bounce3,
-  Spinner,
-  LocationBody,
-  Line,
-  LocationContainer,
-  MyLocationResult,
-  LocationDiv,
-  Div1,
-  Div2,
-  LocationIcon,
-  MyLocationDiv,
-  MyLocationText,
-  SearchDiv,
-  SearchIcon,
-  SearchInput,
-  LocationListDiv,
-} from "./LocationSettingStyle";
+import { LocationListContainer, LocationListText, Line, MyLocationResult, Div1, Div2, LocationIcon, MyLocationDiv, MyLocationText, SearchDiv, SearchIcon, SearchInput, LocationListDiv } from "./LocationSettingStyle";
 import { ReactComponent as Location } from "assets/login/Location.svg";
 import { ReactComponent as Search } from "assets/login/Search.svg";
 import "./LocationSetting.css";
@@ -30,6 +9,8 @@ import Alert from "components/commonUi/Alert";
 import { getLocal, searchLocation } from "service/common";
 import { useNavigate } from "react-router-dom";
 import { localActions } from "store/slices/location";
+import * as L from 'components/commonUi/Layout';
+import { S } from 'components/layout/Layout/LayoutStyle'
 
 function LocationSetting() {
   const localState = useSelector(state => state.local);
@@ -93,81 +74,83 @@ function LocationSetting() {
 
   return (
     <div>
-      <LoginHeader title="우리동네 설정" />
-      <LocationBody>
-        {/* ============ 위치설정페이지 ============ */}
-        <LocationContainer>
-          <LocationDiv>
-            <Div1>내 위치 설정</Div1>
-            <Div2>
-              <SearchDiv>
-                <SearchInput
-                  type="text"
-                  placeholder="지번/도로명을 입력해주세요."
-                  value={address}
-                  onChange={e => setAddress(e.target.value)}
-                  onKeyDown={e => {
-                    if (e.key == 'Enter') searchHandler()
-                  }}
-                />
-                <SearchIcon
-                  onClick={searchHandler}
-                >
-                  <Search />
-                </SearchIcon>
-              </SearchDiv>
-              <MyLocationDiv>
-                <LocationIcon>
-                  <Location />
-                </LocationIcon>
-                <MyLocationText>현재 내 위치</MyLocationText>
-                <MyLocationResult>
-                  {localState.addres}
-                </MyLocationResult>
-              </MyLocationDiv>
-            </Div2>
-          </LocationDiv>
-          <Line />
-          {/* ============ 로딩 ============ */}
-          {/* <Spinner>
-            <Bounce1/>
-            <Bounce2/>
-            <Bounce3/>
-          </Spinner> */}
-          {loading && (
-            <div class="spinner">
-              <div class="bounce1"></div>
-              <div class="bounce2"></div>
-              <div class="bounce3"></div>
-            </div>
-          )}
-          {/* ============ 검색리스트 ============ */}
-          <LocationListContainer>
+      <S.Wrapper>
+        <LoginHeader title="우리동네 설정" />
+          <S.Main>
+            <L.Contents _padding='24px 20px' _height='100vh'>
+              <L.FlexCols _gap={32}>
+              {/* ============ 위치설정페이지 ============ */}
+                <L.FlexCols _gap={20}>
+                  <Div1>내 위치 설정</Div1>
+                  <Div2>
+                    <SearchDiv>
+                      <SearchInput
+                        type="text"
+                        placeholder="지번/도로명을 입력해주세요."
+                        value={address}
+                        onChange={e => setAddress(e.target.value)}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') searchHandler()
+                        }}
+                      />
+                      <SearchIcon
+                        onClick={searchHandler}
+                      >
+                        <Search />
+                      </SearchIcon>
+                    </SearchDiv>
+                    <MyLocationDiv>
+                      <LocationIcon>
+                        <Location />
+                      </LocationIcon>
+                      <MyLocationText>현재 내 위치</MyLocationText>
+                      <MyLocationResult>
+                        {localState.addres}
+                      </MyLocationResult>
+                    </MyLocationDiv>
+                  </Div2>
+                </L.FlexCols>
+                
+                <Line />
+                {/* ============ 로딩 ============ */}
+                {loading && (
+                  <L.FlexRows _content='center'>
+                    <div class="spinner">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
+                  </L.FlexRows>
+                )}
+                {/* ============ 검색리스트 ============ */}
+                <LocationListContainer>
+                  {
+                    searchList.length > 0 &&
+                    searchList.map((item, i) => (
+                      <LocationListDiv
+                        key={i}
+                        onClick={() => onSubmit(item)}
+                      >
+                        <SearchIcon><Search /></SearchIcon>
+                        <LocationListText>{item}</LocationListText>
+                      </LocationListDiv>
+                    ))
+                  }
+                </LocationListContainer>
             {
-              searchList.length > 0 &&
-              searchList.map((item, i) => (
-                <LocationListDiv
-                  key={i}
-                  onClick={() => onSubmit(item)}
-                >
-                  <SearchIcon><Search /></SearchIcon>
-                  <LocationListText>{item}</LocationListText>
-                </LocationListDiv>
-              ))
+              alert &&
+              <Alert
+                title={alert.title}
+                contents={alert.contents}
+                buttonText={alert.buttonText}
+                onButtonClick={alert.onButtonClick}
+                onOverlayClick={alert.onOverlayClick}
+              />
             }
-          </LocationListContainer>
-        </LocationContainer>
-      </LocationBody>
-      {
-        alert &&
-        <Alert
-          title={alert.title}
-          contents={alert.contents}
-          buttonText={alert.buttonText}
-          onButtonClick={alert.onButtonClick}
-          onOverlayClick={alert.onOverlayClick}
-        />
-      }
+            </L.FlexCols>
+          </L.Contents>
+        </S.Main>
+      </S.Wrapper>
     </div>
   );
 }

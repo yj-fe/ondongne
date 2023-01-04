@@ -2,26 +2,24 @@ import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader'
 import React, { useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import * as I from 'components/commonUi/Input';
-import * as B from 'components/commonUi/Button';
-import CheckBox from 'components/commonUi/CheckBox';
-import { EmailBody } from 'pages/login/email/FindEmailStyle';
-import { LocationBody, LocationContainer } from 'pages/login/LocationSetting/LocationSettingStyle';
-import Header from 'components/layout/Header/Header';
+import { S } from 'components/layout/Layout/LayoutStyle'
 import { Line } from 'pages/main/DetailsPage/DetailsPageStyle';
 import Img from 'assets/images/newsimg.png'
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { ArrowRightB } from 'components/commonUi/Icon';
 
+
 function MemberNews() {
   return (
     <div>
-      <LoginHeader title="알림"/>
-      <LocationBody>
+      <S.Wrapper>
+        <LoginHeader title="알림"/>
+          <S.Main>
 
-        <LocationContainer>
+          <L.Contents _padding='24px 20px ' _height='100vh'>
+
 {/* ============ 알림없을때 ============ */}
-            {/* <L.Contents>
+            {/* <L.Contents _padding='56px 0px 0px 0px'>
               <T.Text   _weight={300} _size={15} _color="gray600" _align='center' >
                 <p>새로운 알림이 없습니다.</p>
                 <p>동네활동이 시작되면 알려드릴게요!</p>
@@ -42,14 +40,14 @@ function MemberNews() {
                   <T.Text   _weight={400} _size={15} _color="gray800"  >
                     <p>단골가게의 새로운 쿠폰소식이 올라왔어요!</p>
                   </T.Text>
-                  <L.FlexRows>
-                  <T.Text   _weight={300} _size={12} _color="gray500"  >
-                    <p>2022년 10월 10일</p>
-                  </T.Text>
-                  <T.Text   _weight={300} _size={12} _color="gray500"  >
-                    <p>14:00</p>
-                  </T.Text>
-              </L.FlexRows>
+                  <L.FlexRows _items='center'>
+                    <T.Text   _weight={300} _size={12} _color="gray500"  >
+                      <p>2022년 10월 10일</p>
+                    </T.Text>
+                    <T.Text   _weight={300} _size={12} _color="gray500"  >
+                      <p>14:00</p>
+                    </T.Text>
+                  </L.FlexRows>
                 </L.FlexCols>
             </L.FlexRows>
 
@@ -120,8 +118,9 @@ function MemberNews() {
 
 
 
-        </LocationContainer>
-      </LocationBody>
+        </L.Contents>
+        </S.Main>
+      </S.Wrapper>
     </div>
   )
 }

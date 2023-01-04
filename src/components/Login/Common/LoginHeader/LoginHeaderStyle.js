@@ -12,9 +12,6 @@ export const LoginNavDiv = styled.div`
 		background: #FFF;
 		border-bottom: 1px solid ${props => props.theme.color.gray200};
 
-		@media(${props => props.theme.media.tablet}) {
-				border-bottom: 0;
-		}
 `;
 export const Inner = styled.div`
 	height: 100%;

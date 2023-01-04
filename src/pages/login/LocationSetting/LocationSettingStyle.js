@@ -34,12 +34,11 @@ export const LocationDiv = styled.div`
 	align-items: flex-start;
 	padding: 0px;
 	gap: 20px;
-
-	width: 688px;
+	width: 100%;
 	height: 126px;
 `;
 export const Div1 = styled.p`
-	width: 688px;
+	width: 100%;
 	height: 26px;
 	font-weight: 600;
 	font-size: 18px;
@@ -51,7 +50,7 @@ export const Div2 = styled.p`
 	align-items: flex-start;
 	padding: 0px;
 	gap: 16px;
-	width: 648px;
+	width: 100%;
 	height: 80px;
 `;
 export const SearchDiv = styled.div`
@@ -61,19 +60,24 @@ export const SearchDiv = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	padding: 12px 16px;
-	/* gap: 567px; */
-	width: 648px;
+	width: 100%;
 	height: 44px;
 	background: #fafafa;
 	border: 1px solid #eeeeee;
 	border-radius: 4px;
 `;
 export const SearchInput = styled.input`
-	width: 600px;
+	width: calc(100% - 20px);
 	font-weight: 400;
 	font-size: 16px;
-	color: #bdbdbd;
+	font-family: 'Pretendard';
+	font-style: normal;
+	color: black;
 	background: #fafafa;
+	&::placeholder{
+		color: #bdbdbd;
+
+	}
 	&:focus {
 		color: #212121;
 	}
@@ -184,7 +188,6 @@ export const LocationListContainer = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 0 20px;
-	gap: 8px;
 	width: 648px;
 	height: 100%;
 	overflow-y: scroll;

@@ -1,24 +1,5 @@
 import styled from "styled-components";
 
-export const LoginBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 40px 0;
-  gap: 60px;
-  background: #FFFFFF;
-  width: 100%;
-
-  > form {
-    max-width: 100%;
-    background-color: #fff;
-
-    @media only screen and (max-width: 728px) { 
-      width: 100%;
-    }
-  }
-`;
 export const LogoImg = styled.img`
   width: 172px;
   height: 38px;
@@ -189,21 +170,12 @@ export const LoginFooter = styled.div`
   gap: 4px;
   width: 100%;
   margin-top: 150px;
-  /* padding-top: 35px; */
-  /* position: absolute; */
   bottom: 32px;
-  /* align-items: center; */
 `;
 export const LoginText = styled.p`
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* width: 220px; */
-  /* justify-content: center; */
   font-weight: 400;
   font-size: 14px;
-  /* line-height: 20px; */
   color: #424242;
-  /* flex: none; */
 `;
 export const Button = styled.button`
   display: flex;
@@ -212,13 +184,6 @@ export const Button = styled.button`
   height: 20px;
 `;
 export const SignupText = styled.p`
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* width: 60px; */
-  /* justify-content: center; */
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* line-height: 20px; */
   font-weight: 600;
   font-size: 14px;
   color: #424242;
