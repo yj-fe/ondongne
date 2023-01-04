@@ -176,6 +176,13 @@ export const Check = () => (
     </svg>
 );
 
+export const UnCheck = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="20" height="20" rx="2" fill="#E0E0E0"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8327 6.92279L8.57192 14.1663L4.16602 9.77088L5.3649 8.68109L8.57192 11.8805L14.6338 5.83301L15.8327 6.92279Z" fill="white"/>
+    </svg>
+);
+
 export const EmptyCheck = () => (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="0.5" y="0.5" width="17" height="17" rx="1.5" fill="white" />

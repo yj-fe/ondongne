@@ -10,6 +10,7 @@ function Test({data}) {
 
   return (
     <div>
+      
         <RequestTextStyle>
           <RequestText>이메일 찾기 결과</RequestText>
           <RequestInfo>회원님의 가입 정보는 아래 내용과 같습니다.</RequestInfo>

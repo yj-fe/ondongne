@@ -3,7 +3,8 @@ import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader';
 import SignupRequest from 'components/Login/Signup/signuprequest/SignupRequest';
 import Agreement from 'components/Login/Signup/agreement/Agreement';
 import SignupInfo from 'components/Login/Signup/signupinfo/SignupInfo';
-
+import * as L from 'components/commonUi/Layout';
+import { S } from 'components/layout/Layout/LayoutStyle'
 
 function SignupPage() {
 
@@ -61,10 +62,16 @@ function SignupPage() {
 
   return (
     <div>
-      <LoginHeader title="회원가입" />
-      {depth01 && <SignupRequest setData={setData} depthHandler={() => depthHandler(1)}/>}
-      {depth02 && <Agreement setData={setData} depthHandler={() => depthHandler(2)}/>}
-      {depth03 && <SignupInfo setData={setData} data={data}/>}
+      <S.Wrapper>
+        <LoginHeader title="회원가입" />
+        <S.Main>
+          <L.Contents _padding='0px' _height='100vh'>
+            {depth01 && <SignupRequest setData={setData} depthHandler={() => depthHandler(1)}/>}
+            {depth02 && <Agreement setData={setData} depthHandler={() => depthHandler(2)}/>}
+            {depth03 && <SignupInfo setData={setData} data={data}/>}
+          </L.Contents>
+        </S.Main>
+      </S.Wrapper>
     </div>
   )
 }

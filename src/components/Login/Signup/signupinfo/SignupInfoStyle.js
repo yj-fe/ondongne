@@ -46,45 +46,14 @@ export const RequestInfo = styled.p`
   font-size: 15px;
   color: #424242;
 `;
-export const RequesInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 648px;
 
-  @media only screen and (max-width: 390px) {
-    width: 350px;
-  }
-`;
 
-export const RequestInputForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 0px;
-  gap: 12px;
-  margin-top: 40px;
-
-  width: 648px;
-  /* height: auto; */
-`;
 export const RequesInputTitle = styled.p`
   font-weight: 500;
   font-size: 16px;
   color: #212121;
 `;
-export const RequestInputDiv = styled.div`
-  display: flex;
-  flex-direction: ${(props) => props.direction};
-  align-items: center;
-  padding: 0px;
-  gap: 12px;
-  width: 648px;
-  /* height: 48px; */
 
-  @media only screen and (max-width: 390px) {
-    width: 350px;
-  }
-`;
 export const RequestInput = styled.input`
   box-sizing: border-box;
   width: 546px;

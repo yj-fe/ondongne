@@ -1,32 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as Icon } from "assets/checkinput.svg";
 
-export const AgreementBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 40px 0;
-  margin-top: 60px;
-  padding-top: 60px;
-  gap: 60px;
-
-  background: #FFFFFF;
-
-  @media only screen and (max-width: 728px) {
-
-  }
-  > form {
-    max-width: 728px;
-    width: 100%;
-    background-color: #fff;
-
-    @media only screen and (max-width: 728px) { 
-      width: 100%;
-  
-    }
-  }
-`
 export const AgreementTextStyle = styled.div`
   display: flex;
   flex-direction: column;
@@ -66,7 +40,7 @@ export const CheckboxForm = styled.p`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 16px;
+  gap: 14px;
 
   /* width: 648px; */
   /* height: 293px; */
@@ -85,6 +59,8 @@ export const CheckboxInput = styled.form`
 `
 
 export const CheckboxButton = styled.button`
+  align-items: center;
+  padding-top: 10px;
 `
 export const Line = styled.div`
   width: 100%;
@@ -116,15 +92,10 @@ export const CheckboxText = styled.label`
   font-weight: ${props => props.weight};
   font-size: ${props => props.size};
   color: #212121;
+  
 `
 export const CheckboxToggle = styled.div`
-  
-  right: 0;
-  display: flex;
-  /* float: right; */
-  /* clear: left; */
-  /* align-items: flex-end; */
-  padding-top: 7px;
+  align-items: center;
 `
 export const NextButton = styled.button`
   position: fixed;

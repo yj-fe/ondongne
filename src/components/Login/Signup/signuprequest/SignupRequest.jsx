@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { sendSMS } from 'service/common';
 import { memberPhoneValidation } from 'service/common';
-import { AuthTimer, InputForm, RequesInput, RequesInputForm, RequestButton, RequestInfo, RequestText, RequestTextStyle, SignupBody } from './SignupRequestStyle'
+import { AuthTimer, RequesInputForm, RequestButton, RequestInfo, RequestText, RequestTextStyle } from './SignupRequestStyle'
 import Alert from 'components/commonUi/Alert';
 import { SignupButton } from '../signupinfo/SignupInfoStyle';
+import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
+import { RequesInput } from 'components/Login/Password/PwdRequest/PwdRequestStyle';
+import * as L from 'components/commonUi/Layout';
+
+
 
 /* ==============================
     180 => 3: 00 문자열 반환
@@ -139,12 +144,13 @@ function SignupRequest({ setData, depthHandler }) {
 
   return (
     <div>
-      <SignupBody>
+      <EmailRequestBody>
         <RequestTextStyle>
           <RequestText>온동네마켓 회원가입</RequestText>
           <RequestInfo>회원가입을 위해 휴대폰 번호를 인증해 주세요.</RequestInfo>
         </RequestTextStyle>
-        <InputForm>
+
+        <L.FlexCols _gap={16}>
           <RequesInputForm>
             <RequesInput
               type='number'
@@ -162,6 +168,8 @@ function SignupRequest({ setData, depthHandler }) {
             </RequestButton> 
           </RequesInputForm>
 
+
+           
           {authCode && 
             <RequesInputForm style={{position: 'relative'}}>
               <RequesInput
@@ -175,8 +183,8 @@ function SignupRequest({ setData, depthHandler }) {
               <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
             </RequesInputForm>
           }
-        </InputForm>
-      </SignupBody>
+        </L.FlexCols>
+      </EmailRequestBody>
       {
         authCode && 
           <SignupButton

@@ -65,11 +65,7 @@ export const InputForm = styled.form`
   align-items: flex-start;
   gap: 12px;
   width: 100%;
-  margin-top: 40px;
 
-  @media only screen and (max-width: 390px) {
-    width: 350px;
-  }
 `
 export const RequesInputForm = styled.form`
   display: flex;

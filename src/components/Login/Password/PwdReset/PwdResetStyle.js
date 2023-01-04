@@ -62,7 +62,7 @@ export const PwdInput = styled.input`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #bdbdbd;
+  color: black;
   outline: none;
   &::-ms-reveal {
    display: none;

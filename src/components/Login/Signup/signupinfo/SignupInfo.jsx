@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
 import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
-import { EyeOffStyle, PwdContainer, PwdInput, RequesInputContainer, RequesInputTitle, RequestButton, RequestInfo, RequestInput, RequestInputDiv, RequestInputForm, SignupButton, ValidText } from "./SignupInfoStyle";
+import { EyeOffStyle, RequesInputTitle, RequestButton, RequestInfo, ValidText } from "./SignupInfoStyle";
 import { useNavigate } from "react-router-dom";
 import Alert from 'components/commonUi/Alert';
-import { SignupBody, RequestText } from 'components/Login/Signup/signuprequest/SignupRequestStyle';
-import { RequestTextStyle } from 'components/Login/Password/PwdReset/PwdResetStyle';
+import { RequestText, RequesInputForm } from 'components/Login/Signup/signuprequest/SignupRequestStyle';
+import { PwdContainer, PwdInput, RequestInputDiv, RequestTextStyle } from 'components/Login/Password/PwdReset/PwdResetStyle';
 import { signup } from "service/auth";
 import { memberEmailValidation, memberNicknameValidation } from "service/common";
+import * as L from 'components/commonUi/Layout';
+import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
+import { Input } from 'components/Login/Password/PwdRequest/PwdRequestStyle';
+import { NextButton } from "../agreement/AgreementStyle";
+
+
 
 function SignupInfo({ data, setData }) {
 
@@ -195,107 +201,105 @@ function SignupInfo({ data, setData }) {
 
   return (
     <div>
-      <SignupBody>
+      <EmailRequestBody>
         <RequestTextStyle>
           <RequestText>회원 정보 입력</RequestText>
           <RequestInfo>회원가입 시 필요한 회원정보를 모두 입력해 주세요.</RequestInfo>
         </RequestTextStyle>
-        <RequesInputContainer>
-          <RequestInputForm>
+
+        <L.FlexCols _gap={24}>
+          <L.FlexCols>
             <RequesInputTitle>이메일</RequesInputTitle>
-            <RequestInputDiv direction="row">
-              <RequestInput
-                type='text'
-                placeholder='이메일 입력'
-                outline='none'
-                value={email}
-                borderColor={emailValid == null ?'#E0E0E0' : emailValid ? '#388E3C' : '#D32F2F'}
-                onChange={e => setEmail(e.target.value)}
-              />
-              
-              <RequestButton
-                type="button"
-                onClick={emailValidation}
-              >
-                중복확인
-              </RequestButton>
-            </RequestInputDiv>
-            {
-              emailValidMessage && 
-              <ValidText color={emailValid}>{emailValidMessage}</ValidText>
-            }
-          </RequestInputForm>
+            <RequesInputForm>
+                <Input
+                  type='text'
+                  placeholder='이메일 입력'
+                  outline='none'
+                  value={email}
+                  borderColor={emailValid == null ?'#E0E0E0' : emailValid ? '#388E3C' : '#D32F2F'}
+                  onChange={e => setEmail(e.target.value)}
+                />
+                <RequestButton
+                  type="button"
+                  onClick={emailValidation}
+                >
+                  중복확인
+                </RequestButton>
+              {
+                emailValidMessage && 
+                <ValidText color={emailValid}>{emailValidMessage}</ValidText>
+              }
+            </RequesInputForm>
+          </L.FlexCols>
           {
             !data.isAuth && 
-            <RequestInputForm>
+            <L.FlexCols>
               <RequesInputTitle>비밀번호</RequesInputTitle>
-              <RequestInputDiv direction="column">
-                <PwdContainer
-                  borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
-                  <PwdInput
-                    type={showPassword ? "text" : "password"}
-                    placeholder="비밀번호 입력"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                  />
-                  <EyeOffStyle onClick={()=>setShowPassword(!showPassword)}>
-                    {showPassword ? <EyeOn /> : <EyeOff />}
-                  </EyeOffStyle>
-                </PwdContainer>
-                <PwdContainer
-                  borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
-                  <PwdInput
-                    type={showPasswordCheck ? "text" : "password"}
-                    placeholder="비밀번호 확인"
-                    value={passwordCheck}
-                    onChange={e => setPasswordCheck(e.target.value)}
-                  />
-                  <EyeOffStyle onClick={()=>setShowPasswordCheck(!showPasswordCheck)}>
-                    {showPasswordCheck ? <EyeOn /> : <EyeOff />}
-                  </EyeOffStyle>
-                </PwdContainer>
-                {
-                  passwordValidMessage && 
-                  <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
-                }
-              </RequestInputDiv>
-            </RequestInputForm>
+                <RequestInputDiv direction="column">
+                  <PwdContainer
+                    borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
+                    <PwdInput
+                      type={showPassword ? "text" : "password"}
+                      placeholder="8자 이상 영문,숫자,특수문자 조합"
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                    />
+                    <EyeOffStyle onClick={()=>setShowPassword(!showPassword)}>
+                      {showPassword ? <EyeOn /> : <EyeOff />}
+                    </EyeOffStyle>
+                  </PwdContainer>
+                  <PwdContainer
+                    borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
+                    <PwdInput
+                      type={showPasswordCheck ? "text" : "password"}
+                      placeholder="비밀번호 확인"
+                      value={passwordCheck}
+                      onChange={e => setPasswordCheck(e.target.value)}
+                    />
+                    <EyeOffStyle onClick={()=>setShowPasswordCheck(!showPasswordCheck)}>
+                      {showPasswordCheck ? <EyeOn /> : <EyeOff />}
+                    </EyeOffStyle>
+                  </PwdContainer>
+                  {
+                    passwordValidMessage && 
+                    <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
+                  }
+                </RequestInputDiv>
+            </L.FlexCols>
           }
-
-          <RequestInputForm>
+          <L.FlexCols>
             <RequesInputTitle>닉네임</RequesInputTitle>
-            <RequestInputDiv direction="row">
-              <RequestInput
-                type='text'
-                placeholder='닉네임 입력'
-                outline='none'
-                value={nickname}
-                borderColor={nicknameValid == null ?'#E0E0E0' : nicknameValid ? '#388E3C' : '#D32F2F'}
-                onChange={e => setNickname(e.target.value)}
-              >
-              </RequestInput>
-              <RequestButton
-                type="button"
-                onClick={nicknameValidation}
-              >
-                중복확인
-              </RequestButton>
-            </RequestInputDiv>
-            {
-              nicknameValidMessage && 
-              <ValidText color={nicknameValid}>{nicknameValidMessage}</ValidText>
-            }
-          </RequestInputForm>
-        </RequesInputContainer>
-      </SignupBody>
-      <SignupButton
+            <RequesInputForm>
+                <Input
+                  type='text'
+                  placeholder='닉네임 입력'
+                  outline='none'
+                  value={nickname}
+                  borderColor={nicknameValid == null ?'#E0E0E0' : nicknameValid ? '#388E3C' : '#D32F2F'}
+                  onChange={e => setNickname(e.target.value)}
+                 />
+                <RequestButton
+                  type="button"
+                  onClick={nicknameValidation}
+                  >
+                  중복확인
+                </RequestButton>
+              {
+                nicknameValidMessage && 
+                <ValidText color={nicknameValid}>{nicknameValidMessage}</ValidText>
+              }
+            </RequesInputForm>
+          </L.FlexCols>
+        </L.FlexCols>
+      <NextButton
         type="button"
         color={active}
         disabled={disabled}
         onClick={onSubmit}
-      >
+        >
         가입하기
-      </SignupButton>
+      </NextButton>
+      </EmailRequestBody>
       {
         alert &&
         <Alert
