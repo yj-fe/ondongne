@@ -39,25 +39,25 @@ export const RequesInputForm = styled.form`
 `;
 export const Input = styled.input`
   box-sizing: border-box;
-  width: 648px;
+  width: 100%;
   height: 48px;
   background: #ffffff;
   border-bottom: 1px solid #e0e0e0;
   padding: 12px;
-
+  font-family: 'Pretendard';
+  font-style: normal;
   font-weight: 400;
   font-size: 16px;
-
-  color: #bdbdbd;
+  color: #212121;
+  &::placeholder{
+    color: #BDBDBD;
+  }
   &:focus {
     outline: none;
     border-bottom: 1px solid #616161;
     color: #212121;
   }
 
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
 `;
 export const InputContainer = styled.div`
   display: flex;

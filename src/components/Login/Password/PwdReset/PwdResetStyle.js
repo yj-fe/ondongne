@@ -9,13 +9,8 @@ export const RequestTextStyle = styled.p`
   justify-content: center;
   padding: 0px;
   gap: 8px;
-  /* width: 648px; */
-  /* height: 60px; */
-  /* flex: none; */
 
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
+
 `;
 export const RequestText = styled.p`
   font-weight: 600;
@@ -34,13 +29,8 @@ export const RequesInputForm = styled.form`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  width: 648px;
-  /* height: 112px; */
-  margin-top: 40px;
+  width: 100%;
 
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
 `;
 export const RequestInputDiv = styled.div`
   display: flex;
@@ -48,18 +38,14 @@ export const RequestInputDiv = styled.div`
   align-items: center;
   padding: 0px;
   gap: 12px;
-  width: 648px;
+  width: 100%;
   /* height: 48px; */
 
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
 `
 export const PwdContainer = styled.div`
   box-sizing: border-box;
   /* align-items: center; */
   width: 100%;
-  /* width: 648px; */
   height: 48px;
   border-bottom: 1px solid #e0e0e0;
   padding: 12px;
@@ -69,11 +55,10 @@ export const PwdContainer = styled.div`
   line-height: 24px;
   color: #bdbdbd;
 
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
 `;
 export const PwdInput = styled.input`
+  font-family: 'Pretendard';
+  font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -81,6 +66,9 @@ export const PwdInput = styled.input`
   outline: none;
   &::-ms-reveal {
    display: none;
+  }
+  &::placeholder{
+    color: #BDBDBD;
   }
 `;
 export const EyeOffStyle = styled.div`

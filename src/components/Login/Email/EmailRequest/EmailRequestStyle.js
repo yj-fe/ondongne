@@ -5,6 +5,9 @@ export const EmailRequestBody = styled.div`
   padding: 32px 40px;
   gap: 40px;
   max-width: 728px;
+  @media only screen and (max-width: 400px) {
+    padding: 32px 20px;
+  }
 `
 export const RequestTextStyle = styled.p`
   display: flex;

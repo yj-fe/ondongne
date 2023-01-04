@@ -7,6 +7,7 @@ import { ValidText } from "components/Login/Signup/signupinfo/SignupInfoStyle";
 import { memberPasswordChange } from "service/member";
 import Alert from "components/commonUi/Alert";
 import { client } from "service";
+import { EmailRequestBody } from "components/Login/Email/EmailRequest/EmailRequestStyle";
 
 
 
@@ -79,38 +80,39 @@ function PwdReset({ id }) {
 
   return (
     <div>
-      <RequestTextStyle>
-        <RequestText>비밀번호 재 설정</RequestText>
-        <RequestInfo>
-          영문, 숫자, 특수문자 조합으로 8자 이상 입력해주세요.
-        </RequestInfo>
-      </RequestTextStyle>
+      <EmailRequestBody>
+        <RequestTextStyle>
+          <RequestText>비밀번호 재 설정</RequestText>
+          <RequestInfo>
+            영문, 숫자, 특수문자 조합으로 8자 이상 입력해주세요.
+          </RequestInfo>
+        </RequestTextStyle>
 
-      <RequesInputForm>
-        <RequestInputDiv direction="column">
-          <PwdContainer>
-            <PwdInput
-              type={showPassword ? "text" : "password"}
-              placeholder="새 비밀번호"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-            <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <EyeOn /> : <EyeOff />}
-            </EyeOffStyle>
-          </PwdContainer>
-          <PwdContainer>
-            <PwdInput
-              type={showPasswordCheck ? "text" : "password"}
-              placeholder="새 비밀번호 확인"
-              value={passwordCheck}
-              onChange={e => setPasswordCheck(e.target.value)}
-            />
-            <EyeOffStyle onClick={() => setShowPasswordCheck(!showPasswordCheck)}>
-              {showPasswordCheck ? <EyeOn /> : <EyeOff />}
-            </EyeOffStyle>
-          </PwdContainer>
-        </RequestInputDiv>
+        <RequesInputForm>
+          <RequestInputDiv direction="column">
+            <PwdContainer>
+              <PwdInput
+                type={showPassword ? "text" : "password"}
+                placeholder="새 비밀번호"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+              <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <EyeOn /> : <EyeOff />}
+              </EyeOffStyle>
+            </PwdContainer>
+            <PwdContainer>
+              <PwdInput
+                type={showPasswordCheck ? "text" : "password"}
+                placeholder="새 비밀번호 확인"
+                value={passwordCheck}
+                onChange={e => setPasswordCheck(e.target.value)}
+              />
+              <EyeOffStyle onClick={() => setShowPasswordCheck(!showPasswordCheck)}>
+                {showPasswordCheck ? <EyeOn /> : <EyeOff />}
+              </EyeOffStyle>
+            </PwdContainer>
+          </RequestInputDiv>
         {
           passwordValidMessage &&
           <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
@@ -134,6 +136,7 @@ function PwdReset({ id }) {
           onOverlayClick={alert.onOverlayClick}
         />
       }
+      </EmailRequestBody>
     </div>
   )
 }

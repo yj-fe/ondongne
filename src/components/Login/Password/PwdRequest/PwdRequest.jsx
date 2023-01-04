@@ -3,9 +3,11 @@ import { sendSMS } from "service/common";
 import { memberFindPassword } from "service/common";
 import Alert from "components/commonUi/Alert";
 import ErrorToggle from "components/Login/Common/ErrorToggle/ErrorToggle";
-import { RequestToggleBody, RequestToggleButton, RequestToggleForm, RequestToggleText, RequestToggleTextLink, RequestToggleTextStyle } from "components/Login/Common/RequestToggle/RequestToggleStyle";
-import { AuthTimer } from "components/Login/Signup/signuprequest/SignupRequestStyle";
-import {RequestTextStyle, RequestText, RequestInfo, RequesInputForm,Input, InputContainer, RequesInput, RequestButton  } from './PwdRequestStyle'
+import { RequestToggleButton, RequestToggleForm, RequestToggleText, RequestToggleTextLink, RequestToggleTextStyle } from "components/Login/Common/RequestToggle/RequestToggleStyle";
+import { AuthTimer, RequesInputForm } from "components/Login/Signup/signuprequest/SignupRequestStyle";
+import { RequestText, RequestInfo, Input, RequesInput, RequestButton  } from './PwdRequestStyle'
+import { EmailRequestBody, RequestTextStyle } from "components/Login/Email/EmailRequest/EmailRequestStyle";
+import * as L from 'components/commonUi/Layout';
 
 /* ==============================
     180 => 3: 00 문자열 반환
@@ -133,42 +135,45 @@ function PwdRequest({setFindSuccess, setId}) {
 
   return (
     <div>
+      <EmailRequestBody>
       <RequestTextStyle>
         <RequestText>휴대폰 번호를 인증해주세요.</RequestText>
         <RequestInfo>
           고객님의 정보 보호를 위해 휴대폰 인증을 진행해주세요.
         </RequestInfo>
       </RequestTextStyle>
-      <RequesInputForm>
-        <Input
-          type='text'
-          placeholder="이메일 입력"
-          outline='none'
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <InputContainer>
-          <RequesInput
-              type='number'
-              placeholder='-를 제외한 휴대폰번호 입력'
-              outline='none'
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
-            >
-            </RequesInput>
-            <RequestButton
-              type='button'
-              onClick={smsHandler}
-            >
-              인증요청
-          </RequestButton>
-        </InputContainer>
 
+      <RequesInputForm>
+        <L.FlexCols _gap={16}>
+          <Input
+            type='text'
+            placeholder="이메일 입력"
+            outline='none'
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <RequesInputForm>
+            <RequesInput
+                type='number'
+                placeholder='-를 제외한 휴대폰번호 입력'
+                outline='none'
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
+              >
+              </RequesInput>
+              <RequestButton
+                type='button'
+                onClick={smsHandler}
+              >
+                인증요청
+            </RequestButton>
+          </RequesInputForm>
+        </L.FlexCols>
       </RequesInputForm>
+      
 
       {
           authCode &&
-          <RequestToggleBody>
             <RequestToggleForm>
               <RequesInputForm style={{position: 'relative'}}>
                 <RequesInput
@@ -195,7 +200,6 @@ function PwdRequest({setFindSuccess, setId}) {
                 <RequestToggleTextLink onClick={sendSMS}>인증번호 재전송</RequestToggleTextLink>
               </RequestToggleTextStyle>
             </RequestToggleForm>
-          </RequestToggleBody>
         }
         {
           alert &&
@@ -207,6 +211,7 @@ function PwdRequest({setFindSuccess, setId}) {
             onOverlayClick={alert.onOverlayClick}
           />
         }
+      </EmailRequestBody>
     </div>
   )
 }

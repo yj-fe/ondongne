@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader'
 import PwdRequest from "components/Login/Password/PwdRequest/PwdRequest";
 import PwdReset from "components/Login/Password/PwdReset/PwdReset";
-import {PwdBody} from './FindPwdStyle'
+import * as L from 'components/commonUi/Layout';
+import { S } from 'components/layout/Layout/LayoutStyle'
 
 
 function FindPwd() {
@@ -12,17 +13,23 @@ function FindPwd() {
 
   return (
     <div>
-      <LoginHeader title="비밀번호 찾기"/>
-      <PwdBody>
-        {
-          !findSuccess && 
-          <PwdRequest setFindSuccess={setFindSuccess} setId={setId}/>
-        }
-        {
-          findSuccess && 
-          <PwdReset id={id}/>
-        }
-      </PwdBody>
+      <S.Wrapper>
+        <LoginHeader title="비밀번호 찾기"/>
+          <S.Main>
+            <L.Contents _padding='0px' _height='100vh'>
+              <L.FlexCols _gap={40}>
+              {
+                !findSuccess && 
+                <PwdRequest setFindSuccess={setFindSuccess} setId={setId}/>
+              }
+              {
+                findSuccess && 
+                <PwdReset id={id}/>
+              }
+            </L.FlexCols>
+          </L.Contents>
+        </S.Main>
+      </S.Wrapper>
     </div>
   );
 }
