@@ -34,7 +34,7 @@ export const LayerOptionButton = styled.button`
         width: 24px;
         height: 24px;
         background: url(${arrowBottom}) center no-repeat;
-        transform: rotate(${props => props.active? 180 : 0}deg);
+        transform: rotate(${props => props.active ? 180 : 0}deg);
     }
 `;
 
@@ -59,7 +59,7 @@ export const LayerOptionButtonC = styled.button`
         width: 24px;
         height: 24px;
         background: url(${CameraC}) center no-repeat;
-        transform: rotate(${props => props.active? 180 : 0}deg);
+        transform: rotate(${props => props.active ? 180 : 0}deg);
     }
 `;
 export const BorderBox = styled.button`
@@ -81,7 +81,7 @@ export const BorderBox = styled.button`
         width: 24px;
         height: 24px;
         background: url(${Calendar}) ;
-        transform: rotate(${props => props.active? 180 : 0}deg);
+        transform: rotate(${props => props.active ? 180 : 0}deg);
     }
 `;
 
@@ -112,16 +112,16 @@ export const CouponButton = styled.button`
         width: 24px;
         height: 24px;
         background: url(${right}) center no-repeat;
-        transform: rotate(${props => props.active? 180 : 0}deg);
+        transform: rotate(${props => props.active ? 180 : 0}deg);
     }
 `;
 export const LayerTextButton = styled.button`
-    width: ${props=> props._width || '100%'};
-    padding:${props=> props._padding || '0px 16px'} ;
+    width: ${props => props._width || '100%'};
+    padding:${props => props._padding || '0px 16px'} ;
     display: flex;
     gap: 8px;
     height: 48px;
-    justify-content: ${props=> props._content || 'center'};
+    justify-content: ${props => props._content || 'center'};
     align-items: center;
     line-height: 1.5;
     border: 1px solid ${props => props.theme.color.gray200};
@@ -226,4 +226,13 @@ export const MapListButton = styled.button`
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
     font-weight: 700;
     font-size: 16px;
+`;
+
+export const Label = styled.label`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 `;

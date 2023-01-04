@@ -1,0 +1,38 @@
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+	width: 100%;
+	height: 84vh;
+}
+
+.ck.ck-editor__editable::-webkit-scrollbar-thumb {
+	background-color: #bdbdbd;
+	border-radius: 99px;
+}
+.ck.ck-editor__editable::-webkit-scrollbar {
+	width: 4px;
+}
+
+ol {
+	list-style: decimal !important;
+}
+ul {
+	list-style: inside !important;
+}
+
+strong {
+	font-weight: bold !important;
+}
+
+h4 {
+	font-size: 16px !important;
+	font-weight: bold !important;
+}
+
+h3 {
+	font-size: 22px !important;
+	font-weight: bold !important;
+}
+
+h2 {
+	font-size: 28px !important;
+	font-weight: 500 !important;
+}

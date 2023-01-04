@@ -10,11 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/store';
 import { Down } from 'components/commonUi/Icon';
-import { deliveryToString, hourValidtion, minValidtion, numberFormatter } from 'utils/utils';
+import { deliveryToString, numberFormatter } from 'utils/utils';
 import AddressModel from 'components/AddressModel';
 import Alert from 'components/commonUi/Alert';
 import CalendarModel from 'components/commonUi/CalendarModel';
-import { setHours } from 'date-fns';
 
 // 상점정보
 function BusinessManagementTab1() {
@@ -116,7 +115,7 @@ function BusinessManagementTab1() {
     setStore({
       ...store,
       sales: store.sales.map(item =>
-        item.dayWeek == dayWeek ? { ...item, openTime: time} : item
+        item.dayWeek == dayWeek ? { ...item, openTime: time } : item
       )
     })
   }
@@ -126,7 +125,7 @@ function BusinessManagementTab1() {
     setStore({
       ...store,
       sales: store.sales.map(item =>
-        item.dayWeek == dayWeek ? { ...item, closeTime: time} : item
+        item.dayWeek == dayWeek ? { ...item, closeTime: time } : item
       )
     })
   }
@@ -368,7 +367,7 @@ function BusinessManagementTab1() {
                 {
                   store.sales && store.sales.length > 0 &&
                   store.sales.map(item => (
-                    <DayOffForm 
+                    <DayOffForm
                       sales={item}
                       dayOffHandler={dayOffHandler}
                     />
@@ -385,7 +384,7 @@ function BusinessManagementTab1() {
             {
               store.sales && store.sales.length > 0 &&
               store.sales.map(item => (
-                <SalesForm 
+                <SalesForm
                   sales={item}
                   salesOpenTimeHandler={salesOpenTimeHandler}
                   salesCloseTimeHandler={salesCloseTimeHandler}
@@ -448,8 +447,8 @@ function BusinessManagementTab1() {
   )
 }
 
-const DayOffForm = ({sales, dayOffHandler}) => {
-  const {dayWeek, dayOffStatus} = sales;
+const DayOffForm = ({ sales, dayOffHandler }) => {
+  const { dayWeek, dayOffStatus } = sales;
   return (
     <DayBox
       onClick={() => dayOffHandler(dayWeek)}
@@ -460,8 +459,8 @@ const DayOffForm = ({sales, dayOffHandler}) => {
   )
 }
 
-const SalesForm = ({sales, salesOpenTimeHandler, salesCloseTimeHandler}) => {
-  const {dayWeek, dayOffStatus, openTime, closeTime} = sales;
+const SalesForm = ({ sales, salesOpenTimeHandler, salesCloseTimeHandler }) => {
+  const { dayWeek, dayOffStatus, openTime, closeTime } = sales;
   const [openHour, setOpenHour] = useState(openTime.split(':')[0]);
   const [openMin, setOpenMin] = useState(openTime.split(':')[1]);
   const [closeHour, setCloseHour] = useState(closeTime.split(':')[0]);
@@ -470,17 +469,17 @@ const SalesForm = ({sales, salesOpenTimeHandler, salesCloseTimeHandler}) => {
 
   const timeValid = (value, handler, maxNumber) => {
     const num = Number(value);
-    if(num === NaN) return handler(``)
+    if (num === NaN) return handler(``)
 
-    if(num < 0 || num > maxNumber) {
+    if (num < 0 || num > maxNumber) {
       return handler(``)
     }
 
     return handler(`${num}`);
-    
+
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     salesOpenTimeHandler(dayWeek, `${openHour}:${openMin}:00`)
   }, [openHour, openMin])
 
@@ -492,7 +491,7 @@ const SalesForm = ({sales, salesOpenTimeHandler, salesCloseTimeHandler}) => {
     <RowTitle align={'center'}>
       <Text _size={15} height={'44px'}>{dayWeek}</Text>
       <RowTimeDiv>
-        <TimeDiv 
+        <TimeDiv
           color={dayOffStatus}
         >
           <TimeBox>
@@ -503,7 +502,7 @@ const SalesForm = ({sales, salesOpenTimeHandler, salesCloseTimeHandler}) => {
               disabled={dayOffStatus}
               value={openHour}
               maxLength={2}
-              onChange={e => timeValid(e.target.value, setOpenHour ,23)}
+              onChange={e => timeValid(e.target.value, setOpenHour, 23)}
             />
           </TimeBox>
           :
@@ -515,12 +514,12 @@ const SalesForm = ({sales, salesOpenTimeHandler, salesCloseTimeHandler}) => {
               disabled={dayOffStatus}
               value={openMin}
               maxLength={2}
-              onChange={e => timeValid(e.target.value, setOpenMin ,59)}
+              onChange={e => timeValid(e.target.value, setOpenMin, 59)}
             />
           </TimeBox>
         </TimeDiv>
         ~
-        <TimeDiv 
+        <TimeDiv
           color={dayOffStatus}
         >
           <TimeBox>
@@ -531,7 +530,7 @@ const SalesForm = ({sales, salesOpenTimeHandler, salesCloseTimeHandler}) => {
               placeholder='00'
               disabled={dayOffStatus}
               value={closeHour}
-              onChange={e => timeValid(e.target.value, setCloseHour ,23)}
+              onChange={e => timeValid(e.target.value, setCloseHour, 23)}
             />
           </TimeBox>
           :
@@ -543,7 +542,7 @@ const SalesForm = ({sales, salesOpenTimeHandler, salesCloseTimeHandler}) => {
               placeholder='00'
               disabled={dayOffStatus}
               value={closeMin}
-              onChange={e => timeValid(e.target.value, setCloseMin ,59)}
+              onChange={e => timeValid(e.target.value, setCloseMin, 59)}
             />
           </TimeBox>
         </TimeDiv>

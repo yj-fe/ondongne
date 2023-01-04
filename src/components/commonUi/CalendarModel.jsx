@@ -4,13 +4,13 @@ import ko from 'date-fns/locale/ko';
 import Overlay from '../layout/Overlay/Overlay';
 import { format } from 'date-fns';
 
-const CalendarModel = ({modelClose, now, onChange}) => {
+const CalendarModel = ({modelClose, onChange, dateFormat='yy-MM-dd'}) => {
     const [date, setDate] = useState(new Date());
 
     const onChangeDate = useCallback((date) => {
         if (!date) return;
         setDate(date);
-        onChange(format(date, 'yy-MM-dd'));
+        onChange(format(date, dateFormat));
         modelClose();
     },[date]);
 
@@ -23,7 +23,7 @@ const CalendarModel = ({modelClose, now, onChange}) => {
                 months={1}
                 date={date}
                 onChange={onChangeDate}
-                dateDisplayFormat={'yy-MM-dd'}
+                dateDisplayFormat={dateFormat}
             />
         </Overlay>
     )
