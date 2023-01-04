@@ -64,7 +64,7 @@ export const InputForm = styled.form`
   justify-content: center;
   align-items: flex-start;
   gap: 12px;
-  width: 648px;
+  width: 100%;
   margin-top: 40px;
 
   @media only screen and (max-width: 390px) {
@@ -77,12 +77,10 @@ export const RequesInputForm = styled.form`
   justify-content: center;
   align-items: flex-start;
   gap: 12px;
-  width: 648px;
+  width: 100%;
   height: 48px;
 
-  @media only screen and (max-width: 390px) {
-    width: 350px;
-  }
+
 `
 export const RequesInput = styled.input`
   display: flex;
@@ -137,7 +135,7 @@ export const AuthTimer = styled.div`
     position: absolute;
     top: 0;
     right: 5px;
-    width: 80px;
+    width: 90px;
     height: 90%;
     display: flex;
     justify-content: center;

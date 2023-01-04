@@ -163,7 +163,6 @@ function EmailRequest({setData, setFindEmailSuccess}) {
 
         {
           authCode &&
-          <RequestToggleBody>
             <RequestToggleForm>
               <RequesInputForm style={{position: 'relative'}}>
                 <RequesInput
@@ -190,7 +189,6 @@ function EmailRequest({setData, setFindEmailSuccess}) {
                 <RequestToggleTextLink onClick={sendSMS}>인증번호 재전송</RequestToggleTextLink>
               </RequestToggleTextStyle>
             </RequestToggleForm>
-          </RequestToggleBody>
 
         }
       </EmailRequestBody>

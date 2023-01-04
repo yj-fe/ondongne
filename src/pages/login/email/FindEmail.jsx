@@ -4,7 +4,9 @@ import FindResult from 'components/Login/Email/FindResult/FindResult'
 import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader'
 import {EmailBody} from './FindEmailStyle'
 import { useState } from 'react';
-
+import * as L from 'components/commonUi/Layout';
+import { S } from 'components/layout/Layout/LayoutStyle'
+import Test from '../../../components/Login/Email/FindResult/Test'
 
 
 function FindEmail() {
@@ -18,17 +20,23 @@ function FindEmail() {
 
   return (
     <div>
-      <LoginHeader title="이메일 찾기"/>
-      <EmailBody>
-        {
-          !findEmailSuccess &&
-          <EmailRequest setData={setData} setFindEmailSuccess={setFindEmailSuccess}/>
-        }
-        {
-          findEmailSuccess &&
-            <FindResult data={data}/>
-        }
-      </EmailBody>
+      <S.Wrapper>
+        <LoginHeader title="이메일 찾기"/>
+        <S.Main>
+           <L.Contents _padding='0px' _height='100vh'>
+            <L.FlexCols _gap={40}>
+              {
+                !findEmailSuccess &&
+                <EmailRequest setData={setData} setFindEmailSuccess={setFindEmailSuccess}/>
+              }
+              {
+                findEmailSuccess &&
+                  <FindResult data={data}/>
+              }
+            </L.FlexCols>
+          </L.Contents>
+        </S.Main>
+      </S.Wrapper>
     </div>
   )
 }

@@ -17,10 +17,8 @@ import Confirm from 'components/commonUi/Confirm';
 import { login } from "service/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "store/slices/auth";
-import { Body } from "pages/main/MainPage/MainPageStyle";
 import * as L from 'components/commonUi/Layout';
 import { S } from 'components/layout/Layout/LayoutStyle'
-import { LayerOptionButton } from "components/commonUi/Button";
 
 
 function LoginPage() {

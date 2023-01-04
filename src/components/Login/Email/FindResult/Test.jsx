@@ -1,16 +1,15 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import {RequestButton,RequestButtonContainer,RequestFindEmail,RequestFindEmailText,RequestButtonDisable} from './FindResultStyle'
-import { EmailRequestBody, RequestInfo, RequestText, RequestTextStyle } from '../EmailRequest/EmailRequestStyle';
+
+import {RequestInfo,RequestText,RequestTextStyle,RequestButton,RequestButtonContainer,RequestFindEmail,RequestFindEmailText,RequestButtonDisable} from './FindResultStyle'
 
 
-function FindResult({data}) {
+function Test({data}) {
   let navigate = useNavigate()
   const [date, time] = data.date.split('T')
 
   return (
     <div>
-      <EmailRequestBody>
         <RequestTextStyle>
           <RequestText>이메일 찾기 결과</RequestText>
           <RequestInfo>회원님의 가입 정보는 아래 내용과 같습니다.</RequestInfo>
@@ -23,10 +22,9 @@ function FindResult({data}) {
           <RequestButton onClick={()=>{navigate("/login")}}>로그인 하기</RequestButton>
           <RequestButtonDisable onClick={()=>{navigate("/login/find/password")}}>비밀번호 찾기</RequestButtonDisable>
         </RequestButtonContainer>
-      </EmailRequestBody>
     </div>
   )
 }
 
 
-export default FindResult;
+export default Test;

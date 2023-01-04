@@ -74,17 +74,21 @@ export const InputContainer = styled.div`
 `
 export const RequesInput = styled.input`
   box-sizing: border-box;
-  width: 546px;
+  width: calc(100% - 90px);
   height: 48px;
   background: #ffffff;
   border-bottom: 1px solid #e0e0e0;
   flex: none;
   padding: 12px;
-
+  font-family: 'Pretendard';
+  font-style: normal;
   font-weight: 400;
   font-size: 16px;
-
-  color: #bdbdbd;
+  line-height: 24px;
+  color: #212121;
+  &::placeholder{
+    color: #BDBDBD;
+  }
   &:focus {
     outline: none;
     border-bottom: 1px solid #616161;
@@ -95,7 +99,7 @@ export const RequesInput = styled.input`
   }
 
   @media only screen and (max-width: 390px) {
-    width: 255px;
+    width: 80%;
   }
 `;
 export const RequestButton = styled.button`

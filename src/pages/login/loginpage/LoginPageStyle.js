@@ -8,7 +8,6 @@ export const LoginBody = styled.div`
   padding: 32px 40px 0;
   gap: 60px;
   background: #FFFFFF;
-  /* margin-top: 60px; */
   width: 100%;
 
   > form {
@@ -29,10 +28,8 @@ export const InputForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* align-items: flex-start; */
   gap: 16px;
   width: 100%;
-  /* height: 204px; */
 
   @media only screen and (max-width: 728px) {
     width: 100%;

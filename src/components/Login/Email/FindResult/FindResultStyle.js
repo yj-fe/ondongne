@@ -47,7 +47,7 @@ export const RequestFindEmail = styled.div`
   align-items: flex-start;
   padding: 24px;
   gap: 8px;
-  width: 648px;
+  width: 100%;
   height: 96px;
   background: #FFFFFF;
   border: 1px solid #E0E0E0;
@@ -55,23 +55,14 @@ export const RequestFindEmail = styled.div`
   flex: none;
   margin-bottom: 40px;
 
-  @media only screen and (max-width: 390px) {
-    width: 350px;
-  }
 `
 export const RequestFindEmailText = styled.p`
   height: 20px;
-
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 300;
   font-size: 15px;
   line-height: 20px;
-  /* identical to box height, or 133% */
-
-
-  /* Gray/900 */
-
   color: #212121;
 `
 export const RequestButtonContainer = styled.div`
@@ -82,12 +73,9 @@ export const RequestButtonContainer = styled.div`
   padding: 0px;
   gap: 12px;
 
-  width: 648px;
+  width: 100%;
   height: 52px;
 
-  @media only screen and (max-width: 390px) {
-    width: 350px;
-  }
 `
 export const RequestButton = styled.button`
   display: flex;
@@ -96,7 +84,7 @@ export const RequestButton = styled.button`
   align-items: center;
   padding: 8px 4px;
   gap: 4px;
-  width: 318px;
+  width: 100%;
   height: 52px;
   background: #0B806F;
   border-radius: 4px;
@@ -113,7 +101,7 @@ export const RequestButtonDisable = styled.button`
   align-items: center;
   padding: 8px 4px;
   gap: 4px;
-  width: 318px;
+  width: 100%;
   height: 52px;
   background: #FFFFFF;
   border: 1px solid #EEEEEE;

@@ -1,13 +1,15 @@
 import styled from 'styled-components'
 
 export const RequestToggleBody = styled.div`
+width: 100%;
 `
 export const RequestToggleForm = styled.form`
+width: 100%;
 `
 export const RequestToggleDiv = styled.div`
   box-sizing: border-box;
   flex-direction: row;
-  width: 648px;
+  width: 100%;
   height: 48px;
   border-bottom: 1px solid #e0e0e0;
   /* border-bottom: 1px solid ${props => props.errorPwd ? "#D32F2F" :"#e0e0e0"}; */
@@ -18,9 +20,6 @@ export const RequestToggleDiv = styled.div`
   line-height: 24px;
   color: #bdbdbd;
 
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
 `
 export const RequestToggleInput = styled.input`
   font-weight: 400;
@@ -40,7 +39,7 @@ export const RequestToggleCount = styled.div`
   float: right;
 `
 export const RequestToggleButton = styled.button`
-  width: 648px;
+  width: 100%;
   height: 52px;
   background: ${props=>props.active ? "#0B806F" : "#E0E0E0"};
   /* background: #E0E0E0; */
@@ -49,9 +48,6 @@ export const RequestToggleButton = styled.button`
   color: #FFFFFF;
   margin-top: 24px;
 
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
 `
 export const RequestToggleTextStyle = styled.p`
   display: flex;
