@@ -65,6 +65,9 @@ function MorePage() {
     if (data) setMember(data);
   }
 
+  const goToMember = () => {
+    navigate('/member/management');
+  }
   const bizMember = async () => {
 
     const response = await getBizMember();
@@ -110,6 +113,7 @@ function MorePage() {
       >
         <L.Container _padding="0px 0px 8px" >
 
+
           {
             auth.isAuthenticated &&
             <MoreAccountDiv>
@@ -122,9 +126,7 @@ function MorePage() {
                 </MoreAccountTextDiv>
               </MoreAccountProfile>
               <MoreAccountButtonDiv>
-                <Link to="/member/management">
-                  <MoreAccountButton>회원정보 관리</MoreAccountButton>
-                </Link>
+                  <MoreAccountButton onClick={goToMember}>회원정보 관리</MoreAccountButton>
                 <MoreAccountButton
                   onClick={bizMember}
                 >비즈회원 전환</MoreAccountButton>
@@ -144,7 +146,9 @@ function MorePage() {
             <Link to="/member/market">
               <MoreContainerDiv>My 단골</MoreContainerDiv>
             </Link>
-            <MoreContainerDiv>내가 쓴 리뷰</MoreContainerDiv>
+            <Link to="/member/review">
+              <MoreContainerDiv>내가 쓴 리뷰</MoreContainerDiv>
+            </Link>
             <Link to="/member/coupon">
               <MoreContainerDiv>쿠폰함</MoreContainerDiv>
             </Link>

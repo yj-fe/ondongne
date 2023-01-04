@@ -5,6 +5,15 @@ export const ImgSizeLayout = styled.img`
     width: ${props => props._width}px;
     height: ${props => props._height}px;
 `;
+export const ImgPer = styled.img`
+    border-radius: ${props => props._bdr}px;
+    /* width: ${props => props._width || '31.4%'}; */
+    /* padding-bottom: ${props => props._height || '31.4%'}; */
+
+    @media only screen and (max-width: 688px) { 
+ 
+    }
+`;
 
 export const RelativDiv = styled.div`
     border-radius: ${props => props._bdr}px;

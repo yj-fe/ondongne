@@ -3,7 +3,7 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { CartC, Down, Star } from 'components/commonUi/Icon';
 import maindata from 'assets/data/maindata'
-import { AbsoluteDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
+import { AbsoluteDiv, ImgPer, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
 import { ModalBody, ModalButton, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from '../More/ModalPageStyle';
 
 function MarketDetailProduct() {
@@ -58,6 +58,7 @@ export function MarketProductCard(props){
   <div>
 
     <L.FlexCols _gap={12} _padding={0} _width='216px'>
+
       <RelativDiv>
         <AbsoluteDiv>
           <CartC/>
@@ -78,9 +79,36 @@ export function MarketProductCard(props){
           <Star/>
           <T.Text  _size={11} _weight={400} _color='gray800'>(4.5)</T.Text>
         </L.FlexRows>
-
       </L.FlexCols>
+
     </L.FlexCols>
+
+
+    {/* <L.CateCols _gap={12} _padding={0} _width='216px'>
+
+      <RelativDiv>
+        <AbsoluteDiv>
+          <CartC/>
+        </AbsoluteDiv>
+        <ImgPer _width={216} _height={216} _bdr={6} src={props.item.img}/>
+      </RelativDiv>
+
+      <L.FlexCols _gap={4} _padding={0} >
+        <T.Text _size={14} _weight={400} _color='gray900'>{props.item.title}</T.Text>
+        <L.FlexRows _gap={4} _padding={0} _items='center' >
+          <T.Text  _size={15} _weight={600} _color='red'>{props.item.discount}</T.Text>
+          <T.Text  _size={13} _weight={400} _color='gray500'>{props.item.price}</T.Text>
+        </L.FlexRows>
+        <L.FlexRows>
+          <T.Text  _size={16} _weight={600} _color='gray900'>{props.item.finalprice}</T.Text>
+        </L.FlexRows>
+        <L.FlexRows>
+          <Star/>
+          <T.Text  _size={11} _weight={400} _color='gray800'>(4.5)</T.Text>
+        </L.FlexRows>
+      </L.FlexCols>
+      
+    </L.CateCols> */}
   </div>
   )
 }

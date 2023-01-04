@@ -46,6 +46,17 @@ export const FlexCols = styled.div`
     width: ${props => props._width || '100%'};
     padding: ${props => props._padding || '0px'};
 `;
+export const CateCols = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: ${props => props._gap || 8}px;
+    width: ${props => props._width || '31.4%'};
+    padding: ${props => props._padding || '0px'};
+    @media only screen and (max-width: 688px) { 
+      width: 47.5%;
+    }
+`;
 
 export const FlexRows = styled.div`
     display: flex;

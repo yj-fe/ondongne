@@ -14,6 +14,7 @@ export const TextInput = styled.input`
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
+    align-self: start;
     &::placeholder {
         color: ${props => props.theme.color.gray400};
     }

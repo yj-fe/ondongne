@@ -16,16 +16,9 @@ export const CartContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: #6e6868;
-  width: 728px;
+  width: 100%;
   height: auto;
-  > div {
-    /* max-width: 728px; */
-    width: 100%;
 
-    @media only screen and (max-width: 728px) { 
-      width: 100%;
-    }
-  }
 `
 export const CartEmptyDiv = styled.div`
   display: flex;
@@ -56,7 +49,7 @@ export const CartDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  width: 728px;
+  width: 100%;
   height: auto;
 `
 export const CarProfiletDiv = styled.div`
@@ -94,7 +87,7 @@ flex-direction: column;
 align-items: flex-start;
 padding: 20px 24px;
 gap: 20px;
-width: 728px;
+width: 100%;
 height: auto;
 background: #FFFFFF;
 `
@@ -104,7 +97,7 @@ export const ContentProductDiv = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 16px;
-  width: 680px;
+  width: 100%;
   height: auto;
 `
 export const ProductTitleDiv = styled.div`
@@ -114,7 +107,7 @@ export const ProductTitleDiv = styled.div`
   align-items: center;
   padding: 0px;
   gap: 24px;
-  width: 680px;
+  width: 100%;
   height: 26px;
 `
 export const DeleteStyle = styled.div`
@@ -132,7 +125,7 @@ export const ProductInfo = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 4px;
-  width: 680px;
+  width: 100%;
 `
 export const ProductInfoText = styled.p`
   font-weight: 400;
@@ -147,7 +140,7 @@ export const ContentCountDiv = styled.div`
   padding: 0px;
   gap: 16px;
 
-  width: 680px;
+  width: 100%;
   height: 32px;
 `
 export const CountText = styled.p`
@@ -187,7 +180,7 @@ export const ContentButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  width: 680px;
+  width: 100%;
   height: 48px;
   background: #0B806F;
   border-radius: 4px;

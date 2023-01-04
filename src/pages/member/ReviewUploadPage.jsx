@@ -5,11 +5,11 @@ import Layout from 'components/layout/Layout/Layout';
 import { Link, useNavigate } from 'react-router-dom'
 import { Delete, Down, OneEmptyBigStar } from 'components/commonUi/Icon';
 import { ActionButton, LayerOptionButtonC } from 'components/commonUi/Button';
-import { TextInput } from './../../components/commonUi/Input';
 import { OneBigStar } from './../../components/commonUi/Icon';
 import { ReviewLayout } from './../../components/layout/Layout/MoreLayout';
 import { AbsoluteTopDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
 import maindata from 'assets/data/maindata'
+import { NameToggleInput, NameToggleInputForm } from './MemberManagement/MemberManagementStyle';
 
 
 function ReviewUploadPage() {
@@ -79,12 +79,12 @@ function ReviewUploadPage() {
 
 
 
-              
-              <TextInput
-                _height={200}
-                _boccolor='#ffffff'
-                placeholder='내용을 작성해주세요.'
-              />
+              <NameToggleInputForm _height='200px'>
+                  <NameToggleInput
+                    placeholder='내용을 작성해주세요.'
+                    type='text'
+                  />
+                </NameToggleInputForm>
 
 
             </L.FlexCols>

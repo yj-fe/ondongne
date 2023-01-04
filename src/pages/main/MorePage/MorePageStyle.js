@@ -36,7 +36,7 @@ export const MoreLoginDiv = styled.div`
   align-items: flex-start;
   padding: 20px;
   gap: 24px;
-  width: 728px;
+  width: 100%;
   height: auto;
   background: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
@@ -48,7 +48,7 @@ export const MoreAccountDiv = styled.div`
   align-items: flex-start;
   padding: 20px;
   gap: 24px;
-  width: 728px;
+  width: 100%;
   height: auto;
   background: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
@@ -60,7 +60,7 @@ export const MoreAccountProfile = styled.div`
   padding: 0px;
   gap: 16px;
 
-  width: 688px;
+  width: 100%;
   height: 52px;
 `
 export const MoreAccountImg = styled.img`
@@ -114,8 +114,7 @@ export const MoreAccountButtonDiv = styled.div`
   align-items: center;
   padding: 0px;
   gap: 12px;
-
-  width: 688px;
+  width: 100%;
   height: 44px;
 `
 export const MoreAccountButton = styled.div`
@@ -125,7 +124,7 @@ export const MoreAccountButton = styled.div`
   align-items: center;
   padding: 4px;
   gap: 4px;
-  width: 338px;
+  width: 49.12%;
   height: 44px;
   background: #F5F5F5;
   border-radius: 99px;
@@ -136,7 +135,7 @@ export const MoreAccountButton = styled.div`
   color: #424242;
 `
 export const MoreLoginText = styled.p`
-  width: 688px;
+  width: 100%;
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
@@ -150,7 +149,7 @@ export const MoreLoginButton = styled.div`
   align-items: center;
   padding: 4px;
   gap: 4px;
-  width: 688px;
+  width: 100%;
   height: 52px;
   background: #0B806F;
   border-radius: 4px;
