@@ -48,13 +48,19 @@ export const FlexCols = styled.div`
 `;
 export const BottomCols = styled.div`
     position: fixed;
+    display: flex;
+    flex-direction: column;
     width: 688px;
     bottom: 24px;
-    width: 728px;
-    flex-direction: column;
-    flex-wrap: wrap;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     gap: ${props => props._gap || 8}px;
     padding: ${props => props._padding || '0px'};
+    @media only screen and (max-width: 728px) { 
+        width: 100%;
+        padding: 0 20px;
+  }
 `;
 export const CateCols = styled.div`
     display: flex;

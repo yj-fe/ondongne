@@ -175,6 +175,7 @@ export const FixedPaddingActionButton = styled.button`
     transform: translateX(-50%);
     font-size: 18px;
     font-weight: 600;
+
 `;
 export const FilterButton = styled.button`
     width: 200px;

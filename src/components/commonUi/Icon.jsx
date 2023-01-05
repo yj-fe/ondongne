@@ -30,6 +30,12 @@ export const ArrowRightB = () => (
     </svg>
 );
 
+export const ArrowTop = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.41009 13.0906C4.08466 12.7651 4.08466 12.2375 4.41009 11.912L9.41009 6.91205C9.73553 6.58661 10.2632 6.58661 10.5886 6.91205L15.5886 11.912C15.914 12.2375 15.914 12.7651 15.5886 13.0906C15.2632 13.416 14.7355 13.416 14.4101 13.0906L9.99935 8.67981L5.5886 13.0906C5.26317 13.416 4.73553 13.416 4.41009 13.0906Z" fill="#424242"/>
+    </svg>
+);
+
 export const Profile32 = () => (
     <div style={{ width: "32px", height: "32px", borderRadius: "16px", overflow: "hidden" }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,6 +93,13 @@ export const Switch = () => (
     <svg width="52" height="28" viewBox="0 0 52 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="52" height="28" rx="14" fill="#E0E0E0" />
         <circle cx="14" cy="14" r="12" fill="white" />
+    </svg>
+);
+
+export const SwitchC = () => (
+    <svg width="52" height="28" viewBox="0 0 52 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="52" height="28" rx="14" fill="#0B806F"/>
+    <circle cx="38" cy="14" r="12" fill="white"/>
     </svg>
 );
 

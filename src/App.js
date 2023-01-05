@@ -65,6 +65,7 @@ import BusinessCouponUpload from "./pages/business/BusinessPage/BusinessCouponUp
 import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 import { localActions } from "store/slices/location";
+import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -228,6 +229,7 @@ function App() {
 					<Route path="faq" element={<FrequentlyAskedQuestion />} />
 					{/* 1:1 */}
 					<Route path="inquiry" element={<InquiryPage />} />
+					<Route path="inquiry/details/:id" element={<InquiryDetailsPage />} />
 					{/* voc */}
 					<Route path="voc" element={<VocPage />} />
 					{/* 약관 */}

@@ -135,7 +135,7 @@ export const InfoBoxDiv = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	padding: 14px 12px;
-	width: 688px;
+	width: 100%;
 	height: 48px;
 	background: #ffffff;
 	border: 1px solid #eeeeee;

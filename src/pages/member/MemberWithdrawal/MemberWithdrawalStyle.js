@@ -44,7 +44,7 @@ export const TextTitle = styled.p`
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-  width: 688px;
+  width: 100%;
   height: 88px;
 `
 export const TextTitleBold = styled.p`
@@ -94,14 +94,7 @@ export const CheckForm = styled.div`
   width: 100%;
   height: 136px;
 `
-export const Bottom = styled.div`
 
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  width: 100%;
-  bottom: 24px;
-`
 export const CheckTitleDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -124,7 +117,7 @@ export const CheckTitle = styled.p`
   color: #212121;
 `
 export const InputDiv = styled.div`
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   gap: 4px;
   width: 100%;
   height: 100px;
@@ -166,4 +159,5 @@ export const ButtonDiv = styled.button`
   font-size: 18px;
   text-align: center;
   color: #FFFFFF;
+
 `

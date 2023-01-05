@@ -18,36 +18,36 @@ function CustomerService() {
           onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px">
-          <L.Contents  >
-            <L.FlexCols _gap={24} _padding="8px 20px">
-              <L.FlexRows _content="space-between" _items="center" _padding="16px 0px">
-                <T.Text _weight={500} _size={16} _color="gray900">자주하는 질문</T.Text>
-                <Link to='/service/faq'>
+          <L.Contents  _padding='0px'>
+            <L.FlexCols _gap='0px' _padding="8px 20px">
+              <Link to='/service/faq'>
+                <L.FlexRows _height='56px' _content="space-between" _items="center" _padding="16px 0px">
+                  <T.Text _weight={500} _size={16} _color="gray900">자주하는 질문</T.Text>
                   <ArrowRight/>
-                </Link>
-              </L.FlexRows>
-              <L.FlexRows _content="space-between" _items="center" _padding="16px 0px">
-                <T.Text _weight={500} _size={16} _color="gray900">1:1 문의</T.Text>
-                <Link to='/service/inquiry'>
+                </L.FlexRows>
+              </Link>
+              <Link to='/service/inquiry'>
+                <L.FlexRows _height='56px' _content="space-between" _items="center" _padding="16px 0px">
+                  <T.Text _weight={500} _size={16} _color="gray900">1:1 문의</T.Text>
                   <ArrowRight/>
-                </Link>
-              </L.FlexRows>
-              <L.FlexRows _content="space-between" _items="center" _padding="16px 0px">
-                <T.Text _weight={500} _size={16} _color="gray900">Voc 의견</T.Text>
-                <Link to='/service/voc'>
+                </L.FlexRows>
+              </Link>
+              <Link to='/service/voc'>
+                <L.FlexRows _height='56px'  _content="space-between" _items="center" _padding="16px 0px">
+                  <T.Text _weight={500} _size={16} _color="gray900">Voc 의견</T.Text>
                   <ArrowRight/>
-                </Link>
-              </L.FlexRows>
+                </L.FlexRows>
+              </Link>
             </L.FlexCols>
           </L.Contents>
 
-          <L.Contents >
-            <L.FlexCols _gap={24} _padding="8px 20px">
-              <L.FlexRows _content="space-between" _items="center" _width={688} _padding="8px 0px">
+          <L.Contents _padding='0px' >
+            <L.FlexCols _gap='0px' _padding="8px 20px">
+              <L.FlexRows _height='36px' _content="space-between" _items="center" _width={688} _padding="8px 0px">
                 <T.Text _weight={400} _size={14} _color="gray800">우리동네 고객센터</T.Text>
                 <T.Text _weight={400} _size={14} _color="gray800">070-1234-5678</T.Text>
               </L.FlexRows>
-              <L.FlexRows _content="space-between" _items="center" _width={688} _padding="8px 0px">
+              <L.FlexRows _height='36px' _content="space-between" _items="center" _width={688} _padding="8px 0px">
                 <T.Text _weight={400} _size={14} _color="gray800">이메일</T.Text>
                 <T.Text _weight={400} _size={14} _color="gray800">sosangoin@email.com</T.Text>
               </L.FlexRows>

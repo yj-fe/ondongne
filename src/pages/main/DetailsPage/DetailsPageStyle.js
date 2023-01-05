@@ -196,7 +196,7 @@ export const TabButtonStyle = styled.div`
   align-items: center;
   padding: 0px;
   width: 100%;
-  height: 40px;
+  height: 50px;
   background: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
 `
@@ -209,7 +209,7 @@ export const DetailTabInfo = styled.div`
   padding: 8px 20px;
   gap: 4px;
   width: 50%;
-  height: 40px;
+  height: 50px;
   border-bottom: 2px solid ${ props => props.infocolor  ? "#0B806F" : "#BDBDBD"};;
   /* border-bottom: 2px solid #0B806F; */
 
@@ -228,7 +228,7 @@ export const DetailTabReview = styled.div`
   gap: 4px;
   border-bottom: 2px solid ${ props => props.reviewcolor  ? "#0B806F" : "#BDBDBD"};;
   width: 50%;
-  height: 40px;
+  height: 50px;
 
   font-weight: 600;
   font-size: 16px;

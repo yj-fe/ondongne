@@ -88,6 +88,7 @@ function MemberWithdrawal() {
           </L.FlexCols>
 
           <L.BottomCols>
+            <L.FlexCols>
             <CheckForm >
               <CheckTitleDiv onClick={() => { setCheck((s) => !s); setBtn((s) => !s) }}>
                 <CheckStyle
@@ -114,6 +115,7 @@ function MemberWithdrawal() {
             >
               회원탈퇴
             </ButtonDiv>
+            </L.FlexCols>
           </L.BottomCols>
 
       {modal && <ModalDelete PropsWithdrwal={PropsWithdrwal} PropsModal={PropsModal} closeText="취소" buttonText="탈퇴하기" titleText="정말로 탈퇴하시겠습니까?" />}
