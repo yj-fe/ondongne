@@ -316,3 +316,21 @@ export const PlusB = () => (
     <path d="M22 16H10" stroke="#424242" stroke-width="2" stroke-linecap="round"/>
     </svg>
 );
+
+export const OrderPay = () => (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="48" height="48" rx="24" fill="#FAFAFA"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M36 16.0013H12V32.0013H36V16.0013ZM12 14.668C11.2636 14.668 10.6667 15.2649 10.6667 16.0013V32.0013C10.6667 32.7377 11.2636 33.3346 12 33.3346H36C36.7364 33.3346 37.3333 32.7377 37.3333 32.0013V16.0013C37.3333 15.2649 36.7364 14.668 36 14.668H12Z" fill="#BDBDBD"/>
+    <rect x="12" y="18.668" width="24" height="4" fill="#BDBDBD"/>
+    <rect x="14.6667" y="25.332" width="5.33333" height="1.33333" rx="0.666666" fill="#BDBDBD"/>
+    </svg>
+);
+
+export const OrderPayC = () => (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="48" height="48" rx="24" fill="#E1F3F2"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M36 16.0013H12V32.0013H36V16.0013ZM12 14.668C11.2636 14.668 10.6667 15.2649 10.6667 16.0013V32.0013C10.6667 32.7377 11.2636 33.3346 12 33.3346H36C36.7364 33.3346 37.3333 32.7377 37.3333 32.0013V16.0013C37.3333 15.2649 36.7364 14.668 36 14.668H12Z" fill="#0B806F"/>
+    <rect x="12" y="18.668" width="24" height="4" fill="#0B806F"/>
+    <rect x="14.6667" y="25.332" width="5.33333" height="1.33333" rx="0.666666" fill="#0B806F"/>
+    </svg>
+);

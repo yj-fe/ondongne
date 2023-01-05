@@ -186,14 +186,14 @@ const OrderForm = props => {
             <L.Contents>
                 <L.FlexCols _gap={16}>
                     <T.Text _weight={600}>요청사항</T.Text>
+                    <IP.TextInput 
+                        placeholder="언제나 고객님의 요청에 귀 기울입니다."
+                    />
                     <CheckBox
                         label="다음에도 사용"
                         name="requestSave"
                         checked={requestSave}
                         onChange={e => {setRequestSave(e.currentTarget.checked)}}
-                    />
-                    <IP.TextInput 
-                        placeholder="언제나 고객님의 요청에 귀 기울입니다."
                     />
                 </L.FlexCols>
             </L.Contents>
@@ -231,10 +231,10 @@ const OrderForm = props => {
                                 <th>배달비</th>
                                 <td>{ orderData.deliveryFee } 원</td>
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 <th>결제 수단</th>
                                 <td>{ payType }</td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                         <tfoot>
                             <tr>

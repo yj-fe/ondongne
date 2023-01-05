@@ -66,6 +66,8 @@ import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 import { localActions } from "store/slices/location";
 import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage";
+import OrderManagement from "pages/business/BusinessPage/OrderManagement";
+import OrderManagementDetailsPage from "pages/business/BusinessPage/OrderManagementDetailsPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -197,6 +199,9 @@ function App() {
 					{/* 리뷰관리 */}
 					<Route path="review" element={<BusinessReview />} />
 					<Route path="news" element={<BusinessNews />} />
+					{/* 주문관리 */}
+					<Route path="order" element={<OrderManagement />} />
+					<Route path="order/details/:id" element={<OrderManagementDetailsPage />} />
 				</Route>
 
 				{/* ========== 로그인 ========== */}

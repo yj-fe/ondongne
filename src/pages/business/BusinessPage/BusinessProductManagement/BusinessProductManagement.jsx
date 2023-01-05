@@ -62,7 +62,7 @@ function BusinessProductManagement() {
       >
 
         <L.Container >
-          <L.Contents _height={'100vh'}>
+          <L.Contents>
             <L.FlexCols _padding={0} _gap={0}>
 
               <L.FlexRows _gap={16} _content='space-between'>
@@ -80,13 +80,15 @@ function BusinessProductManagement() {
               </L.FlexRows>
 
               <L.Contents _padding='0px' _gap={20}>
-                <L.FlexRowsWrap _gap={20} _padding={0} _height='364px'>
+                <L.FlexRowsWrap _gap={20} _padding={0}>
                   {
                     items && items.length === 0 &&
-                    <L.NoneDataContainer>
-                      <T.Text _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
-                      <T.Text _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
-                    </L.NoneDataContainer>
+                    <L.Contents _padding='50px 0px' _height='100vh'>
+                      <L.NoneDataContainer>
+                        <T.Text _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
+                        <T.Text _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
+                      </L.NoneDataContainer>
+                    </L.Contents>
                   }
                   {
                     items && items.length > 0 &&
