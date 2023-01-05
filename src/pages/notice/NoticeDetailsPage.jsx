@@ -19,14 +19,14 @@ function NoticeDetailsPage() {
         <L.Container _padding="0px 0px 8px" 
         >
           <Link to='/notice/details/:id'>
-          <L.Contents  _height='100vh'>
-            <L.FlexCols _gap={20} _padding="8px 20px">
-              <L.FlexCols _gap={4}>
+          <L.Contents  _height='100vh' _padding="0px">
+            <L.FlexCols _gap={20} _padding="0px">
+              <L.FlexCols _gap={4} _padding="8px 20px">
                 <T.Text _weight={500} _size={16} _color="gray900">사기를 주의하세요.</T.Text>
                 <T.Text _weight={400} _size={13} _color="gray500">2022/10/10</T.Text>
              </L.FlexCols>
              <Line/>
-              <L.FlexCols _gap={4}>
+              <L.FlexCols _gap={4} _padding="8px 20px">
                 <T.Text _weight={400} _size={15} _color="gray800">
                   <p>안녕하세요.</p>
                   <p>맘스노트 관리자 입니다.</p>

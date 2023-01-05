@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { businessNumberFormatter, fileFormatter } from 'utils/utils';
 import DaumPost from 'components/DaumPost';
 import Alert from 'components/commonUi/Alert';
-
+import * as L from 'components/commonUi/Layout';
 
 function BusinessManagementTab2() {
   const navigate = useNavigate();
@@ -92,7 +92,9 @@ function BusinessManagementTab2() {
     <div>
       <TabDiv>
 
-        <TabContent>
+        <L.Contents >
+          <L.FlexCols _gap={40}>
+
           <ContentDiv>
             <ContentTitle>대표자 명</ContentTitle>
             <TitleInfoDiv>
@@ -209,8 +211,8 @@ function BusinessManagementTab2() {
             </FileForm>
           </ContentDiv>
 
-
-        </TabContent>
+          </L.FlexCols>
+        </L.Contents>
 
 
         <TabBtn onClick={businessInfoUpdate}>수정 완료</TabBtn>

@@ -8,8 +8,14 @@ import { CheckStyle } from 'pages/member/MemberWithdrawal/MemberWithdrawalStyle'
 
 function SettingPage() {
   const navigate = useNavigate();
-  const [check, setCheck] = useState(false)
-
+  const [check1, setCheck1] = useState(false)
+  const [check2, setCheck2] = useState(false)
+  const handleSwitch1=()=>{
+    setCheck1(!check1)
+  }
+  const handleSwitch2=()=>{
+    setCheck2(!check2)
+  }
   return (
     <div>
       <Layout
@@ -21,17 +27,18 @@ function SettingPage() {
         <L.Container _padding="0px 0px 8px" >
           <L.Contents  _padding='0px'>
             <L.FlexCols _gap='0px' _padding="8px 20px">
-              <L.FlexRows _height='56px' _content="space-between" _items="center" _padding="16px 0px">
+              <L.FlexRows onClick={handleSwitch1} _height='56px' _content="space-between" _items="center" _padding="16px 0px">
                 <T.Text _weight={500} _size={16} _color="gray900">마케팅 활용 동의</T.Text>
 
-                  {check ? <SwitchC /> : <Switch />}
+                  {check1 ? <SwitchC /> : <Switch />}
 
               </L.FlexRows>
-              <L.FlexRows  
+              <L.FlexRows
+               onClick={handleSwitch2}  
                _height='56px' _content="space-between" _items="center" _padding="16px 0px">
                 <T.Text _weight={500} _size={16} _color="gray900">Push 수신 동의</T.Text>
 
-                {check ? <SwitchC /> : <Switch />}
+                {check2 ? <SwitchC /> : <Switch />}
               </L.FlexRows>
 
             </L.FlexCols>

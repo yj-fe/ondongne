@@ -96,7 +96,7 @@ export const AgreementDiv = styled.div`
   background: #FFFFFF;
   padding: 32px 20px;
   gap: 16px;
-  width: 728px;
+  width: 100%;
   height: auto;
 `
 export const SpaceBet = styled.div`
@@ -104,7 +104,7 @@ export const SpaceBet = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 688px;
+  width: 100%;
 `
 export const Button = styled.button`
   display: flex;

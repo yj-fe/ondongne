@@ -53,9 +53,14 @@ export const Container = styled.div`
   height: 766px;
   border-radius: 12px;
   background: #FFFFFF;
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+  }
 `
 const Header = styled.div`
-  width: 390px;
+  width: 100%;
   height: 60px;
   padding: 20px;
 `
@@ -66,7 +71,7 @@ const Content = styled.div`
   align-items: center;
   padding: 40px 20px;
   gap: 12px;
-  width: 390px;
+  width: 100%;
   height: 706px;
 `
 const Btn = styled.div`
@@ -76,7 +81,7 @@ const Btn = styled.div`
   align-items: center;
   padding: 12px 24px;
   gap: 4px;
-  width: 350px;
+  width: 100%;
   height: 56px;
   background: #0B806F;
   border-radius: 4px;

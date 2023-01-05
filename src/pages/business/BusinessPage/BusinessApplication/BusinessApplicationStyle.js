@@ -8,7 +8,7 @@ export const FinalPageDiv = styled.div`
   padding: 40px 20px;
   gap: 40px;
   /* position: absolute; */
-  width: 728px;
+  width: 100%;
   height: 100vh;
   /* top: 60px; */
   background: #FFFFFF;

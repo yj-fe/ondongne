@@ -4,11 +4,10 @@ import { Text } from 'components/commonUi/Text'
 import { ReactComponent as Right } from "assets/main/right.svg";
 import { ReactComponent as Down } from "assets/icons/arrow/Arrow-Down.svg";
 import Alert from 'components/commonUi/Alert';
-import { Final, Check } from 'components/commonUi/Icon';
+import { Final, Check, Delete, Close } from 'components/commonUi/Icon';
 
 import { NextButton } from 'components/Login/Signup/agreement/AgreementStyle'
 import { ConfirmButton, CenterDiv, FinalPageDiv } from './BusinessApplicationStyle'
-import LayoutPage from 'components/Common/LayoutPage';
 import { Body, Container, Div } from 'components/Common/LayoutPageStyle';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -16,7 +15,8 @@ import { searchLocation } from 'service/common';
 import AddressModel from 'components/AddressModel';
 import { deliveryToString, businessNumberFormatter } from 'utils/utils';
 import { bizSignup } from 'service/biz';
-
+import Layout from 'components/layout/Layout/Layout';
+import * as L from 'components/commonUi/Layout';
 
 function BusinessApplication() {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ function BusinessApplication() {
 
     if (!checked) {
       const count = categories.filter(category => category.checked === true)
-      if (count.length == 5) {
+      if (count.length === 5) {
         return setCategoryErrorMessage('최대 5개까지 추가 가능합니다.');
       }
     }
@@ -116,7 +116,7 @@ function BusinessApplication() {
   }, [categories, deliveries, files])
 
   useEffect(() => {
-    if (data.businessNumber.length == 12
+    if (data.businessNumber.length === 12
       && data.category.length > 0
       && data.delivery.length > 0
       && data.storeName.length > 0
@@ -130,12 +130,17 @@ function BusinessApplication() {
   return (
     <div>
       {/* ============= 3. 비즈회원신청페이지 ============= */}
-      <LayoutPage title="비즈 정보 관리" />
-      <Body>
-        <Container>
+      <Layout
+        title="비즈 정보 관리"
+        cart={false}
+        bell={false}
+        onBackClick={() => navigate(-1)}
+      >
+        <L.Container _padding="0px 0px 8px">
+          <L.Contents _padding="0" _height={'100vh'}>
+            <L.FlexCols>
           {
             !isSuccess &&
-            <Div>
               <TabContent>
                 <div>
                   <Text _weight={600} _size={24} _color={'gray900'}><p>나만의 상점을</p><p>직접 등록해 보세요.</p></Text>
@@ -159,12 +164,12 @@ function BusinessApplication() {
                 </ContentDiv>
                 <ContentDiv style={{ position: "relative" }}>
                   <ContentTitle>카테고리</ContentTitle>
-                  <TitleInfoDiv>
+                  <TitleInfoDiv onClick={() => setSelect(!select)}>
                     <TitleInfo>
                       {data.category === '' ? '카테고리 선택' : data.category}
                     </TitleInfo>
                     <RightStyle
-                      onClick={() => setSelect(!select)}
+                      
                     ><Down /></RightStyle>
                   </TitleInfoDiv>
                   {categoryErroMessage && <Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{categoryErroMessage}</Text>}
@@ -224,7 +229,7 @@ function BusinessApplication() {
                           <button
                             type='button'
                             onClick={() => setFiles(files.filter(item => item.name !== file.name))}
-                          >x</button>
+                          ><Close/></button>
                         </div>
                       ))}
                     </FileForm>
@@ -241,7 +246,6 @@ function BusinessApplication() {
                   비즈 신청하기
                 </NextButton>
               </TabContent>
-            </Div>
           }
 
           {/* ============= 4. 비즈회원신청 완료페이지 ============= */}
@@ -261,9 +265,6 @@ function BusinessApplication() {
               </ConfirmButton>
             </FinalPageDiv>
           }
-
-        </Container>
-      </Body>
       {
         alert &&
         <Alert
@@ -282,6 +283,10 @@ function BusinessApplication() {
           setDeliverise={setDeliverise}
         />
       }
+            </L.FlexCols>
+          </L.Contents>
+        </L.Container>
+      </Layout>
     </div>
   )
 }

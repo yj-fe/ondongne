@@ -4,7 +4,7 @@ export const TabDiv = styled.p`
 	flex-direction: column;
 	align-items: center;
 	padding: 0px;
-	width: 728px;
+	width: 100%;
 `;
 export const TabProfileDiv = styled.div`
 	width: 100%;
@@ -44,13 +44,13 @@ export const CameraImg = styled.img`
 `;
 export const AvatarDiv = styled.div`
 	position: absolute;
-	top: 207px;
+	top: 327px;
 `;
 export const TabContent = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 20px;
+	padding: 60px 20px 80px;
 	gap: 40px;
 	width: 100%;
 	height: 90%;
@@ -78,6 +78,9 @@ export const TabBtn = styled.button`
 	font-size: 18px;
 	text-align: center;
 	color: #ffffff;
+	@media screen and (max-width: 728px) {
+		width: 100%;
+	}
 `;
 export const ContentDiv = styled.div`
 	display: flex;
@@ -153,7 +156,7 @@ export const TextCenter = styled.label`
 	justify-content: center;
 	align-items: center;
 	padding: 14px 12px;
-	width: 688px;
+	width: 100%;
 	height: 48px;
 	background: #ffffff;
 	border: 1px solid #eeeeee;
@@ -183,7 +186,11 @@ export const Input = styled.input`
 	width: 100%;
 	background-color: ${(props) => (props.color ? "#EEEEEE" : "none")};
 	text-align: ${(props) => props.align || null};
-	color: #bdbdbd;
+	font-family: 'Pretendard';
+	font-style: normal;
+	&::placeholder{
+		color: #bdbdbd;
+	}
 	&:focus {
 		color: #212121;
 	}
@@ -191,6 +198,7 @@ export const Input = styled.input`
 		display: none;
 	}
 `;
+
 
 export const Textarea = styled.textarea`
 	font-weight: 400;
@@ -246,7 +254,7 @@ export const DayDiv = styled.div`
 	align-items: flex-start;
 	padding: 0px;
 	gap: 8px;
-	width: 688px;
+	width: 100%;
 	height: 48px;
 	justify-content: space-evenly;
 `;
@@ -272,7 +280,7 @@ export const BankToggleDiv = styled.div`
 	padding: 0px;
 	isolation: isolate;
 	position: absolute;
-	width: 688px;
+	width: 100%;
 	height: 192px;
 	justify-content: flex-start;
 	background: #ffffff;
@@ -301,7 +309,7 @@ export const RowTimeDiv = styled.div`
 	align-items: center;
 	padding: 0px;
 	gap: 8px;
-	width: 609px;
+	width: 100%;
 	height: 44px;
 `;
 export const TimeDiv = styled.div`

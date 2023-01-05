@@ -14,6 +14,11 @@ import { deliveryToString, numberFormatter } from 'utils/utils';
 import AddressModel from 'components/AddressModel';
 import Alert from 'components/commonUi/Alert';
 import CalendarModel from 'components/commonUi/CalendarModel';
+import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+
+
 
 // 상점정보
 function BusinessManagementTab1() {
@@ -105,7 +110,7 @@ function BusinessManagementTab1() {
     setStore({
       ...store,
       sales: store.sales.map(item =>
-        item.dayWeek == dayWeek ? { ...item, dayOffStatus: !item.dayOffStatus } : item
+        item.dayWeek === dayWeek ? { ...item, dayOffStatus: !item.dayOffStatus } : item
       )
     })
   }
@@ -115,7 +120,7 @@ function BusinessManagementTab1() {
     setStore({
       ...store,
       sales: store.sales.map(item =>
-        item.dayWeek == dayWeek ? { ...item, openTime: time } : item
+        item.dayWeek === dayWeek ? { ...item, openTime: time } : item
       )
     })
   }
@@ -125,7 +130,7 @@ function BusinessManagementTab1() {
     setStore({
       ...store,
       sales: store.sales.map(item =>
-        item.dayWeek == dayWeek ? { ...item, closeTime: time } : item
+        item.dayWeek === dayWeek ? { ...item, closeTime: time } : item
       )
     })
   }
@@ -203,7 +208,7 @@ function BusinessManagementTab1() {
           <ProfileAvatar
             profile={store.profile && store.profile}
             onChange={profileUpdate}
-          />
+            />
         </AvatarDiv>
 
         <TabContent>
@@ -221,7 +226,7 @@ function BusinessManagementTab1() {
             </TitleInfoDiv>
           </ContentDiv>
 
-          {/* 카테고리 */}
+          {/* ============== 카테고리 ==============  */}
           <ContentDiv style={{ position: "relative" }}>
             <ContentTitle>카테고리</ContentTitle>
             <TitleInfoDiv>
@@ -349,7 +354,7 @@ function BusinessManagementTab1() {
           {/* ============== 휴무일 ============== */}
           <RowDiv>
             <ContentDiv>
-              <RowTitle>
+              <L.FlexRows _content='space-between' >
                 <ContentTitle>휴무일</ContentTitle>
                 <CheckBox
                   label="공휴일 휴무"
@@ -362,7 +367,7 @@ function BusinessManagementTab1() {
                     })
                   }}
                 />
-              </RowTitle>
+              </L.FlexRows>
               <DayDiv>
                 {
                   store.sales && store.sales.length > 0 &&
