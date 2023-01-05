@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
 
 import Layout from 'components/layout/Layout/Layout';
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom'
 import { Down } from 'components/commonUi/Icon';
 import { Line } from '../DetailsPage/DetailsPageStyle';
-import maindata from 'assets/data/maindata';
-import { MarketProductCard } from 'components/Main/MarketDetail/MarketDetailProduct';
+import { MarketProductCard, ProductCard } from 'components/Main/MarketDetail/MarketDetailProduct';
 import Swiper from 'swiper';
 import { FilterLayout, SortLayout } from './../../../components/layout/Layout/MoreLayout';
 import { productFilterText, productSortText } from 'utils/utils';
 import { useInView } from 'react-intersection-observer';
-import { getItemList } from 'service/item';
+import { getItemCategoryList } from 'service/item';
+import LoadingBar from 'components/commonUi/LoadingBar';
 
 // 메뉴슬라이드예정
 const menu = new Swiper(".mySwiper", {
@@ -26,39 +26,59 @@ const menu = new Swiper(".mySwiper", {
 
 function CategoryPage() {
   const navigate = useNavigate()
+  const location = useLocation();
+
   const [filter01, setFilter01] = useState(false);
   const [filter02, setFilter02] = useState(false);
 
   const { category } = useParams();
   const local = useSelector(state => state.local);
-  const [items, setItems] = useState([])
-  const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1)
   const [type, setType] = useState('all');
   const [sort, setSort] = useState('create');
+
+  const [getDataStop, setGetDataStop] = useState(false);
+  const [items, setItems] = useState([])
 
   const [ref, inView] = useInView();
   const [loading, setLoading] = useState(false)
 
   const getItems = async () => {
-    setLoading(true);
+    const response = await getItemCategoryList(category.replace(',', '/'), local, page, type, sort);
+    const { data } = response.data;
 
-    const response = await getItemList(category, local, page, type, sort);
+    // if (data.items.length === 9) {
+    //   setGetDataStop(true);
+    // }
+
+    setItems(data.items);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000)
   }
 
   useEffect(() => {
-    getItems();
-  }, [category, local, page, type, sort])
+    setGetDataStop(false);
+    setPage(1);
+  }, [type, sort])
 
   useEffect(() => {
-    if (items.length == totalCount) return;
+    setLoading(true);
+    getItems();
+  }, [page])
 
-    if (inView && !loading) {
+  useEffect(() => {
+    setLoading(true);
+    getItems();
+  }, [location])
+
+  useEffect(() => {
+    console.log(inView);
+    if (inView && !getDataStop) {
       setPage(prevState => prevState + 1)
     }
-  }, [inView, loading])
-
-
+  }, [inView, getDataStop])
 
   return (
     <div>
@@ -110,7 +130,7 @@ function CategoryPage() {
                 </Link>
               </L.FlexRows>
               <Line />
-              <L.FlexCols _padding='24px 20px'>
+              <L.FlexColsScroll _padding='24px 15px'>
                 {/* =================== 필터 =================== */}
                 <L.FlexRows _gap={12} _items='center' _width='auto'>
                   <B.FilterButton
@@ -130,14 +150,25 @@ function CategoryPage() {
                 </L.FlexRows>
 
                 {/* =================== 없을때 =================== */}
-
-                {/* <CategoryEmpty/> */}
-
+                {
+                  !loading &&
+                  items.length === 0 &&
+                  <CategoryEmpty />
+                }
 
                 {/* =================== 있을때 =================== */}
-                <CategoryCard />
+                {
+                  !loading &&
+                  items.length > 0 &&
+                  <CategoryCard list={items} lastRef={ref} />
+                }
 
-              </L.FlexCols>
+                {/* =================== 로딩 =================== */}
+                {
+                  loading && <LoadingBar />
+                }
+
+              </L.FlexColsScroll>
             </L.FlexCols>
           </L.Contents>
         </L.Container>
@@ -164,17 +195,23 @@ function CategoryEmpty() {
 }
 
 
-export function CategoryCard(props) {
-  let [item] = useState(maindata)
+export function CategoryCard({ list, lastRef }) {
 
   return (
     <div>
       {/* <L.Contents _padding="0px 20px 24px" _gap={20}> */}
-      <L.FlexRows _gap={20} _padding={0} _height='382px'>
-        <MarketProductCard item={item[0]} />
-        <MarketProductCard item={item[1]} />
-        <MarketProductCard item={item[2]} />
-      </L.FlexRows>
+      <L.FlexRowsWrap _gap={20} _padding={0} _height='382px'>
+        {list.map((item, index) => (
+          <>
+            {
+              list.length == index + 1
+                ? <ProductCard item={item} lastRef={lastRef} />
+                : <ProductCard item={item} lastRef={null} />
+            }
+
+          </>
+        ))}
+      </L.FlexRowsWrap>
       {/* <L.FlexRows _gap={20} _padding={0} _height='382px'>
           <MarketProductCard item={item[3]}/>
           <MarketProductCard item={item[4]}/>

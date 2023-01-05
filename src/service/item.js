@@ -1,14 +1,22 @@
 import { client } from ".";
 
 const urls = {
-	list: "/item/list",
+	categoryList: "/item/category/list",
 };
 
 /* ==============================
    상품 목록
 ============================== */
-export function getItemList(category, local, type, page, sort) {
-	return client.get(
-		`${urls.list}?category=${category}&local=${local}&type=${type}&page=${page}&sort=${sort}`
-	);
+export function getItemCategoryList(category, local, page, type, sort) {
+	const data = {
+		category,
+		address: local.address,
+		x: local.x,
+		y: local.y,
+		page,
+		type,
+		sort,
+	};
+
+	return client.post(urls.categoryList, data);
 }

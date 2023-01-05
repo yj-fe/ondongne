@@ -76,77 +76,77 @@ function LocationSetting() {
     <div>
       <S.Wrapper>
         <LoginHeader title="우리동네 설정" />
-          <S.Main>
-            <L.Contents _padding='24px 20px' _height='100vh'>
-              <L.FlexCols _gap={32}>
+        <S.Main>
+          <L.Contents _padding='24px 20px' _height='100vh'>
+            <L.FlexCols _gap={32}>
               {/* ============ 위치설정페이지 ============ */}
-                <L.FlexCols _gap={20}>
-                  <Div1>내 위치 설정</Div1>
-                  <Div2>
-                    <SearchDiv>
-                      <SearchInput
-                        type="text"
-                        placeholder="지번/도로명을 입력해주세요."
-                        value={address}
-                        onChange={e => setAddress(e.target.value)}
-                        onKeyDown={e => {
-                          if (e.key === 'Enter') searchHandler()
-                        }}
-                      />
-                      <SearchIcon
-                        onClick={searchHandler}
-                      >
-                        <Search />
-                      </SearchIcon>
-                    </SearchDiv>
-                    <MyLocationDiv>
-                      <LocationIcon>
-                        <Location />
-                      </LocationIcon>
-                      <MyLocationText>현재 내 위치</MyLocationText>
-                      <MyLocationResult>
-                        {localState.addres}
-                      </MyLocationResult>
-                    </MyLocationDiv>
-                  </Div2>
-                </L.FlexCols>
-                
-                <Line />
-                {/* ============ 로딩 ============ */}
-                {loading && (
-                  <L.FlexRows _content='center'>
-                    <div class="spinner">
-                      <div class="bounce1"></div>
-                      <div class="bounce2"></div>
-                      <div class="bounce3"></div>
-                    </div>
-                  </L.FlexRows>
-                )}
-                {/* ============ 검색리스트 ============ */}
-                <LocationListContainer>
-                  {
-                    searchList.length > 0 &&
-                    searchList.map((item, i) => (
-                      <LocationListDiv
-                        key={i}
-                        onClick={() => onSubmit(item)}
-                      >
-                        <SearchIcon><Search /></SearchIcon>
-                        <LocationListText>{item}</LocationListText>
-                      </LocationListDiv>
-                    ))
-                  }
-                </LocationListContainer>
-            {
-              alert &&
-              <Alert
-                title={alert.title}
-                contents={alert.contents}
-                buttonText={alert.buttonText}
-                onButtonClick={alert.onButtonClick}
-                onOverlayClick={alert.onOverlayClick}
-              />
-            }
+              <L.FlexCols _gap={20}>
+                <Div1>내 위치 설정</Div1>
+                <Div2>
+                  <SearchDiv>
+                    <SearchInput
+                      type="text"
+                      placeholder="지번/도로명을 입력해주세요."
+                      value={address}
+                      onChange={e => setAddress(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter') searchHandler()
+                      }}
+                    />
+                    <SearchIcon
+                      onClick={searchHandler}
+                    >
+                      <Search />
+                    </SearchIcon>
+                  </SearchDiv>
+                  <MyLocationDiv>
+                    <LocationIcon>
+                      <Location />
+                    </LocationIcon>
+                    <MyLocationText>현재 내 위치</MyLocationText>
+                    <MyLocationResult>
+                      {localState.addres}
+                    </MyLocationResult>
+                  </MyLocationDiv>
+                </Div2>
+              </L.FlexCols>
+
+              <Line />
+              {/* ============ 로딩 ============ */}
+              {loading && (
+                <L.FlexRows _content='center'>
+                  <div class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                  </div>
+                </L.FlexRows>
+              )}
+              {/* ============ 검색리스트 ============ */}
+              <LocationListContainer>
+                {
+                  searchList.length > 0 &&
+                  searchList.map((item, i) => (
+                    <LocationListDiv
+                      key={i}
+                      onClick={() => onSubmit(item)}
+                    >
+                      <SearchIcon><Search /></SearchIcon>
+                      <LocationListText>{item}</LocationListText>
+                    </LocationListDiv>
+                  ))
+                }
+              </LocationListContainer>
+              {
+                alert &&
+                <Alert
+                  title={alert.title}
+                  contents={alert.contents}
+                  buttonText={alert.buttonText}
+                  onButtonClick={alert.onButtonClick}
+                  onOverlayClick={alert.onOverlayClick}
+                />
+              }
             </L.FlexCols>
           </L.Contents>
         </S.Main>

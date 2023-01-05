@@ -83,7 +83,7 @@ export const totalPrice = (price, rate) => {
 // 상품 필터 한글화
 export const productFilterText = (filter) => {
 	if (filter === "all") return "상품 전체";
-	if (filter === "nomal") return "일반 상품";
+	if (filter === "normal") return "일반 상품";
 	if (filter === "group") return "공동구매 상품";
 };
 

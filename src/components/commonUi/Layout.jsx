@@ -46,6 +46,26 @@ export const FlexCols = styled.div`
     width: ${props => props._width || '100%'};
     padding: ${props => props._padding || '0px'};
 `;
+
+export const FlexColsScroll = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: ${props => props._gap || 8}px;
+    width: ${props => props._width || '100%'};
+    padding: ${props => props._padding || '0px'};
+    overflow-y: scroll;
+    height: calc(100vh - 80px);
+
+    &::-webkit-scrollbar-thumb {
+            background-color: #bdbdbd;
+            border-radius: 99px;
+    }
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+`;
+
 export const BottomCols = styled.div`
     position: fixed;
     display: flex;

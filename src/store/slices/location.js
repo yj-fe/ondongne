@@ -12,8 +12,8 @@ const localSlice = createSlice({
 		save(state, action) {
 			const data = action.payload;
 			state.address = data.address;
-			state.x = data.x;
-			state.y = data.y;
+			state.x = data.y;
+			state.y = data.x;
 
 			localStorage.setItem("localState", JSON.stringify(data));
 		},

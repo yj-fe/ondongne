@@ -36,7 +36,7 @@ function MoreLayout({ PropsModal }) {
 
 export function FilterLayout({ PropsModal, data, setData }) {
 
-  const filters = ['all', 'nomal', 'group'];
+  const filters = ['all', 'normal', 'group'];
 
   const clickHandler = (filter) => {
     setData(filter);
