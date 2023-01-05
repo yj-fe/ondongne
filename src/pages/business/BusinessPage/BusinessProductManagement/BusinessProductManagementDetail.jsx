@@ -11,23 +11,18 @@ import { ReactComponent as Filter } from "assets/main/filter.svg";
 import Image from 'assets/main/shine.png'
 import ReviewImg from 'assets/main/reviewimg.png'
 import Avatar from 'assets/common/avatar.png'
-import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileTextDiv, FinalPrice,  Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile } from 'pages/main/DetailsPage/DetailsPageStyle'
+import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileTextDiv, FinalPrice, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile } from 'pages/main/DetailsPage/DetailsPageStyle'
 import Layout from 'components/layout/Layout/Layout';
-import { useSelector } from 'react-redux';
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 
+function BusinessProductManagementDetail() {
 
-function BusinessProductManagementDetail(props) {
-
-
-  const [detailTab, setDetailTab] = useState(0)
+  const { id } = useParams();
   const navigate = useNavigate();
-
-
-
+  const [detailTab, setDetailTab] = useState(0);
 
   return (
     <div>
@@ -39,12 +34,12 @@ function BusinessProductManagementDetail(props) {
       >
 
 
-      <DetailBody>
-        <DetailContainer>
-          <ImgSizeLayout src={Image} _height={390} _width={728}/>
+        <DetailBody>
+          <DetailContainer>
+            <ImgSizeLayout src={Image} _height={390} _width={728} />
 
-          <DetailMarketDiv>
-            <DetailMarketInfo>
+            <DetailMarketDiv>
+              <DetailMarketInfo>
                 <L.FlexRows _content="space-between" _items="center" _gap={12}>
                   <L.FlexRows >
                     <ImgSizeLayout _width={40} _height={40} _bdr={50} src={Image} />
@@ -55,67 +50,69 @@ function BusinessProductManagementDetail(props) {
                   </L.FlexRows>
 
                   <L.FlexRows _padding={0} _gap={16} _items="center" _width={64}>
-                    <Flag/>
+                    <Flag />
                     <button
                       type='button'
                     >
-                      <More/>
+                      <More />
                     </button>
                   </L.FlexRows>
                 </L.FlexRows>
-            </DetailMarketInfo>
+              </DetailMarketInfo>
 
-            <Line />
+              <Line />
 
-            <DetailMarketTitle>
-              <MarketTitle>송이송이 달달 상큼 샤인머스켓 1송이 + 딸기 300g 증정</MarketTitle>
-              <RateStyle>
-                <Star><StarIcon /></Star>
-                <Number>(4.5)</Number>
-              </RateStyle>
-              <DiscountStyle>
-                <Discount>40%</Discount>
-                <Price>25,200원</Price>
-              </DiscountStyle>
-              <FinalPrice>18,000원</FinalPrice>
-            </DetailMarketTitle>
-          </DetailMarketDiv>
-
-
+              <DetailMarketTitle>
+                <MarketTitle>송이송이 달달 상큼 샤인머스켓 1송이 + 딸기 300g 증정</MarketTitle>
+                <RateStyle>
+                  <Star><StarIcon /></Star>
+                  <Number>(4.5)</Number>
+                </RateStyle>
+                <DiscountStyle>
+                  <Discount>40%</Discount>
+                  <Price>25,200원</Price>
+                </DiscountStyle>
+                <FinalPrice>18,000원</FinalPrice>
+              </DetailMarketTitle>
+            </DetailMarketDiv>
 
 
-          <DetailTabDiv>
-            <TabButtonStyle>
-              <DetailTabInfo
-                onClick={() => { setDetailTab(0); }}
-                infocolor={detailTab === 0}
-              >
-                상세정보
-              </DetailTabInfo>
-              <DetailTabReview
-                onClick={() => { setDetailTab(1); }}
-                reviewcolor={detailTab === 1}
-              >
-                상품리뷰
-              </DetailTabReview>
-            </TabButtonStyle>
-            <TabContentStyle>
-              <TabContent detailTab={detailTab} />
-            </TabContentStyle>
-          </DetailTabDiv>
 
 
-        </DetailContainer>
-        
-        <ButtonStyle>
-          <DetailButtonDiv>
-            <DetailButtonStyle>수정하기</DetailButtonStyle>
-          </DetailButtonDiv>
-        </ButtonStyle>
-      </DetailBody>
+            <DetailTabDiv>
+              <TabButtonStyle>
+                <DetailTabInfo
+                  onClick={() => { setDetailTab(0); }}
+                  infocolor={detailTab === 0}
+                >
+                  상세정보
+                </DetailTabInfo>
+                <DetailTabReview
+                  onClick={() => { setDetailTab(1); }}
+                  reviewcolor={detailTab === 1}
+                >
+                  상품리뷰
+                </DetailTabReview>
+              </TabButtonStyle>
+              <TabContentStyle>
+                <TabContent detailTab={detailTab} />
+              </TabContentStyle>
+            </DetailTabDiv>
 
 
-</Layout>
+          </DetailContainer>
+
+          <ButtonStyle>
+            <DetailButtonDiv>
+              <DetailButtonStyle
+                onClick={() => navigate(`/business/edit/${id}`)}
+              >수정하기</DetailButtonStyle>
+            </DetailButtonDiv>
+          </ButtonStyle>
+        </DetailBody>
+
+
+      </Layout>
     </div>
   )
 }
