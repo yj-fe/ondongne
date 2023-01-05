@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+
 import { ReactComponent as Vege } from "assets/main/category/Vegetable.svg";
 import { ReactComponent as Meat } from "assets/main/category/Meat.svg";
 import { ReactComponent as Sea } from "assets/main/category/Seafood.svg";
@@ -17,7 +19,8 @@ function MainCategory() {
   return (
     <div>
       <MainCategoryBody>
-
+      <Link to="/categories" style={{ textDecoration: 'none' }}>
+        
         <MainCategoryRow>
           <MainCategoryItem>
             <Vege/>
@@ -64,7 +67,7 @@ function MainCategory() {
             <MainCategoryText>기타</MainCategoryText>
           </MainCategoryItem>
         </MainCategoryRow>
-
+        </Link>
       </MainCategoryBody>
     </div>
   )

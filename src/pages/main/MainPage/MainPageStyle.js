@@ -23,7 +23,6 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #6e6868;
   max-width: 728px;
   height: auto;
   padding: 0;

@@ -30,9 +30,8 @@ function MainPage() {
         <MainContainer>
           <Img src={BannerImg}></Img>
           {/* <MainBanner/> */}
-          <Link to="/categories" style={{ textDecoration: 'none' }}>
+
           <MainCategory />
-          </Link>
         </MainContainer>
 
         
