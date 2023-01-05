@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 import { ReactComponent as StarIcon2 } from "assets/main/ratestar2.svg";
@@ -17,102 +18,120 @@ import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
+import { getBizItemDetails } from 'service/item';
+import StarRate from 'components/commonUi/StarRate';
+import { numberFormat, totalPrice } from 'utils/utils';
+import HTMLReactParser from 'html-react-parser';
 
 function BusinessProductManagementDetail() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const auth = useSelector(state => state.auth);
+  const [item, setItem] = useState({});
   const [detailTab, setDetailTab] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const getItem = async () => {
+    const response = await getBizItemDetails(id);
+    const { data } = response.data;
+    setItem(data);
+    setLoading(true);
+  }
+
+  useEffect(() => {
+    if (auth.isAuthenticated) getItem();
+  }, [auth]);
 
   return (
     <div>
-      <Layout
-        title="아재의 과일"
-        cart={false}
-        bell={false}
-        onBackClick={() => navigate(-1)}
-      >
+      {loading &&
+        <Layout
+          title={item.storeName}
+          cart={false}
+          bell={false}
+          onBackClick={() => navigate(-1)}
+        >
+          <DetailBody>
+            <DetailContainer>
+              <ImgSizeLayout src={item.images[0]} _height={390} _width={728} />
 
+              <DetailMarketDiv>
+                <DetailMarketInfo>
+                  <L.FlexRows _content="space-between" _items="center" _gap={12}>
+                    <L.FlexRows >
+                      <ImgSizeLayout _width={40} _height={40} _bdr={50} src={item.profile} />
+                      <L.FlexCols _padding={0} _gap={4}>
+                        <T.Text _weight={600} _size={18} _color="gray900">{item.storeName}</T.Text>
+                        <T.Text _weight={400} _size={14} _color="gray800">{item.storeAddress}</T.Text>
+                      </L.FlexCols>
+                    </L.FlexRows>
 
-        <DetailBody>
-          <DetailContainer>
-            <ImgSizeLayout src={Image} _height={390} _width={728} />
-
-            <DetailMarketDiv>
-              <DetailMarketInfo>
-                <L.FlexRows _content="space-between" _items="center" _gap={12}>
-                  <L.FlexRows >
-                    <ImgSizeLayout _width={40} _height={40} _bdr={50} src={Image} />
-                    <L.FlexCols _padding={0} _gap={4}>
-                      <T.Text _weight={600} _size={18} _color="gray900">아재의 과일</T.Text>
-                      <T.Text _weight={400} _size={14} _color="gray800">김포 풍무동</T.Text>
-                    </L.FlexCols>
+                    {/* <L.FlexRows _padding={0} _gap={16} _items="center" _width={64}>
+                      <Flag />
+                      <button
+                        type='button'
+                      >
+                        <More />
+                      </button>
+                    </L.FlexRows> */}
                   </L.FlexRows>
+                </DetailMarketInfo>
 
-                  <L.FlexRows _padding={0} _gap={16} _items="center" _width={64}>
-                    <Flag />
-                    <button
-                      type='button'
-                    >
-                      <More />
-                    </button>
-                  </L.FlexRows>
-                </L.FlexRows>
-              </DetailMarketInfo>
+                <Line />
 
-              <Line />
-
-              <DetailMarketTitle>
-                <MarketTitle>송이송이 달달 상큼 샤인머스켓 1송이 + 딸기 300g 증정</MarketTitle>
-                <RateStyle>
-                  <Star><StarIcon /></Star>
-                  <Number>(4.5)</Number>
-                </RateStyle>
-                <DiscountStyle>
-                  <Discount>40%</Discount>
-                  <Price>25,200원</Price>
-                </DiscountStyle>
-                <FinalPrice>18,000원</FinalPrice>
-              </DetailMarketTitle>
-            </DetailMarketDiv>
+                <DetailMarketTitle>
+                  <MarketTitle>{item.name}</MarketTitle>
+                  <RateStyle>
+                    <StarRate rate={item.rating} />
+                    <Number>({item.rating})</Number>
+                  </RateStyle>
+                  <DiscountStyle>
+                    <Discount>{item.salePercent}%</Discount>
+                    <Price>{numberFormat(item.price)}원</Price>
+                  </DiscountStyle>
+                  <FinalPrice>{totalPrice(item.price, item.salePercent)}원</FinalPrice>
+                </DetailMarketTitle>
+              </DetailMarketDiv>
 
 
 
 
-            <DetailTabDiv>
-              <TabButtonStyle>
-                <DetailTabInfo
-                  onClick={() => { setDetailTab(0); }}
-                  infocolor={detailTab === 0}
-                >
-                  상세정보
-                </DetailTabInfo>
-                <DetailTabReview
-                  onClick={() => { setDetailTab(1); }}
-                  reviewcolor={detailTab === 1}
-                >
-                  상품리뷰
-                </DetailTabReview>
-              </TabButtonStyle>
-              <TabContentStyle>
-                <TabContent detailTab={detailTab} />
-              </TabContentStyle>
-            </DetailTabDiv>
+              <DetailTabDiv>
+                <TabButtonStyle>
+                  <DetailTabInfo
+                    onClick={() => setDetailTab(0)}
+                    infocolor={detailTab === 0}
+                  >
+                    상세정보
+                  </DetailTabInfo>
+                  <DetailTabReview
+                    onClick={() => setDetailTab(1)}
+                    reviewcolor={detailTab === 1}
+                  >
+                    상품리뷰
+                  </DetailTabReview>
+                </TabButtonStyle>
+                <TabContentStyle>
+                  <TabContent detailTab={detailTab} item={item} />
+                </TabContentStyle>
+              </DetailTabDiv>
 
 
-          </DetailContainer>
+            </DetailContainer>
 
-          <ButtonStyle>
-            <DetailButtonDiv>
-              <DetailButtonStyle
-                onClick={() => navigate(`/business/edit/${id}`)}
-              >수정하기</DetailButtonStyle>
-            </DetailButtonDiv>
-          </ButtonStyle>
-        </DetailBody>
+            <ButtonStyle>
+              <DetailButtonDiv>
+                <DetailButtonStyle
+                  onClick={() => navigate(`/business/edit/${id}`)}
+                >수정하기</DetailButtonStyle>
+              </DetailButtonDiv>
+            </ButtonStyle>
+          </DetailBody>
 
 
-      </Layout>
+        </Layout>
+      }
     </div>
   )
 }
@@ -121,7 +140,7 @@ function BusinessProductManagementDetail() {
 
 
 
-function TabContent(props) {
+function TabContent({ detailTab, item }) {
   return [
 
     //=====================상세정보=====================
@@ -130,11 +149,11 @@ function TabContent(props) {
         <TabInfoType>
           <TypeTextStyle>
             <TypeLabel>구매 형태</TypeLabel>
-            <TypeLabelInfo>공동구매</TypeLabelInfo>
+            <TypeLabelInfo>{item.type == 'GROUP' ? '공동구매 상품' : '일반상품'}</TypeLabelInfo>
           </TypeTextStyle>
           <TypeTextStyle>
             <TypeLabel>카테고리</TypeLabel>
-            <TypeLabelInfo>야채/과일</TypeLabelInfo>
+            <TypeLabelInfo>{item.categories ? item.categories.join(', ') : ''}</TypeLabelInfo>
           </TypeTextStyle>
           <TypeTextStyle>
             <TypeLabel>배달/주문금액</TypeLabel>
@@ -142,13 +161,13 @@ function TabContent(props) {
           </TypeTextStyle>
           <TypeTextStyle>
             <TypeLabel>배달/픽업</TypeLabel>
-            <TypeLabelInfo>배달 가능, 픽업 가능</TypeLabelInfo>
+            <TypeLabelInfo>{item.recetiveType ? item.recetiveType.join(', ') : ''} 가능</TypeLabelInfo>
           </TypeTextStyle>
           <CouponTextStyle>
             <CouponLabel>쿠폰</CouponLabel>
             <CouponLabelInfoDiv>
               <CouponLabelInfo1>해당 상점에 쿠폰이 있습니다.</CouponLabelInfo1>
-              <CouponLabelInfo2>해당 상점에 쿠폰이 있습니다.</CouponLabelInfo2>
+              <CouponLabelInfo2>{`상점(스토어) > 소식을 확인해 주세요.`}</CouponLabelInfo2>
             </CouponLabelInfoDiv>
           </CouponTextStyle>
 
@@ -159,21 +178,7 @@ function TabContent(props) {
         <TabInfoContent>
           <TabInfoContentTitle>상품 정보</TabInfoContentTitle>
           <TabInfoContentText>
-            <p>과일 행사 안내(10.20)</p>
-            <p>샤인머스켓 한송이를 마진 낮게 잡고 알뜰 구매하실 수 있도록 할인 판매 합니다.</p>
-            <br />
-            <p>* 발주 방법</p>
-            <p>장바구니에 담아 결제까지 앱에서 한번에</p>
-            <br />
-            <p>*수령 방법</p>
-            <p>직접배달, 수령 선택에 따라 진행합니다.</p>
-            <p>수령 시 앱에서 구매 이력을 보여 주세요~</p>
-            <br />
-            <p>* 구매자 특별 혜택</p>
-            <p>직접 수령을 통해 방문 주시면</p>
-            <p>특별한 서비스를 드려요~</p>
-            <br />
-            <p>많은 방문 부탁드립니다.</p>
+            {HTMLReactParser(item.description)}
           </TabInfoContentText>
         </TabInfoContent>
       </TabBody>
@@ -185,10 +190,10 @@ function TabContent(props) {
         <TabReviewType>
           <ReviewRateStyle>
             <ReviewRateDiv>
-              <ReviewStar><StarIcon2 /></ReviewStar>
+              <ReviewStar><StarRate rate={item.rating} width={28} /></ReviewStar>
             </ReviewRateDiv>
             <ReviewRateDiv>
-              <ReviewNum color="#212121">4.5</ReviewNum>
+              <ReviewNum color="#212121">{item.rating}</ReviewNum>
               <ReviewNum color="#BDBDBD">/ 5</ReviewNum>
             </ReviewRateDiv>
           </ReviewRateStyle>
@@ -197,7 +202,7 @@ function TabContent(props) {
           <ReviewListStyle>
 
             <ReviewMenu>
-              <MenuQuantity>총 리뷰 3 건</MenuQuantity>
+              <MenuQuantity>총 리뷰 {item.reviews.length} 건</MenuQuantity>
               <MenuFilterDiv>
                 <MenuFilterText>최신 순</MenuFilterText>
                 <MenuFilterIcon><Filter /></MenuFilterIcon>
@@ -206,8 +211,41 @@ function TabContent(props) {
 
             <Line />
 
+            {
+              item.reviews.length === 0
+                ? <L.NoneDataContainer>
+                  <T.Text _size={15} _weight={400} _color='gray600'>등록된 상품 리뷰가 없습니다.</T.Text>
+                </L.NoneDataContainer>
+                : item.reviews.map(review => (
+                  <ReviewContentDiv>
+                    <ReviewContentProfile>
+                      <ReviewProfileStyle>
+                        <ReviewProfileImg src={Avatar} />
+                        <ProfileDiv>
+                          <ProfileTextDiv>
+                            <ReviewId>과일싹쓸이</ReviewId>
+                            <ReviewDate>2일 전</ReviewDate>
+                          </ProfileTextDiv>
+                          <div><Reviewstar /></div>
+                        </ProfileDiv>
+                      </ReviewProfileStyle>
+                      {/* <ReportText>신고하기</ReportText> */}
+                    </ReviewContentProfile>
+                    <UploadImg src={ReviewImg} />
+                    <Comments>맛있습니다~</Comments>
+                    <ReviewLikeStyle>
+                      <ReviewLikeFrame color={true}>
+                        <ReviewLikeButton><ReviewLike /></ReviewLikeButton>
+                        <ReviewLikeText color={true}>도움돼요!</ReviewLikeText>
+                        <ReviewLikeText color={true}>1</ReviewLikeText>
+                      </ReviewLikeFrame>
+                    </ReviewLikeStyle>
+                  </ReviewContentDiv>
+                ))
+            }
+
             {/* =======Review1====== */}
-            <ReviewContentDiv>
+            {/* <ReviewContentDiv>
               <ReviewContentProfile>
                 <ReviewProfileStyle>
                   <ReviewProfileImg src={Avatar} />
@@ -218,9 +256,9 @@ function TabContent(props) {
                     </ProfileTextDiv>
                     <div><Reviewstar /></div>
                   </ProfileDiv>
-                </ReviewProfileStyle>
-                {/* <ReportText>신고하기</ReportText> */}
-              </ReviewContentProfile>
+                </ReviewProfileStyle> */}
+            {/* <ReportText>신고하기</ReportText> */}
+            {/* </ReviewContentProfile>
               <UploadImg src={ReviewImg} />
               <Comments>맛있습니다~</Comments>
               <ReviewLikeStyle>
@@ -230,9 +268,9 @@ function TabContent(props) {
                   <ReviewLikeText color={true}>1</ReviewLikeText>
                 </ReviewLikeFrame>
               </ReviewLikeStyle>
-            </ReviewContentDiv>
+            </ReviewContentDiv> */}
             {/* =======Review2====== */}
-            <ReviewContentDiv>
+            {/* <ReviewContentDiv>
               <ReviewContentProfile>
                 <ReviewProfileStyle>
                   <ReviewProfileImg src={Avatar} />
@@ -243,11 +281,11 @@ function TabContent(props) {
                     </ProfileTextDiv>
                     <div><Reviewstar /></div>
                   </ProfileDiv>
-                </ReviewProfileStyle>
-                {/* <ReportText>신고하기</ReportText> */}
-              </ReviewContentProfile>
-              {/* <UploadImg src={ReviewImg}/> */}
-              <Comments>담에 또 먹을래요~~~~~~~~</Comments>
+                </ReviewProfileStyle> */}
+            {/* <ReportText>신고하기</ReportText> */}
+            {/* </ReviewContentProfile> */}
+            {/* <UploadImg src={ReviewImg}/> */}
+            {/* <Comments>담에 또 먹을래요~~~~~~~~</Comments>
               <ReviewLikeStyle>
                 <ReviewLikeFrame color={false}>
                   <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
@@ -255,10 +293,10 @@ function TabContent(props) {
                   <ReviewLikeText color={false}>0</ReviewLikeText>
                 </ReviewLikeFrame>
               </ReviewLikeStyle>
-            </ReviewContentDiv>
+            </ReviewContentDiv> */}
 
             {/* =======MarketReview====== */}
-            <MarketReviewDiv>
+            {/* <MarketReviewDiv>
               <ReviewProfileImg src={Avatar} />
               <MarketCommentsStyle>
                 <MarketIdDiv>
@@ -271,9 +309,9 @@ function TabContent(props) {
                   <p>감사합니다 ^^</p><br />
                 </MarketComments>
               </MarketCommentsStyle>
-            </MarketReviewDiv>
+            </MarketReviewDiv> */}
             {/* =======Review3====== */}
-            <ReviewContentDiv>
+            {/* <ReviewContentDiv>
               <ReviewContentProfile>
                 <ReviewProfileStyle>
                   <ReviewProfileImg src={Avatar} />
@@ -284,11 +322,11 @@ function TabContent(props) {
                     </ProfileTextDiv>
                     <div><Reviewstar /></div>
                   </ProfileDiv>
-                </ReviewProfileStyle>
-                {/* <ReportText>신고하기</ReportText> */}
-              </ReviewContentProfile>
-              {/* <UploadImg src={ReviewImg}/> */}
-              <Comments>싱싱하고 맛있어요</Comments>
+                </ReviewProfileStyle> */}
+            {/* <ReportText>신고하기</ReportText> */}
+            {/* </ReviewContentProfile> */}
+            {/* <UploadImg src={ReviewImg}/> */}
+            {/* <Comments>싱싱하고 맛있어요</Comments>
               <ReviewLikeStyle>
                 <ReviewLikeFrame color={false}>
                   <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
@@ -296,7 +334,7 @@ function TabContent(props) {
                   <ReviewLikeText color={false}>0</ReviewLikeText>
                 </ReviewLikeFrame>
               </ReviewLikeStyle>
-            </ReviewContentDiv>
+            </ReviewContentDiv> */}
 
 
 
@@ -304,7 +342,7 @@ function TabContent(props) {
         </TabReviewType>
       </TabBody>
     </div>
-  ][props.detailTab]
+  ][detailTab]
 }
 
 export default BusinessProductManagementDetail

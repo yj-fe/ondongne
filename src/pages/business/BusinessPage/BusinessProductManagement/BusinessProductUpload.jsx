@@ -8,36 +8,41 @@ import * as C from 'components/commonUi/CommonStyles';
 import CheckBox from 'components/commonUi/CheckBox';
 import { ContentDiv, Input, RightStyle, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { Down, ArrowRightB, X_Icon, Delete, Calendar } from 'components/commonUi/Icon';
-import { fileFormatter, imageValidation, numberFormatter, totalPrice } from 'utils/utils';
+import { fileFormatter, imageValidation, numberFormat, numberFormatter, totalPrice } from 'utils/utils';
 import CategorySelect from 'components/commonUi/CategorySelect';
 import BusinessProductEditInfo from './BusinessProductEditInfo';
-import { createItem, getBizItem } from 'service/item';
+import { bizItemdeleteFile, createItem, getBizItem, updateItem } from 'service/item';
 import Alert from 'components/commonUi/Alert';
 import CalendarModel from 'components/commonUi/CalendarModel';
+import Confirm from 'components/commonUi/Confirm';
+import { useSelector } from 'react-redux';
 
 function BusinessProductUpload() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const auth = useSelector(state => state.auth);
   const [select, setSelect] = useState(false);
   const [editor, isEditor] = useState(false);
   const [alert, setAlert] = useState(null);
+  const [confirm, setConfirm] = useState(null);
   const [calendar, setCalendar] = useState(false);
   const [categoryError, setCategoryError] = useState('');
-  const [deleteFiles, setDeleteFiles] = useState([]);
+  const [fileErrorMessage, setFileErrorMessage] = useState('');
+  const [validtion, isValidtion] = useState(false);
   const [data, setData] = useState({
     type: '',
+    files: [],
+    images: [],
+    categories: [],
     name: '',
-    description: '',
     price: '',
     salePercent: '',
     minCount: 0,
     maxCount: 0,
     endDate: '',
     recetiveType: [],
-    categories: [],
-    files: [],
-    images: [],
+    description: '',
   })
 
   // 종료일 설정
@@ -48,6 +53,7 @@ function BusinessProductUpload() {
     })
   }
 
+  // 수령 방법 데이터 핸들러
   const recetiveTypeHandler = (value) => {
     return setData({
       ...data,
@@ -57,9 +63,46 @@ function BusinessProductUpload() {
     })
   }
 
+  // 파일 삭제
+  const fileDeleteHandler = async (file) => {
+
+    if (data.images.length === 1) {
+      return setAlert({
+        contents: "업로드 된 사진이 한장 이상이야 삭제가 가능합니다.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(null),
+        onOverlayClick: () => setAlert(null),
+      })
+    }
+
+    const response = await bizItemdeleteFile(file);
+    const { message } = response.data;
+
+    if (message) {
+      return setAlert({
+        contents: message,
+        buttonText: "확인",
+        onButtonClick: () => {
+          setAlert(null)
+          setData({
+            ...data,
+            images: data.images.filter(item => item !== file)
+          })
+        },
+        onOverlayClick: () => setAlert(null),
+      })
+    }
+
+    setAlert({
+      contents: "사진 삭제 중 오류가 발생하였습니다.",
+      buttonText: "확인",
+      onButtonClick: () => setAlert(null),
+      onOverlayClick: () => setAlert(null),
+    })
+  }
+
   const onSubmit = async () => {
-    const response = await createItem(data);
-    console.log(response)
+    const response = id ? await updateItem(data) : await createItem(data);
 
     if (response.data.data) {
       setAlert({
@@ -77,25 +120,41 @@ function BusinessProductUpload() {
     const responseData = response.data.data;
 
     setData({
+      itemId: responseData.itemId,
       type: responseData.type,
+      files: [],
+      categories: responseData.categories,
+      images: responseData.images,
       name: responseData.name,
-      description: responseData.description,
       price: responseData.price,
       salePercent: responseData.salePercent,
       minCount: responseData.minCount,
       maxCount: responseData.maxCount,
-      endDate: responseData.endDate,
+      endDate: responseData.endDate ? responseData.endDate : '',
       recetiveType: responseData.recetiveType,
-      categories: responseData.categories,
-      images: responseData.files,
-      files: [],
+      description: responseData.description,
     })
   }
 
+
   useEffect(() => {
-    if (!id) return;
-    getItem();
-  }, [id])
+    setFileErrorMessage('');
+    setCategoryError('');
+
+    if (data.type === '') return isValidtion(false);
+    if (!id && data.files.length == 0) return isValidtion(false);
+    if (data.categories.length == 0) return isValidtion(false);
+    if (data.name === '') return isValidtion(false);
+    if (data.price === 0) return isValidtion(false);
+    if (data.recetiveType.length == 0) return isValidtion(false);
+    if (data.description === '') return isValidtion(false);
+
+    return isValidtion(true);
+  }, [data])
+
+  useEffect(() => {
+    if (auth.isAuthenticated && id) getItem();
+  }, [auth, id])
 
   return (
     <div>
@@ -139,19 +198,20 @@ function BusinessProductUpload() {
                     <T.Text _weight={400} _size={15} _color="gray900" _align='center' _content='center'>이미지 업로드</T.Text>
                   </B.Label>
                 </B.LayerTextButton>
+                {fileErrorMessage && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{fileErrorMessage}</T.Text>}
                 {
-                  data.files.length > 0 &&
+                  (data.files.length > 0 || data.images.length > 0) &&
                   <L.FlexRows _gap={20}>
-                    {/* {
+                    {
                       data.images.length > 0 &&
                       data.images.map((file, index) => (
                         <FileListForm
                           key={index}
                           file={file}
-                          deleteFile={() => setDeleteFiles([...deleteFiles, file.itemImageId])}
+                          fileDeleteHandler={fileDeleteHandler}
                         />
                       ))
-                    } */}
+                    }
                     {
                       data.files.length > 0 &&
                       data.files.map((file, index) => (
@@ -176,6 +236,10 @@ function BusinessProductUpload() {
                     if (!e.target.files[0]) return;
                     const valid = imageValidation(e.target.files[0]);
                     if (valid) return
+
+                    if (data.files.length === 7) {
+                      return setFileErrorMessage('최대 7개까지 추가 가능합니다.')
+                    }
 
                     setData({
                       ...data,
@@ -230,7 +294,7 @@ function BusinessProductUpload() {
                     <Input
                       name='price'
                       placeholder='0'
-                      value={data.price}
+                      value={numberFormat(data.price)}
                       onChange={e => setData({ ...data, price: numberFormatter(e.target.value) })}
                       maxLength={12}
                     />
@@ -354,8 +418,29 @@ function BusinessProductUpload() {
 
             </L.FlexCols>
             <B.FixedActionButton
-              onClick={onSubmit}
-            >등록하기</B.FixedActionButton>
+              type='button'
+              disabled={!validtion}
+              backgroundColor={validtion ? 'green700' : 'gray300'}
+              onClick={() => {
+                if (id) {
+                  setConfirm({
+                    warn: false,
+                    contents: `수정하신 정보를 저장하시겠습니까?`,
+                    confirmText: "네",
+                    cancelText: "취소",
+                    onConfirmClick: () => {
+                      setConfirm(null)
+                      onSubmit()
+                    },
+                    onCancelClick: () => setConfirm(null)
+                  })
+                } else {
+                  onSubmit()
+                }
+              }}
+            >
+              {id ? '수정하기' : '등록하기'}
+            </B.FixedActionButton>
           </L.Contents>
         </L.Container>
       </Layout>
@@ -376,6 +461,17 @@ function BusinessProductUpload() {
         />
       }
       {
+        confirm &&
+        <Confirm
+          warn={confirm.warn}
+          contents={confirm.contents}
+          confirmText={confirm.confirmText}
+          cancelText={confirm.cancelText}
+          onConfirmClick={confirm.onConfirmClick}
+          onCancelClick={confirm.onCancelClick}
+        />
+      }
+      {
         calendar &&
         <CalendarModel
           modelClose={() => setCalendar(false)}
@@ -387,17 +483,54 @@ function BusinessProductUpload() {
   )
 }
 
-const FileListForm = ({ file, deleteFile }) => {
+const FileListForm = ({ file, fileDeleteHandler }) => {
 
+  const [confirm, setConfirm] = useState(null);
+  const [alert, setAlert] = useState(null);
   const url = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/'
 
   return (
-    <C.ImageBox>
-      <C.DeleteBtn onClick={deleteFile}>
-        <Delete />
-      </C.DeleteBtn>
-      <img src={url + file.url} width={"100%"} height={"100%"} />
-    </C.ImageBox>
+    <>
+      <C.ImageBox>
+        <C.DeleteBtn onClick={() => {
+          setConfirm({
+            warn: true,
+            contents: `사진을 삭제하시겠습니까?`,
+            confirmText: "삭제",
+            cancelText: "취소",
+            onConfirmClick: () => {
+              setConfirm(null);
+              fileDeleteHandler(file);
+            },
+            onCancelClick: () => setConfirm(null)
+          })
+        }}>
+          <Delete />
+        </C.DeleteBtn>
+        <img src={url + file.name} width={"100%"} height={"100%"} />
+      </C.ImageBox>
+      {
+        confirm &&
+        <Confirm
+          warn={confirm.warn}
+          contents={confirm.contents}
+          confirmText={confirm.confirmText}
+          cancelText={confirm.cancelText}
+          onConfirmClick={confirm.onConfirmClick}
+          onCancelClick={confirm.onCancelClick}
+        />
+      }
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
+    </>
   )
 }
 

@@ -33,7 +33,7 @@ export const businessNumberFormatter = (value) => {
 export const numberFormatter = (value) => {
 	if (!value) return;
 
-	if (value.charAt(0) == 0) return "";
+	if (value.charAt(0) == "0") return "";
 
 	const num = value.toString().replaceAll(",", "");
 	const valid = !/[^0-9]/g.test(num);

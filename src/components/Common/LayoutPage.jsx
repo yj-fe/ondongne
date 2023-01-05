@@ -5,22 +5,22 @@ import { ReactComponent as Arrow } from "assets/login/Arrow.svg";
 import { Body, Container, Div } from './LayoutPageStyle'
 
 
-function LayoutPage({title, to=-1}) {
+function LayoutPage({ title, to = -1 }) {
   const navigate = useNavigate()
   return (
     <div>
-{/* 헤더 */}
+      {/* 헤더 */}
       <MainFooterDiv>
         <LoginNavDiv>
           <TitleStyle>
-            <BackStyle onClick={()=>{ navigate(to)}}>
+            <BackStyle onClick={() => { navigate(to) }}>
               <Arrow />
             </BackStyle>
             <LoginNavTitle>{title}</LoginNavTitle>
           </TitleStyle>
         </LoginNavDiv>
       </MainFooterDiv>
-{/* 화면꽉차는 배경레이아웃 */}
+      {/* 화면꽉차는 배경레이아웃 */}
       {/* <Body>
         <Container>
 <Div>

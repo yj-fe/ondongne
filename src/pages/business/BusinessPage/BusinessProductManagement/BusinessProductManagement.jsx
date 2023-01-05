@@ -10,10 +10,12 @@ import { numberFormat, totalPrice } from 'utils/utils';
 import StarRate from 'components/commonUi/StarRate';
 import ProductTimer from 'components/commonUi/ProductTimer';
 import { useInView } from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
 
 
 function BusinessProductManagement() {
   const navigate = useNavigate();
+  const auth = useSelector(state => state.auth);
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [modal, setConfirm] = useState(null)
@@ -39,8 +41,8 @@ function BusinessProductManagement() {
   }
 
   useEffect(() => {
-    getItem();
-  }, [page, sort]);
+    if (auth.isAuthenticated) getItem();
+  }, [page, sort, auth]);
 
   useEffect(() => {
     if (items.length == totalCount) return;

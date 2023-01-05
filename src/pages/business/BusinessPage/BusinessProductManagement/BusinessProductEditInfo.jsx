@@ -41,7 +41,6 @@ const BusinessProductEditInfo = ({ isOpen, close, data, dataHanler }) => {
         bell={false}
         onBackClick={() => {
           setConfirm({
-            warn: true,
             contents: `지금 페이지를 나가시면\n작성중인 데이터가 저장되지 않을 수 있습니다.`,
             confirmText: "나가기",
             cancelText: "취소",

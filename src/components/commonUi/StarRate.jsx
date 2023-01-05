@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-function StarRate({ rate }) {
+function StarRate({ rate, width = 15 }) {
     const AVR_RATE = rate;
     const STAR_IDX_ARR = ['first', 'second', 'third', 'fourth', 'last'];
     const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
 
     const calcStarRates = () => {
         let tempStarRatesArr = [0, 0, 0, 0, 0];
-        let starVerScore = (AVR_RATE * 70) / 5;
+        let starVerScore = (AVR_RATE * (width * 5)) / 5;
         let idx = 0;
         while (starVerScore > 14) {
             tempStarRatesArr[idx] = 14;
@@ -26,7 +26,7 @@ function StarRate({ rate }) {
         <StarRateWrap>
             {STAR_IDX_ARR.map((item, idx) => {
                 return <span className='star_icon' key={`${item}_${idx}`}>
-                    <svg xmlns='http://www.w3.org/2000/svg' width='15' height='14' viewBox='0 0 14 13' fill='#E0E0E0'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width={width} height={width} viewBox='0 0 14 13' fill='#E0E0E0'>
                         <clipPath id={`${item}StarClip`}>
                             <rect width={`${ratesResArr[idx]}`} height='14' />
                         </clipPath>

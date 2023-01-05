@@ -137,7 +137,7 @@ export const FixedActionButton = styled.button`
     max-width: ${props => props.theme.breakpoint.tablet}px;
     height: 56px;
     padding: 0 16px;
-    background-color: ${props => props.theme.color.green700};
+    background-color: ${props => props.theme.color[props.backgroundColor || 'green700']};
     color: #FFF;
     transform: translateX(-50%);
     font-size: 18px;
