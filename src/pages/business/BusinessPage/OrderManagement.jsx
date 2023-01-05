@@ -3,13 +3,17 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import Layout from 'components/layout/Layout/Layout';
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight, Down, More, OrderPayC } from 'components/commonUi/Icon';
+import { ArrowRight, Down, More, OrderDe, OrderDeC, OrderFin, OrderFinC, OrderPay, OrderPayC, OrderReady, OrderReadyC } from 'components/commonUi/Icon';
+import { S } from 'components/orders/orderlist/OrderListStyle';
+import Confirm from 'components/commonUi/Confirm';
 
 function OrderManagement() {
   const navigate = useNavigate()
   const [totalCount, setTotalCount] = useState(0)
-
-
+  const [ delOrder, setDelOrder ] = useState(null);
+  const openDelete = () =>{
+    setDelOrder(true)
+  }
   return (
     <div>
       <Layout
@@ -44,7 +48,7 @@ function OrderManagement() {
 
 
         {/* 주문 있을 때 */}
-          {/* 주문 완료 */}
+          {/* ===== 1-1. 배달- 결제 완료 ===== */}
           <L.Contents _padding='20px'>
                 <L.FlexCols _gap={40}>
                     <L.FlexRows _gap={0} _content="space-between">
@@ -55,6 +59,7 @@ function OrderManagement() {
                         </L.FlexCols>
                         <More/>
                     </L.FlexRows>
+              {/* === 주문현황Icon === */}
                     <L.FlexRows _gap={0} _content="space-evenly" _items='center'>
                       <L.FlexCols _width="auto">
                         <OrderPayC/>
@@ -62,31 +67,307 @@ function OrderManagement() {
                       </L.FlexCols>
                       <ArrowRight/>
                       <L.FlexCols _width="auto">
-                        <OrderPayC/>
+                        <OrderReady/>
                         <T.Text _align='center' _weight={600} _size={12} _color="gray400">상품 준비</T.Text>
                       </L.FlexCols>
                       <ArrowRight/>
                       <L.FlexCols _width="auto">
-                        <OrderPayC/>
+                        <OrderDe/>
                         <T.Text _align='center' _weight={600} _size={12} _color="gray400">배송중</T.Text>
                       </L.FlexCols>
                       <ArrowRight/>
                       <L.FlexCols _width="auto">
-                        <OrderPayC/>
+                        <OrderFin/>
                         <T.Text _align='center' _weight={600} _size={12} _color="gray400">배송 완료</T.Text>
                       </L.FlexCols>
                     </L.FlexRows>
 
-                    <L.FlexCols _gap={4}>
-                        <L.FlexCols _gap={4}>
-                        </L.FlexCols>
+              {/* === 주문관리버튼 === */}
+                    <L.FlexCols>
+                      <S.Action 
+                        _type="bgb"
+                      >주문 확인</S.Action>
+                      <S.Action
+                      >주문내역 보기</S.Action>
+                      <S.Action 
+                        _type="cancel"
+                        onClick={openDelete}
+                      >주문 취소</S.Action>
                     </L.FlexCols>
+
                 </L.FlexCols>
             </L.Contents>
 
+          {/* ===== 1-2. 배달- 상품 준비 ===== */}
+          <L.Contents _padding='20px'>
+                <L.FlexCols _gap={40}>
+                    <L.FlexRows _gap={0} _content="space-between">
+                        <L.FlexCols _width="auto" _gap={4}>
+                          <T.Text _size={18} _weight={600}>인싸과일</T.Text>
+                          <T.Text _size={15} _color="gray800">샤인머스켓 500g 외 1개</T.Text>
+                          <T.Text _weight={500} _size={13} _color="gray500">2022/10/10 19:00</T.Text>
+                        </L.FlexCols>
+                        <More/>
+                    </L.FlexRows>
+              {/* === 주문현황Icon === */}
+                    <L.FlexRows _gap={0} _content="space-evenly" _items='center'>
+                      <L.FlexCols _width="auto">
+                        <OrderPay/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">결제 완료</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderReadyC/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="green700">상품 준비</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderDe/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">배송중</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderFin/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">배송 완료</T.Text>
+                      </L.FlexCols>
+                    </L.FlexRows>
+
+              {/* === 주문관리버튼 === */}
+                    <L.FlexCols>
+                      <S.Action 
+                        _type="bg"
+                      >배달 진행</S.Action>
+                      <S.Action
+                      >주문내역 보기</S.Action>
+                    </L.FlexCols>
+
+                </L.FlexCols>
+            </L.Contents>
+
+          {/* ===== 1-3. 배달- 배송중 ===== */}
+          <L.Contents _padding='20px'>
+                <L.FlexCols _gap={40}>
+                    <L.FlexRows _gap={0} _content="space-between">
+                        <L.FlexCols _width="auto" _gap={4}>
+                          <T.Text _size={18} _weight={600}>인싸과일</T.Text>
+                          <T.Text _size={15} _color="gray800">샤인머스켓 500g 외 1개</T.Text>
+                          <T.Text _weight={500} _size={13} _color="gray500">2022/10/10 19:00</T.Text>
+                        </L.FlexCols>
+                        <More/>
+                    </L.FlexRows>
+              {/* === 주문현황Icon === */}
+                    <L.FlexRows _gap={0} _content="space-evenly" _items='center'>
+                      <L.FlexCols _width="auto">
+                        <OrderPay/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">결제 완료</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderReady/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">상품 준비</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderDeC/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="green700">배송중</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderFin/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">배송 완료</T.Text>
+                      </L.FlexCols>
+                    </L.FlexRows>
+
+              {/* === 주문관리버튼 === */}
+                    <L.FlexCols>
+                      <S.Action 
+                        _type="bg"
+                      >배달/픽업 인증</S.Action>
+                      <S.Action
+                      >주문내역 보기</S.Action>
+                    </L.FlexCols>
+
+                </L.FlexCols>
+            </L.Contents>
+
+          {/* ===== 1-4. 배달- 배송 완료 ===== */} 
+          <L.Contents _padding='20px'>
+                <L.FlexCols _gap={40}>
+                    <L.FlexRows _gap={0} _content="space-between">
+                        <L.FlexCols _width="auto" _gap={4}>
+                          <T.Text _size={18} _weight={600}>인싸과일</T.Text>
+                          <T.Text _size={15} _color="gray800">샤인머스켓 500g 외 1개</T.Text>
+                          <T.Text _weight={500} _size={13} _color="gray500">2022/10/10 19:00</T.Text>
+                        </L.FlexCols>
+                        <More/>
+                    </L.FlexRows>
+              {/* === 주문현황Icon === */}
+                    <L.FlexRows _gap={0} _content="space-evenly" _items='center'>
+                      <L.FlexCols _width="auto">
+                        <OrderPay/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">결제 완료</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderReady/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">상품 준비</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderDe/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">배송중</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderFinC/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="green700">배송 완료</T.Text>
+                      </L.FlexCols>
+                    </L.FlexRows>
+
+              {/* === 주문관리버튼 === */}
+                    <L.FlexCols>
+                      <S.Action
+                      >주문내역 보기</S.Action>
+                    </L.FlexCols>
+
+                </L.FlexCols>
+            </L.Contents>
+
+          {/* ===== 2-1. 픽업- 결제 완료 ===== */}
+          <L.Contents _padding='20px'>
+                <L.FlexCols _gap={40}>
+                    <L.FlexRows _gap={0} _content="space-between">
+                        <L.FlexCols _width="auto" _gap={4}>
+                          <T.Text _size={18} _weight={600}>인싸과일</T.Text>
+                          <T.Text _size={15} _color="gray800">샤인머스켓 500g 외 1개</T.Text>
+                          <T.Text _weight={500} _size={13} _color="gray500">2022/10/10 19:00</T.Text>
+                        </L.FlexCols>
+                        <More/>
+                    </L.FlexRows>
+              {/* === 주문현황Icon === */}
+                    <L.FlexRows _gap={0} _content="space-evenly" _items='center'>
+                      <L.FlexCols _width="auto">
+                        <OrderPayC/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="green700">결제 완료</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderReady/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">상품 준비</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderFin/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">픽업 완료</T.Text>
+                      </L.FlexCols>
+                    </L.FlexRows>
+
+              {/* === 주문관리버튼 === */}
+                    <L.FlexCols>
+                      <S.Action 
+                        _type="bgb"
+                      >주문 확인</S.Action>
+                      <S.Action
+                      >주문내역 보기</S.Action>
+                      <S.Action 
+                        _type="cancel"
+                        onClick={openDelete}
+                      >주문 취소</S.Action>
+                    </L.FlexCols>
+
+                </L.FlexCols>
+            </L.Contents>
+
+          {/* ===== 2-2. 픽업- 상품 준비 ===== */}
+          <L.Contents _padding='20px'>
+                <L.FlexCols _gap={40}>
+                    <L.FlexRows _gap={0} _content="space-between">
+                        <L.FlexCols _width="auto" _gap={4}>
+                          <T.Text _size={18} _weight={600}>인싸과일</T.Text>
+                          <T.Text _size={15} _color="gray800">샤인머스켓 500g 외 1개</T.Text>
+                          <T.Text _weight={500} _size={13} _color="gray500">2022/10/10 19:00</T.Text>
+                        </L.FlexCols>
+                        <More/>
+                    </L.FlexRows>
+              {/* === 주문현황Icon === */}
+                    <L.FlexRows _gap={0} _content="space-evenly" _items='center'>
+                      <L.FlexCols _width="auto">
+                        <OrderPay/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">결제 완료</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderReadyC/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="green700">상품 준비</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderFin/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">픽업 완료</T.Text>
+                      </L.FlexCols>
+                    </L.FlexRows>
+
+              {/* === 주문관리버튼 === */}
+                    <L.FlexCols>
+                      <S.Action 
+                        _type="bg"
+                      >배달/픽업 인증</S.Action>
+                      <S.Action
+                      >주문내역 보기</S.Action>
+                    </L.FlexCols>
+
+                </L.FlexCols>
+            </L.Contents>
+
+          {/* ===== 2-3. 픽업- 픽업 완료 ===== */}
+          <L.Contents _padding='20px'>
+                <L.FlexCols _gap={40}>
+                    <L.FlexRows _gap={0} _content="space-between">
+                        <L.FlexCols _width="auto" _gap={4}>
+                          <T.Text _size={18} _weight={600}>인싸과일</T.Text>
+                          <T.Text _size={15} _color="gray800">샤인머스켓 500g 외 1개</T.Text>
+                          <T.Text _weight={500} _size={13} _color="gray500">2022/10/10 19:00</T.Text>
+                        </L.FlexCols>
+                        <More/>
+                    </L.FlexRows>
+              {/* === 주문현황Icon === */}
+                    <L.FlexRows _gap={0} _content="space-evenly" _items='center'>
+                      <L.FlexCols _width="auto">
+                        <OrderPay/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">결제 완료</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderReady/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="gray400">상품 준비</T.Text>
+                      </L.FlexCols>
+                      <ArrowRight/>
+                      <L.FlexCols _width="auto">
+                        <OrderFinC/>
+                        <T.Text _align='center' _weight={600} _size={12} _color="green700">픽업 완료</T.Text>
+                      </L.FlexCols>
+                    </L.FlexRows>
+
+              {/* === 주문관리버튼 === */}
+                    <L.FlexCols>
+                      <S.Action
+                      >주문내역 보기</S.Action>
+                    </L.FlexCols>
+
+                </L.FlexCols>
+            </L.Contents>
 
       </L.Container>
       </Layout>
+      {delOrder&&
+      <Confirm
+          contents={`주문내역을 정말로 삭제하시겠습니까? \n내역 삭제 전 나만의 단골집으로 등록해보세요!`}
+          // warn={true}
+          confirmText="삭제"
+          cancelText="취소"
+          onConfirmClick={setDelOrder(null)}
+          onCancelClick={setDelOrder(null)}
+      />}
     </div>
   )
 }
