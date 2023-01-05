@@ -178,7 +178,7 @@ export const FixedPaddingActionButton = styled.button`
 
 `;
 export const FilterButton = styled.button`
-    width: 200px;
+    width: auto;
     height: 36px;
     padding:    5px 8px;
     background-color: ${props => props.theme.color.gray50};

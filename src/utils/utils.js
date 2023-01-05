@@ -65,6 +65,7 @@ export const imageValidation = (file) => {
 	}
 };
 
+// 총 가격
 export const totalPrice = (price, rate) => {
 	if (!price) return 0;
 	if (!rate)
@@ -77,4 +78,19 @@ export const totalPrice = (price, rate) => {
 	);
 
 	return result ? result : "0";
+};
+
+// 상품 필터 한글화
+export const productFilterText = (filter) => {
+	if (filter === "all") return "상품 전체";
+	if (filter === "nomal") return "일반 상품";
+	if (filter === "group") return "공동구매 상품";
+};
+
+// 상품 정렬 한글화
+export const productSortText = (filter) => {
+	if (filter === "create") return "기본 순";
+	if (filter === "order") return "주문 많은 순";
+	if (filter === "review") return "리뷰 별점 순";
+	if (filter === "newstore") return "신규 매장 순";
 };

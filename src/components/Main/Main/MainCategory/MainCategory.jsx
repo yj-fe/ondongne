@@ -12,62 +12,67 @@ import { ReactComponent as Drink } from "assets/main/category/drink.svg";
 import { ReactComponent as Pet } from "assets/main/category/Pet.svg";
 import { ReactComponent as Etc } from "assets/main/category/Etc.svg";
 
-import {MainCategoryBody,MainCategoryItem,MainCategoryRow,MainCategoryText} from './MainCategoryStyle'
+import { MainCategoryBody, MainCategoryItem, MainCategoryRow, MainCategoryText } from './MainCategoryStyle'
 
 
 function MainCategory() {
+  const navigate = useNavigate();
+
+  const router = category => {
+    navigate(`/categories/${category}`)
+  }
+
   return (
     <div>
       <MainCategoryBody>
-      <Link to="/categories" style={{ textDecoration: 'none' }}>
-        
+
         <MainCategoryRow>
-          <MainCategoryItem>
-            <Vege/>
-            <MainCategoryText>야채/과일</MainCategoryText>
+          <MainCategoryItem onClick={() => router('야채,과일')}>
+            <Vege />
+            <MainCategoryText >야채/과일</MainCategoryText>
           </MainCategoryItem>
-          <MainCategoryItem>
-            <Meat/>
+          <MainCategoryItem onClick={() => router('정육')}>
+            <Meat />
             <MainCategoryText>정육</MainCategoryText>
           </MainCategoryItem>
-          <MainCategoryItem>
-            <Sea/>
+          <MainCategoryItem onClick={() => router('수산,해산')}>
+            <Sea />
             <MainCategoryText>수산/해산</MainCategoryText>
           </MainCategoryItem>
-          <MainCategoryItem>
-            <Rice/>
+          <MainCategoryItem onClick={() => router('쌀,잡곡')}>
+            <Rice />
             <MainCategoryText>쌀/잡곡</MainCategoryText>
           </MainCategoryItem>
-          <MainCategoryItem>
-            <Food/>
+          <MainCategoryItem onClick={() => router('식품')}>
+            <Food />
             <MainCategoryText>식품</MainCategoryText>
           </MainCategoryItem>
         </MainCategoryRow>
 
 
         <MainCategoryRow>
-          <MainCategoryItem>
-            <Daily/>
+          <MainCategoryItem onClick={() => router('생활용품')}>
+            <Daily />
             <MainCategoryText>생활용품</MainCategoryText>
           </MainCategoryItem>
-          <MainCategoryItem>
-            <Dessert/>
+          <MainCategoryItem onClick={() => router('디저트')}>
+            <Dessert />
             <MainCategoryText>디저트</MainCategoryText>
           </MainCategoryItem>
-          <MainCategoryItem>
-            <Drink/>
-            <MainCategoryText>음료/주류</MainCategoryText>
+          <MainCategoryItem onClick={() => router('식음료')}>
+            <Drink />
+            <MainCategoryText>식음료</MainCategoryText>
           </MainCategoryItem>
-          <MainCategoryItem>
-            <Pet/>
+          <MainCategoryItem onClick={() => router('반려동물')}>
+            <Pet />
             <MainCategoryText>반려동물</MainCategoryText>
           </MainCategoryItem>
-          <MainCategoryItem>
-            <Etc/>
+          <MainCategoryItem onClick={() => router('기타')}>
+            <Etc />
             <MainCategoryText>기타</MainCategoryText>
           </MainCategoryItem>
         </MainCategoryRow>
-        </Link>
+
       </MainCategoryBody>
     </div>
   )

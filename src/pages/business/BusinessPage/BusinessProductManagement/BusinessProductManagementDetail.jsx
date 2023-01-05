@@ -18,7 +18,7 @@ import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import { getBizItemDetails } from 'service/item';
+import { getBizItemDetails } from 'service/bizItem';
 import StarRate from 'components/commonUi/StarRate';
 import { numberFormat, totalPrice } from 'utils/utils';
 import HTMLReactParser from 'html-react-parser';

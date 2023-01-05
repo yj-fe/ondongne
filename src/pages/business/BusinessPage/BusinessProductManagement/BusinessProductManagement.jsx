@@ -5,7 +5,7 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { Down } from 'components/commonUi/Icon';
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
-import { bizItemList } from 'service/item';
+import { bizItemList } from 'service/bizItem';
 import { numberFormat, totalPrice } from 'utils/utils';
 import StarRate from 'components/commonUi/StarRate';
 import ProductTimer from 'components/commonUi/ProductTimer';

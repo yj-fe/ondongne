@@ -37,7 +37,7 @@ function BusinessManagementTab1() {
     { "id": 4, "name": "식품", "checked": false },
     { "id": 5, "name": "생활용품", "checked": false },
     { "id": 6, "name": "디저트", "checked": false },
-    { "id": 7, "name": "음료/주류", "checked": false },
+    { "id": 7, "name": "식음료", "checked": false },
     { "id": 8, "name": "반려동물", "checked": false },
     { "id": 9, "name": "기타", "checked": false }
   ]);
@@ -208,7 +208,7 @@ function BusinessManagementTab1() {
           <ProfileAvatar
             profile={store.profile && store.profile}
             onChange={profileUpdate}
-            />
+          />
         </AvatarDiv>
 
         <TabContent>

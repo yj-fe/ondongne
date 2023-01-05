@@ -122,7 +122,10 @@ function App() {
 						element={<SearchResultPage />}
 					/>
 					<Route path="cart" element={<CartPage />} />
-					<Route path="categories" element={<CategoryPage />} />
+					<Route
+						path="categories/:category"
+						element={<CategoryPage />}
+					/>
 					<Route path="collections" element={<CollectionPage />} />
 					<Route path="details/:id" element={<DetailsPage />} />
 					<Route path="more" element={<MorePage />} />
@@ -201,7 +204,10 @@ function App() {
 					<Route path="news" element={<BusinessNews />} />
 					{/* 주문관리 */}
 					<Route path="order" element={<OrderManagement />} />
-					<Route path="order/details/:id" element={<OrderManagementDetailsPage />} />
+					<Route
+						path="order/details/:id"
+						element={<OrderManagementDetailsPage />}
+					/>
 				</Route>
 
 				{/* ========== 로그인 ========== */}
@@ -237,7 +243,10 @@ function App() {
 					<Route path="faq" element={<FrequentlyAskedQuestion />} />
 					{/* 1:1 */}
 					<Route path="inquiry" element={<InquiryPage />} />
-					<Route path="inquiry/details/:id" element={<InquiryDetailsPage />} />
+					<Route
+						path="inquiry/details/:id"
+						element={<InquiryDetailsPage />}
+					/>
 					{/* voc */}
 					<Route path="voc" element={<VocPage />} />
 					{/* 약관 */}

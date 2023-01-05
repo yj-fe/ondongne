@@ -11,7 +11,7 @@ import { Down, ArrowRightB, X_Icon, Delete, Calendar } from 'components/commonUi
 import { fileFormatter, imageValidation, numberFormat, numberFormatter, totalPrice } from 'utils/utils';
 import CategorySelect from 'components/commonUi/CategorySelect';
 import BusinessProductEditInfo from './BusinessProductEditInfo';
-import { bizItemdeleteFile, createItem, getBizItem, updateItem } from 'service/item';
+import { bizItemdeleteFile, createItem, getBizItem, updateItem } from 'service/bizItem';
 import Alert from 'components/commonUi/Alert';
 import CalendarModel from 'components/commonUi/CalendarModel';
 import Confirm from 'components/commonUi/Confirm';

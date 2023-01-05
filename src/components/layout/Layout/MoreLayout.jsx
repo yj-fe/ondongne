@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import {ModalBody,ModalButton,ModalDiv1,ModalDiv2,ModalOutside,ModalTitle} from 'components/Main/More/ModalPageStyle'
+import { ModalBody, ModalButton, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from 'components/Main/More/ModalPageStyle'
 import * as T from 'components/commonUi/Text';
 import * as L from 'components/commonUi/Layout';
 import { Check } from 'components/commonUi/Icon';
 import { ImgSizeLayout } from '../Img/ImgSizeLayout';
 import Review from 'assets/images/Review.png'
+import { productFilterText, productSortText } from 'utils/utils';
 
 
-function MoreLayout({PropsModal}) {
+function MoreLayout({ PropsModal }) {
 
 
   return (
@@ -25,7 +26,7 @@ function MoreLayout({PropsModal}) {
             type="button"
             onClick={PropsModal}
           >
-          닫기
+            닫기
           </ModalButton>
         </ModalBody>
       </ModalOutside>
@@ -33,7 +34,15 @@ function MoreLayout({PropsModal}) {
   )
 }
 
-export function FilterLayout({PropsModal}) {
+export function FilterLayout({ PropsModal, data, setData }) {
+
+  const filters = ['all', 'nomal', 'group'];
+
+  const clickHandler = (filter) => {
+    setData(filter);
+    PropsModal();
+  }
+
   return (
     <div>
       <ModalOutside>
@@ -41,19 +50,29 @@ export function FilterLayout({PropsModal}) {
           <ModalDiv1>상품 필터</ModalDiv1>
           <L.Contents _padding='16px 20px' >
             <L.FlexCols _gap={32}>
-              <L.FlexRows _content='space-between' _items='center'>
-                <T.Text _weight={400} _size={15} _color="green700" >전체</T.Text>
-                <Check/>
-              </L.FlexRows>
-              <T.Text _weight={400} _size={15} _color="gray800" >일반상품</T.Text>
-              <T.Text _weight={400} _size={15} _color="gray800" >공동구매 상품</T.Text>
+
+              {
+                filters.map((filter, index) => (
+                  <L.FlexRows key={index} _content='space-between' _items='center'>
+                    <T.Text
+                      _weight={filter === data ? 600 : 400}
+                      _size={15}
+                      _color={filter === data ? "green800" : "gray700"}
+                      onClick={() => clickHandler(filter)}
+                    >{productFilterText(filter)}</T.Text>
+                    {
+                      filter === data && <Check />
+                    }
+                  </L.FlexRows>
+                ))
+              }
             </L.FlexCols>
           </L.Contents>
           <ModalButton
             type="button"
             onClick={PropsModal}
           >
-          닫기
+            닫기
           </ModalButton>
         </ModalBody>
       </ModalOutside>
@@ -61,7 +80,15 @@ export function FilterLayout({PropsModal}) {
   )
 }
 
-export function SortLayout({CloseModal}) {
+export function SortLayout({ CloseModal, data, setData }) {
+
+  const sorts = ['create', 'order', 'review', 'newstore'];
+
+  const clickHandler = (sort) => {
+    setData(sort);
+    CloseModal();
+  }
+
   return (
     <div>
       <ModalOutside
@@ -70,21 +97,29 @@ export function SortLayout({CloseModal}) {
           <ModalDiv1>정렬</ModalDiv1>
           <L.Contents _padding='16px 20px' >
             <L.FlexCols _gap={32}>
-              <L.FlexRows _content='space-between' _items='center'>
-                <T.Text _weight={400} _size={15} _color="green700" >기본 순</T.Text>
-                <Check/>
-              </L.FlexRows>
-              <T.Text _weight={400} _size={15} _color="gray800" >주문 많은 순</T.Text>
-              <T.Text _weight={400} _size={15} _color="gray800" >리뷰 별점 순</T.Text>
-              <T.Text _weight={400} _size={15} _color="gray800" >신규 매장 순</T.Text>
-              <T.Text _weight={400} _size={15} _color="gray800" >쿠폰 인기 순</T.Text>
+
+              {
+                sorts.map((sort, index) => (
+                  <L.FlexRows key={index} _content='space-between' _items='center'>
+                    <T.Text
+                      _weight={sort === data ? 600 : 400}
+                      _size={15}
+                      _color={sort === data ? "green800" : "gray700"}
+                      onClick={() => clickHandler(sort)}
+                    >{productSortText(sort)}</T.Text>
+                    {
+                      sort === data && <Check />
+                    }
+                  </L.FlexRows>
+                ))
+              }
             </L.FlexCols>
           </L.Contents>
           <ModalButton
             type="button"
             onClick={CloseModal}
           >
-          닫기
+            닫기
           </ModalButton>
         </ModalBody>
       </ModalOutside>
@@ -92,7 +127,7 @@ export function SortLayout({CloseModal}) {
   )
 }
 
-export function ReviewLayout({CloseModal}) {
+export function ReviewLayout({ CloseModal }) {
   return (
     <div>
       <ModalOutside
@@ -100,24 +135,24 @@ export function ReviewLayout({CloseModal}) {
         <ModalBody>
           <ModalDiv1>
 
-          <L.Contents _padding='16px 20px' _gap={32}>
-            <L.FlexCols _gap={32}>
-              <L.FlexRows _content='center' >
-                <ImgSizeLayout src={Review}/>
-              </L.FlexRows>
+            <L.Contents _padding='16px 20px' _gap={32}>
+              <L.FlexCols _gap={32}>
+                <L.FlexRows _content='center' >
+                  <ImgSizeLayout src={Review} />
+                </L.FlexRows>
 
-            <L.FlexCols >
-              <T.Text _align='center' _weight={700} _size={20} _color="gray900" >리뷰 작성 완료!</T.Text>
-              <T.Text _align='center' _weight={400} _size={15} _color="gray600" >리뷰를 남겨주셔서 감사합니다.</T.Text>
-            </L.FlexCols>
-            </L.FlexCols>
-          </L.Contents>
+                <L.FlexCols >
+                  <T.Text _align='center' _weight={700} _size={20} _color="gray900" >리뷰 작성 완료!</T.Text>
+                  <T.Text _align='center' _weight={400} _size={15} _color="gray600" >리뷰를 남겨주셔서 감사합니다.</T.Text>
+                </L.FlexCols>
+              </L.FlexCols>
+            </L.Contents>
           </ModalDiv1>
           <ModalButton
             type="button"
             onClick={CloseModal}
           >
-          닫기
+            닫기
           </ModalButton>
         </ModalBody>
       </ModalOutside>

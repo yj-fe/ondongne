@@ -6,7 +6,7 @@ import { ReactComponent as Market } from "assets/main/Market.svg";
 import { ReactComponent as Order } from "assets/main/Order.svg";
 import { ReactComponent as More } from "assets/main/More.svg";
 
-import {MainFooterDiv,FooterNav,NavIcon,} from './MainFooterStyle'
+import { MainFooterDiv, FooterNav, NavIcon, } from './MainFooterStyle'
 
 
 
@@ -21,7 +21,7 @@ function MainFooter() {
           <Home />
         </NavIcon>
         <NavIcon>
-          <Link to="/search" style={{ textDecoration: 'none' }}>
+          <Link to="/categories" style={{ textDecoration: 'none' }}>
             <Search />
           </Link>
         </NavIcon>
@@ -33,9 +33,9 @@ function MainFooter() {
 
         <NavIcon
         >
-        <Link to="/order/all" style={{ textDecoration: 'none' }}>
-          <Order />
-        </Link>
+          <Link to="/order/all" style={{ textDecoration: 'none' }}>
+            <Order />
+          </Link>
         </NavIcon>
 
         <NavIcon
