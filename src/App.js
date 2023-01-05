@@ -68,6 +68,7 @@ import { localActions } from "store/slices/location";
 import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage";
 import OrderManagement from "pages/business/BusinessPage/OrderManagement";
 import OrderManagementDetailsPage from "pages/business/BusinessPage/OrderManagementDetailsPage";
+import OrderManagementDetailsAuthPage from "pages/business/BusinessPage/OrderManagementDetailsAuthPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -207,6 +208,10 @@ function App() {
 					<Route
 						path="order/details/:id"
 						element={<OrderManagementDetailsPage />}
+					/>
+					<Route
+						path="order/details/auth"
+						element={<OrderManagementDetailsAuthPage />}
 					/>
 				</Route>
 

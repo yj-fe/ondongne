@@ -12,6 +12,7 @@ export const S = {
       background-color: ${props =>{
           switch(props._type) {
               case 'bg': return props.theme.color.green700;
+              case 'bgb': return props.theme.color.blue;
               default: return '#FFF'
           }
       }};
@@ -19,6 +20,7 @@ export const S = {
           switch(props._type) {
               case 'bd':
               case 'bg': return props.theme.color.green700;
+              case 'bgb': return props.theme.color.blue;
               case 'cancel': return props.theme.color.error;
               default: return props.theme.color.gray200;
           }
@@ -27,6 +29,7 @@ export const S = {
           switch(props._type) {
               case 'bd': return props.theme.color.green700;
               case 'bg': return '#FFF';
+              case 'bgb': return '#FFF';
               case 'cancel': return props.theme.color.error;
               default: return props.theme.color.gray900;
           }

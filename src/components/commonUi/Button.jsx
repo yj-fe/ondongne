@@ -120,7 +120,7 @@ export const LayerTextButton = styled.button`
     padding:${props => props._padding || '0px 16px'} ;
     display: flex;
     gap: 8px;
-    height: 48px;
+    height: ${props => props._height || '48px'};
     justify-content: ${props => props._content || 'center'};
     align-items: center;
     line-height: 1.5;
