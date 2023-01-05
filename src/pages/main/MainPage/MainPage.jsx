@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import BannerImg from 'assets/Img.png'
 import MainBestCoupon from 'components/Main/Main/MainBestCoupon/MainBestCoupon'
 import MainLastChance from 'components/Main/Main/MainLastChance/MainLastChance'
@@ -30,7 +30,9 @@ function MainPage() {
         <MainContainer>
           <Img src={BannerImg}></Img>
           {/* <MainBanner/> */}
-          <MainCategory/>
+          <Link to="/categories" style={{ textDecoration: 'none' }}>
+          <MainCategory />
+          </Link>
         </MainContainer>
 
         
