@@ -21,7 +21,7 @@ function MainFooter() {
           <Home />
         </NavIcon>
         <NavIcon>
-          <Link to="/search" style={{ textDecoration: 'none' }}>
+          <Link to="/categories" style={{ textDecoration: 'none' }}>
             <Search />
           </Link>
         </NavIcon>
