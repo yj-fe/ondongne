@@ -54,16 +54,7 @@ export const FlexColsScroll = styled.div`
     gap: ${props => props._gap || 8}px;
     width: ${props => props._width || '100%'};
     padding: ${props => props._padding || '0px'};
-    overflow-y: scroll;
-    height: calc(100vh - 80px);
-
-    &::-webkit-scrollbar-thumb {
-            background-color: #bdbdbd;
-            border-radius: 99px;
-    }
-    &::-webkit-scrollbar {
-        width: 5px;
-    }
+    height: auto;
 `;
 
 export const BottomCols = styled.div`

@@ -5,7 +5,6 @@ export const S = {
 		z-index: 10;
 		position: relative;
 		width: 100%;
-		min-height: 100vh;
 		height: auto;
 		background-color: ${(props) => props.theme.color.gray100};
 	`,

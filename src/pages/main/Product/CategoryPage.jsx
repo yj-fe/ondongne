@@ -37,7 +37,7 @@ function CategoryPage() {
   const [type, setType] = useState('all');
   const [sort, setSort] = useState('create');
 
-  const [getDataStop, setGetDataStop] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
   const [items, setItems] = useState([])
 
   const [ref, inView] = useInView();
@@ -47,10 +47,7 @@ function CategoryPage() {
     const response = await getItemCategoryList(category.replace(',', '/'), local, page, type, sort);
     const { data } = response.data;
 
-    // if (data.items.length === 9) {
-    //   setGetDataStop(true);
-    // }
-
+    setTotalCount(data.count);
     setItems(data.items);
 
     setTimeout(() => {
@@ -59,7 +56,6 @@ function CategoryPage() {
   }
 
   useEffect(() => {
-    setGetDataStop(false);
     setPage(1);
   }, [type, sort])
 
@@ -75,10 +71,13 @@ function CategoryPage() {
 
   useEffect(() => {
     console.log(inView);
-    if (inView && !getDataStop) {
+
+    if (totalCount === items.length) return;
+
+    if (inView && !loading) {
       setPage(prevState => prevState + 1)
     }
-  }, [inView, getDataStop])
+  }, [inView, loading])
 
   return (
     <div>
@@ -90,7 +89,7 @@ function CategoryPage() {
         onBackClick={() => navigate('/')}
       >
         <L.Container >
-          <L.Contents _padding="0" _height='100vh'>
+          <L.Contents _padding="0" >
             <L.FlexCols _padding={0} _gap={0} >
 
               {/* =================== 메뉴 =================== */}
@@ -158,7 +157,6 @@ function CategoryPage() {
 
                 {/* =================== 있을때 =================== */}
                 {
-                  !loading &&
                   items.length > 0 &&
                   <CategoryCard list={items} lastRef={ref} />
                 }
@@ -200,7 +198,7 @@ export function CategoryCard({ list, lastRef }) {
   return (
     <div>
       {/* <L.Contents _padding="0px 20px 24px" _gap={20}> */}
-      <L.FlexRowsWrap _gap={20} _padding={0} _height='382px'>
+      <L.FlexRowsWrap _gap={20} _padding={0}>
         {list.map((item, index) => (
           <>
             {
