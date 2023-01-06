@@ -41,7 +41,7 @@ function MainPage() {
           </L.Contents>
         </L.Inner>
 
-        {/* <L.Inner>
+        <L.Inner>
           <L.Contents _padding='20px 0px 20px 20px'>
             <MainBestCoupon/>
           </L.Contents>
@@ -70,7 +70,7 @@ function MainPage() {
           <L.Contents _padding='20px 0px 20px 20px'>
             <MainBestCollection/>
           </L.Contents>
-        </L.Inner> */}
+        </L.Inner>
 
         <L.Inner>
           <FooterLayout/>

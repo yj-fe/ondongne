@@ -19,6 +19,7 @@ function MainLastChance() {
         </L.FlexRows>
 
         <LastChanceDiv>
+        <L.FlexRowsCP>
           <LastChanceContent>
             {
               item.map((a, i)=>{
@@ -30,17 +31,20 @@ function MainLastChance() {
               })
             }
           </LastChanceContent>
+            </L.FlexRowsCP>
+            <L.FlexRowsCP>
           <LastChanceContent>
             {
               item.map((a, i)=>{
                 if(i%2 === 1){
-                return(
-                  <LastChanceCard item={item[i]} i={i}/>
-                  )
+                  return(
+                    <LastChanceCard item={item[i]} i={i}/>
+                    )
                 }
               })
             }
           </LastChanceContent>
+        </L.FlexRowsCP>
         </LastChanceDiv>
         {/* <Routes>
           <Route path='/detail/:id' element={<DetailsPage item={item}/>}/>

@@ -17,15 +17,17 @@ function MainBestCoupon() {
           <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
         </L.FlexRows>
 
-        <MainBestCouponContent>
-          {
-            item.map((a, i)=>{
-              return(
-                <BestCouponCard item={item[i]} i={i}/>
-                )
-            })
-          }
-        </MainBestCouponContent>
+        <L.FlexRowsCP>
+          <MainBestCouponContent>
+            {
+              item.map((a, i)=>{
+                return(
+                  <BestCouponCard item={item[i]} i={i}/>
+                  )
+                })
+              }
+          </MainBestCouponContent>
+        </L.FlexRowsCP>
 
 
 

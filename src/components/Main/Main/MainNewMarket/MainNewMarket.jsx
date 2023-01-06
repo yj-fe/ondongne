@@ -16,17 +16,20 @@ function MainNewMarket() {
           <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
         </L.FlexRows>
         <NewMarketDiv>
+        <L.FlexRowsCP>
           <NewMarketContent>
           {
-              item.map((a, i)=>{
-                if(i%2 === 0){
+            item.map((a, i)=>{
+              // if(i%2 === 0){
                 return(
                   <NewMarketCard item={item[i]} i={i}/>
                   )
-                }
+                // }
               })
             }
             </NewMarketContent>
+            </L.FlexRowsCP>
+            <L.FlexRowsCP>
             <NewMarketContent>
             {
               item.map((a, i)=>{
@@ -38,6 +41,7 @@ function MainNewMarket() {
               })
             }
           </NewMarketContent>
+            </L.FlexRowsCP>
         </NewMarketDiv>
 
 

@@ -23,28 +23,32 @@ function MainBestProduct() {
           <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
         </L.FlexRows>
         <LastChanceDiv>
+        <L.FlexRowsCP>
           <LastChanceContent>
             {
               item.map((a, i)=>{
                 if(i%2 === 0){
-                return(
-                  <LastChanceCard item={item[i]} i={i}/>
+                  return(
+                    <LastChanceCard item={item[i]} i={i}/>
                   )
                 }
               })
             }
           </LastChanceContent>
+            </L.FlexRowsCP>
+            <L.FlexRowsCP>
           <LastChanceContent>
             {
               item.map((a, i)=>{
                 if(i%2 === 1){
-                return(
-                  <LastChanceCard item={item[i]} i={i}/>
-                  )
-                }
-              })
-            }
+                  return(
+                    <LastChanceCard item={item[i]} i={i}/>
+                    )
+                  }
+                })
+              }
           </LastChanceContent>
+          </L.FlexRowsCP>
         </LastChanceDiv>
 
 
