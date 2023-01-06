@@ -181,7 +181,7 @@ export const FilterButton = styled.button`
     width: auto;
     height: 36px;
     padding:    5px 8px;
-    background-color: ${props => props.theme.color.gray50};
+    background: ${props => props.theme.color[props._bg || 'gray50']};
     border: 1px solid #EEEEEE;
     border-radius: 99px;
     color: #FFF;

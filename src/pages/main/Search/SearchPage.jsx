@@ -1,27 +1,83 @@
-import React, { useState } from 'react'
-import {useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
-import { Down, Flag, Map, OneStar } from 'components/commonUi/Icon';
-import { Link, useNavigate } from 'react-router-dom'
+import { Down, Flag, OneStar } from 'components/commonUi/Icon';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import { Line } from 'components/Login/Signup/agreement/AgreementStyle';
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import Img from 'assets/images/marketdetail.png'
-import { SortLayout } from 'components/layout/Layout/MoreLayout';
+import { SearchSortLayout } from 'components/layout/Layout/MoreLayout';
+import CategoryTabs from 'components/commonUi/CategoryTabs';
+import { numberFormat, sortFormatter } from 'utils/utils';
+import { useInView } from 'react-intersection-observer';
+import { getStoreCategoryList } from 'service/store';
+import LoadingBar from 'components/commonUi/LoadingBar';
+import StarRate from 'components/commonUi/StarRate';
 
 function SearchPage() {
-  const [sort, setSort] = useState(false);
-  const { category } = useParams();
-
   const navigate = useNavigate();
-  const ShowSortModal = () => {
-    setSort(!sort);
+  const [filter01, setFilter01] = useState(false);
+
+  const [page, setPage] = useState(1);
+  const [category, setCategory] = useState('전체');
+  const categoryHandler = c => setCategory(c);
+  const [sort, setSort] = useState('create');
+  const local = useSelector(state => state.local);
+
+  const [items, setItems] = useState([])
+  const [totalCount, setTotalCount] = useState(0);
+
+  const [ref, inView] = useInView();
+  const [loading, setLoading] = useState(false);
+  const [fetching, isFetching] = useState(false);
+
+  const getStores = async () => {
+    const response = await getStoreCategoryList(category.replace(',', '/'), local, page, sort);
+    const { data } = response.data;
+
+    setTotalCount(data.count);
+    setItems(data.stores);
+    isFetching(false);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   }
-  const CloseModal = () => {
-    setSort(!sort);
-  }
+
+  useEffect(() => {
+    setPage(1);
+    setItems([]);
+    setSort('create');
+    isFetching(true);
+  }, [category])
+
+  useEffect(() => {
+    setPage(1);
+    setItems([]);
+    isFetching(true);
+  }, [sort])
+
+  useEffect(() => {
+    if (totalCount < 9) return;
+    if (totalCount === items.length) return;
+    if (loading) return;
+
+    if (inView) {
+      setPage(prevState => prevState + 1);
+      isFetching(true);
+    }
+  }, [inView, loading])
+
+  useEffect(() => {
+    if (!fetching) return;
+
+    setLoading(true);
+    getStores();
+  }, [fetching])
+
   return (
     <div>
       <Layout
@@ -29,151 +85,121 @@ function SearchPage() {
         cart={true}
         bell={true}
         search={true}
-        onBackClick={() => navigate(-1)}
+        onBackClick={() => navigate('/')}
       >
 
         <L.Container >
-          <L.Contents _height={'100vh'}>
-            <L.FlexCols _padding={0} _gap={0}>
+          <L.Contents _height={'100vh'} _padding='0'>
+            <L.FlexCols _padding="0" _gap='0'>
 
 
               {/* =================== 메뉴 =================== */}
-              <L.FlexRowsCP _height='48px' _gap='0px' _items='center' _padding='0px 0px 0px 20px'>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '전체' ? 'green700' : 'gray400'} _align='center'>전체</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '야채,과일' ? 'green700' : 'gray400'} _align='center'>야채/과일</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '정육' ? 'green700' : 'gray400'} _align='center'>정육</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '수산,해산' ? 'green700' : 'gray400'} _align='center'>수산/해산</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '쌀,잡곡' ? 'green700' : 'gray400'} _align='center'>쌀/잡곡</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '식품' ? 'green700' : 'gray400'} _align='center'>식품</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '생활용품' ? 'green700' : 'gray400'} _align='center'>생활용품</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '디저트' ? 'green700' : 'gray400'} _align='center'>디저트</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '식음료' ? 'green700' : 'gray400'} _align='center'>식음료</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '반려동물' ? 'green700' : 'gray400'} _align='center'>반려동물</T.Text></L.Inline>
-                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '기타' ? 'green700' : 'gray400'} _align='center'>기타</T.Text></L.Inline>
-              </L.FlexRowsCP>
+              <CategoryTabs currentData={category} onChange={categoryHandler} />
+
               <Line />
-              <L.FlexCols _gap={32} >
+
+              {/* =================== 필터 =================== */}
+              <L.FlexCols _gap={32} _padding='24px 20px'>
                 <L.FlexRows _gap={16} _content='space-between'>
                   <div>
-                    <T.Text _size={16} _weight={600} _color='gray900'>전체 0</T.Text>
+                    <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
                   </div>
                   <L.FlexRows _gap={4} _content='flex-end' _width='100px'>
-                    <T.Text _size={13} _weight={400} _color='gray900'>주문 많은 순</T.Text>
+                    <T.Text _size={13} _weight={400} _color='gray900'>{sortFormatter(sort)}</T.Text>
                     <button
                       type='button'
-                      onClick={ShowSortModal}
+                      _bg={sort !== 'create' && 'green700'}
+                      onClick={() => setFilter01(true)}
                     >
                       <Down />
                     </button>
                   </L.FlexRows>
                 </L.FlexRows>
 
-                {/* 없을 때 */}
-                {/* <ListEmpty/> */}
-                {/* 있을 때 */}
-                <L.FlexCols>
-                  <ListCard />
-                </L.FlexCols>
+                {/* =================== 상품 정보 없을 경우=================== */}
+                {
+                  !loading &&
+                  items.length === 0 &&
+                  <ListEmpty />
+                }
+
+                {/* =================== 상품 정보 있을 경우=================== */}
+                {
+                  items.length > 0 &&
+                  <ListCard list={items} lastRef={ref} />
+                }
+
+                {/* ===================로딩=================== */}
+                {
+                  loading && <LoadingBar />
+                }
+
               </L.FlexCols>
             </L.FlexCols>
 
-            {!sort && <B.MapListButton
-            >
+            {/* {!filter01 && 
+            <B.MapListButton>
               <Map />
               지도 보기
-            </B.MapListButton>}
+            </B.MapListButton>} */}
           </L.Contents>
         </L.Container>
 
-        {sort && <SortLayout CloseModal={CloseModal} />}
+        {filter01 && <SearchSortLayout CloseModal={() => setFilter01(false)} data={sort} setData={setSort} />}
       </Layout>
     </div>
   )
 }
 
-const ListEmpty = () => {
+export const ListEmpty = () => {
   return (
-    <div>
-      <L.FlexCols >
-        <L.FlexRows _content='center' _padding='80px 20px'>
-          <T.Text _weight={300} _size={15} _color="gray600" _align='center'><p>해당 지역에 등록된 업체가 없습니다.</p><p>다른 지역으로 검색해주세요!</p></T.Text>
+    <L.FlexCols >
+      <L.FlexRows _content='center' _padding='80px 20px'>
+        <T.Text _weight={300} _size={15} _color="gray600" _align='center'><p>해당 지역에 등록된 업체가 없습니다.</p><p>다른 지역으로 검색해주세요!</p></T.Text>
 
-        </L.FlexRows>
-      </L.FlexCols>
-    </div>
+      </L.FlexRows>
+    </L.FlexCols>
   )
 }
-export const ListCard = () => {
+export const ListCard = ({ list, lastRef }) => {
   return (
-    <div>
-      <L.FlexCols _gap={20}>
-        <L.FlexRows _content='space-between'>
-          <L.FlexRows _content='row'>
-            <ImgSizeLayout _bdr={4} src={Img} _width={98} _height={98}></ImgSizeLayout>
-            <L.FlexCols _gap={2}>
-              <T.Text _weight={600} _size={18} _color="gray900">bhc 치킨</T.Text>
-              <L.FlexRows _content='flex-start' _items='center' _gap={2}>
-                <OneStar />
-                <T.Text _weight={500} _size={14} _color="gray900" _align='center'>4.5</T.Text>
-              </L.FlexRows>
-              <L.FlexRows>
-                <T.Text _weight={400} _size={14} _color="gray800" _align='center'>최소주문 20,000원,</T.Text>
-                <T.Text _weight={400} _size={14} _color="gray800" _align='center'>배달 2,000원</T.Text>
-              </L.FlexRows>
-              <L.FlexRows>
-                <B.Badge _color='white' _bg='green500'>신규 입점</B.Badge>
-                <B.Badge>픽업가능</B.Badge>
-                <B.Badge>배달가능</B.Badge>
-              </L.FlexRows>
-            </L.FlexCols>
+    <L.FlexCols _gap={20}>
+      {
+        list.map((item, index) => (
+          <L.FlexRows
+            key={item.storeId}
+            _content='space-between'
+            ref={list.length == index + 1 ? lastRef : null}
+          >
+            <L.FlexRows _content='row'>
+              <ImgSizeLayout _bdr={4} src={item.profile != null ? item.profile : Img} _width={98} _height={98}></ImgSizeLayout>
+              <L.FlexCols _gap={2}>
+                <T.Text _weight={600} _size={18} _color="gray900">{item.name}</T.Text>
+                <L.FlexRows _content='flex-start' _items='center' _gap={2}>
+                  <StarRate rate={item.reviewRate} />
+                  <T.Text _weight={500} _size={14} _color="gray900" _align='center'>({item.reviewRate})</T.Text>
+                </L.FlexRows>
+                <L.FlexRows>
+                  <T.Text _weight={400} _size={14} _color="gray800" _align='center'>
+                    최소주문 {item.orderMinPrice ? numberFormat(item.orderMinPrice) : 0}원,
+                  </T.Text>
+                  <T.Text _weight={400} _size={14} _color="gray800" _align='center'>
+                    배달 {item.deliveryPrice ? numberFormat(item.deliveryPrice) : 0}원
+                  </T.Text>
+                </L.FlexRows>
+                <L.FlexRows>
+                  {item.newStatus && <B.Badge _color='white' _bg='green500'>신규 입점</B.Badge>}
+                  {item.couponStatus && <B.Badge _color='green600' _bg='green50'>쿠폰</B.Badge>}
+                  {item.pickupStatus && <B.Badge>픽업가능</B.Badge>}
+                  {item.deliveryStatus && <B.Badge>배달가능</B.Badge>}
+                </L.FlexRows>
+              </L.FlexCols>
+            </L.FlexRows>
+            <Flag />
           </L.FlexRows>
-          <Flag />
-        </L.FlexRows>
-        <L.FlexRows _content='space-between'>
-          <L.FlexRows _content='row'>
-            <ImgSizeLayout _bdr={4} src={Img} _width={98} _height={98}></ImgSizeLayout>
-            <L.FlexCols _gap={2}>
-              <T.Text _weight={600} _size={18} _color="gray900">Satterfield, Ward and Feil</T.Text>
-              <L.FlexRows _content='flex-start' _items='center' _gap={2}>
-                <OneStar />
-                <T.Text _weight={500} _size={14} _color="gray900" _align='center'>4.5</T.Text>
-              </L.FlexRows>
-              <L.FlexRows>
-                <T.Text _weight={400} _size={14} _color="gray800" _align='center'>최소주문 20,000원,</T.Text>
-                <T.Text _weight={400} _size={14} _color="gray800" _align='center'>배달 2,000원</T.Text>
-              </L.FlexRows>
-              <L.FlexRows>
-                <B.Badge _color='green600' _bg='green50'>쿠폰</B.Badge>
-                <B.Badge>픽업가능</B.Badge>
-                <B.Badge>배달가능</B.Badge>
-              </L.FlexRows>
-            </L.FlexCols>
-          </L.FlexRows>
-          <Flag />
-        </L.FlexRows>
-        <L.FlexRows _content='space-between'>
-          <L.FlexRows _content='row'>
-            <ImgSizeLayout _bdr={4} src={Img} _width={98} _height={98}></ImgSizeLayout>
-            <L.FlexCols _gap={2}>
-              <T.Text _weight={600} _size={18} _color="gray900">Corkery - Hammes</T.Text>
-              <L.FlexRows _content='flex-start' _items='center' _gap={2}>
-                <OneStar />
-                <T.Text _weight={500} _size={14} _color="gray900" _align='center'>4.5</T.Text>
-              </L.FlexRows>
-              <L.FlexRows>
-                <T.Text _weight={400} _size={14} _color="gray800" _align='center'>최소주문 20,000원,</T.Text>
-                <T.Text _weight={400} _size={14} _color="gray800" _align='center'>배달 2,000원</T.Text>
-              </L.FlexRows>
-              <L.FlexRows>
-                <B.Badge>픽업가능</B.Badge>
-                <B.Badge>배달가능</B.Badge>
-              </L.FlexRows>
-            </L.FlexCols>
-          </L.FlexRows>
-          <Flag />
-        </L.FlexRows>
-      </L.FlexCols>
-    </div>
+        ))
+      }
+    </L.FlexCols>
   )
 }
 

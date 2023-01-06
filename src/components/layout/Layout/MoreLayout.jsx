@@ -5,7 +5,7 @@ import * as L from 'components/commonUi/Layout';
 import { Check } from 'components/commonUi/Icon';
 import { ImgSizeLayout } from '../Img/ImgSizeLayout';
 import Review from 'assets/images/Review.png'
-import { productFilterText, productSortText } from 'utils/utils';
+import { sortFormatter } from 'utils/utils';
 
 
 function MoreLayout({ PropsModal }) {
@@ -59,7 +59,7 @@ export function FilterLayout({ PropsModal, data, setData }) {
                       _size={15}
                       _color={filter === data ? "green800" : "gray700"}
                       onClick={() => clickHandler(filter)}
-                    >{productFilterText(filter)}</T.Text>
+                    >{sortFormatter(filter)}</T.Text>
                     {
                       filter === data && <Check />
                     }
@@ -106,7 +106,54 @@ export function SortLayout({ CloseModal, data, setData }) {
                       _size={15}
                       _color={sort === data ? "green800" : "gray700"}
                       onClick={() => clickHandler(sort)}
-                    >{productSortText(sort)}</T.Text>
+                    >{sortFormatter(sort)}</T.Text>
+                    {
+                      sort === data && <Check />
+                    }
+                  </L.FlexRows>
+                ))
+              }
+            </L.FlexCols>
+          </L.Contents>
+          <ModalButton
+            type="button"
+            onClick={CloseModal}
+          >
+            닫기
+          </ModalButton>
+        </ModalBody>
+      </ModalOutside>
+    </div>
+  )
+}
+
+export function SearchSortLayout({ CloseModal, data, setData }) {
+
+  const sorts = ['create', 'order', 'review', 'like'];
+
+  const clickHandler = (sort) => {
+    setData(sort);
+    CloseModal();
+  }
+
+  return (
+    <div>
+      <ModalOutside
+      >
+        <ModalBody>
+          <ModalDiv1>정렬</ModalDiv1>
+          <L.Contents _padding='16px 20px' >
+            <L.FlexCols _gap={32}>
+
+              {
+                sorts.map((sort, index) => (
+                  <L.FlexRows key={index} _content='space-between' _items='center'>
+                    <T.Text
+                      _weight={sort === data ? 600 : 400}
+                      _size={15}
+                      _color={sort === data ? "green800" : "gray700"}
+                      onClick={() => clickHandler(sort)}
+                    >{sortFormatter(sort)}</T.Text>
                     {
                       sort === data && <Check />
                     }

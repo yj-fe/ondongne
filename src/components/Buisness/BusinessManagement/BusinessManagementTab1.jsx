@@ -8,7 +8,7 @@ import { Text } from 'components/commonUi/Text';
 import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, CameraImg, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel, Size } from './BusinessManagementTabStyle'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/store';
+import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/bizStore';
 import { Down } from 'components/commonUi/Icon';
 import { deliveryToString, numberFormatter } from 'utils/utils';
 import AddressModel from 'components/AddressModel';
@@ -498,7 +498,7 @@ const SalesForm = ({ sales, salesOpenTimeHandler, salesCloseTimeHandler }) => {
         <Text _size={15}>{dayWeek}</Text>
       </Size>
       <Size>
-        <L.FlexRows  _height='44px' _items='center'>
+        <L.FlexRows _height='44px' _items='center'>
           <TimeDiv
             color={dayOffStatus}
           >

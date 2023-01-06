@@ -19,7 +19,7 @@ function MainCategory() {
   const navigate = useNavigate();
 
   const router = category => {
-    navigate(`/categories/${category}`)
+    navigate('/categories', { state: { category } })
   }
 
   return (

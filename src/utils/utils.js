@@ -80,17 +80,14 @@ export const totalPrice = (price, rate) => {
 	return result ? result : "0";
 };
 
-// 상품 필터 한글화
-export const productFilterText = (filter) => {
+// 상품 정렬 한글화
+export const sortFormatter = (filter) => {
 	if (filter === "all") return "상품 전체";
 	if (filter === "normal") return "일반 상품";
 	if (filter === "group") return "공동구매 상품";
-};
-
-// 상품 정렬 한글화
-export const productSortText = (filter) => {
 	if (filter === "create") return "기본 순";
 	if (filter === "order") return "주문 많은 순";
 	if (filter === "review") return "리뷰 별점 순";
 	if (filter === "newstore") return "신규 매장 순";
+	if (filter === "like") return "단골 많은 순";
 };

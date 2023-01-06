@@ -123,10 +123,7 @@ function App() {
 						element={<SearchResultPage />}
 					/>
 					<Route path="cart" element={<CartPage />} />
-					<Route
-						path="categories/:category"
-						element={<CategoryPage />}
-					/>
+					<Route path="categories" element={<CategoryPage />} />
 					<Route path="collections" element={<CollectionPage />} />
 					<Route path="details/:id" element={<DetailsPage />} />
 					<Route path="more" element={<MorePage />} />

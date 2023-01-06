@@ -1,46 +1,31 @@
 import { client } from ".";
 
 const urls = {
-	get: "/biz/store/get",
-    imageUpdate: 'biz/store/image',
-	update: "/biz/store/update",
+	categoryList: "/store/category/list",
+	searchList: "/store/search/list",
 };
 
 /* ==============================
-   비즈 상점 조회
+   상점 목록
 ============================== */
-export function getBizStore() {
-	return client.get(urls.get);
+export function getStoreCategoryList(category, local, page, sort) {
+	const data = {
+		category,
+		address: local.address,
+		x: local.x,
+		y: local.y,
+		page,
+		sort,
+	};
+
+	return client.post(urls.categoryList, data);
 }
 
 /* ==============================
-   비즈 상점 프로필 이미지 수정
+   상점 검색 목록
 ============================== */
-export function storeImageProfileUpdate(file, id) {
-    const headers = { "Content-Type": "multipart/form-data" };
-	const data = new FormData();
-    data.append("storeId", id);
-    data.append("storeImageType", "PROFILE");
-	data.append("file", file);
-    return client.post(urls.imageUpdate, data, { headers });
+export function searchStoreList(search, sort, page, x, y) {
+	return client.get(
+		`${urls.searchList}?search=${search}&sort=${sort}&page=${page}&x=${x}&y=${y}`
+	);
 }
-
-/* ==============================
-   비즈 상점 배너 이미지 수정
-============================== */
-export function storeImageBannerUpdate(file, id) {
-    const headers = { "Content-Type": "multipart/form-data" };
-	const data = new FormData();
-    data.append("storeId", id);
-    data.append("storeImageType", "BANNER");
-	data.append("file", file);
-    return client.post(urls.imageUpdate, data, { headers });
-}
-
-/* ==============================
-   비즈 상점 정보 수정
-============================== */
-export function storeUpdate(data) {
-	return client.post(urls.update, data);
-}
-

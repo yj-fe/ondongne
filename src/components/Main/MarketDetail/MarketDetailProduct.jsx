@@ -52,9 +52,9 @@ function MarketDetailProduct() {
   )
 }
 
-export function ProductCard({ item }) {
+export function ProductCard({ item, lastRef }) {
   return (
-    <L.FlexCols _gap={12} _padding={0} _width='216px' >
+    <L.FlexCols key={item.itemId} _gap={12} _padding={0} _width='216px' ref={lastRef}>
 
       <RelativDiv>
         <AbsoluteDiv>

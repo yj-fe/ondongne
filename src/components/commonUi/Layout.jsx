@@ -72,7 +72,7 @@ export const FlexColsScroll = styled.div`
     gap: ${props => props._gap || 8}px;
     width: ${props => props._width || '100%'};
     padding: ${props => props._padding || '0px'};
-    height: auto;
+    height: ${props => props._height || 'auto'};
 `;
 
 export const FlexRowsScroll = styled.div`
