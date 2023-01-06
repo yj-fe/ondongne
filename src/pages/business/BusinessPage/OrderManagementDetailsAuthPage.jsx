@@ -5,12 +5,38 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
 import * as C from 'components/commonUi/CommonStyles';
-import { Down, X_Icon, Delete, Camera, } from 'components/commonUi/Icon';
-import { CameraImg } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
-
+import * as I from 'components/commonUi/Input';
+import { Down, X_Icon, Delete, Camera, ArrowTop, } from 'components/commonUi/Icon';
+import { CameraImg, ContentDiv, InfoBoxDiv, RightStyle, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { AbsoluteTopDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
+import maindata from 'assets/data/maindata'
+import { CateToggle } from './BusinessApplication/BusinessApplication';
+import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
+import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 
 function OrderManagementDetailsAuthPage() {
   const navigate = useNavigate();
+  let [item] = useState(maindata)
+  const [show, setShow] = useState()
+  const [alert1, setAlert1] = useState('')
+  const [alert2, setAlert2] = useState('')
+
+  const openAlert1 = () => {
+    return setAlert1({
+      contents: "텍스트를 입력해주세요.",
+      confirmText: "확인",
+      onConfirmClick: () => setAlert1(null),
+      active: () => setAlert1(null),
+    })
+  }
+  const openAlert2 = () => {
+    return setAlert2({
+      contents: "배달/픽업이 완료처리 되었습니다.",
+      confirmText: "확인",
+      onConfirmClick: () => setAlert2(null),
+      active: () => setAlert2(null),
+    })
+  }
 
   return (
     <div>
@@ -22,261 +48,89 @@ function OrderManagementDetailsAuthPage() {
       >
 
         <L.Container _padding="0px 0px 60px" >
-          <L.Contents _height='auto'>
+          <L.Contents _height='100vh'>
             <L.FlexCols _gap={40} _padding="8px 20px">
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">판매 종류</T.Text>
                 <L.FlexRows _gap={16}>
                   <B.LayerTextButton _width='100px' _height='100px'>
-                    <L.FlexCols>
+                    <L.FlexCols _gap={4}>
                       <L.FlexRows _content='center'>
-                      <Camera/>
+                        <Camera/>
                       </L.FlexRows>
                       <T.Text _align='center' _size={14}>파일 첨부</T.Text>
                     </L.FlexCols>
                   </B.LayerTextButton>
+
+                  <RelativDiv>
+                    <ImgSizeLayout _width={100} _height={100} _bdr={4} src={item[0].img}/>
+                    <AbsoluteTopDiv _left='90px' >
+                      <Delete/>
+                    </AbsoluteTopDiv>
+                  </RelativDiv>
                 </L.FlexRows>
               </L.FlexCols>
 
-              {/* <ContentDiv>
-                <L.FlexCols>
-                  <T.Text _weight={600} _size={16} _color="gray900">상품 이미지</T.Text>
-                  <T.Text _weight={400} _size={14} _color="gray600">상세페이지 상단에 노출할 상품 이미지를 등록해주세요.</T.Text>
-                </L.FlexCols>
-                <B.LayerTextButton>
-                  <B.Label htmlFor="files">
-                    <T.Text _weight={400} _size={15} _color="gray900" _align='center' _content='center'>이미지 업로드</T.Text>
-                  </B.Label>
-                </B.LayerTextButton>
-                {fileErrorMessage && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{fileErrorMessage}</T.Text>}
-                {
-                  (data.files.length > 0 || data.images.length > 0) &&
-                  <L.FlexRows _gap={20}>
-                    {
-                      data.images.length > 0 &&
-                      data.images.map((file, index) => (
-                        <FileListForm
-                          key={index}
-                          file={file}
-                          fileDeleteHandler={fileDeleteHandler}
-                        />
-                      ))
-                    }
-                    {
-                      data.files.length > 0 &&
-                      data.files.map((file, index) => (
-                        <FileList
-                          key={index}
-                          file={file}
-                          deleteFile={() =>
-                            setData({
-                              ...data,
-                              files: data.files.filter(item => item !== file)
-                            })
-                          } />
-                      ))
-                    }
-                  </L.FlexRows>
-                }
-                <input
-                  type="file"
-                  id="files"
-                  accept='image/*'
-                  onChange={e => {
-                    if (!e.target.files[0]) return;
-                    const valid = imageValidation(e.target.files[0]);
-                    if (valid) return
-
-                    if (data.files.length === 7) {
-                      return setFileErrorMessage('최대 7개까지 추가 가능합니다.')
-                    }
-
-                    setData({
-                      ...data,
-                      files: [...data.files, e.target.files[0]]
-                    })
-                  }}
+              <L.FlexCols _gap={16}>
+                <T.Text _weight={600} _size={16} _color="gray900">배달/픽업 인증 내용</T.Text>
+                <InfoBoxDiv onClick={() => setShow((s) => !s)}>
+                  <TitleInfo>예시문구</TitleInfo>
+                  {show ? <ArrowTop/> : <Down/> }
+                </InfoBoxDiv>
+                {show && <Toggle/>}
+                <I.TextInput
+                  placeholder='텍스트를 입력해 주세요.'
+                 _boccolor={'#FFFFFF'} _height={140}
                 />
-              </ContentDiv>
-
-              <L.FlexCols _gap={16}>
-                <T.Text _weight={600} _size={16} _color="gray900">카테고리</T.Text>
-                <L.FlexRows _gap={16}>
-                  <TitleInfoDiv>
-                    <TitleInfo>
-                      {data.categories?.length > 0 ? data.categories.join(', ') : '카테고리 선택'}
-                    </TitleInfo>
-                    <RightStyle
-                      onClick={() => setSelect(!select)}
-                    ><Down /></RightStyle>
-                  </TitleInfoDiv>
-                </L.FlexRows>
-                {categoryError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{categoryError}</T.Text>}
-                {
-                  select &&
-                  <CategorySelect
-                    isOpen={select}
-                    data={data}
-                    dataHanler={setData}
-                    errorHandler={setCategoryError}
-                  />
-                }
               </L.FlexCols>
-
-              <L.FlexCols _gap={16}>
-                <T.Text _weight={600} _size={16} _color="gray900">상품명</T.Text>
-                <TitleInfoDiv>
-                  <Input
-                    name='name'
-                    placeholder='상품명을 입력해주세요.'
-                    value={data.name}
-                    onChange={e => setData({ ...data, name: e.target.value })}
-                    maxLength={255}
-                  />
-                </TitleInfoDiv>
-              </L.FlexCols>
-
-
-              <L.FlexRows>
-                <L.FlexCols _gap={16}>
-                  <T.Text _weight={600} _size={16} _color="gray900">상품 가격(원)</T.Text>
-                  <TitleInfoDiv>
-                    <Input
-                      name='price'
-                      placeholder='0'
-                      value={numberFormat(data.price)}
-                      onChange={e => setData({ ...data, price: numberFormatter(e.target.value) })}
-                      maxLength={12}
-                    />
-                    <span>￦</span>
-                  </TitleInfoDiv>
-                </L.FlexCols>
-
-                <L.FlexCols _gap={16}>
-                  <T.Text _weight={600} _size={16} _color="gray900">할인율(%)</T.Text>
-                  <TitleInfoDiv>
-                    <Input
-                      name='salePercent'
-                      placeholder='0'
-                      value={data.salePercent}
-                      onChange={e => setData({ ...data, salePercent: numberFormatter(e.target.value) })}
-                      maxLength={3}
-                    />
-                    <span>%</span>
-                  </TitleInfoDiv>
-                </L.FlexCols>
-
-                <L.FlexCols _gap={16}>
-                  <T.Text _weight={600} _size={16} _color="gray900">할인 가격</T.Text>
-                  <TitleInfoDiv>
-                    <Input
-                      disabled
-                      style={{ background: '#fff' }}
-                      value={totalPrice(data.price, data.salePercent)}
-                    />
-                    <span>￦</span>
-                  </TitleInfoDiv>
-                </L.FlexCols>
-              </L.FlexRows>
-
-              {
-                data.type === 'GROUP' &&
-                <>
-                  <L.FlexRows>
-                    <L.FlexCols _gap={16}>
-                      <T.Text _weight={600} _size={16} _color="gray900">최소 수량</T.Text>
-                      <TitleInfoDiv>
-                        <Input
-                          name='minCount'
-                          placeholder='0'
-                          value={data.minCount}
-                          onChange={e => setData({ ...data, minCount: numberFormatter(e.target.value) })}
-                          maxLength={10}
-                        />
-                        <span>개</span>
-                      </TitleInfoDiv>
-                    </L.FlexCols>
-
-                    <L.FlexCols _gap={16}>
-                      <T.Text _weight={600} _size={16} _color="gray900">최대 수량</T.Text>
-                      <TitleInfoDiv>
-                        <Input
-                          name='maxCount'
-                          placeholder='0'
-                          value={data.maxCount}
-                          onChange={e => setData({ ...data, maxCount: numberFormatter(e.target.value) })}
-                          maxLength={10}
-                        />
-                        <span>개</span>
-                      </TitleInfoDiv>
-                    </L.FlexCols>
-                  </L.FlexRows>
-
-                  <L.FlexCols _gap={16}>
-                    <T.Text _weight={600} _size={16} _color="gray900">판매 종료일</T.Text>
-                    <TitleInfoDiv
-                      onClick={() => setCalendar(true)}
-                    >
-                      <Input
-                        disabled
-                        name='endDate'
-                        placeholder='판매 종료일 선택'
-                        style={{ background: '#fff' }}
-                        value={data.endDate ? data.endDate.split(' ')[0] : ''}
-                      />
-                      <span><Calendar /></span>
-                    </TitleInfoDiv>
-                  </L.FlexCols>
-                </>
-              }
-
-
-              <L.FlexCols _gap={16}>
-                <T.Text _weight={600} _size={16} _color="gray900">배달/픽업 여부</T.Text>
-                <L.FlexRows _gap={16}>
-                  <CheckBox
-                    label="배달 가능"
-                    name="delivery"
-                    checked={data.recetiveType.includes('배달')}
-                    onChange={() => recetiveTypeHandler('배달')}
-                  />
-                  <CheckBox
-                    label="픽업 가능"
-                    name="pickup"
-                    checked={data.recetiveType.includes('픽업')}
-                    onChange={() => recetiveTypeHandler('픽업')}
-                  />
-                  <CheckBox
-                    label="택배 가능"
-                    name="parcel"
-                    checked={data.recetiveType.includes('택배')}
-                    onChange={() => recetiveTypeHandler('택배')}
-                  />
-                </L.FlexRows>
-              </L.FlexCols>
-
-              <L.FlexCols _gap={16}>
-                <T.Text _weight={600} _size={16} _color="gray900">상품 정보</T.Text>
-                <TitleInfoDiv
-                  onClick={() => isEditor(true)}
-                >
-                  <TitleInfo>작성하기</TitleInfo>
-                  <RightStyle
-                  ><ArrowRightB /></RightStyle>
-                </TitleInfoDiv>
-              </L.FlexCols> */}
 
             </L.FlexCols>
+
+
             <B.FixedActionButton
               type='button'
+              onClick={openAlert1}
             >
               배달/픽업 완료
             </B.FixedActionButton>
           </L.Contents>
         </L.Container>
       </Layout>
+      {
+        alert1 &&
+        <SimpleConfirm
+          contents={alert1.contents}
+          confirmText={alert1.confirmText}
+          onConfirmClick={alert1.onConfirmClick}
+          active={alert1.active}
+        />
+      }
+      {
+        alert2 &&
+        <SimpleConfirm
+          contents={alert2.contents}
+          confirmText={alert2.confirmText}
+          onConfirmClick={alert2.onConfirmClick}
+          active={alert2.active}
+        />
+      }
 
+    </div>
+  )
+}
 
+function Toggle() {
+
+  return (
+    <div>
+      <ToggleS>
+        <L.FlexCols _gap='0px'>
+          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _weight={600} _size={15} _color="green700">예시문구</T.Text></L.FlexRows>
+          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">고객님, 오늘도 맛있는 저희 상품 구매해주셔서 감사합니다.</T.Text></L.FlexRows>
+          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">배달 완료 인증해드립니다. 확인 부탁드려요~</T.Text></L.FlexRows>
+          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">주문해주셔서 감사합니다~</T.Text></L.FlexRows>
+        </L.FlexCols>
+      </ToggleS>
     </div>
   )
 }

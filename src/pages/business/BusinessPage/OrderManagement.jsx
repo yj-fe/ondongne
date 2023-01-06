@@ -12,7 +12,15 @@ function OrderManagement() {
   const [totalCount, setTotalCount] = useState(0)
   const [ delOrder, setDelOrder ] = useState(null);
   const openDelete = () =>{
-    setDelOrder(true)
+    return setDelOrder({
+      contents: "해당 고객의 주문을 취소하시겠습니까?",
+      confirmText: "주문 취소",
+      cancelText: "아니요",
+      onConfirmClick: () => setDelOrder(null),
+      onCancelClick: () => setDelOrder(null),
+      active: () => setDelOrder(null),
+      warn: () => setDelOrder(null),
+    })
   }
   return (
     <div>
@@ -361,12 +369,13 @@ function OrderManagement() {
       </Layout>
       {delOrder&&
       <Confirm
-          contents={`주문내역을 정말로 삭제하시겠습니까? \n내역 삭제 전 나만의 단골집으로 등록해보세요!`}
-          // warn={true}
-          confirmText="삭제"
-          cancelText="취소"
-          onConfirmClick={setDelOrder(null)}
-          onCancelClick={setDelOrder(null)}
+          contents={delOrder.contents}
+          confirmText={delOrder.confirmText}
+          cancelText={delOrder.cancelText}
+          onConfirmClick={delOrder.onConfirmClick}
+          onCancelClick={delOrder.onCancelClick}
+          active={delOrder.active}
+          warn={delOrder.warn}
       />}
     </div>
   )

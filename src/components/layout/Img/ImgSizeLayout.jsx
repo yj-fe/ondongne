@@ -56,8 +56,8 @@ export const AbsoluteTopDiv = styled.div`
     height: ${props => props._height}px;
     display: flex;
     position: absolute;
-    left: 70px;
-    top: -10px;
+    left: ${props => props._left || '70px' };
+    top: ${props => props._top || '-10px' };
     bottom: 0%;
     margin: 0;
 `;
