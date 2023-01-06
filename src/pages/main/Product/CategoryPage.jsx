@@ -93,41 +93,41 @@ function CategoryPage() {
             <L.FlexCols _padding={0} _gap={0} >
 
               {/* =================== 메뉴 =================== */}
-              <L.FlexRows _height='48px' _gap={20} _items='center' _padding='0px 0px 0px 20px'>
+              <L.FlexRowsCP _height='48px' _gap='0px' _items='center' _padding='0px 0px 0px 20px'>
                 <Link to="/categories/전체">
-                  <T.Text _size={16} _weight={600} _color={category == '전체' ? 'green700' : 'gray400'} _align='center'>전체</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '전체' ? 'green700' : 'gray400'} _align='center'>전체</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/야채,과일">
-                  <T.Text _size={16} _weight={600} _color={category == '야채,과일' ? 'green700' : 'gray400'} _align='center'>야채/과일</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '야채,과일' ? 'green700' : 'gray400'} _align='center'>야채/과일</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/정육">
-                  <T.Text _size={16} _weight={600} _color={category == '정육' ? 'green700' : 'gray400'} _align='center'>정육</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '정육' ? 'green700' : 'gray400'} _align='center'>정육</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/수산,해산">
-                  <T.Text _size={16} _weight={600} _color={category == '수산,해산' ? 'green700' : 'gray400'} _align='center'>수산/해산</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '수산,해산' ? 'green700' : 'gray400'} _align='center'>수산/해산</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/쌀,잡곡">
-                  <T.Text _size={16} _weight={600} _color={category == '쌀,잡곡' ? 'green700' : 'gray400'} _align='center'>쌀/잡곡</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '쌀,잡곡' ? 'green700' : 'gray400'} _align='center'>쌀/잡곡</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/식품">
-                  <T.Text _size={16} _weight={600} _color={category == '식품' ? 'green700' : 'gray400'} _align='center'>식품</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '식품' ? 'green700' : 'gray400'} _align='center'>식품</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/생활용품">
-                  <T.Text _size={16} _weight={600} _color={category == '생활용품' ? 'green700' : 'gray400'} _align='center'>생활용품</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '생활용품' ? 'green700' : 'gray400'} _align='center'>생활용품</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/디저트">
-                  <T.Text _size={16} _weight={600} _color={category == '디저트' ? 'green700' : 'gray400'} _align='center'>디저트</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '디저트' ? 'green700' : 'gray400'} _align='center'>디저트</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/식음료">
-                  <T.Text _size={16} _weight={600} _color={category == '식음료' ? 'green700' : 'gray400'} _align='center'>식음료</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '식음료' ? 'green700' : 'gray400'} _align='center'>식음료</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/반려동물">
-                  <T.Text _size={16} _weight={600} _color={category == '반려동물' ? 'green700' : 'gray400'} _align='center'>반려동물</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '반려동물' ? 'green700' : 'gray400'} _align='center'>반려동물</T.Text></L.Inline>
                 </Link>
                 <Link to="/categories/기타">
-                  <T.Text _size={16} _weight={600} _color={category == '기타' ? 'green700' : 'gray400'} _align='center'>기타</T.Text>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '기타' ? 'green700' : 'gray400'} _align='center'>기타</T.Text></L.Inline>
                 </Link>
-              </L.FlexRows>
+              </L.FlexRowsCP>
               <Line />
               <L.FlexColsScroll _padding='24px 15px'>
                 {/* =================== 필터 =================== */}
@@ -210,17 +210,6 @@ export function CategoryCard({ list, lastRef }) {
           </>
         ))}
       </L.FlexRowsWrap>
-      {/* <L.FlexRows _gap={20} _padding={0} _height='382px'>
-          <MarketProductCard item={item[3]}/>
-          <MarketProductCard item={item[4]}/>
-          <MarketProductCard item={item[5]}/>
-        </L.FlexRows>
-        <L.FlexRows _gap={20} _padding={0} _height='382px'>
-          <MarketProductCard item={item[3]}/>
-          <MarketProductCard item={item[4]}/>
-          <MarketProductCard item={item[5]}/>
-        </L.FlexRows> */}
-      {/* </L.Contents> */}
     </div>
   )
 }

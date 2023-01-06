@@ -25,7 +25,7 @@ function MyMarket() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          <L.Contents _padding="0" _height={'100vh'}>
+          <L.Contents _padding="0">
             <L.FlexCols _padding={0} _gap={0}>
 
 
@@ -74,7 +74,6 @@ function TabCoupon(props) {
   }
 
 
-
   return [
 
     //=====================1. Tab 1 상품=====================
@@ -106,16 +105,13 @@ function TabCoupon(props) {
 
 {/* =================== 있을 때 =================== */}
         <L.Contents _padding="24px 20px" _gap={20}>
-          <L.FlexRows _gap={20} _padding={0} _height='382px'>
-            <MarketProductCard item={item[0]}/>
-            <MarketProductCard item={item[1]}/>
-            <MarketProductCard item={item[2]}/>
-          </L.FlexRows>
-          <L.FlexRows _gap={20} _padding={0}>
-            <MarketProductCard item={item[3]}/>
-            <MarketProductCard item={item[4]}/>
-            <MarketProductCard item={item[5]}/>
-          </L.FlexRows>
+          <L.FlexRowsWrap _gap={20} _padding={0}>
+              {
+                item.map((item, idx) => (
+                  <MarketProductCard item={item} />
+                ))
+              }
+            </L.FlexRowsWrap>
         </L.Contents>
 
     </div>,

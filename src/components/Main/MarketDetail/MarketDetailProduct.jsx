@@ -42,16 +42,6 @@ function MarketDetailProduct() {
                 ))
               }
             </L.FlexRowsWrap>
-            {/* <L.FlexRows _gap={20} _padding={0}>
-              <MarketProductCard item={item[0]} />
-              <MarketProductCard item={item[1]} />
-              <MarketProductCard item={item[2]} />
-            </L.FlexRows>
-            <L.FlexRows _gap={20} _padding={0}>
-              <MarketProductCard item={item[3]} />
-              <MarketProductCard item={item[4]} />
-              <MarketProductCard item={item[5]} />
-            </L.FlexRows> */}
           </L.FlexCols>
 
 

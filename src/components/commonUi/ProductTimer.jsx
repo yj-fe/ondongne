@@ -8,7 +8,7 @@ const ContentDate = styled.div`
   justify-content: center;
   padding: 2px;
   gap: 4px;
-  width: 120px;
+  width: 150px;
   height: 22px;
   background: #FDECEE;
   border-radius: 2px;

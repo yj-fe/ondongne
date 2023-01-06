@@ -4,7 +4,7 @@ import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { Down } from 'components/commonUi/Icon';
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgSizeH, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { bizItemList } from 'service/bizItem';
 import { numberFormat, totalPrice } from 'utils/utils';
 import StarRate from 'components/commonUi/StarRate';
@@ -80,7 +80,7 @@ function BusinessProductManagement() {
               </L.FlexRows>
 
               <L.Contents _padding='0px' _gap={20}>
-                <L.FlexRowsWrap _gap={20} _padding={0}>
+                <L.FlexRowsWrapBPM _padding={0}>
                   {
                     items && items.length === 0 &&
                     <L.Contents _padding='50px 0px' _height='100vh'>
@@ -110,7 +110,7 @@ function BusinessProductManagement() {
                         </Link>
                     ))
                   }
-                </L.FlexRowsWrap>
+                </L.FlexRowsWrapBPM>
               </L.Contents>
 
             </L.FlexCols>
@@ -123,14 +123,13 @@ function BusinessProductManagement() {
 
 export function Card({ lastRef, item }) {
   return (
-    <div>
-      <L.FlexCols _gap={12} _padding={0} _width='216px' >
+      <L.FlexColsSize _gap={12} _padding={0} >
 
         {
           !item.soldoutStatus
-            ? <ImgSizeLayout _width={216} _height={216} _bdr={6} src={item.thumbnail} />
+            ? <ImgSizeH _height={216} _width='216px' _bdr={6} src={item.thumbnail} />
             : <div style={{ position: 'relative' }}>
-              <ImgSizeLayout _width={216} _height={216} _bdr={6} src={item.thumbnail} />
+              <ImgSizeH _height={216} _bdr={6} src={item.thumbnail} />
               <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
             </div>
         }
@@ -152,14 +151,13 @@ export function Card({ lastRef, item }) {
           <L.FlexRows>
             <T.Text _size={16} _weight={600} _color='gray900'>{totalPrice(item.price, item.salePercent)} 원</T.Text>
           </L.FlexRows>
-          <L.FlexRows>
+          <L.FlexRows _content='flex-start'>
             <StarRate rate={item.reviewRate} />
-            <T.Text _size={11} _weight={400} _color='gray800'>({item.reviewRate})</T.Text>
+            <T.Text _align='left'  _size={11} _weight={400} _color='gray800'>({item.reviewRate})</T.Text>
           </L.FlexRows>
 
         </L.FlexCols>
-      </L.FlexCols>
-    </div>
+      </L.FlexColsSize>
   )
 }
 

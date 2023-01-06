@@ -62,7 +62,7 @@ export const CouponDiv = styled.div`
 	align-items: flex-start;
 	padding: 0px;
 	gap: 16px;
-	width: 688px;
+	width: 100%;
 	height: auto;
 `;
 export const CouponCard = styled.div`
@@ -71,7 +71,7 @@ export const CouponCard = styled.div`
 	align-items: flex-start;
 	padding: 20px;
 	gap: 12px;
-	width: 688px;
+	width: 100%;
 	height: 140px;
 	background: #2dac9e;
 	border-radius: 8px;
@@ -126,8 +126,8 @@ export const CouponInfoDiv = styled.div`
 	align-items: center;
 	padding: 0px;
 	gap: 16px;
-	width: 688px;
-	height: 54px;
+	width: 100%;
+	height: auto;
 `;
 export const DownloadDiv = styled.div`
 	box-sizing: border-box;
@@ -224,14 +224,15 @@ export const FooterDiv = styled.div`
 	width: 728px;
 	padding: 0 24px 0 0;
 `;
-export const FloatingDiv = styled.div`
-	position: sticky;
-	/* gap: 16px; */
-	/* bottom: 40px; */
-	/* right: 24px; */
-	justify-content: right;
-	align-items: center;
-	display: flex;
+export const FloatingDivT = styled.div`
+	margin: 0px;
+	padding: 0px;
+	position: absolute;
+	right: 24px;
+	bottom: 40px;
+	@media screen and (max-width: 728px){
+		right: 3%;
+	}
 `;
 export const Footer = styled.div`
 	display: flex;

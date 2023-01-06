@@ -26,6 +26,13 @@ export const NavContainer = styled.div`
 	padding: 0px 20px;
 	width: 100%;
 `;
+
+export const ImgLogoBox = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+`;
 export const MainLocation = styled.div`
 	display: flex;
 	align-items: center;

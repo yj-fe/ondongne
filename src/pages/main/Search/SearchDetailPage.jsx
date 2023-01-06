@@ -28,22 +28,16 @@ function SearchDetailPage() {
               <T.Text  _weight={700} _size={18} _color="black">우리동네 인기 추천</T.Text>
               <T.Text  _weight={500} _size={14} _color="blue">전체 보기</T.Text>
             </L.FlexRows>
-            <L.FlexRows _height='300px'>
-              <L.FlexCols _width='150px' _gap={12}>
-                <BestCollectionCard item={item[0]}/>
-                <BestCollectionCard item={item[1]}/>
-                <BestCollectionCard item={item[2]}/>
-                <BestCollectionCard item={item[3]}/>
-              </L.FlexCols>
-            </L.FlexRows>
-            <L.FlexRows _height='300px'>
-              <L.FlexCols _width='150px' _gap={12}>
-                <BestCollectionCard item={item[4]}/>
-                <BestCollectionCard item={item[5]}/>
-                <BestCollectionCard item={item[6]}/>
-                <BestCollectionCard item={item[7]}/>
-              </L.FlexCols>
-            </L.FlexRows>
+            {/* <L.FlexRowsCP _height='300px' _gap='0px' _items='flex start' _padding='0px 0px 0px 20px'> */}
+            <L.FlexRowsWrap _gap={20} _padding={0}>
+            {
+                item.map((item, idx) => (
+                  <BestCollectionCard item={item}/>
+                ))
+              }
+              </L.FlexRowsWrap>
+              {/* </L.FlexRowsCP> */}
+
           </L.FlexCols>
           </L.Contents>
         </L.Container>

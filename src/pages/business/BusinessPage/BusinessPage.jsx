@@ -19,10 +19,13 @@ import { ReactComponent as Order } from "assets/icons/business/Order.svg";
 
 import { MoreNavBody, MoreContainer, MoreDiv, FooterText, Logo } from 'pages/main/MorePage/MorePageStyle'
 import { TermsDiv, TermsTitle, TermsIconStyle } from 'pages/service/TermsPage/TermsPageStyle'
-import { TitleText, InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDiv, FloatingContentDiv, FloatingContentTitle, FloatingContentIcon, FloatingToggleDiv, CardTextDiv, CouponDiv, CouponInfoDiv, DownloadDiv, DownloadText, DownloadCount, DownloadCountTextB, DownloadCountTextN, MyBestProductContent, FloatingDiv, FooterDiv } from './BusinessPageStyle'
+import { TitleText, InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDiv, FloatingContentDiv, FloatingContentTitle, FloatingContentIcon, FloatingToggleDiv, CardTextDiv, CouponDiv, CouponInfoDiv, DownloadDiv, DownloadText, DownloadCount, DownloadCountTextB, DownloadCountTextN, MyBestProductContent, FloatingDiv, FooterDiv, CouponCard, CouponTitleDiv, CouponBadge, CouponTitleText, CouponTitleInfoDiv, FloatingDivT } from './BusinessPageStyle'
 import { ContentDate, ContentImg, ContentMarket, ContentProduct, ContentStyle, ContentTitle, Discount, DiscountStyle, Price, FinalPrice, RateStyle, Star, Number } from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
 import { getBizMember } from 'service/biz';
 import { useSelector } from 'react-redux';
+
+import * as L from 'components/commonUi/Layout';
+import Layout from 'components/layout/Layout/Layout';
 
 function BusinessPage() {
   const navigate = useNavigate();
@@ -47,13 +50,13 @@ function BusinessPage() {
   return (
     <div>
       <BusinessHeader />
+      <Layout>
 
-      <MoreNavBody>
+        <L.Container>
         {/* ==================== 가게 정보 ==================== */}
-        <MoreContainer>
-          <MoreDiv>
+          <L.Contents>
             <TitleText>가게 정보</TitleText>
-            <InfoDiv>
+              <L.FlexRowsWrapMedia _gap={16}>
               <InfoCard>
                 <InfoIconStyle><OrderIcon /></InfoIconStyle>
                 <CardTextDiv>
@@ -75,15 +78,17 @@ function BusinessPage() {
                   <CardCount>0 건</CardCount>
                 </CardTextDiv>
               </InfoCard>
-            </InfoDiv>
-          </MoreDiv>
-        </MoreContainer>
+              </L.FlexRowsWrapMedia>
+          </L.Contents>
 
-        {/* ==================== 발행한 쿠폰 ==================== */}
-        <MoreContainer>
-          <MoreDiv>
+        </L.Container>
+
+
+        {/* ==================== 2차개발 - 발행한 쿠폰 ==================== */}
+        {/* <L.Container>
+          <L.Contents>
             <TitleText>발행한 쿠폰</TitleText>
-            <CouponDiv>
+            <CouponDiv> */}
               {/* ========== 쿠폰배너생성시 뜨는 예시 ======= */}
               {/* <CouponCard>
                 <CouponTitleDiv>
@@ -94,31 +99,33 @@ function BusinessPage() {
                 <p>22.01.16 까지</p>
                 <p>방문결제 시 현장 할인</p>
                 </CouponTitleInfoDiv>
-              </CouponCard> */}
+              </CouponCard>
 
               <CouponInfoDiv>
-                <DownloadDiv>
-                  <DownloadText>쿠폰 다운로드 수</DownloadText>
-                  <DownloadCount>
-                    <DownloadCountTextB>0</DownloadCountTextB>
-                    <DownloadCountTextN>건</DownloadCountTextN>
-                  </DownloadCount>
-                </DownloadDiv>
-                <DownloadDiv>
-                  <DownloadText>쿠폰 사용</DownloadText>
-                  <DownloadCount>
-                    <DownloadCountTextB>0</DownloadCountTextB>
-                    <DownloadCountTextN>건</DownloadCountTextN>
-                  </DownloadCount>
-                </DownloadDiv>
+                <L.FlexRowsWrap>
+                  <DownloadDiv>
+                    <DownloadText>쿠폰 다운로드 수</DownloadText>
+                    <DownloadCount>
+                      <DownloadCountTextB>0</DownloadCountTextB>
+                      <DownloadCountTextN>건</DownloadCountTextN>
+                    </DownloadCount>
+                  </DownloadDiv>
+                  <DownloadDiv>
+                    <DownloadText>쿠폰 사용</DownloadText>
+                    <DownloadCount>
+                      <DownloadCountTextB>0</DownloadCountTextB>
+                      <DownloadCountTextN>건</DownloadCountTextN>
+                    </DownloadCount>
+                  </DownloadDiv>
+                </L.FlexRowsWrap>
               </CouponInfoDiv>
             </CouponDiv>
-          </MoreDiv>
-        </MoreContainer>
+          </L.Contents>
+        </L.Container> */}
 
         {/* ==================== 내 상점 인기상품 ==================== */}
-        <MoreContainer>
-          <MoreDiv>
+        <L.Container>
+          <L.Contents>
             <TitleText>내 상점 인기상품</TitleText>
 
             {/* <EmptyDiv>
@@ -128,9 +135,11 @@ function BusinessPage() {
                 <EmptyButtonIcon><Right/></EmptyButtonIcon>
               </EmptyButton>
             </EmptyDiv> */}
+            <L.FlexRowsCP>
             <MyBestProductContent
             // onClick={()=>{navigate(`/item/${}`, { state: {item}})}}
             >
+            
               {
                 item.map((a, i) => {
                   if (i % 2 === 0) {
@@ -141,51 +150,53 @@ function BusinessPage() {
                 })
               }
             </MyBestProductContent>
+            </L.FlexRowsCP>
             {/* item있으면 ? <MyBestProductContent/> : <EmptyDiv/>  */}
-          </MoreDiv>
-        </MoreContainer>
+          </L.Contents>
+        </L.Container>
 
         {/* ==================== 비즈 정보 관리 ==================== */}
-        <MoreContainer>
-          <MoreDiv>
+        <L.Container>
+          <L.Contents>
+              <Link to="/business/management">
             <TermsDiv>
               <TermsTitle>비즈 정보 관리</TermsTitle>
-              <Link to="/business/management">
                 <TermsIconStyle><Right /></TermsIconStyle>
-              </Link>
             </TermsDiv>
+              </Link>
+              <Link to="/business/product">
             <TermsDiv>
               <TermsTitle>상품 관리</TermsTitle>
-              <Link to="/business/product">
                 <TermsIconStyle><Right /></TermsIconStyle>
-              </Link>
             </TermsDiv>
+              </Link>
+              <Link to="/business/order">
             <TermsDiv>
               <TermsTitle>주문 관리</TermsTitle>
-              <Link to="">
                 <TermsIconStyle><Right /></TermsIconStyle>
-              </Link>
             </TermsDiv>
+              </Link>
+              <Link to="/business/review">
             <TermsDiv>
               <TermsTitle>리뷰 관리</TermsTitle>
-              <Link to="/business/review">
                 <TermsIconStyle><Right /></TermsIconStyle>
-              </Link>
             </TermsDiv>
+              </Link>
+              <Link to="">
             <TermsDiv>
               <TermsTitle>정산 관리</TermsTitle>
-              <Link to="">
                 <TermsIconStyle><Right /></TermsIconStyle>
-              </Link>
             </TermsDiv>
-            <TermsDiv>
-              <TermsTitle>상점 소식 관리</TermsTitle>
-              <Link to="">
-                <TermsIconStyle><Right /></TermsIconStyle>
               </Link>
-            </TermsDiv>
-          </MoreDiv>
-        </MoreContainer>
+              {/* 2차개발-상점 소식 관리 */}
+              {/* <Link to="">
+                <TermsDiv>
+                  <TermsTitle>상점 소식 관리</TermsTitle>
+                    <TermsIconStyle><Right /></TermsIconStyle>
+                </TermsDiv>
+              </Link> */}
+          </L.Contents>
+        </L.Container>
         <FooterDiv>
           <Footer>
             <Logo src={FooterImg} />
@@ -196,15 +207,14 @@ function BusinessPage() {
               <span>고객센터: 123-456-78912 / 이메일문의: example@email.com</span>
             </FooterText>
           </Footer>
-          <FloatingDiv
+          <FloatingDivT
             onClick={() => setFloating(!floating)}
           >
             {floating && <FloatingToggle />}
             {floating ? <FloatingPush /> : <Floating />}
-          </FloatingDiv>
+          </FloatingDivT>
         </FooterDiv>
-
-      </MoreNavBody>
+        </Layout>
 
 
     </div>

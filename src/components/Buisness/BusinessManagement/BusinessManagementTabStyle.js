@@ -103,9 +103,19 @@ export const RowDiv = styled.div`
 	justify-content: space-between;
 	/* justify-content: space-evenly; */
 	align-items: flex-start;
-	gap: 16px;
+	gap: ${props => props.gap || '16px'};
 	width: 100%;
 	height: auto;
+`;
+
+export const RowDiv2 = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 20px;
+	width: 100%;
+	overflow-x:scroll;
+	
 `;
 export const RowTitle = styled.div`
 	display: flex;
@@ -189,7 +199,7 @@ export const InputBox = styled.div`
 export const Input = styled.input`
 	font-weight: 400;
 	font-size: 16px;
-	width: 40%;
+	width: 70%;
 	background-color: ${(props) => (props.color ? "#EEEEEE" : "none")};
 	text-align: ${(props) => props.align || null};
 	font-family: 'Pretendard';

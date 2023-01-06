@@ -210,8 +210,8 @@ function BusinessProductUpload() {
                           file={file}
                           fileDeleteHandler={fileDeleteHandler}
                         />
-                      ))
-                    }
+                        ))
+                      }
                     {
                       data.files.length > 0 &&
                       data.files.map((file, index) => (
@@ -226,7 +226,7 @@ function BusinessProductUpload() {
                           } />
                       ))
                     }
-                  </L.FlexRows>
+                    </L.FlexRows>
                 }
                 <input
                   type="file"
@@ -260,8 +260,8 @@ function BusinessProductUpload() {
                       onClick={() => setSelect(!select)}
                     ><Down /></RightStyle>
                   </TitleInfoDiv>
+                  
                 </L.FlexRows>
-                {categoryError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{categoryError}</T.Text>}
                 {
                   select &&
                   <CategorySelect
@@ -271,6 +271,7 @@ function BusinessProductUpload() {
                     errorHandler={setCategoryError}
                   />
                 }
+                {categoryError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{categoryError}</T.Text>}
               </L.FlexCols>
 
               <L.FlexCols _gap={16}>

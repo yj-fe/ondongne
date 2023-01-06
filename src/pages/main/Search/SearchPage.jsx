@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {useParams } from 'react-router-dom'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
@@ -12,7 +13,7 @@ import { SortLayout } from 'components/layout/Layout/MoreLayout';
 
 function SearchPage() {
   const [sort, setSort] = useState(false);
-
+  const { category } = useParams();
 
   const navigate = useNavigate();
   const ShowSortModal = () => {
@@ -36,18 +37,20 @@ function SearchPage() {
             <L.FlexCols _padding={0} _gap={0}>
 
 
-              <L.FlexRows _height='48px' _gap={20} _items='center' _padding='0px 0px 0px 20px'>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>전체</T.Text>
-                <T.Text _size={16} _weight={600} _color='green700' _align='center'>야채/과일</T.Text>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>정육</T.Text>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>수산/해산</T.Text>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>쌀/잡곡</T.Text>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>식품</T.Text>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>생활용품</T.Text>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>디저트</T.Text>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>식음료</T.Text>
-                <T.Text _size={16} _weight={600} _color='gray400' _align='center'>반려동물</T.Text>
-              </L.FlexRows>
+              {/* =================== 메뉴 =================== */}
+              <L.FlexRowsCP _height='48px' _gap='0px' _items='center' _padding='0px 0px 0px 20px'>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '전체' ? 'green700' : 'gray400'} _align='center'>전체</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '야채,과일' ? 'green700' : 'gray400'} _align='center'>야채/과일</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '정육' ? 'green700' : 'gray400'} _align='center'>정육</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '수산,해산' ? 'green700' : 'gray400'} _align='center'>수산/해산</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '쌀,잡곡' ? 'green700' : 'gray400'} _align='center'>쌀/잡곡</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '식품' ? 'green700' : 'gray400'} _align='center'>식품</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '생활용품' ? 'green700' : 'gray400'} _align='center'>생활용품</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '디저트' ? 'green700' : 'gray400'} _align='center'>디저트</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '식음료' ? 'green700' : 'gray400'} _align='center'>식음료</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '반려동물' ? 'green700' : 'gray400'} _align='center'>반려동물</T.Text></L.Inline>
+                  <L.Inline _width='70px' ><T.Text _size={16} _weight={600} _color={category == '기타' ? 'green700' : 'gray400'} _align='center'>기타</T.Text></L.Inline>
+              </L.FlexRowsCP>
               <Line />
               <L.FlexCols _gap={32} >
                 <L.FlexRows _gap={16} _content='space-between'>

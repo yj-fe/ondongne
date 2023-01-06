@@ -38,24 +38,24 @@ function SearchResultPage() {
                 </DetailTabReview>
               </L.FlexRows>
             </L.Contents>
-          <L.Contents>
-            <L.FlexCols>
-              <L.FlexRows _gap={16} _content='space-between'>
-                <L.FlexRows _content='left'>
-                  <T.Text _size={16} _weight={700} _color='gray900'>‘과일’</T.Text>
-                  <T.Text _size={16} _weight={500} _color='gray900'>검색결과</T.Text>
+            <L.Contents>
+              <L.FlexCols>
+                <L.FlexRows _gap={16} _content='space-between'>
+                  <L.FlexRows _content='left'>
+                    <T.Text _size={16} _weight={700} _color='gray900'>‘과일’</T.Text>
+                    <T.Text _size={16} _weight={500} _color='gray900'>검색결과</T.Text>
+                  </L.FlexRows>
+                  <L.FlexRows _gap={4} _content='flex-end'>
+                    <T.Text _size={13} _weight={400} _color='gray900'>주문 많은 순</T.Text>
+                    <button
+                      type='button'
+                      onClick={ShowSortModal}
+                    >
+                      <Down/>
+                    </button>
                 </L.FlexRows>
-                <L.FlexRows _gap={4} _content='flex-end'>
-                  <T.Text _size={13} _weight={400} _color='gray900'>주문 많은 순</T.Text>
-                  <button
-                    type='button'
-                    onClick={ShowSortModal}
-                  >
-                    <Down/>
-                  </button>
               </L.FlexRows>
-            </L.FlexRows>
-          </L.FlexCols>
+            </L.FlexCols>
           </L.Contents>
           <L.Contents _padding="0px">
             <TabContent detailTab={detailTab} />
@@ -66,17 +66,21 @@ function SearchResultPage() {
   )
 }
 function TabContent(props) {
+  const [items, setItems] = useState([])
   return [
 
     //=====================상품=====================
     <div>
 {/* 없을때 */}
-            {/* <L.Contents _padding="80px 20px 600px" >
+            {/* <L.Contents _height='calc(100vh - 190px)' _padding="80px 20px 600px" >
                 <T.Text _weight={300} _size={15} _color="gray600" _align='center'>검색어와 일치하는 상품이 없습니다.</T.Text>
             </L.Contents> */}
 {/* 있을때 */}
-    <L.Contents _padding="0px">
-      <CategoryCard/>
+    <L.Contents _height='calc(100vh - 190px)' _padding="0px">
+    {
+      items.length > 0 &&
+      <CategoryCard list={items}  />
+    }
     </L.Contents>
 
     </div>,
@@ -84,11 +88,11 @@ function TabContent(props) {
     //=====================상점=====================
     <div>
 {/* 없을때 */}
-            {/* <L.Contents _padding="80px 20px 600px" >
+            {/* <L.Contents _height='calc(100vh - 190px)' _padding="80px 20px 600px" >
               <T.Text _weight={300} _size={15} _color="gray600" _align='center'>검색어와 일치하는 상점이 없습니다.</T.Text>
             </L.Contents> */}
 {/* 있을때 */}
-          <L.Contents _height='100vh'>
+          <L.Contents _height='calc(100vh - 190px)'>
             <L.FlexCols>
               <ListCard/>
             </L.FlexCols>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { screen } from '@testing-library/react';
 
 export const Inner = styled.div`
     position: relative;
@@ -6,6 +7,7 @@ export const Inner = styled.div`
     max-width: ${props => props.theme.breakpoint.tablet}px;
     margin: 0 auto;
 `;
+
 
 export const Container = styled.div`
     display: flex;
@@ -34,6 +36,7 @@ export const Contents = styled.div`
     display: block;
     padding: ${props => props._padding || '24px 20px'};
     background: #FFF;
+    max-width: 728px;
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};
 `;
@@ -45,6 +48,21 @@ export const FlexCols = styled.div`
     gap: ${props => props._gap || 8}px;
     width: ${props => props._width || '100%'};
     padding: ${props => props._padding || '0px'};
+`;
+
+export const FlexColsSize = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    /* flex-basis: 318px; */
+    /* flex-grow: 1; */
+    gap: ${props => props._gap || 8}px;
+    /* min-height: fit-content; */
+    max-width: ${props => props._width || '216px'};
+    padding: ${props => props._padding || '0px'};
+    /* @media screen and (max-width: 500px){
+        width: 167px;
+    } */
 `;
 
 export const FlexColsScroll = styled.div`
@@ -71,6 +89,17 @@ export const FlexRowsScroll = styled.div`
     > Link{
         display: inline-block;
     }
+`;
+
+export const Inline = styled.div`
+    display: inline-block;
+    gap: ${props => props._gap || 8}px;
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+    flex: 0 0 auto;
 `;
 
 export const BottomCols = styled.div`
@@ -112,6 +141,28 @@ export const FlexRows = styled.div`
     padding: ${props => props._padding || '0px'};
 `;
 
+export const FlexRowsCP = styled.div`
+    display: flex;
+    overflow-x: auto; 
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    
+    flex-direction: rows;
+    gap: ${props => props._gap || 8}px;
+    /* justify-content: ${props => props._content || 'inherit'}; */
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    > Link {
+        display: inline-block;
+        /* text-align: center; */
+        text-decoration: none;
+    }
+    > Link::-webkit-scrollbar{
+    display: none; 
+}
+`;
+
 export const FlexRowsWrap = styled.div`
     display: flex;
     flex-direction: rows;
@@ -122,6 +173,38 @@ export const FlexRowsWrap = styled.div`
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};
     padding: ${props => props._padding || '0px'};
+
+`;
+
+export const FlexRowsWrapMedia = styled.div`
+    display: flex;
+    flex-direction: rows;
+    flex-wrap: wrap;
+    gap: ${props => props._gap || 8}px;
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+@media screen and (max-width:600px){
+    
+}
+`;
+
+export const FlexRowsWrapBPM = styled.div`
+    display: flex;
+    flex-direction: rows;
+    flex-wrap: wrap;
+    gap: 1.2em;
+    /* gap: ${props => props._gap || '20px'}; */
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'flex-start'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+    /* @media screen and (max-width: 500px) {
+        gap: 16px;
+    } */
 `;
 
 export const NoneDataContainer = styled.div`
