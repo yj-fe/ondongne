@@ -292,7 +292,7 @@ function BusinessApplication() {
 }
 
 
-function CateToggle({ close, categories, categoryHandler }) {
+export function CateToggle({ close, categories, categoryHandler }) {
 
   const onChecked = (id, checked) => {
     categoryHandler(id, checked);
