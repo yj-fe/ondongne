@@ -20,7 +20,7 @@ import Confirm from 'components/commonUi/Confirm';
 import { ArrowBottom, Cart, MinusB, PlusB } from 'components/commonUi/Icon';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import { ImgSize100, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer, ImgSize100, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { Badge, LayerTextButton } from 'components/commonUi/Button';
 
 function DetailsPage(props) {
@@ -80,7 +80,7 @@ function DetailsPage(props) {
 
           <L.Contents _padding='0px 0px 60px 0px'>
             <L.FlexCols >
-              <DetailImg src={Image} />
+              <ImgPer src={Image} />
 
               <L.FlexCols >
                 <L.FlexRows _content='space-between' _items='center' _padding=' 16px 20px'>

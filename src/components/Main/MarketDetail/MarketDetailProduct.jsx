@@ -35,13 +35,13 @@ function MarketDetailProduct() {
                 <Down />
               </button>
             </L.FlexRows>
-            <L.FlexRows _gap={20} _padding={0}>
+            <L.FlexRowsWrap _gap={20} _padding={0}>
               {
                 items.map((item, idx) => (
                   <MarketProductCard item={item} />
                 ))
               }
-            </L.FlexRows>
+            </L.FlexRowsWrap>
             {/* <L.FlexRows _gap={20} _padding={0}>
               <MarketProductCard item={item[0]} />
               <MarketProductCard item={item[1]} />

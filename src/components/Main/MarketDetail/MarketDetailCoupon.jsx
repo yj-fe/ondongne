@@ -4,7 +4,7 @@ import * as T from 'components/commonUi/Text';
 import * as C from 'components/commonUi/Coupon';
 import { DownloadC, DownloadD } from 'components/commonUi/Icon';
 import ImageSample from 'assets/images/sample.png'
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 
 function MarketDetailCoupon() {
   return (
@@ -50,7 +50,7 @@ function MarketDetailCoupon() {
           </L.FlexRows>
             <T.Text _size={15} _weight={400} _color='gray800'><p>오늘 아침은 비가 오는 아침입니다.</p><p>하지만 손님들을 위해 저희 아재의 과일은 새벽부터 인증을 올립니다.</p><p>오늘도 싱싱한 과일로 상큼한 아침을 열어보세요.</p></T.Text>
            
-            <ImgSizeLayout src={ImageSample}/>
+            <ImgPer src={ImageSample}/>
           
             <C.Borderbox>
               <C.Contentbox >

@@ -4,7 +4,7 @@ import * as T from 'components/commonUi/Text';
 import { DetailMarketInfo, DetailTabDiv, DetailTabInfo, DetailTabReview, FlagStyle, FlagText, IconStyle, Line, MarketIcon, MarketLocation, MarketName, MarketProfile, MoreStyle, TabButtonStyle, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import Image from 'assets/main/shine.png'
 
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { ArrowRightB, Flag, More } from 'components/commonUi/Icon';
 import FooterLayout from 'components/layout/Footer/Footer';
 import Layout from 'components/layout/Layout/Layout';
@@ -40,7 +40,7 @@ function MarketDetail() {
       >
         <L.Container >
           <L.Contents _padding="0">
-            <ImgSizeLayout src={MarketImg} _height={390} _width={728}/>
+            <ImgPer src={MarketImg}/>
             <L.FlexCols _padding={0} _gap={0}>
 
 
