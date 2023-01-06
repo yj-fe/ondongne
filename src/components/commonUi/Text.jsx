@@ -8,6 +8,8 @@ export const Text = styled.p`
     white-space: pre-wrap;
     text-align: ${props => props._align || 'left'};
     text-decoration: ${props => props._decoration || 'none'};
+    width: ${props => props._width || 'auto'};
+
 `;
 
 export const SoldoutText = styled.p`

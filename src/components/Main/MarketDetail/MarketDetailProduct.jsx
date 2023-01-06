@@ -10,7 +10,7 @@ import { numberFormat, totalPrice } from 'utils/utils';
 import StarRate from 'components/commonUi/StarRate';
 
 function MarketDetailProduct() {
-  let [item] = useState(maindata)
+  let [items] = useState(maindata)
   const [modal, setModal] = useState(false);
 
 
@@ -35,8 +35,14 @@ function MarketDetailProduct() {
                 <Down />
               </button>
             </L.FlexRows>
-
             <L.FlexRows _gap={20} _padding={0}>
+              {
+                items.map((item, idx) => (
+                  <MarketProductCard item={item} />
+                ))
+              }
+            </L.FlexRows>
+            {/* <L.FlexRows _gap={20} _padding={0}>
               <MarketProductCard item={item[0]} />
               <MarketProductCard item={item[1]} />
               <MarketProductCard item={item[2]} />
@@ -45,7 +51,7 @@ function MarketDetailProduct() {
               <MarketProductCard item={item[3]} />
               <MarketProductCard item={item[4]} />
               <MarketProductCard item={item[5]} />
-            </L.FlexRows>
+            </L.FlexRows> */}
           </L.FlexCols>
 
 
@@ -105,10 +111,10 @@ export function ProductCard({ item }) {
 
 export function MarketProductCard(props) {
   return (
-    <div>
+    // <div style={{width: 'calc(50% - 10px)'}}>
+    <div >
 
       <L.FlexCols _gap={12} _padding={0} _width='216px'>
-
         <RelativDiv>
           <AbsoluteDiv>
             <CartC />

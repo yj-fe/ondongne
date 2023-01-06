@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { screen } from '@testing-library/react';
 export const TabDiv = styled.p`
 	display: flex;
 	flex-direction: column;
@@ -78,8 +79,8 @@ export const TabBtn = styled.button`
 	font-size: 18px;
 	text-align: center;
 	color: #ffffff;
-	@media screen and (max-width: 728px) {
-		width: 100%;
+	@media screen and (max-width: 500px) {
+		width: 130%;
 	}
 `;
 export const ContentDiv = styled.div`
@@ -99,7 +100,8 @@ export const ContentDiv = styled.div`
 export const RowDiv = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
+	justify-content: space-between;
+	/* justify-content: space-evenly; */
 	align-items: flex-start;
 	gap: 16px;
 	width: 100%;
@@ -112,6 +114,10 @@ export const RowTitle = styled.div`
 	align-items: ${(props) => props.align || "flex-start"};
 	width: 100%;
 	height: ${(props) => props.height || "auto"};
+	gap: 40px;
+	@media screen and (max-width: 500px){
+		gap: 30px;
+	}
 `;
 export const ContentTitle = styled.p`
 	font-weight: 600;
@@ -183,7 +189,7 @@ export const InputBox = styled.div`
 export const Input = styled.input`
 	font-weight: 400;
 	font-size: 16px;
-	width: 100%;
+	width: 40%;
 	background-color: ${(props) => (props.color ? "#EEEEEE" : "none")};
 	text-align: ${(props) => props.align || null};
 	font-family: 'Pretendard';
@@ -271,6 +277,7 @@ export const DayBox = styled.div`
 	border-radius: 4px;
 	font-weight: 400;
 	font-size: 16px;
+	
 	color: ${(props) => (props.color ? "#0B806F" : "#424242")};
 `;
 export const BankToggleDiv = styled.div`
@@ -306,19 +313,28 @@ export const BankListDiv = styled.div`
 export const RowTimeDiv = styled.div`
 	display: flex;
 	flex-direction: row;
+	justify-content: flex-end;
 	align-items: center;
 	padding: 0px;
 	gap: 8px;
-	width: 100%;
+	width: calc(100%-65px);
 	height: 44px;
+`;
+export const Size = styled.div`
+	width: ${props=>props._width || 'calc(100% - 80px)'};
+
 `;
 export const TimeDiv = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: space-evenly;
 	padding: 0px;
-	width: 291.5px;
+	max-width: 291.5px;
+	/* width: 40%; */
+	/* width: 100%; */
+	/* width: calc(100%-105px); */
 	height: 100%;
 	background: ${(props) => (props.color ? "#EEEEEE" : "#FFFFFF")};
 	border: 1px solid #eeeeee;
@@ -329,9 +345,10 @@ export const TimeBox = styled.div`
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	padding: 0px 8px;
-	width: 143.75px;
-	height: 100%;
+	padding: 0px;
+	/* max-width: 19.7%; */
+	/* width: 40%; */
+	/* height: 100%; */
 `;
 
 export const FileForm = styled.div`

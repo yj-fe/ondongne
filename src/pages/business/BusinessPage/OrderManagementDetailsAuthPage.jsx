@@ -6,11 +6,10 @@ import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
 import * as C from 'components/commonUi/CommonStyles';
 import * as I from 'components/commonUi/Input';
-import { Down, X_Icon, Delete, Camera, ArrowTop, } from 'components/commonUi/Icon';
-import { CameraImg, ContentDiv, InfoBoxDiv, RightStyle, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { Down, Delete, Camera, ArrowTop, } from 'components/commonUi/Icon';
+import { InfoBoxDiv, TitleInfo } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { AbsoluteTopDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
 import maindata from 'assets/data/maindata'
-import { CateToggle } from './BusinessApplication/BusinessApplication';
 import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 
@@ -18,9 +17,9 @@ function OrderManagementDetailsAuthPage() {
   const navigate = useNavigate();
   let [item] = useState(maindata)
   const [show, setShow] = useState()
+  
   const [alert1, setAlert1] = useState('')
   const [alert2, setAlert2] = useState('')
-
   const openAlert1 = () => {
     return setAlert1({
       contents: "텍스트를 입력해주세요.",

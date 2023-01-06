@@ -3,13 +3,7 @@ import Layout from 'components/layout/Layout/Layout';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as Tb from 'components/commonUi/Table';
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
 import { Profile48 } from 'components/commonUi/Icon';
-import Confirm from 'components/commonUi/Confirm';
-import Alert from 'components/commonUi/Alert';
-import { S } from 'components/orders/orderdetails/OrderDetailsStyle'
 
 
 

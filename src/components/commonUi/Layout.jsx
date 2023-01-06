@@ -57,6 +57,22 @@ export const FlexColsScroll = styled.div`
     height: auto;
 `;
 
+export const FlexRowsScroll = styled.div`
+    display: flex;
+    flex-direction: rows;
+    gap: ${props => props._gap || 8}px;
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+    white-space: 'nowrap';
+    overflow: 'auto';
+    > Link{
+        display: inline-block;
+    }
+`;
+
 export const BottomCols = styled.div`
     position: fixed;
     display: flex;

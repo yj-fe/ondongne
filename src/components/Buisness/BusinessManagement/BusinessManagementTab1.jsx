@@ -5,7 +5,7 @@ import CheckBox from 'components/commonUi/CheckBox';
 
 import ProfileAvatar from 'components/commonUi/ProfileAvatar'
 import { Text } from 'components/commonUi/Text';
-import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, CameraImg, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel } from './BusinessManagementTabStyle'
+import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, CameraImg, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel, Size } from './BusinessManagementTabStyle'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/store';
@@ -385,7 +385,7 @@ function BusinessManagementTab1() {
 
           {/* ============== 운영 시간 ============== */}
           <ContentDiv>
-            <ContentTitle>운영 시간</ContentTitle>
+            <ContentTitle >운영 시간</ContentTitle>
             {
               store.sales && store.sales.length > 0 &&
               store.sales.map(item => (
@@ -494,64 +494,68 @@ const SalesForm = ({ sales, salesOpenTimeHandler, salesCloseTimeHandler }) => {
 
   return (
     <RowTitle align={'center'}>
-      <Text _size={15} height={'44px'}>{dayWeek}</Text>
-      <RowTimeDiv>
-        <TimeDiv
-          color={dayOffStatus}
-        >
-          <TimeBox>
-            <Input
-              color={dayOffStatus}
-              align={'center'}
-              placeholder='00'
-              disabled={dayOffStatus}
-              value={openHour}
-              maxLength={2}
-              onChange={e => timeValid(e.target.value, setOpenHour, 23)}
-            />
-          </TimeBox>
-          :
-          <TimeBox>
-            <Input
-              color={dayOffStatus}
-              align={'center'}
-              placeholder='00'
-              disabled={dayOffStatus}
-              value={openMin}
-              maxLength={2}
-              onChange={e => timeValid(e.target.value, setOpenMin, 59)}
-            />
-          </TimeBox>
-        </TimeDiv>
-        ~
-        <TimeDiv
-          color={dayOffStatus}
-        >
-          <TimeBox>
-            <Input
-              maxLength={2}
-              color={dayOffStatus}
-              align={'center'}
-              placeholder='00'
-              disabled={dayOffStatus}
-              value={closeHour}
-              onChange={e => timeValid(e.target.value, setCloseHour, 23)}
-            />
-          </TimeBox>
-          :
-          <TimeBox>
-            <Input
-              maxLength={2}
-              color={dayOffStatus}
-              align={'center'}
-              placeholder='00'
-              disabled={dayOffStatus}
-              value={closeMin}
-              onChange={e => timeValid(e.target.value, setCloseMin, 59)}
-            />
-          </TimeBox>
-        </TimeDiv>
-      </RowTimeDiv>
+      <Size _width='40px'>
+        <Text _size={15}>{dayWeek}</Text>
+      </Size>
+      <Size>
+        <L.FlexRows  _height='44px' _items='center'>
+          <TimeDiv
+            color={dayOffStatus}
+          >
+            <TimeBox>
+              <Input
+                color={dayOffStatus}
+                align={'center'}
+                placeholder='00'
+                disabled={dayOffStatus}
+                value={openHour}
+                maxLength={2}
+                onChange={e => timeValid(e.target.value, setOpenHour, 23)}
+              />
+            </TimeBox>
+            :
+            <TimeBox>
+              <Input
+                color={dayOffStatus}
+                align={'center'}
+                placeholder='00'
+                disabled={dayOffStatus}
+                value={openMin}
+                maxLength={2}
+                onChange={e => timeValid(e.target.value, setOpenMin, 59)}
+              />
+            </TimeBox>
+          </TimeDiv>
+          ~
+          <TimeDiv
+            color={dayOffStatus}
+          >
+            <TimeBox>
+              <Input
+                maxLength={2}
+                color={dayOffStatus}
+                align={'center'}
+                placeholder='00'
+                disabled={dayOffStatus}
+                value={closeHour}
+                onChange={e => timeValid(e.target.value, setCloseHour, 23)}
+              />
+            </TimeBox>
+            :
+            <TimeBox>
+              <Input
+                maxLength={2}
+                color={dayOffStatus}
+                align={'center'}
+                placeholder='00'
+                disabled={dayOffStatus}
+                value={closeMin}
+                onChange={e => timeValid(e.target.value, setCloseMin, 59)}
+              />
+            </TimeBox>
+          </TimeDiv>
+        </L.FlexRows>
+      </Size>
     </RowTitle>
   )
 }
