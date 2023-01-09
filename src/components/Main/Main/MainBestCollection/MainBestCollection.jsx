@@ -6,9 +6,11 @@ import LoadingBar from 'components/commonUi/LoadingBar';
 import { useSelector } from 'react-redux';
 import { bestItemList } from 'service/main';
 import { ProductCard } from 'components/Main/MarketDetail/MarketDetailProduct';
+import { useNavigate } from 'react-router-dom';
 
 
 function MainBestCollection() {
+  const navigate = useNavigate();
   const local = useSelector(state => state.local);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
@@ -22,6 +24,20 @@ function MainBestCollection() {
     }, 1000)
   }
 
+  const router = () => {
+    navigate(
+      "/collections",
+      {
+        state: 
+          {
+            type: 1,
+            title: "우리동네 인기 추천", 
+            list: list
+          }
+      }
+    )
+  }
+
   useEffect(() => {
     setLoading(true)
     getItem();
@@ -31,7 +47,14 @@ function MainBestCollection() {
     <div>
       <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
         <T.Text _size={18} _weight={700} _color='black'>우리동네 인기 추천</T.Text>
-        <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+        <T.Text 
+          _size={14} 
+          _weight={500} 
+          _color='blue'
+          onClick={router}
+        >
+          전체 보기
+        </T.Text>
       </L.FlexRows>
       <LastChanceDiv>
         <L.FlexRowsCP>

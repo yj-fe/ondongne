@@ -5,9 +5,10 @@ import { ContentDiv, ContentImg, ContentImgBadge, ContentImgDiv, ContentInfo, Co
 import { useSelector } from 'react-redux';
 import { newStoreList } from 'service/main';
 import LoadingBar from 'components/commonUi/LoadingBar';
-
+import { useNavigate } from 'react-router-dom';
 
 function MainNewMarket() {
+  const navigate = useNavigate();
   const local = useSelector(state => state.local);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
@@ -22,19 +23,37 @@ function MainNewMarket() {
     }, 1000)
   }
 
+  const router = () => {
+    navigate(
+      "/collections",
+      {
+        state: 
+          {
+            type: 0,
+            title: "우리동네 신규 입점", 
+            list: list
+          }
+      }
+    )
+  }
+
   useEffect(() => {
     setLoading(true)
     getItem();
   }, [])
 
-  console.log(list);
-
-
   return (
     <div>
       <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
         <T.Text _size={18} _weight={700} _color='black'>우리동네 신규 입점</T.Text>
-        <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+        <T.Text 
+          _size={14} 
+          _weight={500} 
+          _color='blue'
+          onClick={router}
+        >
+          전체 보기
+        </T.Text>
       </L.FlexRows>
       <L.FlexRowsCP>
         {

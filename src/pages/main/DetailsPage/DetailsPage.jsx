@@ -274,7 +274,7 @@ function TabContent(props) {
           <CouponLabel>쿠폰</CouponLabel>
           <CouponLabelInfoDiv>
             <CouponLabelInfo1>해당 상점에 쿠폰이 있습니다.</CouponLabelInfo1>
-            <CouponLabelInfo2>상점(스토어) > 소식을 확인해 주세요.</CouponLabelInfo2>
+            <CouponLabelInfo2>상점(스토어) {'>'} 소식을 확인해 주세요.</CouponLabelInfo2>
           </CouponLabelInfoDiv>
         </CouponTextStyle>
       </L.FlexCols>

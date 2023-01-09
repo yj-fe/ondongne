@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react'
 import BannerImg from 'assets/Img.png'
 import MainBestCoupon from 'components/Main/Main/MainBestCoupon/MainBestCoupon'
 import MainLastChance from 'components/Main/Main/MainLastChance/MainLastChance'
@@ -19,16 +18,12 @@ import { useSelector } from 'react-redux';
 
 function MainPage() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const navigate = useNavigate()
 
   return (
     <div>
       <MainNav />
 
-      <MainNavBody
-      // onClick={() => {
-      //   navigate("detail/:id")}}
-      >
+      <MainNavBody>
         <MainContainer>
           <Img src={BannerImg}></Img>
           {/* <MainBanner/> */}

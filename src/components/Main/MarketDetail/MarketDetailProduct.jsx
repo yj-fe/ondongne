@@ -8,6 +8,7 @@ import { ModalBody, ModalButton, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle 
 import ProductTimer from 'components/commonUi/ProductTimer';
 import { numberFormat, totalPrice } from 'utils/utils';
 import StarRate from 'components/commonUi/StarRate';
+import ProductCart from 'components/Main/Cart/ProductCart';
 
 function MarketDetailProduct() {
   let [items] = useState(maindata)
@@ -43,8 +44,6 @@ function MarketDetailProduct() {
               }
             </L.FlexRowsWrap>
           </L.FlexCols>
-
-
         </L.Contents>
       </L.Container>
       {modal && <ModalFilter PropsModal={PropsModal} />}
@@ -58,7 +57,7 @@ export function ProductCard({ item, lastRef, width = 216 }) {
 
       <RelativDiv>
         <AbsoluteDiv>
-          <CartC />
+          <ProductCart id={item.itemId}/>
         </AbsoluteDiv>
         {
           !item.soldoutStatus
