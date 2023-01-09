@@ -24,8 +24,13 @@ export function cartInsert(cart) {
 /* ==============================
    장바구니 수정
 ============================== */
-export function cartUpdate(cart) {
-	return client.put(urls.update, cart);
+export function cartCountUpdate(item, type) {
+   const data = {
+      cartId: item.cartId,
+      itemId: item.itemId,
+      count: item.count + type
+   }
+	return client.patch(urls.update, data);
 }
 
 /* ==============================

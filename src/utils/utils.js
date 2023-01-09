@@ -91,3 +91,28 @@ export const sortFormatter = (filter) => {
 	if (filter === "newstore") return "신규 매장 순";
 	if (filter === "like") return "단골 많은 순";
 };
+
+// 데이터 상점 리스트 그룹화
+export const groupBy = (data, key) => {
+    return data.reduce((list, item) => {
+        const group = item[key];
+
+        if (list[group] === undefined) {
+            list[group] = []
+        }                
+        
+        list[group].push(item)
+
+        return list
+    }, {})
+}
+
+export const isEmptyObj = (obj) => {
+	if(obj.constructor === Object
+	   && Object.keys(obj).length === 0)  {
+	  return true;
+	}
+	
+	return false;
+  }
+  

@@ -35,7 +35,7 @@ export const Overlay = styled.div`
 export const Contents = styled.div`
     display: block;
     padding: ${props => props._padding || '24px 20px'};
-    background: #FFF;
+    background: ${props => props._bg || '#FFF'};
     max-width: 728px;
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};

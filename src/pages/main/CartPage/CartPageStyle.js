@@ -18,7 +18,7 @@ export const CartContainer = styled.div`
   background: #6e6868;
   width: 100%;
   height: auto;
-
+  margin-bottom: 30px;
 `
 export const CartEmptyDiv = styled.div`
   display: flex;
