@@ -81,7 +81,7 @@ export const MarketLocation = styled.div`
 export const MarketIcon = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
   padding: 0px;
   gap: 16px;
@@ -265,15 +265,15 @@ export const DetailButtonStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: ${props => props.width || '100%'};
 
-  height: 48px;
+  height: ${props => props.height || '48px'} ;
   bottom: 0;
   background: #0B806F;
   border-radius: 4px;
 
   font-weight: 700;
-  font-size: 18px;
+  font-size:  ${props => props.size || '18px'};
   line-height: 26px;
   color: #FFFFFF;
 `

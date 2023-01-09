@@ -78,10 +78,10 @@ function TabInquiry(props){
 
 <div>
       <L.FlexCols _gap={24} _padding="8px 20px">
-              <L.FlexCols>
+              {/* <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">이름</T.Text>
                   <I.TextInput _boccolor={'#FFFFFF'}/>
-             </L.FlexCols>
+             </L.FlexCols> */}
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>

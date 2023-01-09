@@ -5,7 +5,7 @@ import * as B from 'components/commonUi/Button';
 import Layout from 'components/layout/Layout/Layout';
 import { useNavigate } from 'react-router-dom';
 import { DetailTabInfo, DetailTabReview, TabButtonStyle, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
-import { Down, FlagC, OneStar } from 'components/commonUi/Icon';
+import { Down, FlagC, FlagN, FlagNC, OneStar } from 'components/commonUi/Icon';
 import { MarketProductCard, ModalFilter } from 'components/Main/MarketDetail/MarketDetailProduct';
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import Img from 'assets/images/marketdetail.png'
@@ -71,6 +71,11 @@ function TabCoupon(props) {
   }
   const PropsModal = () => {
     setModal(!modal);
+  }
+
+  const [check, setCheck] = useState(false)
+  const handleSwitch=()=>{
+    setCheck(!check)
   }
 
 
@@ -172,7 +177,12 @@ function TabCoupon(props) {
                   </L.FlexRows>
                 </L.FlexCols>              
               </L.FlexRows>
-              <FlagC/>
+              <L.FlexRows
+                _gap='0px' _content='right' _width='40px'
+                onClick={handleSwitch}
+              >
+                {check ? <FlagNC /> : <FlagN />}
+              </L.FlexRows>
             </L.FlexRows>
 
 
@@ -199,7 +209,12 @@ function TabCoupon(props) {
                   </L.FlexRows>
                 </L.FlexCols>              
               </L.FlexRows>
-                <FlagC/>
+                <L.FlexRows
+                  _gap='0px' _content='right' _width='40px'
+                  onClick={handleSwitch}
+                >
+                  {check ? <FlagNC /> : <FlagN />}
+                </L.FlexRows>
               </L.FlexRows>
 
 
@@ -224,7 +239,12 @@ function TabCoupon(props) {
                   </L.FlexRows>
                 </L.FlexCols>              
               </L.FlexRows>
-                <FlagC/>
+                <L.FlexRows
+                  _gap='0px' _content='right' _width='40px'
+                  onClick={handleSwitch}
+                >
+                  {check ? <FlagNC /> : <FlagN />}
+                </L.FlexRows>
               </L.FlexRows>
           </L.FlexCols>
         </L.Contents>

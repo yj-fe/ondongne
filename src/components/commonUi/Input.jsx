@@ -15,6 +15,8 @@ export const TextInput = styled.input`
     font-size: 15px;
     line-height: 20px;
     align-self: start;
+    font-family: 'Pretendard';
+    font-style: normal;
     &::placeholder {
         color: ${props => props.theme.color.gray400};
     }

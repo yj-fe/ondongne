@@ -33,11 +33,11 @@ function MainNewMarket() {
             <NewMarketContent>
             {
               item.map((a, i)=>{
-                if(i%2 === 1){
+                // if(i%2 === 1){
                 return(
                   <NewMarketCard item={item[i]} i={i}/>
                   )
-                }
+                // }
               })
             }
           </NewMarketContent>

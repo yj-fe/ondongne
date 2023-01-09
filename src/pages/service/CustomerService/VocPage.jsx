@@ -39,11 +39,11 @@ function VocPage() {
       >
         <L.Container _padding="0px 0px 8px" >
           <L.Contents  _height='100vh'>
-            <L.FlexCols _gap={24} _padding="8px 20px">
-              <L.FlexCols>
+            <L.FlexCols _gap={24} _padding="0px">
+              {/* <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">이름</T.Text>
                   <I.TextInput _boccolor={'#FFFFFF'}/>
-             </L.FlexCols>
+             </L.FlexCols> */}
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>

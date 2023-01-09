@@ -16,7 +16,7 @@ function ModalPage({PropsModal}) {
           <ModalDiv2>
             {/* <ModalTitle>채팅문의</ModalTitle> */}
             <ModalTitle>전화문의</ModalTitle>
-            <ModalTitle>공유하기</ModalTitle>
+            {/* <ModalTitle>공유하기</ModalTitle> */}
             {/* <ModalTitle>신고하기</ModalTitle> */}
           </ModalDiv2>
           <ModalButton

@@ -6,8 +6,6 @@ import { ReactComponent as StarIcon2 } from "assets/main/ratestar2.svg";
 import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
 import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import { ReactComponent as ReviewLike0 } from "assets/main/reviewlikedisable.svg";
-import { ReactComponent as Flag } from "assets/main/flag.svg";
-import { ReactComponent as More } from "assets/main/moreverti.svg";
 import { ReactComponent as Filter } from "assets/main/filter.svg";
 import Image from 'assets/main/shine.png'
 import ReviewImg from 'assets/main/reviewimg.png'
@@ -17,9 +15,10 @@ import ModalMorePage from 'components/Main/More/ModalMorePage'
 import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
 import Confirm from 'components/commonUi/Confirm';
-import { ArrowBottom, Cart, MinusB, PlusB } from 'components/commonUi/Icon';
+import { ArrowBottom, Cart, MinusB, My, MyC, PlusB } from 'components/commonUi/Icon';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
+import * as I from 'components/commonUi/Input';
 import { ImgPer, ImgSize100, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { Badge, LayerTextButton } from 'components/commonUi/Button';
 
@@ -34,6 +33,9 @@ function DetailsPage(props) {
   const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
   const [confirm, setConfirm] = useState(false);
+  const [check, setCheck] = useState(false);
+  const [btn, setBtn] = useState(true);
+
 
   // const{ 
   //   state: {
@@ -64,6 +66,16 @@ function DetailsPage(props) {
   const closeOrderToggle = () => {
     setOrderToggle(false);
   }
+  const handleSwitch=()=>{
+    setCheck(!check)
+  }
+  
+  // const btnTrue=()=>{
+  //   setBtn(true)
+  // }
+  // const btnFalse=()=>{
+  //   setBtn(false)
+  // }
 
 
 
@@ -74,6 +86,8 @@ function DetailsPage(props) {
         title="아재의 과일"
         bell={false}
         cart={true}
+        share={true}
+        more={true}
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
@@ -91,21 +105,9 @@ function DetailsPage(props) {
                       <T.Text _size={13} _weight={400} _color='gray600' >김포 풍무동</T.Text>
                     </L.FlexCols>
                   </L.FlexRows>
-                  <MarketIcon>
-                    <FlagStyle>
-                      <IconStyle>
-                        <Flag />
-                      </IconStyle>
-                      <FlagText>단골찜</FlagText>
-                    </FlagStyle>
-                    <MoreStyle
-                      type='button'
-                      onClick={ShowMoreModal}
-                    >
-                      <More />
-                    </MoreStyle>
-                </MarketIcon>
-
+                  <L.FlexRows onClick={handleSwitch}  _content='right' _width='50px' _gap='0px'>
+                    {check ? <MyC/> : <My/>}
+                  </L.FlexRows>
                 </L.FlexRows>
 
                 <Line/>
@@ -129,8 +131,8 @@ function DetailsPage(props) {
                       </L.FlexCols>
                     </L.FlexCols>
                     <Badge _fdir='column' _width='115px' _height ='74px' _bg='gray50' _padding='16px'>
-                      <T.Text _size={12} _weight={400} _color='gray600' >최소 주문량</T.Text>
-                      <T.Text _size={16} _weight={600} _color='gray800' >10/100개</T.Text>
+                      <T.Text  _align='center' _size={12} _weight={400} _color='gray600' >최소 주문량</T.Text>
+                      <T.Text  _width='65px' _align='center' _size={16} _weight={600} _color='gray800' >10/100개</T.Text>
                     </Badge>
                   </L.FlexRows>
                 </L.Contents>
@@ -164,16 +166,22 @@ function DetailsPage(props) {
 
               <L.FlexRows _content='center' _items='center' _gap='0px' _height='40px'>
                 <DetailTabInfo
-                  onClick={() => { setDetailTab(0); }}
+                  onClick={() => { setDetailTab(0); setBtn(true); }}
                   infocolor={detailTab === 0}
                 >
                   상세정보
                 </DetailTabInfo>
                 <DetailTabReview
-                  onClick={() => { setDetailTab(1); }}
+                  onClick={() => { setDetailTab(1); setBtn(true);}}
                   reviewcolor={detailTab === 1}
                 >
                   상품리뷰
+                </DetailTabReview>
+                <DetailTabReview
+                  onClick={() => { setDetailTab(2);  setBtn(false);}}
+                  reviewcolor={detailTab === 2}
+                >
+                  댓글
                 </DetailTabReview>
               </L.FlexRows>
 
@@ -181,16 +189,36 @@ function DetailsPage(props) {
                 <TabContent detailTab={detailTab} />
               </L.Contents>
 
-        
-              <ButtonStyle>
-              {orderToggle && <OrderToggle closeOrderToggle={closeOrderToggle}/>}
-                <DetailButtonDiv>
-                  <LayerTextButton _padding='0px' _width='48px'>
-                    <Cart/>
-                  </LayerTextButton>
-                  <DetailButtonStyle onClick={()=>{paymentsOrder(); openOrderToggle();}}>구매하기</DetailButtonStyle>
-                </DetailButtonDiv>
-              </ButtonStyle>
+              { btn 
+                ? 
+                  <ButtonStyle>
+                  {orderToggle && <OrderToggle closeOrderToggle={closeOrderToggle}/>}
+                    <DetailButtonDiv>
+                      <LayerTextButton _padding='0px' _width='48px'>
+                        <Cart/>
+                      </LayerTextButton>
+                      <DetailButtonStyle onClick={()=>{paymentsOrder(); openOrderToggle();}}>구매하기</DetailButtonStyle>
+                    </DetailButtonDiv>
+                  </ButtonStyle>
+                :
+                <ButtonStyle>
+                    <DetailButtonDiv>
+                      <L.FlexRows _content='space=between'>
+
+                        <I.TextInput
+                          _borcolor='#F5F5F5'
+                          _boccolor='#F5F5F5'
+                          placeholder='댓글을 입력해주세요.'
+                        />
+
+                        <L.FlexRows _content='right' _width='71px'>
+                          <DetailButtonStyle size='15px' height='44px' >남기기</DetailButtonStyle>
+                        </L.FlexRows>
+
+                      </L.FlexRows>
+                    </DetailButtonDiv>
+                  </ButtonStyle>
+              }
 
 
           </L.FlexCols>
@@ -316,7 +344,7 @@ function TabContent(props) {
                 </L.FlexCols>
               </L.FlexRows>
               <L.FlexRows _width='50px'>
-                <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+                {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
               </L.FlexRows>
             </L.FlexRows>
 
@@ -344,7 +372,7 @@ function TabContent(props) {
                 </L.FlexCols>
               </L.FlexRows>
               <L.FlexRows _width='50px'>
-                <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+                {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
               </L.FlexRows>
             </L.FlexRows>
             <Comments>담에 또 먹을래요~~~~~~~~</Comments>
@@ -386,7 +414,7 @@ function TabContent(props) {
                 </L.FlexCols>
               </L.FlexRows>
               <L.FlexRows _width='50px'>
-                <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+                {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
               </L.FlexRows>
             </L.FlexRows>
             
@@ -401,6 +429,53 @@ function TabContent(props) {
 
 
 
+        </L.FlexCols>
+      </L.FlexCols>
+    </div>,
+    //====================댓글=====================
+    <div>
+      <L.FlexCols _gap={12}>
+        <L.FlexRows>
+          <T.Text _size={15}>댓글 2건</T.Text>
+        </L.FlexRows>
+        <Line/>
+        <L.FlexCols _gap={40}>
+          {/* =======Review1====== */}
+          <L.FlexCols  _gap={16}>
+            <L.FlexRows _content='space-between' _items='center'>
+              <L.FlexRows>
+                <ReviewProfileImg src={Avatar} />
+                <L.FlexCols _gap={4}>
+                  <L.FlexRows _items='center' _content='left'>
+                    <T.Text _size={16} _weight={600}>우리동네</T.Text>
+                  </L.FlexRows>
+                  <ReviewDate>2일 전</ReviewDate>
+                </L.FlexCols>
+              </L.FlexRows>
+              <L.FlexRows _width='50px'>
+                {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
+              </L.FlexRows>
+            </L.FlexRows>
+            <Comments>담에 또 먹을래요~~~~~~~~</Comments>
+          </L.FlexCols>
+          {/* =======Review2====== */}
+          <L.FlexCols  _gap={16}>
+            <L.FlexRows _content='space-between' _items='center'>
+              <L.FlexRows>
+                <ReviewProfileImg src={Avatar} />
+                <L.FlexCols _gap={4}>
+                  <L.FlexRows _items='center' _content='left'>
+                    <T.Text _size={16} _weight={600}>아이덴잇</T.Text>
+                  </L.FlexRows>
+                  <ReviewDate>2022.11.30</ReviewDate>
+                </L.FlexCols>
+              </L.FlexRows>
+              <L.FlexRows _width='50px'>
+                {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
+              </L.FlexRows>
+            </L.FlexRows>
+            <Comments>싱싱하고 맛있어요</Comments>
+          </L.FlexCols>
         </L.FlexCols>
       </L.FlexCols>
     </div>

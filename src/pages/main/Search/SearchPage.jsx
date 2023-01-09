@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
-import { Down, Flag, OneStar } from 'components/commonUi/Icon';
+import { Down, Flag, FlagN, FlagNC, OneStar } from 'components/commonUi/Icon';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
@@ -162,6 +162,10 @@ export const ListEmpty = () => {
   )
 }
 export const ListCard = ({ list, lastRef }) => {
+  const [check, setCheck] = useState(false)
+  const handleSwitch=()=>{
+    setCheck(!check)
+  }
   return (
     <L.FlexCols _gap={20}>
       {
@@ -195,7 +199,12 @@ export const ListCard = ({ list, lastRef }) => {
                 </L.FlexRows>
               </L.FlexCols>
             </L.FlexRows>
-            <Flag />
+            <L.FlexRows
+              _gap='0px' _content='right' _width='40px'
+              onClick={handleSwitch}
+            >
+            {check ? <FlagNC /> : <FlagN />}
+            </L.FlexRows>
           </L.FlexRows>
         ))
       }

@@ -43,7 +43,6 @@ function MarketDetail() {
             <ImgPer src={MarketImg}/>
             <L.FlexCols _padding={0} _gap={0}>
 
-
               <L.Contents _padding="16px 20px">
                 <L.FlexRows _content="space-between" _items="center" _gap={12}>
                   <L.FlexRows >
