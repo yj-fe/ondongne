@@ -52,9 +52,9 @@ function MarketDetailProduct() {
   )
 }
 
-export function ProductCard({ item, lastRef }) {
+export function ProductCard({ item, lastRef, width = 216 }) {
   return (
-    <L.FlexCols key={item.itemId} _gap={12} _padding={0} _width='216px' ref={lastRef}>
+    <L.FlexCols key={item.itemId} _gap={12} _padding={0} _width={width + 'px'} ref={lastRef}>
 
       <RelativDiv>
         <AbsoluteDiv>
@@ -62,9 +62,9 @@ export function ProductCard({ item, lastRef }) {
         </AbsoluteDiv>
         {
           !item.soldoutStatus
-            ? <ImgSizeLayout _width={216} _height={216} _bdr={6} src={item.thumbnail} />
+            ? <ImgSizeLayout _width={width} _height={width} _bdr={6} src={item.thumbnail} />
             : <div style={{ position: 'relative' }}>
-              <ImgSizeLayout _width={216} _height={216} _bdr={6} src={item.thumbnail} />
+              <ImgSizeLayout _width={width} _height={width} _bdr={6} src={item.thumbnail} />
               <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
             </div>
         }
@@ -76,6 +76,7 @@ export function ProductCard({ item, lastRef }) {
           !item.soldoutStatus &&
           <ProductTimer date={item.endDate} />
         }
+        <T.Text _size={12} _weight={500} _color='gray600' _line='1.8' >{item.storeName}</T.Text>
         <T.Text _size={14} _weight={400} _color='gray900'>{item.name}</T.Text>
         {
           item.salePercent > 0 &&

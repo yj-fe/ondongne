@@ -50,7 +50,7 @@ function LoginPage() {
     const response = await login(account);
     const { message, data, code } = response.data;
 
-    if (code == '500') {
+    if (code != '200') {
       setAlert({
         title: "로그인 실패",
         contents: "이메일 또는 비밀번호가 일치하지 않습니다.",
@@ -67,7 +67,7 @@ function LoginPage() {
   }
 
   function loginNaver() {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/naver';
+    window.location.href = '/oauth2/authorization/naver';
   }
   const loginKakao = () => {
     window.location.href = '/oauth2/authorization/kakao';
@@ -201,44 +201,44 @@ function LoginPage() {
                     {/* <Apple onClick={loginApple}/> */}
                   </SnsIcon>
                 </SnsStyle>
-              </GapContainer>                     
+              </GapContainer>
 
 
-            {
-              alert &&
-              <Alert
-              title={alert.title}
-              contents={alert.contents}
-              buttonText={alert.buttonText}
-              onButtonClick={alert.onButtonClick}
-              onOverlayClick={alert.onOverlayClick}
-              />
-            }
-            {
-              confirm &&
-              <Confirm
-              contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
-              confirmText="네"
-              cancelText="아니오"
-              onConfirmClick={() => { navigate('/login/signup') }}
-              onCancelClick={() => {
-                setConfirm(false)
-                navigate('/login')
-              }}
-              />
-            }
+              {
+                alert &&
+                <Alert
+                  title={alert.title}
+                  contents={alert.contents}
+                  buttonText={alert.buttonText}
+                  onButtonClick={alert.onButtonClick}
+                  onOverlayClick={alert.onOverlayClick}
+                />
+              }
+              {
+                confirm &&
+                <Confirm
+                  contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
+                  confirmText="네"
+                  cancelText="아니오"
+                  onConfirmClick={() => { navigate('/login/signup') }}
+                  onCancelClick={() => {
+                    setConfirm(false)
+                    navigate('/login')
+                  }}
+                />
+              }
 
-                <LoginFooter>
-                  <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
-                  <Link to="/login/signup">
-                    <Button>
-                      <SignupText>회원가입</SignupText>
-                      <ArrowStyle>
-                        <Arrow />
-                      </ArrowStyle>
-                    </Button>
-                  </Link>
-                </LoginFooter>
+              <LoginFooter>
+                <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
+                <Link to="/login/signup">
+                  <Button>
+                    <SignupText>회원가입</SignupText>
+                    <ArrowStyle>
+                      <Arrow />
+                    </ArrowStyle>
+                  </Button>
+                </Link>
+              </LoginFooter>
             </L.FlexCols>
           </L.Contents>
         </S.Main>

@@ -143,7 +143,7 @@ export const FlexRows = styled.div`
 
 export const FlexRowsCP = styled.div`
     display: flex;
-    overflow-x: auto; 
+    overflow-x: scroll; 
     overflow-y: hidden;
     flex-wrap: nowrap;
     
@@ -158,7 +158,7 @@ export const FlexRowsCP = styled.div`
         /* text-align: center; */
         text-decoration: none;
     }
-    > Link::-webkit-scrollbar{
+    ::-webkit-scrollbar{
     display: none; 
 }
 `;
@@ -215,3 +215,10 @@ export const NoneDataContainer = styled.div`
     width: 100%;
     /* height: 100px; */
 `;
+
+export const GridContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	padding-top: 32px;
+	gap: 16px;
+`

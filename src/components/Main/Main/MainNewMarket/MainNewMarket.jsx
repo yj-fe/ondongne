@@ -1,74 +1,82 @@
 import React, { useState, useEffect } from 'react'
-import newmarket from 'assets/data/newmarket'
-import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import {NewMarketContent,NewMarketDiv,ContentDiv,ContentImg,ContentImgBadge,ContentImgDiv,ContentInfo,ContentMarket,ContentMarketImg,ContentProduct,ContentStyle,ContentTextStyle} from './MainNewMarketStyle'
+import { ContentDiv, ContentImg, ContentImgBadge, ContentImgDiv, ContentInfo, ContentMarket, ContentMarketImg, ContentProduct, ContentStyle, ContentTextStyle } from './MainNewMarketStyle'
+import { useSelector } from 'react-redux';
+import { newStoreList } from 'service/main';
+import LoadingBar from 'components/commonUi/LoadingBar';
 
 
 function MainNewMarket() {
-  let [item] = useState(newmarket)
+  const local = useSelector(state => state.local);
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState([]);
+
+  const getItem = async () => {
+    const response = await newStoreList(local);
+    const { data } = response.data;
+    setList(data.stores);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000)
+  }
+
+  useEffect(() => {
+    setLoading(true)
+    getItem();
+  }, [])
+
+  console.log(list);
+
 
   return (
     <div>
-        <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
-          <T.Text _size={18} _weight={700} _color='black'>우리동네 신규 입점</T.Text>
-          <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
-        </L.FlexRows>
-        <NewMarketDiv>
-        <L.FlexRowsCP>
-          <NewMarketContent>
-          {
-            item.map((a, i)=>{
-              // if(i%2 === 0){
-                return(
-                  <NewMarketCard item={item[i]} i={i}/>
-                  )
-                // }
-              })
-            }
-            </NewMarketContent>
-            </L.FlexRowsCP>
-            <L.FlexRowsCP>
-            <NewMarketContent>
+      <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
+        <T.Text _size={18} _weight={700} _color='black'>우리동네 신규 입점</T.Text>
+        <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+      </L.FlexRows>
+      <L.FlexRowsCP>
+        {
+          loading && <LoadingBar />
+        }
+        {
+          !loading &&
+          list.length > 0 &&
+          <L.GridContainer>
             {
-              item.map((a, i)=>{
-                // if(i%2 === 1){
-                return(
-                  <NewMarketCard item={item[i]} i={i}/>
-                  )
-                // }
-              })
+              list.map((item, index) => (
+                <React.Fragment
+                  key={index}
+                >
+                  <NewMarketCard item={item} />
+                </React.Fragment>
+              ))
             }
-          </NewMarketContent>
-            </L.FlexRowsCP>
-        </NewMarketDiv>
-
-
-
+          </L.GridContainer>
+        }
+      </L.FlexRowsCP>
     </div>
   )
 }
 
-function NewMarketCard(props){
-  return(
-  <div>
+function NewMarketCard(props) {
+  return (
     <ContentProduct>
       <ContentImgDiv>
         <ContentImgBadge>신규 입점</ContentImgBadge>
-        <ContentImg src={props.item.img}/>
+        <ContentImg src={props.item.banner} />
       </ContentImgDiv>
       <ContentStyle>
         <ContentDiv>
-          <ContentMarketImg src={props.item.img}/>
+          <ContentMarketImg src={props.item.profile} />
           <ContentTextStyle>
-            <ContentMarket>{props.item.market}</ContentMarket>
-            <ContentInfo>{props.item.info}</ContentInfo>
+            <ContentMarket>{props.item.name}</ContentMarket>
+            <ContentInfo>{props.item.description}</ContentInfo>
           </ContentTextStyle>
         </ContentDiv>
       </ContentStyle>
     </ContentProduct>
-  </div>
   )
 }
 
