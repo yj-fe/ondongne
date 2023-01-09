@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
@@ -14,6 +14,7 @@ import { ReactComponent as Check } from 'assets/login/checkgray.svg'
 import { ReactComponent as Checked } from 'assets/login/checked.svg'
 import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
+import { postInquiry } from 'service/border';
 
 
 
@@ -73,15 +74,50 @@ function TabInquiry(props){
       onOverlayClick: () => setConfirm(null),
     })
   }
+
+
+
+
+
+  // const [ inquiry, setInquiry ] = useState([]);
+  // const requestData = {
+  //   "_comment": "문의 = INQUIRY, voc = VOC",
+  //   "category": "VOC",
+  //   "type": "기능",
+  //   "title": "이거 추가해 주세요.",
+  //   "contents": "이 기능"
+  // }
+  // const getInquiry = async () => {
+  //   const response = await postInquiry(requestData);
+  //   const { data } = response.data;
+  //   setInquiry(data);
+  //   console.log(data);
+  // }
+  // useEffect(()=>{
+  //   getInquiry()
+  // }, [])
+
+
+
+
+  // const handleChange = (e) => {
+  //   const {name, value}=e.target;
+  //   setInquiry((inquiry)=>({...inquiry, [name]: value}))
+  // }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // }
+
+
+
   return[
 //=====================1. Tab 문의하기=====================
 
 <div>
-      <L.FlexCols _gap={24} _padding="8px 20px">
-              {/* <L.FlexCols>
-                <T.Text _weight={600} _size={16} _color="gray900">이름</T.Text>
-                  <I.TextInput _boccolor={'#FFFFFF'}/>
-             </L.FlexCols> */}
+{/* <div onSubmit={handleSubmit}> */}
+
+      {/* <L.FlexCols _gap={24} _padding="8px 20px">
+              
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>
@@ -92,11 +128,25 @@ function TabInquiry(props){
              </L.FlexCols>
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">제목</T.Text>
-                  <I.TextInput _boccolor={'#FFFFFF'}/>
+                  <I.TextInput
+                    type='text'
+                    name='title'
+                    value={inquiry.title ?? ''}
+                    required
+                    onChange={handleChange}
+                    _boccolor={'#FFFFFF'}
+                  />
              </L.FlexCols>
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">문의내용</T.Text>
-                  <I.TextInput _boccolor={'#FFFFFF'} _height={140}/>
+                  <I.TextInput 
+                    type='text'
+                    name='contents'
+                    value={inquiry.title ?? ''}
+                    required
+                    onChange={handleChange}
+                    _boccolor={'#FFFFFF'} _height={140}
+                  />
              </L.FlexCols>
               <L.FlexRows _content="flex-start" _items="center" >
               <CheckTitleDiv onClick={() => { setCheck((s) => !s); setBtn((s) => !s) }}>
@@ -128,7 +178,7 @@ function TabInquiry(props){
               confirmText={confirm.confirmText}
               onConfirmClick={confirm.onConfirmClick}
           />
-      }
+      } */}
 
     </div>,
 //=====================2. Tab 문의내역=====================
