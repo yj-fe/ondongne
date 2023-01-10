@@ -10,12 +10,21 @@ function SettingPage() {
   const navigate = useNavigate();
   const [check1, setCheck1] = useState(false)
   const [check2, setCheck2] = useState(false)
+
+  const [data, setData] = useState({
+    emailSmsAgreeStatus: 1
+  })
+
   const handleSwitch1=()=>{
     setCheck1(!check1)
   }
   const handleSwitch2=()=>{
     setCheck2(!check2)
   }
+
+
+
+  
   return (
     <div>
       <Layout

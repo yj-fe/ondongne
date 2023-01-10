@@ -45,7 +45,7 @@ function BusinessProductManagement() {
   }, [page, sort, auth]);
 
   useEffect(() => {
-    if (items.length == totalCount) return;
+    if (items.length === totalCount) return;
 
     if (inView && !loading) {
       setPage(prevState => prevState + 1)
@@ -95,19 +95,19 @@ function BusinessProductManagement() {
                     items.map((item, index) => (
                       items.length === index + 1
                         ? <Link
-                          ref={ref}
-                          key={item.itemId}
-                          to={`/business/product/details/${item.itemId}`}
-                        >
-                          <Card item={item} />
-                        </Link>
+                            ref={ref}
+                            key={item.itemId}
+                            to={`/business/product/details/${item.itemId}`}
+                          >
+                            <Card item={item} />
+                          </Link>
 
                         : <Link
-                          key={item.itemId}
-                          to={`/business/product/details/${item.itemId}`}
-                        >
-                          <Card item={item} />
-                        </Link>
+                            key={item.itemId}
+                            to={`/business/product/details/${item.itemId}`}
+                          >
+                            <Card item={item} />
+                          </Link>
                     ))
                   }
                 </L.FlexRowsWrapBPM>
@@ -136,7 +136,7 @@ export function Card({ lastRef, item }) {
 
         <L.FlexCols _gap={4} _padding={0} >
           {
-            item.type == 'GROUP' &&
+            item.type === 'GROUP' &&
             !item.soldoutStatus &&
             <ProductTimer date={item.endDate} />
           }

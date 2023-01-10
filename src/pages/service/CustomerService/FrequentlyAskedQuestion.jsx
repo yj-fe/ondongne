@@ -9,14 +9,8 @@ import { faqList } from 'service/border';
 
 function FrequentlyAskedQuestion() {
   const navigate = useNavigate();
-  const [show, setShow] = useState()
   const [faq, setFaq] = useState([])
 
-  // const [toggleList, setToggleList] = useState([]);
-  // const ToggleHandler = (e) => {
-  //   const toggleList = [...toggleList];
-
-  // }
 
   const requestData = {
     "page": 1
@@ -25,6 +19,7 @@ function FrequentlyAskedQuestion() {
     const response = await faqList(requestData);
     const { data } = response.data;
     setFaq(data);
+    console.log(data);
   }
   useEffect(()=>{
     getFaq()
@@ -38,18 +33,12 @@ function FrequentlyAskedQuestion() {
           bell={false}
           onBackClick={() => navigate(-1)}
       >
-        <L.Container>
-          <L.Contents>
+        <L.Container _height='100vh'>
+          <L.Contents _height='100vh'>
             <L.FlexCols _gap='0px' _padding="0px" _items="center">
               {
                 faq.map(item=>(
-                  <>
-                    <L.FlexRows  id={item.borderId} key={item.borderId} onClick={() => setShow((s) => !s)} _height='56px' _content="space-between" _items="center" _padding="0px ">
-                      <T.Text _weight={400} _size={16} _color="gray900">{item.title}</T.Text>
-                      {show ? <ArrowTop/> : <Down/> }
-                    </L.FlexRows>
-                      {show && <Toggle item={item}/>}
-                  </>
+                  <FaqList item={item} />
                 ))
               }
             </L.FlexCols>
@@ -58,6 +47,29 @@ function FrequentlyAskedQuestion() {
         </L.Container>
       </Layout>
     </div>
+  )
+}
+
+function FaqList ({item}) {
+
+  const [show, setShow] = useState();
+
+  return(
+    <>
+      <L.FlexRows  
+        id={item.borderId} 
+        key={item.borderId} 
+        onClick={() => setShow((s) => !s)} 
+        _height='56px' 
+        _content="space-between" 
+        _items="center" 
+        _padding="0px "
+      >
+        <T.Text _weight={400} _size={16} _color="gray900">{item.title}</T.Text>
+        {show ? <ArrowTop/> : <Down/> }
+      </L.FlexRows>
+        {show && <Toggle item={item}/>}
+    </>
   )
 }
 

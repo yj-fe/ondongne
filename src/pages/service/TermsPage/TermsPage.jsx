@@ -9,24 +9,24 @@ function TermsPage() {
       <BasicHeader title="약관 및 정책"/>
       <TermsBody>
         <TermsContainer>
-          <TermsDiv>
-            <TermsTitle>서비스 이용약관</TermsTitle>
-            <Link to="/service/terms/service">
+          <Link to="/service/terms/service">
+            <TermsDiv>
+              <TermsTitle>서비스 이용약관</TermsTitle>
               <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
-          <TermsDiv>
-            <TermsTitle>위치기반 서비스 이용약관</TermsTitle>
-            <Link to="/service/terms/location">
-              <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
-          <TermsDiv>
-            <TermsTitle>개인정보 처리방침</TermsTitle>
-            <Link to="/service/terms/privacy">
-              <TermsIconStyle><Right/></TermsIconStyle>
-            </Link>
-          </TermsDiv>
+            </TermsDiv>
+          </Link>
+          <Link to="/service/terms/location">
+            <TermsDiv>
+              <TermsTitle>위치기반 서비스 이용약관</TermsTitle>
+                <TermsIconStyle><Right/></TermsIconStyle>
+            </TermsDiv>
+          </Link>
+          <Link to="/service/terms/privacy">
+            <TermsDiv>
+              <TermsTitle>개인정보 처리방침</TermsTitle>
+                <TermsIconStyle><Right/></TermsIconStyle>
+            </TermsDiv>
+          </Link>
         </TermsContainer>
       </TermsBody>
     </div>

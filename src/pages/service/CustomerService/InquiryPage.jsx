@@ -5,9 +5,8 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as I from 'components/commonUi/Input';
 import * as B from 'components/commonUi/Button';
-import CheckBox from 'components/commonUi/CheckBox';
 import { ButtonDiv, CheckStyle, CheckTitle, CheckTitleDiv } from 'pages/member/MemberWithdrawal/MemberWithdrawalStyle';
-import { InfoBoxDiv, RightStyle, TitleInfo } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { InfoBoxDiv, TitleInfo } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { ArrowTop, Down } from 'components/commonUi/Icon';
 import { DetailTabInfo, DetailTabReview, Line, TabButtonStyle, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import { ReactComponent as Check } from 'assets/login/checkgray.svg'
@@ -15,6 +14,7 @@ import { ReactComponent as Checked } from 'assets/login/checked.svg'
 import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import { postInquiry } from 'service/border';
+import { useSelector } from 'react-redux';
 
 
 
@@ -50,7 +50,7 @@ function InquiryPage() {
             </TabButtonStyle>
 
             <TabContentStyle>
-              <TabInquiry detailTab={detailTab} />
+              <TabInquiry detailTab={detailTab} tabHandler={setDetailTab}/>
             </TabContentStyle>
           </L.Contents>
         </L.Container>
@@ -60,78 +60,89 @@ function InquiryPage() {
 }
 
 
-function TabInquiry(props){
-  const [select, setSelect] = useState(false)
+function TabInquiry({detailTab, tabHandler}){
   const [confirm, setConfirm] = useState(false);
   const [show, setShow] = useState()
   const [btn, setBtn] = useState(false)
-  const [check, setCheck] = useState(false)
-  const openConfirm = () => {
-    return setConfirm({
-      contents: "고객님의 문의가 정상적으로 접수되었습니다.\n빠른 시간내에 답변 드리도록 하겠습니다.",
-      buttonText: "확인",
-      onButtonClick: () => setConfirm(null),
-      onOverlayClick: () => setConfirm(null),
-    })
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+  const [data, setData] = useState({
+    category: "INQUIRY",
+    type: "주문 및 배달문의",
+    title: "",
+    contents: "",
+    check: false
+  })
+
+  const dataChecked = type => {
+    setData({...data, type: type})
+  }
+  
+  //
+  const handleChange = (e) => {
+    const {name, value}=e.target;
+    setData(item => ({...item, [name]: value}))
   }
 
+  // 체크 박스 핸들러
+  const checkHandler = (e) => {
+    e.preventDefault();
+    setData(item => ({...item, check: !data.check}))
+  }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    if(!isAuthenticated) {
+      return setConfirm({
+        contents: "로그인해주세요.",
+        buttonText: "확인",
+        onConfirmClick: () => setConfirm(null),
+        onOverlayClick: () => setConfirm(null),
+      })
+    }
 
+    const response = await postInquiry(data);
+    // console.log(response)
 
-  // const [ inquiry, setInquiry ] = useState([]);
-  // const requestData = {
-  //   "_comment": "문의 = INQUIRY, voc = VOC",
-  //   "category": "VOC",
-  //   "type": "기능",
-  //   "title": "이거 추가해 주세요.",
-  //   "contents": "이 기능"
-  // }
-  // const getInquiry = async () => {
-  //   const response = await postInquiry(requestData);
-  //   const { data } = response.data;
-  //   setInquiry(data);
-  //   console.log(data);
-  // }
-  // useEffect(()=>{
-  //   getInquiry()
-  // }, [])
+    if(response && response.data.data) {
+      return setConfirm({
+        contents: "고객님의 문의가 정상적으로 접수되었습니다.\n빠른 시간내에 답변 드리도록 하겠습니다.",
+        buttonText: "확인",
+        onConfirmClick: () => tabHandler(1),
+        onOverlayClick: () => setConfirm(null),
+      })
+    }
+  }
 
-
-
-
-  // const handleChange = (e) => {
-  //   const {name, value}=e.target;
-  //   setInquiry((inquiry)=>({...inquiry, [name]: value}))
-  // }
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  // }
-
-
+  useEffect(() => {
+    if(data.check && data.contents && data.title) {
+      setBtn(true);
+    } else {
+      setBtn(false);
+    }
+  }, [data])
 
   return[
 //=====================1. Tab 문의하기=====================
 
 <div>
-{/* <div onSubmit={handleSubmit}> */}
-
-      {/* <L.FlexCols _gap={24} _padding="8px 20px">
+      <L.FlexCols _gap={24} _padding="8px 20px">
               
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>
-                  <TitleInfo>주문 및 배달문의</TitleInfo>
+                  <TitleInfo>{data.type}</TitleInfo>
                   {show ? <ArrowTop/> : <Down/> }
                 </InfoBoxDiv>
-                {show && <Toggle/>}
+                {show && <Toggle type={data.type} handler={dataChecked} closeSelector={() => setShow(false)}/>}
              </L.FlexCols>
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">제목</T.Text>
                   <I.TextInput
                     type='text'
                     name='title'
-                    value={inquiry.title ?? ''}
+                    value={data.title}
                     required
                     onChange={handleChange}
                     _boccolor={'#FFFFFF'}
@@ -139,22 +150,23 @@ function TabInquiry(props){
              </L.FlexCols>
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">문의내용</T.Text>
-                  <I.TextInput 
+                  <I.Textarea 
                     type='text'
                     name='contents'
-                    value={inquiry.title ?? ''}
+                    value={data.contents}
                     required
                     onChange={handleChange}
                     _boccolor={'#FFFFFF'} _height={140}
                   />
+                  
              </L.FlexCols>
               <L.FlexRows _content="flex-start" _items="center" >
-              <CheckTitleDiv onClick={() => { setCheck((s) => !s); setBtn((s) => !s) }}>
+              <CheckTitleDiv onClick={checkHandler}>
                 <CheckStyle
                   id="confirm"
                   type="button"
                 >
-                  {check ? <Checked /> : <Check />}
+                  {data.check ? <Checked /> : <Check />}
                 </CheckStyle>
                 <CheckTitle>개인정보 수집, 이용에 동의합니다.(필수)</CheckTitle>
               </CheckTitleDiv>
@@ -166,19 +178,21 @@ function TabInquiry(props){
               <ButtonDiv
                 type="button"
                 btn={btn}
-                onClick={openConfirm}
+                disabled={!btn}
+                onClick={handleSubmit}
               >문의하기
               </ButtonDiv>
             </L.BottomCols>
-            {
-          confirm &&
-          <SimpleConfirm 
-              warn={confirm.warn}
-              contents={confirm.contents}
-              confirmText={confirm.confirmText}
-              onConfirmClick={confirm.onConfirmClick}
-          />
-      } */}
+      {
+        confirm &&
+        <SimpleConfirm 
+            warn={confirm.warn}
+            contents={confirm.contents}
+            confirmText={confirm.confirmText}
+            onConfirmClick={confirm.onConfirmClick}
+            onOverlayClick={confirm.onOverlayClick}
+        />
+      }
 
     </div>,
 //=====================2. Tab 문의내역=====================
@@ -218,19 +232,83 @@ function TabInquiry(props){
 
       </L.FlexCols>
     </div>
-  ][props.detailTab]
+  ][detailTab]
 }
 
-function Toggle() {
+
+
+//분류 토글
+function Toggle({ type, handler, closeSelector }) {
+
+  const [data, setData] = useState([
+    {
+      id: 0,
+      name: "주문 및 배달문의",
+      checked: false
+    },
+    {
+      id: 1,
+      name: "이용방법 및 회원정보 문의",
+      checked: false
+    },
+    {
+      id: 2,
+      name: "권리침해 신고",
+      checked: false
+    },
+    {
+      id: 3,
+      name: "기타문의",
+      checked: false
+    }
+  
+  ])
+
+  const clickHandler = name => {
+    setData(
+      data.map(item => 
+          item.name === name 
+            ? {...item, checked: !item.checked} 
+            : {...item, checked: false} 
+      )
+    )
+    handler(name);
+    closeSelector();
+  }
+
+  useEffect(() => {
+    setData(
+      data.map(item => 
+          item.name === type 
+            ? {...item, checked: !item.checked} 
+            : item
+      )
+    )
+  }, []);
 
   return (
     <div>
       <ToggleS>
         <L.FlexCols _gap='0px'>
-          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _weight={600} _size={15} _color="green700">주문 및 배달문의</T.Text></L.FlexRows>
-          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">이용방법 및 회원정보 문의</T.Text></L.FlexRows>
-          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">권리침해 신고</T.Text></L.FlexRows>
-          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">기타문의</T.Text></L.FlexRows>
+
+          {
+            data.map(item => (
+              <L.FlexRows 
+                key={item.id}
+                 _padding='12px 16px' 
+                 _height='48px' 
+                 _items='center'
+                 onClick={() => clickHandler(item.name)}>
+                <T.Text 
+                  _weight={item.checked ? 600 : 400} 
+                  _size={15} 
+                  _color={item.checked ? "green700" : "gray900"}
+                >
+                  {item.name}
+                </T.Text>
+              </L.FlexRows>
+            ))
+          }
         </L.FlexCols>
       </ToggleS>
     </div>

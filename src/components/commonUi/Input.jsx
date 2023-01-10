@@ -64,3 +64,36 @@ export const SearchInput = styled.input`
         position: absolute;
     }
 `;
+
+
+export const Textarea = styled.textarea`
+	font-weight: 400;
+	font-size: 16px;
+	width: 100%;
+	height: 180px;
+	background-color: ${(props) => (props.color ? "#EEEEEE" : "none")};
+	text-align: ${(props) => props.align || null};
+	color: #bdbdbd;
+	outline: none;
+	border: 0;
+	resize: none;
+    border: 1px solid #EEEEEE;
+    padding: 12px 16px;
+	&:focus {
+		color: #212121;
+	}
+	&::-ms-reveal {
+		display: none;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: #bdbdbd;
+		border-radius: 99px;
+	}
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+	margin: 0;
+    font-family: 'Pretendard';
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; */
+    -webkit-font-smoothing: antialiased;
+`;

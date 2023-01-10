@@ -4,7 +4,8 @@ const urls = {
   list: '/border/list',
   details: '/border/details/:id',
   faq: '/faq/list',
-
+  inquiry: '/member/border/insert',
+  voc: '/member/border/insert',
 };
 
 

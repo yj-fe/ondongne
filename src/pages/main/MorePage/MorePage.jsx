@@ -149,9 +149,9 @@ function MorePage() {
             <Link to="/member/review">
               <MoreContainerDiv>내가 쓴 리뷰</MoreContainerDiv>
             </Link>
-            <Link to="/member/coupon">
+            {/* <Link to="/member/coupon">
               <MoreContainerDiv>쿠폰함</MoreContainerDiv>
-            </Link>
+            </Link> */}
           </MoreDiv>
           <MoreDiv>
 

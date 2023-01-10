@@ -110,15 +110,15 @@ function CategoryPage(props) {
                     onClick={() => setFilter01(true)}
                   >
                     <T.Text _weight={400} _size={13} _color={type != 'all' ? 'white' : 'gray900'} _align='center'>{sortFormatter(type)}</T.Text>
-                    <Down color={type != 'all' ? 'white' : '#424242'} />
+                    <Down color={type !== 'all' ? 'white' : '#424242'} />
                   </B.FilterButton>
                   <B.FilterButton
                     type='button'
-                    _bg={sort != 'create' && 'green700'}
+                    _bg={sort !== 'create' && 'green700'}
                     onClick={() => setFilter02(true)}
                   >
                     <T.Text _weight={400} _size={13} _color={sort != 'create' ? 'white' : 'gray900'} _align='center'>{sortFormatter(sort)}</T.Text>
-                    <Down color={sort != 'create' ? 'white' : '#424242'} />
+                    <Down color={sort !== 'create' ? 'white' : '#424242'} />
                   </B.FilterButton>
                 </L.FlexRows>
 
