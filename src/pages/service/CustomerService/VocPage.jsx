@@ -105,12 +105,12 @@ function VocPage() {
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">제목</T.Text>
                   <I.TextInput
-                    _boccolor={'#FFFFFF'}
                     type='text'
                     name='title'
                     value={data.title}
                     required
                     onChange={handleChange}
+                    _boccolor={'#FFFFFF'}
                   />
              </L.FlexCols>
               <L.FlexCols>

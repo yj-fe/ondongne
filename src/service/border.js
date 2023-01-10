@@ -6,6 +6,8 @@ const urls = {
   faq: '/faq/list',
   inquiry: '/member/border/insert',
   voc: '/member/border/insert',
+  marketing: '/member/marketing/update',
+  push: '/member/push/update',
 };
 
 
@@ -42,4 +44,18 @@ export function postInquiry(requestData) {
 ============================== */
 export function postVoc(requestData) {
     return client.post(urls.voc, requestData);
+};
+
+/* ==============================
+   마케팅 수신 동의
+============================== */
+export function postMarketing(requestData) {
+    return client.post(urls.marketing, requestData);
+};
+
+/* ==============================
+   Push 수신 동의
+============================== */
+export function postPush(requestData) {
+    return client.post(urls.push, requestData);
 };

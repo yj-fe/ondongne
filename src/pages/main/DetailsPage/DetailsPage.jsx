@@ -51,17 +51,18 @@ function DetailsPage(props) {
     setModal(!modal);
   }
 
+
   const paymentsOrder = () => {
     console.log(auth)
     if(auth.isAuthenticated) {
-      navigate('/order/new/:id')
+      if(orderToggle===false){
+        setOrderToggle(true)
+      }else if(orderToggle===true){
+        navigate('/order/new/:id')
+      }
     } else {
       setConfirm(true)
     }
-  }
-
-  const openOrderToggle = () => {
-    setOrderToggle(true);
   }
   const closeOrderToggle = () => {
     setOrderToggle(false);
@@ -70,13 +71,6 @@ function DetailsPage(props) {
     setCheck(!check)
   }
   
-  // const btnTrue=()=>{
-  //   setBtn(true)
-  // }
-  // const btnFalse=()=>{
-  //   setBtn(false)
-  // }
-
 
 
   return (
@@ -197,7 +191,7 @@ function DetailsPage(props) {
                       <LayerTextButton _padding='0px' _width='48px'>
                         <Cart/>
                       </LayerTextButton>
-                      <DetailButtonStyle onClick={()=>{paymentsOrder(); openOrderToggle();}}>구매하기</DetailButtonStyle>
+                      <DetailButtonStyle onClick={paymentsOrder}>구매하기</DetailButtonStyle>
                     </DetailButtonDiv>
                   </ButtonStyle>
                 :

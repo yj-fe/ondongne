@@ -73,7 +73,8 @@ function TabInquiry({detailTab, tabHandler}){
     contents: "",
     check: false
   })
-
+  
+// 선택한 분류로 바꾸기
   const dataChecked = type => {
     setData({...data, type: type})
   }
