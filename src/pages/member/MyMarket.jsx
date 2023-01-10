@@ -1,260 +1,233 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
-import Layout from 'components/layout/Layout/Layout';
+import { DetailTabInfo, DetailTabReview } from 'pages/main/DetailsPage/DetailsPageStyle';
+import { Down } from 'components/commonUi/Icon';
+import { FilterLayout, MyStoreSortLayout, SearchSortLayout, SortLayout } from 'components/layout/Layout/MoreLayout';
+import { sortFormatter } from 'utils/utils';
 import { useNavigate } from 'react-router-dom';
-import { DetailTabInfo, DetailTabReview, TabButtonStyle, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
-import { Down, FlagC, FlagN, FlagNC, OneStar } from 'components/commonUi/Icon';
-import { MarketProductCard, ModalFilter } from 'components/Main/MarketDetail/MarketDetailProduct';
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
-import Img from 'assets/images/marketdetail.png'
-import maindata from 'assets/data/maindata'
+import { useSelector } from 'react-redux';
+import LoadingBar from 'components/commonUi/LoadingBar';
+import { useInView } from 'react-intersection-observer';
+import { CategoryCard } from 'pages/main/Product/CategoryPage';
+import { StoreListCard } from 'components/commonUi/StoreListCard';
+import { MyStoreBestItem } from 'service/main';
+import { getMyStores } from 'service/mystore';
+import Layout from 'components/layout/Layout/Layout';
 
 function MyMarket() {
 
+  const navigate = useNavigate();
   const [detailTab, setDetailTab] = useState(0)
-  const navigate = useNavigate()
+  const [filter01, setFilter01] = useState(false);
+  const [filter02, setFilter02] = useState(false);
+  const local = useSelector(state => state.local);
+
+  const [type, setType] = useState('all');
+  const [sort, setSort] = useState('create');
+  const [page, setPage] = useState(1);
+
+  const [ref, inView] = useInView();
+  const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState([]);
+  const [fetching, isFetching] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const getItems = async () => {
+
+    const response = detailTab === 0
+      ? await MyStoreBestItem(local)
+      : await getMyStores(page, sort);
+
+    const { data } = response.data;
+
+    console.log(data);
+
+    setTotalCount(data.count);
+    setItems(detailTab === 0 ? data.items : data.stores);
+    isFetching(false);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }
+
+  useEffect(() => {
+    setSort('create')
+    setType('all');
+  }, [detailTab])
+
+  useEffect(() => {
+    setPage(1);
+    setItems([]);
+    isFetching(true);
+  }, [sort, detailTab])
+
+
+  useEffect(() => {
+    if (totalCount < 9) return;
+    if (totalCount === items.length) return;
+    if (loading) return;
+
+    if (inView) {
+      setPage(prevState => prevState + 1);
+      isFetching(true);
+    }
+  }, [inView, loading])
+
+  useEffect(() => {
+    if (!fetching) return;
+
+    setLoading(true);
+    getItems();
+  }, [fetching])
 
   return (
     <div>
-       <Layout
+      <Layout
         title="My 단골"
         cart={true}
         bell={true}
         onBackClick={() => navigate(-1)}
       >
-        <L.Container >
-          <L.Contents _padding="0">
-            <L.FlexCols _padding={0} _gap={0}>
-
-
-{/* =================== Tab버튼 ( 상품 / 상점 ) =================== */}
-            <TabButtonStyle>
-              <DetailTabInfo
-                onClick={() => { setDetailTab(0); }}
-                infocolor={detailTab === 0}
-              >
-                상품
-              </DetailTabInfo>
-              <DetailTabReview
-                onClick={() => { setDetailTab(1); }}
-                reviewcolor={detailTab === 1}
-              >
-                상점
-              </DetailTabReview>
-            </TabButtonStyle>
-
-            <TabContentStyle>
-              <TabCoupon detailTab={detailTab} />
-            </TabContentStyle>
-
-
+        <L.Contents _padding='0px'>
+          <L.FlexRows _gap='0px'>
+            <DetailTabInfo
+              onClick={() => { setDetailTab(0); }}
+              infocolor={detailTab === 0}
+            >
+              상품
+            </DetailTabInfo>
+            <DetailTabReview
+              onClick={() => { setDetailTab(1); }}
+              reviewcolor={detailTab === 1}
+            >
+              상점
+            </DetailTabReview>
+          </L.FlexRows>
+        </L.Contents>
+        <L.Contents>
+          <L.FlexCols>
+            {
+              detailTab === 0
+                ? <L.FlexRows _gap='12' _items='center' _width='auto'>
+                  <B.FilterButton
+                    type='button'
+                    _bg={type !== 'all' && 'green700'}
+                    onClick={() => setFilter01(true)}
+                  >
+                    <T.Text _weight={400} _size={13} _color={type != 'all' ? 'white' : 'gray900'} _align='center'>{sortFormatter(type)}</T.Text>
+                    <Down color={type != 'all' ? 'white' : '#424242'} />
+                  </B.FilterButton>
+                  <B.FilterButton
+                    type='button'
+                    _bg={sort != 'create' && 'green700'}
+                    onClick={() => setFilter02(true)}
+                  >
+                    <T.Text _weight={400} _size={13} _color={sort != 'create' ? 'white' : 'gray900'} _align='center'>{sortFormatter(sort)}</T.Text>
+                    <Down color={sort != 'create' ? 'white' : '#424242'} />
+                  </B.FilterButton>
+                </L.FlexRows>
+                : <L.FlexRows _gap={16} _content='space-between'>
+                  <div>
+                    <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
+                  </div>
+                  <L.FlexRows _gap={4} _content='flex-end' _width='100px'>
+                    <T.Text _size={13} _weight={400} _color='gray900'>{sortFormatter(sort)}</T.Text>
+                    <button
+                      type='button'
+                      _bg={sort !== 'create' && 'green700'}
+                      onClick={() => setFilter01(true)}
+                    >
+                      <Down />
+                    </button>
+                  </L.FlexRows>
+                </L.FlexRows>
+            }
           </L.FlexCols>
-          </L.Contents>
-        </L.Container>
+        </L.Contents>
 
-
+        <L.Contents _padding="0px">
+          <TabContent detailTab={detailTab} items={items} setData={setItems} loading={loading} lastRef={ref} />
+        </L.Contents>
 
       </Layout>
-
+      {
+        filter01 &&
+        detailTab === 0
+        && <FilterLayout PropsModal={() => setFilter01(false)} data={type} setData={setType} />
+      }
+      {
+        filter01 &&
+        detailTab === 1
+        && <MyStoreSortLayout CloseModal={() => setFilter01(false)} data={sort} setData={setSort} />
+      }
+      {
+        filter02 &&
+        detailTab === 0 &&
+        <SortLayout CloseModal={() => setFilter02(false)} data={sort} setData={setSort} />
+      }
     </div>
   )
 }
-
-
-function TabCoupon(props) {
-  let [item] = useState(maindata)
-  const [modal, setModal] = useState(false);
-  const ShowMoreModal = () => {
-    setModal(!modal);
-  }
-  const PropsModal = () => {
-    setModal(!modal);
-  }
-
-  const [check, setCheck] = useState(false)
-  const handleSwitch=()=>{
-    setCheck(!check)
-  }
-
-
+function TabContent({ detailTab, items, setData, loading, lastRef }) {
   return [
 
-    //=====================1. Tab 1 상품=====================
-    <div>
-{/* =================== 필터 =================== */}
-        <L.Contents>
-          <L.FlexRows _gap={12} _items='center' _width='186px'>
-            <B.FilterButton>
-              <T.Text _weight={400} _size={13} _color="gray900" _align='center'>상품 전체</T.Text>
-              <Down/>
-            </B.FilterButton>
-            <B.FilterButton>
-              <T.Text _weight={400} _size={13} _color="gray900" _align='center'>기본 순</T.Text>
-              <Down/>
-            </B.FilterButton>
-          </L.FlexRows>
+    //=====================상품=====================
+    <>
+      {/* 없을때 */}
+      {
+        !loading &&
+        items.length === 0 &&
+        <L.Contents _padding="80px 20px 600px" >
+          <T.Text _weight={300} _size={15} _color="gray600" _align='center'>아직 단골가게가 없습니다.</T.Text>
+          <T.Text _weight={300} _size={15} _color="gray600" _align='center'>주변 단골가게를 추가해보세요!</T.Text>
         </L.Contents>
-
-
-
-{/* =================== 없을 때 =================== */}
-        {/* <L.Contents _padding="80px 20px" >
-          <L.FlexCols _padding={0} _gap={4}>
-            <T.Text _weight={300} _size={15} _color="gray600" _align='center'><p>아직 단골가게가 없습니다.<p></p>주변 단골가게를 추가해보세요!</p></T.Text>
-          </L.FlexCols>
-        </L.Contents> */}
-
-
-
-{/* =================== 있을 때 =================== */}
-        <L.Contents _padding="24px 20px" _gap={20}>
-          <L.FlexRowsWrap _gap={20} _padding={0}>
-              {
-                item.map((item, idx) => (
-                  <MarketProductCard item={item} />
-                ))
-              }
-            </L.FlexRowsWrap>
+      }
+      {/* 있을때 */}
+      {
+        items.length > 0 &&
+        <L.Contents _padding="0 20px">
+          <CategoryCard list={items} lastRef={lastRef} />
         </L.Contents>
+      }
 
-    </div>,
+      {/* =================== 로딩 =================== */}
+      {
+        loading && <LoadingBar />
+      }
 
+    </>,
 
-
-
-
-    //=====================2. Tab 2 상점=====================
-    <div>
-
-    
-    {/* =================== 없을 때 =================== */}
-            {/* <L.Contents _padding="80px 20px" >
-              <L.FlexCols _padding={0} _gap={4}>
-                <T.Text _weight={300} _size={15} _color="gray600" _align='center'><p>아직 단골가게가 없습니다.<p></p>주변 단골가게를 추가해보세요!</p></T.Text>
-              </L.FlexCols>
-            </L.Contents> */}
-    
-    
-    
-    {/* =================== 있을 때 =================== */}
-        <L.Contents>
-          <L.FlexCols _gap={16}>
-            <L.FlexRows _gap={16} _content='space-between'>
-              <div>
-                <T.Text _size={16} _weight={600} _color='gray900'>전체 150</T.Text>
-              </div>
-              <L.FlexRows _gap={4} _content='flex-end' _width='100px'>
-                <T.Text _size={13} _weight={400} _color='gray900'>주문 많은 순</T.Text>
-                <button
-                    type='button'
-                    onClick={ShowMoreModal}
-                  >
-                  <Down/>
-                </button>
-              </L.FlexRows>
-            </L.FlexRows>
-
-
-            <L.FlexRows _content='space-between'>
-              <L.FlexRows _content='row'>
-                <ImgSizeLayout _bdr={4} src={Img} _width={98} _height={98}></ImgSizeLayout>
-                <L.FlexCols _gap={2}>
-                  <T.Text _weight={600} _size={18} _color="gray900">bhc 치킨</T.Text>
-                  <L.FlexRows _content='flex-start' _items='center' _gap={2}>
-                    <OneStar/>
-                    <T.Text _weight={500} _size={14} _color="gray900" _align='center'>4.5</T.Text>
-                  </L.FlexRows>
-                  <L.FlexRows>
-                    <T.Text _weight={400} _size={14} _color="gray800" _align='center'>최소주문 20,000원,</T.Text>
-                    <T.Text _weight={400} _size={14} _color="gray800" _align='center'>배달 2,000원</T.Text>
-                  </L.FlexRows>
-                  <L.FlexRows>
-                    <B.Badge _color='white' _bg='green500'>신규 입점</B.Badge>
-                    <B.Badge>픽업가능</B.Badge>
-                    <B.Badge>배달가능</B.Badge>
-                  </L.FlexRows>
-                </L.FlexCols>              
-              </L.FlexRows>
-              <L.FlexRows
-                _gap='0px' _content='right' _width='40px'
-                onClick={handleSwitch}
-              >
-                {check ? <FlagNC /> : <FlagN />}
-              </L.FlexRows>
-            </L.FlexRows>
-
-
-
-
-
-            <L.FlexRows _content='space-between'>
-              <L.FlexRows _content='row'>
-                <ImgSizeLayout _bdr={4} src={Img} _width={98} _height={98}></ImgSizeLayout>
-                <L.FlexCols _gap={2}>
-                  <T.Text _weight={600} _size={18} _color="gray900">Satterfield, Ward and Feil</T.Text>
-                  <L.FlexRows _content='flex-start' _items='center' _gap={2}>
-                    <OneStar/>
-                    <T.Text _weight={500} _size={14} _color="gray900" _align='center'>4.5</T.Text>
-                  </L.FlexRows>
-                  <L.FlexRows>
-                    <T.Text _weight={400} _size={14} _color="gray800" _align='center'>최소주문 20,000원,</T.Text>
-                    <T.Text _weight={400} _size={14} _color="gray800" _align='center'>배달 2,000원</T.Text>
-                  </L.FlexRows>
-                  <L.FlexRows>
-                    <B.Badge _color='green600' _bg='green50'>쿠폰</B.Badge>
-                    <B.Badge>픽업가능</B.Badge>
-                    <B.Badge>배달가능</B.Badge>
-                  </L.FlexRows>
-                </L.FlexCols>              
-              </L.FlexRows>
-                <L.FlexRows
-                  _gap='0px' _content='right' _width='40px'
-                  onClick={handleSwitch}
-                >
-                  {check ? <FlagNC /> : <FlagN />}
-                </L.FlexRows>
-              </L.FlexRows>
-
-
-
-
-            <L.FlexRows _content='space-between'>
-              <L.FlexRows _content='row'>
-                <ImgSizeLayout _bdr={4} src={Img} _width={98} _height={98}></ImgSizeLayout>
-                <L.FlexCols _gap={2}>
-                  <T.Text _weight={600} _size={18} _color="gray900">Corkery - Hammes</T.Text>
-                  <L.FlexRows _content='flex-start' _items='center' _gap={2}>
-                    <OneStar/>
-                    <T.Text _weight={500} _size={14} _color="gray900" _align='center'>4.5</T.Text>
-                  </L.FlexRows>
-                  <L.FlexRows>
-                    <T.Text _weight={400} _size={14} _color="gray800" _align='center'>최소주문 20,000원,</T.Text>
-                    <T.Text _weight={400} _size={14} _color="gray800" _align='center'>배달 2,000원</T.Text>
-                  </L.FlexRows>
-                  <L.FlexRows>
-                    <B.Badge>픽업가능</B.Badge>
-                    <B.Badge>배달가능</B.Badge>
-                  </L.FlexRows>
-                </L.FlexCols>              
-              </L.FlexRows>
-                <L.FlexRows
-                  _gap='0px' _content='right' _width='40px'
-                  onClick={handleSwitch}
-                >
-                  {check ? <FlagNC /> : <FlagN />}
-                </L.FlexRows>
-              </L.FlexRows>
+    //=====================상점=====================
+    <>
+      {/* 없을때 */}
+      {
+        !loading &&
+        items.length === 0 &&
+        <L.Contents _padding="80px 20px 600px" >
+          <T.Text _weight={300} _size={15} _color="gray600" _align='center'>아직 단골가게가 없습니다.</T.Text>
+          <T.Text _weight={300} _size={15} _color="gray600" _align='center'>주변 단골가게를 추가해보세요!</T.Text>
+        </L.Contents>
+      }
+      {/* 있을때 */}
+      {
+        items.length > 0 &&
+        <L.Contents _height='100vh'>
+          <L.FlexCols>
+            <StoreListCard list={items} setData={setData} lastRef={lastRef} />
           </L.FlexCols>
         </L.Contents>
-            
-        {modal && <ModalFilter PropsModal={PropsModal} />}
-        </div>,
-  ][props.detailTab]
+      }
+
+      {/* =================== 로딩 =================== */}
+      {
+        loading && <LoadingBar />
+      }
+
+    </>,
+  ][detailTab]
 }
 
-
-
-
-export default MyMarket
+export default MyMarket;

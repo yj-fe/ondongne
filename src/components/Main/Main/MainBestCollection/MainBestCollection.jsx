@@ -28,12 +28,12 @@ function MainBestCollection() {
     navigate(
       "/collections",
       {
-        state: 
-          {
-            type: 1,
-            title: "우리동네 인기 추천", 
-            list: list
-          }
+        state:
+        {
+          type: 1,
+          title: "우리동네 인기 추천",
+          list: list
+        }
       }
     )
   }
@@ -47,9 +47,9 @@ function MainBestCollection() {
     <div>
       <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
         <T.Text _size={18} _weight={700} _color='black'>우리동네 인기 추천</T.Text>
-        <T.Text 
-          _size={14} 
-          _weight={500} 
+        <T.Text
+          _size={14}
+          _weight={500}
           _color='blue'
           onClick={router}
         >
@@ -70,7 +70,7 @@ function MainBestCollection() {
                   <React.Fragment
                     key={index}
                   >
-                    <ProductCard item={item} lastRef={null} width={150} />
+                    <ProductCard item={item} lastRef={null} width={150} isCart={false} />
                   </React.Fragment>
                 ))
               }

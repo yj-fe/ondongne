@@ -16,6 +16,8 @@ import { useInView } from 'react-intersection-observer';
 import { getStoreCategoryList } from 'service/store';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import StarRate from 'components/commonUi/StarRate';
+import StoreLike from 'components/commonUi/StoreLike';
+import { StoreListCard } from 'components/commonUi/StoreListCard';
 
 function SearchPage() {
   const navigate = useNavigate();
@@ -126,7 +128,7 @@ function SearchPage() {
                 {/* =================== 상품 정보 있을 경우=================== */}
                 {
                   items.length > 0 &&
-                  <ListCard list={items} lastRef={ref} />
+                  <StoreListCard list={items} setData={setItems} lastRef={ref} />
                 }
 
                 {/* ===================로딩=================== */}
@@ -161,56 +163,5 @@ export const ListEmpty = () => {
     </L.FlexCols>
   )
 }
-export const ListCard = ({ list, lastRef }) => {
-  const [check, setCheck] = useState(false)
-  const handleSwitch=()=>{
-    setCheck(!check)
-  }
-  return (
-    <L.FlexCols _gap={20}>
-      {
-        list.map((item, index) => (
-          <L.FlexRows
-            key={item.storeId}
-            _content='space-between'
-            ref={list.length == index + 1 ? lastRef : null}
-          >
-            <L.FlexRows _content='row'>
-              <ImgSizeLayout _bdr={4} src={item.profile != null ? item.profile : Img} _width={98} _height={98}></ImgSizeLayout>
-              <L.FlexCols _gap={2}>
-                <T.Text _weight={600} _size={18} _color="gray900">{item.name}</T.Text>
-                <L.FlexRows _content='flex-start' _items='center' _gap={2}>
-                  <StarRate rate={item.reviewRate} />
-                  <T.Text _weight={500} _size={14} _color="gray900" _align='center'>({item.reviewRate})</T.Text>
-                </L.FlexRows>
-                <L.FlexRows>
-                  <T.Text _weight={400} _size={14} _color="gray800" _align='center'>
-                    최소주문 {item.orderMinPrice ? numberFormat(item.orderMinPrice) : 0}원,
-                  </T.Text>
-                  <T.Text _weight={400} _size={14} _color="gray800" _align='center'>
-                    배달 {item.deliveryPrice ? numberFormat(item.deliveryPrice) : 0}원
-                  </T.Text>
-                </L.FlexRows>
-                <L.FlexRows>
-                  {item.newStatus && <B.Badge _color='white' _bg='green500'>신규 입점</B.Badge>}
-                  {item.couponStatus && <B.Badge _color='green600' _bg='green50'>쿠폰</B.Badge>}
-                  {item.pickupStatus && <B.Badge>픽업가능</B.Badge>}
-                  {item.deliveryStatus && <B.Badge>배달가능</B.Badge>}
-                </L.FlexRows>
-              </L.FlexCols>
-            </L.FlexRows>
-            <L.FlexRows
-              _gap='0px' _content='right' _width='40px'
-              onClick={handleSwitch}
-            >
-            {check ? <FlagNC /> : <FlagN />}
-            </L.FlexRows>
-          </L.FlexRows>
-        ))
-      }
-    </L.FlexCols>
-  )
-}
 
-
-export default SearchPage
+export default SearchPage;

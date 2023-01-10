@@ -9,6 +9,7 @@ import ProductTimer from 'components/commonUi/ProductTimer';
 import { numberFormat, totalPrice } from 'utils/utils';
 import StarRate from 'components/commonUi/StarRate';
 import ProductCart from 'components/Main/Cart/ProductCart';
+import { useNavigate } from 'react-router-dom';
 
 function MarketDetailProduct() {
   let [items] = useState(maindata)
@@ -51,14 +52,27 @@ function MarketDetailProduct() {
   )
 }
 
-export function ProductCard({ item, lastRef, width = 216 }) {
+export function ProductCard({
+  item, lastRef, width = 216, isCart = true
+}) {
+
+  const navigate = useNavigate();
+
   return (
-    <L.FlexCols key={item.itemId} _gap={12} _padding={0} _width={width + 'px'} ref={lastRef}>
+    <L.FlexCols
+      key={item.itemId}
+      ref={lastRef}
+      onClick={() => navigate(`/details/${item.itemId}`)}
+      _gap={12} _padding={0} _width={width + 'px'}
+    >
 
       <RelativDiv>
-        <AbsoluteDiv>
-          <ProductCart id={item.itemId}/>
-        </AbsoluteDiv>
+        {
+          isCart &&
+          <AbsoluteDiv>
+            <ProductCart id={item.itemId} count={1} type={"list"} />
+          </AbsoluteDiv>
+        }
         {
           !item.soldoutStatus
             ? <ImgSizeLayout _width={width} _height={width} _bdr={6} src={item.thumbnail} />
@@ -100,6 +114,7 @@ export function ProductCard({ item, lastRef, width = 216 }) {
 
 
 export function MarketProductCard(props) {
+
   return (
     // <div style={{width: 'calc(50% - 10px)'}}>
     <div >
