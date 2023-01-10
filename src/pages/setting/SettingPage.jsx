@@ -42,7 +42,7 @@ function SettingPage() {
     }
 
     const response = await postMarketing(email);
-    console.log(response)
+    // console.log(response)
     if(response && response.email) {
       return setConfirm({
         contents: "마케팅 활용 동의 하셨습니다",

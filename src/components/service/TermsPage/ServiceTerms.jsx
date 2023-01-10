@@ -1,13 +1,23 @@
-import React from 'react'
-import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
-import {TermsBody,TermsContainer,TermsTextDiv} from 'pages/service/TermsPage/TermsPageStyle'
+import React, { useEffect, useState } from 'react'
+import Layout from 'components/layout/Layout/Layout'
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+
+
 function ServiceTerms() {
   return (
     <div>
-    <BasicHeader title="서비스 이용약관"/>
-      <TermsBody>
-        <TermsContainer>
-          <TermsTextDiv>
+      <Layout
+        title="서비스 이용약관"
+        cart={false}
+        bell={false}
+      >
+        <L.Container>
+          <L.Contents>
+            <T.Text _size={14} _color='gray800'>
+
+            </T.Text>
+            <T.Text>
             <p>이용약관</p>
               <p>제1조(목적) </p>
               <p>이 약관은 “하이퍼로컬리티”(전자거래 사업자 이하 “회사”)가 운영하는 온동네마켓(이하 “온동네마켓”)에서 제공하는 서비스(이하 "서비스"라 한다)와 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>
@@ -161,11 +171,10 @@ function ServiceTerms() {
               <p>[부칙]</p>
               <p>제1조 (시행일자)</p>
               <p>이 약관은 2022년 12월 21일부터 시행됩니다.</p>
- 
-
-          </TermsTextDiv>
-        </TermsContainer>
-      </TermsBody>
+            </T.Text>
+          </L.Contents>
+        </L.Container>
+      </Layout>
     </div>
   )
 }
