@@ -14,87 +14,79 @@ function SettingPage() {
   const [confirm, setConfirm] = useState(false);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-  //포스트맨 body
+  //포스트맨 body(마케팅, Push)
   const [email, setEmail] = useState({
-    emailSmsAgreeStatus: 1,
+    emailSmsAgreeStatus: 0,
     check: false
   })
   const [push, setPush] = useState({
-    pushAgreeStatus: 1,
+    pushAgreeStatus: 0,
     check: false
   })
-  // postMarketing(requestData) postPush(requestData)
-  // 체크 박스 핸들러
-  const emailHandler = (e) => {
+  // 체크 박스 핸들러(마케팅, Push)
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
+    if(!isAuthenticated) {
+      return setConfirm({
+        contents: "로그인해주세요.",
+        buttonText: "확인",
+        onConfirmClick: () => setConfirm(null),
+        onOverlayClick: () => setConfirm(null),
+      })
+    }
     setEmail(item => ({...item, check: !email.check}))
+    if(email.check === true){
+      setEmail(item => ({...item, emailSmsAgreeStatus: 0}))
+    }else if(email.check === false){
+      setEmail(item => ({...item, emailSmsAgreeStatus: 1}))
+    }
 
+    const response = await postMarketing(email);
+    console.log(response)
+    if(response && response.email) {
+      return setConfirm({
+        contents: "마케팅 활용 동의 하셨습니다",
+        buttonText: "확인",
+        onConfirmClick: () => setConfirm(null),
+        onOverlayClick: () => setConfirm(null),
+      })
+    }
   }
-  const pushHandler = (e) => {
+  const handlePushSubmit = async (e) => {
     e.preventDefault();
-    setPush(item => ({...item, check: !push.check}))
+
+    if(!isAuthenticated) {
+      return setConfirm({
+        contents: "로그인해주세요.",
+        buttonText: "확인",
+        onConfirmClick: () => setConfirm(null),
+        onOverlayClick: () => setConfirm(null),
+      })
+    }
+    setPush(item => ({...item, check: !push.check}));
+    if(push.check === true){
+      setPush(item => ({...item, pushAgreeStatus: 0}))
+    }else if(push.check === false){
+      setPush(item => ({...item, pushAgreeStatus: 1}))
+    }
+    const response = await postPush(push);
+    // console.log(response)
+    if(response && response.push) {
+      return setConfirm({
+        contents: "Push 동의 하셨습니다",
+        buttonText: "확인",
+        onConfirmClick: () => setConfirm(null),
+        onOverlayClick: () => setConfirm(null),
+      })
+    }
+
   }
-
-  const handleEmailChange = (e) => {
-    const {value}=e.target;
-    setEmail(item => ({...item, value}))
-    console.log(email);
-  }
-
-  const handlePushChange = (e) => {
-    const {value}=e.target;
-    setEmail(item => ({...item, value}))
-    console.log(email);
-  }
-
-  // const handleEmailSubmit = async (e) => {
-  //   e.preventDefault();
-  //   // if(!isAuthenticated) {
-  //   //   return setConfirm({
-  //   //     contents: "로그인해주세요.",
-  //   //     buttonText: "확인",
-  //   //     onConfirmClick: () => setConfirm(null),
-  //   //     onOverlayClick: () => setConfirm(null),
-  //   //   })
-  //   // }
-  //   const response = await postMarketing(email);
-  //   console.log(response)
-  //   // if(response && response.email) {
-  //   //   return setConfirm({
-  //   //     contents: "마케팅 활용 동의 하셨습니다",
-  //   //     buttonText: "확인",
-  //   //     onConfirmClick: () => setConfirm(null),
-  //   //     onOverlayClick: () => setConfirm(null),
-  //   //   })
-  //   // }
-  // }
-
-  // const handlePushSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   // if(!isAuthenticated) {
-  //   //   return setConfirm({
-  //   //     contents: "로그인해주세요.",
-  //   //     buttonText: "확인",
-  //   //     onConfirmClick: () => setConfirm(null),
-  //   //     onOverlayClick: () => setConfirm(null),
-  //   //   })
-  //   // }
-  //   const response = await postPush(push);
-  //   console.log(response)
-  //   // if(response && response.push) {
-  //   //   return setConfirm({
-  //   //     contents: "Push 동의 하셨습니다",
-  //   //     buttonText: "확인",
-  //   //     onConfirmClick: () => setConfirm(null),
-  //   //     onOverlayClick: () => setConfirm(null),
-  //   //   })
-  //   // }
-  // }
+  // console.log(email);
+  // console.log(push);
 
   useEffect(() => {
 
-  }, [])
+  }, [email, push])
 
 
 
@@ -110,10 +102,8 @@ function SettingPage() {
           <L.Contents  _padding='0px'>
             <L.FlexCols _gap='0px' _padding="8px 20px">
               <L.FlexRows
-                onClick={emailHandler}
-                onChange={handleEmailChange}
+                onClick={handleEmailSubmit}
                 value={email.emailSmsAgreeStatus}
-                // onClick={()=>{emailHandler(); handleEmailSubmit();}}
                 _height='56px' 
                 _content="space-between" 
                 _items="center" 
@@ -123,10 +113,8 @@ function SettingPage() {
                   {email.check ? <SwitchC /> : <Switch />}
               </L.FlexRows>
               <L.FlexRows
-                onClick={pushHandler} 
-                onChange={handlePushChange}
+                onClick={handlePushSubmit} 
                 value={push.pushAgreeStatus} 
-                // onClick={()=>{pushHandler(); handlePushSubmit();}}  
                 _height='56px' 
                 _content="space-between" 
                 _items="center" 
@@ -143,7 +131,6 @@ function SettingPage() {
               <T.Text _weight={500} _size={14} _color="gray800">앱 버전 정보</T.Text>
               <T.Text _weight={400} _size={14} _color="gray800">1.1.1</T.Text>
             </L.FlexRows>
-
 
           </L.Contents>
         </L.Container>
