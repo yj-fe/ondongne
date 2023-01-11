@@ -9,7 +9,7 @@ export const Text = styled.p`
     text-align: ${props => props._align || 'left'};
     text-decoration: ${props => props._decoration || 'none'};
     width: ${props => props._width || 'auto'};
-
+    min-width: ${props => props._minWidth || 'auto'};
 `;
 
 export const SoldoutText = styled.p`

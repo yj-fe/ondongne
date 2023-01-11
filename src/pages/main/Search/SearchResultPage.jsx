@@ -8,7 +8,6 @@ import { DetailTabReview } from './../DetailsPage/DetailsPageStyle';
 import { Down } from 'components/commonUi/Icon';
 import { CategoryCard } from './../Product/CategoryPage';
 import { SearchSortLayout, SortLayout } from 'components/layout/Layout/MoreLayout';
-import { ListCard } from './SearchPage';
 import { sortFormatter } from 'utils/utils';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -16,6 +15,7 @@ import { searchItmeList } from 'service/item';
 import { searchStoreList } from 'service/store';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { useInView } from 'react-intersection-observer';
+import { StoreListCard } from 'components/commonUi/StoreListCard';
 
 function SearchResultPage() {
   const location = useLocation()
@@ -122,7 +122,7 @@ function SearchResultPage() {
         </L.Contents>
 
         <L.Contents _padding="0px">
-          <TabContent detailTab={detailTab} items={items} loading={loading} lastRef={ref} />
+          <TabContent detailTab={detailTab} items={items} setItems={setItems} loading={loading} lastRef={ref} />
         </L.Contents>
 
       </LayoutSearch>
@@ -140,7 +140,7 @@ function SearchResultPage() {
     </div>
   )
 }
-function TabContent({ detailTab, items, loading, lastRef }) {
+function TabContent({ detailTab, items, setItems, loading, lastRef }) {
   return [
 
     //=====================상품=====================
@@ -183,7 +183,7 @@ function TabContent({ detailTab, items, loading, lastRef }) {
         items.length > 0 &&
         <L.Contents _height='100vh'>
           <L.FlexCols>
-            <ListCard list={items} lastRef={lastRef} />
+            <StoreListCard list={items} setData={setItems} lastRef={lastRef} />
           </L.FlexCols>
         </L.Contents>
       }

@@ -27,12 +27,12 @@ function MainLastChance() {
     navigate(
       "/collections",
       {
-        state: 
-          {
-            type: 1,
-            title: "공동구매 마지막 찬스", 
-            list: list
-          }
+        state:
+        {
+          type: 1,
+          title: "공동구매 마지막 찬스",
+          list: list
+        }
       }
     )
   }
@@ -46,9 +46,9 @@ function MainLastChance() {
     <div>
       <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
         <T.Text _size={18} _weight={700} _color='black'>공동구매 마지막 찬스</T.Text>
-        <T.Text 
-          _size={14} 
-          _weight={500} 
+        <T.Text
+          _size={14}
+          _weight={500}
           _color='blue'
           onClick={router}
         >
@@ -69,7 +69,7 @@ function MainLastChance() {
                   <React.Fragment
                     key={index}
                   >
-                    <ProductCard item={item} lastRef={null} width={150} />
+                    <ProductCard item={item} lastRef={null} width={150} isCart={false} />
                   </React.Fragment>
                 ))
               }

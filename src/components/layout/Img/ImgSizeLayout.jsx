@@ -18,6 +18,7 @@ export const ImgSizeH = styled.img`
 export const ImgPer = styled.img`
     border-radius: ${props => props._bdr}px;
     width: 100%;
+    height: 390px;
 `;
 
 export const RelativDiv = styled.div`
@@ -65,8 +66,8 @@ export const AbsoluteTopDiv = styled.div`
     height: ${props => props._height}px;
     display: flex;
     position: absolute;
-    left: ${props => props._left || '70px' };
-    top: ${props => props._top || '-10px' };
+    left: ${props => props._left || '70px'};
+    top: ${props => props._top || '-10px'};
     bottom: 0%;
     margin: 0;
 `;

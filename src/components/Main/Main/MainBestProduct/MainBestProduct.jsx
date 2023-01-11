@@ -28,12 +28,12 @@ function MainBestProduct() {
     navigate(
       "/collections",
       {
-        state: 
-          {
-            type: 1,
-            title: "My단골 인기 상품", 
-            list: list,
-          }
+        state:
+        {
+          type: 1,
+          title: "My단골 인기 상품",
+          list: list,
+        }
       }
     )
   }
@@ -45,39 +45,39 @@ function MainBestProduct() {
 
   return (
     <div>
-          <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
-            <T.Text _size={18} _weight={700} _color='black'>My단골 인기 상품</T.Text>
-            <T.Text 
-              _size={14} 
-              _weight={500} 
-              _color='blue'
-              onClick={router}
-            >
-              전체 보기
-            </T.Text>
-          </L.FlexRows>
-          <LastChanceDiv>
-            <L.FlexRowsCP>
+      <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
+        <T.Text _size={18} _weight={700} _color='black'>My단골 인기 상품</T.Text>
+        <T.Text
+          _size={14}
+          _weight={500}
+          _color='blue'
+          onClick={router}
+        >
+          전체 보기
+        </T.Text>
+      </L.FlexRows>
+      <LastChanceDiv>
+        <L.FlexRowsCP>
+          {
+            loading && <LoadingBar />
+          }
+          {
+            !loading &&
+            list.length > 0 &&
+            <L.GridContainer>
               {
-                loading && <LoadingBar />
+                list.map((item, index) => (
+                  <React.Fragment
+                    key={index}
+                  >
+                    <ProductCard item={item} lastRef={null} width={150} isCart={false} />
+                  </React.Fragment>
+                ))
               }
-              {
-                !loading &&
-                list.length > 0 &&
-                <L.GridContainer>
-                  {
-                    list.map((item, index) => (
-                      <React.Fragment
-                        key={index}
-                      >
-                        <ProductCard item={item} lastRef={null} width={150} />
-                      </React.Fragment>
-                    ))
-                  }
-                </L.GridContainer>
-              }
-            </L.FlexRowsCP>
-          </LastChanceDiv>
+            </L.GridContainer>
+          }
+        </L.FlexRowsCP>
+      </LastChanceDiv>
     </div>
   )
 }

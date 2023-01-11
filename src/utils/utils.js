@@ -87,6 +87,7 @@ export const sortFormatter = (filter) => {
 	if (filter === "group") return "공동구매 상품";
 	if (filter === "create") return "기본 순";
 	if (filter === "order") return "주문 많은 순";
+	if (filter === "orderDesc") return "최근 주문 순";
 	if (filter === "review") return "리뷰 별점 순";
 	if (filter === "newstore") return "신규 매장 순";
 	if (filter === "like") return "단골 많은 순";
@@ -94,25 +95,23 @@ export const sortFormatter = (filter) => {
 
 // 데이터 상점 리스트 그룹화
 export const groupBy = (data, key) => {
-    return data.reduce((list, item) => {
-        const group = item[key];
+	return data.reduce((list, item) => {
+		const group = item[key];
 
-        if (list[group] === undefined) {
-            list[group] = []
-        }                
-        
-        list[group].push(item)
+		if (list[group] === undefined) {
+			list[group] = [];
+		}
 
-        return list
-    }, {})
-}
+		list[group].push(item);
+
+		return list;
+	}, {});
+};
 
 export const isEmptyObj = (obj) => {
-	if(obj.constructor === Object
-	   && Object.keys(obj).length === 0)  {
-	  return true;
+	if (obj.constructor === Object && Object.keys(obj).length === 0) {
+		return true;
 	}
-	
+
 	return false;
-  }
-  
+};
