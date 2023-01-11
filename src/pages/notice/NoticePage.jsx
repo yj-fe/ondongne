@@ -10,12 +10,13 @@ import dayjs from 'dayjs';
 
 function NoticePage() {
   const navigate = useNavigate();
+  const [list, setList] = useState([]);
 
+  // 포스트맨 body
   const requestData = {
     category: "NOTICE",
     page: 1
   }
-  const [list, setList] = useState([]);
 
   const getNotices = async () => {
     const response = await noticeList(requestData);

@@ -2,7 +2,7 @@ import { client } from ".";
 
 const urls = {
   list: '/border/list',
-  details: '/border/details/:id',
+  details: '/border/details',
   faq: '/faq/list',
   inquiry: '/member/border/insert',
   voc: '/member/border/insert',

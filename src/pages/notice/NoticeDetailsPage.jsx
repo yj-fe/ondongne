@@ -5,31 +5,29 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { Line } from 'components/Login/Signup/agreement/AgreementStyle';
 import { detailsList } from 'service/border';
+import dayjs from 'dayjs';
 
 function NoticeDetailsPage() {
   const navigate = useNavigate();
-
-  // const handleSubmit = (e)=>{
-  //   e.preventDefault();
-  // }
+  const [details, setDetails] = useState([]);
   // let {id} = useParams();
 
-  // const requestDetails = {
-  //   "borderId": 3
-  // }
-  // const [details, setDetails] = useState([]);
 
-  // const getDetails = async () => {
-  //   const response = await detailsList(requestDetails);
-  //   const { data } = response.data;
-  //   console.log(data);
-  //   setDetails(data);
-  // }
+  // 포스트맨 body
+  const requestDetails = {
+    borderId: 3
+  }
+  // 공지사항 상세 불러오기
+  const getDetails = async () => {
+    const response = await detailsList(requestDetails);
+    const { data } = response.data;
+    console.log(data);
+    setDetails(data);
+  }
 
-
-  // useEffect(() => {
-  //   getDetails()
-  // }, [])
+  useEffect(() => {
+    getDetails()
+  }, [])
 
 
   
@@ -42,7 +40,6 @@ function NoticeDetailsPage() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container
-          // onSubmit={handleSubmit}
          _padding="0px 0px 8px" 
         >
 
@@ -50,15 +47,13 @@ function NoticeDetailsPage() {
           <L.Contents  _height='100vh' _padding="0px">
             <L.FlexCols _gap={20} _padding="0px">
               <L.FlexCols _gap={4} _padding="8px 20px">
-                <T.Text _weight={500} _size={16} _color="gray900">title</T.Text>
-                <T.Text _weight={400} _size={13} _color="gray500">createDate</T.Text>
-                {/* <T.Text _weight={500} _size={16} _color="gray900">{title}</T.Text> */}
-                {/* <T.Text _weight={400} _size={13} _color="gray500">{createDate}</T.Text> */}
+                <T.Text _weight={500} _size={16} _color="gray900">{details.title}</T.Text>
+                <T.Text _weight={400} _size={13} _color="gray500">{dayjs(details.createDate).format('YYYY/MM/DD')}</T.Text>
              </L.FlexCols>
              <Line/>
               <L.FlexCols _gap={4} _padding="8px 20px">
                 <T.Text _weight={400} _size={15} _color="gray800">
-                  contents
+                {details.contents}
 
                 </T.Text>
              </L.FlexCols>
@@ -67,29 +62,6 @@ function NoticeDetailsPage() {
           </L.Contents>
         </Link>
         </L.Container>
-        {/* <L.Container _padding="0px 0px 8px" 
-        >
-          <Link to='/notice/details/:id'>
-          <L.Contents  _height='100vh' _padding="0px">
-            <L.FlexCols _gap={20} _padding="0px">
-              <L.FlexCols _gap={4} _padding="8px 20px">
-                <T.Text _weight={500} _size={16} _color="gray900">사기를 주의하세요.</T.Text>
-                <T.Text _weight={400} _size={13} _color="gray500">2022/10/10</T.Text>
-             </L.FlexCols>
-             <Line/>
-              <L.FlexCols _gap={4} _padding="8px 20px">
-                <T.Text _weight={400} _size={15} _color="gray800">
-                  <p>안녕하세요.</p>
-                  <p>맘스노트 관리자 입니다.</p>
-                  <p>맘스노트 11월 4주차 공지사항을 알려드립니다.</p>
-                  <p>저희...</p>
-                </T.Text>
-             </L.FlexCols>
-             </L.FlexCols>
-
-          </L.Contents>
-        </Link>
-        </L.Container> */}
       </Layout>
     </div>
   )
