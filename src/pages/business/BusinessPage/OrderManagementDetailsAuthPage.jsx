@@ -12,14 +12,23 @@ import { AbsoluteTopDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img
 import maindata from 'assets/data/maindata'
 import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
+import { NameToggleInput, NameToggleInputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
+import data from './../../../assets/data/maindata';
+import { type } from '@testing-library/user-event/dist/type';
 
 function OrderManagementDetailsAuthPage() {
   const navigate = useNavigate();
   let [item] = useState(maindata)
   const [show, setShow] = useState()
-  
+  const [text, setText] = useState('')
   const [alert1, setAlert1] = useState('')
   const [alert2, setAlert2] = useState('')
+
+
+  const [data, setData] = useState ({
+    type:'예시문구',
+  })
+
   const openAlert1 = () => {
     return setAlert1({
       contents: "텍스트를 입력해주세요.",
@@ -36,6 +45,10 @@ function OrderManagementDetailsAuthPage() {
       active: () => setAlert2(null),
     })
   }
+// 선택한 분류로 바꾸기
+  const dataChecked = type => {
+    setData({...data, type: type})
+  }
 
   return (
     <div>
@@ -47,7 +60,7 @@ function OrderManagementDetailsAuthPage() {
       >
 
         <L.Container _padding="0px 0px 60px" >
-          <L.Contents _height='100vh'>
+          <L.Contents _height='calc(100vh - 68px)' _padding="0px">
             <L.FlexCols _gap={40} _padding="8px 20px">
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">판매 종류</T.Text>
@@ -73,14 +86,18 @@ function OrderManagementDetailsAuthPage() {
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">배달/픽업 인증 내용</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>
-                  <TitleInfo>예시문구</TitleInfo>
+                  <TitleInfo>{data.type}</TitleInfo>
                   {show ? <ArrowTop/> : <Down/> }
                 </InfoBoxDiv>
-                {show && <Toggle/>}
-                <I.TextInput
-                  placeholder='텍스트를 입력해 주세요.'
-                 _boccolor={'#FFFFFF'} _height={140}
-                />
+                {show && <Toggle  type={data.type} handler={dataChecked} closeSelector={() => setShow(false)}/>}
+                <NameToggleInputForm _height='140px'>
+                  <NameToggleInput
+                    type='text'
+                    placeholder='텍스트를 입력해 주세요.'
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                  />
+                </NameToggleInputForm>
               </L.FlexCols>
 
             </L.FlexCols>
@@ -118,17 +135,74 @@ function OrderManagementDetailsAuthPage() {
   )
 }
 
-function Toggle() {
+function Toggle({ type, handler, closeSelector }) {
+  const [data, setData] = useState([
+    {
+      id: 0,
+      name: "예시문구",
+      checked: false
+    },
+    {
+      id: 1,
+      name: "고객님, 오늘도 맛있는 저희 상품 구매해주셔서 감사합니다.",
+      checked: false
+    },
+    {
+      id: 2,
+      name: "배달 완료 인증해드립니다. 확인 부탁드려요~",
+      checked: false
+    },
+    {
+      id: 3,
+      name: "주문해주셔서 감사합니다~",
+      checked: false
+    }
+  ])
 
+  const clickHandler = name =>{
+    setData(
+      data.map(item =>
+        item.name === name
+        ? {...item, checked: !item.checked}
+        : {...item, checked: false}
+        )
+      )
+      handler(name);
+      closeSelector();
+  }
+  useEffect(()=>{
+    setData(
+      data.map(item=>
+        item.name === type
+        ? {...item, checked: !item.checked}
+        : item
+        )
+    )
+  }, [])
   return (
     <div>
       <ToggleS>
-        <L.FlexCols _gap='0px'>
-          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _weight={600} _size={15} _color="green700">예시문구</T.Text></L.FlexRows>
-          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">고객님, 오늘도 맛있는 저희 상품 구매해주셔서 감사합니다.</T.Text></L.FlexRows>
-          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">배달 완료 인증해드립니다. 확인 부탁드려요~</T.Text></L.FlexRows>
-          <L.FlexRows _padding='12px 16px' _height='48px' _items='center'><T.Text _size={15} _color="gray900">주문해주셔서 감사합니다~</T.Text></L.FlexRows>
-        </L.FlexCols>
+      <L.FlexCols _gap='0px'>
+
+      {
+        data.map(item => (
+          <L.FlexRows 
+            key={item.id}
+            _padding='12px 16px' 
+            _height='48px' 
+            _items='center'
+            onClick={() => clickHandler(item.name)}>
+            <T.Text 
+              _weight={item.checked ? 600 : 400} 
+              _size={15} 
+              _color={item.checked ? "green700" : "gray900"}
+            >
+              {item.name}
+            </T.Text>
+          </L.FlexRows>
+        ))
+      }
+      </L.FlexCols>
       </ToggleS>
     </div>
   )

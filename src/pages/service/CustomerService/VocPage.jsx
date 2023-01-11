@@ -92,7 +92,7 @@ function VocPage() {
           onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px" >
-          <L.Contents  _height='100vh'>
+          <L.Contents _height='calc(100vh - 68px)'>
             <L.FlexCols _gap={24} _padding="0px">
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>

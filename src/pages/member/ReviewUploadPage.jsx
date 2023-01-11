@@ -68,17 +68,17 @@ function ReviewUploadPage() {
               </div>
               <L.FlexRows _content='center' _items='center' _gap={16}>
                 {Array(5)
-                .fill()
-                .map((_, index) => (
-                  star >= index +1 ? (
-                    <div onClick={()=> setStar(index + 1)}>
-                      <OneBigStar/>
-                    </div>
-                    ) : (
-                    <div onClick={()=> setStar(index + 1)}>
-                      <OneEmptyBigStar/>
-                    </div>
-                  )
+                  .fill()
+                  .map((_, index) => (
+                    star >= index +1 ? (
+                      <div onClick={()=> setStar(index + 1)}>
+                        <OneBigStar/>
+                      </div>
+                      ) : (
+                      <div onClick={()=> setStar(index + 1)}>
+                        <OneEmptyBigStar/>
+                      </div>
+                    )
                 ))}
                 {/* 별점 */}
                 {/* {handleStar()} */}
@@ -86,9 +86,7 @@ function ReviewUploadPage() {
 
 
 
-              <LayerOptionButtonC>
-              사진 첨부하기
-              </LayerOptionButtonC>
+              <LayerOptionButtonC>사진 첨부하기</LayerOptionButtonC>
 
 
               <L.FlexRows _gap={20}>
@@ -109,11 +107,11 @@ function ReviewUploadPage() {
 
 
               <NameToggleInputForm _height='200px'>
-                  <NameToggleInput
-                    placeholder='내용을 작성해주세요.'
-                    type='text'
-                  />
-                </NameToggleInputForm>
+                <NameToggleInput
+                  placeholder='내용을 작성해주세요.'
+                  type='text'
+                />
+              </NameToggleInputForm>
 
 
             </L.FlexCols>

@@ -91,7 +91,7 @@ function BusinessCouponContent () {
 
                   <T.Text _size={15} _weight={400} _color='gray800'><p>오늘 아침은 비가 오는 아침입니다.</p><p>하지만 손님들을 위해 저희 아재의 과일은 새벽부터 인증을 올립니다.</p><p>오늘도 싱싱한 과일로 상큼한 아침을 열어보세요.</p></T.Text>
                 
-                  <ImgPer src={ImageSample}/>
+                  <ImgPer _height='100%' src={ImageSample}/>
                 
                   <C.Borderbox>
                     <C.Contentbox >

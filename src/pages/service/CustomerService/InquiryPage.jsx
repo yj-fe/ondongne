@@ -32,7 +32,7 @@ function InquiryPage() {
           onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px" >
-          <L.Contents _padding="0" _height={'100vh'}>
+          <L.Contents _padding="0" _height='calc(100vh - 68px)'>
             {/* =================== Tab버튼 ( 문의하기 / 문의내역 ) =================== */}
             <TabButtonStyle>
               <DetailTabInfo
@@ -225,7 +225,7 @@ function TabInquiry({detailTab, tabHandler}){
             <T.Text _weight={600} _size={16} _color="gray800">문의사항 제목문의사항 제목</T.Text>
             <T.Text _size={13} _color="gray500">2022/11/01</T.Text>
           </L.FlexCols>
-          <B.Badge _size='14px' _bg='green50' _color='green700' _width='70px' _height='36px'>답변 완료</B.Badge>
+          <B.Badge _items='center' _size='14px' _bg='green50' _color='green700' _width='70px' _height='36px'>답변 완료</B.Badge>
         </L.FlexRows>
         </Link>
         <Line/>
@@ -262,7 +262,6 @@ function Toggle({ type, handler, closeSelector }) {
       name: "기타문의",
       checked: false
     }
-  
   ])
 
   const clickHandler = name => {

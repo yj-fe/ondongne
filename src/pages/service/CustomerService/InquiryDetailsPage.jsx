@@ -19,7 +19,7 @@ function InquiryDetailsPage() {
           onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px" >
-          <L.Contents _padding="0" _height={'100vh'}>
+          <L.Contents _padding="0" _height='calc(100vh - 68px)'>
             <L.FlexCols>
 
                 <L.FlexRows _gap='0px' _padding='20px' _items='center' _content='space-between' _height='86px'>

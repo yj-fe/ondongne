@@ -195,7 +195,7 @@ export const Badge = styled.button`
     display: flex;
     flex-direction: ${props => props._fdir || 'row'};
     justify-content: center;
-    align-items: ${props => props._items || 'center'}center;
+    align-items: ${props => props._items || 'center'};
     padding: ${props => props._padding || '2px 6px'};
     gap: 4px;
     width:  ${props => props._width || 'fit-content'};
