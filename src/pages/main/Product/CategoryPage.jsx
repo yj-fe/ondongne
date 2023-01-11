@@ -172,7 +172,7 @@ export function CategoryCard({ list, lastRef }) {
       {list.map((item, index) => (
         <ProductCard
           item={item}
-          lastRef={list.length == index + 1 ? lastRef : null}
+          lastRef={list.length === index + 1 ? lastRef : null}
         />
       ))}
     </L.FlexRowsWrap>

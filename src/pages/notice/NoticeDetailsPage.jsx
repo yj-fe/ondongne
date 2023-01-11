@@ -44,7 +44,7 @@ function NoticeDetailsPage() {
         >
 
           <Link to='/notice/details/:id'>
-          <L.Contents  _height='100vh' _padding="0px">
+          <L.Contents   _height='calc(100vh - 60px)' _padding="0px">
             <L.FlexCols _gap={20} _padding="0px">
               <L.FlexCols _gap={4} _padding="8px 20px">
                 <T.Text _weight={500} _size={16} _color="gray900">{details.title}</T.Text>

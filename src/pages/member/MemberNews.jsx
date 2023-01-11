@@ -16,7 +16,7 @@ function MemberNews() {
         <LoginHeader title="알림"/>
           <S.Main>
 
-          <L.Contents _padding='24px 20px ' _height='100vh'>
+          <L.Contents _padding='24px 20px ' _height='calc(100vh - 68px)'>
 
 {/* ============ 알림없을때 ============ */}
             {/* <L.Contents _padding='56px 0px 0px 0px'>

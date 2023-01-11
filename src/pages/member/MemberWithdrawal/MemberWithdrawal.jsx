@@ -63,7 +63,7 @@ function MemberWithdrawal() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          <L.Contents _height={'100vh'}>
+          <L.Contents _height='calc(100vh - 68px)'>
             <L.FlexCols _padding={0} _gap={40}>
 
         {/* ============ 회원탈퇴 ============ */}

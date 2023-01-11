@@ -21,7 +21,7 @@ function MyCoupon() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          <L.Contents _padding="0" _height={'100vh'}>
+          <L.Contents _padding="0" _height='calc(100vh - 68px)'>
             <L.FlexCols _padding={0} _gap={0}>
 
 

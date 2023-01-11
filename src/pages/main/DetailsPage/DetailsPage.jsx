@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import data from 'assets/data/detailtest'
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 import { ReactComponent as StarIcon2 } from "assets/main/ratestar2.svg";
 import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
@@ -11,7 +10,6 @@ import Image from 'assets/main/shine.png'
 import ReviewImg from 'assets/main/reviewimg.png'
 import Avatar from 'assets/common/avatar.png'
 import { DetailButtonDiv, DetailButtonStyle, DetailImg, DetailTabInfo, DetailTabReview, MarketComments, TabInfoContentText, TabInfoContentTitle, TypeLabel, TypeLabelInfo, TypeTextStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketReviewDiv, Price, ProfileDiv, ProfileTextDiv, MoreStyle, FlagStyle, FlagText, IconStyle, Line, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, ButtonStyle, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, OrderToggleBox } from './DetailsPageStyle'
-import ModalMorePage from 'components/Main/More/ModalMorePage'
 import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
 import Confirm from 'components/commonUi/Confirm';
@@ -19,7 +17,7 @@ import { ArrowBottom, Cart, Close, CloseW, Delete, MinusB, More, My, MyC, PlusB 
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as I from 'components/commonUi/Input';
-import { ImgPer, ImgSize100, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { Badge, LayerTextButton } from 'components/commonUi/Button';
 import ReportAlert from 'components/commonUi/ReportAlert';
 import Modal from 'components/commonUi/Modal';
@@ -28,9 +26,6 @@ function DetailsPage(props) {
 
 
   const [detailTab, setDetailTab] = useState(0)
-  // let [item] = useState(data)
-  // let {id} = useParams()
-  // const [modal, setModal] = useState(false);
   const [orderToggle, setOrderToggle] = useState(false);
   const [reviewToggle, setReviewToggleToggle] = useState(false);
   const navigate = useNavigate();
@@ -39,16 +34,6 @@ function DetailsPage(props) {
   const [check, setCheck] = useState(false);
   const [btn, setBtn] = useState(true);
   const [report, setReport] = useState('')
-
-
-
-  // const ShowMoreModal = () => {
-  //   setModal(!modal);
-  // }
-  // const PropsModal = () => {
-  //   setModal(!modal);
-  // }
-
 
   const paymentsOrder = () => {
     console.log(auth)
@@ -137,18 +122,21 @@ function DetailsPage(props) {
                           <T.Text _size={11} _weight={400} _color='gray800' >(4.5)</T.Text>
                         </L.FlexRows>
                       </L.FlexCols>
-                      <L.FlexCols _gap={4}>
-                        <L.FlexRows _gap={4} _items='center'>
-                          <T.Text _size={16} _weight={600} _color='red' >40%</T.Text>
-                          <Price>25,200원</Price>
-                        </L.FlexRows>
-                        <T.Text _size={20} _weight={600} _color='gray900' >18,000원</T.Text>
-                      </L.FlexCols>
+                      <L.FlexRows  _content='space-between'>
+                        <L.FlexCols _gap={4}>
+                          <L.FlexRows _gap={4} _items='center'>
+                            <T.Text _size={16} _weight={600} _color='red' >40%</T.Text>
+                            <Price>25,200원</Price>
+                          </L.FlexRows>
+                          <T.Text _size={20} _weight={600} _color='gray900' >18,000원</T.Text>
+                        </L.FlexCols>
+                        <Badge _fdir='column' _width='115px' _height ='74px' _bg='gray50' _padding='16px'>
+                        <T.Text   _width='65px' _align='center' _size={12} _weight={400} _color='gray600' >최소 주문량</T.Text>
+                        <T.Text  _width='65px' _align='center' _size={16} _weight={600} _color='gray800' >10/100개</T.Text>
+                      </Badge>
+                      </L.FlexRows>
                     </L.FlexCols>
-                    <Badge _fdir='column' _width='115px' _height ='74px' _bg='gray50' _padding='16px'>
-                      <T.Text  _align='center' _size={12} _weight={400} _color='gray600' >최소 주문량</T.Text>
-                      <T.Text  _width='65px' _align='center' _size={16} _weight={600} _color='gray800' >10/100개</T.Text>
-                    </Badge>
+
                   </L.FlexRows>
                 </L.Contents>
               </L.FlexCols>
@@ -216,7 +204,6 @@ function DetailsPage(props) {
         </L.Contents>
       </L.Container>
     </Layout>
-      {/* {modal && <ModalMorePage PropsModal={PropsModal} />} */}
       {
         confirm &&
         <Confirm
@@ -562,7 +549,6 @@ function TabContent({openReviewToggle, detailTab}) {
           </L.FlexCols>
         </L.FlexCols>
       </L.FlexCols>
-      {/* {modal && <ModalMorePage PropsModal={PropsModal} />} */}
       {
         modal &&
         <Modal
@@ -600,34 +586,34 @@ function OrderToggle({closeOrderToggle}){
   return(
     <div>
       <OrderToggleBox>
-      <L.FlexCols _gap='0px' _padding='16px 20px'>
-        <button
-          type='button'
-          onClick={closeOrderToggle}
-        >
-          <L.FlexRows _content='center' _gap='0px' _items='center'>
-            <ArrowBottom/>
+        <L.FlexCols _gap='0px' _padding='16px 20px'>
+          <button
+            type='button'
+            onClick={closeOrderToggle}
+          >
+            <L.FlexRows _content='center' _gap='0px' _items='center'>
+              <ArrowBottom/>
+            </L.FlexRows>
+          </button>
+          <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
+            <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
+            <L.FlexRows _content='right' _gap='0px' _items='center' _width='112px'>
+              <button onClick={decrease}>
+                <MinusB />
+              </button>
+              <T.Text _width='48px' _align='center' _weight={500}>{num}</T.Text>
+              <button onClick={increase}>
+                <PlusB/>
+              </button>
+            </L.FlexRows>
           </L.FlexRows>
-        </button>
-        <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
-          <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
-          <L.FlexRows _content='right' _gap='0px' _items='center' _width='112px'>
-            <button onClick={decrease}>
-              <MinusB />
-            </button>
-            <T.Text _width='48px' _align='center' _weight={500}>{num}</T.Text>
-            <button onClick={increase}>
-              <PlusB/>
-            </button>
+          <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
+            <T.Text _size={16} _weight={500} _color='gray800' >상품 금액</T.Text>
+            <T.Text _size={16} _weight={600} _color='gray800' >270,000 원</T.Text>
           </L.FlexRows>
-        </L.FlexRows>
-        <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
-          <T.Text _size={16} _weight={500} _color='gray800' >상품 금액</T.Text>
-          <T.Text _size={16} _weight={600} _color='gray800' >270,000 원</T.Text>
-        </L.FlexRows>
 
 
-      </L.FlexCols>
+        </L.FlexCols>
       </OrderToggleBox>
     </div>
   )

@@ -91,7 +91,7 @@ function BusinessReview() {
                       </L.FlexCols>
                     </L.FlexRows>
                     <L.FlexRows _width='50px'>
-                      <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+                      {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
                     </L.FlexRows>
                   </L.FlexRows>
 
@@ -142,7 +142,7 @@ function BusinessReview() {
                       </L.FlexCols>
                     </L.FlexRows>
                     <L.FlexRows _width='50px'>
-                    <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+                    {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
                     </L.FlexRows>
                   </L.FlexRows>
               <Comments>담에 또 먹을래요~~~~~~~~</Comments>
@@ -208,7 +208,7 @@ function BusinessReview() {
                       </L.FlexCols>
                     </L.FlexRows>
                     <L.FlexRows _width='50px'>
-                    <T.Text _size={12} _color='gray400'>신고하기</T.Text>
+                    {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
                     </L.FlexRows>
                   </L.FlexRows>
 

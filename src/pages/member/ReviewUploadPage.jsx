@@ -17,12 +17,33 @@ function ReviewUploadPage() {
   const navigate = useNavigate()
   const [color, setColor] = useState(false)
   const [modal, setModal] = useState(false)
+  const [star, setStar] = useState(0)
 
   const ShowReviewModal = () => {
     setModal(!modal);
   }
   const CloseModal = () => {
     setModal(!modal);
+  }
+
+  // 별점 계산
+  const handleStar = () => {
+    switch (star) {
+      case 0:
+        return '0';
+      case 1:
+        return '1';
+      case 2:
+        return '2';
+      case 3:
+        return '3';
+      case 4:
+        return '4';
+      case 5:
+        return '5';
+      default:
+        return 'star'
+    }
   }
   // const ActiveBtn()=>{
   //   if(별체크 && 내용입력){
@@ -39,20 +60,28 @@ function ReviewUploadPage() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          <L.Contents  _height={'100vh'}>
+          <L.Contents  _height='calc(100vh - 68px)'>
             <L.FlexCols _gap={28}>
               <div>
                 <T.Text _size={20} _weight={600} _color='gray900' _align='center' _line={2}>인싸 과일</T.Text>
                 <T.Text _size={16} _weight={400} _color='gray800' _align='center'>샤인머스켓 500g</T.Text>
               </div>
               <L.FlexRows _content='center' _items='center' _gap={16}>
-                {/* 색있는 별 */}
-                {/* <OneBigStar/> */}
-                <OneEmptyBigStar/>
-                <OneEmptyBigStar/>
-                <OneEmptyBigStar/>
-                <OneEmptyBigStar/>
-                <OneEmptyBigStar/>
+                {Array(5)
+                .fill()
+                .map((_, index) => (
+                  star >= index +1 ? (
+                    <div onClick={()=> setStar(index + 1)}>
+                      <OneBigStar/>
+                    </div>
+                    ) : (
+                    <div onClick={()=> setStar(index + 1)}>
+                      <OneEmptyBigStar/>
+                    </div>
+                  )
+                ))}
+                {/* 별점 */}
+                {/* {handleStar()} */}
               </L.FlexRows>
 
 

@@ -68,7 +68,7 @@ function MemberManagement() {
         onBackClick={() => navigate(-1)}
       >
        <L.Container >
-          <L.Contents _height={'100vh'}>
+          <L.Contents _height='calc(100vh - 60px)'>
             <L.FlexCols _padding={0} _gap={0}>
 
         {/* ============ 회원정보관리 ============ */}

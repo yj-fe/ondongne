@@ -43,7 +43,7 @@ function NoticePage() {
       >
         <L.Container _padding="0px 0px 8px" 
         >
-          <L.Contents _padding="0px"  _height='100vh'>
+          <L.Contents _padding="0px"  _height='calc(100vh - 60px)'>
             <L.FlexCols _gap='0px' _padding="8px 20px">
             {
               list.map(item => (
