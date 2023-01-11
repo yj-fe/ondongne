@@ -17,8 +17,8 @@ export const ImgSizeH = styled.img`
 
 export const ImgPer = styled.img`
     border-radius: ${props => props._bdr}px;
-    width: 100%;
-    height: 390px;
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || '390px'};
 `;
 
 export const RelativDiv = styled.div`

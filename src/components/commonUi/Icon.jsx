@@ -327,9 +327,9 @@ export const ArrowBottom = () => (
 );
 
 export const MinusB = () => (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="32" height="32" rx="4" fill="#F5F5F5" />
-        <path d="M16 10V22" stroke="#424242" stroke-width="2" stroke-linecap="round" />
         <path d="M22 16H10" stroke="#424242" stroke-width="2" stroke-linecap="round" />
     </svg>
 );
@@ -337,6 +337,7 @@ export const MinusB = () => (
 export const PlusB = () => (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="32" height="32" rx="4" fill="#F5F5F5" />
+        <path d="M16 10V22" stroke="#424242" stroke-width="2" stroke-linecap="round" />
         <path d="M22 16H10" stroke="#424242" stroke-width="2" stroke-linecap="round" />
     </svg>
 );

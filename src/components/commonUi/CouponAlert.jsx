@@ -73,7 +73,7 @@ const CouponAlert = ({
                             >
                                 <SimpleClose/>
                             </div>
-                            </FlexRows>
+                        </FlexRows>
                     </S.Body>
                     <Line/>
                     <S.Body>

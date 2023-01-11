@@ -14,7 +14,7 @@ import ReviewImg from 'assets/main/reviewimg.png'
 import Avatar from 'assets/common/avatar.png'
 import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileTextDiv, FinalPrice, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile } from 'pages/main/DetailsPage/DetailsPageStyle'
 import Layout from 'components/layout/Layout/Layout';
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
@@ -54,14 +54,14 @@ function BusinessProductManagementDetail() {
         >
           <DetailBody>
             <DetailContainer>
-              <ImgSizeLayout src={item.images[0]} _height={390} _width={728} />
+            <ImgPer  src={item.images[0]}/>
 
               <DetailMarketDiv>
                 <DetailMarketInfo>
                   <L.FlexRows _content="space-between" _items="center" _gap={12}>
                     <L.FlexRows >
-                      <ImgSizeLayout _width={40} _height={40} _bdr={50} src={item.profile} />
-                      <L.FlexCols _padding={0} _gap={4}>
+                      <ImgPer _height='40px' _width='40px' bdr={50} src={item.profile}/>
+                      <L.FlexCols  _gap={4}>
                         <T.Text _weight={600} _size={18} _color="gray900">{item.storeName}</T.Text>
                         <T.Text _weight={400} _size={14} _color="gray800">{item.storeAddress}</T.Text>
                       </L.FlexCols>

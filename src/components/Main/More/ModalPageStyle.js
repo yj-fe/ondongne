@@ -64,11 +64,22 @@ export const ModalTitle = styled.div`
   align-items: center;
   padding: 16px 24px;
   gap: 4px;
-
   width: 100%;
   height: 56px;
-
-  background: #FFFFFF;
+  border-radius: 0px;
+`
+export const ModalTitle2 = styled.div`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #D32F2F;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 4px;
+  width: 100%;
+  height: 56px;
   border-radius: 0px;
 `
 export const ModalButton = styled.button`

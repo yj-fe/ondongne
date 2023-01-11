@@ -20,6 +20,9 @@ import BusinessReview from "pages/business/BusinessReview";
 import BusinessProductUpload from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductUpload";
 import BusinessProductEdit from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductEdit";
 import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
+import OrderManagement from "pages/business/BusinessPage/OrderManagement";
+import OrderManagementDetailsPage from "pages/business/BusinessPage/OrderManagementDetailsPage";
+import OrderManagementDetailsAuthPage from "pages/business/BusinessPage/OrderManagementDetailsAuthPage";
 /* ========== LOGIN ========== */
 import LoginPage from "pages/login/loginpage/LoginPage";
 import FindEmail from "pages/login/email/FindEmail";
@@ -52,6 +55,7 @@ import PrivacyTerms from "components/service/TermsPage/PrivacyTerms";
 import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAskedQuestion";
 import InquiryPage from "pages/service/CustomerService/InquiryPage";
 import VocPage from "pages/service/CustomerService/VocPage";
+import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage";
 import ConfigurationPage from "pages/main/ConfigurationPage/ConfigurationPage";
 import Alert from "components/commonUi/Alert";
 import { authActions } from "store/slices/auth";
@@ -65,10 +69,6 @@ import BusinessCouponUpload from "./pages/business/BusinessPage/BusinessCouponUp
 import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 import { localActions } from "store/slices/location";
-import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage";
-import OrderManagement from "pages/business/BusinessPage/OrderManagement";
-import OrderManagementDetailsPage from "pages/business/BusinessPage/OrderManagementDetailsPage";
-import OrderManagementDetailsAuthPage from "pages/business/BusinessPage/OrderManagementDetailsAuthPage";
 
 function App() {
 	const dispatch = useDispatch();

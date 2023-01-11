@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from "react-router-dom";
-
 import {ModalBody,ModalButton,ModalDiv1,ModalDiv2,ModalOutside,ModalTitle} from './ModalPageStyle'
 
 
@@ -32,3 +31,4 @@ function ModalPage({PropsModal}) {
 }
 
 export default ModalPage
+

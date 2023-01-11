@@ -15,12 +15,14 @@ import ModalMorePage from 'components/Main/More/ModalMorePage'
 import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
 import Confirm from 'components/commonUi/Confirm';
-import { ArrowBottom, Cart, Close, CloseW, Delete, MinusB, My, MyC, PlusB } from 'components/commonUi/Icon';
+import { ArrowBottom, Cart, Close, CloseW, Delete, MinusB, More, My, MyC, PlusB } from 'components/commonUi/Icon';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as I from 'components/commonUi/Input';
 import { ImgPer, ImgSize100, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { Badge, LayerTextButton } from 'components/commonUi/Button';
+import ReportAlert from 'components/commonUi/ReportAlert';
+import Modal from 'components/commonUi/Modal';
 
 function DetailsPage(props) {
 
@@ -28,7 +30,7 @@ function DetailsPage(props) {
   const [detailTab, setDetailTab] = useState(0)
   // let [item] = useState(data)
   // let {id} = useParams()
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
   const [orderToggle, setOrderToggle] = useState(false);
   const [reviewToggle, setReviewToggleToggle] = useState(false);
   const navigate = useNavigate();
@@ -36,21 +38,16 @@ function DetailsPage(props) {
   const [confirm, setConfirm] = useState(false);
   const [check, setCheck] = useState(false);
   const [btn, setBtn] = useState(true);
+  const [report, setReport] = useState('')
 
 
-  // const{ 
-  //   state: {
-  //     product: {id, title, img, price },
-  //   },
-  // } = useLocation();
 
-
-  const ShowMoreModal = () => {
-    setModal(!modal);
-  }
-  const PropsModal = () => {
-    setModal(!modal);
-  }
+  // const ShowMoreModal = () => {
+  //   setModal(!modal);
+  // }
+  // const PropsModal = () => {
+  //   setModal(!modal);
+  // }
 
 
   const paymentsOrder = () => {
@@ -66,20 +63,36 @@ function DetailsPage(props) {
     }
   }
 
-  const closeOrderToggle = () => {
-    setOrderToggle(false);
-  }
-  const closeReviewToggle = () => {
-    setReviewToggleToggle(false)
-  }
+  // 단골찜버튼
   const handleSwitch=()=>{
     setCheck(!check)
+  }
+  // 수량토글닫기
+  const closeOrderToggle = () => {
+    setOrderToggle(false);
   }
   // 대댓글남기기토글
   const openReviewToggle = () => {
     setReviewToggleToggle(true)
   }
+  // 대댓글토글닫기
+  const closeReviewToggle = () => {
+    setReviewToggleToggle(false)
+  }
 
+// 리뷰신고모달
+  const openReport = () => {
+    return setReport({
+      title: '리뷰 신고',
+      titledesc1: '해당 리뷰에 문제가 있나요?',
+      titledesc2: '신고 사유를 선택해주세요!',
+      contents: "",
+      buttonText: "신고하기",
+      onCloseClick: () => setReport(null),
+      onButtonClick: () => setReport(null),
+      onOverlayClick: () => setReport(null),
+    })
+  }
 
   return (
     <div>
@@ -139,31 +152,6 @@ function DetailsPage(props) {
                   </L.FlexRows>
                 </L.Contents>
               </L.FlexCols>
-
-          {/* <DetailImg src={props.item[id].img}/> */}
-          {/* <DetailMarketDiv>
-            <DetailMarketInfo>
-              <MarketProfile>
-                <ProfileImg src={props.item[id].img}/>
-                <ProfileName>
-                  <MarketName>{props.item[id].title}</MarketName>
-                  <MarketLocation>{props.item[id].location}</MarketLocation>
-                </ProfileName>
-              </MarketProfile>
-
-            <DetailMarketTitle>
-              <MarketTitle>{props.item[id].title}</MarketTitle>
-              <RateStyle>
-                <Star><StarIcon/></Star>
-                <Number>(4.5)</Number>
-              </RateStyle>
-              <DiscountStyle>
-                <Discount>{props.item[id].discount}</Discount>
-                <Price>{props.item[id].price}</Price>
-              </DiscountStyle>
-              <FinalPrice>{props.item[id].finalprice}</FinalPrice>
-            </DetailMarketTitle>
-          </DetailMarketDiv> */}
 
 
               <L.FlexRows _content='center' _items='center' _gap='0px' _height='40px'>
@@ -228,7 +216,7 @@ function DetailsPage(props) {
         </L.Contents>
       </L.Container>
     </Layout>
-      {modal && <ModalMorePage PropsModal={PropsModal} />}
+      {/* {modal && <ModalMorePage PropsModal={PropsModal} />} */}
       {
         confirm &&
         <Confirm
@@ -239,6 +227,18 @@ function DetailsPage(props) {
             onCancelClick={() => {
               setConfirm(false)
             }}
+        />
+      }
+      {
+        report &&
+        <ReportAlert
+          title={report.title}
+          titledesc1={report.titledesc1}
+          titledesc2={report.titledesc2}
+          contents={report.contents}
+          buttonText={report.buttonText}
+          onButtonClick={report.onButtonClick}
+          onOverlayClick={report.onOverlayClick}
         />
       }
 
@@ -252,6 +252,11 @@ function DetailsPage(props) {
 
 
 function TabContent({openReviewToggle, detailTab}) {
+    const [modal, setModal] = useState(false);
+    const ShowMoreModal = () => {
+      setModal(!modal);
+    }
+
   return [
 
     //=====================상세정보=====================
@@ -442,22 +447,20 @@ function TabContent({openReviewToggle, detailTab}) {
           <T.Text _size={15}>댓글 2건</T.Text>
         </L.FlexRows>
         <Line/>
-        <L.FlexCols _gap={16}>
+        <L.FlexCols _gap={24}>
           {/* =======댓글1====== */}
-          <L.FlexCols  _gap={16}>
+          <L.FlexCols  _gap={24}>
             <L.FlexRows  _gap={16} _content='space-between' _items='stretch'>
 
-              <L.FlexRows _width='calc(100% - 60px)'  _content='left'>
+              <L.FlexRows _gap={16}  _width='calc(100% - 60px)'  _content='left'>
                 <L.FlexRows>
                   <ReviewProfileImg src={Avatar} />
                 </L.FlexRows>
                 <L.FlexCols  _items='start' _content='left' >
-                  <L.FlexCols _gap={4}>
-                    <L.FlexRows>
+                    <L.FlexRows _items='center'>
                       <T.Text _size={16} _weight={600}>우리동네</T.Text>
+                      <ReviewDate>1초 전</ReviewDate>
                     </L.FlexRows>
-                    <ReviewDate>2일 전</ReviewDate>
-                  </L.FlexCols>
                   <L.FlexCols>
                     <Comments>담에 또 먹을래요~~~~~~~~</Comments>
                     <T.Text  _size={13} _weight={500} _color='gray500' onClick={openReviewToggle} >댓글달기</T.Text>
@@ -466,6 +469,9 @@ function TabContent({openReviewToggle, detailTab}) {
               </L.FlexRows>
 
               <L.FlexRows _content='right' _items='start' _width='50px'>
+                <button onClick={ShowMoreModal}>
+                <More />
+                </button>
                 {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
               </L.FlexRows>
             </L.FlexRows>
@@ -473,17 +479,15 @@ function TabContent({openReviewToggle, detailTab}) {
           {/* =======대댓글1====== */}
             <L.FlexRows _padding='0px 0px 0px 36px' _gap='0px'>
               <L.FlexRows  _gap={16} _content='space-between' _items='stretch'>
-                <L.FlexRows _width='calc(100% - 60px)'  _content='left'>
+                <L.FlexRows _gap={16} _width='calc(100% - 60px)'  _content='left'>
                   <L.FlexRows>
                     <ReviewProfileImg src={Avatar} />
                   </L.FlexRows>
                   <L.FlexCols  _items='start' _content='left' >
-                    <L.FlexCols _gap={4}>
-                      <L.FlexRows>
+                      <L.FlexRows _items='center'>
                         <T.Text _size={16} _weight={600}>우리동네</T.Text>
+                        <ReviewDate>1분 전</ReviewDate>
                       </L.FlexRows>
-                      <ReviewDate>2일 전</ReviewDate>
-                    </L.FlexCols>
                     <L.FlexCols>
                       <Comments>@우리동네 담에 또 먹을래요~~~~~~~~</Comments>
                       <T.Text _size={13} _weight={500} _color='gray500' onClick={openReviewToggle} >댓글달기</T.Text>
@@ -491,6 +495,9 @@ function TabContent({openReviewToggle, detailTab}) {
                   </L.FlexCols>
                 </L.FlexRows>
                 <L.FlexRows _content='right' _items='start' _width='50px'>
+                  <button onClick={ShowMoreModal}>
+                  <More />
+                  </button>
                   {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
                 </L.FlexRows>
               </L.FlexRows>
@@ -498,17 +505,15 @@ function TabContent({openReviewToggle, detailTab}) {
           {/* =======대댓글2====== */}
             <L.FlexRows _padding='0px 0px 0px 36px' _gap='0px'>
               <L.FlexRows  _gap={16} _content='space-between' _items='stretch'>
-                <L.FlexRows _width='calc(100% - 60px)'  _content='left'>
+                <L.FlexRows _gap={16}  _width='calc(100% - 60px)'  _content='left'>
                   <L.FlexRows>
                     <ReviewProfileImg src={Avatar} />
                   </L.FlexRows>
                   <L.FlexCols  _items='start' _content='left' >
-                    <L.FlexCols _gap={4}>
-                      <L.FlexRows>
+                      <L.FlexRows _items='center'>
                         <T.Text _size={16} _weight={600}>우리동네</T.Text>
-                      </L.FlexRows>
                       <ReviewDate>2일 전</ReviewDate>
-                    </L.FlexCols>
+                      </L.FlexRows>
                     <L.FlexCols>
                       <Comments>@우리동네 담에 또 먹을래요~~~~~~~~</Comments>
                       <T.Text _size={13} _weight={500} _color='gray500' onClick={openReviewToggle} >댓글달기</T.Text>
@@ -516,6 +521,9 @@ function TabContent({openReviewToggle, detailTab}) {
                   </L.FlexCols>
                 </L.FlexRows>
                 <L.FlexRows _content='right' _items='start' _width='50px'>
+                  <button onClick={ShowMoreModal}>
+                  <More />
+                  </button>
                   {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
                 </L.FlexRows>
               </L.FlexRows>
@@ -523,19 +531,19 @@ function TabContent({openReviewToggle, detailTab}) {
 
           </L.FlexCols>
           {/* =======댓글2====== */}
-          <L.FlexCols  _gap={16}>
+          <L.FlexCols  _gap={24}>
             <L.FlexRows  _gap={16} _content='space-between' _items='stretch'>
 
-              <L.FlexRows _width='calc(100% - 60px)'  _content='left'>
+              <L.FlexRows _gap={16}  _width='calc(100% - 60px)'  _content='left'>
                 <L.FlexRows>
                   <ReviewProfileImg src={Avatar} />
                 </L.FlexRows>
                 <L.FlexCols  _items='start' _content='left' >
                   <L.FlexCols _gap={4}>
-                    <L.FlexRows>
+                    <L.FlexRows  _items='center'>
                       <T.Text _size={16} _weight={600}>우리동네</T.Text>
-                    </L.FlexRows>
                     <ReviewDate>2일 전</ReviewDate>
+                    </L.FlexRows>
                   </L.FlexCols>
                   <L.FlexCols>
                     <Comments>담에 또 먹을래요~~~~~~~~</Comments>
@@ -545,18 +553,50 @@ function TabContent({openReviewToggle, detailTab}) {
               </L.FlexRows>
 
               <L.FlexRows _content='right' _items='start' _width='50px'>
+                <button onClick={ShowMoreModal}>
+                  <More />
+                </button>
                 {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
               </L.FlexRows>
             </L.FlexRows>
           </L.FlexCols>
         </L.FlexCols>
       </L.FlexCols>
+      {/* {modal && <ModalMorePage PropsModal={PropsModal} />} */}
+      {
+        modal &&
+        <Modal
+            title="더보기"
+            desc1="댓글 수정"
+            desc2="댓글 삭제"
+            onCloseClick={() => {
+              setModal(false)
+            }}
+        />
+      }
     </div>
   ][detailTab]
 }
 
 // 수량토글
 function OrderToggle({closeOrderToggle}){
+  const [num, setNum] = useState(1)
+  // 증가감소버튼
+  const increase = () => {
+    if(num>=0){
+      setNum(num+1)
+    }else{
+      return
+    }
+  }
+  const decrease = () => {
+    if(num>0){
+      setNum(num-1)
+    }else{
+      return
+    }
+  }
+
   return(
     <div>
       <OrderToggleBox>
@@ -571,10 +611,14 @@ function OrderToggle({closeOrderToggle}){
         </button>
         <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
           <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
-          <L.FlexRows _content='right' _gap={12} _items='center' _width='112px'>
-            <MinusB/>
-            <T.Text _weight={500}>1</T.Text>
-            <PlusB/>
+          <L.FlexRows _content='right' _gap='0px' _items='center' _width='112px'>
+            <button onClick={decrease}>
+              <MinusB />
+            </button>
+            <T.Text _width='48px' _align='center' _weight={500}>{num}</T.Text>
+            <button onClick={increase}>
+              <PlusB/>
+            </button>
           </L.FlexRows>
         </L.FlexRows>
         <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
@@ -601,7 +645,7 @@ function ReviewToggle({closeReviewToggle}){
           <button
             type='button'
             onClick={closeReviewToggle}
-            >
+          >
             <CloseW/>
           </button>
         </L.FlexRows>

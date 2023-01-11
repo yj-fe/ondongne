@@ -229,12 +229,12 @@ function BusinessManagementTab1() {
           {/* ============== 카테고리 ==============  */}
           <ContentDiv style={{ position: "relative" }}>
             <ContentTitle>카테고리</ContentTitle>
-            <TitleInfoDiv>
+            <TitleInfoDiv onClick={() => setSelect(!select)}>
               <TitleInfo>
                 {store.categories?.length > 0 ? store.categories.join(', ') : '카테고리 선택'}
               </TitleInfo>
               <RightStyle
-                onClick={() => setSelect(!select)}
+                
               ><Down /></RightStyle>
             </TitleInfoDiv>
             {categoryErroMessage && <Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{categoryErroMessage}</Text>}

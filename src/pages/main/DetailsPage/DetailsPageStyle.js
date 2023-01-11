@@ -15,7 +15,7 @@ export const DetailContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: #F5F5F5;
-  width: 728px;
+  width: 100%;
   height: auto;
   padding: 0;
 
@@ -127,10 +127,11 @@ export const Line = styled.div`
   background: #F5F5F5;
 `
 export const DetailMarketTitle = styled.div`
+  height: auto;
   
 `
 export const MarketTitle = styled.div`
-  width: 688px;
+  width: 100%;
   height: 26px;
   font-weight: 500;
   font-size: 18px;
@@ -244,8 +245,11 @@ export const ButtonStyle = styled.div`
   position: fixed;
   bottom: 0;
   justify-items: center;
-  width: 100%;
+  width: 728px;
   height: 70px;
+  @media screen and (max-width: 728px) {
+    width: 100%;
+  }
 `
 export const DetailButtonDiv = styled.div`
   display: flex;
