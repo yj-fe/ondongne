@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import BannerImg from 'assets/Img.png'
 import MainBestCoupon from 'components/Main/Main/MainBestCoupon/MainBestCoupon'
 import MainLastChance from 'components/Main/Main/MainLastChance/MainLastChance'
@@ -14,10 +14,26 @@ import MainProductTest from 'components/Main/Main/MainProductTest/MainProductTes
 import FooterLayout from 'components/layout/Footer/Footer';
 import * as L from 'components/commonUi/Layout';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import Alert from 'components/commonUi/Alert'
 
 
 function MainPage() {
+  const { state } = useLocation();
+  const [alert, setAlert] = useState(null);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    console.log(state);
+    if (state && state.error) {
+      return setAlert({
+        contents: state.error,
+        buttonText: "확인",
+        onButtonClick: () => setAlert(false),
+        onOverlayClick: () => setAlert(false),
+      });
+    }
+  }, [state])
 
   return (
     <div>
@@ -86,6 +102,15 @@ function MainPage() {
       <FooterStyle>
         <MainFooter />
       </FooterStyle>
+      {alert && (
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      )}
     </div>
   )
 }

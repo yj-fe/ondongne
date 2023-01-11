@@ -3,7 +3,7 @@ import { client } from "service";
 
 const authenticationState = {
 	isAuthenticated: false,
-	member: {},
+	id: "",
 };
 
 const authSlice = createSlice({
@@ -23,8 +23,7 @@ const authSlice = createSlice({
 			client.defaults.headers.common["Authorization"] = data.accessToken;
 		},
 		save(state, action) {
-			const member = action.payload;
-			state.member = member;
+			state.id = action.payload;
 		},
 		logout(state) {
 			localStorage.removeItem("accessToken");

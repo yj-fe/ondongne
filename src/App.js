@@ -69,6 +69,7 @@ import BusinessCouponUpload from "./pages/business/BusinessPage/BusinessCouponUp
 import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 import { localActions } from "store/slices/location";
+import jwtDecode from "jwt-decode";
 
 function App() {
 	const dispatch = useDispatch();
@@ -77,6 +78,7 @@ function App() {
 
 	const member = () => {
 		const data = getExpiry("accessToken");
+		const token = localStorage.getItem("accessToken");
 		const localState = localStorage.getItem("localState");
 		if (data !== null) {
 			if (data.status) {
@@ -92,6 +94,11 @@ function App() {
 			}
 
 			dispatch(authActions.login(data));
+		}
+
+		if (token != null) {
+			const member = jwtDecode(token);
+			dispatch(authActions.save(member.sub));
 		}
 
 		if (localState) {
@@ -223,7 +230,7 @@ function App() {
 				{/* ========== 주문 ========== */}
 				<Route path="/order">
 					<Route path="all" element={<OrderListPage />} />
-					<Route path="new/:id" element={<OrderFormPage />} />
+					<Route path="new" element={<OrderFormPage />} />
 					<Route path="details/:id" element={<OrderDetailsPage />} />
 				</Route>
 

@@ -222,3 +222,9 @@ export const GridContainer = styled.div`
 	padding-top: 32px;
 	gap: 16px;
 `
+
+export const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background: #F5F5F5;
+`
