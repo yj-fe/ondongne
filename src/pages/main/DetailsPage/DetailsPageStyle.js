@@ -630,13 +630,13 @@ export const MarketComments = styled.div`
 export const OrderToggleBox = styled.div`
   position: absolute;
   bottom: 0;
-  padding: 16px 20px;
+  padding: ${props=>props._padding || '16px 20px'};
   margin-bottom: 70px;
-  border-radius: 20px 20px 0px 0px;
-  gap: 16px;
-  width: 728px;
-  height: 158px;
-  background: #FFFFFF;
+  border-radius: ${props=>props._br || '20px 20px 0px 0px'};
+  gap: ${props=>props._gap || '16px'};
+  width: ${props=>props._width || '728px'};
+  height: ${props=>props._height || '158px'};
+  background: ${props=>props._bg || '#FFFFFF'};
   box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.08);
   @media only screen and (max-width: 728px) { 
     width: 100%;

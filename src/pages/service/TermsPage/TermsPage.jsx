@@ -14,7 +14,7 @@ function TermsPage() {
         bell={false}
       >
         <L.Container>
-          <L.Contents _height='100vh'>
+          <L.Contents _height='calc(100vh - 60px)'>
           <Link to="/service/terms/service">
             <TermsDiv>
               <TermsTitle>서비스 이용약관</TermsTitle>
