@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
@@ -7,21 +7,23 @@ import { Line } from 'components/Login/Signup/agreement/AgreementStyle';
 import { detailsList } from 'service/border';
 import dayjs from 'dayjs';
 
-function NoticeDetailsPage() {
+function NoticeDetailsPage(props) {
   const navigate = useNavigate();
   const [details, setDetails] = useState([]);
-  // let {id} = useParams();
 
+  // borderId 가져오기
+  const {
+    state: { item },
+  } = useLocation();
 
   // 포스트맨 body
   const requestDetails = {
-    borderId: 3
+    borderId: `${item.borderId}`
   }
   // 공지사항 상세 불러오기
   const getDetails = async () => {
     const response = await detailsList(requestDetails);
     const { data } = response.data;
-    console.log(data);
     setDetails(data);
   }
 
@@ -42,8 +44,6 @@ function NoticeDetailsPage() {
         <L.Container
          _padding="0px 0px 8px" 
         >
-
-          <Link to='/notice/details/:id'>
           <L.Contents   _height='calc(100vh - 60px)' _padding="0px">
             <L.FlexCols _gap={20} _padding="0px">
               <L.FlexCols _gap={4} _padding="8px 20px">
@@ -52,15 +52,10 @@ function NoticeDetailsPage() {
              </L.FlexCols>
              <Line/>
               <L.FlexCols _gap={4} _padding="8px 20px">
-                <T.Text _weight={400} _size={15} _color="gray800">
-                {details.contents}
-
-                </T.Text>
+                <T.Text _weight={400} _size={15} _color="gray800">{details.contents}</T.Text>
              </L.FlexCols>
              </L.FlexCols>
-
           </L.Contents>
-        </Link>
         </L.Container>
       </Layout>
     </div>
