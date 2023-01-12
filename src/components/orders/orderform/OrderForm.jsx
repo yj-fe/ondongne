@@ -23,7 +23,7 @@ const dummyData = JSON.stringify({
     pay: '카드 결제'
 });
 
-const OrderForm = ({ id, count }) => {
+const OrderForm = () => {
 
     const [orderData, setOrderData] = useState(null);
     // form
@@ -131,7 +131,7 @@ const OrderForm = ({ id, count }) => {
 
     useEffect(() => {
         loadData();
-    }, [id])
+    }, [])
 
     useEffect(() => {
         if (status) orderSuccess();

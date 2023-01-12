@@ -76,7 +76,7 @@ function DetailsPage(props) {
       if (orderToggle && type === 0) return;
 
       if (orderToggle && type === 1) {
-        return navigate('/order/new', { state: { id: item.itemId, count: count } })
+        return navigate('/order/new', { state: { data: [{ id: item.itemId, count: count }], toBack: `/details/${id}` } })
       }
 
     } else {
@@ -476,9 +476,9 @@ function OrderToggle({
           <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
             <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
             <L.FlexRows _content='right' _gap={12} _items='center' _width='112px'>
-              <button type='button' onClick={() => counterHandler(1)}><MinusB /></button>
+              <button type='button' onClick={() => counterHandler(-1)}><MinusB /></button>
               <T.Text _weight={500}>{numberFormat(count)}</T.Text>
-              <button type='button' onClick={() => counterHandler(-1)}><PlusB /></button>
+              <button type='button' onClick={() => counterHandler(1)}><PlusB /></button>
             </L.FlexRows>
           </L.FlexRows>
           <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>

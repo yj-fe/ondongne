@@ -4,17 +4,15 @@ import OrderForm from 'components/orders/orderform/OrderForm';
 import Confirm from 'components/commonUi/Confirm';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const OrderFormPage = props => {
+const OrderFormPage = () => {
 
     const { state } = useLocation();
-    const [id, setId] = useState();
-    const [count, setCount] = useState();
     const [cancelConfirm, setCancelConfirm] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        setId(state.id);
-        setCount(state.count);
+        console.log(state.data);
+        console.log(state.toBack);
     }, [state])
 
     return (
@@ -24,15 +22,14 @@ const OrderFormPage = props => {
                 setCancelConfirm(true)
             }}
         >
-            <OrderForm id={id} count={count} />
-            {/* 나중에 삭제하고, global로 대치 */}
+            <OrderForm />
             {
                 cancelConfirm &&
                 <Confirm
                     contents="진행중인 주문을 취소하시겠습니까?"
                     confirmText="네"
                     cancelText="아니오"
-                    onConfirmClick={() => { navigate(`/details/${id}`) }}
+                    onConfirmClick={() => { window.location.replace(state.toBack) }}
                     onCancelClick={() => { setCancelConfirm(false) }}
                 />
             }
