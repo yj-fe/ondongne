@@ -157,8 +157,10 @@ export const ListEmpty = () => {
   return (
     <L.FlexCols >
       <L.FlexRows _content='center' _padding='80px 20px'>
-        <T.Text _weight={300} _size={15} _color="gray600" _align='center'><p>해당 지역에 등록된 업체가 없습니다.</p><p>다른 지역으로 검색해주세요!</p></T.Text>
-
+        <T.Text _weight={300} _size={15} _color="gray600" _align='center'>
+          <p>해당 지역에 등록된 업체가 없습니다.</p>
+          <p>다른 지역으로 검색해주세요!</p>
+        </T.Text>
       </L.FlexRows>
     </L.FlexCols>
   )

@@ -84,10 +84,6 @@ function DetailsPage(props) {
     }
   }
 
-  const likeHandler = (id) => {
-    setItem({ ...item, likeStatus: !item.likeStatus })
-  }
-
   const getItem = async () => {
     const response = await getItemDetails(id);
 
@@ -101,8 +97,10 @@ function DetailsPage(props) {
   }
 
   useEffect(() => {
-    getItem();
-  }, [])
+    if (id) {
+      getItem();
+    }
+  }, [id])
 
   return (
     <div>
@@ -139,7 +137,9 @@ function DetailsPage(props) {
                     </L.FlexCols>
                   </L.FlexRows>
                   <L.FlexRows _content='right' _gap='0px'>
-                    <StoreLike id={item.storeId} checked={item.likeStatus} onChange={likeHandler} />
+                    <StoreLike id={item.storeId} checked={item.likeStatus} onChange={(id) => {
+                      setItem({ ...item, likeStatus: !item.likeStatus })
+                    }} />
                   </L.FlexRows>
                 </L.FlexRows>
 

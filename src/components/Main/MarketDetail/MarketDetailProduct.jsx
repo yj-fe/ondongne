@@ -1,253 +1,143 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import { CartC, Down, Star } from 'components/commonUi/Icon';
-import maindata from 'assets/data/maindata'
-import { AbsoluteDiv, ImgPer, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
-import { ModalBody, ModalButton, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from '../More/ModalPageStyle';
-import ProductTimer from 'components/commonUi/ProductTimer';
-import { numberFormat, totalPrice } from 'utils/utils';
-import StarRate from 'components/commonUi/StarRate';
-import ProductCart from 'components/Main/Cart/ProductCart';
-import { useNavigate } from 'react-router-dom';
+import { Down } from 'components/commonUi/Icon';
+import { ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from '../More/ModalPageStyle';
+import { useEffect } from 'react';
+import { getStoreItemList } from 'service/item';
+import { useInView } from 'react-intersection-observer';
+import { ProductCard } from '../productDetails/ProductCard';
+import LoadingBar from 'components/commonUi/LoadingBar';
+import { ModalFilter } from 'components/layout/Layout/MoreLayout';
+import { sortFormatter } from 'utils/utils';
 
-function MarketDetailProduct() {
-  let [items] = useState(maindata)
-  const [modal, setModal] = useState(false);
-  // 정렬
-  const [data, setData] = useState({
-    type: "기본 순",
-  })
-// 정렬- 선택한 type으로 바꾸기
-const dataChecked = type => {
-  setData({...data, type: type})
-}
-  const ShowMoreModal = () => {
-    setModal(!modal);
+function MarketDetailProduct({ id }) {
+  const [filter, setFilter] = useState(false);
+  const [fetching, isFetching] = useState(false);
+
+  const [list, setList] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const [sort, setSort] = useState("create");
+  const [page, setPage] = useState(1);
+
+  const [ref, inView] = useInView();
+  const [loading, setLoading] = useState(false)
+
+  const getItems = async () => {
+    const response = await getStoreItemList(id, page, sort);
+    if (response && response.data.data) {
+
+      const { items, count } = response.data.data;
+
+      setList(items);
+      setTotalCount(count);
+      isFetching(false);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000)
+    }
   }
-  const PropsModal = () => {
-    setModal(!modal);
-  }
+
+  useEffect(() => {
+    setPage(1);
+    setList([]);
+    isFetching(true);
+  }, [id, sort])
+
+  useEffect(() => {
+    if (totalCount < 18) return;
+    if (totalCount === list.length) return;
+    if (loading) return;
+
+    if (inView) {
+      setPage(prevState => prevState + 1);
+      isFetching(true);
+    }
+  }, [inView, loading])
+
+  useEffect(() => {
+    if (!fetching) return;
+
+    setLoading(true);
+    getItems();
+  }, [fetching])
 
   return (
     <div>
       <L.Container>
         <L.Contents>
           <L.FlexCols _gap={16}>
-            <L.FlexRows _gap={4} _content='flex-end'>
-              <T.Text _size={13} _weight={400} _color='gray900'>{data.type}</T.Text>
-              <button
-                type='button'
-                onClick={ShowMoreModal}
-              >
-                <Down />
-              </button>
+            <L.FlexRows _content='space-between' _items='content'>
+              <L.FlexRows _gap={4} _content='flex-start' _items='content'>
+                <T.Text _size={13} _weight={400} _color='gray900'>전체</T.Text>
+                <T.Text _size={13} _weight={600}>{totalCount}</T.Text>
+              </L.FlexRows>
+              <L.FlexRows _gap={4} _content='flex-end' _items='content'>
+                <T.Text _size={13} _weight={400} _color='gray900'>{sortFormatter(sort)}</T.Text>
+                <button
+                  type='button'
+                  onClick={() => setFilter(true)}
+                >
+                  <Down />
+                </button>
+              </L.FlexRows>
             </L.FlexRows>
-            <L.FlexRowsWrap _gap={20} _padding={0}>
-              {
-                items.map((item, idx) => (
-                  <MarketProductCard item={item} />
-                ))
-              }
-            </L.FlexRowsWrap>
+
+
+            {/* =================== 없을때 =================== */}
+            {
+              !loading &&
+              list.length === 0 &&
+              <ProductEmpty />
+            }
+
+            {/* =================== 있을때 =================== */}
+            {
+              list.length > 0 &&
+              <ProductList list={list} lastRef={ref} />
+            }
+
+            {/* =================== 로딩 =================== */}
+            {
+              loading && <LoadingBar />
+            }
+
+
           </L.FlexCols>
         </L.Contents>
       </L.Container>
-      {modal && <ModalFilter type={data.type} handler={dataChecked} closeSelector={() => setModal(false)} PropsModal={PropsModal} />}
+      {filter && <ModalFilter CloseModal={() => setFilter(false)} data={sort} setData={setSort} />}
     </div>
   )
 }
 
-export function ProductCard({
-  item, lastRef, width = 216, isCart = true
-}) {
-
-  const navigate = useNavigate();
-
+function ProductEmpty() {
   return (
-    <L.FlexCols
-      key={item.itemId}
-      ref={lastRef}
-      onClick={() => navigate(`/details/${item.itemId}`)}
-      _gap={12} _padding={0} _width={width + 'px'}
-    >
-
-      <RelativDiv>
-        {
-          isCart &&
-          <AbsoluteDiv>
-            <ProductCart id={item.itemId} count={1} type={"list"} />
-          </AbsoluteDiv>
-        }
-        {
-          !item.soldoutStatus
-            ? <ImgSizeLayout _width={width} _height={width} _bdr={6} src={item.thumbnail} />
-            : <div style={{ position: 'relative' }}>
-              <ImgSizeLayout _width={width} _height={width} _bdr={6} src={item.thumbnail} />
-              <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
-            </div>
-        }
-      </RelativDiv>
-
-      <L.FlexCols _gap={4} _padding={0} >
-        {
-          item.type == 'GROUP' &&
-          !item.soldoutStatus &&
-          <ProductTimer date={item.endDate} />
-        }
-        <T.Text _size={12} _weight={500} _color='gray600' _line='1.8' >{item.storeName}</T.Text>
-        <T.Text _size={14} _weight={400} _color='gray900'>{item.name}</T.Text>
-        {
-          item.salePercent > 0 &&
-          <L.FlexRows _gap={4} _padding={0} _items='center' >
-            <T.Text _size={15} _weight={600} _color='red'>{item.salePercent}%</T.Text>
-            <T.Text _size={13} _weight={400} _color='gray500' _decoration={'line-through'}>{numberFormat(item.price)}원</T.Text>
-          </L.FlexRows>
-        }
-        <L.FlexRows>
-          <T.Text _size={16} _weight={600} _color='gray900'>{totalPrice(item.price, item.salePercent)} 원</T.Text>
-        </L.FlexRows>
-        <L.FlexRows>
-          <StarRate rate={item.reviewRate} />
-          <T.Text _size={11} _weight={400} _color='gray800'>({item.reviewRate})</T.Text>
-        </L.FlexRows>
-
-      </L.FlexCols>
-    </L.FlexCols>
-  )
-
-}
-
-
-export function MarketProductCard(props) {
-
-  return (
-    // <div style={{width: 'calc(50% - 10px)'}}>
-    <div >
-
-      <L.FlexCols _gap={12} _padding={0} _width='216px'>
-        <RelativDiv>
-          <AbsoluteDiv>
-            <CartC />
-          </AbsoluteDiv>
-          <ImgSizeLayout _width={216} _height={216} _bdr={6} src={props.item.img} />
-        </RelativDiv>
-
-        <L.FlexCols _gap={4} _padding={0} >
-          <T.Text _size={14} _weight={400} _color='gray900'>{props.item.title}</T.Text>
-          <L.FlexRows _gap={4} _padding={0} _items='center' >
-            <T.Text _size={15} _weight={600} _color='red'>{props.item.discount}</T.Text>
-            <T.Text _size={13} _weight={400} _color='gray500'>{props.item.price}</T.Text>
-          </L.FlexRows>
-          <L.FlexRows>
-            <T.Text _size={16} _weight={600} _color='gray900'>{props.item.finalprice}</T.Text>
-          </L.FlexRows>
-          <L.FlexRows>
-            <Star />
-            <T.Text _size={11} _weight={400} _color='gray800'>(4.5)</T.Text>
-          </L.FlexRows>
-        </L.FlexCols>
-
-      </L.FlexCols>
-
-
-      {/* <L.CateCols _gap={12} _padding={0} _width='216px'>
-
-      <RelativDiv>
-        <AbsoluteDiv>
-          <CartC/>
-        </AbsoluteDiv>
-        <ImgPer _width={216} _height={216} _bdr={6} src={props.item.img}/>
-      </RelativDiv>
-
-      <L.FlexCols _gap={4} _padding={0} >
-        <T.Text _size={14} _weight={400} _color='gray900'>{props.item.title}</T.Text>
-        <L.FlexRows _gap={4} _padding={0} _items='center' >
-          <T.Text  _size={15} _weight={600} _color='red'>{props.item.discount}</T.Text>
-          <T.Text  _size={13} _weight={400} _color='gray500'>{props.item.price}</T.Text>
-        </L.FlexRows>
-        <L.FlexRows>
-          <T.Text  _size={16} _weight={600} _color='gray900'>{props.item.finalprice}</T.Text>
-        </L.FlexRows>
-        <L.FlexRows>
-          <Star/>
-          <T.Text  _size={11} _weight={400} _color='gray800'>(4.5)</T.Text>
-        </L.FlexRows>
-      </L.FlexCols>
-      
-    </L.CateCols> */}
-    </div>
+    <L.FlexRows _content='center' _gap='0px' _padding='56px 0px' _height='calc(100vh - 230px)'>
+      <T.Text _weight={300} _size={15} _color="gray600" _align='center'>
+        <p>해당 상점에</p>
+        <p>등록된 상품이 없습니다.</p>
+      </T.Text>
+    </L.FlexRows>
   )
 }
 
-export function ModalFilter({ type, handler, closeSelector }) {
 
-  const [data, setData] = useState([
-    {
-      id: 0,
-      name: "기본 순",
-      checked: false
-    },
-    {
-      id: 1,
-      name: "주문 많은 순",
-      checked: false
-    },
-    {
-      id: 2,
-      name: "리뷰 별점 순",
-      checked: false
-    },
-  ])
-  const clickHandler = name => {
-    setData(
-      data.map(item => 
-          item.name === name 
-            ? {...item, checked: !item.checked} 
-            : {...item, checked: false} 
-      )
-    )
-    handler(name);
-    closeSelector();
-  }
-
-  useEffect(() => {
-    setData(
-      data.map(item => 
-          item.name === type 
-            ? {...item, checked: !item.checked} 
-            : item
-      )
-    )
-  }, []);
-
+export function ProductList({ list, lastRef }) {
 
   return (
-    <div>
-      <ModalOutside>
-        <ModalBody>
-          <ModalDiv1>정렬</ModalDiv1>
-          <ModalDiv2>
-            {
-              data.map(item=>(
-                <ModalTitle
-                  key={item.id}
-                  onClick={() => clickHandler(item.name)}
-                >
-                  <T.Text 
-                    _weight={item.checked ? 600 : 400} 
-                    _size={15} 
-                    _color={item.checked ? "green700" : "gray900"}
-                  >
-                    {item.name}
-                  </T.Text>
-                </ModalTitle>
-              ))
-            }
-          </ModalDiv2>
-        </ModalBody>
-      </ModalOutside>
-    </div>
+    <L.FlexRowsWrap _gap={20} _padding={0}>
+      {list.map((item, index) => (
+        <React.Fragment key={index}>
+          <ProductCard
+            item={item}
+            lastRef={list.length === index + 1 ? lastRef : null}
+          />
+        </React.Fragment>
+      ))}
+    </L.FlexRowsWrap>
   )
 }
 

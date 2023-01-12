@@ -5,8 +5,8 @@ import { LastChanceDiv } from './MainBestProductStyle'
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { useSelector } from 'react-redux';
 import { MyStoreBestItem } from 'service/main';
-import { ProductCard } from 'components/Main/MarketDetail/MarketDetailProduct';
 import { useNavigate } from 'react-router-dom';
+import { ProductCard } from 'components/Main/productDetails/ProductCard';
 
 
 function MainBestProduct() {

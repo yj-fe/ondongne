@@ -1,0 +1,70 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+import ProductCart from "../Cart/ProductCart";
+import { AbsoluteDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
+import ProductTimer from "components/commonUi/ProductTimer";
+import { numberFormat, totalPrice } from "utils/utils";
+import StarRate from "components/commonUi/StarRate";
+
+export function ProductCard({
+    item, lastRef, width = 216, isCart = true
+}) {
+
+    const navigate = useNavigate();
+
+    return (
+        <L.FlexCols
+            key={item.itemId}
+            ref={lastRef}
+            _gap={12} _padding={0} _width={width + 'px'}
+        >
+            <RelativDiv>
+                {
+                    isCart &&
+                    <AbsoluteDiv>
+                        <ProductCart id={item.itemId} count={1} type={"list"} />
+                    </AbsoluteDiv>
+                }
+                {
+                    !item.soldoutStatus
+                        ? <ImgSizeLayout
+                            _width={width} _height={width} _bdr={6}
+                            src={item.thumbnail}
+                            onClick={() => navigate(`/details/${item.itemId}`)}
+                        />
+                        : <div style={{ position: 'relative' }}>
+                            <ImgSizeLayout _width={width} _height={width} _bdr={6} src={item.thumbnail} />
+                            <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
+                        </div>
+                }
+            </RelativDiv>
+
+            <L.FlexCols _gap={4} _padding={0} >
+                {
+                    item.type == 'GROUP' &&
+                    !item.soldoutStatus &&
+                    <ProductTimer date={item.endDate} />
+                }
+                <T.Text _size={12} _weight={500} _color='gray600' _line='1.8' >{item.storeName}</T.Text>
+                <T.Text _size={14} _weight={400} _color='gray900'>{item.name}</T.Text>
+                {
+                    item.salePercent > 0 &&
+                    <L.FlexRows _gap={4} _padding={0} _items='center' >
+                        <T.Text _size={15} _weight={600} _color='red'>{item.salePercent}%</T.Text>
+                        <T.Text _size={13} _weight={400} _color='gray500' _decoration={'line-through'}>{numberFormat(item.price)}원</T.Text>
+                    </L.FlexRows>
+                }
+                <L.FlexRows>
+                    <T.Text _size={16} _weight={600} _color='gray900'>{totalPrice(item.price, item.salePercent)} 원</T.Text>
+                </L.FlexRows>
+                <L.FlexRows>
+                    <StarRate rate={item.reviewRate} />
+                    <T.Text _size={11} _weight={400} _color='gray800'>({item.reviewRate})</T.Text>
+                </L.FlexRows>
+
+            </L.FlexCols>
+        </L.FlexCols>
+    )
+}

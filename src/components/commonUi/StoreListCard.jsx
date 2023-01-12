@@ -7,8 +7,11 @@ import StarRate from './StarRate';
 import { numberFormat } from 'utils/utils';
 import StoreLike from './StoreLike';
 import Img from 'assets/images/marketdetail.png';
+import { useNavigate } from 'react-router-dom';
 
 export const StoreListCard = ({ list, setData, lastRef }) => {
+
+    const navigate = useNavigate();
 
     const likeHandler = (id) => {
         setData(
@@ -25,6 +28,7 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
             {
                 list.map((item, index) => (
                     <L.FlexRows
+                        onClick={() => navigate(`/market/detail/${item.storeId}`)}
                         key={item.storeId}
                         _content='space-between'
                         ref={list.length == index + 1 ? lastRef : null}

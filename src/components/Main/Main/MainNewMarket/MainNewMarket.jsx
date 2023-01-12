@@ -27,12 +27,12 @@ function MainNewMarket() {
     navigate(
       "/collections",
       {
-        state: 
-          {
-            type: 0,
-            title: "우리동네 신규 입점", 
-            list: list
-          }
+        state:
+        {
+          type: 0,
+          title: "우리동네 신규 입점",
+          list: list
+        }
       }
     )
   }
@@ -46,9 +46,9 @@ function MainNewMarket() {
     <div>
       <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
         <T.Text _size={18} _weight={700} _color='black'>우리동네 신규 입점</T.Text>
-        <T.Text 
-          _size={14} 
-          _weight={500} 
+        <T.Text
+          _size={14}
+          _weight={500}
           _color='blue'
           onClick={router}
         >
@@ -65,11 +65,12 @@ function MainNewMarket() {
           <L.GridContainer>
             {
               list.map((item, index) => (
-                <React.Fragment
+                <div
                   key={index}
+                  onClick={() => navigate(`/market/detail/${item.storeId}`)}
                 >
                   <NewMarketCard item={item} />
-                </React.Fragment>
+                </div>
               ))
             }
           </L.GridContainer>
@@ -79,19 +80,19 @@ function MainNewMarket() {
   )
 }
 
-function NewMarketCard(props) {
+function NewMarketCard({ item }) {
   return (
     <ContentProduct>
       <ContentImgDiv>
         <ContentImgBadge>신규 입점</ContentImgBadge>
-        <ContentImg src={props.item.banner} />
+        <ContentImg src={item.banner} />
       </ContentImgDiv>
       <ContentStyle>
         <ContentDiv>
-          <ContentMarketImg src={props.item.profile} />
+          <ContentMarketImg src={item.profile} />
           <ContentTextStyle>
-            <ContentMarket>{props.item.name}</ContentMarket>
-            <ContentInfo>{props.item.description}</ContentInfo>
+            <ContentMarket>{item.name}</ContentMarket>
+            <ContentInfo>{item.description}</ContentInfo>
           </ContentTextStyle>
         </ContentDiv>
       </ContentStyle>

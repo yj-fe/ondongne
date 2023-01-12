@@ -1,9 +1,16 @@
 import { client } from ".";
 
 const urls = {
+	details: "/store/details",
 	categoryList: "/store/category/list",
 	searchList: "/store/search/list",
 };
+/* ==============================
+   상점 상세
+============================== */
+export function getStoreDetails(id) {
+	return client.get(`${urls.details}/${id}`);
+}
 
 /* ==============================
    상점 목록

@@ -5,20 +5,20 @@ import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
 import Layout from 'components/layout/Layout/Layout';
 import LoadingBar from 'components/commonUi/LoadingBar';
-import { ProductCard } from 'components/Main/MarketDetail/MarketDetailProduct';
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { Img } from '../MainPage/MainPageStyle';
 import StarRate from 'components/commonUi/StarRate';
 import { FlagN, FlagNC } from 'components/commonUi/Icon';
 import { numberFormat } from 'utils/utils';
+import { ProductCard } from 'components/Main/productDetails/ProductCard';
 
 function CollectionPage() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  
-  const {title, list, type} = location.state;
-  
+
+  const { title, list, type } = location.state;
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ function CollectionPage() {
                   list.length > 0 &&
                   <L.FlexRowsWrap _gap={20} _padding={0}>
                     {
-                      type === 0 
+                      type === 0
                         ? <ListCard list={list} lastRef={null} />
                         : list.map(item => (
                           <ProductCard
@@ -83,7 +83,7 @@ function CollectionPage() {
 
 export const ListCard = ({ list, lastRef }) => {
   const [check, setCheck] = useState(false)
-  const handleSwitch=()=>{
+  const handleSwitch = () => {
     setCheck(!check)
   }
   return (
@@ -123,7 +123,7 @@ export const ListCard = ({ list, lastRef }) => {
               _gap='0px' _content='right' _width='40px'
               onClick={handleSwitch}
             >
-            {check ? <FlagNC /> : <FlagN />}
+              {check ? <FlagNC /> : <FlagN />}
             </L.FlexRows>
           </L.FlexRows>
         ))

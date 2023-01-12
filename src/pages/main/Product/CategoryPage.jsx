@@ -8,13 +8,13 @@ import Layout from 'components/layout/Layout/Layout';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom'
 import { Down } from 'components/commonUi/Icon';
 import { Line } from '../DetailsPage/DetailsPageStyle';
-import { ProductCard } from 'components/Main/MarketDetail/MarketDetailProduct';
 import { FilterLayout, SortLayout } from 'components/layout/Layout/MoreLayout';
 import { sortFormatter } from 'utils/utils';
 import { useInView } from 'react-intersection-observer';
 import { getItemCategoryList } from 'service/item';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import CategoryTabs from 'components/commonUi/CategoryTabs';
+import { ProductCard } from 'components/Main/productDetails/ProductCard';
 
 function CategoryPage(props) {
   const navigate = useNavigate();
@@ -117,7 +117,7 @@ function CategoryPage(props) {
                     _bg={sort !== 'create' && 'green700'}
                     onClick={() => setFilter02(true)}
                   >
-                    <T.Text _weight={400} _size={13} _color={sort !==  'create' ? 'white' : 'gray900'} _align='center'>{sortFormatter(sort)}</T.Text>
+                    <T.Text _weight={400} _size={13} _color={sort !== 'create' ? 'white' : 'gray900'} _align='center'>{sortFormatter(sort)}</T.Text>
                     <Down color={sort !== 'create' ? 'white' : '#424242'} />
                   </B.FilterButton>
                 </L.FlexRows>

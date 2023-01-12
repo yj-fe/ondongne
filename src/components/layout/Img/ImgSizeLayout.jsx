@@ -47,6 +47,7 @@ export const AbsoluteDiv = styled.div`
     bottom: 0%;
     margin: 0;
     padding: 18px 12px;
+    z-index: 9999;
 `;
 export const AbsoluteDivS = styled.div`
     border-radius: ${props => props._bdr}px;

@@ -55,15 +55,18 @@ export const MarketTable = styled.table`
         padding: 2px 0;
         line-height: 1.5;
         font-weight: 400;
-        
+        height: 30px;
+        color: #424242;
+
         th {
+            font-weight: 500;
+            text-align: left;
             width: 20%;
-            text-align: left;
         }
-        
+
         td {
-            word-break: keep-all;
             text-align: left;
+            width: 80%;
         }
     }
 

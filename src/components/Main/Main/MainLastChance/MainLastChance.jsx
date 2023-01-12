@@ -4,9 +4,9 @@ import * as T from 'components/commonUi/Text';
 import { LastChanceDiv } from './MainLastChanceStyle'
 import { getLastGroupItemList } from 'service/main';
 import { useSelector } from 'react-redux';
-import { ProductCard } from 'components/Main/MarketDetail/MarketDetailProduct';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { useNavigate } from 'react-router-dom';
+import { ProductCard } from 'components/Main/productDetails/ProductCard';
 
 function MainLastChance() {
   const navigate = useNavigate();

@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { MarketTable } from 'components/commonUi/Table';
+import { phoneFormatter } from 'utils/utils';
 
-function MarketDetailInfo() {
+function MarketDetailInfo({ item }) {
+
+  const dayweekToText = (day) => {
+    const sales = item.sales.filter(s => s.dayWeek === day);
+
+    if (sales[0].dayOffStatus) {
+      return "휴무";
+    }
+
+    return `${sales[0].openTime} ~ ${sales[0].closeTime}`
+  }
+
   return (
     <div>
       {/* 상점 소개 */}
@@ -11,7 +23,7 @@ function MarketDetailInfo() {
         <L.Contents>
           <L.FlexCols>
             <T.Text _weight={700} _size={16} _color="gray900">상점 소개</T.Text>
-            <T.Text _weight={400} _size={15} _color="gray800"><p>수많은 과일집이 있습니다.</p><p>하지만 저희는 다릅니다.</p><p>언제나 좋은 과일을 전달 드리기 위해 직접 과일을 확인하고 포장 합니다.</p></T.Text>
+            <T.Text _weight={400} _size={15} _color="gray800">{item.description}</T.Text>
           </L.FlexCols>
         </L.Contents>
       </L.Container>
@@ -23,51 +35,46 @@ function MarketDetailInfo() {
           <L.FlexCols>
             <T.Text _weight={700} _size={16} _color="gray900">영업정보</T.Text>
             <MarketTable>
-              <tbody >
+              <tbody>
                 <tr>
                   <th>상호명</th>
-                  <td>인싸과일</td>
+                  <td>{item.name}</td>
                 </tr>
                 <tr>
                   <th>운영시간</th>
-                  <td>월요일 : 휴일</td>
+                  <td>월요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
                   <th></th>
-                  <td>화요일 : 10:00 ~ 19:00</td>
+                  <td>화요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
                   <th></th>
-                  <td>수요일 : 10:00 ~ 19:00</td>
+                  <td>수요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
                   <th></th>
-                  <td>목요일 : 10:00 ~ 19:00</td>
+                  <td>목요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
                   <th></th>
-                  <td>금요일 : 10:00 ~ 19:00</td>
+                  <td>금요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
                   <th></th>
-                  <td>토요일 : 10:00 ~ 19:00</td>
+                  <td>토요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
                   <th></th>
-                  <td>일요일 : 11:00 ~ 15:00</td>
-                </tr>
-                <tr>
-                  <th></th>
-                  <td>공휴일 휴무</td>
+                  <td>일요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
                   <th>전화번호</th>
-                  <td>070-1234-5678</td>
+                  <td>{phoneFormatter(item.phone)}</td>
                 </tr>
                 <tr>
                   <th>배달지역</th>
-                  {/* <td>김포시 풍무동, 김포시 사우동, 김포시 장기동, </td> */}
-                  <td>김포시 풍무동, 김포시 사우동, 김포시 장기동, 김포시 운양동, 김포시 구래동, 김포시 고촌읍, 김포시 양촌읍</td>
+                  <td>{item.deliveryAddress}</td>
                 </tr>
               </tbody>
             </MarketTable>
@@ -75,7 +82,7 @@ function MarketDetailInfo() {
         </L.Contents>
       </L.Container>
 
-      
+
       {/* 사업자 정보 */}
       <L.Container >
         <L.Contents _padding=" 24px 20px">
@@ -85,15 +92,15 @@ function MarketDetailInfo() {
               <tbody>
                 <tr>
                   <th>대표자명</th>
-                  <td>아이덴잇</td>
+                  <td>{item.ceo}</td>
                 </tr>
                 <tr>
                   <th>상호명</th>
-                  <td>아이덴잇</td>
+                  <td>{item.name}</td>
                 </tr>
                 <tr>
                   <th>사업자주소</th>
-                  <td>서울시 강서구 가양동 가양 데시앙플렉스센터</td>
+                  <td>{item.address} {item.addressDetails}</td>
                 </tr>
               </tbody>
             </MarketTable>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
-import { FlagN, FlagNC, My, MyC } from 'components/commonUi/Icon';
+import { My, MyC } from 'components/commonUi/Icon';
 import { AlertText } from "components/Login/Member/MemberPhone/MemberPhoneStyle";
 import { storeLike } from "service/mystore";
 
@@ -21,7 +21,6 @@ const StoreLike = ({ id, checked, onChange }) => {
         }
 
         const response = await storeLike(id);
-        console.log(response)
 
         if (response && response.data.data) {
             onChange(id);

@@ -4,6 +4,7 @@ const urls = {
 	categoryList: "/item/category/list",
 	bestItemList: "/item/best/list",
 	searchList: "/item/search/list",
+	itemList: "/item/store/list",
 	details: "/item/get",
 };
 
@@ -45,4 +46,13 @@ export function getBestItemList(x, y) {
 ============================== */
 export function getItemDetails(id) {
 	return client.get(`${urls.details}/${id}`);
+}
+
+/* ==============================
+   상점 상품 목록
+============================== */
+export function getStoreItemList(id, page, sort) {
+	return client.get(
+		`${urls.itemList}?storeId=${id}&page=${page}&sort=${sort}`
+	);
 }

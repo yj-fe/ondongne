@@ -5,8 +5,9 @@ import * as T from 'components/commonUi/Text';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { useSelector } from 'react-redux';
 import { bestItemList } from 'service/main';
-import { ProductCard } from 'components/Main/MarketDetail/MarketDetailProduct';
+
 import { useNavigate } from 'react-router-dom';
+import { ProductCard } from 'components/Main/productDetails/ProductCard';
 
 
 function MainBestCollection() {
