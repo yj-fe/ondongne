@@ -55,12 +55,14 @@ export const MarketTable = styled.table`
         padding: 2px 0;
         line-height: 1.5;
         font-weight: 400;
-
+        
         th {
+            width: 20%;
             text-align: left;
         }
-
+        
         td {
+            word-break: keep-all;
             text-align: left;
         }
     }

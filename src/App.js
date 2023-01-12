@@ -133,8 +133,8 @@ function App() {
 					<Route path="categories" element={<CategoryPage />} />
 					<Route path="collections" element={<CollectionPage />} />
 					<Route path="details/:id" element={<DetailsPage />} />
-					{/* 상점정보 */}
 					<Route path="more" element={<MorePage />} />
+					{/* 상점정보 */}
 					<Route
 						path="market/detail/:id"
 						element={<MarketDetail />}

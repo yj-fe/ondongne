@@ -23,14 +23,34 @@ function MarketDetailInfo() {
           <L.FlexCols>
             <T.Text _weight={700} _size={16} _color="gray900">영업정보</T.Text>
             <MarketTable>
-              <tbody>
+              <tbody >
                 <tr>
                   <th>상호명</th>
                   <td>인싸과일</td>
                 </tr>
                 <tr>
                   <th>운영시간</th>
-                  <td>평일, 토요일 : 10:00 ~ 19:00</td>
+                  <td>월요일 : 휴일</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td>화요일 : 10:00 ~ 19:00</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td>수요일 : 10:00 ~ 19:00</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td>목요일 : 10:00 ~ 19:00</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td>금요일 : 10:00 ~ 19:00</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td>토요일 : 10:00 ~ 19:00</td>
                 </tr>
                 <tr>
                   <th></th>
@@ -46,7 +66,8 @@ function MarketDetailInfo() {
                 </tr>
                 <tr>
                   <th>배달지역</th>
-                  <td>김포시 풍무동</td>
+                  {/* <td>김포시 풍무동, 김포시 사우동, 김포시 장기동, </td> */}
+                  <td>김포시 풍무동, 김포시 사우동, 김포시 장기동, 김포시 운양동, 김포시 구래동, 김포시 고촌읍, 김포시 양촌읍</td>
                 </tr>
               </tbody>
             </MarketTable>
