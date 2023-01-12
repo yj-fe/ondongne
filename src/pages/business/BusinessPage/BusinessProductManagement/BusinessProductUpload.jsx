@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
@@ -16,6 +15,8 @@ import Alert from 'components/commonUi/Alert';
 import CalendarModel from 'components/commonUi/CalendarModel';
 import Confirm from 'components/commonUi/Confirm';
 import { useSelector } from 'react-redux';
+import LayoutBPM from 'components/layout/Layout/LayoutBPM';
+import Layout from 'components/layout/Layout/Layout';
 
 function BusinessProductUpload() {
 
@@ -68,7 +69,7 @@ function BusinessProductUpload() {
 
     if (data.images.length === 1) {
       return setAlert({
-        contents: "업로드 된 사진이 한장 이상이야 삭제가 가능합니다.",
+        contents: "업로드 된 사진이 한장 이상이어야\n삭제가 가능합니다.",
         buttonText: "확인",
         onButtonClick: () => setAlert(null),
         onOverlayClick: () => setAlert(null),
@@ -167,7 +168,7 @@ function BusinessProductUpload() {
 
         <L.Container _padding="0px 0px 60px" >
           <L.Contents _height='auto'>
-            <L.FlexCols _gap={40} _padding="8px 20px">
+            <L.FlexCols _gap={40} _padding="0px">
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">판매 종류</T.Text>
                 <L.FlexRows _gap={16}>

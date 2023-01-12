@@ -11,7 +11,7 @@ import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import Avatar from 'assets/common/avatar.png';
 import ReviewImg from 'assets/main/reviewimg.png'
 import { Badge } from 'components/commonUi/Button';
-import { ImgPer } from 'components/layout/Img/ImgSizeLayout';
+import { Imgauto, ImgPer } from 'components/layout/Img/ImgSizeLayout';
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Confirm from 'components/commonUi/Confirm';
 
@@ -102,7 +102,7 @@ function ReviewPage() {
                     </L.FlexRows>
                   </L.FlexRows>
 
-              <ImgPer _bdr={4}  src={ReviewImg}/>
+              <Imgauto _bdr={4}  src={ReviewImg}/>
               <Comments>맛있습니다~</Comments>
               <ReviewLikeStyle>
                 <ReviewLikeFrame color={false}>

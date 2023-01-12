@@ -98,9 +98,9 @@ export const RequesInput = styled.input`
     -webkit-appearance: none;
   }
 
-  @media only screen and (max-width: 390px) {
+  /* @media only screen and (max-width: 390px) {
     width: 80%;
-  }
+  } */
 `;
 export const RequestButton = styled.button`
   box-sizing: border-box;

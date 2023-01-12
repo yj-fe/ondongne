@@ -11,10 +11,9 @@ import dayjs from 'dayjs';
 
 function MemberNews() {
   const [date, setDate]= useState([{
-      Date: '2022년 10월 10일 14:20'
+      Date: '2023-01-04T21:08:35.000+00:00'
     }
   ])
-
   return (
     <div>
       <S.Wrapper>
@@ -47,7 +46,7 @@ function MemberNews() {
                   </T.Text>
                   <L.FlexRows _items='center'>
                     <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>{dayjs(date.Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
+                      <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                     </T.Text>
                   </L.FlexRows>
                 </L.FlexCols>
@@ -68,10 +67,7 @@ function MemberNews() {
                   </T.Text>
                   <L.FlexRows>
                   <T.Text   _weight={300} _size={12} _color="gray500"  >
-                    <p>2022년 10월 10일</p>
-                  </T.Text>
-                  <T.Text   _weight={300} _size={12} _color="gray500"  >
-                    <p>14:00</p>
+                  <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                   </T.Text>
               </L.FlexRows>
                 </L.FlexCols>
@@ -92,10 +88,7 @@ function MemberNews() {
                   </T.Text>
                   <L.FlexRows>
                   <T.Text   _weight={300} _size={12} _color="gray500"  >
-                    <p>2022년 10월 10일</p>
-                  </T.Text>
-                  <T.Text   _weight={300} _size={12} _color="gray500"  >
-                    <p>14:00</p>
+                  <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                   </T.Text>
               </L.FlexRows>
                 </L.FlexCols>
@@ -108,12 +101,9 @@ function MemberNews() {
                 <p>회원가입을 환영합니다. 온동네에서 다양한 거래를 시작해보세요!</p>
               </T.Text>
           <L.FlexRows>
-              <T.Text   _weight={300} _size={12} _color="gray500"  >
-                <p>2022년 10월 10일</p>
-              </T.Text>
-              <T.Text   _weight={300} _size={12} _color="gray500"  >
-                <p>14:00</p>
-              </T.Text>
+            <T.Text   _weight={300} _size={12} _color="gray500"  >
+              <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
+            </T.Text>
           </L.FlexRows>
             </L.FlexCols>
         </L.FlexCols>

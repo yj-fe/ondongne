@@ -10,11 +10,16 @@ export const ImgSizeH = styled.img`
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width || '100%'};
     height: ${props => props._height}px;
-    /* @media screen and (max-width: 500px){
+    @media screen and (max-width: 500px){
         height: 167px;
-    } */
+    }
 `;
 
+export const Imgauto = styled.img`
+    border-radius: ${props => props._bdr}px;
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+`;
 export const ImgPer = styled.img`
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width || '100%'};

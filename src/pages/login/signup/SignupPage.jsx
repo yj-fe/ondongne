@@ -66,9 +66,11 @@ function SignupPage() {
         <LoginHeader title="회원가입" />
         <S.Main>
           <L.Contents _padding='0px' _height='calc(100vh - 68px)'>
+          <L.FlexCols _gap='0px'>
             {depth01 && <SignupRequest setData={setData} depthHandler={() => depthHandler(1)}/>}
             {depth02 && <Agreement setData={setData} depthHandler={() => depthHandler(2)}/>}
             {depth03 && <SignupInfo setData={setData} data={data}/>}
+          </L.FlexCols>
           </L.Contents>
         </S.Main>
       </S.Wrapper>

@@ -60,9 +60,9 @@ export const FlexColsSize = styled.div`
     /* min-height: fit-content; */
     max-width: ${props => props._width || '216px'};
     padding: ${props => props._padding || '0px'};
-    /* @media screen and (max-width: 500px){
+    @media screen and (max-width: 500px){
         width: 167px;
-    } */
+    }
 `;
 
 export const FlexColsScroll = styled.div`

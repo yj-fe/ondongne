@@ -4,7 +4,7 @@ export const EmailRequestBody = styled.div`
   flex-direction: column;
   padding: 32px 40px;
   gap: 40px;
-  max-width: 728px;
+  width: 100%;
   @media only screen and (max-width: 400px) {
     padding: 32px 20px;
   }

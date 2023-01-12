@@ -28,13 +28,13 @@ export const RequestTextStyle = styled.p`
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-  width: 648px;
+  width: 100%;
   height: 60px;
   flex: none;
 
-  @media only screen and (max-width: 390px) {
+  /* @media only screen and (max-width: 390px) {
     width: 350px;
-  }
+  } */
 `
 export const RequestText = styled.p`
   width: 648px;
@@ -75,8 +75,6 @@ export const RequesInputForm = styled.form`
   gap: 12px;
   width: 100%;
   height: 48px;
-
-
 `
 export const RequesInput = styled.input`
   display: flex;

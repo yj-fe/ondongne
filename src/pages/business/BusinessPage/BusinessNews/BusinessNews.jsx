@@ -6,8 +6,13 @@ import { S } from 'components/layout/Layout/LayoutStyle'
 import { Line } from 'pages/main/DetailsPage/DetailsPageStyle';
 import Img from 'assets/images/business/newsimg2.png'
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import dayjs from 'dayjs';
 
 function BusinessNews() {
+  const [date, setDate]= useState([{
+    Date: '2023-01-04T21:08:35.000+00:00'
+  }
+])
   return (
     <div>
       <S.Wrapper>
@@ -31,12 +36,9 @@ function BusinessNews() {
                         <p>idenit 님이 단골가게로 등록하셨습니다.</p>
                       </T.Text>
                     <L.FlexRows>
-                      <T.Text   _weight={300} _size={12} _color="gray500"  >
-                        <p>2022년 10월 10일</p>
-                      </T.Text>
-                      <T.Text   _weight={300} _size={12} _color="gray500"  >
-                        <p>14:20</p>
-                      </T.Text>
+                    <T.Text   _weight={300} _size={12} _color="gray500"  >
+                      <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
+                    </T.Text>
                     </L.FlexRows>
                   </L.FlexCols>
                 </L.FlexRows>
@@ -55,11 +57,8 @@ function BusinessNews() {
                     <p>1+1 싱싱한 사과 한박스</p>
                   </T.Text>
                   <L.FlexRows>
-                    <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>2022년 10월 10일</p>
-                    </T.Text>
-                    <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>14:20</p>
+                  <T.Text   _weight={300} _size={12} _color="gray500"  >
+                      <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                     </T.Text>
                   </L.FlexRows>
                 </L.FlexCols>
@@ -79,11 +78,8 @@ function BusinessNews() {
                     <p>1+1 싱싱한 사과 한박스</p>
                   </T.Text>
                   <L.FlexRows>
-                    <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>2022년 10월 10일</p>
-                    </T.Text>
-                    <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>14:20</p>
+                  <T.Text   _weight={300} _size={12} _color="gray500"  >
+                      <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                     </T.Text>
                   </L.FlexRows>
                 </L.FlexCols>
@@ -103,10 +99,7 @@ function BusinessNews() {
                   </T.Text>
                   <L.FlexRows>
                     <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>2022년 10월 10일</p>
-                    </T.Text>
-                    <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>14:20</p>
+                      <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                     </T.Text>
                   </L.FlexRows>
                 </L.FlexCols>
@@ -127,10 +120,7 @@ function BusinessNews() {
                   </T.Text>
                   <L.FlexRows>
                     <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>2022년 10월 10일</p>
-                    </T.Text>
-                    <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>14:20</p>
+                      <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                     </T.Text>
                   </L.FlexRows>
                 </L.FlexCols>

@@ -7,7 +7,7 @@ import { SignupButton } from '../signupinfo/SignupInfoStyle';
 import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
 import { RequesInput } from 'components/Login/Password/PwdRequest/PwdRequestStyle';
 import * as L from 'components/commonUi/Layout';
-
+import * as T from 'components/commonUi/Text';
 
 
 /* ==============================
@@ -144,13 +144,13 @@ function SignupRequest({ setData, depthHandler }) {
 
   return (
     <div>
-      <EmailRequestBody>
-        <RequestTextStyle>
-          <RequestText>온동네마켓 회원가입</RequestText>
-          <RequestInfo>회원가입을 위해 휴대폰 번호를 인증해 주세요.</RequestInfo>
-        </RequestTextStyle>
-
-        <L.FlexCols _gap={16}>
+      <L.Contents _padding='32px 40px'>
+      <L.FlexCols _gap={40}>
+        <L.FlexCols>
+          <T.Text _size={24} _weight={600} >온동네마켓 회원가입</T.Text>
+          <T.Text _size={15} _color='gray800'>회원가입을 위해 휴대폰 번호를 인증해 주세요.</T.Text>
+        </L.FlexCols>
+        <L.FlexCols>
           <RequesInputForm>
             <RequesInput
               type='number'
@@ -167,44 +167,42 @@ function SignupRequest({ setData, depthHandler }) {
               인증요청
             </RequestButton> 
           </RequesInputForm>
-
-
-           
-          {authCode && 
-            <RequesInputForm style={{position: 'relative'}}>
-              <RequesInput
-                style={{width: '100%'}}
-                type='number'
-                placeholder='인증번호 입력'
-                outline='none'
-                value={authNum}
-                onChange={e => setAuthNum(e.target.value)}
+        {authCode && 
+          <RequesInputForm style={{position: 'relative'}}>
+            <RequesInput
+              style={{width: '100%'}}
+              type='number'
+              placeholder='인증번호 입력'
+              outline='none'
+              value={authNum}
+              onChange={e => setAuthNum(e.target.value)}
               />
-              <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
-            </RequesInputForm>
-          }
-        </L.FlexCols>
-      </EmailRequestBody>
-      {
-        authCode && 
+            <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
+          </RequesInputForm>
+        }
+        {
+          authCode && 
           <SignupButton
-            type="button"
-            color={true}
-            onClick={onAuthNumSubmit}
+          type="button"
+          color={true}
+          onClick={onAuthNumSubmit}
           >
-          인증 확인
-          </SignupButton>
-      }
-      {
-        alert &&
-        <Alert
-          title={alert.title}
-          contents={alert.contents}
-          buttonText={alert.buttonText}
-          onButtonClick={alert.onButtonClick}
-          onOverlayClick={alert.onOverlayClick}
-        />
-      }
+            인증 확인
+            </SignupButton>
+        }
+        </L.FlexCols>
+        </L.FlexCols>
+        {
+          alert &&
+          <Alert
+            title={alert.title}
+            contents={alert.contents}
+            buttonText={alert.buttonText}
+            onButtonClick={alert.onButtonClick}
+            onOverlayClick={alert.onOverlayClick}
+          />
+        }
+      </L.Contents>
     </div>
   )
 }
