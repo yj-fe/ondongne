@@ -7,9 +7,14 @@ import { Line } from 'pages/main/DetailsPage/DetailsPageStyle';
 import Img from 'assets/images/newsimg.png'
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { ArrowRightB } from 'components/commonUi/Icon';
-
+import dayjs from 'dayjs';
 
 function MemberNews() {
+  const [date, setDate]= useState([{
+      Date: '2022년 10월 10일 14:20'
+    }
+  ])
+
   return (
     <div>
       <S.Wrapper>
@@ -42,10 +47,7 @@ function MemberNews() {
                   </T.Text>
                   <L.FlexRows _items='center'>
                     <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>2022년 10월 10일</p>
-                    </T.Text>
-                    <T.Text   _weight={300} _size={12} _color="gray500"  >
-                      <p>14:00</p>
+                      <p>{dayjs(date.Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                     </T.Text>
                   </L.FlexRows>
                 </L.FlexCols>
