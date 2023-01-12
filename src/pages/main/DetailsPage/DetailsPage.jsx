@@ -272,7 +272,7 @@ function TabContent(props) {
       <L.FlexCols _padding={'0 0 16px 0'}>
         <TypeTextStyle>
           <TypeLabel>구매 형태</TypeLabel>
-          <TypeLabelInfo>{props.item.type == 'GROUP' ? '공동구매 상품' : '일반 상품'}</TypeLabelInfo>
+          <TypeLabelInfo>{props.item.type === 'GROUP' ? '공동구매 상품' : '일반 상품'}</TypeLabelInfo>
         </TypeTextStyle>
         <TypeTextStyle>
           <TypeLabel>카테고리</TypeLabel>

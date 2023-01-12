@@ -26,6 +26,13 @@ function MainBestCoupon() {
                   )
                 })
               }
+            {
+              item.map((a, i)=>{
+                return(
+                  <BestCouponCard item={item[i]} i={i}/>
+                  )
+                })
+              }
           </MainBestCouponContent>
         </L.FlexRowsCP>
 

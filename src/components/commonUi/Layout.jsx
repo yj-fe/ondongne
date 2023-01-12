@@ -146,10 +146,9 @@ export const FlexRowsCP = styled.div`
     overflow-x: scroll; 
     overflow-y: hidden;
     flex-wrap: nowrap;
-    
+    padding: 0px 0px 10px 0px;
     flex-direction: rows;
     gap: ${props => props._gap || 8}px;
-    /* justify-content: ${props => props._content || 'inherit'}; */
     align-items: ${props => props._items || 'inherit'};
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};
@@ -159,8 +158,19 @@ export const FlexRowsCP = styled.div`
         text-decoration: none;
     }
     ::-webkit-scrollbar{
-    display: none; 
-}
+        width: 5px;
+        height: 8px;
+        background-color: transparent; 
+        @media screen and ( max-width: 710px) {
+            display: none; 
+        }
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #eee;
+        border-radius: 99px;
+    }
+    &::-webkit-scrollbar-track {
+    }
 `;
 
 export const FlexRowsWrap = styled.div`

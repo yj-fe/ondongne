@@ -73,13 +73,13 @@ function FaqList ({item}) {
   )
 }
 
-function Toggle(props) {
+function Toggle({item}) {
 
   return (
     <div>
       <ToggleBody>
         <ToggleDiv _padding='16px'>
-          <T.Text>{props.item.contents}</T.Text>
+          <T.Text>{item.contents}</T.Text>
         </ToggleDiv>
       </ToggleBody>
     </div>

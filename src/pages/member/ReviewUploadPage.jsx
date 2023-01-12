@@ -18,6 +18,7 @@ function ReviewUploadPage() {
   const [color, setColor] = useState(false)
   const [modal, setModal] = useState(false)
   const [star, setStar] = useState(0)
+  const [inputValue, setInputValue] = useState(null)
 
   const ShowReviewModal = () => {
     setModal(!modal);
@@ -27,25 +28,25 @@ function ReviewUploadPage() {
   }
 
   // 별점 계산
-  const handleStar = () => {
-    switch (star) {
-      case 0:
-        return '0';
-      case 1:
-        return '1';
-      case 2:
-        return '2';
-      case 3:
-        return '3';
-      case 4:
-        return '4';
-      case 5:
-        return '5';
-      default:
-        return 'star'
-    }
-  }
-  // const ActiveBtn()=>{
+  // const handleStar = () => {
+  //   switch (star) {
+  //     case 0:
+  //       return '0';
+  //     case 1:
+  //       return '1';
+  //     case 2:
+  //       return '2';
+  //     case 3:
+  //       return '3';
+  //     case 4:
+  //       return '4';
+  //     case 5:
+  //       return '5';
+  //     default:
+  //       return 'star'
+  //   }
+  // }
+  // const handleBtn = ()=>{
   //   if(별체크 && 내용입력){
   //     setColor(true)
   //   }
@@ -110,6 +111,9 @@ function ReviewUploadPage() {
                 <NameToggleInput
                   placeholder='내용을 작성해주세요.'
                   type='text'
+                  value={inputValue}
+                  onChange={e => setInputValue(e.target.value)}
+                  
                 />
               </NameToggleInputForm>
 
@@ -120,8 +124,11 @@ function ReviewUploadPage() {
 
 
             <ActionButton
-              color={color}
+              type='button'
+              // color={color}
               onClick={ShowReviewModal}
+              // active={inputValue.length > 5}
+              // disabled={inputValue.length > 5}
             >리뷰 등록</ActionButton>
           </L.Contents>
         </L.Container>
