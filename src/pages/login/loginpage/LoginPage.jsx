@@ -136,7 +136,7 @@ function LoginPage() {
         <LoginHeader title="로그인" />
 
         <S.Main>
-          <L.Contents _padding='32px 40px' _height='100vh'>
+          <L.Contents _padding='32px 40px' _height='calc(100vh - 60px)'>
             <L.FlexCols _gap={60}>
               <L.FlexRows _content='center'>
                 <LogoImg src={Logo} />

@@ -5,7 +5,7 @@ import { DetailMarketInfo, DetailTabDiv, DetailTabInfo, DetailTabReview, FlagSty
 import Image from 'assets/main/shine.png'
 
 import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
-import { ArrowRightB, Flag, More } from 'components/commonUi/Icon';
+import { ArrowRightB, My, MyC } from 'components/commonUi/Icon';
 import FooterLayout from 'components/layout/Footer/Footer';
 import Layout from 'components/layout/Layout/Layout';
 import { Link, useNavigate } from 'react-router-dom'
@@ -20,7 +20,7 @@ function MarketDetail() {
   const navigate = useNavigate()
   const [detailTab, setDetailTab] = useState(0)
   const [modal, setModal] = useState(false);
-
+  const [check, setCheck] = useState(false)
 
   const ShowMoreModal = () => {
     setModal(!modal);
@@ -36,6 +36,8 @@ function MarketDetail() {
         title="아재의 과일"
         cart={true}
         bell={false}
+        share={true}
+        more={true}
         onBackClick={() => navigate('/')}
       >
         <L.Container >
@@ -54,13 +56,9 @@ function MarketDetail() {
                   </L.FlexRows>
 
                   <L.FlexRows _padding={0} _gap={16} _items="center" _width={64}>
-                    <Flag/>
-                    <button
-                      type='button'
-                      onClick={ShowMoreModal}
-                    >
-                      <More/>
-                    </button>
+                    <div onClick={()=>{setCheck(!check)}}>
+                      {check ? <MyC/> : <My/>}
+                    </div>
                   </L.FlexRows>
                 </L.FlexRows>
               </L.Contents>

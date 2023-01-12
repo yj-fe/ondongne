@@ -78,7 +78,7 @@ function LocationSetting() {
         <LoginHeader title="우리동네 설정" />
         <S.Main>
           <L.Contents _padding='24px 20px' _height='calc(100vh - 68px)'>
-            <L.FlexCols _gap={32}>
+            <L.FlexCols _gap={32} >
               {/* ============ 위치설정페이지 ============ */}
               <L.FlexCols _gap={20}>
                 <Div1>내 위치 설정</Div1>

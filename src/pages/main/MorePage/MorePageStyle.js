@@ -165,7 +165,7 @@ export const MoreDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
-  width: 728px;
+  width: 100%;
   height: auto;
   background: #FFFFFF;
 `
@@ -174,7 +174,7 @@ export const MoreContainerDiv = styled.div`
   flex-direction: row;
   align-items: center;
   padding: 16px 0px;
-  width: 688px;
+  width: 100%;
   height: 56px;
   font-weight: 500;
   font-size: 16px;

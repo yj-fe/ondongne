@@ -158,15 +158,14 @@ export const FlexRowsCP = styled.div`
         text-decoration: none;
     }
     ::-webkit-scrollbar{
-        width: 5px;
-        height: 8px;
+        height: 4px;
         background-color: transparent; 
         @media screen and ( max-width: 710px) {
             display: none; 
         }
     }
     &::-webkit-scrollbar-thumb {
-        background: #eee;
+        background-color: #bdbdbd;
         border-radius: 99px;
     }
     &::-webkit-scrollbar-track {

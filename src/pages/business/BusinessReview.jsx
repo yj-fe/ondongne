@@ -12,7 +12,7 @@ import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import Avatar from 'assets/common/avatar.png';
 import ReviewImg from 'assets/main/reviewimg.png'
 import { Badge } from 'components/commonUi/Button';
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Confirm from 'components/commonUi/Confirm';
 import {  NameToggleInput, NameToggleInputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
@@ -95,7 +95,7 @@ function BusinessReview() {
                     </L.FlexRows>
                   </L.FlexRows>
 
-              <ImgSizeLayout src={ReviewImg}/>
+              {/* <ImgPer src={ReviewImg}/> */}
               <Comments>맛있습니다~</Comments>
               <ReviewLikeStyle>
                 <ReviewLikeFrame color={false}>
@@ -105,12 +105,11 @@ function BusinessReview() {
                 </ReviewLikeFrame>
               </ReviewLikeStyle>
 
-
-
               <L.FlexRows _gap={16}>
                 <ImgSizeLayout _width={40} _height={40} _bdr={50} src={Avatar} />
                 <NameToggleInputForm _height='58px'>
                   <NameToggleInput
+                    _size='15px'
                     placeholder='리뷰 답변을 남겨보세요.'
                     type='text'
                   />
@@ -118,13 +117,9 @@ function BusinessReview() {
                 </NameToggleInputForm>
               </L.FlexRows>
 
-
-
             </L.FlexCols>
 
             
-
-
             {/* =======Review2====== */}
             <L.FlexCols _padding='20px 0px' _gap={16}>
               <L.FlexRows _content='space-between' _items='center'>
@@ -159,33 +154,33 @@ function BusinessReview() {
             <MarketReviewDiv>
               <ReviewProfileImg src={Avatar} />
               <MarketCommentsStyle>
-                <L.FlexRows>
-                  <L.FlexCols>
+                <L.FlexCols _gap={16}>
+                  <L.FlexRows _content='space-between'>
                     <MarketIdDiv>
                       <MarketId>사장님</MarketId>
                       <MarketDate>2일 전</MarketDate>
                     </MarketIdDiv>
+                    <L.FlexRows _width='118px'>
+                      <div
+                        type='button'
+                        onClick={openConfirm} 
+                        >
+                      <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _bg='white' _size='13px'>수정</Badge>
+                      </div>
+                      <div
+                        type='button'
+                        onClick={ShowDeleteModal} 
+                        >
+                      <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _bg='white' _size='13px'>삭제</Badge>
+                      </div>
+                    </L.FlexRows>
+                  </L.FlexRows>
                     <MarketComments>
                       <p>주문해주셔서 감사합니다 우리동네님!</p><br />
                       <p>더 좋은 상품으로 보답하겠습니다.</p>
                       <p>감사합니다 ^^</p><br />
                     </MarketComments>
-                  </L.FlexCols>
-                  <L.FlexRows _width='118px'>
-                    <div
-                      type='button'
-                      onClick={openConfirm} 
-                    >
-                    <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _bg='white' _size='13px'>수정</Badge>
-                    </div>
-                    <div
-                      type='button'
-                      onClick={ShowDeleteModal} 
-                    >
-                    <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _bg='white' _size='13px'>삭제</Badge>
-                    </div>
-                  </L.FlexRows>
-                </L.FlexRows>
+                </L.FlexCols>
               </MarketCommentsStyle>
             </MarketReviewDiv>
 
@@ -226,10 +221,11 @@ function BusinessReview() {
                 <ImgSizeLayout _width={40} _height={40} _bdr={50} src={Avatar} />
                 <NameToggleInputForm _height='58px'>
                   <NameToggleInput
+                    _size='15px'
                     placeholder='리뷰 답변을 남겨보세요.'
                     type='text'
                   />
-                  <Badge _padding='8px 12px' _width='47px' _height='34px' _bg='green700' _bdr='4px' _color='white' _weight='600' _size='13px'>등록</Badge>
+                  <Badge _width='47px' _height='34px' _bg='green700' _bdr='4px' _color='white' _weight='600' _size='13px'>등록</Badge>
                 </NameToggleInputForm>
               </L.FlexRows>
 

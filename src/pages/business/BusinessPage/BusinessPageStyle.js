@@ -221,7 +221,7 @@ export const FooterDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	width: 728px;
+	width: 100%;
 	padding: 0 24px 0 0;
 `;
 export const FloatingDivT = styled.div`

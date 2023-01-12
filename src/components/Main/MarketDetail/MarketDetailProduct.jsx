@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { CartC, Down, Star } from 'components/commonUi/Icon';
@@ -14,8 +14,14 @@ import { useNavigate } from 'react-router-dom';
 function MarketDetailProduct() {
   let [items] = useState(maindata)
   const [modal, setModal] = useState(false);
-
-
+  // 정렬
+  const [data, setData] = useState({
+    type: "기본 순",
+  })
+// 정렬- 선택한 type으로 바꾸기
+const dataChecked = type => {
+  setData({...data, type: type})
+}
   const ShowMoreModal = () => {
     setModal(!modal);
   }
@@ -29,7 +35,7 @@ function MarketDetailProduct() {
         <L.Contents>
           <L.FlexCols _gap={16}>
             <L.FlexRows _gap={4} _content='flex-end'>
-              <T.Text _size={13} _weight={400} _color='gray900'>주문 많은 순</T.Text>
+              <T.Text _size={13} _weight={400} _color='gray900'>{data.type}</T.Text>
               <button
                 type='button'
                 onClick={ShowMoreModal}
@@ -47,7 +53,7 @@ function MarketDetailProduct() {
           </L.FlexCols>
         </L.Contents>
       </L.Container>
-      {modal && <ModalFilter PropsModal={PropsModal} />}
+      {modal && <ModalFilter type={data.type} handler={dataChecked} closeSelector={() => setModal(false)} PropsModal={PropsModal} />}
     </div>
   )
 }
@@ -174,16 +180,70 @@ export function MarketProductCard(props) {
   )
 }
 
-export function ModalFilter(props) {
+export function ModalFilter({ type, handler, closeSelector }) {
+
+  const [data, setData] = useState([
+    {
+      id: 0,
+      name: "기본 순",
+      checked: false
+    },
+    {
+      id: 1,
+      name: "주문 많은 순",
+      checked: false
+    },
+    {
+      id: 2,
+      name: "리뷰 별점 순",
+      checked: false
+    },
+  ])
+  const clickHandler = name => {
+    setData(
+      data.map(item => 
+          item.name === name 
+            ? {...item, checked: !item.checked} 
+            : {...item, checked: false} 
+      )
+    )
+    handler(name);
+    closeSelector();
+  }
+
+  useEffect(() => {
+    setData(
+      data.map(item => 
+          item.name === type 
+            ? {...item, checked: !item.checked} 
+            : item
+      )
+    )
+  }, []);
+
+
   return (
     <div>
       <ModalOutside>
         <ModalBody>
           <ModalDiv1>정렬</ModalDiv1>
           <ModalDiv2>
-            <ModalTitle>기본 순</ModalTitle>
-            <ModalTitle>주문 많은 순</ModalTitle>
-            <ModalTitle>리뷰 별점 순</ModalTitle>
+            {
+              data.map(item=>(
+                <ModalTitle
+                  key={item.id}
+                  onClick={() => clickHandler(item.name)}
+                >
+                  <T.Text 
+                    _weight={item.checked ? 600 : 400} 
+                    _size={15} 
+                    _color={item.checked ? "green700" : "gray900"}
+                  >
+                    {item.name}
+                  </T.Text>
+                </ModalTitle>
+              ))
+            }
           </ModalDiv2>
         </ModalBody>
       </ModalOutside>

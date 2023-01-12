@@ -108,7 +108,7 @@ export const NameToggleInputForm = styled.form`
   align-items: center;
   padding: 12px 16px;
   gap: 24px;
-  width: 100%;
+  width: calc(100% - 40px);
   height: ${props=>props._height || '48px'};
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
@@ -223,11 +223,10 @@ export const Input = styled.input`
 //   color: #1565C0;
 // `
 export const NameToggleInput = styled.input`
-
   width: calc(100%-70px);
   height: 24px;
   font-weight: 400;
-  font-size: 16px;
+  font-size: ${props=> props._size || '16px'};
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;

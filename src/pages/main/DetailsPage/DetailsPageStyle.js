@@ -522,7 +522,7 @@ export const UploadImg = styled.img`
   border-radius: 4px;
 `
 export const Comments = styled.p`
-  width: 688px;
+  width: 100%;
   height: auto;
   font-weight: 400;
   font-size: 15px;

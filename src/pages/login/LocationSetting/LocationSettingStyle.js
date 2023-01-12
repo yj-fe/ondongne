@@ -189,7 +189,7 @@ export const LocationListContainer = styled.div`
 	align-items: flex-start;
 	padding: 0 20px;
 	width: 648px;
-	height: 100%;
+	height: calc(100vh - 300px);
 	overflow-y: scroll;
 	&::-webkit-scrollbar-thumb {
 		background-color: #bdbdbd;

@@ -21,7 +21,7 @@ function FindEmail() {
       <S.Wrapper>
         <LoginHeader title="이메일 찾기"/>
         <S.Main>
-           <L.Contents _padding='0px' _height='100vh'>
+           <L.Contents _padding='0px' _height='calc(100vh - 68px)'>
             <L.FlexCols _gap={40}>
               {
                 !findEmailSuccess &&
