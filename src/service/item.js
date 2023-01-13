@@ -6,6 +6,7 @@ const urls = {
 	searchList: "/item/search/list",
 	itemList: "/item/store/list",
 	details: "/item/get",
+	getIds: "/item/getIds",
 };
 
 /* ==============================
@@ -55,4 +56,11 @@ export function getStoreItemList(id, page, sort) {
 	return client.get(
 		`${urls.itemList}?storeId=${id}&page=${page}&sort=${sort}`
 	);
+}
+
+/* ==============================
+   상품 id 로 리스트 
+============================== */
+export function getItemIds(ids) {
+	return client.get(`${urls.getIds}?ids=${ids}`);
 }

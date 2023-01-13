@@ -11,7 +11,7 @@ import * as L from 'components/commonUi/Layout';
 import { useSelector } from 'react-redux';
 import { cartCountUpdate, cartDelete, carts } from 'service/cart';
 import LoadingBar from 'components/commonUi/LoadingBar';
-import { groupBy, isEmptyObj, numberFormat } from 'utils/utils';
+import { groupBy, isEmptyObj, numberFormat, storeTotalPrice } from 'utils/utils';
 import { totalPrice } from 'utils/utils';
 const IMGURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/';
 
@@ -60,24 +60,9 @@ function CartPage({ }) {
     }
   }
 
-  // 총 가격
-  const storeTotalPrice = (values) => {
-    let price = 0;
-    values.map(item =>
-      price += (Number(item.itemPrice) * item.count) - Number(item.itemPrice) * item.count * (Number(item.itemSalePercent) / 100)
-    );
-    return price;
-  }
-
   // 주문페이지 이동
-  const orderRoute = (item) => {
-    const orderData = [];
-    item.forEach(i => orderData.push({
-      id: i.itemId,
-      count: i.count
-    }));
-
-    return navigate('/order/new', { state: { data: orderData, toBack: "/cart" } })
+  const orderRoute = (items) => {
+    return navigate('/order/new', { state: { data: items } })
   }
 
   useEffect(() => {
@@ -142,7 +127,7 @@ function CartPage({ }) {
                               </DeleteStyle>
                             </ProductTitleDiv>
                             <ProductInfo>
-                              <ProductInfoText>기본: {totalPrice(Number(item.itemPrice) * item.count, item.itemSalePercent)}원</ProductInfoText>
+                              <ProductInfoText>기본: {totalPrice(Number(item.price) * item.count, item.salePercent)}원</ProductInfoText>
                             </ProductInfo>
                           </ContentProductDiv>
                           <ContentCountDiv>

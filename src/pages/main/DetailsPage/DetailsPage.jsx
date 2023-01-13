@@ -70,17 +70,20 @@ function DetailsPage(props) {
   }
 
   const paymentsOrder = (type) => {
-    if (auth.isAuthenticated) {
-      if (!orderToggle) return setOrderToggle(true)
+    if (!auth.isAuthenticated) {
+      return setConfirm(true)
+    }
 
-      if (orderToggle && type === 0) return;
+    console.log(item);
 
-      if (orderToggle && type === 1) {
-        return navigate('/order/new', { state: { data: [{ id: item.itemId, count: count }], toBack: `/details/${id}` } })
-      }
+    if (!orderToggle) return setOrderToggle(true)
 
-    } else {
-      setConfirm(true)
+    if (orderToggle && type === 0) return;
+
+    if (orderToggle && type === 1) {
+      return navigate(
+        '/order/new', { state: { data: [{ ...item, count, cartId: 0 }] } }
+      )
     }
   }
 

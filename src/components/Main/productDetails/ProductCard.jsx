@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import ProductCart from "../Cart/ProductCart";
@@ -11,7 +11,6 @@ import StarRate from "components/commonUi/StarRate";
 export function ProductCard({
     item, lastRef, width = 216, isCart = true
 }) {
-
     const navigate = useNavigate();
 
     return (
@@ -31,11 +30,14 @@ export function ProductCard({
                     !item.soldoutStatus
                         ? <ImgSizeLayout
                             _width={width} _height={width} _bdr={6}
-                            src={item.thumbnail}
+                            src={item.images.length > 0 && item.images[0]}
                             onClick={() => navigate(`/details/${item.itemId}`)}
                         />
                         : <div style={{ position: 'relative' }}>
-                            <ImgSizeLayout _width={width} _height={width} _bdr={6} src={item.thumbnail} />
+                            <ImgSizeLayout
+                                _width={width} _height={width} _bdr={6}
+                                src={item.images.length > 0 && item.images[0]}
+                            />
                             <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
                         </div>
                 }
@@ -59,9 +61,9 @@ export function ProductCard({
                 <L.FlexRows>
                     <T.Text _size={16} _weight={600} _color='gray900'>{totalPrice(item.price, item.salePercent)} 원</T.Text>
                 </L.FlexRows>
-                <L.FlexRows>
-                    <StarRate rate={item.reviewRate} />
-                    <T.Text _size={11} _weight={400} _color='gray800'>({item.reviewRate})</T.Text>
+                <L.FlexRows _items='center'>
+                    <StarRate rate={item.rating} />
+                    <T.Text _size={11} _weight={400} _color='gray800'>({item.rating})</T.Text>
                 </L.FlexRows>
 
             </L.FlexCols>

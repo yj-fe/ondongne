@@ -80,6 +80,21 @@ export const totalPrice = (price, rate) => {
 	return result ? result : "0";
 };
 
+// 총 가격
+export const storeTotalPrice = (values) => {
+	let price = 0;
+	values.map(
+		(item) =>
+			(price +=
+				Number(item.price) * item.count -
+				Number(item.price) *
+					item.count *
+					(Number(item.salePercent) / 100))
+	);
+
+	return price;
+};
+
 // 상품 정렬 한글화
 export const sortFormatter = (filter) => {
 	if (filter === "all") return "상품 전체";

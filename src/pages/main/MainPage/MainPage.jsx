@@ -28,8 +28,14 @@ function MainPage() {
       return setAlert({
         contents: state.error,
         buttonText: "확인",
-        onButtonClick: () => setAlert(false),
-        onOverlayClick: () => setAlert(false),
+        onButtonClick: () => {
+          setAlert(false);
+          navgigate("/");
+        },
+        onOverlayClick: () => {
+          setAlert(false);
+          navgigate("/");
+        },
       });
     }
   }, [state])

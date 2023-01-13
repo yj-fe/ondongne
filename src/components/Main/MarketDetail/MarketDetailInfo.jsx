@@ -37,10 +37,6 @@ function MarketDetailInfo({ item }) {
             <MarketTable>
               <tbody>
                 <tr>
-                  <th>상호명</th>
-                  <td>{item.name}</td>
-                </tr>
-                <tr>
                   <th>운영시간</th>
                   <td>월요일 : {dayweekToText("월요일")}</td>
                 </tr>
