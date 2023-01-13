@@ -3,11 +3,11 @@ import { sendSMS } from 'service/common';
 import { memberPhoneValidation } from 'service/common';
 import { AuthTimer, RequesInputForm, RequestButton, RequestInfo, RequestText, RequestTextStyle } from './SignupRequestStyle'
 import Alert from 'components/commonUi/Alert';
-import { SignupButton } from '../signupinfo/SignupInfoStyle';
 import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
 import { RequesInput } from 'components/Login/Password/PwdRequest/PwdRequestStyle';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
+import { NextButton } from '../agreement/AgreementStyle';
 
 
 /* ==============================
@@ -182,13 +182,13 @@ function SignupRequest({ setData, depthHandler }) {
         }
         {
           authCode && 
-          <SignupButton
-          type="button"
-          color={true}
-          onClick={onAuthNumSubmit}
+          <NextButton
+            type="button"
+            color={true}
+            onClick={onAuthNumSubmit}
           >
             인증 확인
-            </SignupButton>
+            </NextButton>
         }
         </L.FlexCols>
         </L.FlexCols>

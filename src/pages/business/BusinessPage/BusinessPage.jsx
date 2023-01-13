@@ -142,11 +142,11 @@ function BusinessPage() {
             
               {
                 item.map((a, i) => {
-                  if (i % 2 === 0) {
+                  // if (i % 2 === 0) {
                     return (
                       <MyBestProductCard item={item[i]} i={i} />
                     )
-                  }
+                  // }
                 })
               }
             </MyBestProductContent>

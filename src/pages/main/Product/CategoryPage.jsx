@@ -15,6 +15,7 @@ import { getItemCategoryList } from 'service/item';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import CategoryTabs from 'components/commonUi/CategoryTabs';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
+import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 
 function CategoryPage(props) {
   const navigate = useNavigate();
@@ -168,6 +169,8 @@ function CategoryEmpty() {
 export function CategoryCard({ list, lastRef }) {
 
   return (
+    <L.FlexRows  _gap='0px' _padding='20px 0px 0px' _height='calc(100vh - 208px)'>
+      <Scroll _height='calc(100vh - 210px)'>
     <L.FlexRowsWrap _gap={20} _padding={0}>
       {list.map((item, index) => (
         <ProductCard
@@ -176,6 +179,8 @@ export function CategoryCard({ list, lastRef }) {
         />
       ))}
     </L.FlexRowsWrap>
+    </Scroll>
+    </L.FlexRows>
   )
 }
 

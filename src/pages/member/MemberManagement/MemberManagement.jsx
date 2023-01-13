@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
 
-import { NameToggleInput, NameToggleInputForm, MemberBar, MemberLinkText, MemberLinkDiv, MemberProfileDiv, TextEmail, TextName, TitleText, ProfileTextDiv, Input, ChangeButton, InputForm, MaxWidth } from './MemberManagementStyle'
+import { NameToggleInput, MemberBar, MemberLinkText, MemberLinkDiv, MemberProfileDiv, TextEmail, TextName, TitleText, ProfileTextDiv, Input, ChangeButton, InputForm, MaxWidth } from './MemberManagementStyle'
 import Alert from "components/commonUi/Alert";
 import MemberPhone from 'components/Login/Member/MemberPhone/MemberPhone';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
@@ -14,6 +13,7 @@ import { authActions } from 'store/slices/auth';
 import { Text } from 'components/commonUi/Text';
 import Layout from 'components/layout/Layout/Layout';
 import * as L from 'components/commonUi/Layout';
+import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 
 
 
@@ -69,6 +69,7 @@ function MemberManagement() {
       >
        <L.Container >
           <L.Contents _height='calc(100vh - 60px)'>
+            <Scroll >
             <L.FlexCols _padding={0} _gap={0}>
 
         {/* ============ 회원정보관리 ============ */}
@@ -135,7 +136,7 @@ function MemberManagement() {
         />
       }
         </L.FlexCols>
-        
+        </Scroll>
         </L.Contents>
       </L.Container>
 
@@ -192,9 +193,8 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
   }
 
   return (
-    <MaxWidth>
+    <InputForm _bg='#fff'>
 
-      <NameToggleInputForm>
         <NameToggleInput
           id='id'
           type='text'
@@ -206,7 +206,6 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
           type='button'
           onClick={nicknameChange}
         >적용</ChangeButton>
-      </NameToggleInputForm>
       {
         error && (
           <Text  
@@ -226,7 +225,7 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
           active={confirm.active}
         />
       }
-    </MaxWidth>
+    </InputForm>
   )
 }
 

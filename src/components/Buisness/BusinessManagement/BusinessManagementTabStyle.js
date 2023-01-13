@@ -16,7 +16,9 @@ export const TabProfileDiv = styled.div`
 	flex-direction: row;
 	justify-content: right;
 	background-image: url(${(props) => props.banner || ""});
-
+	background-size: contain;
+	background-repeat: no-repeat;
+	
 	& input[type="file"] {
 		display: none;
 	}

@@ -92,7 +92,7 @@ export const InputForm = styled.form`
   gap: 24px;
   width: 100%;
   height: 48px;
-  background: #F5F5F5;
+  background: ${props=> props._bg || '#F5F5F5'};
   border: 1px solid #EEEEEE;
   border-radius: 4px;
   &:focus-within{

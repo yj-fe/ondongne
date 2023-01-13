@@ -171,7 +171,6 @@ function PwdRequest({setFindSuccess, setId}) {
         </L.FlexCols>
       </RequesInputForm>
       
-
       {
           authCode &&
             <RequestToggleForm>
@@ -211,6 +210,7 @@ function PwdRequest({setFindSuccess, setId}) {
             onOverlayClick={alert.onOverlayClick}
           />
         }
+
       </EmailRequestBody>
     </div>
   )

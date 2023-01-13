@@ -74,7 +74,7 @@ export const RequesInputForm = styled.form`
   align-items: flex-start;
   gap: 12px;
   width: 100%;
-  height: 48px;
+  height: auto;
 `
 export const RequesInput = styled.input`
   display: flex;

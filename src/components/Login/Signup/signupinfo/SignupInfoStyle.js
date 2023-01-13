@@ -136,20 +136,20 @@ export const EyeOffStyle = styled.div`
 export const SignupButton = styled.button`
   position: absolute;
   bottom: 0;
-  width: 728px;
+  width: 100%;
   height: 56px;
   background: ${(props) => (props.color ? "#0B806F" : "#e0e0e0")};
   font-weight: 700;
   font-size: 18px;
   text-align: center;
   color: #ffffff;
-  left: 31%;
+  /* left: 31%;
 
   @media only screen and (max-width: 390px) {
     align-items: center;
     width: 390px;
     left: auto;
-  }
+  } */
 `;
 
 export const ValidText = styled.p`

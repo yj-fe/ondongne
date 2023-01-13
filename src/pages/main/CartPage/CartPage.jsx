@@ -108,7 +108,7 @@ function CartPage({ }) {
             {
               !loading &&
               isEmptyObj(list) &&
-              <L.Contents _padding='80px 20px' _height='100vh'>
+              <L.Contents _padding='80px 20px' _height='calc(100vh - 68px)'>
                 <CartEmptyText>장바구니에 담긴 상품이 없습니다.</CartEmptyText>
               </L.Contents>
             }
