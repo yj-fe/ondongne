@@ -1,9 +1,9 @@
 import React from 'react'
-import MainLogo from "assets/images/Logonew.png";
 import { ReactComponent as News } from "assets/news.svg";
 
 import {NavContainer,MainNavDiv,LogoImg,Icon,NewsStyle, ImgLogoBox} from 'components/Main/Main/MainNav/MainNavStyle'
 import { Link } from 'react-router-dom';
+import { Logo } from 'components/commonUi/Icon';
 
 function BusinessHeader() {
 
@@ -13,7 +13,7 @@ function BusinessHeader() {
 
         
       <ImgLogoBox>
-        <LogoImg src={MainLogo} />
+        <Logo/>
       </ImgLogoBox>
 
         <Link to='/business/news'>

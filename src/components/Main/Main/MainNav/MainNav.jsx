@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import MainLogo from "assets/images/Logonew.png";
 import { ReactComponent as News } from "assets/news.svg";
 import { ReactComponent as Cart } from "assets/main/nav/cart.svg";
 import { ReactComponent as Pin } from "assets/main/pin.svg";
@@ -8,6 +7,7 @@ import { ReactComponent as ArrowDown } from "assets/login/Arrow-Down.svg";
 
 import { MainLocation, NavContainer, MainNavDiv, PinStyle, LocationText, ArrowStyle, LogoImg, Icon, NewsStyle, CartStyle, LogoBox } from './MainNavStyle'
 import { useSelector } from 'react-redux';
+import { Logo } from 'components/commonUi/Icon';
 
 function MainNav() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ function MainNav() {
         </MainLocation>
 
         <LogoBox>
-          <LogoImg src={MainLogo} />
+          <Logo/>
         </LogoBox>
 
         <Icon>
