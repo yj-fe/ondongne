@@ -66,7 +66,6 @@ function CartPage({ }) {
     values.map(item =>
       price += (Number(item.itemPrice) * item.count) - Number(item.itemPrice) * item.count * (Number(item.itemSalePercent) / 100)
     );
-
     return price;
   }
 

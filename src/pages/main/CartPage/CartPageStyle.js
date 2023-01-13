@@ -59,7 +59,7 @@ export const CarProfiletDiv = styled.div`
   align-items: center;
   padding: 16px 20px;
   gap: 8px;
-  width: 728px;
+  width: 100%;
   height: 64px;
   background: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
