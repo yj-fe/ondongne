@@ -33,16 +33,16 @@ function FrequentlyAskedQuestion() {
           bell={false}
           onBackClick={() => navigate(-1)}
       >
-        <L.Container _height='100vh'>
-          <L.Contents _height='100vh'>
+        <L.Container _height='calc(100vh - 60px)'>
+          <L.Contents _height='calc(100vh - 60px)'>
             <Scroll>
-            <L.FlexCols _gap='0px' _padding="0px" _items="center">
-              {
-                faq.map(item=>(
-                  <FaqList item={item} />
-                ))
-              }
-            </L.FlexCols>
+              <L.FlexCols _gap='0px' _padding="0px" _items="center">
+                {
+                  faq.map(item=>(
+                    <FaqList item={item} />
+                  ))
+                }
+              </L.FlexCols>
             </Scroll>
           </L.Contents>
 

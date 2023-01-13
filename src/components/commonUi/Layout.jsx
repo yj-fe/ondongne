@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { screen } from '@testing-library/react';
 
+
 export const Inner = styled.div`
     position: relative;
     width: 100%;
@@ -29,6 +30,20 @@ export const Overlay = styled.div`
     > * {
         position: relative;
         z-index: 91;
+    }
+`;
+
+
+
+export const ContentsMedia = styled.div`
+    display: block;
+    padding: ${props => props._padding || '24px 20px'};
+    background: ${props => props._bg || '#FFF'};
+    max-width: 728px;
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    @media screen and (max-width:600px){
+        padding: ${props => props._paddingm || '24px 20px'};
     }
 `;
 
@@ -127,6 +142,21 @@ export const CateCols = styled.div`
     padding: ${props => props._padding || '0px'};
     @media only screen and (max-width: 688px) { 
       width: 47.5%;
+    }
+`;
+
+export const FlexColsMedia = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: ${props => props._gap || 8}px;
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+    @media screen and (max-width:600px){
+        padding: ${props => props._paddingm || '0px'};
+        gap: ${props => props._gapm || 8}px;
     }
 `;
 

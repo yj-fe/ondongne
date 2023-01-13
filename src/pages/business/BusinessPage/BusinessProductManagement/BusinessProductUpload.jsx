@@ -253,12 +253,11 @@ function BusinessProductUpload() {
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">카테고리</T.Text>
                 <L.FlexRows _gap={16}>
-                  <TitleInfoDiv>
+                  <TitleInfoDiv  onClick={() => setSelect(!select)}>
                     <TitleInfo>
                       {data.categories?.length > 0 ? data.categories.join(', ') : '카테고리 선택'}
                     </TitleInfo>
                     <RightStyle
-                      onClick={() => setSelect(!select)}
                     ><Down /></RightStyle>
                   </TitleInfoDiv>
                   

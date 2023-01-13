@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const LogoImg = styled.img`
-  width: 172px;
-  height: 38px;
+  width: 148px;
+  height: 40px;
 `;
 export const InputForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 40px;
   width: 100%;
 
   @media only screen and (max-width: 728px) {
@@ -170,7 +170,10 @@ export const LoginFooter = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   gap: 0px;
-  bottom: 32px;
+  bottom: 80px;
+  @media screen and (max-width:600px) {
+    bottom: 60px;
+  }
 `;
 export const LoginText = styled.p`
   width: 180px;

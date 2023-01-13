@@ -15,6 +15,7 @@ import { StoreListCard } from 'components/commonUi/StoreListCard';
 import { MyStoreBestItem } from 'service/main';
 import { getMyStores } from 'service/mystore';
 import Layout from 'components/layout/Layout/Layout';
+import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 
 function MyMarket() {
 
@@ -91,7 +92,7 @@ function MyMarket() {
         bell={true}
         onBackClick={() => navigate(-1)}
       >
-        <L.Contents _padding='0px'>
+        <L.Contents  _padding='0px'>
           <L.FlexRows _gap='0px'>
             <DetailTabInfo
               onClick={() => { setDetailTab(0); }}
@@ -107,7 +108,7 @@ function MyMarket() {
             </DetailTabReview>
           </L.FlexRows>
         </L.Contents>
-        <L.Contents>
+        <L.Contents >
           <L.FlexCols>
             {
               detailTab === 0
@@ -148,8 +149,10 @@ function MyMarket() {
           </L.FlexCols>
         </L.Contents>
 
-        <L.Contents _padding="0px">
-          <TabContent detailTab={detailTab} items={items} setData={setItems} loading={loading} lastRef={ref} />
+        <L.Contents _padding="0px" _height='calc(100vh - 195px)'>
+          <Scroll _height='calc(100vh - 200px)'>
+            <TabContent detailTab={detailTab} items={items} setData={setItems} loading={loading} lastRef={ref} />
+          </Scroll>
         </L.Contents>
 
       </Layout>

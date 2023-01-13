@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import LoginHeader from 'components/Login/Common/LoginHeader/LoginHeader'
-import Logo from "assets/logo.png";
 import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
 import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
 import { ReactComponent as Bar } from "assets/bar.svg";
@@ -19,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "store/slices/auth";
 import * as L from 'components/commonUi/Layout';
 import { S } from 'components/layout/Layout/LayoutStyle'
+import { Logo } from "components/commonUi/Icon";
 
 
 function LoginPage() {
@@ -135,73 +135,76 @@ function LoginPage() {
         <LoginHeader title="로그인" />
 
         <S.Main as="main" _bc='#fff'>
-          <L.Contents _padding='32px 40px 0px 40px '>
-            <L.FlexCols _gap={60}>
-              <L.FlexRows _content='center'>
-                <LogoImg src={Logo} />
+          <L.ContentsMedia _padding='80px 40px 0px 40px ' _paddingm='60px 20px'>
+            <L.FlexColsMedia _gap={80} _gapm={60}>
+              <L.FlexRows _content='center' >
+                <Logo/>
               </L.FlexRows>
-              <L.FlexCols _gap={16}>
-                <InputForm>
-                  <Input
-                    placeholder="이메일"
-                    name="email"
-                    type='text'
-                    value={account.email}
-                    onChange={onChangeInput}
-                  />
-                  <PwdContainer>
-                    <PwdInput
-                      name="password"
-                      type={showPassword ? "text" : "password"}
-                      value={account.password}
-                      placeholder="비밀번호"
+              <L.FlexCols  _gap={60}>
+                <L.FlexCols _gap={16}>
+                  <InputForm>
+                  <L.FlexCols  _gap={16}>
+                    <Input
+                      placeholder="이메일"
+                      name="email"
+                      type='text'
+                      value={account.email}
                       onChange={onChangeInput}
                     />
-                    <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
-                      {showPassword ? <EyeOn /> : <EyeOff />}
-                    </EyeOffStyle>
-                  </PwdContainer>
+                    <PwdContainer>
+                      <PwdInput
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        value={account.password}
+                        placeholder="비밀번호"
+                        onChange={onChangeInput}
+                      />
+                      <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
+                        {showPassword ? <EyeOn /> : <EyeOff />}
+                      </EyeOffStyle>
+                    </PwdContainer>
+                  </L.FlexCols>
 
-                  <LoginButton
-                    type="button"
-                    onClick={onSubmut}
-                    disabled={!active}
-                    color={active}
-                  >
-                    로그인</LoginButton>
+                    <LoginButton
+                      type="button"
+                      onClick={onSubmut}
+                      disabled={!active}
+                      color={active}
+                    >
+                      로그인</LoginButton>
 
-                </InputForm>
-                <FindStyle>
-                  <Link to="/login/find/email">
-                    <FindAccount>
-                      이메일 찾기
-                    </FindAccount>
-                  </Link>
-                  <Bar />
-                  <Link to="/login/find/password">
-                    <FindAccount>
-                      비밀번호 찾기
-                    </FindAccount>
-                  </Link>
-                </FindStyle>
+                  </InputForm>
+                  <FindStyle>
+                    <Link to="/login/find/email">
+                      <FindAccount>
+                        이메일 찾기
+                      </FindAccount>
+                    </Link>
+                    <Bar />
+                    <Link to="/login/find/password">
+                      <FindAccount>
+                        비밀번호 찾기
+                      </FindAccount>
+                    </Link>
+                  </FindStyle>
+                </L.FlexCols>
+
+                <GapContainer>
+                  <SnsStyle>
+                    <SnsTextStyle>
+                      <Horizon />
+                      <Snstext>SNS로 1초만에 시작하기</Snstext>
+                      <Horizon />
+                    </SnsTextStyle>
+                    <SnsIcon>
+                      <Naver onClick={loginNaver} />
+                      <Kakao onClick={loginKakao} />
+                      <Google onClick={loginGoogle} />
+                      {/* <Apple onClick={loginApple}/> */}
+                    </SnsIcon>
+                  </SnsStyle>
+                </GapContainer>
               </L.FlexCols>
-
-              <GapContainer>
-                <SnsStyle>
-                  <SnsTextStyle>
-                    <Horizon />
-                    <Snstext>SNS로 1초만에 시작하기</Snstext>
-                    <Horizon />
-                  </SnsTextStyle>
-                  <SnsIcon>
-                    <Naver onClick={loginNaver} />
-                    <Kakao onClick={loginKakao} />
-                    <Google onClick={loginGoogle} />
-                    {/* <Apple onClick={loginApple}/> */}
-                  </SnsIcon>
-                </SnsStyle>
-              </GapContainer>
-
 
               {
                 alert &&
@@ -238,8 +241,8 @@ function LoginPage() {
                   </Button>
                 </Link>
               </LoginFooter>
-            </L.FlexCols>
-          </L.Contents>
+            </L.FlexColsMedia>
+          </L.ContentsMedia>
         </S.Main>
       </S.Wrapper>
   );

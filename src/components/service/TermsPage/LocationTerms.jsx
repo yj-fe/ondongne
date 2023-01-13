@@ -3,6 +3,7 @@ import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { locationPolicy } from 'service/policy';
+import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 
 
 function LocationTerms() {
@@ -32,8 +33,10 @@ function LocationTerms() {
         bell={false}
       >
         <L.Container>
-          <L.Contents>
+          <L.Contents  _height='calc(100vh - 68px)'>
+            <Scroll _height='calc(100vh - 110px)'>
               <T.Text _size={14} _color='gray800'>{policy}</T.Text>
+            </Scroll>
           </L.Contents>
         </L.Container>
       </Layout>

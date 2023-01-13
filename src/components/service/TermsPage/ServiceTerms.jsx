@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
+import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 
 
 function ServiceTerms() {
@@ -13,7 +14,8 @@ function ServiceTerms() {
         bell={false}
       >
         <L.Container>
-          <L.Contents>
+          <L.Contents  _height='calc(100vh - 68px)'>
+          <Scroll _height='calc(100vh - 110px)'>
             <T.Text _size={14} _color='gray800'>
 
             </T.Text>
@@ -172,6 +174,7 @@ function ServiceTerms() {
               <p>제1조 (시행일자)</p>
               <p>이 약관은 2022년 12월 21일부터 시행됩니다.</p>
             </T.Text>
+            </Scroll>
           </L.Contents>
         </L.Container>
       </Layout>

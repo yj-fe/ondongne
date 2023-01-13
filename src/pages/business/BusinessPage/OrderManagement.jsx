@@ -47,7 +47,7 @@ function OrderManagement() {
                   </L.FlexRows>
               </L.FlexRows>
         {/* 주문 없을 때 */}
-              {/* <L.FlexRows  _height={'100vh'}  _content='center' _item='center'>
+              {/* <L.FlexRows  _height='calc(100vh - 68px)'  _content='center' _item='center'>
                 <T.Text _align='center' _size={15} _weight={300} _color='gray600'><p>주문 내역이 없습니다.</p><p>내 주변 마켓을 이용해보세요!</p></T.Text>
               </L.FlexRows> */}
 

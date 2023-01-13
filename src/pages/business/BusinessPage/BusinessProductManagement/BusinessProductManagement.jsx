@@ -12,6 +12,7 @@ import ProductTimer from 'components/commonUi/ProductTimer';
 import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 import { ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from 'components/Main/More/ModalPageStyle';
+import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 
 
 function BusinessProductManagement() {
@@ -100,7 +101,7 @@ function BusinessProductManagement() {
                 <L.FlexRowsWrapBPM _padding={0}>
                   {
                     items && items.length === 0 &&
-                    <L.Contents _padding='50px 0px' _height='100vh'>
+                    <L.Contents _padding='50px 0px'  _height='calc(100vh - 68px)'>
                       <L.NoneDataContainer>
                         <T.Text _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
                         <T.Text _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
@@ -125,8 +126,8 @@ function BusinessProductManagement() {
                           >
                             <Card item={item} />
                           </Link>
-                    ))
-                  }
+                  ))
+                }
                 </L.FlexRowsWrapBPM>
               </L.Contents>
 

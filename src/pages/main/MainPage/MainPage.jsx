@@ -41,8 +41,6 @@ function MainPage() {
       <MainNavBody>
         <MainContainer>
           <Img src={BannerImg}></Img>
-          {/* <MainBanner/> */}
-
           <MainCategory />
         </MainContainer>
 
