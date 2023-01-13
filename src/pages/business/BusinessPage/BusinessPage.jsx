@@ -8,7 +8,6 @@ import { ReactComponent as Right } from "assets/main/right.svg";
 import { ReactComponent as OrderIcon } from "assets/icons/business/neworder.svg";
 import { ReactComponent as Pickup } from "assets/icons/business/pickup.svg";
 import { ReactComponent as NewReview } from "assets/icons/business/newreview.svg";
-import FooterImg from 'assets/main/footerlogo.svg'
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 import { ReactComponent as Floating } from "assets/icons/business/floating.svg";
 import { ReactComponent as FloatingPush } from "assets/icons/business/floatingpush.svg";
@@ -26,6 +25,7 @@ import { useSelector } from 'react-redux';
 
 import * as L from 'components/commonUi/Layout';
 import Layout from 'components/layout/Layout/Layout';
+import { FooterLogo } from 'components/commonUi/Icon';
 
 function BusinessPage() {
   const navigate = useNavigate();
@@ -199,7 +199,7 @@ function BusinessPage() {
         </L.Container>
         <FooterDiv>
           <Footer>
-            <Logo src={FooterImg} />
+            <FooterLogo/>
             <FooterText>
               <span>(주)우리동네</span><br />
               <span>대표자: 윤원규 / 사업자등록번호: 893-62-00579 / 통신판매신고: 김포마산-1234</span><br />
