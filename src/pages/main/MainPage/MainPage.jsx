@@ -16,9 +16,11 @@ import * as L from 'components/commonUi/Layout';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Alert from 'components/commonUi/Alert'
+import { useNavigate } from 'react-router-dom';
 
 
 function MainPage() {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const [alert, setAlert] = useState(null);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -30,11 +32,11 @@ function MainPage() {
         buttonText: "확인",
         onButtonClick: () => {
           setAlert(false);
-          navgigate("/");
+          navigate("/");
         },
         onOverlayClick: () => {
           setAlert(false);
-          navgigate("/");
+          navigate("/");
         },
       });
     }
