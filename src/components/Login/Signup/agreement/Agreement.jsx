@@ -8,7 +8,7 @@ import { UnCheck } from "components/commonUi/Icon";
 import { AgreementInfo, AgreementText, AgreementTextStyle, CheckboxButton, CheckboxForm, CheckboxText, CheckboxToggle, Line, NextButton } from "./AgreementStyle";
 import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
 import * as L from 'components/commonUi/Layout';
-
+import * as T from 'components/commonUi/Text';
 
 
 function Agreement({setData, depthHandler}) {
@@ -66,157 +66,157 @@ function Agreement({setData, depthHandler}) {
 
   return (
     <div>
-      <EmailRequestBody>
-        <AgreementTextStyle>
-          <AgreementText>회원가입 약관 동의</AgreementText>
-          <AgreementInfo>이용약관을 확인 후 필수/선택 항목을 동의 체크해 주세요.</AgreementInfo>
-        </AgreementTextStyle>
-
-        <CheckboxForm>
-          <L.FlexRows 
-            _content='left' _items='center' 
-            onClick={() => setCheckAll((s) => !s)}
-           >
-            <CheckboxButton
-              id="All"
-              type="button"
+      <L.Contents _padding='32px 40px'>
+        <L.FlexCols _gap={60}>
+          <L.FlexCols>
+            <T.Text _size={24} _weight={600} >회원가입 약관 동의</T.Text>
+            <T.Text _size={15} _color='gray800'>이용약관을 확인 후 필수/선택 항목을 동의 체크해 주세요.</T.Text>
+          </L.FlexCols>
+          <CheckboxForm>
+            <L.FlexRows 
+              _content='left' _items='center' 
+              onClick={() => setCheckAll((s) => !s)}
             >
-              {checkAll ? <Checked /> : <UnCheck />}
-            </CheckboxButton>
-            <CheckboxText
-              size="16px"
-              weight="600"
-              for="all"
-            >
-              이용약관 전체동의
-            </CheckboxText>
-          </L.FlexRows>
-
-          <Line />
-
-
-          <L.FlexRows _content='space-between' _items='center'>
-            <L.FlexRows  
-              _content='left' _items='center'
-              onClick={(e) => {
-                onCheckClick(0)
-              }}
-            > 
               <CheckboxButton
-                id="Age"
+                id="All"
                 type="button"
-                onChange={ButtonActive}
               >
-                {checks[0] ? <Checked /> : <UnCheck />}
+                {checkAll ? <Checked /> : <UnCheck />}
               </CheckboxButton>
               <CheckboxText
-                size="14px"
-                weight="400"
-                for="age"
+                size="16px"
+                weight="600"
+                for="all"
               >
-                [필수] 14세 이상 입니다.
+                이용약관 전체동의
               </CheckboxText>
+            </L.FlexRows>
+
+            <Line />
+
+            <L.FlexRows _gap='0px' _content='space-between' _items='center'>
+              <L.FlexRows  
+                _content='left' _items='center' 
+                onClick={(e) => {
+                  onCheckClick(0)
+                }}
+              > 
+                <CheckboxButton
+                  id="Age"
+                  type="button"
+                  onChange={ButtonActive}
+                >
+                  {checks[0] ? <Checked /> : <UnCheck />}
+                </CheckboxButton>
+                <CheckboxText
+                  size="14px"
+                  weight="400"
+                  for="age"
+                >
+                  [필수] 14세 이상 입니다.
+                </CheckboxText>
+                </L.FlexRows>
+                <CheckboxToggle
+                  onClick={() => setShowAge((s) => !s)}
+                >
+                  {showAge ? <ToggleUp /> : <ToggleDown />}
+                </CheckboxToggle>
+            </L.FlexRows>
+            {showAge && <ToggleDetail />}
+
+
+
+
+            <L.FlexRows _content='space-between' _items='center'>
+              <L.FlexRows  
+                _content='left' _items='center'
+                onClick={() => { onCheckClick(1) }}
+              >
+                <CheckboxButton
+                  id="Service"
+                  type="button"
+                  onChange={ButtonActive}
+                >
+                  {checks[1] ? <Checked /> : <UnCheck />}
+                </CheckboxButton>
+                <CheckboxText
+                  size="14px"
+                  weight="400"
+                  for="service"
+                >
+                  [필수] 서비스 이용약관 동의
+                </CheckboxText>
               </L.FlexRows>
               <CheckboxToggle
-                onClick={() => setShowAge((s) => !s)}
-              >
-                {showAge ? <ToggleUp /> : <ToggleDown />}
+                onClick={() => setShowService((s) => !s)}
+                >
+                {showService ? <ToggleUp /> : <ToggleDown />}
               </CheckboxToggle>
-          </L.FlexRows>
-          {showAge && <ToggleDetail />}
-
-
-
-
-          <L.FlexRows _content='space-between' _items='center'>
-            <L.FlexRows  
-              _content='left' _items='center'
-              onClick={() => { onCheckClick(1) }}
-            >
-              <CheckboxButton
-                id="Service"
-                type="button"
-                onChange={ButtonActive}
-              >
-                {checks[1] ? <Checked /> : <UnCheck />}
-              </CheckboxButton>
-              <CheckboxText
-                size="14px"
-                weight="400"
-                for="service"
-              >
-                [필수] 서비스 이용약관 동의
-              </CheckboxText>
             </L.FlexRows>
-            <CheckboxToggle
-              onClick={() => setShowService((s) => !s)}
-              >
-              {showService ? <ToggleUp /> : <ToggleDown />}
-            </CheckboxToggle>
-          </L.FlexRows>
-          {showService && <ToggleDetail />}
+            {showService && <ToggleDetail />}
 
 
 
-          <L.FlexRows _content='space-between' _items='center'>
-            <L.FlexRows  
-              _content='left' _items='center'
-              onClick={() => { onCheckClick(2) }}
-            >
-              <CheckboxButton
-                id="Collect"
-                type="button"
-                onChange={ButtonActive}
+            <L.FlexRows _content='space-between' _items='center'>
+              <L.FlexRows  
+                _content='left' _items='center'
+                onClick={() => { onCheckClick(2) }}
               >
-                {checks[2] ? <Checked /> : <UnCheck />}
-              </CheckboxButton>
-              <CheckboxText
-                size="14px"
-                weight="400"
-                for="collect"
+                <CheckboxButton
+                  id="Collect"
+                  type="button"
+                  onChange={ButtonActive}
+                >
+                  {checks[2] ? <Checked /> : <UnCheck />}
+                </CheckboxButton>
+                <CheckboxText
+                  size="14px"
+                  weight="400"
+                  for="collect"
+                >
+                  [필수] 개인정보 수집 이용 동의
+                </CheckboxText>
+              </L.FlexRows>
+              <CheckboxToggle
+                onClick={() => setShowCollect((s) => !s)}
               >
-                [필수] 개인정보 수집 이용 동의
-              </CheckboxText>
+                {showCollect ? <ToggleUp /> : <ToggleDown />}
+              </CheckboxToggle>
             </L.FlexRows>
-            <CheckboxToggle
-              onClick={() => setShowCollect((s) => !s)}
-            >
-              {showCollect ? <ToggleUp /> : <ToggleDown />}
-            </CheckboxToggle>
-          </L.FlexRows>
-          {showCollect && <ToggleDetail />}
+            {showCollect && <ToggleDetail />}
 
 
 
-          <L.FlexRows _content='space-between' _items='center'>
-            <L.FlexRows  
-              _content='left' _items='center'
-              onClick={() => { onCheckClick(3) }}
-            >
-              <CheckboxButton
-                id="Sns"
-                type="button"
+            <L.FlexRows _content='space-between' _items='center'>
+              <L.FlexRows  
+                _content='left' _items='center'
+                onClick={() => { onCheckClick(3) }}
               >
-                {checks[3] ? <Checked /> : <UnCheck />}
-              </CheckboxButton>
-              <CheckboxText
-                size="14px"
-                weight="400"
-                for="sns"
+                <CheckboxButton
+                  id="Sns"
+                  type="button"
+                >
+                  {checks[3] ? <Checked /> : <UnCheck />}
+                </CheckboxButton>
+                <CheckboxText
+                  size="14px"
+                  weight="400"
+                  for="sns"
+                >
+                  [선택] 마케팅정보 메일, SMS 수신동의
+                </CheckboxText>
+              </L.FlexRows>
+              <CheckboxToggle
+                onClick={() => setShowSns((s) => !s)}
               >
-                [선택] 마케팅정보 메일, SMS 수신동의
-              </CheckboxText>
+                {showSns ? <ToggleUp /> : <ToggleDown />}
+              </CheckboxToggle>
             </L.FlexRows>
-            <CheckboxToggle
-              onClick={() => setShowSns((s) => !s)}
-            >
-              {showSns ? <ToggleUp /> : <ToggleDown />}
-            </CheckboxToggle>
-          </L.FlexRows>
-          {showSns && <ToggleDetail />}
-        </CheckboxForm>
-
-      </EmailRequestBody>
+            {showSns && <ToggleDetail />}
+          </CheckboxForm>
+          
+        </L.FlexCols>
+      </L.Contents>
       <NextButton
         type="button"
         color={checks[0] && checks[1] &&  checks[2]}

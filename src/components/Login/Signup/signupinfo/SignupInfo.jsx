@@ -9,6 +9,7 @@ import { PwdContainer, PwdInput, RequestInputDiv, RequestTextStyle } from 'compo
 import { signup } from "service/auth";
 import { memberEmailValidation, memberNicknameValidation } from "service/common";
 import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
 import { Input } from 'components/Login/Password/PwdRequest/PwdRequestStyle';
 import { NextButton } from "../agreement/AgreementStyle";
@@ -202,11 +203,12 @@ function SignupInfo({ data, setData }) {
   return (
     <div>
       <EmailRequestBody>
-        <RequestTextStyle>
-          <RequestText>회원 정보 입력</RequestText>
-          <RequestInfo>회원가입 시 필요한 회원정보를 모두 입력해 주세요.</RequestInfo>
-        </RequestTextStyle>
-
+        <L.FlexCols _gap={40}>
+          <L.FlexCols>
+            <T.Text _size={24} _weight={600} >회원 정보 입력</T.Text>
+            <T.Text _size={15} _color='gray800'>회원가입 시 필요한 회원정보를 모두 입력해 주세요.</T.Text>
+          </L.FlexCols>
+        </L.FlexCols>
         <L.FlexCols _gap={24}>
           <L.FlexCols>
             <RequesInputTitle>이메일</RequesInputTitle>

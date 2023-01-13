@@ -40,13 +40,8 @@ export const CheckboxForm = styled.p`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 14px;
-
-  /* width: 648px; */
-  /* height: 293px; */
-  @media only screen and (max-width: 728px) { 
-    width: 100%;
-  }
+  gap: 12px;
+  width: 100%;
 `
 export const CheckboxInput = styled.form`
   display: flex;
@@ -92,7 +87,6 @@ export const CheckboxText = styled.label`
   font-weight: ${props => props.weight};
   font-size: ${props => props.size};
   color: #212121;
-  
 `
 export const CheckboxToggle = styled.div`
   align-items: center;
