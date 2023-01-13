@@ -12,7 +12,7 @@ import { AbsoluteTopDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img
 import maindata from 'assets/data/maindata'
 import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
-import { NameToggleInput, NameToggleInputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
+import { InputFormOrder, NameToggleInput, NameToggleInputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
 import data from './../../../assets/data/maindata';
 import { type } from '@testing-library/user-event/dist/type';
 
@@ -90,14 +90,14 @@ function OrderManagementDetailsAuthPage() {
                   {show ? <ArrowTop/> : <Down/> }
                 </InfoBoxDiv>
                 {show && <Toggle  type={data.type} handler={dataChecked} closeSelector={() => setShow(false)}/>}
-                <NameToggleInputForm _height='140px'>
+                <InputFormOrder _height='140px'>
                   <NameToggleInput
                     type='text'
                     placeholder='텍스트를 입력해 주세요.'
                     value={text}
                     onChange={e => setText(e.target.value)}
                   />
-                </NameToggleInputForm>
+                </InputFormOrder>
               </L.FlexCols>
 
             </L.FlexCols>

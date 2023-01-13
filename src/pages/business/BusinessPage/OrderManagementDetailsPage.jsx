@@ -16,7 +16,7 @@ function OrderManagementDetailsPage() {
         <Layout
           title="주문내역 상세"
         >
-<L.Container>
+            <L.Container>
             {/* 주문 완료 */}
             <L.Contents>
                 <L.FlexCols _gap={24}>

@@ -99,6 +99,21 @@ export const InputForm = styled.form`
     background: #FFFFFF;
   }
 `
+export const InputFormOrder = styled.form`
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 24px;
+  width: 100%;
+  height: ${props=>props._height || '48px'};
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 4px;
+`
 export const NameToggleInputForm = styled.form`
 
   box-sizing: border-box;

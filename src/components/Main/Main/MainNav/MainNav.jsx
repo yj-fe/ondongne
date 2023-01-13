@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as News } from "assets/news.svg";
 import { ReactComponent as Cart } from "assets/main/nav/cart.svg";
 import { ReactComponent as Pin } from "assets/main/pin.svg";
@@ -35,9 +35,13 @@ function MainNav() {
         </LogoBox>
 
         <Icon>
-          <NewsStyle>
-            <News />
-          </NewsStyle>
+          {/* 일반알림 */}
+            <NewsStyle
+              onClick={() => {
+                navigate("member/news");
+              }}>
+              <News />
+            </NewsStyle>
           <CartStyle
             onClick={() => {
               navigate("cart");

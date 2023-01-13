@@ -66,7 +66,6 @@ function BusinessManagementTab2() {
     if (!data) {
       navigate("/");
     }
-
     setBiz(data);
   }
 

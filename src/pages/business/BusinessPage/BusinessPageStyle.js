@@ -214,7 +214,7 @@ export const MyBestProductContent = styled.div`
 	flex-direction: row;
 	align-items: flex-start;
 	gap: 16px;
-	width: 814px;
+	width: 100%;
 	height: 316px;
 `;
 export const FooterDiv = styled.div`
