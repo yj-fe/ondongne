@@ -8,7 +8,7 @@ function LoginHeader({title}) {
   const navigate = useNavigate()
 
   return (
-    <LoginNavDiv>
+    <LoginNavDiv as="header">
       <Inner>
         <UtilBtn onClick={()=>{ navigate(-1)}}>
           <Back />

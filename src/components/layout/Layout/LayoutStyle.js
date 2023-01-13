@@ -10,7 +10,7 @@ export const S = {
 	`,
 	Main: styled(Common.Inner)`
 		z-index: 20;
-		background-color: transparent;
+		background-color: ${props => props._bc || 'transparent'};
 		padding-top: 60px;
 		min-height: 100vh;
 	`,

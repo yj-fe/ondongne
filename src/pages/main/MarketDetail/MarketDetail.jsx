@@ -103,19 +103,15 @@ function MarketDetail() {
             </L.FlexCols>
           </L.Contents>
         </L.Container>
-
         {
           !isEmptyObj(item) &&
           <TabContentStyle>
             <TabContent detailTab={detailTab} item={item} />
           </TabContentStyle>
         }
-
-
         {modal && <ModalMorePage PropsModal={() => setModal(false)} />}
 
-
-        <FooterLayout />
+          <FooterLayout />
 
       </Layout>
 

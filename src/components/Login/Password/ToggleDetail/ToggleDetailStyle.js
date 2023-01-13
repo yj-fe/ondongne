@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const Scroll = styled.div`
+  overflow: scroll;
+  height: calc(100vh - 10%);
+  &::-webkit-scrollbar{
+    display: none;
+  }
+`
+
 export const ToggleBody = styled.div`
   display: flex;
   width: 100%;

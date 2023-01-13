@@ -131,12 +131,11 @@ function LoginPage() {
   }, [auth])
 
   return (
-    <div>
       <S.Wrapper>
         <LoginHeader title="로그인" />
 
-        <S.Main>
-          <L.Contents _padding='32px 40px' _height='calc(100vh - 60px)'>
+        <S.Main as="main" _bc='#fff'>
+          <L.Contents _padding='32px 40px 0px 40px '>
             <L.FlexCols _gap={60}>
               <L.FlexRows _content='center'>
                 <LogoImg src={Logo} />
@@ -243,7 +242,6 @@ function LoginPage() {
           </L.Contents>
         </S.Main>
       </S.Wrapper>
-    </div>
   );
 }
 

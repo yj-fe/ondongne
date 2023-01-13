@@ -164,15 +164,16 @@ export const SnsIcon = styled.div`
   flex-grow: 0;
 `;
 export const LoginFooter = styled.div`
+  position: fixed;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 4px;
-  width: 100%;
-  margin-top: 150px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 0px;
   bottom: 32px;
 `;
 export const LoginText = styled.p`
+  width: 180px;
   font-weight: 400;
   font-size: 14px;
   color: #424242;
@@ -182,9 +183,11 @@ export const Button = styled.button`
   flex-direction: row;
   justify-content: center;
   height: 20px;
+  width: 80px;
 `;
 export const SignupText = styled.p`
   font-weight: 600;
+  width: 50x;
   font-size: 14px;
   color: #424242;
 `;

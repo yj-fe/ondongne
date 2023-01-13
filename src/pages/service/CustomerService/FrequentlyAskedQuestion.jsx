@@ -4,7 +4,7 @@ import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { ArrowTop, Down } from 'components/commonUi/Icon';
-import { ToggleBody, ToggleDiv } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
+import { Scroll, ToggleBody, ToggleDiv } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import { faqList } from 'service/border';
 
 function FrequentlyAskedQuestion() {
@@ -35,6 +35,7 @@ function FrequentlyAskedQuestion() {
       >
         <L.Container _height='100vh'>
           <L.Contents _height='100vh'>
+            <Scroll>
             <L.FlexCols _gap='0px' _padding="0px" _items="center">
               {
                 faq.map(item=>(
@@ -42,6 +43,7 @@ function FrequentlyAskedQuestion() {
                 ))
               }
             </L.FlexCols>
+            </Scroll>
           </L.Contents>
 
         </L.Container>
