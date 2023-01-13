@@ -209,7 +209,7 @@ export const DetailTabInfo = styled.div`
   align-items: center;
   padding: 8px 20px;
   gap: 4px;
-  width: 50%;
+  width:33.3%;
   height: 50px;
   border-bottom: 2px solid ${ props => props.infocolor  ? "#0B806F" : "#BDBDBD"};;
   /* border-bottom: 2px solid #0B806F; */
@@ -228,7 +228,7 @@ export const DetailTabReview = styled.div`
   padding: 8px 20px;
   gap: 4px;
   border-bottom: 2px solid ${ props => props.reviewcolor  ? "#0B806F" : "#BDBDBD"};;
-  width: 50%;
+  width: 33.3%;
   height: 50px;
 
   font-weight: 600;
@@ -245,7 +245,7 @@ export const ButtonStyle = styled.div`
   position: fixed;
   bottom: 0;
   justify-items: center;
-  width: 728px;
+  width: 100%;
   height: 70px;
   @media screen and (max-width: 728px) {
     width: 100%;
@@ -308,11 +308,11 @@ export const TypeTextStyle = styled.div`
   padding: 0px;
   gap: 24px;
 
-  width: 688px;
+  width: 100%;
   height: 20px;
 `
 export const TypeLabel = styled.p`
-  width: 89px;
+  width: 60%;
   height: 20px;
   font-weight: 500;
   font-size: 14px;
@@ -638,7 +638,7 @@ export const OrderToggleBox = styled.div`
   margin-bottom: 70px;
   border-radius: ${props=>props._br || '20px 20px 0px 0px'};
   gap: ${props=>props._gap || '16px'};
-  width: ${props=>props._width || '728px'};
+  width: ${props=>props._width || '100%'};
   height: ${props=>props._height || '158px'};
   background: ${props=>props._bg || '#FFFFFF'};
   box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.08);

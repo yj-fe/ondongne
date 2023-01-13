@@ -177,6 +177,7 @@ function DetailsPage(props) {
                       <Badge _fdir='column' _bg='gray100' _padding='8px 16px' _height='auto' _bdr='8px'>
                         <T.Text _align='center' _size={12} _color='gray600' _minWidth={'74px'}>최소 주문량</T.Text>
                         <T.Text _width='76px' _align='center' _size={16} _weight={600} _color='gray800' >{item.minCount}/{item.maxCount}개</T.Text>
+                        {/* </L.FlexRows> */}
                       </Badge>
                     }
                   </L.FlexRows>
