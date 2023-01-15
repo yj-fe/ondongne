@@ -638,6 +638,7 @@ export const OrderToggleBox = styled.div`
 	height: ${(props) => props._height || "158px"};
 	background: ${(props) => props._bg || "#FFFFFF"};
 	box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.08);
+	max-width: 728px;
 	@media only screen and (max-width: 728px) {
 		width: 100%;
 	}

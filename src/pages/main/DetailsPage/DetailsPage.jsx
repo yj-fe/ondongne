@@ -467,32 +467,30 @@ function OrderToggle({
   }
 
   return (
-    <div>
-      <OrderToggleBox>
-        <L.FlexCols _gap='0px' _padding='16px 20px'>
-          <button
-            type='button'
-            onClick={closeOrderToggle}
-          >
-            <L.FlexRows _content='center' _gap='0px' _items='center'>
-              <ArrowBottom />
-            </L.FlexRows>
-          </button>
-          <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
-            <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
-            <L.FlexRows _content='right' _gap={12} _items='center' _width='112px'>
-              <button type='button' onClick={() => counterHandler(-1)}><MinusB /></button>
-              <T.Text _weight={500}>{numberFormat(count)}</T.Text>
-              <button type='button' onClick={() => counterHandler(1)}><PlusB /></button>
-            </L.FlexRows>
+    <OrderToggleBox>
+      <L.FlexCols _gap='0px' _padding='16px 20px'>
+        <button
+          type='button'
+          onClick={closeOrderToggle}
+        >
+          <L.FlexRows _content='center' _gap='0px' _items='center'>
+            <ArrowBottom />
           </L.FlexRows>
-          <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
-            <T.Text _size={16} _weight={500} _color='gray800' >상품 금액</T.Text>
-            <T.Text _size={16} _weight={600} _color='gray800' >{totalPrice(price * count, salePercent)} 원</T.Text>
+        </button>
+        <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
+          <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
+          <L.FlexRows _content='right' _gap={12} _items='center' _width='112px'>
+            <button type='button' onClick={() => counterHandler(-1)}><MinusB /></button>
+            <T.Text _weight={500}>{numberFormat(count)}</T.Text>
+            <button type='button' onClick={() => counterHandler(1)}><PlusB /></button>
           </L.FlexRows>
-        </L.FlexCols>
-      </OrderToggleBox>
-    </div>
+        </L.FlexRows>
+        <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
+          <T.Text _size={16} _weight={500} _color='gray800' >상품 금액</T.Text>
+          <T.Text _size={16} _weight={600} _color='gray800' >{totalPrice(price * count, salePercent)} 원</T.Text>
+        </L.FlexRows>
+      </L.FlexCols>
+    </OrderToggleBox>
   )
 }
 
