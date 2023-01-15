@@ -52,13 +52,6 @@ function MainPage() {
           <MainCategory />
         </MainContainer>
 
-
-        <L.Inner>
-          <L.Contents _padding='20px 0px 20px 20px'>
-            <MainProductTest />
-          </L.Contents>
-        </L.Inner>
-
         {/* 우리동네 인기 쿠폰 */}
         {/* <L.Inner>
           <L.Contents _padding='20px 0px 20px 20px'>

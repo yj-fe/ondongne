@@ -26,11 +26,14 @@ import StarRate from 'components/commonUi/StarRate';
 import HTMLReactParser from 'html-react-parser';
 import ProductCart from 'components/Main/Cart/ProductCart';
 import ProductComments from 'components/Main/productDetails/ProductComments';
+import { useDispatch } from 'react-redux';
+import { orderActions } from 'store/slices/order';
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
 const STOREURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
 function DetailsPage(props) {
 
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [item, setItem] = useState({
     address: '',
@@ -74,16 +77,14 @@ function DetailsPage(props) {
       return setConfirm(true)
     }
 
-    console.log(item);
-
     if (!orderToggle) return setOrderToggle(true)
 
     if (orderToggle && type === 0) return;
 
     if (orderToggle && type === 1) {
-      return navigate(
-        '/order/new', { state: { data: [{ ...item, count, cartId: 0 }] } }
-      )
+      const data = [{ ...item, count, cartId: 0 }];
+      dispatch(orderActions.save(data));
+      return navigate('/order/new');
     }
   }
 

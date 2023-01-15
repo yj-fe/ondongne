@@ -135,11 +135,18 @@ function BusinessManagementTab1() {
     })
   }
 
-
   // 상점 수정
   const onSubmit = async () => {
     const response = await storeUpdate(store);
-    console.log(response)
+
+    if (response && response.data.data) {
+      return setAlert({
+        contents: "상점 정보를 수정하였습니다.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(false),
+        onOverlayClick: () => setAlert(false),
+      })
+    }
   }
 
   // 상점 조회
@@ -234,7 +241,7 @@ function BusinessManagementTab1() {
                 {store.categories?.length > 0 ? store.categories.join(', ') : '카테고리 선택'}
               </TitleInfo>
               <RightStyle
-                
+
               ><Down /></RightStyle>
             </TitleInfoDiv>
             {categoryErroMessage && <Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{categoryErroMessage}</Text>}

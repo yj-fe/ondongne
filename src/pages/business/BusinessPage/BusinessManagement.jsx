@@ -26,30 +26,32 @@ function BusinessManagement() {
       >
         <L.Container _padding="0px" _gap='0px'>
           <L.Contents _padding="0">
-            <L.FlexCols  _gap='0px'>
-      {/* ============  ============ */}
+            <L.FlexCols _gap='0px'>
+              {/* ============  ============ */}
 
 
 
-            <TabButtonStyle>
-              <DetailTabInfo
-                onClick={() => { setDetailTab(0); }}
-                infocolor={detailTab === 0}
-              >
-                상점 정보
-              </DetailTabInfo>
-              <DetailTabReview
-                onClick={() => { setDetailTab(1); }}
-                reviewcolor={detailTab === 1}
-              >
-                사업자 정보
-              </DetailTabReview>
-            </TabButtonStyle>
+              <TabButtonStyle>
+                <DetailTabInfo
+                  width='50%'
+                  onClick={() => { setDetailTab(0); }}
+                  infocolor={detailTab === 0}
+                >
+                  상점 정보
+                </DetailTabInfo>
+                <DetailTabReview
+                  width='50%'
+                  onClick={() => { setDetailTab(1); }}
+                  reviewcolor={detailTab === 1}
+                >
+                  사업자 정보
+                </DetailTabReview>
+              </TabButtonStyle>
 
-            <TabContentStyle>
-              <TabContent detailTab={detailTab} />
-            </TabContentStyle>
-            <MarginBDiv />
+              <TabContentStyle>
+                <TabContent detailTab={detailTab} />
+              </TabContentStyle>
+              <MarginBDiv />
 
 
 

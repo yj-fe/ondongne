@@ -87,7 +87,7 @@ function SearchPage() {
         cart={true}
         bell={true}
         search={true}
-        onBackClick={() => navigate('/')}
+        onBackClick={() => navigate(-1, { replace: true })}
       >
 
         <L.Container >

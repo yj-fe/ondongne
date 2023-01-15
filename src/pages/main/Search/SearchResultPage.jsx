@@ -87,12 +87,14 @@ function SearchResultPage() {
         <L.Contents _padding='0px'>
           <L.FlexRows _gap='0px'>
             <DetailTabInfo
+              width='50%'
               onClick={() => { setDetailTab(0); }}
               infocolor={detailTab === 0}
             >
               상품
             </DetailTabInfo>
             <DetailTabReview
+              width='50%'
               onClick={() => { setDetailTab(1); }}
               reviewcolor={detailTab === 1}
             >

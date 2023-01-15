@@ -29,7 +29,7 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
                 list.map((item, index) => (
                     <L.FlexRows
                         onClick={() => navigate(`/market/detail/${item.storeId}`)}
-                        key={item.storeId}
+                        key={index}
                         _content='space-between'
                         ref={list.length == index + 1 ? lastRef : null}
                     >

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { loadTossPayments } from '@tosspayments/payment-sdk'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
@@ -14,28 +14,29 @@ import { numberFormat, phoneFormatter, storeTotalPrice, totalPrice } from 'utils
 import { useSelector } from 'react-redux';
 import { getMember } from 'service/member';
 import DaumPost from 'components/DaumPost';
-import { useDispatch } from 'react-redux';
-import { orderActions } from 'store/slices/order';
+import { requestPayment } from 'service/payment';
 const IMGURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/';
-const CLIENTKEY = 'test_ck_d26DlbXAaV0KNDOejNd3qY50Q9RB'
 
 const OrderForm = ({ data }) => {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const auth = useSelector(state => state.auth);
-    const orderItems = useSelector(state => state.order);
+    const orderItems = useSelector(state => state.order.items);
 
     const [orderData, setOrderData] = useState({
+        memberId: '',
+        cartId: '',
+        storeId: '',
         nickname: '',
         phone: '',
         address: '',
         addressDetails: '',
         deliveryContents: '',
         items: [],
-        orderPrice: 0,
-        orderType: '배달',
-        payType: '카드 결제',
+        deliveryPrice: 0,
+        amount: 0,
+        recetiveType: '배달',
+        payType: '카드',
         requestSave: false,
     })
 
@@ -66,16 +67,18 @@ const OrderForm = ({ data }) => {
         if (response && response.data.data) {
             const member = response.data.data;
 
-            dispatch(orderActions.save(data));
-
             setOrderData({
                 ...orderData,
+                memberId: member.memberId,
+                cartId: orderItems[0].cartId,
+                storeId: orderItems[0].storeId,
                 nickname: member.nickname,
                 phone: member.phone,
-                address: member.address,
-                addressDetails: member.addressDetails,
-                items: data ?? orderItems,
-                orderPrice: Number(data[0].deliveryPrice + storeTotalPrice(data))
+                address: member.address === null ? '' : member.address,
+                addressDetails: member.addressDetails === null ? '' : member.addressDetails,
+                items: orderItems,
+                amount: Number(orderItems[0].deliveryPrice + storeTotalPrice(orderItems)),
+                deliveryPrice: orderItems[0].deliveryPrice,
             })
         } else {
             return goHome();
@@ -86,9 +89,12 @@ const OrderForm = ({ data }) => {
         결제하기 SUBMIT 
         - 결제 api 요청
     ============================== */
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if (orderData.orderType === '배달' && !orderData.address && !orderData.addressDetails) {
+
+        if (orderData.recetiveType === '배달'
+            && orderData.address === ""
+            && orderData.addressDetails === "") {
             return setAlert({
                 title: "배송지 입력",
                 contents: "상세 주소를 입력해 주세요",
@@ -98,38 +104,45 @@ const OrderForm = ({ data }) => {
             })
         }
 
-        loadTossPayments(CLIENTKEY).then(tossPayments => {
-            tossPayments.requestPayment('카드', { // 결제 수단 파라미터
-                // 결제 정보 파라미터
-                amount: orderData.orderPrice,
-                orderId: `ONDONG-MARKTER`,
-                orderName: toTossOrderName(),
-                customerName: orderData.items[0].storeName,
-                // successUrl: 'https://ondongnemarket.com/api/payment/request',
-                // failUrl: 'https://ondongnemarket.com/api/payment/fail',
-                successUrl: 'http://localhost:8080/api/payment/request',
-                failUrl: 'http://localhost:8080/api/payment/fail',
-            })
-                .catch(function (error) {
-                    if (error.code === 'USER_CANCEL') {
-                        return setAlert({
-                            title: "결제 취소",
-                            contents: "결제가 취소되었습니다.",
-                            buttonText: "확인",
-                            onButtonClick: () => { setAlert(null) },
-                            onOverlayClick: () => { setAlert(null) },
-                        })
-                    } else if (error.code === 'INVALID_CARD_COMPANY') {
-                        return setAlert({
-                            title: "결제 취소",
-                            contents: "유효하지 않은 카드 코드입니다.",
-                            buttonText: "확인",
-                            onButtonClick: () => { setAlert(null) },
-                            onOverlayClick: () => { setAlert(null) },
-                        })
-                    }
+        console.log(orderData);
+
+        const response = await requestPayment(orderData);
+        if (response && response.data.data) {
+
+            const data = response.data.data;
+
+            loadTossPayments(data.clientKey).then(tossPayments => {
+                tossPayments.requestPayment(orderData.payType, {
+                    amount: data.amount,
+                    orderId: data.orderKey,
+                    orderName: toTossOrderName(),
+                    customerName: orderData.items[0].storeName,
+                    successUrl: data.successUrl,
+                    failUrl: data.failUrl,
                 })
-        })
+                    .catch(function (error) {
+                        if (error.code === 'USER_CANCEL') {
+                            return setAlert({
+                                title: "결제 취소",
+                                contents: "결제가 취소되었습니다.",
+                                buttonText: "확인",
+                                onButtonClick: () => { setAlert(null) },
+                                onOverlayClick: () => { setAlert(null) },
+                            })
+                        } else if (error.code === 'INVALID_CARD_COMPANY') {
+                            return setAlert({
+                                title: "결제 취소",
+                                contents: "유효하지 않은 카드 코드입니다.",
+                                buttonText: "확인",
+                                onButtonClick: () => { setAlert(null) },
+                                onOverlayClick: () => { setAlert(null) },
+                            })
+                        }
+                    })
+            })
+        }
+
+
 
     };
 
@@ -146,7 +159,7 @@ const OrderForm = ({ data }) => {
             title: status ? "주문 완료" : "주문 실패",
             contents: status ? "주문이 완료되었습니다." : "주문이 실패되었습니다.",
             buttonText: "확인",
-            onButtonClick: () => { status ? navigate('/order/all') : setAlert(null) },
+            onButtonClick: () => { status ? navigate('/order/all', { replace: true }) : setAlert(null) },
             onOverlayClick: () => { setAlert(null) },
         })
     }
@@ -204,23 +217,24 @@ const OrderForm = ({ data }) => {
                             </L.FlexCols>
                         </L.FlexCols>
                         <B.LayerOptionButton
+                            type='button'
                             active={orderSelect}
                             onClick={() => setOrderSelect(orderSelect => !orderSelect)}
-                        >{orderData.orderType}(으)로 주문</B.LayerOptionButton>
+                        >{orderData.recetiveType}(으)로 주문</B.LayerOptionButton>
                         <LayerSelect
                             active={orderSelect}
-                            selected={orderData.orderType}
-                            name="orderType"
+                            selected={orderData.recetiveType}
+                            name="recetiveType"
                             selectName="주문 방식"
                             options={[
                                 { text: '배달', value: '배달' },
-                                { text: '방문 포장', value: '방문 포장' },
+                                // { text: '방문 포장', value: '방문 포장' },
                             ]}
                             onChange={e => {
                                 e.preventDefault();
                                 setOrderData({
                                     ...orderData,
-                                    orderType: e.currentTarget.value
+                                    recetiveType: e.currentTarget.value
                                 })
                                 setOrderSelect(false);
                             }}
@@ -284,7 +298,7 @@ const OrderForm = ({ data }) => {
                                         </tr>
                                         <tr>
                                             <th>배달비</th>
-                                            <td>{numberFormat(orderData.items[0].deliveryPrice)} 원</td>
+                                            <td>{numberFormat(orderData.deliveryPrice)} 원</td>
                                         </tr>
                                         {/* <tr>
                                     <th>결제 수단</th>
@@ -294,7 +308,7 @@ const OrderForm = ({ data }) => {
                                     <tfoot>
                                         <tr>
                                             <th>총 결제금액</th>
-                                            <td>{numberFormat(orderData.orderPrice)} 원</td>
+                                            <td>{numberFormat(orderData.amount)} 원</td>
                                         </tr>
                                     </tfoot>
                                 </Tb.ReciptTable>
@@ -307,6 +321,7 @@ const OrderForm = ({ data }) => {
                     <L.FlexCols _gap={16}>
                         <T.Text _size={18} _weight={600}>결제 수단</T.Text>
                         <B.LayerOptionButton
+                            type='button'
                             onClick={() => setPaySelect(paySelect => !paySelect)}
                         >{orderData.payType}</B.LayerOptionButton>
                     </L.FlexCols>
@@ -316,7 +331,7 @@ const OrderForm = ({ data }) => {
                         name="payType"
                         selectName="결제 수단"
                         options={[
-                            { text: '카드 결제', value: '카드 결제' },
+                            { text: '카드 결제', value: '카드' },
                             // { text: '방문 결제', value: '방문 결제' },
                         ]}
                         onChange={e => {

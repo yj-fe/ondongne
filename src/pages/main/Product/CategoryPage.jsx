@@ -169,17 +169,19 @@ function CategoryEmpty() {
 export function CategoryCard({ list, lastRef }) {
 
   return (
-    <L.FlexRows  _gap='0px' _padding='20px 0px 0px' _height='calc(100vh - 208px)'>
+    <L.FlexRows _gap='0px' _padding='20px 0px 0px' _height='calc(100vh - 208px)'>
       <Scroll _height='calc(100vh - 210px)'>
-    <L.FlexRowsWrap _gap={20} _padding={0}>
-      {list.map((item, index) => (
-        <ProductCard
-          item={item}
-          lastRef={list.length === index + 1 ? lastRef : null}
-        />
-      ))}
-    </L.FlexRowsWrap>
-    </Scroll>
+        <L.FlexRowsWrap _gap={20} _padding={0}>
+          {list.length > 0 && list.map((item, index) => (
+            <React.Fragment key={index}>
+              <ProductCard
+                item={item}
+                lastRef={list.length === index + 1 ? lastRef : null}
+              />
+            </React.Fragment>
+          ))}
+        </L.FlexRowsWrap>
+      </Scroll>
     </L.FlexRows>
   )
 }

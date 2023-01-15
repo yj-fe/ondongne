@@ -8,16 +8,18 @@ import { CarContentDiv, CarProfiletDiv, CartContainer, CartDiv, ProductInfo, Pro
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Layout from 'components/layout/Layout/Layout';
 import * as L from 'components/commonUi/Layout';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartCountUpdate, cartDelete, carts } from 'service/cart';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { groupBy, isEmptyObj, numberFormat, storeTotalPrice } from 'utils/utils';
 import { totalPrice } from 'utils/utils';
+import { orderActions } from 'store/slices/order';
 const IMGURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/';
 
 
 function CartPage({ }) {
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
   const [loading, setLoading] = useState(false);
@@ -62,7 +64,8 @@ function CartPage({ }) {
 
   // 주문페이지 이동
   const orderRoute = (items) => {
-    return navigate('/order/new', { state: { data: items } })
+    dispatch(orderActions.save(items));
+    return navigate('/order/new')
   }
 
   useEffect(() => {

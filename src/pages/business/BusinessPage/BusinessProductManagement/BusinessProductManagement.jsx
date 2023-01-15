@@ -13,6 +13,7 @@ import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 import { ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from 'components/Main/More/ModalPageStyle';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
+import { ProductCard } from 'components/Main/productDetails/ProductCard';
 
 
 function BusinessProductManagement() {
@@ -34,7 +35,7 @@ function BusinessProductManagement() {
   })
   // 정렬- 선택한 type으로 바꾸기
   const dataChecked = type => {
-    setData({...data, type: type})
+    setData({ ...data, type: type })
   }
   // 정렬모달
   const PropsModal = () => {
@@ -43,7 +44,7 @@ function BusinessProductManagement() {
   const ShowMoreModal = () => {
     setModal(!modal);
   }
-// ====================================
+  // ====================================
   const getItem = async () => {
     setLoading(true)
     const response = await bizItemList(page, sort);
@@ -101,7 +102,7 @@ function BusinessProductManagement() {
                 <L.FlexRowsWrapBPM _padding={0}>
                   {
                     items && items.length === 0 &&
-                    <L.Contents _padding='50px 0px'  _height='calc(100vh - 68px)'>
+                    <L.Contents _padding='50px 0px' _height='calc(100vh - 68px)'>
                       <L.NoneDataContainer>
                         <T.Text _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
                         <T.Text _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
@@ -113,21 +114,21 @@ function BusinessProductManagement() {
                     items.map((item, index) => (
                       items.length === index + 1
                         ? <Link
-                            ref={ref}
-                            key={item.itemId}
-                            to={`/business/product/details/${item.itemId}`}
-                          >
-                            <Card item={item} />
-                          </Link>
+                          ref={ref}
+                          key={item.itemId}
+                          to={`/business/product/details/${item.itemId}`}
+                        >
+                          <ProductCard item={item} />
+                        </Link>
 
                         : <Link
-                            key={item.itemId}
-                            to={`/business/product/details/${item.itemId}`}
-                          >
-                            <Card item={item} />
-                          </Link>
-                  ))
-                }
+                          key={item.itemId}
+                          to={`/business/product/details/${item.itemId}`}
+                        >
+                          <ProductCard item={item} />
+                        </Link>
+                    ))
+                  }
                 </L.FlexRowsWrapBPM>
               </L.Contents>
 
@@ -140,45 +141,6 @@ function BusinessProductManagement() {
   )
 }
 
-export function Card({ lastRef, item }) {
-  return (
-      <L.FlexColsSize _gap={12} _padding={0} >
-
-        {
-          !item.soldoutStatus
-            ? <ImgSizeH _height={216} _width='100%' _bdr={6} src={item.thumbnail} />
-            : <div style={{ position: 'relative' }}>
-              <ImgSizeH _height={216} _bdr={6} src={item.thumbnail} />
-              <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
-            </div>
-        }
-
-        <L.FlexCols _gap={4} _padding={0} >
-          {
-            item.type === 'GROUP' &&
-            !item.soldoutStatus &&
-            <ProductTimer date={item.endDate} />
-          }
-          <T.Text _size={14} _weight={400} _color='gray900'>{item.name}</T.Text>
-          {
-            item.salePercent > 0 &&
-            <L.FlexRows _gap={4} _padding={0} _items='center' >
-              <T.Text _size={15} _weight={600} _color='red'>{item.salePercent}%</T.Text>
-              <T.Text _size={13} _weight={400} _color='gray500' _decoration={'line-through'}>{numberFormat(item.price)}원</T.Text>
-            </L.FlexRows>
-          }
-          <L.FlexRows>
-            <T.Text _size={16} _weight={600} _color='gray900'>{totalPrice(item.price, item.salePercent)} 원</T.Text>
-          </L.FlexRows>
-          <L.FlexRows _content='flex-start'>
-            <StarRate rate={item.reviewRate} />
-            <T.Text _align='left'  _size={11} _weight={400} _color='gray800'>({item.reviewRate})</T.Text>
-          </L.FlexRows>
-
-        </L.FlexCols>
-      </L.FlexColsSize>
-  )
-}
 
 // 정렬 모달
 export function ModalFilter({ type, handler, closeSelector }) {
@@ -202,10 +164,10 @@ export function ModalFilter({ type, handler, closeSelector }) {
   ])
   const clickHandler = name => {
     setData(
-      data.map(item => 
-          item.name === name 
-            ? {...item, checked: !item.checked} 
-            : {...item, checked: false} 
+      data.map(item =>
+        item.name === name
+          ? { ...item, checked: !item.checked }
+          : { ...item, checked: false }
       )
     )
     handler(name);
@@ -214,10 +176,10 @@ export function ModalFilter({ type, handler, closeSelector }) {
 
   useEffect(() => {
     setData(
-      data.map(item => 
-          item.name === type 
-            ? {...item, checked: !item.checked} 
-            : item
+      data.map(item =>
+        item.name === type
+          ? { ...item, checked: !item.checked }
+          : item
       )
     )
   }, []);
@@ -228,25 +190,25 @@ export function ModalFilter({ type, handler, closeSelector }) {
           <ModalDiv1>정렬</ModalDiv1>
           <ModalDiv2>
 
-         { data.map(item=>(
-                <ModalTitle
-                  key={item.id}
-                  onClick={() => clickHandler(item.name)}
+            {data.map(item => (
+              <ModalTitle
+                key={item.id}
+                onClick={() => clickHandler(item.name)}
+              >
+                <T.Text
+                  _weight={item.checked ? 600 : 400}
+                  _size={15}
+                  _color={item.checked ? "green700" : "gray900"}
                 >
-                  <T.Text 
-                    _weight={item.checked ? 600 : 400} 
-                    _size={15} 
-                    _color={item.checked ? "green700" : "gray900"}
-                  >
-                    {item.name}
-                  </T.Text>
-                </ModalTitle>
-              ))
+                  {item.name}
+                </T.Text>
+              </ModalTitle>
+            ))
             }
           </ModalDiv2>
         </ModalBody>
       </ModalOutside>
-      </div>
+    </div>
   )
 }
 

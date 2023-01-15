@@ -14,8 +14,6 @@ const localSlice = createSlice({
 			state.address = data.address;
 			state.x = data.y;
 			state.y = data.x;
-
-			localStorage.setItem("localState", JSON.stringify(data));
 		},
 	},
 });

@@ -78,8 +78,6 @@ function App() {
 
 	const member = () => {
 		const data = getExpiry("accessToken");
-		const token = localStorage.getItem("accessToken");
-		const localState = localStorage.getItem("localState");
 		if (data !== null) {
 			if (data.status) {
 				dispatch(authActions.logout());
@@ -94,15 +92,6 @@ function App() {
 			}
 
 			dispatch(authActions.login(data));
-		}
-
-		if (token != null) {
-			const member = jwtDecode(token);
-			dispatch(authActions.save(member.sub));
-		}
-
-		if (localState) {
-			dispatch(localActions.save(JSON.parse(localState)));
 		}
 	};
 

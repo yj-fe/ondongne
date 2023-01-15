@@ -4,7 +4,7 @@ import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
 import { DetailTabInfo, DetailTabReview } from 'pages/main/DetailsPage/DetailsPageStyle';
 import { Down } from 'components/commonUi/Icon';
-import { FilterLayout, MyStoreSortLayout, SearchSortLayout, SortLayout } from 'components/layout/Layout/MoreLayout';
+import { FilterLayout, MyStoreSortLayout, SortLayout } from 'components/layout/Layout/MoreLayout';
 import { sortFormatter } from 'utils/utils';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle
 function MyMarket() {
 
   const navigate = useNavigate();
-  const [detailTab, setDetailTab] = useState(0)
+  const [detailTab, setDetailTab] = useState(0);
   const [filter01, setFilter01] = useState(false);
   const [filter02, setFilter02] = useState(false);
   const local = useSelector(state => state.local);
@@ -36,34 +36,38 @@ function MyMarket() {
   const [totalCount, setTotalCount] = useState(0);
 
   const getItems = async () => {
-
     const response = detailTab === 0
       ? await MyStoreBestItem(local)
       : await getMyStores(page, sort);
 
-    const { data } = response.data;
+    if (response && response.data) {
+      const { data } = response.data;
 
-    console.log(data);
+      console.log(data);
 
-    setTotalCount(data.count);
-    setItems(detailTab === 0 ? data.items : data.stores);
-    isFetching(false);
+      setTotalCount(data.count);
+      setItems(detailTab === 0 ? data.items : data.stores);
+      isFetching(false);
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
   }
 
   useEffect(() => {
-    setSort('create')
+    setPage(1);
+    setItems([]);
     setType('all');
+    setSort('create');
+    isFetching(true);
   }, [detailTab])
 
   useEffect(() => {
     setPage(1);
     setItems([]);
     isFetching(true);
-  }, [sort, detailTab])
+  }, [type, sort])
 
 
   useEffect(() => {
@@ -92,16 +96,26 @@ function MyMarket() {
         bell={true}
         onBackClick={() => navigate(-1)}
       >
-        <L.Contents  _padding='0px'>
+        <L.Contents _padding='0px'>
           <L.FlexRows _gap='0px'>
             <DetailTabInfo
-              onClick={() => { setDetailTab(0); }}
+              width="50%"
+              onClick={() => {
+                setType('all');
+                setSort('create');
+                setDetailTab(0);
+              }}
               infocolor={detailTab === 0}
             >
               상품
             </DetailTabInfo>
             <DetailTabReview
-              onClick={() => { setDetailTab(1); }}
+              width="50%"
+              onClick={() => {
+                setType('all');
+                setSort('create');
+                setDetailTab(1);
+              }}
               reviewcolor={detailTab === 1}
             >
               상점
