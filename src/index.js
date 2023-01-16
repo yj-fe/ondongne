@@ -12,6 +12,7 @@ import { persistStore } from "redux-persist";
 import store from "./store";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import ScrollToTop from "components/commonUi/ScrollTop";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const persistor = persistStore(store);
@@ -21,6 +22,7 @@ root.render(
 		<PersistGate loading={null} persistor={persistor}>
 			<ThemeProvider theme={theme}>
 				<BrowserRouter>
+					<ScrollToTop />
 					<GlobalStyle />
 					<App />
 				</BrowserRouter>
