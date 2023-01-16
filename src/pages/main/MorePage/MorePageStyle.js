@@ -198,7 +198,7 @@ export const Footer = styled.div`
   align-items: flex-start;
   /* text-align: left; */
   width: 100%;
-  height: 156px;
+  height: auto;
   padding: 20px;
   gap: 12px;
   

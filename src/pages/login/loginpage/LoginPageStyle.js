@@ -41,9 +41,9 @@ export const Input = styled.input`
 
   }
   &input:-webkit-autofill:focus{
-    border: 1px solid green;
-    -webkit-text-fill-color: green;
-    -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+    /* border: 1px solid green; */
+    /* -webkit-text-fill-color: green; */
+    /* -webkit-box-shadow: 0 0 0px 1000px #000 inset; */
     transition: background-color 5000s ease-in-out 0s;
   }
 `;
