@@ -171,6 +171,18 @@ export const FlexRows = styled.div`
     padding: ${props => props._padding || '0px'};
 `;
 
+export const FlexRowsCategory = styled.div`
+    display: flex;
+    flex-direction: rows;
+    flex: 1 1 30%;
+    gap: ${props => props._gap || 8}px;
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+`;
+
 export const FlexRowsCP = styled.div`
     display: flex;
     overflow-x: scroll; 
@@ -213,6 +225,22 @@ export const FlexRowsWrap = styled.div`
     height: ${props => props._height || 'auto'};
     padding: ${props => props._padding || '0px'};
 
+`;
+
+export const FlexRowsWrapCategory = styled.div`
+    display: flex;
+    flex-direction: rows;
+    flex-basis: 50%;
+    /* flex-wrap: wrap; */
+    gap: ${props => props._gap || 8}px;
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+@media screen and (max-width:728px) {
+    
+}
 `;
 
 export const FlexRowsWrapMedia = styled.div`

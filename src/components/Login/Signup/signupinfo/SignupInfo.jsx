@@ -227,11 +227,11 @@ function SignupInfo({ data, setData }) {
                 >
                   중복확인
                 </RequestButton>
+            </RequesInputForm>
               {
                 emailValidMessage && 
                 <ValidText color={emailValid}>{emailValidMessage}</ValidText>
               }
-            </RequesInputForm>
           </L.FlexCols>
           {
             !data.isAuth && 
@@ -286,11 +286,11 @@ function SignupInfo({ data, setData }) {
                   >
                   중복확인
                 </RequestButton>
+            </RequesInputForm>
               {
                 nicknameValidMessage && 
                 <ValidText color={nicknameValid}>{nicknameValidMessage}</ValidText>
               }
-            </RequesInputForm>
           </L.FlexCols>
         </L.FlexCols>
       <NextButton

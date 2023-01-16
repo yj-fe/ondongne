@@ -34,9 +34,17 @@ export const Input = styled.input`
     border-bottom: 1px solid #616161;
     color: #212121;
   }
-
   @media only screen and (max-width: 728px) {
     width: 100%;
+  }
+  &input:-webkit-autofill:hover{
+
+  }
+  &input:-webkit-autofill:focus{
+    border: 1px solid green;
+    -webkit-text-fill-color: green;
+    -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+    transition: background-color 5000s ease-in-out 0s;
   }
 `;
 export const InputError = styled.p`
@@ -190,7 +198,8 @@ export const Button = styled.button`
 `;
 export const SignupText = styled.p`
   font-weight: 600;
-  width: 50x;
+  width: 50px;
+  white-space: nowrap;
   font-size: 14px;
   color: #424242;
 `;

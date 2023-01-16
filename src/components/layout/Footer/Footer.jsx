@@ -3,6 +3,7 @@ import {  Footer, FooterText,} from 'pages/main/MorePage/MorePageStyle'
 import * as L from 'components/commonUi/Layout';
 import { FooterDiv } from 'pages/business/BusinessPage/BusinessPageStyle';
 import { FooterLogo } from 'components/commonUi/Icon';
+import { ImgSizeLayout } from '../Img/ImgSizeLayout';
 
 
 function FooterLayout() {

@@ -81,12 +81,14 @@ function MarketDetail() {
 
               <TabButtonStyle>
                 <DetailTabInfo
+                  width={'50%'}
                   onClick={() => { setDetailTab(0); }}
                   infocolor={detailTab === 0}
                 >
                   상점정보
                 </DetailTabInfo>
                 <DetailTabReview
+                  width={'50%'}
                   onClick={() => { setDetailTab(1); }}
                   reviewcolor={detailTab === 1}
                 >
