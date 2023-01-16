@@ -30,12 +30,12 @@ function SignupPage() {
 
   // 뎁스 이동 핸들러
   const depthHandler = (type) => {
-    switch(type) {
-      case 1: 
+    switch (type) {
+      case 1:
         setDepth01(false)
         setDepth02(true)
         break;
-      case 2: 
+      case 2:
         setDepth02(false)
         setDepth03(true)
         break;
@@ -43,38 +43,33 @@ function SignupPage() {
   }
 
   useEffect(() => {
-    if(authData) {
-        const parasedData = JSON.parse(authData)
-        setData({
-            ...data,
-            email: parasedData.email,
-            password: parasedData.providerId,
-            nickname: parasedData.name,
-            provider: parasedData.provider,
-            providerId: parasedData.providerId,
-            isAuth: true
-        })
-        localStorage.removeItem('auth');
+    if (authData) {
+      const parasedData = JSON.parse(authData)
+      setData({
+        ...data,
+        email: parasedData.email,
+        password: parasedData.providerId,
+        nickname: parasedData.name,
+        provider: parasedData.provider,
+        providerId: parasedData.providerId,
+        isAuth: true
+      })
     }
   }, [authData]);
 
-  console.log(data);
-
   return (
-    <div>
-      <S.Wrapper>
-        <LoginHeader title="회원가입" />
-        <S.Main>
-          <L.Contents _padding='0px' _height='calc(100vh - 68px)'>
-            <L.FlexCols _gap='0px'>
-              {depth01 && <SignupRequest setData={setData} depthHandler={() => depthHandler(1)}/>}
-              {depth02 && <Agreement setData={setData} depthHandler={() => depthHandler(2)}/>}
-              {depth03 && <SignupInfo setData={setData} data={data}/>}
-            </L.FlexCols>
-          </L.Contents>
-        </S.Main>
-      </S.Wrapper>
-    </div>
+    <S.Wrapper>
+      <LoginHeader title="회원가입" to={"/login"} />
+      <S.Main>
+        <L.Contents _padding='0px' _height='calc(100vh - 68px)'>
+          <L.FlexCols _gap='0px'>
+            {depth01 && <SignupRequest setData={setData} depthHandler={() => depthHandler(1)} />}
+            {depth02 && <Agreement setData={setData} depthHandler={() => depthHandler(2)} />}
+            {depth03 && <SignupInfo setData={setData} data={data} />}
+          </L.FlexCols>
+        </L.Contents>
+      </S.Main>
+    </S.Wrapper>
   )
 }
 

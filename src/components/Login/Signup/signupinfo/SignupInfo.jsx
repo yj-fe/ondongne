@@ -13,6 +13,7 @@ import * as T from 'components/commonUi/Text';
 import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
 import { Input } from 'components/Login/Password/PwdRequest/PwdRequestStyle';
 import { NextButton } from "../agreement/AgreementStyle";
+import { isEmail } from "utils/utils";
 
 
 
@@ -22,11 +23,11 @@ function SignupInfo({ data, setData }) {
   const [emailValidMessage, setEmailValidMessage] = useState('');
   const [emailValid, setEmailValid] = useState(null);
 
-  const [password, setPassword] = useState(''); 
+  const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [passwordValid, setPasswordValid] = useState(null);
   const [passwordValidMessage, setPasswordValidMessage] = useState('');
- 
+
   const [nickname, setNickname] = useState('');
   const [nicknameValidMessage, setNicknameValidMessage] = useState('');
   const [nicknameValid, setNicknameValid] = useState(null);
@@ -38,7 +39,7 @@ function SignupInfo({ data, setData }) {
   const [alert, setAlert] = useState(null);
 
   const navigate = useNavigate();
-  
+
   // 이메일 중복체크
   const emailValidation = async () => {
     if (email === '') {
@@ -50,9 +51,18 @@ function SignupInfo({ data, setData }) {
       })
     }
 
+    if (!isEmail(email)) {
+      return setAlert({
+        contents: "이메일을 형식의 맞춰주세요.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(null),
+        onOverlayClick: () => setAlert(null),
+      })
+    }
+
     await memberEmailValidation(email)
       .then(response => {
-        const {data, message} = response.data;
+        const { data, message } = response.data;
         setEmailValid(data);
         setEmailValidMessage(message);
       })
@@ -74,7 +84,7 @@ function SignupInfo({ data, setData }) {
 
     await memberNicknameValidation(nickname)
       .then(response => {
-        const {data, message} = response.data;
+        const { data, message } = response.data;
         setNicknameValid(data);
         setNicknameValidMessage(message);
       })
@@ -87,7 +97,13 @@ function SignupInfo({ data, setData }) {
   const onSubmit = async () => {
     await signup(data)
       .then(response => {
-        if(response.status == 200) {
+        if (response.status == 200) {
+
+          const authData = localStorage.getItem("auth");
+          if (authData) {
+            localStorage.removeItem('auth');
+          }
+
           setAlert({
             contents: "회원가입을 축하드립니다. \n 로그인 후 이용해 주세요.",
             buttonText: "확인",
@@ -105,7 +121,7 @@ function SignupInfo({ data, setData }) {
       })
       .catch(error => {
         console.log(error)
-    })
+      })
   }
 
   // 비밀번호 유효성 검사
@@ -113,31 +129,31 @@ function SignupInfo({ data, setData }) {
     const regExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
     return regExp.test(password);
   }
-  
+
   //비밀번호 체크
   useEffect(() => {
 
-    if(data.isAuth) {
+    if (data.isAuth) {
       return;
     }
 
-    if(!password) {
+    if (!password) {
       return;
     }
 
-    if(!passwordValidation()) {
+    if (!passwordValidation()) {
       setPasswordValid(false);
       setPasswordValidMessage("비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 20이하로 입력해주세요.");
       return;
     }
 
-    if(!passwordCheck) {
+    if (!passwordCheck) {
       setPasswordValid(false);
       setPasswordValidMessage("비밀번호 확인이 필요합니다.");
       return
     }
 
-    if(password === passwordCheck) {      
+    if (password === passwordCheck) {
       setPasswordValid(true);
       setPasswordValidMessage("");
     } else {
@@ -147,29 +163,33 @@ function SignupInfo({ data, setData }) {
   }, [password, passwordCheck])
 
   useEffect(() => {
-    if(data.isAuth) {
-      if(emailValid && nicknameValid) {
+    if (data.isAuth) {
+      if (emailValid && nicknameValid) {
         setActive(true)
         setDisabled(false)
-  
+
         setData((prevState) => {
-          return { 
+          return {
             ...prevState,
             email,
             password,
             nickname
           }
         });
+      } else {
+        setActive(false)
+        setDisabled(true)
       }
+
       return;
     }
 
-    if(emailValid && passwordValid && nicknameValid) {
+    if (emailValid && passwordValid && nicknameValid) {
       setActive(true)
       setDisabled(false)
 
       setData((prevState) => {
-        return { 
+        return {
           ...prevState,
           email,
           password,
@@ -180,9 +200,9 @@ function SignupInfo({ data, setData }) {
     } else {
       setActive(false)
       setDisabled(true)
-      
+
       setData((prevState) => {
-        return { 
+        return {
           ...prevState,
           email: '',
           password: '',
@@ -193,12 +213,22 @@ function SignupInfo({ data, setData }) {
   }, [emailValid, passwordValid, nicknameValid])
 
   useEffect(() => {
-    if(data.isAuth) {
+    if (data.isAuth) {
       setEmail(data.email)
       setPassword(data.password)
       setNickname(data.nickname)
     }
   }, [data])
+
+  useEffect(() => {
+    setEmailValid(null)
+    setEmailValidMessage('');
+  }, [email])
+
+  useEffect(() => {
+    setNicknameValid(null)
+    setNicknameValidMessage('');
+  }, [nickname])
 
   return (
     <div>
@@ -213,94 +243,94 @@ function SignupInfo({ data, setData }) {
           <L.FlexCols>
             <RequesInputTitle>이메일</RequesInputTitle>
             <RequesInputForm>
-                <Input
-                  type='text'
-                  placeholder='이메일 입력'
-                  outline='none'
-                  value={email}
-                  borderColor={emailValid == null ?'#E0E0E0' : emailValid ? '#388E3C' : '#D32F2F'}
-                  onChange={e => setEmail(e.target.value)}
-                />
-                <RequestButton
-                  type="button"
-                  onClick={emailValidation}
-                >
-                  중복확인
-                </RequestButton>
+              <Input
+                type='text'
+                placeholder='이메일 입력'
+                outline='none'
+                value={email}
+                borderColor={emailValid == null ? '#E0E0E0' : emailValid ? '#388E3C' : '#D32F2F'}
+                onChange={e => setEmail(e.target.value)}
+              />
+              <RequestButton
+                type="button"
+                onClick={emailValidation}
+              >
+                중복확인
+              </RequestButton>
             </RequesInputForm>
-              {
-                emailValidMessage && 
-                <ValidText color={emailValid}>{emailValidMessage}</ValidText>
-              }
+            {
+              emailValidMessage &&
+              <ValidText color={emailValid}>{emailValidMessage}</ValidText>
+            }
           </L.FlexCols>
           {
-            !data.isAuth && 
+            !data.isAuth &&
             <L.FlexCols>
               <RequesInputTitle>비밀번호</RequesInputTitle>
-                <RequestInputDiv direction="column">
-                  <PwdContainer
-                    borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
-                    <PwdInput
-                      type={showPassword ? "text" : "password"}
-                      placeholder="8자 이상 영문,숫자,특수문자 조합"
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                    />
-                    <EyeOffStyle onClick={()=>setShowPassword(!showPassword)}>
-                      {showPassword ? <EyeOn /> : <EyeOff />}
-                    </EyeOffStyle>
-                  </PwdContainer>
-                  <PwdContainer
-                    borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
-                    <PwdInput
-                      type={showPasswordCheck ? "text" : "password"}
-                      placeholder="비밀번호 확인"
-                      value={passwordCheck}
-                      onChange={e => setPasswordCheck(e.target.value)}
-                    />
-                    <EyeOffStyle onClick={()=>setShowPasswordCheck(!showPasswordCheck)}>
-                      {showPasswordCheck ? <EyeOn /> : <EyeOff />}
-                    </EyeOffStyle>
-                  </PwdContainer>
-                  {
-                    passwordValidMessage && 
-                    <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
-                  }
-                </RequestInputDiv>
+              <RequestInputDiv direction="column">
+                <PwdContainer
+                  borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
+                  <PwdInput
+                    type={showPassword ? "text" : "password"}
+                    placeholder="8자 이상 영문,숫자,특수문자 조합"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                  <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <EyeOn /> : <EyeOff />}
+                  </EyeOffStyle>
+                </PwdContainer>
+                <PwdContainer
+                  borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
+                  <PwdInput
+                    type={showPasswordCheck ? "text" : "password"}
+                    placeholder="비밀번호 확인"
+                    value={passwordCheck}
+                    onChange={e => setPasswordCheck(e.target.value)}
+                  />
+                  <EyeOffStyle onClick={() => setShowPasswordCheck(!showPasswordCheck)}>
+                    {showPasswordCheck ? <EyeOn /> : <EyeOff />}
+                  </EyeOffStyle>
+                </PwdContainer>
+                {
+                  passwordValidMessage &&
+                  <ValidText color={passwordValid}>{passwordValidMessage}</ValidText>
+                }
+              </RequestInputDiv>
             </L.FlexCols>
           }
           <L.FlexCols>
             <RequesInputTitle>닉네임</RequesInputTitle>
             <RequesInputForm>
-                <Input
-                  type='text'
-                  placeholder='닉네임 입력'
-                  outline='none'
-                  value={nickname}
-                  borderColor={nicknameValid == null ?'#E0E0E0' : nicknameValid ? '#388E3C' : '#D32F2F'}
-                  onChange={e => setNickname(e.target.value)}
-                 />
-                <RequestButton
-                  type="button"
-                  onClick={nicknameValidation}
-                  >
-                  중복확인
-                </RequestButton>
+              <Input
+                type='text'
+                placeholder='닉네임 입력'
+                outline='none'
+                value={nickname}
+                borderColor={nicknameValid == null ? '#E0E0E0' : nicknameValid ? '#388E3C' : '#D32F2F'}
+                onChange={e => setNickname(e.target.value)}
+              />
+              <RequestButton
+                type="button"
+                onClick={nicknameValidation}
+              >
+                중복확인
+              </RequestButton>
             </RequesInputForm>
-              {
-                nicknameValidMessage && 
-                <ValidText color={nicknameValid}>{nicknameValidMessage}</ValidText>
-              }
+            {
+              nicknameValidMessage &&
+              <ValidText color={nicknameValid}>{nicknameValidMessage}</ValidText>
+            }
           </L.FlexCols>
         </L.FlexCols>
-      <NextButton
-        type="button"
-        color={active}
-        disabled={disabled}
-        onClick={onSubmit}
+        <NextButton
+          type="button"
+          color={active}
+          disabled={disabled}
+          onClick={onSubmit}
         >
-        가입하기
-      </NextButton>
+          가입하기
+        </NextButton>
       </EmailRequestBody>
       {
         alert &&

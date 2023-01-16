@@ -173,10 +173,6 @@ function MorePage() {
               <T.Text _weight={500} _size={16} _color="gray900">앱 버전 정보</T.Text>
               <T.Text _weight={400} _size={14} _color="gray800">1.1.1</T.Text>
             </L.FlexRows> */}
-            {
-              auth.isAuthenticated &&
-              <MoreContainerDiv onClick={memberLogout}>로그아웃</MoreContainerDiv>
-            }
           </MoreDiv>
 
         </L.Container>

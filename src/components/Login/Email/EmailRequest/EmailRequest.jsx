@@ -6,7 +6,7 @@ import { RequestToggleDiv, RequestToggleTextStyle, RequestToggleTextLink } from 
 import ErrorToggle from '../../Common/ErrorToggle/ErrorToggle';
 import Alert from 'components/commonUi/Alert';
 import { memberFindEmail, sendSMS } from 'service/common';
-import {EmailRequestBody,RequestButton,RequestInfo,RequestText,RequestTextStyle} from './EmailRequestStyle'
+import { EmailRequestBody, RequestButton, RequestInfo, RequestText, RequestTextStyle } from './EmailRequestStyle'
 
 
 /* ==============================
@@ -19,7 +19,7 @@ function getFormattedTime(seconds) {
   return `${m}:${s.length < 2 ? '0' + s : s}`;
 };
 
-function EmailRequest({setData, setFindEmailSuccess}) {
+function EmailRequest({ setData, setFindEmailSuccess }) {
 
   const AUTH_SECONDS = 180;
   const [phone, setPhone] = useState('');
@@ -37,11 +37,11 @@ function EmailRequest({setData, setFindEmailSuccess}) {
       await memberFindEmail(phone)
         .then(response => {
 
-          const {data, message} = response.data
+          const { data, message } = response.data
 
-          if(data) {
+          if (data) {
             setData((prevState) => {
-              return { 
+              return {
                 ...prevState,
                 email: data.email,
                 date: data.createDate
@@ -68,7 +68,7 @@ function EmailRequest({setData, setFindEmailSuccess}) {
   };
 
   // 인증번호 발송
-  const smsHandler = async (event) => {
+  const smsHandler = async () => {
 
     if (phone === '') {
       return setAlert({
@@ -99,6 +99,13 @@ function EmailRequest({setData, setFindEmailSuccess}) {
         })
       });
   }
+
+  // input enter 이벤트
+  const handleOnKeyPress = e => {
+    if (e.key === "Enter") {
+      smsHandler();
+    }
+  };
 
   // 타이머 설정
   useEffect(() => {
@@ -151,6 +158,7 @@ function EmailRequest({setData, setFindEmailSuccess}) {
             outline='none'
             value={phone}
             onChange={e => setPhone(e.target.value)}
+            onKeyPress={handleOnKeyPress}
           >
           </RequesInput>
           <RequestButton
@@ -163,32 +171,32 @@ function EmailRequest({setData, setFindEmailSuccess}) {
 
         {
           authCode &&
-            <RequestToggleForm>
-              <RequesInputForm style={{position: 'relative'}}>
-                <RequesInput
-                  style={{width: '100%'}}
-                  type='number'
-                  placeholder='인증번호 입력'
-                  outline='none'
-                  value={authNum}
-                  onChange={e => setAuthNum(e.target.value)}
-                />
-                <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
-              </RequesInputForm>
-              {errorMessage && <ErrorToggle errormessage={errorMessage} />}
+          <RequestToggleForm>
+            <RequesInputForm style={{ position: 'relative' }}>
+              <RequesInput
+                style={{ width: '100%' }}
+                type='number'
+                placeholder='인증번호 입력'
+                outline='none'
+                value={authNum}
+                onChange={e => setAuthNum(e.target.value)}
+              />
+              <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
+            </RequesInputForm>
+            {errorMessage && <ErrorToggle errormessage={errorMessage} />}
 
-              <RequestToggleButton
-                active={authNum.length > 1}
-                disabled={authNum.length === 1}
-                onClick={onAuthNumSubmit}
-              >
-                인증확인
-              </RequestToggleButton>
-              <RequestToggleTextStyle>
-                <RequestToggleText>인증번호를 못받으셨나요?</RequestToggleText>
-                <RequestToggleTextLink onClick={sendSMS}>인증번호 재전송</RequestToggleTextLink>
-              </RequestToggleTextStyle>
-            </RequestToggleForm>
+            <RequestToggleButton
+              active={authNum.length > 1}
+              disabled={authNum.length === 1}
+              onClick={onAuthNumSubmit}
+            >
+              인증확인
+            </RequestToggleButton>
+            <RequestToggleTextStyle>
+              <RequestToggleText>인증번호를 못받으셨나요?</RequestToggleText>
+              <RequestToggleTextLink onClick={smsHandler}>인증번호 재전송</RequestToggleTextLink>
+            </RequestToggleTextStyle>
+          </RequestToggleForm>
 
         }
       </EmailRequestBody>

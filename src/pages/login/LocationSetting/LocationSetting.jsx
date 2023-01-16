@@ -75,7 +75,7 @@ function LocationSetting() {
   return (
     <div>
       <S.Wrapper>
-        <LoginHeader title="우리동네 설정" />
+        <LoginHeader title="우리동네 설정" to={"/"} />
         <S.Main>
           <L.Contents _padding='24px 20px' _height='calc(100vh - 68px)'>
             <L.FlexCols _gap={32} >

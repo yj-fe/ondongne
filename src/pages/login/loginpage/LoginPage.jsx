@@ -70,7 +70,7 @@ function LoginPage() {
     window.location.href = '/oauth2/authorization/naver';
   }
   const loginKakao = () => {
-    window.location.href = '/oauth2/authorization/kakao';
+    window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
   }
   const loginGoogle = () => {
     window.location.href = '/oauth2/authorization/google';
@@ -93,7 +93,7 @@ function LoginPage() {
     const email = searchParams.get('email');
     const name = searchParams.get('name');
     const accessToken = searchParams.get('accessToken');
-    const expiresIn = searchParams.get('expiresIn');
+    const expiresIn = searchParams.get('tokenExpiresIn');
 
     if (isAuth == null) {
       return;
@@ -131,19 +131,19 @@ function LoginPage() {
   }, [auth])
 
   return (
-      <S.Wrapper>
-        <LoginHeader title="로그인" />
+    <S.Wrapper>
+      <LoginHeader title="로그인" to={"/more"} />
 
-        <S.Main as="main" _bc='#fff'>
-          <L.ContentsMedia _padding='80px 40px 0px 40px ' _paddingm='60px 20px'>
-            <L.FlexColsMedia _gap={80} _gapm={60}>
-              <L.FlexRows _content='center' >
-                <Logo/>
-              </L.FlexRows>
-              <L.FlexCols  _gap={60}>
-                <L.FlexCols _gap={16}>
-                  <InputForm>
-                  <L.FlexCols  _gap={16}>
+      <S.Main as="main" _bc='#fff'>
+        <L.ContentsMedia _padding='80px 40px 0px 40px ' _paddingm='60px 20px'>
+          <L.FlexColsMedia _gap={80} _gapm={60}>
+            <L.FlexRows _content='center' >
+              <Logo />
+            </L.FlexRows>
+            <L.FlexCols _gap={60}>
+              <L.FlexCols _gap={16}>
+                <InputForm>
+                  <L.FlexCols _gap={16}>
                     <Input
                       placeholder="이메일"
                       name="email"
@@ -165,86 +165,87 @@ function LoginPage() {
                     </PwdContainer>
                   </L.FlexCols>
 
-                    <LoginButton
-                      type="button"
-                      onClick={onSubmut}
-                      disabled={!active}
-                      color={active}
-                    >
-                      로그인</LoginButton>
+                  <LoginButton
+                    type="button"
+                    onClick={onSubmut}
+                    disabled={!active}
+                    color={active}
+                  >
+                    로그인</LoginButton>
 
-                  </InputForm>
-                  <FindStyle>
-                    <Link to="/login/find/email">
-                      <FindAccount>
-                        이메일 찾기
-                      </FindAccount>
-                    </Link>
-                    <Bar />
-                    <Link to="/login/find/password">
-                      <FindAccount>
-                        비밀번호 찾기
-                      </FindAccount>
-                    </Link>
-                  </FindStyle>
-                </L.FlexCols>
-
-                <GapContainer>
-                  <SnsStyle>
-                    <SnsTextStyle>
-                      <Horizon />
-                      <Snstext>SNS로 1초만에 시작하기</Snstext>
-                      <Horizon />
-                    </SnsTextStyle>
-                    <SnsIcon>
-                      <Naver onClick={loginNaver} />
-                      <Kakao onClick={loginKakao} />
-                      <Google onClick={loginGoogle} />
-                      {/* <Apple onClick={loginApple}/> */}
-                    </SnsIcon>
-                  </SnsStyle>
-                </GapContainer>
+                </InputForm>
+                <FindStyle>
+                  <Link to="/login/find/email">
+                    <FindAccount>
+                      이메일 찾기
+                    </FindAccount>
+                  </Link>
+                  <Bar />
+                  <Link to="/login/find/password">
+                    <FindAccount>
+                      비밀번호 찾기
+                    </FindAccount>
+                  </Link>
+                </FindStyle>
               </L.FlexCols>
 
-              {
-                alert &&
-                <Alert
-                  title={alert.title}
-                  contents={alert.contents}
-                  buttonText={alert.buttonText}
-                  onButtonClick={alert.onButtonClick}
-                  onOverlayClick={alert.onOverlayClick}
-                />
-              }
-              {
-                confirm &&
-                <Confirm
-                  contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
-                  confirmText="네"
-                  cancelText="아니오"
-                  onConfirmClick={() => { navigate('/login/signup') }}
-                  onCancelClick={() => {
-                    setConfirm(false)
-                    navigate('/login')
-                  }}
-                />
-              }
+              <GapContainer>
+                <SnsStyle>
+                  <SnsTextStyle>
+                    <Horizon />
+                    <Snstext>SNS로 1초만에 시작하기</Snstext>
+                    <Horizon />
+                  </SnsTextStyle>
+                  <SnsIcon>
+                    <Naver onClick={loginNaver} />
+                    <Kakao onClick={loginKakao} />
+                    <Google onClick={loginGoogle} />
+                    {/* <Apple onClick={loginApple}/> */}
+                  </SnsIcon>
+                </SnsStyle>
+              </GapContainer>
+            </L.FlexCols>
 
-              <LoginFooter>
-                <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
-                <Link to="/login/signup">
-                  <Button>
-                    <SignupText>회원가입</SignupText>
-                    <ArrowStyle>
-                      <Arrow />
-                    </ArrowStyle>
-                  </Button>
-                </Link>
-              </LoginFooter>
-            </L.FlexColsMedia>
-          </L.ContentsMedia>
-        </S.Main>
-      </S.Wrapper>
+            {
+              alert &&
+              <Alert
+                title={alert.title}
+                contents={alert.contents}
+                buttonText={alert.buttonText}
+                onButtonClick={alert.onButtonClick}
+                onOverlayClick={alert.onOverlayClick}
+              />
+            }
+            {
+              confirm &&
+              <Confirm
+                contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
+                confirmText="네"
+                cancelText="아니오"
+                onConfirmClick={() => navigate('/login/signup', { replace: true })}
+                onCancelClick={() => {
+                  setConfirm(false)
+                  localStorage.removeItem('auth');
+                  navigate('/login', { replace: true })
+                }}
+              />
+            }
+
+            <LoginFooter>
+              <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
+              <Link to="/login/signup">
+                <Button>
+                  <SignupText>회원가입</SignupText>
+                  <ArrowStyle>
+                    <Arrow />
+                  </ArrowStyle>
+                </Button>
+              </Link>
+            </LoginFooter>
+          </L.FlexColsMedia>
+        </L.ContentsMedia>
+      </S.Main>
+    </S.Wrapper>
   );
 }
 

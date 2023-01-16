@@ -1,25 +1,25 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { sendSMS } from "service/common";
 import { memberFindPassword } from "service/common";
 import Alert from "components/commonUi/Alert";
 import ErrorToggle from "components/Login/Common/ErrorToggle/ErrorToggle";
 import { RequestToggleButton, RequestToggleForm, RequestToggleText, RequestToggleTextLink, RequestToggleTextStyle } from "components/Login/Common/RequestToggle/RequestToggleStyle";
 import { AuthTimer, RequesInputForm } from "components/Login/Signup/signuprequest/SignupRequestStyle";
-import { RequestText, RequestInfo, Input, RequesInput, RequestButton  } from './PwdRequestStyle'
+import { RequestText, RequestInfo, Input, RequesInput, RequestButton } from './PwdRequestStyle'
 import { EmailRequestBody, RequestTextStyle } from "components/Login/Email/EmailRequest/EmailRequestStyle";
 import * as L from 'components/commonUi/Layout';
 
 /* ==============================
     180 => 3: 00 문자열 반환
   ============================== */
-  function getFormattedTime(seconds) {
-    const m = Math.floor(seconds / 60);
-    const s = (seconds - (m * 60)) + '';
-  
-    return `${m}:${s.length < 2 ? '0' + s : s}`;
-  };
+function getFormattedTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = (seconds - (m * 60)) + '';
 
-function PwdRequest({setFindSuccess, setId}) {
+  return `${m}:${s.length < 2 ? '0' + s : s}`;
+};
+
+function PwdRequest({ setFindSuccess, setId }) {
 
   const AUTH_SECONDS = 180;
   const [email, setEmail] = useState('');
@@ -38,9 +38,9 @@ function PwdRequest({setFindSuccess, setId}) {
       await memberFindPassword(email, phone)
         .then(response => {
 
-          const {data, message} = response.data
+          const { data, message } = response.data
 
-          if(data) {
+          if (data) {
             setId(data)
             setFindSuccess(true);
           } else {
@@ -96,6 +96,13 @@ function PwdRequest({setFindSuccess, setId}) {
       });
   }
 
+  // input enter 이벤트
+  const handleOnKeyPress = e => {
+    if (e.key === "Enter") {
+      smsHandler();
+    }
+  };
+
   // 타이머 설정
   useEffect(() => {
     // authcode 지정되었을 때 timeout 시작
@@ -136,24 +143,25 @@ function PwdRequest({setFindSuccess, setId}) {
   return (
     <div>
       <EmailRequestBody>
-      <RequestTextStyle>
-        <RequestText>휴대폰 번호를 인증해주세요.</RequestText>
-        <RequestInfo>
-          고객님의 정보 보호를 위해 휴대폰 인증을 진행해주세요.
-        </RequestInfo>
-      </RequestTextStyle>
+        <RequestTextStyle>
+          <RequestText>휴대폰 번호를 인증해주세요.</RequestText>
+          <RequestInfo>
+            고객님의 정보 보호를 위해 휴대폰 인증을 진행해주세요.
+          </RequestInfo>
+        </RequestTextStyle>
 
-      <RequesInputForm>
-        <L.FlexCols _gap={16}>
-          <Input
-            type='text'
-            placeholder="이메일 입력"
-            outline='none'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <RequesInputForm>
-            <RequesInput
+        <RequesInputForm>
+          <L.FlexCols _gap={16}>
+            <Input
+              type='text'
+              placeholder="이메일 입력"
+              outline='none'
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              onKeyPress={handleOnKeyPress}
+            />
+            <RequesInputForm>
+              <RequesInput
                 type='number'
                 placeholder='-를 제외한 휴대폰번호 입력'
                 outline='none'
@@ -166,39 +174,39 @@ function PwdRequest({setFindSuccess, setId}) {
                 onClick={smsHandler}
               >
                 인증요청
-            </RequestButton>
-          </RequesInputForm>
-        </L.FlexCols>
-      </RequesInputForm>
-      
-      {
-          authCode &&
-            <RequestToggleForm>
-              <RequesInputForm style={{position: 'relative'}}>
-                <RequesInput
-                  style={{width: '100%'}}
-                  type='number'
-                  placeholder='인증번호 입력'
-                  outline='none'
-                  value={authNum}
-                  onChange={e => setAuthNum(e.target.value)}
-                />
-                <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
-              </RequesInputForm>
-              {errorMessage && <ErrorToggle errormessage={errorMessage} />}
+              </RequestButton>
+            </RequesInputForm>
+          </L.FlexCols>
+        </RequesInputForm>
 
-              <RequestToggleButton
-                active={authNum.length > 1}
-                disabled={authNum.length === 1}
-                onClick={onAuthNumSubmit}
-              >
-                인증확인
-              </RequestToggleButton>
-              <RequestToggleTextStyle>
-                <RequestToggleText>인증번호를 못받으셨나요?</RequestToggleText>
-                <RequestToggleTextLink onClick={sendSMS}>인증번호 재전송</RequestToggleTextLink>
-              </RequestToggleTextStyle>
-            </RequestToggleForm>
+        {
+          authCode &&
+          <RequestToggleForm>
+            <RequesInputForm style={{ position: 'relative' }}>
+              <RequesInput
+                style={{ width: '100%' }}
+                type='number'
+                placeholder='인증번호 입력'
+                outline='none'
+                value={authNum}
+                onChange={e => setAuthNum(e.target.value)}
+              />
+              <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
+            </RequesInputForm>
+            {errorMessage && <ErrorToggle errormessage={errorMessage} />}
+
+            <RequestToggleButton
+              active={authNum.length > 1}
+              disabled={authNum.length === 1}
+              onClick={onAuthNumSubmit}
+            >
+              인증확인
+            </RequestToggleButton>
+            <RequestToggleTextStyle>
+              <RequestToggleText>인증번호를 못받으셨나요?</RequestToggleText>
+              <RequestToggleTextLink onClick={smsHandler}>인증번호 재전송</RequestToggleTextLink>
+            </RequestToggleTextStyle>
+          </RequestToggleForm>
         }
         {
           alert &&

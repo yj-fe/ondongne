@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router-dom'
 import { LoginNavDiv, LoginNavTitle, Inner, UtilBtn } from "./LoginHeaderStyle";
 
 
-function LoginHeader({title}) {
+function LoginHeader({ title, to }) {
   const navigate = useNavigate()
 
   return (
     <LoginNavDiv as="header">
       <Inner>
-        <UtilBtn onClick={()=>{ navigate(-1)}}>
+        <UtilBtn onClick={() => { navigate(to, { replace: true }) }}>
           <Back />
         </UtilBtn>
-      <LoginNavTitle>{title}</LoginNavTitle>
+        <LoginNavTitle>{title}</LoginNavTitle>
       </Inner>
     </LoginNavDiv>
   )

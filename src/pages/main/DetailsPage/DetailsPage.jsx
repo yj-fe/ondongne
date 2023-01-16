@@ -127,7 +127,7 @@ function DetailsPage(props) {
               }
               <L.FlexCols >
                 <L.FlexRows _content='space-between' _items='center' _padding=' 16px 20px'>
-                  <L.FlexRows _content='left'>
+                  <L.FlexRows _content='left' onClick={() => navigate(`/market/detail/${item.storeId}`)}>
                     <ImgSizeLayout _bdr={50} _width={40} _height={40} src={item.storeProfile && STOREURL + item.storeProfile} />
                     <L.FlexCols _gap={1}>
                       <T.Text _size={16} _weight={500} _color='gray900' >{item.storeName}</T.Text>
@@ -141,9 +141,12 @@ function DetailsPage(props) {
                     </L.FlexCols>
                   </L.FlexRows>
                   <L.FlexRows _content='right' _gap='0px'>
-                    <StoreLike id={item.storeId} checked={item.likeStatus} onChange={(id) => {
-                      setItem({ ...item, likeStatus: !item.likeStatus })
-                    }} />
+                    {
+                      auth.isAuthenticated &&
+                      <StoreLike id={item.storeId} checked={item.likeStatus} onChange={(id) => {
+                        setItem({ ...item, likeStatus: !item.likeStatus })
+                      }} />
+                    }
                   </L.FlexRows>
                 </L.FlexRows>
 
@@ -250,7 +253,7 @@ function DetailsPage(props) {
       {
         confirm &&
         <Confirm
-          contents="로그인 후 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
+          contents={"로그인 후 이용가능합니다.\n로그인 페이지로 이동하시겠습니까?"}
           confirmText="네"
           cancelText="아니오"
           onConfirmClick={() => { navigate('/login') }}

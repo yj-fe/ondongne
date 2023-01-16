@@ -8,6 +8,7 @@ import { RequesInput } from 'components/Login/Password/PwdRequest/PwdRequestStyl
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { NextButton } from '../agreement/AgreementStyle';
+import LoadingBar from 'components/commonUi/LoadingBar';
 
 
 /* ==============================
@@ -29,6 +30,7 @@ function SignupRequest({ setData, depthHandler }) {
   const [authCode, setAuthCode] = useState('');
   const [authTime, setAuthTime] = useState(-1);
   const [authInterval, setAuthInterval] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // 인증 번호 확인
   const onAuthNumSubmit = async (event) => {
@@ -36,32 +38,32 @@ function SignupRequest({ setData, depthHandler }) {
 
     if (authCode === authNum) {
       await memberPhoneValidation(phone)
-      .then(response => {
-        const {data, message} = response.data;
-        if(data) {
-          setData((prevState) => {
-            return { 
-              ...prevState,
-              phone: phone,
-              phoneAuthStatus: true
-            }
-          });
-  
-          return depthHandler(1);
-        } else {
-          setAuthCode('')
-          return setAlert({
-            contents: message,
-            buttonText: "확인",
-            onButtonClick: () => setAlert(null),
-            onOverlayClick: () => setAlert(null),
-          })
-        }
+        .then(response => {
+          const { data, message } = response.data;
+          if (data) {
+            setData((prevState) => {
+              return {
+                ...prevState,
+                phone: phone,
+                phoneAuthStatus: true
+              }
+            });
 
-      })
-      .catch(error => {
-        console.log('error : ',error);
-      });
+            return depthHandler(1);
+          } else {
+            setAuthCode('')
+            return setAlert({
+              contents: message,
+              buttonText: "확인",
+              onButtonClick: () => setAlert(null),
+              onOverlayClick: () => setAlert(null),
+            })
+          }
+
+        })
+        .catch(error => {
+          console.log('error : ', error);
+        });
     }
     else {
       return setAlert({
@@ -74,14 +76,15 @@ function SignupRequest({ setData, depthHandler }) {
   };
 
   // 인증번호 발송
-  const smsHandler = async (event) => {
+  const smsHandler = async () => {
+    setLoading(true);
 
     if (phone === '') {
       return setAlert({
         contents: "휴대폰 번호를 입력해주세요.",
         buttonText: "확인",
-        onButtonClick: () => setAlert(null),
-        onOverlayClick: () => setAlert(null),
+        onButtonClick: loadingHandler,
+        onOverlayClick: loadingHandler,
       })
     }
 
@@ -92,18 +95,31 @@ function SignupRequest({ setData, depthHandler }) {
         setAlert({
           contents: message,
           buttonText: "확인",
-          onButtonClick: () => setAlert(null),
-          onOverlayClick: () => setAlert(null),
+          onButtonClick: loadingHandler,
+          onOverlayClick: loadingHandler,
         })
       })
       .catch(error => {
         return setAlert({
           contents: error,
           buttonText: "확인",
-          onButtonClick: () => setAlert(null),
-          onOverlayClick: () => setAlert(null),
+          onButtonClick: loadingHandler,
+          onOverlayClick: loadingHandler,
         })
       });
+  }
+
+  // input enter 이벤트
+  const handleOnKeyPress = e => {
+    if (e.key === "Enter") {
+      smsHandler();
+    }
+  };
+
+  // 로딩 해제
+  const loadingHandler = () => {
+    setAlert(null);
+    setLoading(false);
   }
 
   // 타이머 설정
@@ -143,8 +159,7 @@ function SignupRequest({ setData, depthHandler }) {
   }, [authTime]);
 
   return (
-    <div>
-      <L.Contents _padding='32px 40px'>
+    <L.Contents _padding='32px 40px'>
       <L.FlexCols _gap={40}>
         <L.FlexCols>
           <T.Text _size={24} _weight={600} >온동네마켓 회원가입</T.Text>
@@ -154,56 +169,58 @@ function SignupRequest({ setData, depthHandler }) {
           <RequesInputForm>
             <RequesInput
               type='number'
+              name='phone'
               placeholder='-를 제외한 휴대폰번호 입력'
               outline='none'
               value={phone}
               onChange={e => setPhone(e.target.value)}
-            >
-            </RequesInput>
+              onKeyPress={handleOnKeyPress}
+            />
+
             <RequestButton
               type='button'
-              onClick={smsHandler}
+              onClick={loading ? () => { } : smsHandler}
             >
               인증요청
-            </RequestButton> 
+            </RequestButton>
           </RequesInputForm>
-        {authCode && 
-          <RequesInputForm style={{position: 'relative'}}>
-            <RequesInput
-              style={{width: '100%'}}
-              type='number'
-              placeholder='인증번호 입력'
-              outline='none'
-              value={authNum}
-              onChange={e => setAuthNum(e.target.value)}
+          {authCode &&
+            <RequesInputForm style={{ position: 'relative' }}>
+              <RequesInput
+                style={{ width: '100%' }}
+                type='number'
+                name='authNumber'
+                placeholder='인증번호 입력'
+                outline='none'
+                value={authNum}
+                onChange={e => setAuthNum(e.target.value)}
               />
-            <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
-          </RequesInputForm>
-        }
-        {
-          authCode && 
-          <NextButton
-            type="button"
-            color={true}
-            onClick={onAuthNumSubmit}
-          >
-            인증 확인
+              <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
+            </RequesInputForm>
+          }
+          {
+            authCode &&
+            <NextButton
+              type="button"
+              color={true}
+              onClick={onAuthNumSubmit}
+            >
+              인증 확인
             </NextButton>
-        }
+          }
         </L.FlexCols>
-        </L.FlexCols>
-        {
-          alert &&
-          <Alert
-            title={alert.title}
-            contents={alert.contents}
-            buttonText={alert.buttonText}
-            onButtonClick={alert.onButtonClick}
-            onOverlayClick={alert.onOverlayClick}
-          />
-        }
-      </L.Contents>
-    </div>
+      </L.FlexCols>
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
+    </L.Contents >
   )
 }
 

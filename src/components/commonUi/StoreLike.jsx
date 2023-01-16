@@ -12,6 +12,7 @@ const StoreLike = ({ id, checked, onChange }) => {
 
     const likeHandler = async () => {
         if (!isAuthenticated) {
+            console.log('로그인 안됨')
             return setAlert({
                 contents: "로그인 후 이용 가능합니다.",
                 buttonText: "확인",

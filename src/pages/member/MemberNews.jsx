@@ -10,19 +10,19 @@ import { ArrowRightB } from 'components/commonUi/Icon';
 import dayjs from 'dayjs';
 
 function MemberNews() {
-  const [date, setDate]= useState([{
-      Date: '2023-01-04T21:08:35.000+00:00'
-    }
+  const [date, setDate] = useState([{
+    Date: '2023-01-04T21:08:35.000+00:00'
+  }
   ])
   return (
     <div>
       <S.Wrapper>
-        <LoginHeader title="알림"/>
-          <S.Main>
+        <LoginHeader title="알림" to={-1} />
+        <S.Main>
 
           <L.Contents _padding='24px 20px ' _height='calc(100vh - 68px)'>
 
-{/* ============ 알림없을때 ============ */}
+            {/* ============ 알림없을때 ============ */}
             {/* <L.Contents _padding='56px 0px 0px 0px'>
               <T.Text   _weight={300} _size={15} _color="gray600" _align='center' >
                 <p>새로운 알림이 없습니다.</p>
@@ -30,87 +30,87 @@ function MemberNews() {
               </T.Text>
             </L.Contents> */}
 
-{/* ============ 알림있을때 ============ */}
+            {/* ============ 알림있을때 ============ */}
             <L.FlexCols _gap={24}>
               <L.FlexRows _gap={16}>
                 <ImgSizeLayout src={Img} _height={48} _weight={48} />
                 <L.FlexCols _gap={4}>
                   <L.FlexRows _items='center'>
-                    <T.Text   _weight={600} _size={16} _color="gray900"  >
+                    <T.Text _weight={600} _size={16} _color="gray900"  >
                       <p>이마트 트레이더스</p>
                     </T.Text>
-                    <ArrowRightB/>
+                    <ArrowRightB />
                   </L.FlexRows>
-                  <T.Text   _weight={400} _size={15} _color="gray800"  >
+                  <T.Text _weight={400} _size={15} _color="gray800"  >
                     <p>단골가게의 새로운 쿠폰소식이 올라왔어요!</p>
                   </T.Text>
                   <L.FlexRows _items='center'>
-                    <T.Text   _weight={300} _size={12} _color="gray500"  >
+                    <T.Text _weight={300} _size={12} _color="gray500"  >
                       <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
                     </T.Text>
                   </L.FlexRows>
                 </L.FlexCols>
-            </L.FlexRows>
+              </L.FlexRows>
 
-            <Line/>
+              <Line />
               <L.FlexRows _gap={16}>
                 <ImgSizeLayout src={Img} _height={48} _weight={48} />
                 <L.FlexCols _gap={4}>
                   <L.FlexRows _items='center'>
-                    <T.Text   _weight={600} _size={16} _color="gray900"  >
+                    <T.Text _weight={600} _size={16} _color="gray900"  >
                       <p>이마트 트레이더스</p>
                     </T.Text>
-                    <ArrowRightB/>
+                    <ArrowRightB />
                   </L.FlexRows>
-                  <T.Text   _weight={400} _size={15} _color="gray800"  >
+                  <T.Text _weight={400} _size={15} _color="gray800"  >
                     <p>단골가게의 새로운 쿠폰소식이 올라왔어요!</p>
                   </T.Text>
                   <L.FlexRows>
-                  <T.Text   _weight={300} _size={12} _color="gray500"  >
-                  <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
-                  </T.Text>
-              </L.FlexRows>
+                    <T.Text _weight={300} _size={12} _color="gray500"  >
+                      <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
+                    </T.Text>
+                  </L.FlexRows>
                 </L.FlexCols>
-            </L.FlexRows>
+              </L.FlexRows>
 
-            <Line/>
+              <Line />
               <L.FlexRows _gap={16}>
                 <ImgSizeLayout src={Img} _height={48} _weight={48} />
                 <L.FlexCols _gap={4}>
                   <L.FlexRows _items='center'>
-                    <T.Text   _weight={600} _size={16} _color="gray900"  >
+                    <T.Text _weight={600} _size={16} _color="gray900"  >
                       <p>이마트 트레이더스</p>
                     </T.Text>
-                    <ArrowRightB/>
+                    <ArrowRightB />
                   </L.FlexRows>
-                  <T.Text   _weight={400} _size={15} _color="gray800"  >
+                  <T.Text _weight={400} _size={15} _color="gray800"  >
                     <p>단골가게의 새로운 쿠폰소식이 올라왔어요!</p>
                   </T.Text>
                   <L.FlexRows>
-                  <T.Text   _weight={300} _size={12} _color="gray500"  >
-                  <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
-                  </T.Text>
-              </L.FlexRows>
+                    <T.Text _weight={300} _size={12} _color="gray500"  >
+                      <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
+                    </T.Text>
+                  </L.FlexRows>
                 </L.FlexCols>
-            </L.FlexRows>
+              </L.FlexRows>
 
-            <Line/>
+              <Line />
 
-            <L.FlexCols>
-              <T.Text   _weight={400} _size={15} _color="gray800"  >
-                <p>회원가입을 환영합니다. 온동네에서 다양한 거래를 시작해보세요!</p>
-              </T.Text>
-          <L.FlexRows>
-            <T.Text   _weight={300} _size={12} _color="gray500"  >
-              <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
-            </T.Text>
-          </L.FlexRows>
+              <L.FlexCols>
+                <T.Text _weight={400} _size={15} _color="gray800"  >
+                  <p>회원가입을 환영합니다. 온동네에서 다양한 거래를 시작해보세요!</p>
+                </T.Text>
+                <L.FlexRows>
+                  <T.Text _weight={300} _size={12} _color="gray500"  >
+                    <p>{dayjs(date[0].Date).format('YYYY년 MM월 DD일 HH:mm')}</p>
+                  </T.Text>
+                </L.FlexRows>
+              </L.FlexCols>
             </L.FlexCols>
-        </L.FlexCols>
 
 
 
-        </L.Contents>
+          </L.Contents>
         </S.Main>
       </S.Wrapper>
     </div>

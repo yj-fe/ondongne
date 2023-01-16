@@ -5,13 +5,15 @@ import { ReactComponent as ToggleDown } from "assets/login/toggledown.svg";
 import { ReactComponent as ToggleUp } from "assets/login/toggleup.svg";
 import { UnCheck } from "components/commonUi/Icon";
 
-import { AgreementInfo, AgreementText, AgreementTextStyle, CheckboxButton, CheckboxForm, CheckboxText, CheckboxToggle, Line, NextButton } from "./AgreementStyle";
-import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
+import { CheckboxButton, CheckboxForm, CheckboxText, CheckboxToggle, Line, NextButton } from "./AgreementStyle";
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
+import { locationPolicy } from 'service/policy';
 
 
-function Agreement({setData, depthHandler}) {
+function Agreement({ setData, depthHandler }) {
+
+  const [policy, setPolicy] = useState();
 
   const [active, setActive] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
@@ -23,6 +25,17 @@ function Agreement({setData, depthHandler}) {
   const [showSns, setShowSns] = useState()
 
   const [checks, setChecks] = useState([false, false, false, false]);
+
+  // 정책 데이터
+  const getPolicy = async (type) => {
+    const response = await locationPolicy({ policyType: type });
+    console.log(response);
+    const { data } = response.data;
+    setPolicy(data);
+    if (type === "USE") setShowService((s) => !s);
+    if (type === "PRIVACY") setShowCollect((s) => !s);
+    if (type === "MARKETING") setShowSns((s) => !s);
+  }
 
   const ButtonActive = () => {
     if (checks([0]) && checks([1]) && checks([2]) === true) {
@@ -41,7 +54,7 @@ function Agreement({setData, depthHandler}) {
     event.preventDefault();
 
     setData((prevState) => {
-      return { 
+      return {
         ...prevState,
         policy01: checks[0],
         policy02: checks[1],
@@ -63,7 +76,6 @@ function Agreement({setData, depthHandler}) {
 
   }, [checks]);
 
-
   return (
     <div>
       <L.Contents _padding='32px 40px'>
@@ -73,8 +85,8 @@ function Agreement({setData, depthHandler}) {
             <T.Text _size={15} _color='gray800'>이용약관을 확인 후 필수/선택 항목을 동의 체크해 주세요.</T.Text>
           </L.FlexCols>
           <CheckboxForm>
-            <L.FlexRows 
-              _content='left' _items='center' 
+            <L.FlexRows
+              _content='left' _items='center'
               onClick={() => setCheckAll((s) => !s)}
             >
               <CheckboxButton
@@ -95,12 +107,12 @@ function Agreement({setData, depthHandler}) {
             <Line />
 
             <L.FlexRows _gap='0px' _content='space-between' _items='center'>
-              <L.FlexRows  
-                _content='left' _items='center' 
+              <L.FlexRows
+                _content='left' _items='center'
                 onClick={(e) => {
                   onCheckClick(0)
                 }}
-              > 
+              >
                 <CheckboxButton
                   id="Age"
                   type="button"
@@ -115,20 +127,11 @@ function Agreement({setData, depthHandler}) {
                 >
                   [필수] 14세 이상 입니다.
                 </CheckboxText>
-                </L.FlexRows>
-                <CheckboxToggle
-                  onClick={() => setShowAge((s) => !s)}
-                >
-                  {showAge ? <ToggleUp /> : <ToggleDown />}
-                </CheckboxToggle>
+              </L.FlexRows>
             </L.FlexRows>
-            {showAge && <ToggleDetail />}
-
-
-
 
             <L.FlexRows _content='space-between' _items='center'>
-              <L.FlexRows  
+              <L.FlexRows
                 _content='left' _items='center'
                 onClick={() => { onCheckClick(1) }}
               >
@@ -148,17 +151,17 @@ function Agreement({setData, depthHandler}) {
                 </CheckboxText>
               </L.FlexRows>
               <CheckboxToggle
-                onClick={() => setShowService((s) => !s)}
-                >
+                onClick={() => getPolicy("USE")}
+              >
                 {showService ? <ToggleUp /> : <ToggleDown />}
               </CheckboxToggle>
             </L.FlexRows>
-            {showService && <ToggleDetail />}
+            {showService && <ToggleDetail contents={policy} />}
 
 
 
             <L.FlexRows _content='space-between' _items='center'>
-              <L.FlexRows  
+              <L.FlexRows
                 _content='left' _items='center'
                 onClick={() => { onCheckClick(2) }}
               >
@@ -178,17 +181,17 @@ function Agreement({setData, depthHandler}) {
                 </CheckboxText>
               </L.FlexRows>
               <CheckboxToggle
-                onClick={() => setShowCollect((s) => !s)}
+                onClick={() => getPolicy("PRIVACY")}
               >
                 {showCollect ? <ToggleUp /> : <ToggleDown />}
               </CheckboxToggle>
             </L.FlexRows>
-            {showCollect && <ToggleDetail />}
+            {showCollect && <ToggleDetail contents={policy} />}
 
 
 
             <L.FlexRows _content='space-between' _items='center'>
-              <L.FlexRows  
+              <L.FlexRows
                 _content='left' _items='center'
                 onClick={() => { onCheckClick(3) }}
               >
@@ -207,20 +210,20 @@ function Agreement({setData, depthHandler}) {
                 </CheckboxText>
               </L.FlexRows>
               <CheckboxToggle
-                onClick={() => setShowSns((s) => !s)}
+                onClick={() => getPolicy("MARKETING")}
               >
                 {showSns ? <ToggleUp /> : <ToggleDown />}
               </CheckboxToggle>
             </L.FlexRows>
-            {showSns && <ToggleDetail />}
+            {showSns && <ToggleDetail contents={policy} />}
           </CheckboxForm>
-          
+
         </L.FlexCols>
       </L.Contents>
       <NextButton
         type="button"
-        color={checks[0] && checks[1] &&  checks[2]}
-        disabled={!checks[0] && !checks[1] &&  !checks[2]}
+        color={checks[0] && checks[1] && checks[2]}
+        disabled={!checks[0] && !checks[1] && !checks[2]}
         onClick={nextHandler}
       >
         다음

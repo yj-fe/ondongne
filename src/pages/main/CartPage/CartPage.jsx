@@ -30,7 +30,6 @@ function CartPage({ }) {
 
   const getCarts = async () => {
     const response = await carts();
-
     if (response && response.data.data) {
       setList(groupBy(response.data.data, 'storeId'));
     }
@@ -43,9 +42,7 @@ function CartPage({ }) {
     if (type === -1 && item.count == 1) {
       return;
     }
-
     const response = await cartCountUpdate(item, type);
-
     if (response && response.data.data) {
       getCarts();
     }
@@ -85,6 +82,13 @@ function CartPage({ }) {
       >
         <L.Container >
           <L.Contents _padding='0px' _bg='#F5F5F5'>
+            {/* =================== 미로그인 =================== */}
+            {
+              !isAuthenticated &&
+              <L.Contents _padding='80px 20px' _height='calc(100vh - 68px)'>
+                <CartEmptyText>장바구니에 담긴 상품이 없습니다.</CartEmptyText>
+              </L.Contents>
+            }
 
             {/* =================== 로딩 =================== */}
             {

@@ -19,17 +19,17 @@ function FindEmail() {
   return (
     <div>
       <S.Wrapper>
-        <LoginHeader title="이메일 찾기"/>
+        <LoginHeader title="이메일 찾기" to={"/login"} />
         <S.Main>
-           <L.Contents _padding='0px' _height='calc(100vh - 68px)'>
+          <L.Contents _padding='0px' _height='calc(100vh - 68px)'>
             <L.FlexCols _gap={40}>
               {
                 !findEmailSuccess &&
-                <EmailRequest setData={setData} setFindEmailSuccess={setFindEmailSuccess}/>
+                <EmailRequest setData={setData} setFindEmailSuccess={setFindEmailSuccess} />
               }
               {
                 findEmailSuccess &&
-                  <FindResult data={data}/>
+                <FindResult data={data} />
               }
             </L.FlexCols>
           </L.Contents>

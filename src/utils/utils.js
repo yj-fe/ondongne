@@ -29,6 +29,13 @@ export const businessNumberFormatter = (value) => {
 	return num;
 };
 
+// 이메일 형식
+export const isEmail = (email) => {
+	const regExp =
+		/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	return regExp.test(email);
+};
+
 // 숫자 정규식 검사 후 쉼표 처리
 export const numberFormatter = (value) => {
 	if (!value) return;
