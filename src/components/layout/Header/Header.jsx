@@ -11,6 +11,7 @@ import Share from 'assets/icons/utils/Share.svg';
 import { S } from './HeaderStyle';
 import { MoreStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import ModalMorePage from 'components/Main/More/ModalMorePage'
+import ModalShare from 'components/commonUi/ModalShare';
 
 
 const Header = ({
@@ -40,11 +41,15 @@ const Header = ({
     };
 
     const [modal, setModal] = useState(false);
+    const [shareModal, setShareModal] = useState(false);
     const ShowMoreModal = () => {
     setModal(!modal);
     }
     const PropsModal = () => {
     setModal(!modal);
+    }
+    const ShowShareModal = () => {
+        setShareModal(!shareModal);
     }
 
     return (
@@ -85,7 +90,9 @@ const Header = ({
                     }
                     {
                         share &&
-                        <S.UtilBtn>
+                        <S.UtilBtn
+                            onClick={ShowShareModal}
+                        >
                             <img src={Share} alt="공유" />
                         </S.UtilBtn>
 
@@ -108,6 +115,13 @@ const Header = ({
                 </S.Block>
             </S.Inner>
             {modal && <ModalMorePage PropsModal={PropsModal} />}
+            {
+                shareModal && 
+                <ModalShare 
+                    title='공유하기'
+                    ShowShareModal={ShowShareModal} 
+                />
+            }
         </S.Header>
         
     )
