@@ -12,7 +12,7 @@ import { ReactComponent as Filter } from "assets/main/filter.svg";
 import Image from 'assets/main/shine.png'
 import ReviewImg from 'assets/main/reviewimg.png'
 import Avatar from 'assets/common/avatar.png'
-import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileTextDiv, FinalPrice, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile } from 'pages/main/DetailsPage/DetailsPageStyle'
+import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileTextDiv, FinalPrice, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, ButtonStyleNew } from 'pages/main/DetailsPage/DetailsPageStyle'
 import Layout from 'components/layout/Layout/Layout';
 import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 
@@ -100,12 +100,14 @@ function BusinessProductManagementDetail() {
               <DetailTabDiv>
                 <TabButtonStyle>
                   <DetailTabInfo
+                  width='50%'
                     onClick={() => setDetailTab(0)}
                     infocolor={detailTab === 0}
                   >
                     상세정보
                   </DetailTabInfo>
                   <DetailTabReview
+                  width='50%'
                     onClick={() => setDetailTab(1)}
                     reviewcolor={detailTab === 1}
                   >
@@ -120,13 +122,13 @@ function BusinessProductManagementDetail() {
 
             </DetailContainer>
 
-            <ButtonStyle>
+            <ButtonStyleNew>
               <DetailButtonDiv>
                 <DetailButtonStyle
                   onClick={() => navigate(`/business/edit/${id}`)}
                 >수정하기</DetailButtonStyle>
               </DetailButtonDiv>
-            </ButtonStyle>
+            </ButtonStyleNew>
           </DetailBody>
 
 

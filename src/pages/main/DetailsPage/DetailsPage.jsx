@@ -28,8 +28,13 @@ import ProductCart from 'components/Main/Cart/ProductCart';
 import ProductComments from 'components/Main/productDetails/ProductComments';
 import { useDispatch } from 'react-redux';
 import { orderActions } from 'store/slices/order';
+const KEY = process.env.REACT_APP_KAKAO_SDK
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
 const STOREURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+
+
+
+
 
 function DetailsPage(props) {
 
@@ -105,6 +110,7 @@ function DetailsPage(props) {
       getItem();
     }
   }, [id])
+  console.log(KEY);
 
   return (
     <div>

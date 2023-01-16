@@ -206,7 +206,7 @@ export const DetailTabInfo = styled.div`
 	align-items: center;
 	padding: 8px 20px;
 	gap: 4px;
-	width: ${(props) => props.width || "33.3%"};
+	width: ${props => props.width || "33.3%"};
 	height: 50px;
 	border-bottom: 2px solid
 		${(props) => (props.infocolor ? "#0B806F" : "#BDBDBD")};
@@ -238,6 +238,21 @@ export const DetailTabReview = styled.div`
 `;
 export const TabContentStyle = styled.div``;
 
+export const ButtonStyleNew = styled.div`
+ position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 728px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    gap: ${props => props._gap || 8}px;
+    padding: ${props => props._padding || '0px'};
+    @media only screen and (max-width: 728px) { 
+        width: 100%;
+  }
+`;
 export const ButtonStyle = styled.div`
 	position: fixed;
 	bottom: 0;

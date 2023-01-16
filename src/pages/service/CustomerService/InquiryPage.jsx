@@ -36,12 +36,14 @@ function InquiryPage() {
             {/* =================== Tab버튼 ( 문의하기 / 문의내역 ) =================== */}
             <TabButtonStyle>
               <DetailTabInfo
+                width='50%'
                 onClick={() => { setDetailTab(0); }}
                 infocolor={detailTab === 0}
               >
                 문의하기
               </DetailTabInfo>
               <DetailTabReview
+                width='50%'
                 onClick={() => { setDetailTab(1); }}
                 reviewcolor={detailTab === 1}
               >
