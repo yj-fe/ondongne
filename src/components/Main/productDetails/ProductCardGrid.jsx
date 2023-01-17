@@ -28,12 +28,14 @@ export function ProductCardGrid({
                 }
                 {
                     !item.soldoutStatus
-                        ? <ImgSizeH
+                        ? 
+                        <ImgSizeH
                              _bdr={6}
                             src={item.images && item.images.length > 0 && item.images[0]}
                             onClick={() => navigate(`/details/${item.itemId}`)}
                         />
-                        : <div style={{ position: 'relative' }}>
+                        : 
+                        <div style={{ position: 'relative' }}>
                             <ImgSizeH
                                  _bdr={6}
                                 src={item.images && item.images.length > 0 && item.images[0]}

@@ -68,7 +68,16 @@ export const AbsoluteDivGrid = styled.div`
     padding: 18px 12px;
     z-index: 9999;
     @media screen and (max-width:695px) {
+        bottom: -35%;
+    }
+    @media screen and (max-width:685px) {
         bottom: -30%;
+    }
+    @media screen and (max-width:644px) {
+        bottom: -29%;
+    }
+    @media screen and (max-width:633px) {
+        bottom: -27%;
     }
     @media screen and (max-width:620px) {
         bottom: -25%;
@@ -76,8 +85,14 @@ export const AbsoluteDivGrid = styled.div`
     @media screen and (max-width:600px) {
         bottom: -20%;
     }
+    @media screen and (max-width:580px) {
+        bottom: -17%;
+    }
     @media screen and (max-width:570px) {
         bottom: -15%;
+    }
+    @media screen and (max-width:555px) {
+        bottom: -10%;
     }
     @media screen and (max-width:533px) {
         bottom: -7%;
@@ -87,6 +102,12 @@ export const AbsoluteDivGrid = styled.div`
     }
     @media screen and (max-width:450px) {
         right: 15%;
+    }
+    @media screen and (max-width:440px) {
+        right: 12%;
+    }
+    @media screen and (max-width:409px) {
+        right: 7%;
     }
     @media screen and (max-width:400px) {
         right: 0;
