@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as StarIcon2 } from "assets/main/ratestar2.svg";
 import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
 import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
@@ -37,6 +37,7 @@ const STOREURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/
 
 function DetailsPage(props) {
 
+  const location = useLocation();
   const dispatch = useDispatch();
   const { id } = useParams();
   const [item, setItem] = useState({
@@ -86,11 +87,16 @@ function DetailsPage(props) {
     if (orderToggle && type === 0) return;
 
     if (orderToggle && type === 1) {
-      const data = [{ ...item, count, cartId: 0 }];
+      const data = {
+        items: [{ ...item, count, cartId: 0 }],
+        to: location.pathname
+      };
       dispatch(orderActions.save(data));
       return navigate('/order/new');
     }
   }
+
+  console.log(location.pathname);
 
   const getItem = async () => {
     const response = await getItemDetails(id);

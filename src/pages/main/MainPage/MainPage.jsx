@@ -69,11 +69,7 @@ function MainPage() {
         {/* My단골 인기 상품 */}
         {
           isAuthenticated &&
-          <L.Inner>
-            <L.Contents _padding='20px 0px 20px 20px'>
-              <MainBestProduct />
-            </L.Contents>
-          </L.Inner>
+          <MainBestProduct />
         }
 
         {/* 우리동네 신규 입점 */}

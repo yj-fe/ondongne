@@ -82,7 +82,7 @@ function MorePage() {
     if (!data.bizStatus) {
       return setAlert({
         title: "비즈 심사 대기 중입니다.",
-        contents: "관리자 검토 후 2영업일 이내로 승인 처리 예정입니다.\n승인이 완료되면 알림으로 알려드립니다.",
+        contents: "관리자 검토 후 2영업일 이내로\n승인 처리 예정입니다.\n승인이 완료되면 알림으로 알려드립니다.",
         buttonText: "확인",
         onButtonClick: () => setAlert(false),
         onOverlayClick: () => setAlert(false),

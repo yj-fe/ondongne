@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Avatar from 'assets/common/avatar.png'
 import { ReactComponent as Delete } from "assets/main/delete.svg";
 import { ReactComponent as Minus } from "assets/main/cart/minus.svg";
@@ -18,6 +18,7 @@ const IMGURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/';
 
 
 function CartPage({ }) {
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -61,7 +62,11 @@ function CartPage({ }) {
 
   // 주문페이지 이동
   const orderRoute = (items) => {
-    dispatch(orderActions.save(items));
+    const data = {
+      items: items,
+      to: location.pathname
+    };
+    dispatch(orderActions.save(data));
     return navigate('/order/new')
   }
 

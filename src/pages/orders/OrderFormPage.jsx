@@ -3,7 +3,7 @@ import Layout from 'components/layout/Layout/Layout';
 import OrderForm from 'components/orders/orderform/OrderForm';
 import Confirm from 'components/commonUi/Confirm';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { orderActions } from 'store/slices/order';
 
 const OrderFormPage = () => {
@@ -11,10 +11,12 @@ const OrderFormPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [cancelConfirm, setCancelConfirm] = useState(false);
+    const backTo = useSelector(state => state.order.to);
+    console.log(backTo);
 
     const orderCancel = () => {
         dispatch(orderActions.remove());
-        navigate(-1, { replace: true })
+        navigate(backTo, { replace: true })
     }
 
     return (

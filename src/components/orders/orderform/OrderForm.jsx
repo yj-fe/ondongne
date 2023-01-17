@@ -76,6 +76,7 @@ const OrderForm = ({ data }) => {
                 phone: member.phone,
                 address: member.address === null ? '' : member.address,
                 addressDetails: member.addressDetails === null ? '' : member.addressDetails,
+                deliveryContents: member.deliveryContents === null ? '' : member.deliveryContents,
                 items: orderItems,
                 amount: Number(orderItems[0].deliveryPrice + storeTotalPrice(orderItems)),
                 deliveryPrice: orderItems[0].deliveryPrice,
@@ -103,8 +104,6 @@ const OrderForm = ({ data }) => {
                 onOverlayClick: () => { setAlert(null) },
             })
         }
-
-        console.log(orderData);
 
         const response = await requestPayment(orderData);
         if (response && response.data.data) {
@@ -155,12 +154,17 @@ const OrderForm = ({ data }) => {
     }
 
     const orderSuccess = () => {
+
         setAlert({
-            title: status ? "주문 완료" : "주문 실패",
-            contents: status ? "주문이 완료되었습니다." : "주문이 실패되었습니다.",
+            title: JSON.parse(status) ? "주문 완료" : "주문 실패",
+            contents: JSON.parse(status) ? "주문이 완료되었습니다." : "주문이 실패되었습니다.",
             buttonText: "확인",
-            onButtonClick: () => { status ? navigate('/order/all', { replace: true }) : setAlert(null) },
-            onOverlayClick: () => { setAlert(null) },
+            onButtonClick: () => {
+                JSON.parse(status)
+                    ? navigate('/order/all', { replace: true })
+                    : navigate('/order/new'); setAlert(null);
+            },
+            onOverlayClick: () => setAlert(null),
         })
     }
 

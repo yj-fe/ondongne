@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const orderState = {
 	items: [],
+	to: "",
 };
 
 const orderSlice = createSlice({
@@ -9,10 +10,12 @@ const orderSlice = createSlice({
 	initialState: orderState,
 	reducers: {
 		save(state, action) {
-			state.items = action.payload;
+			state.items = action.payload.items;
+			state.to = action.payload.to;
 		},
 		remove(state) {
 			state.items = [];
+			state.to = "";
 		},
 	},
 });
