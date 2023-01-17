@@ -65,6 +65,39 @@ export const FlexCols = styled.div`
     padding: ${props => props._padding || '0px'};
 `;
 
+export const FlexColsGrid = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 75px;
+    width: ${props => props._width || '100%'};
+    padding: ${props => props._padding || '0px'};
+    @media screen and (max-width: 728px) {
+    gap: 73px;
+}
+    @media screen and (max-width: 700px) {
+    gap: 65px;
+}
+    @media screen and (max-width: 690px) {
+    gap: 60px;
+}
+    @media screen and (max-width: 650px) {
+    gap: 50px;
+}
+    @media screen and (max-width: 625px) {
+    gap: 32px;
+}
+    @media screen and (max-width: 600px) {
+    gap: 25px;
+}
+    @media screen and (max-width: 550px) {
+    gap: 10px;
+}
+    @media screen and (max-width: 510px) {
+    gap: 0;
+}
+`;
+
 export const FlexColsSize = styled.div`
     display: flex;
     flex-direction: column;
@@ -214,6 +247,20 @@ export const FlexRowsCP = styled.div`
     }
 `;
 
+export const FlexRowsWrapNew = styled.div`
+grid-column-start: 1;
+grid-column-end: 4;
+    display: flex;
+    flex-direction: rows;
+    flex-wrap: wrap;
+    gap: ${props => props._gap || 8}px;
+    justify-content: ${props => props._content || 'inherit'};
+    align-items: ${props => props._items || 'inherit'};
+    width: ${props => props._width || '100%'};
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0px'};
+
+`;
 export const FlexRowsWrap = styled.div`
     display: flex;
     flex-direction: rows;
@@ -283,6 +330,9 @@ export const NoneDataContainer = styled.div`
     /* height: 100px; */
 `;
 
+export const GridContainerNew = styled.div`
+
+`
 export const GridContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -295,7 +345,7 @@ export const Grid = styled.div`
     grid-template-columns: repeat(3, 31.5%);
     padding: 0px;
     width: 100%;
-    max-height: 370px;
+    /* max-height: 370px; */
 	padding-top: 32px;
 	gap: 2.7%;
     @media screen and (max-width:668px) {

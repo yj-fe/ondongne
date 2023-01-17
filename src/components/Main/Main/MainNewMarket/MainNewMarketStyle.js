@@ -42,7 +42,7 @@ export const NewMarketContent = styled.div`
   flex-direction: row;
   align-items: flex-start;
   gap: 16px;
-  width: 688px;
+  width: 100%;
   height: auto;
 `
 export const ContentProduct = styled.div`

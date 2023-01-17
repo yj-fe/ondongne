@@ -14,8 +14,9 @@ import { useInView } from 'react-intersection-observer';
 import { getItemCategoryList } from 'service/item';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import CategoryTabs from 'components/commonUi/CategoryTabs';
-import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
+import { ProductCard } from 'components/Main/productDetails/ProductCard';
+import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
 
 function CategoryPage(props) {
   const navigate = useNavigate();
@@ -122,7 +123,6 @@ function CategoryPage(props) {
                     <Down color={sort !== 'create' ? 'white' : '#424242'} />
                   </B.FilterButton>
                 </L.FlexRows>
-
                 {/* =================== 없을때 =================== */}
                 {
                   !loading &&
@@ -140,7 +140,6 @@ function CategoryPage(props) {
                 {
                   loading && <LoadingBar />
                 }
-
               </L.FlexColsScroll>
             </L.FlexCols>
           </L.Contents>
@@ -169,20 +168,18 @@ function CategoryEmpty() {
 export function CategoryCard({ list, lastRef }) {
 
   return (
-    <L.FlexRowsCategory _gap='0px' _padding='20px 0px 0px' _height='calc(100vh - 208px)'>
       <Scroll _height='calc(100vh - 210px)'>
-        <L.FlexRowsWrapCategory _gap={20} _padding={0}>
+        <L.Grid>
           {list.length > 0 && list.map((item, index) => (
             <React.Fragment key={index}>
-              <ProductCard
+              <ProductCardGrid
                 item={item}
                 lastRef={list.length === index + 1 ? lastRef : null}
               />
             </React.Fragment>
           ))}
-        </L.FlexRowsWrapCategory>
+          </L.Grid>
       </Scroll>
-    </L.FlexRowsCategory>
   )
 }
 

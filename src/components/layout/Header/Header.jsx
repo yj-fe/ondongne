@@ -84,7 +84,7 @@ const Header = ({
                     }
                     {
                         bell &&
-                        <S.UtilBtn>
+                        <S.UtilBtn as={Link} to="/member/news">
                             <img src={Bell} alt="알림" />
                         </S.UtilBtn>
                     }

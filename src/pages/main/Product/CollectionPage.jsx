@@ -12,6 +12,7 @@ import { FlagN, FlagNC } from 'components/commonUi/Icon';
 import { numberFormat } from 'utils/utils';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
+import { ProductCardGrid } from './../../../components/Main/productDetails/ProductCardGrid';
 
 function CollectionPage() {
 
@@ -61,18 +62,23 @@ function CollectionPage() {
                 {
                   !loading &&
                   list.length > 0 &&
-                  <L.Grid  _padding={0}>
+                  <div>
+                    <L.Grid  _padding={0}>
                     {
                       type === 0
-                        ? <ListCard list={list} lastRef={null} />
+                      ? 
+                        <L.FlexRowsWrapNew _gap={20} _padding={0}>
+                          <ListCard list={list} lastRef={null} />
+                        </L.FlexRowsWrapNew>
                         : list.map(item => (
-                          <ProductCard
+                          <ProductCardGrid
                             item={item}
                             lastRef={null}
-                          />
-                        ))
-                    }
-                  </L.Grid>
+                            />
+                            ))
+                          }
+                          </L.Grid>
+                    </div>
                 }
                 </Scroll>
               </L.FlexColsScroll>
@@ -90,6 +96,7 @@ export const ListCard = ({ list, lastRef }) => {
     setCheck(!check)
   }
   return (
+    <div>
     <L.FlexCols _gap={20}>
       {
         list.map(item => (
@@ -132,6 +139,7 @@ export const ListCard = ({ list, lastRef }) => {
         ))
       }
     </L.FlexCols>
+    </div>
   )
 }
 

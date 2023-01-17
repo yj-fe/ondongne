@@ -317,20 +317,25 @@ export const TypeTextStyle = styled.div`
 	align-items: flex-start;
 	padding: 0px;
 	gap: 24px;
-
 	width: 100%;
 	height: 20px;
 `;
 export const TypeLabel = styled.p`
-	width: 60%;
+	width: 15%;
 	height: 20px;
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 20px;
 	color: #212121;
+	@media screen and (max-width:637px){
+		width: 20%;
+	}
+	@media screen and (max-width:435px){
+		width: 30%;
+	}
 `;
 export const TypeLabelInfo = styled.p`
-	width: 575px;
+	width: auto;
 	height: 20px;
 	font-weight: 400;
 	font-size: 14px;

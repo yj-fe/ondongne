@@ -128,7 +128,6 @@ function DetailsPage(props) {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-
           <L.Contents _padding='0px 0px 60px 0px'>
             <L.FlexCols >
               {

@@ -8,7 +8,7 @@ import { Kakao } from './Icon';
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import Link from 'assets/images/link.png'
 import SimpleConfirm from "./SimpleConfirm";
-
+// import { Helmet } from 'react-helmet'
 
 const ModalShare= ({
   title='title',
@@ -42,12 +42,12 @@ const ModalShare= ({
     })
   }
 // kakao공유
-  // const params = {
-  //   key: process.env.REACT_APP_KAKAO_SDK,
-  //   id: process.env.YOUR_TEMPLATE_ID
-  // }
-  const KAKAO_KEY = process.env.REACT_APP_KAKAO_SDK
-Kakao.init(KAKAO_KEY)
+  const params = {
+    key: process.env.REACT_APP_KAKAO_SDK,
+    id: process.env.YOUR_TEMPLATE_ID
+  }
+//   const KAKAO_KEY = process.env.REACT_APP_KAKAO_SDK
+// Kakao.init(KAKAO_KEY)
   // const useKakaoSDK = () => {
   //   useEffect(() => {
   //     if (typeof window !== 'undefined' && !window.KakaoLoaded) {
@@ -66,50 +66,43 @@ Kakao.init(KAKAO_KEY)
 
   // Kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3');
 
-  // SDK 초기화 여부를 판단합니다.
+  // SDK 초기화 판단
   // console.log(Kakao.isInitialized());
-  // const KaKaoShareButton = (route, title) => {
-  //   if (window.Kakao) {
-  //     const kakao = window.Kakao
-  //     // 중복되는 초기화를 막기 위해 isInitialized()로 SDK 초기화 여부를 판단
-  //     if (!kakao.isInitialized()) {
-  //       kakao.init(params.key)
-  //       // kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3')
-  //     }
-  //     console.log(kakao.isInitialized());
-  //     kakao.Share.sendDefault({
-  //       // container: '#kakaotalk-sharing-btn',
-  //       objectType: 'feed',
-  //       content: {
-  //         title: title,
-  //         description: {},
-  //         imageUrl:
-  //           {},
-  //         link: {
-  //           mobileWebUrl: route,
-  //           webUrl: route
-  //         },
-  //       },
-  //       buttons: [
-  //         {
-  //           title: '자세히보기',
-  //           link: {
-  //             mobileWebUrl: route,
-  //             webUrl: route
-  //           },
-  //         },
-  //       ],
-  //       installTalk: true,
-  //   });
-    // kakao.Share.sendCustom({
-    //   templateId: (params.id),
-    //   templateArgs: {
-    //     title: '제목 영역입니다.',
-    //     description: '설명 영역입니다.',
-    //   },
-    // })
-//   }
-// }
+  const KaKaoShareButton = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao
+      // 중복 초기화를 막기 위해 isInitialized()로 SDK 초기화 여부를 판단
+      if (!kakao.isInitialized()) {
+        // kakao.init(params.key)
+        kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3')
+      }
+      console.log(kakao.isInitialized());
+      kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: 'title',
+          description: 'description',
+          imageUrl:
+          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          link: {
+          // [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+            mobileWebUrl: 'https://ondongnemarket.com',
+            webUrl: 'https://ondongnemarket.com',
+          },
+        },
+        buttons: [
+          {
+            title: '자세히보기',
+            link: {
+              mobileWebUrl: 'https://ondongnemarket.com',
+              webUrl: 'https://ondongnemarket.com',
+            },
+          },
+        ],
+        // installTalk: true,
+    });
+  }
+}
   
   return (
     <div>
@@ -134,10 +127,17 @@ Kakao.init(KAKAO_KEY)
               </ModalDiv3>
             {/* 카카오톡 공유 */}
               <ModalDiv3
-                // id="kakaotalk-sharing-btn"
-                // onClick={KaKaoShareButton}
-                // onClick={() => KaKaoShareButton()}
               >
+                <button
+                type="button"
+                onClick={KaKaoShareButton}
+                // onClick={() => KaKaoShareButton()}
+                >
+
+                
+                      {/* <Helmet>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+      </Helmet> */}
                 <div>
                   <Kakao/>
                   {/* <img src={`${process.env.PUBLIC_URL}/assets/KakaoLogo.png`} alt={"Kakao Logo"} /> */}
@@ -159,6 +159,7 @@ Kakao.init(KAKAO_KEY)
                     } */}
                 </div>
                 <T.Text _size={16} _width='100%' _align='center'>카카오톡</T.Text>
+                </button>
               </ModalDiv3>
             </ModalDiv4>
           <ModalButton
