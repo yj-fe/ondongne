@@ -8,42 +8,41 @@ import ProductTimer from "components/commonUi/ProductTimer";
 import { numberFormat, totalPrice } from "utils/utils";
 import StarRate from "components/commonUi/StarRate";
 
-export function ProductCard({
-    item, lastRef, width = 216, isCart = true
+export function ProductCardGrid({
+    item, lastRef, isCart = true
 }) {
     const navigate = useNavigate();
 
     return (
-        <L.FlexCols
+        <L.FlexColsGrid
             ref={lastRef}
             _gap={12} _padding={0} 
-            _width={width + 'px'}
         >
             <RelativDiv>
                 {
                     isCart &&
                     
-                    <AbsoluteDiv>
+                    <AbsoluteDivGrid>
                         <ProductCart id={item.itemId} count={1} type={"list"} />
-                    </AbsoluteDiv>
+                    </AbsoluteDivGrid>
                 }
                 {
                     !item.soldoutStatus
-                    ? <ImgSizeLayout
-                    _width={width} _height={width} _bdr={6}
+                        ? <ImgSizeH
+                             _bdr={6}
                             src={item.images && item.images.length > 0 && item.images[0]}
                             onClick={() => navigate(`/details/${item.itemId}`)}
                         />
                         : <div style={{ position: 'relative' }}>
-                            <ImgSizeLayout
-                                _width={width} _height={width} _bdr={6}
+                            <ImgSizeH
+                                 _bdr={6}
                                 src={item.images && item.images.length > 0 && item.images[0]}
                             />
                             <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
                         </div>
                 }
             </RelativDiv>
-
+{/* <RelativDiv> */}
             <L.FlexCols _gap={4} _padding={0} >
                 {
                     item.type == 'GROUP' &&
@@ -68,6 +67,8 @@ export function ProductCard({
                 </L.FlexRows>
 
             </L.FlexCols>
-        </L.FlexCols>
+            {/* </RelativDiv> */}
+        </L.FlexColsGrid>
+
     )
 }
