@@ -10,7 +10,8 @@ export const ImgSizeH = styled.img`
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width || '100%'};
     height: ${props => props._height}px;
-    @media screen and (max-width: 500px){
+    @media screen and (max-width: 450px){
+        width: 167px;
         height: 167px;
     }
 `;
@@ -45,6 +46,18 @@ export const RelativDivS = styled.div`
 export const AbsoluteDiv = styled.div`
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width}px;
+    height: ${props => props._height}px;
+    display: flex;
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+    margin: 0;
+    padding: 18px 12px;
+    z-index: 9999;
+`;
+export const AbsoluteDivGrid = styled.div`
+    border-radius: ${props => props._bdr}px;
+    width: ${props => props._width || '100%'};
     height: ${props => props._height}px;
     display: flex;
     position: absolute;

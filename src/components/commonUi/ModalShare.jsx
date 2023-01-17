@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from 'prop-types'
 import { useNavigate } from "react-router-dom";
 import { ModalButton, ModalDiv1, ModalDiv3, ModalDiv4, ModalOutside, ModalShareBody, ModalTitle, ModalTitle2, TextArea } from 'components/Main/More/ModalPageStyle';
@@ -41,56 +41,76 @@ const ModalShare= ({
       onConfirmClick: () => setAlert(null),
     })
   }
+// kakao공유
+  // const params = {
+  //   key: process.env.REACT_APP_KAKAO_SDK,
+  //   id: process.env.YOUR_TEMPLATE_ID
+  // }
+  const KAKAO_KEY = process.env.REACT_APP_KAKAO_SDK
+Kakao.init(KAKAO_KEY)
+  // const useKakaoSDK = () => {
+  //   useEffect(() => {
+  //     if (typeof window !== 'undefined' && !window.KakaoLoaded) {
+  //       window.KakaoLoaded = true;
+  //       const script = document.createElement('script');
+  //       script.src = '//developers.kakao.com/sdk/js/kakao.min.js';
+  // script.onload = () => {
+  // window.Kakao.init(params.key);
+  // };
+  // document.head.appendChild(script);
+  // }
+  // }, []);
+  // };
+  // const KEY = process.env.REACT_APP_KAKAO_SDK
+  // console.log(KEY);
 
-  const KEY = process.env.REACT_APP_KAKAO_SDK
-  console.log(KEY);
-  const KaKaoShareButton = () => {
-    if (window.Kakao) {
-      const kakao = window.Kakao
-      // 중복되는 초기화를 막기 위해 isInitialized()로 SDK 초기화 여부를 판단
-      if (!kakao.isInitialized()) {
-        kakao.init(KEY)
-      }
-      console.log(kakao.isInitialized());
-      kakao.Share.sendDefault({
-        objectType: 'feed',
-        content: {
-          title: '오늘의 디저트',
-          description: '아메리카노, 빵, 케익',
-          imageUrl:
-            'https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
-          link: {
-            mobileWebUrl: 'https://developers.kakao.com',
-            webUrl: 'https://developers.kakao.com',
-          },
-        },
-        buttons: [
-          {
-            title: '웹으로 이동',
-            link: {
-              mobileWebUrl: 'https://developers.kakao.com',
-              webUrl: 'https://developers.kakao.com',
-            },
-          },
-          {
-            title: '앱으로 이동',
-            link: {
-              mobileWebUrl: 'https://developers.kakao.com',
-              webUrl: 'https://developers.kakao.com',
-            },
-          },
-        ],
-    });
-    kakao.Share.sendCustom({
-      // templateId: ${YOUR_TEMPLATE_ID},
-      templateArgs: {
-        title: '제목 영역입니다.',
-        description: '설명 영역입니다.',
-      },
-    })
-  }
-}
+  // Kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3');
 
+  // SDK 초기화 여부를 판단합니다.
+  // console.log(Kakao.isInitialized());
+  // const KaKaoShareButton = (route, title) => {
+  //   if (window.Kakao) {
+  //     const kakao = window.Kakao
+  //     // 중복되는 초기화를 막기 위해 isInitialized()로 SDK 초기화 여부를 판단
+  //     if (!kakao.isInitialized()) {
+  //       kakao.init(params.key)
+  //       // kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3')
+  //     }
+  //     console.log(kakao.isInitialized());
+  //     kakao.Share.sendDefault({
+  //       // container: '#kakaotalk-sharing-btn',
+  //       objectType: 'feed',
+  //       content: {
+  //         title: title,
+  //         description: {},
+  //         imageUrl:
+  //           {},
+  //         link: {
+  //           mobileWebUrl: route,
+  //           webUrl: route
+  //         },
+  //       },
+  //       buttons: [
+  //         {
+  //           title: '자세히보기',
+  //           link: {
+  //             mobileWebUrl: route,
+  //             webUrl: route
+  //           },
+  //         },
+  //       ],
+  //       installTalk: true,
+  //   });
+    // kakao.Share.sendCustom({
+    //   templateId: (params.id),
+    //   templateArgs: {
+    //     title: '제목 영역입니다.',
+    //     description: '설명 영역입니다.',
+    //   },
+    // })
+//   }
+// }
+  
   return (
     <div>
       <ModalOutside>
@@ -114,10 +134,29 @@ const ModalShare= ({
               </ModalDiv3>
             {/* 카카오톡 공유 */}
               <ModalDiv3
-                onClick={KaKaoShareButton}
+                // id="kakaotalk-sharing-btn"
+                // onClick={KaKaoShareButton}
+                // onClick={() => KaKaoShareButton()}
               >
                 <div>
                   <Kakao/>
+                  {/* <img src={`${process.env.PUBLIC_URL}/assets/KakaoLogo.png`} alt={"Kakao Logo"} /> */}
+                  {/* {
+                    window.kakao.Share.sendDefault({
+                    objectType: 'feed',
+                    content: {
+                    title,
+                    // description,
+                    // imageUrl,
+                    // imageWidth: SHARE_KAKAO_OG_WIDTH,
+                    // imageHeight: SHARE_KAKAO_OG_HEIGHT,
+                    link: {
+                    webUrl: '…',
+                    mobileWebUrl: '…',
+                    },
+                    },
+                    })
+                    } */}
                 </div>
                 <T.Text _size={16} _width='100%' _align='center'>카카오톡</T.Text>
               </ModalDiv3>

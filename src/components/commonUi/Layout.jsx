@@ -290,6 +290,32 @@ export const GridContainer = styled.div`
 	gap: 16px;
 `
 
+export const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 31.5%);
+    padding: 0px;
+    width: 100%;
+    max-height: 370px;
+	padding-top: 32px;
+	gap: 2.7%;
+    @media screen and (max-width:668px) {
+        grid-template-columns: repeat(3, 31.5%);
+    }
+    @media screen and (max-width:472px) {
+        gap: 2%;
+    }
+    @media screen and (max-width:450px) {
+        /* gap: 10px; */
+        grid-template-columns: repeat(2, 50%);
+    }
+    @media screen and (max-width:392px) {
+        gap: 1%;
+    }
+    @media screen and (max-width:384px) {
+        gap: 0.7%;
+    }
+`
+
 export const Line = styled.div`
   width: 100%;
   height: 1px;

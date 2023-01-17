@@ -11,6 +11,7 @@ import StarRate from 'components/commonUi/StarRate';
 import { FlagN, FlagNC } from 'components/commonUi/Icon';
 import { numberFormat } from 'utils/utils';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
+import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 
 function CollectionPage() {
 
@@ -39,6 +40,7 @@ function CollectionPage() {
           <L.Contents _padding="0" >
             <L.FlexCols _padding={0} _gap="0" >
               <L.FlexColsScroll _padding='24px 20px'>
+                <Scroll _height= "calc(100vh - 60px)">
                 {/* =================== 로딩 =================== */}
                 {
                   loading && <LoadingBar />
@@ -59,7 +61,7 @@ function CollectionPage() {
                 {
                   !loading &&
                   list.length > 0 &&
-                  <L.FlexRowsWrap _gap={20} _padding={0}>
+                  <L.Grid  _padding={0}>
                     {
                       type === 0
                         ? <ListCard list={list} lastRef={null} />
@@ -70,8 +72,9 @@ function CollectionPage() {
                           />
                         ))
                     }
-                  </L.FlexRowsWrap>
+                  </L.Grid>
                 }
+                </Scroll>
               </L.FlexColsScroll>
             </L.FlexCols>
           </L.Contents>
