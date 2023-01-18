@@ -72,16 +72,16 @@ const params = {
           // 'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
           link: {
           // [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-            mobileWebUrl: 'http://localhost:3000',
-            webUrl: 'http://localhost:3000',
+            mobileWebUrl: 'https://ondongnemarket.com',
+            webUrl: 'https://ondongnemarket.com',
           },
         },
         buttons: [
           {
             title: '자세히보기',
             link: {
-              mobileWebUrl: 'http://localhost:3000',
-              webUrl: 'http://localhost:3000',
+              mobileWebUrl: 'https://ondongnemarket.com',
+              webUrl: 'https://ondongnemarket.com',
             },
           },
         ],
