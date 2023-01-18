@@ -12,7 +12,6 @@ const OrderFormPage = () => {
     const navigate = useNavigate();
     const [cancelConfirm, setCancelConfirm] = useState(false);
     const backTo = useSelector(state => state.order.to);
-    console.log(backTo);
 
     const orderCancel = () => {
         dispatch(orderActions.remove());

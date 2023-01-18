@@ -52,8 +52,6 @@ export const numberFormatter = (value) => {
 
 // 숫자 쉼표 처리
 export const numberFormat = (value) => {
-	if (!value) return;
-
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 

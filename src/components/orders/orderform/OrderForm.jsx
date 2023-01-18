@@ -22,6 +22,7 @@ const OrderForm = ({ data }) => {
     const navigate = useNavigate();
     const auth = useSelector(state => state.auth);
     const orderItems = useSelector(state => state.order.items);
+    const backTo = useSelector(state => state.order.to);
 
     const [orderData, setOrderData] = useState({
         memberId: '',
@@ -146,8 +147,8 @@ const OrderForm = ({ data }) => {
     };
 
     const toTossOrderName = () => {
-        if (orderData.items.length > 0) {
-            return `${orderData.items[0].itemName} 외 ${orderData.items[0].length - 1}개`
+        if (orderData.items.length > 1) {
+            return `${orderData.items[0].itemName} 외 ${orderData.items.length - 1}개`
         } else {
             return `${orderData.items[0].itemName}`
         }
@@ -157,14 +158,18 @@ const OrderForm = ({ data }) => {
 
         setAlert({
             title: JSON.parse(status) ? "주문 완료" : "주문 실패",
-            contents: JSON.parse(status) ? "주문이 완료되었습니다." : "주문이 실패되었습니다.",
+            contents: JSON.parse(status) ? "주문이 완료되었습니다." : "주문을 실패하였습니다.",
             buttonText: "확인",
             onButtonClick: () => {
                 JSON.parse(status)
                     ? navigate('/order/all', { replace: true })
-                    : navigate('/order/new'); setAlert(null);
+                    : navigate(backTo, { replace: true });
             },
-            onOverlayClick: () => setAlert(null),
+            onOverlayClick: () => {
+                JSON.parse(status)
+                    ? navigate('/order/all', { replace: true })
+                    : navigate(backTo, { replace: true });
+            },
         })
     }
 
@@ -190,6 +195,7 @@ const OrderForm = ({ data }) => {
                                 <T.Text _size={15} _color="gray600">{orderData.nickname}</T.Text>
                                 <T.Text _size={15} _color="gray600">{phoneFormatter(orderData.phone)}</T.Text>
                                 {
+                                    orderData.recetiveType == '배달' &&
                                     !orderData.address &&
                                     <L.FlexRows>
                                         <IP.TextInput
@@ -200,6 +206,7 @@ const OrderForm = ({ data }) => {
                                     </L.FlexRows>
                                 }
                                 {
+                                    orderData.recetiveType == '배달' &&
                                     orderData.address &&
                                     <L.FlexCols _gap={8}>
                                         <L.FlexRows>
@@ -232,7 +239,7 @@ const OrderForm = ({ data }) => {
                             selectName="주문 방식"
                             options={[
                                 { text: '배달', value: '배달' },
-                                // { text: '방문 포장', value: '방문 포장' },
+                                { text: '방문 포장', value: '방문포장' },
                             ]}
                             onChange={e => {
                                 e.preventDefault();
@@ -282,6 +289,7 @@ const OrderForm = ({ data }) => {
                                             <L.FlexCols _gap={8}>
                                                 <T.Text _weight={600}>{o.itemName}</T.Text>
                                                 <L.FlexCols _gap={4}>
+                                                    <T.Text _color="gray600">수량: {o.count}개</T.Text>
                                                     <T.Text _color="gray600">기본: {totalPrice(Number(o.price) * o.count, o.salePercent)} 원</T.Text>
                                                 </L.FlexCols>
                                             </L.FlexCols>

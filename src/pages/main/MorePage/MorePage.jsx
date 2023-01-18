@@ -96,6 +96,19 @@ function MorePage() {
 
   }
 
+  // 회원 권한 확인 후 페이지 이동
+  const memberRoleRouter = (to) => {
+    if (!auth.isAuthenticated) {
+      return setAlert({
+        contents: "로그인 후 이용가능합니다.",
+        buttonText: "확인",
+        onButtonClick: () => setAlert(false),
+        onOverlayClick: () => setAlert(false),
+      })
+    }
+    navigate(to);
+  }
+
   useEffect(() => {
     if (auth.isAuthenticated) {
       getMemberProfile()
@@ -142,15 +155,11 @@ function MorePage() {
           }
 
           <MoreDiv>
-            <Link to="/order/all">
-              <MoreContainerDiv>My 주문</MoreContainerDiv>
-            </Link>
-            <Link to="/member/market">
-              <MoreContainerDiv>My 단골</MoreContainerDiv>
-            </Link>
-            <Link to="/member/review">
-              <MoreContainerDiv>내가 쓴 리뷰</MoreContainerDiv>
-            </Link>
+            <MoreContainerDiv onClick={() => memberRoleRouter("/order/all")}>My 주문</MoreContainerDiv>
+
+            <MoreContainerDiv onClick={() => memberRoleRouter("/member/market")}>My 단골</MoreContainerDiv>
+
+            <MoreContainerDiv onClick={() => memberRoleRouter("/member/review")}>내가 쓴 리뷰</MoreContainerDiv>
             {/* <Link to="/member/coupon">
               <MoreContainerDiv>쿠폰함</MoreContainerDiv>
             </Link> */}

@@ -9,23 +9,17 @@ import { Profile48 } from 'components/commonUi/Icon';
 import Confirm from 'components/commonUi/Confirm';
 import Alert from 'components/commonUi/Alert';
 import { S } from './OrderDetailsStyle'
+import { orderDetails } from 'service/order';
+import { numberFormat, storeTotalPrice, totalPrice } from 'utils/utils';
+import dayjs from 'dayjs';
+const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
-const dummyData = JSON.stringify({
-    userName: '아이덴잇',
-    userTel: '010-1234-5678',
-    userAddress : '서울특별시 강서구 가양동 173-22',
-    prdPrice: '27,200',
-    totalPrice: '29,200',
-    deliveryFee: '2,000',
-    orderType: '배달',
-    pay: '카드 결제'
-  });
 
 const OrderDetails = props => {
 
     // id parameter
     const { id } = useParams();
-    const [ orderData, setOrderData ] = useState(null);
+    const [orderData, setOrderData] = useState(null);
     // ui - alert (나중에 global로 관리)
     const [alert, setAlert] = useState(null);
     const [confirm, setConfirm] = useState(null);
@@ -37,18 +31,13 @@ const OrderDetails = props => {
         params: 주문항목 고유 id 등
     ============================== */
     const loadData = async (prodId) => {
-        await fetch('../../data/orders.json', {
-            headers : { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                const oData = data.orders.filter(item => item.no === Number(prodId))[0];
-                setOrderData(oData);
-            })
+        const response = await orderDetails(prodId);
+        if (response && response.data.data) {
+            setOrderData(response.data.data);
+        }
     };
+
+    console.log(orderData);
 
     const onPickUpClick = e => {
         e.preventDefault();
@@ -87,11 +76,11 @@ const OrderDetails = props => {
     ============================== */
     const handleDelete = () => {
         setAlert({
-            title:"삭제 완료",
-            contents:"주문 내역이 삭제되었습니다.",
-            buttonText:"확인",
-            onButtonClick: () => {navigate('/order/all')}, 
-            onOverlayClick: () => {navigate('/order/all')}, 
+            title: "삭제 완료",
+            contents: "주문 내역이 삭제되었습니다.",
+            buttonText: "확인",
+            onButtonClick: () => { navigate('/order/all') },
+            onOverlayClick: () => { navigate('/order/all') },
         })
     };
 
@@ -100,13 +89,21 @@ const OrderDetails = props => {
     ============================== */
     const handlePickUp = () => {
         setAlert({
-            title:"수령 완료",
-            contents:"주문 내역이 수령 완료 처리되었습니다.",
-            buttonText:"확인",
-            onButtonClick: () => {navigate('/order/all')}, 
-            onOverlayClick: () => {navigate('/order/all')}, 
+            title: "수령 완료",
+            contents: "주문 내역이 수령 완료 처리되었습니다.",
+            buttonText: "확인",
+            onButtonClick: () => { navigate('/order/all') },
+            onOverlayClick: () => { navigate('/order/all') },
         })
     };
+
+    const toOrderName = (item) => {
+        if (item.length > 1) {
+            return `${item[0].name} 외 ${item.length - 1}개`
+        } else {
+            return `${item[0].name}`
+        }
+    }
 
     useEffect(() => {
         loadData(id);
@@ -114,125 +111,136 @@ const OrderDetails = props => {
 
     return (
         orderData
-        ?<L.Container>
-            {/* 주문 완료 */}
-            <L.Contents>
-                <L.FlexCols _gap={24}>
-                    <L.FlexRows _gap={0} _content="space-between">
-                        <L.FlexRows _gap={16} _width="auto" _items="center">
-                            <Profile48 />
-                            <L.FlexCols _width="auto" _gap={4}>
-                                <T.Text _size={18} _weight={600}>{orderData.market}</T.Text>
-                                <T.Text _size={15} _color="gray800">{orderData.order}</T.Text>
-                            </L.FlexCols>
+            ? <L.Container>
+                {/* 주문 완료 */}
+                <L.Contents>
+                    <L.FlexCols _gap={24}>
+                        <L.FlexRows _gap={0} _content="space-between">
+                            <L.FlexRows _gap={16} _width="auto" _items="center">
+                                {
+                                    orderData.storeProfile
+                                        ? <img src={IMGURL + orderData.storeProfile} width="48px" height="48px" />
+                                        : <Profile48 />
+                                }
+                                <L.FlexCols _width="auto" _gap={4}>
+                                    <T.Text _size={18} _weight={600}>{orderData.storeName}</T.Text>
+                                    <T.Text _size={15} _color="gray800">{toOrderName(orderData.orderItems)}</T.Text>
+                                </L.FlexCols>
+                            </L.FlexRows>
+                            <T.Text _size={14} _weight={500} _color="gray800">{orderData.orderStatus}</T.Text>
                         </L.FlexRows>
-                        <T.Text _size={14} _weight={500} _color="gray800">{orderData.state}</T.Text>
-                    </L.FlexRows>
-                    <L.FlexCols _gap={4}>
                         <L.FlexCols _gap={4}>
-                            <T.Text _size={14} _color="gray600">주문 일시: { orderData.date }</T.Text>
-                            <T.Text _size={14} _color="gray600">주문 번호: { orderData.orderNo}</T.Text>
-                            <T.Text _size={14} _color="gray600">수령 방법: { orderData.orderSort }</T.Text>
+                            <L.FlexCols _gap={4}>
+                                <T.Text _size={14} _color="gray600">주문 일시: {dayjs(orderData.createDate).format('YYYY.MM.DD')}</T.Text>
+                                <T.Text _size={14} _color="gray600">주문 번호: {orderData.orderKey}</T.Text>
+                                <T.Text _size={14} _color="gray600">수령 방법: {orderData.recetiveType}</T.Text>
+                            </L.FlexCols>
                         </L.FlexCols>
                     </L.FlexCols>
-                </L.FlexCols>
-            </L.Contents>
-            {/* 배송지 / 요청 사항 */}
-            <L.Contents>
-                <L.FlexCols _gap={16}>
-                    <L.FlexCols _gap={4}>
-                        <T.Text _weight={600}>배송지 주소</T.Text>
-                        <T.Text _size={15} _color="gray800">{orderData.address}</T.Text>
+                </L.Contents>
+                {/* 배송지 / 요청 사항 */}
+                <L.Contents>
+                    <L.FlexCols _gap={16}>
+                        {
+                            orderData.recetiveType === "배달"
+                                ? <L.FlexCols _gap={4}>
+                                    <T.Text _weight={600}>배송지 주소</T.Text>
+                                    <T.Text _size={15} _color="gray800">{orderData.deliveryAddress} {orderData.deliveryAddressDetails}</T.Text>
+                                </L.FlexCols>
+                                : <L.FlexCols _gap={4}>
+                                    <T.Text _weight={600}>수령지 주소</T.Text>
+                                    <T.Text _size={15} _color="gray800">{orderData.storeAddress} {orderData.storeAddressDetails}</T.Text>
+                                </L.FlexCols>
+                        }
+                        {
+                            orderData.deliveryContents &&
+                            <L.FlexCols _gap={4}>
+                                <T.Text _weight={600}>요청사항</T.Text>
+                                <T.Text _size={15} _color="gray800">{orderData.deliveryContents}</T.Text>
+                            </L.FlexCols>
+                        }
                     </L.FlexCols>
-                    <L.FlexCols _gap={4}>
-                        <T.Text _weight={600}>요청사항</T.Text>
-                        <T.Text _size={15} _color="gray800">{orderData.request}</T.Text>
-                    </L.FlexCols>
-                </L.FlexCols>
-            </L.Contents>
-            {/* 주문 상품 */}
-            <L.Contents>
-                <L.FlexCols _gap={16}>
-                    <T.Text _weight={600} _size={18}>인싸과일 세트 1개</T.Text>
-                    <L.FlexCols _gap={4}>
-                        <T.Text _color="gray800">기본: 18,000원</T.Text>
-                        <T.Text _color="gray800">추가 선택: 2,000원</T.Text>
-                    </L.FlexCols>
-                </L.FlexCols>
-            </L.Contents>
-            <L.Contents>
-                <L.FlexCols _gap={16}>
-                    <T.Text _weight={600} _size={18}>{orderData.item}</T.Text>
-                    <L.FlexCols _gap={4}>
-                        <T.Text _color="gray800">기본: {orderData.itemPrice}</T.Text>
-                        <T.Text _color="gray800">추가 선택: {orderData.itemOption}</T.Text>
-                    </L.FlexCols>
-                </L.FlexCols>
-            </L.Contents>
-            {/* 결제 금액 */}
-            <L.Contents>
-                <L.FlexCols _gap={16}>
-                    <T.Text _size={18} _weight={600}>결제 금액</T.Text>
-                    <Tb.ReciptTable>
-                        <tbody>
-                            <tr>
-                                <th>상품 주문 금액</th>
-                                <td>{ orderData.price } 원</td>
-                            </tr>
-                            <tr>
-                                <th>배달비</th>
-                                <td>{ orderData.deliveryFee } 원</td>
-                            </tr>
-                            <tr>
-                                <th>결제 수단</th>
-                                <td>{ orderData.pay }</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>총 결제금액</th>
-                                <td>{orderData.totalPrice} 원</td>
-                            </tr>
-                        </tfoot>
-                    </Tb.ReciptTable>
-                </L.FlexCols>
-            </L.Contents>
-            <S.Actions>
+                </L.Contents>
+                {/* 주문 상품 */}
                 {
-                    orderData.orderSort === '픽업' &&
-                    <S.Action
-                        onClick={onPickUpClick}
-                    >상점 수령</S.Action>
+                    orderData.orderItems.length > 0 &&
+                    orderData.orderItems.map((item, index) => (
+                        <L.Contents key={index}>
+                            <L.FlexCols _gap={16}>
+                                <T.Text _weight={600} _size={18}>{item.name}</T.Text>
+                                <L.FlexCols _gap={4}>
+                                    <T.Text _color="gray800">수량: {item.count}개</T.Text>
+                                    <T.Text _color="gray800">기본: {totalPrice(Number(item.price) * item.count, item.salePercent)}원</T.Text>
+                                </L.FlexCols>
+                            </L.FlexCols>
+                        </L.Contents>
+                    ))
                 }
-                <S.Action
-                    onClick={onDeleteClick}
-                    _color="error"
-                >주문 내역 삭제</S.Action>
-            </S.Actions>
-            {/* CONFIRMS */}
-            {
-                confirm &&
-                <Confirm 
-                    warn={confirm.warn}
-                    contents={confirm.contents}
-                    confirmText={confirm.confirmText}
-                    cancelText={confirm.cancelText}
-                    onConfirmClick={confirm.onConfirmClick}
-                    onCancelClick={confirm.onCancelClick}
-                />
-            }
-            {
-                alert &&
-                <Alert
-                    title={alert.title}
-                    contents={alert.contents}
-                    buttonText={alert.buttonText}
-                    onButtonClick={alert.onButtonClick}
-                    onOverlayClick={alert.onOverlayClick}
-                />
-            }
-        </L.Container>
-        :<></>
+
+                {/* 결제 금액 */}
+                <L.Contents>
+                    <L.FlexCols _gap={16}>
+                        <T.Text _size={18} _weight={600}>결제 금액</T.Text>
+                        <Tb.ReciptTable>
+                            <tbody>
+                                <tr>
+                                    <th>상품 주문 금액</th>
+                                    <td>{numberFormat(storeTotalPrice(orderData.orderItems))} 원</td>
+                                </tr>
+                                <tr>
+                                    <th>배달비</th>
+                                    <td>{numberFormat(orderData.deliveryPrice)} 원</td>
+                                </tr>
+                                <tr>
+                                    <th>결제 수단</th>
+                                    <td>{orderData.paymentType}결제</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>총 결제금액</th>
+                                    <td>{numberFormat(orderData.amount)} 원</td>
+                                </tr>
+                            </tfoot>
+                        </Tb.ReciptTable>
+                    </L.FlexCols>
+                </L.Contents>
+                <S.Actions>
+                    {
+                        orderData.orderSort === '픽업' &&
+                        <S.Action
+                            onClick={onPickUpClick}
+                        >상점 수령</S.Action>
+                    }
+                    <S.Action
+                        onClick={onDeleteClick}
+                        _color="error"
+                    >주문 내역 삭제</S.Action>
+                </S.Actions>
+                {/* CONFIRMS */}
+                {
+                    confirm &&
+                    <Confirm
+                        warn={confirm.warn}
+                        contents={confirm.contents}
+                        confirmText={confirm.confirmText}
+                        cancelText={confirm.cancelText}
+                        onConfirmClick={confirm.onConfirmClick}
+                        onCancelClick={confirm.onCancelClick}
+                    />
+                }
+                {
+                    alert &&
+                    <Alert
+                        title={alert.title}
+                        contents={alert.contents}
+                        buttonText={alert.buttonText}
+                        onButtonClick={alert.onButtonClick}
+                        onOverlayClick={alert.onOverlayClick}
+                    />
+                }
+            </L.Container>
+            : <></>
     )
 }
 

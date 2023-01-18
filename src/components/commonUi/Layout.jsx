@@ -55,7 +55,7 @@ export const Contents = styled.div`
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};
     @media screen and (max-width: 450px) {
-        padding: ${props => props._paddingmedia };
+        padding: ${props => props._paddingmedia};
     }
 `;
 
@@ -388,3 +388,9 @@ export const Line = styled.div`
   height: 1px;
   background: #F5F5F5;
 `
+
+export const Icon = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
