@@ -100,7 +100,7 @@ const OrderList = () => {
                                             ><More /></button>
                                         </L.FlexRows>
                                         <L.FlexRows _align="center">
-                                            <L.FlexCols _items="center" _content="center">
+                                            <L.FlexCols style={{ justifyContent: 'center', alignItems: 'center' }}>
                                                 {
                                                     item.orderStatus == "주문완료"
                                                         ? <OrderSuccess_Y />
@@ -113,7 +113,7 @@ const OrderList = () => {
                                             <L.Icon>
                                                 <OrderNextIcon />
                                             </L.Icon>
-                                            <L.FlexCols _items="center" _content="center">
+                                            <L.FlexCols style={{ justifyContent: 'center', alignItems: 'center' }}>
                                                 {
                                                     item.orderStatus == "상품준비"
                                                         ? <OrderStandBy_Y />
@@ -129,7 +129,7 @@ const OrderList = () => {
                                             {
                                                 item.recetiveType === '배달' &&
                                                 <>
-                                                    <L.FlexCols _items="center" _content="center">
+                                                    <L.FlexCols style={{ justifyContent: 'center', alignItems: 'center' }}>
                                                         {
                                                             item.orderStatus == "배송중"
                                                                 ? <OrderDelivery_Y />
@@ -144,7 +144,7 @@ const OrderList = () => {
                                                     </L.Icon>
                                                 </>
                                             }
-                                            <L.FlexCols _items="center" _content="center">
+                                            <L.FlexCols style={{ justifyContent: 'center', alignItems: 'center' }}>
                                                 {
                                                     item.orderStatus == "픽업완료" || item.orderStatus == "배송완료"
                                                         ? <OrderEnd_Y />
