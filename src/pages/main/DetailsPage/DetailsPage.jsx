@@ -121,6 +121,8 @@ function DetailsPage(props) {
 
       <Layout
         title={item.itemName}
+        description={item.storeName}
+        img={IMGURL + item.itemImage}
         bell={false}
         cart={true}
         share={true}

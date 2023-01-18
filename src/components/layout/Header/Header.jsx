@@ -16,6 +16,8 @@ import ModalShare from 'components/commonUi/ModalShare';
 
 const Header = ({
     title = "title",
+    description='description',
+    img='img',
     bell = false,
     cart = false,
     back = true,
@@ -25,7 +27,6 @@ const Header = ({
     backArrow = true,
     ...props
 }) => {
-
     const navigate = useNavigate();
 
     /* ====================
@@ -120,6 +121,9 @@ const Header = ({
                 <ModalShare 
                     title='공유하기'
                     ShowShareModal={ShowShareModal} 
+                    itemName={title}
+                    description={description}
+                    img={img}
                 />
             }
         </S.Header>

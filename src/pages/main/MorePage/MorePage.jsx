@@ -142,7 +142,9 @@ function MorePage() {
           }
 
           <MoreDiv>
-            <MoreContainerDiv>My 주문</MoreContainerDiv>
+            <Link to="/order/all">
+              <MoreContainerDiv>My 주문</MoreContainerDiv>
+            </Link>
             <Link to="/member/market">
               <MoreContainerDiv>My 단골</MoreContainerDiv>
             </Link>

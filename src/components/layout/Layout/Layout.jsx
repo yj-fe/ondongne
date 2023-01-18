@@ -9,7 +9,8 @@ import { S } from './LayoutStyle';
 const Layout = (props) => {
     return (
         <S.Wrapper>
-            <Header {...props} />
+            <Header {...props}/>
+            {/* <Header {...props} itemtitle={itemtitle}/> */}
             <S.Main as="main">
                 {/* parent component로 사용할 때: Outlet */}
                 {/* { <Outlet /> } */}

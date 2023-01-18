@@ -46,7 +46,7 @@ function MainBestCollection() {
 
   return (
     <div>
-      <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 32px 0px'>
+      <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
         <T.Text _size={18} _weight={700} _color='black'>우리동네 인기 추천</T.Text>
         <T.Text
           _size={14}

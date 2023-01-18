@@ -11,14 +11,18 @@ import SimpleConfirm from "./SimpleConfirm";
 // import { Helmet } from 'react-helmet'
 
 const ModalShare= ({
-  title='title',
+  itemName='itemName',
+  description='description',
+  title='',
+  img='',
+  // itemtitle,
+  // description= '',
   ShowShareModal,
   ...props
 })=> {
   const navigate = useNavigate();
         
-
-  
+console.log(itemName);
   // 링크복사하기
   const copyLinkRef = React.useRef()
   const copyLinkUrl = (e) => {
@@ -42,32 +46,12 @@ const ModalShare= ({
     })
   }
 // kakao공유
-  const params = {
-    key: process.env.REACT_APP_KAKAO_SDK,
-    id: process.env.YOUR_TEMPLATE_ID
-  }
-//   const KAKAO_KEY = process.env.REACT_APP_KAKAO_SDK
-// Kakao.init(KAKAO_KEY)
-  // const useKakaoSDK = () => {
-  //   useEffect(() => {
-  //     if (typeof window !== 'undefined' && !window.KakaoLoaded) {
-  //       window.KakaoLoaded = true;
-  //       const script = document.createElement('script');
-  //       script.src = '//developers.kakao.com/sdk/js/kakao.min.js';
-  // script.onload = () => {
-  // window.Kakao.init(params.key);
-  // };
-  // document.head.appendChild(script);
-  // }
-  // }, []);
-  // };
-  // const KEY = process.env.REACT_APP_KAKAO_SDK
-  // console.log(KEY);
-
-  // Kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3');
-
-  // SDK 초기화 판단
-  // console.log(Kakao.isInitialized());
+const params = {
+  key: process.env.REACT_APP_KAKAO_SDK,
+  id: process.env.YOUR_TEMPLATE_ID
+}
+    
+// kakao공유
   const KaKaoShareButton = () => {
     if (window.Kakao) {
       const kakao = window.Kakao
@@ -77,29 +61,31 @@ const ModalShare= ({
         kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3')
       }
       console.log(kakao.isInitialized());
-      kakao.Share.sendDefault({
+      kakao.Share.createDefaultButton({
+        container: '#kakao-sharing',
         objectType: 'feed',
         content: {
-          title: 'title',
-          description: 'description',
+          title: itemName,
+          description: description,
           imageUrl:
-          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          img,
+          // 'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
           link: {
           // [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-            mobileWebUrl: 'https://ondongnemarket.com',
-            webUrl: 'https://ondongnemarket.com',
+            mobileWebUrl: 'http://localhost:3000',
+            webUrl: 'http://localhost:3000',
           },
         },
         buttons: [
           {
             title: '자세히보기',
             link: {
-              mobileWebUrl: 'https://ondongnemarket.com',
-              webUrl: 'https://ondongnemarket.com',
+              mobileWebUrl: 'http://localhost:3000',
+              webUrl: 'http://localhost:3000',
             },
           },
         ],
-        // installTalk: true,
+        installTalk: true,
     });
   }
 }
@@ -108,7 +94,7 @@ const ModalShare= ({
     <div>
       <ModalOutside>
         <ModalShareBody>
-          <ModalDiv1>{title}</ModalDiv1>
+          <ModalDiv1>공유하기</ModalDiv1>
             <ModalDiv4>
             {/* 링크복사 */}
               <ModalDiv3
@@ -130,33 +116,14 @@ const ModalShare= ({
               >
                 <button
                 type="button"
-                onClick={KaKaoShareButton}
-                // onClick={() => KaKaoShareButton()}
+                id="kakao-sharing"
+                // onClick={KaKaoShareButton}
+                // onClick={(itemName) => KaKaoShareButton()}
+                onClick={() => KaKaoShareButton({itemName, description, img})}
                 >
 
-                
-                      {/* <Helmet>
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-      </Helmet> */}
                 <div>
                   <Kakao/>
-                  {/* <img src={`${process.env.PUBLIC_URL}/assets/KakaoLogo.png`} alt={"Kakao Logo"} /> */}
-                  {/* {
-                    window.kakao.Share.sendDefault({
-                    objectType: 'feed',
-                    content: {
-                    title,
-                    // description,
-                    // imageUrl,
-                    // imageWidth: SHARE_KAKAO_OG_WIDTH,
-                    // imageHeight: SHARE_KAKAO_OG_HEIGHT,
-                    link: {
-                    webUrl: '…',
-                    mobileWebUrl: '…',
-                    },
-                    },
-                    })
-                    } */}
                 </div>
                 <T.Text _size={16} _width='100%' _align='center'>카카오톡</T.Text>
                 </button>
