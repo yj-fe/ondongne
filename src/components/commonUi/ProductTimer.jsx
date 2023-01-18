@@ -17,6 +17,12 @@ const ContentDate = styled.div`
   line-height: 18px;
   color: #ED4F62;
   margin-bottom: 4px;
+  @media screen  and (max-width:500px){
+    width: 130px;
+  }
+  @media screen  and (max-width:450px){
+    width: 150px;
+  }
 `
 
 const ProductTimer = ({ date }) => {

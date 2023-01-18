@@ -15,6 +15,14 @@ export const ImgSizeH = styled.img`
         width: 167px;
         height: 167px;
     }
+    @media screen and (max-width: 372px){
+        width: 150px;
+        height: 150px;
+    }
+    @media screen and (max-width: 336px){
+        width: 130px;
+        height: 130px;
+    }
 `;
 
 export const Imgauto = styled.img`

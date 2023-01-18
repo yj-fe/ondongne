@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Text } from 'components/commonUi/Text'
 import SwiperPage from '../Swiper/Swiper'
+import { Close } from 'components/commonUi/Icon'
 
 
 
@@ -15,8 +16,9 @@ function Modal({setAgreementModal, closeModel}) {
   return (
     <Body>
       <Container>
-        <Header>
-          <Text onClick={closeModel} _align={'right'} _size={14} _weight={400} _color={'gray600'}>건너뛰기</Text>
+        <Header onClick={closeModel}>
+          <Close/>
+          {/* <Text onClick={closeModel} _align={'right'} _size={14} _weight={400} _color={'gray600'}>건너뛰기</Text> */}
         </Header>
         <Content>
           <SwiperPage />
@@ -63,6 +65,7 @@ const Header = styled.div`
   width: 100%;
   height: 60px;
   padding: 20px;
+  text-align: right;
 `
 const Content = styled.div`
   display: flex;

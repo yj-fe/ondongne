@@ -137,7 +137,7 @@ function TabContent({ detailTab, item }) {
 
     //=====================쿠폰 소식=====================
     <div>
-      <MarketDetailCoupon />
+      {/* <MarketDetailCoupon /> */}
     </div>
   ][detailTab]
 }

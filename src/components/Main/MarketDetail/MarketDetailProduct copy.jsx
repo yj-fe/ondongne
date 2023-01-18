@@ -10,8 +10,6 @@ import { ProductCard } from '../productDetails/ProductCard';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { ModalFilter } from 'components/layout/Layout/MoreLayout';
 import { sortFormatter } from 'utils/utils';
-import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
-import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
 
 function MarketDetailProduct({ id }) {
   const [filter, setFilter] = useState(false);
@@ -96,10 +94,12 @@ function MarketDetailProduct({ id }) {
             }
 
             {/* =================== 있을때 =================== */}
+            <L.Grid>
             {
               list.length > 0 &&
               <ProductList list={list} lastRef={ref} />
             }
+            </L.Grid>
 
             {/* =================== 로딩 =================== */}
             {
@@ -130,19 +130,16 @@ function ProductEmpty() {
 export function ProductList({ list, lastRef }) {
 
   return (
-    <Scroll>
-
-      <L.Grid>
+    <L.FlexRowsWrap _gap={20} _padding={0}>
       {list.map((item, index) => (
         <React.Fragment key={index}>
-          <ProductCardGrid
+          <ProductCard
             item={item}
             lastRef={list.length === index + 1 ? lastRef : null}
           />
         </React.Fragment>
       ))}
-   </L.Grid>
-    </Scroll>
+    </L.FlexRowsWrap>
   )
 }
 

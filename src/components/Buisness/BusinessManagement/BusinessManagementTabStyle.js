@@ -9,6 +9,7 @@ export const TabDiv = styled.p`
 `;
 export const TabProfileDiv = styled.div`
 	width: 100%;
+	height: auto;
 	height: 228px;
 	background: #e0e0e0;
 	padding: 16px;
@@ -16,9 +17,9 @@ export const TabProfileDiv = styled.div`
 	flex-direction: row;
 	justify-content: right;
 	background-image: url(${(props) => props.banner || ""});
-	background-size: contain;
+	/* background-size: contain; */
 	background-repeat: no-repeat;
-	
+	object-fit: cover;
 	& input[type="file"] {
 		display: none;
 	}
@@ -76,13 +77,15 @@ export const TabBtn = styled.button`
 	width: 728px;
 	height: 56px;
 	bottom: 0px;
+	left: 50%;
+	transform: translate(-50%);
 	background: #0b806f;
 	font-weight: 700;
 	font-size: 18px;
 	text-align: center;
 	color: #ffffff;
 	@media screen and (max-width: 500px) {
-		width: 130%;
+		width: 100%;
 	}
 `;
 export const ContentDiv = styled.div`
@@ -201,7 +204,7 @@ export const InputBox = styled.div`
 export const Input = styled.input`
 	font-weight: 400;
 	font-size: 16px;
-	width: 70%;
+	width: ${(props) => (props._width || "70%")};
 	background-color: ${(props) => (props.color ? "#EEEEEE" : "none")};
 	text-align: ${(props) => props.align || null};
 	font-family: 'Pretendard';
@@ -281,7 +284,7 @@ export const DayBox = styled.div`
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	padding: 12px 16px;
+	/* padding: 12px 16px; */
 	gap: 4px;
 	width: 100%;
 	height: ${(props) => props._height || "48px"};
@@ -334,7 +337,6 @@ export const RowTimeDiv = styled.div`
 `;
 export const Size = styled.div`
 	width: ${props=>props._width || 'calc(100% - 80px)'};
-
 `;
 export const TimeDiv = styled.div`
 	box-sizing: border-box;

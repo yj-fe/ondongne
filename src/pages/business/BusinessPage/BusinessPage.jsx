@@ -24,8 +24,12 @@ import { getBizMember } from 'service/biz';
 import { useSelector } from 'react-redux';
 
 import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+
 import Layout from 'components/layout/Layout/Layout';
 import { FooterLogo } from 'components/commonUi/Icon';
+import { Grid } from 'swiper';
+import FooterLayout from 'components/layout/Footer/Footer';
 
 function BusinessPage() {
   const navigate = useNavigate();
@@ -56,8 +60,30 @@ function BusinessPage() {
         {/* ==================== 가게 정보 ==================== */}
           <L.Contents>
             <TitleText>가게 정보</TitleText>
-              <L.FlexRowsWrapMedia _gap={16}>
-              <InfoCard>
+                <L.GridTwo>
+                  <InfoCard>
+                    <OrderIcon/>
+                    <CardTextDiv>
+                      <CardText>신규 주문</CardText>
+                      <CardCount>0 건</CardCount>
+                    </CardTextDiv>
+                  </InfoCard>
+                  <InfoCard>
+                    <InfoIconStyle><Pickup /></InfoIconStyle>
+                    <CardTextDiv>
+                      <CardText>배달/픽업</CardText>
+                      <CardCount>0 건</CardCount>
+                    </CardTextDiv>
+                  </InfoCard>
+                  <InfoCard>
+                    <InfoIconStyle><NewReview /></InfoIconStyle>
+                    <CardTextDiv>
+                      <CardText>신규 리뷰</CardText>
+                      <CardCount>0 건</CardCount>
+                    </CardTextDiv>
+                  </InfoCard>
+                </L.GridTwo>
+              {/* <InfoCard>
                 <InfoIconStyle><OrderIcon /></InfoIconStyle>
                 <CardTextDiv>
                   <CardText>신규 주문</CardText>
@@ -77,8 +103,8 @@ function BusinessPage() {
                   <CardText>신규 리뷰</CardText>
                   <CardCount>0 건</CardCount>
                 </CardTextDiv>
-              </InfoCard>
-              </L.FlexRowsWrapMedia>
+              </InfoCard> */}
+              {/* </L.FlexRowsWrapMedia> */}
           </L.Contents>
 
         </L.Container>
@@ -142,7 +168,6 @@ function BusinessPage() {
             
               {
                 item.map((a, i) => {
-                  // if (i % 2 === 0) {
                     return (
                       <MyBestProductCard item={item[i]} i={i} />
                     )
@@ -182,12 +207,12 @@ function BusinessPage() {
                 <TermsIconStyle><Right /></TermsIconStyle>
             </TermsDiv>
               </Link>
-              <Link to="">
+              {/* <Link to="">
             <TermsDiv>
               <TermsTitle>정산 관리</TermsTitle>
                 <TermsIconStyle><Right /></TermsIconStyle>
             </TermsDiv>
-              </Link>
+              </Link> */}
               {/* 2차개발-상점 소식 관리 */}
               {/* <Link to="">
                 <TermsDiv>
@@ -197,23 +222,17 @@ function BusinessPage() {
               </Link> */}
           </L.Contents>
         </L.Container>
-        <FooterDiv>
-          <Footer>
-            <FooterLogo/>
-            <FooterText>
-              <span>(주)우리동네</span><br />
-              <span>대표자: 윤원규 / 사업자등록번호: 893-62-00579 / 통신판매신고: 김포마산-1234</span><br />
-              <span>주소: 경기도 김포시 김포한강8로 173-28 108동 103호 / 개인정보관리책임자: 홍길동</span><br />
-              <span>고객센터: 123-456-78912 / 이메일문의: example@email.com</span>
-            </FooterText>
-          </Footer>
+
+        <L.Inner>
+          <FooterLayout />
+        </L.Inner>
+
           <FloatingDivT
             onClick={() => setFloating(!floating)}
           >
             {floating && <FloatingToggle />}
             {floating ? <FloatingPush /> : <Floating />}
           </FloatingDivT>
-        </FooterDiv>
         </Layout>
 
 
@@ -258,12 +277,12 @@ function FloatingToggle(props) {
           <FloatingContentIcon><Order /></FloatingContentIcon>
           <FloatingContentTitle>소식 등록</FloatingContentTitle>
         </FloatingContentDiv>
-        <FloatingContentDiv>
+        {/* <FloatingContentDiv>
           <FloatingContentIcon><Coupon /></FloatingContentIcon>
           <Link to="/business/coupon">
             <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
           </Link>
-        </FloatingContentDiv>
+        </FloatingContentDiv> */}
         <FloatingContentDiv>
           <FloatingContentIcon><Trans /></FloatingContentIcon>
           <Link to="/">

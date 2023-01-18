@@ -225,6 +225,7 @@ function BusinessManagementTab1() {
             <ContentTitle>상점명</ContentTitle>
             <TitleInfoDiv>
               <Input
+              _width='90%'
                 name='name'
                 value={store.name}
                 onChange={onChange}

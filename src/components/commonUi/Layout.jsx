@@ -341,6 +341,18 @@ export const GridContainer = styled.div`
 	padding-top: 32px;
 	gap: 16px;
 `
+export const GridTwo = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+	gap: 16px;
+    @media screen and (max-width: 550px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media screen and (max-width: 378px) {
+        gap: 10px;
+    }
+`
 
 export const Grid = styled.div`
     display: grid;

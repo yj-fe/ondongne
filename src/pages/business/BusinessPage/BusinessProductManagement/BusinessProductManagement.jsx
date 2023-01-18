@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from 'components/Main/More/ModalPageStyle';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
+import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
 
 
 function BusinessProductManagement() {
@@ -99,7 +100,8 @@ function BusinessProductManagement() {
               </L.FlexRows>
 
               <L.Contents _padding='0px' _gap={20}>
-                <L.FlexRowsWrapBPM _padding={0}>
+                {/* <L.FlexRowsWrapBPM _padding={0}> */}
+                <L.Grid>
                   {
                     items && items.length === 0 &&
                     <L.Contents _padding='50px 0px' _height='calc(100vh - 68px)'>
@@ -118,18 +120,19 @@ function BusinessProductManagement() {
                           key={item.itemId}
                           to={`/business/product/details/${item.itemId}`}
                         >
-                          <ProductCard item={item} />
+                          <ProductCardGrid item={item} />
                         </Link>
 
                         : <Link
                           key={item.itemId}
                           to={`/business/product/details/${item.itemId}`}
                         >
-                          <ProductCard item={item} />
+                          <ProductCardGrid item={item} />
                         </Link>
                     ))
                   }
-                </L.FlexRowsWrapBPM>
+                  </L.Grid>
+                {/* </L.FlexRowsWrapBPM> */}
               </L.Contents>
 
             </L.FlexCols>
