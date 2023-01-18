@@ -67,9 +67,8 @@ function MemberManagement() {
         bell={false}
         onBackClick={() => navigate(-1)}
       >
-       <L.Container >
+       <L.Container _height='calc(100vh - 60px)'>
           <L.Contents _height='calc(100vh - 60px)'>
-            <Scroll >
             <L.FlexCols _padding={0} _gap={0}>
 
         {/* ============ 회원정보관리 ============ */}
@@ -84,6 +83,7 @@ function MemberManagement() {
           </MemberProfileDiv>
 
 
+            <Scroll _height='calc(100vh - 65px)'>
           <L.FlexCols _gap={24}>
             {/* =========================== 닉네임 =========================== */}
             <L.FlexCols>
@@ -135,8 +135,8 @@ function MemberManagement() {
           onOverlayClick={alert.onOverlayClick}
         />
       }
-        </L.FlexCols>
         </Scroll>
+        </L.FlexCols>
         </L.Contents>
       </L.Container>
 
@@ -182,7 +182,8 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
     }
 
     setConfirm({
-      contents: message,
+      contents: '닉네임이 변경되었습니다.',
+      // contents: message,
       confirmText: "확인",
       onConfirmClick: () => {
         setToggle()

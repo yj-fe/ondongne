@@ -208,7 +208,8 @@ export const DetailTabInfo = styled.div`
 	gap: 4px;
 	width: ${props => props.width || "33.3%"};
 	height: 50px;
-	border-bottom: 2px solid
+	border-bottom: solid
+		${(props) => (props._bottomsize || '2px')};
 		${(props) => (props.infocolor ? "#0B806F" : "#BDBDBD")};
 	/* border-bottom: 2px solid #0B806F; */
 
@@ -225,8 +226,9 @@ export const DetailTabReview = styled.div`
 	align-items: center;
 	padding: 8px 20px;
 	gap: 4px;
-	border-bottom: 2px solid
-		${(props) => (props.reviewcolor ? "#0B806F" : "#BDBDBD")};
+	border-bottom: 			solid 
+	${(props) => (props._bottomsize || '2px')};
+	${props => (props.reviewcolor ? "#0B806F" : "#BDBDBD")};
 	width: ${(props) => props.width || "33.3%"};
 	height: 50px;
 

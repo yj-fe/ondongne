@@ -238,7 +238,7 @@ export const Input = styled.input`
 //   color: #1565C0;
 // `
 export const NameToggleInput = styled.input`
-  width: calc(100%-70px);
+  width: calc(100% - 70px);
   height: 24px;
   font-weight: 400;
   font-size: ${props=> props._size || '16px'};

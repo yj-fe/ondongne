@@ -22,7 +22,6 @@ const ModalShare= ({
 })=> {
   const navigate = useNavigate();
         
-console.log(itemName);
   // 링크복사하기
   const copyLinkRef = React.useRef()
   const copyLinkUrl = (e) => {
@@ -60,7 +59,7 @@ const params = {
         // kakao.init(params.key)
         kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3')
       }
-      console.log(kakao.isInitialized());
+      // console.log(kakao.isInitialized());
       kakao.Share.createDefaultButton({
         container: '#kakao-sharing',
         objectType: 'feed',
@@ -69,7 +68,6 @@ const params = {
           description: description,
           imageUrl:
           img,
-          // 'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
           link: {
           // [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
             mobileWebUrl: 'https://ondongnemarket.com',
@@ -115,11 +113,9 @@ const params = {
               <ModalDiv3
               >
                 <button
-                type="button"
-                id="kakao-sharing"
-                // onClick={KaKaoShareButton}
-                // onClick={(itemName) => KaKaoShareButton()}
-                onClick={() => KaKaoShareButton({itemName, description, img})}
+                  type="button"
+                  id="kakao-sharing"
+                  onClick={() => KaKaoShareButton({itemName, description, img})}
                 >
 
                 <div>

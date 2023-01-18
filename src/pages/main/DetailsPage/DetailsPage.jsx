@@ -163,7 +163,6 @@ function DetailsPage(props) {
 
                 <Line />
                 <L.Contents _padding='16px 20px'>
-                  <L.FlexRows _gap={12} _items='flex-end'>
                     <L.FlexCols _gap={16}>
                       <L.FlexCols _gap={4}>
                         {
@@ -171,12 +170,14 @@ function DetailsPage(props) {
                           !item.soldoutStatus &&
                           <ProductTimer date={item.endDate} />
                         }
-                        <T.Text _size={18} _weight={500} _color='gray900' >{item.itemName}</T.Text>
+                        <T.Text _width='100%' _size={18} _weight={500} _color='gray900' >{item.itemName}</T.Text>
                         <L.FlexRows>
                           <StarRate rate={item.itemRating} />
                           <T.Text _size={11} _weight={400} _color='gray800'>({item.itemRating})</T.Text>
                         </L.FlexRows>
                       </L.FlexCols>
+
+                  <L.FlexRows _gap={12} _items='flex-end'>
                       <L.FlexCols _gap={4}>
 
                         {
@@ -189,7 +190,6 @@ function DetailsPage(props) {
 
                         <T.Text _size={20} _weight={600} _color='gray900'>{totalPrice(item.price, item.salePercent)} 원</T.Text>
                       </L.FlexCols>
-                    </L.FlexCols>
                     {
                       item.type == 'GROUP' &&
                       <Badge _fdir='column' _bg='gray100' _padding='8px 16px' _height='auto' _bdr='8px'>
@@ -199,6 +199,8 @@ function DetailsPage(props) {
                       </Badge>
                     }
                   </L.FlexRows>
+                    </L.FlexCols>
+
                 </L.Contents>
               </L.FlexCols>
 
@@ -206,18 +208,21 @@ function DetailsPage(props) {
                 <DetailTabInfo
                   onClick={() => { setDetailTab(0); setBtn(true); }}
                   infocolor={detailTab === 0}
+                  _bottomsize='7px'
                 >
                   상세정보
                 </DetailTabInfo>
                 <DetailTabReview
                   onClick={() => { setDetailTab(1); setBtn(true); }}
                   reviewcolor={detailTab === 1}
+                  _bottomsize='7px'
                 >
                   상품리뷰
                 </DetailTabReview>
                 <DetailTabReview
                   onClick={() => { setDetailTab(2); setBtn(false); }}
                   reviewcolor={detailTab === 2}
+                  _bottomsize='7px'
                 >
                   댓글
                 </DetailTabReview>

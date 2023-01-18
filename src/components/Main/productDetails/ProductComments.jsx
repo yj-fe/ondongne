@@ -310,7 +310,7 @@ const Comments = ({ item, child, replyHandler, updateHandler, remove }) => {
         <>
             <L.FlexRows key={item.itemCommentId} _gap={16} _padding={child ? '0 0 0 36px' : '0px'}>
                 <ProfileImg src={item.profile ? IMGURL + item.profile : Avatar} />
-                <L.FlexRows>
+                <L.FlexRows _items='baseline'>
                     <L.FlexCols>
                         <L.FlexRows _items='center' _content='left'>
                             <T.Text _size={16} _weight={600}>{item.nickname}</T.Text>

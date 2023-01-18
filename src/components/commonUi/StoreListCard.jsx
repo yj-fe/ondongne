@@ -36,7 +36,9 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
                         <L.FlexRows _content='row'>
                             <ImgSizeLayout _bdr={4} src={item.profile != null ? item.profile : Img} _width={98} _height={98}></ImgSizeLayout>
                             <L.FlexCols _gap={2}>
-                                <T.Text _weight={600} _size={18} _color="gray900">{item.name}</T.Text>
+                                <L.FlexRows _gap='0px' _width='200px'>
+                                    <T.TextCut _weight={600} _size={18} _color="gray900">{item.name.substring(0, 17)} ...</T.TextCut>
+                                </L.FlexRows>
                                 <L.FlexRows _content='flex-start' _items='center' _gap={2}>
                                     <StarRate rate={item.reviewRate} />
                                     <T.Text _weight={500} _size={14} _color="gray900" _align='center'>({item.reviewRate})</T.Text>

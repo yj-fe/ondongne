@@ -202,6 +202,8 @@ export const FlexRows = styled.div`
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};
     padding: ${props => props._padding || '0px'};
+      white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const FlexRowsCategory = styled.div`
