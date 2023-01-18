@@ -24,8 +24,8 @@ function SignupPage() {
     isAuth: false,
   })
 
-  const [depth01, setDepth01] = useState(true)
-  const [depth02, setDepth02] = useState(false)
+  const [depth01, setDepth01] = useState(false)
+  const [depth02, setDepth02] = useState(true)
   const [depth03, setDepth03] = useState(false)
 
   // 뎁스 이동 핸들러

@@ -159,7 +159,7 @@ function SignupRequest({ setData, depthHandler }) {
   }, [authTime]);
 
   return (
-    <L.Contents _padding='32px 40px'>
+    <L.Contents _padding='32px 40px' _paddingmedia='40px 20px'>
       <L.FlexCols _gap={40}>
         <L.FlexCols>
           <T.Text _size={24} _weight={600} >온동네마켓 회원가입</T.Text>

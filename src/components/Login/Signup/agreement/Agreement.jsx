@@ -25,6 +25,7 @@ function Agreement({ setData, depthHandler }) {
   const [showSns, setShowSns] = useState()
 
   const [checks, setChecks] = useState([false, false, false, false]);
+  const [checkList, setCheckList] = useState([false, false, false, false]);
 
   // 정책 데이터
   const getPolicy = async (type) => {
@@ -38,11 +39,13 @@ function Agreement({ setData, depthHandler }) {
   }
 
   const ButtonActive = () => {
-    if (checks([0]) && checks([1]) && checks([2]) === true) {
-      setActive(true)
-    }
+    setCheckList([...checkList])
   }
-
+  // const CheckAllBtn = () => {
+  //   if (checkAll === true){
+  //     setChecks([true, true, true, true])
+  //   }
+  // }
   const onCheckClick = index => {
     setChecks(checks => checks.map((item, idx) => {
       if (idx === index) return !item;
@@ -65,20 +68,47 @@ function Agreement({ setData, depthHandler }) {
 
     depthHandler(2)
   }
+console.log(checks.filter(item => item).length );
+console.log(checks.length);
+console.log(checks.filter(item => item).length === checks.length);
 
+  // useEffect(() => {
+  //   if (checks.filter(item => item).length === checks.length){
+  //     setCheckAll(true)
+  //   }else{
+  //     setCheckAll(false)
+  //   }
+  // }, [checks])
+
+  // useEffect(() => {
+  //   if (checks([0]) && checks([1]) && checks([2]) === true) {
+  //     setCheckAll(true)
+  //   }
+  //   // const isAllCheck = checks.filter(item => item).length === checks.length;
+  //   // setCheckAll(isAllCheck);
+  // }, [checks]);
   useEffect(() => {
-    setChecks(new Array(4).fill(checkAll));
-  }, [checkAll])
-
+    if (checkAll === true){
+      setChecks([true, true, true, true])
+    }
+    else{
+      setChecks([false, false, false, false])
+    }
+  }, [checkAll]);
+  
   useEffect(() => {
-    const isAllCheck = checks.filter(item => item).length === checks.length;
-    setCheckAll(isAllCheck);
-
+    if(checks.filter(item => item).length < 4){
+      setCheckAll(false)
+    }else{
+    // if(checks.filter(item => item).length === 4){
+      setCheckAll(true)
+    }
   }, [checks]);
+
 
   return (
     <div>
-      <L.Contents _padding='32px 40px'>
+      <L.Contents _padding='32px 40px' _paddingmedia='40px 20px'>
         <L.FlexCols _gap={60}>
           <L.FlexCols>
             <T.Text _size={24} _weight={600} >회원가입 약관 동의</T.Text>
@@ -87,6 +117,7 @@ function Agreement({ setData, depthHandler }) {
           <CheckboxForm>
             <L.FlexRows
               _content='left' _items='center'
+              // onClick={()=>{setCheckAll((s) => !s); CheckAllBtn();}}
               onClick={() => setCheckAll((s) => !s)}
             >
               <CheckboxButton

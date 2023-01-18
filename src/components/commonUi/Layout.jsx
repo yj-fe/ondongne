@@ -54,6 +54,9 @@ export const Contents = styled.div`
     max-width: 728px;
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};
+    @media screen and (max-width: 450px) {
+        padding: ${props => props._paddingmedia };
+    }
 `;
 
 export const FlexCols = styled.div`
