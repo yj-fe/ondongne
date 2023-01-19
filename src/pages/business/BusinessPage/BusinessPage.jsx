@@ -9,12 +9,6 @@ import { ReactComponent as OrderIcon } from "assets/icons/business/neworder.svg"
 import { ReactComponent as Pickup } from "assets/icons/business/pickup.svg";
 import { ReactComponent as NewReview } from "assets/icons/business/newreview.svg";
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
-import { ReactComponent as Floating } from "assets/icons/business/floating.svg";
-import { ReactComponent as FloatingPush } from "assets/icons/business/floatingpush.svg";
-import { ReactComponent as Coupon } from "assets/icons/business/Coupon.svg";
-import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
-import { ReactComponent as Product } from "assets/icons/business/Product.svg";
-import { ReactComponent as Order } from "assets/icons/business/Order.svg";
 
 import { MoreNavBody, MoreContainer, MoreDiv, FooterText, Logo } from 'pages/main/MorePage/MorePageStyle'
 import { TermsDiv, TermsTitle, TermsIconStyle } from 'pages/service/TermsPage/TermsPageStyle'
@@ -22,12 +16,12 @@ import { TitleText, InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDi
 import { ContentDate, ContentImg, ContentMarket, ContentProduct, ContentStyle, ContentTitle, Discount, DiscountStyle, Price, FinalPrice, RateStyle, Star, Number } from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
 import { getBizMember } from 'service/biz';
 import { useSelector } from 'react-redux';
-
+import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 
 import Layout from 'components/layout/Layout/Layout';
-import { FooterLogo } from 'components/commonUi/Icon';
+import { Coupon, Floating, FloatingPush, FooterLogo, Order, Product } from 'components/commonUi/Icon';
 import { Grid } from 'swiper';
 import FooterLayout from 'components/layout/Footer/Footer';
 
@@ -45,8 +39,8 @@ function BusinessPage() {
     if (!data || !data.bizStatus) {
       return navigate("/")
     }
+    // console.log(data.bizStatus);
   }
-
   useEffect(() => {
     if (auth.isAuthenticated) bizMember()
   }, [auth])
@@ -151,7 +145,7 @@ function BusinessPage() {
 
         {/* ==================== 내 상점 인기상품 ==================== */}
         <L.Container>
-          <L.Contents>
+          <L.Contents _padding='20px 0px 20px 20px'>
             <TitleText>내 상점 인기상품</TitleText>
 
             {/* <EmptyDiv>
@@ -268,25 +262,29 @@ function FloatingToggle(props) {
     <div>
       <FloatingToggleDiv>
         <FloatingContentDiv>
-          <FloatingContentIcon><Product /></FloatingContentIcon>
+          <Product />
           <Link to="/business/upload">
             <FloatingContentTitle>상품 등록</FloatingContentTitle>
           </Link>
         </FloatingContentDiv>
-        <FloatingContentDiv>
-          <FloatingContentIcon><Order /></FloatingContentIcon>
-          <FloatingContentTitle>소식 등록</FloatingContentTitle>
-        </FloatingContentDiv>
         {/* <FloatingContentDiv>
-          <FloatingContentIcon><Coupon /></FloatingContentIcon>
+          <Order />
+          <Link to="/business/coupon">
+          <FloatingContentTitle>소식 등록</FloatingContentTitle>
+          </Link>
+        </FloatingContentDiv> */}
+        {/* <FloatingContentDiv>
+          <Coupon />
           <Link to="/business/coupon">
             <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
           </Link>
         </FloatingContentDiv> */}
         <FloatingContentDiv>
-          <FloatingContentIcon><Trans /></FloatingContentIcon>
+          <Trans/>
           <Link to="/">
-            <FloatingContentTitle>일반 전환</FloatingContentTitle>
+            <FloatingContentTitle>
+              일반 전환
+            </FloatingContentTitle>
           </Link>
         </FloatingContentDiv>
       </FloatingToggleDiv>

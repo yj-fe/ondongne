@@ -229,12 +229,28 @@ export const FooterDiv = styled.div`
 	padding: 0 24px 0px 0;
 `;
 export const FloatingDivT = styled.div`
-text-align: right;
+	text-align: right;
 	margin: 0px;
 	padding: 0px;
 	position: sticky;
-	/* right: 0px; */
 	bottom: 40px;
+	z-index: 99;
+
+	/* position: sticky;
+	z-index: 99;
+	bottom: 100px;
+	max-width: 728px;
+	left: 500px; */
+`;
+export const FloatingDivMain = styled.div`
+	position: sticky;
+	z-index: 99;
+	bottom: 100px;
+	
+	/* left: 1250px; */
+	@media screen and (max-width: 728px) {
+		
+	}
 `;
 export const Footer = styled.div`
 	display: flex;

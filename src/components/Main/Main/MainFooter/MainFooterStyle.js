@@ -8,7 +8,6 @@ export const MainFooterDiv = styled.div`
   padding: 0px;
   gap: 4px;
   
-
   height: 56px;
   left: 0px;
   right: 0px;

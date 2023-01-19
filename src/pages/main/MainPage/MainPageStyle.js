@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FloatingDivMain } from 'pages/business/BusinessPage/BusinessPageStyle';
 export const MainNavBody = styled.div`
   display: flex;
   align-items: center;
@@ -12,12 +13,19 @@ export const Body = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #F5F5F5;
+  /* background: #F5F5F5; */
   gap: 8px;
   min-height: 100vh;
   height: auto;
   width: 100%;
 `
+export const MainDivForFloate = styled.div`
+  background: transparent;
+  max-width: 728px;
+  height: auto;
+  padding: 0;
+`
+
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,4 +83,5 @@ export const FooterStyle = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
+  z-index: 999
 `

@@ -600,3 +600,64 @@ export const OrderNextIcon = () => (
         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7.70711 6.29289C8.09763 6.68342 8.09763 7.31658 7.70711 7.70711L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z" fill="#E0E0E0" />
     </svg>
 )
+
+export const Floating = () => (
+    <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_d_676_13765)">
+    <rect x="6" y="3" width="56" height="56" rx="28" fill="#0B806F"/>
+    <path d="M34 21V41" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M44 31L24 31" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <defs>
+    <filter id="filter0_d_676_13765" x="0" y="0" width="68" height="68" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+    <feOffset dy="3"/>
+    <feGaussianBlur stdDeviation="3"/>
+    <feComposite in2="hardAlpha" operator="out"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0"/>
+    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_676_13765"/>
+    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_676_13765" result="shape"/>
+    </filter>
+    </defs>
+    </svg>
+)
+
+export const FloatingPush = () => (
+    <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_d_676_14054)">
+    <rect x="6" y="3" width="56" height="56" rx="28" fill="white"/>
+    <path d="M26.929 23.9297L41.0711 38.0718M41.0711 23.9297L26.929 38.0718" stroke="#0B806F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <defs>
+    <filter id="filter0_d_676_14054" x="0" y="0" width="68" height="68" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+    <feOffset dy="3"/>
+    <feGaussianBlur stdDeviation="3"/>
+    <feComposite in2="hardAlpha" operator="out"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0"/>
+    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_676_14054"/>
+    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_676_14054" result="shape"/>
+    </filter>
+    </defs>
+    </svg>
+)
+
+export const Product = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 19.7V8.775C2.73333 8.64167 2.5 8.43733 2.3 8.162C2.1 7.88733 2 7.56667 2 7.2V4.8C2 4.3 2.175 3.875 2.525 3.525C2.875 3.175 3.3 3 3.8 3H19.2C19.7 3 20.125 3.175 20.475 3.525C20.825 3.875 21 4.3 21 4.8V7.2C21 7.56667 20.9 7.88733 20.7 8.162C20.5 8.43733 20.2667 8.64167 20 8.775V19.7C20 20.2 19.825 20.625 19.475 20.975C19.125 21.325 18.7 21.5 18.2 21.5H4.8C4.3 21.5 3.875 21.325 3.525 20.975C3.175 20.625 3 20.2 3 19.7ZM4.5 9V19.7C4.5 19.7833 4.52933 19.8543 4.588 19.913C4.646 19.971 4.71667 20 4.8 20H18.2C18.2833 20 18.3543 19.971 18.413 19.913C18.471 19.8543 18.5 19.7833 18.5 19.7V9H4.5ZM19.2 7.5C19.2833 7.5 19.3543 7.47067 19.413 7.412C19.471 7.354 19.5 7.28333 19.5 7.2V4.8C19.5 4.71667 19.471 4.64567 19.413 4.587C19.3543 4.529 19.2833 4.5 19.2 4.5H3.8C3.71667 4.5 3.646 4.529 3.588 4.587C3.52933 4.64567 3.5 4.71667 3.5 4.8V7.2C3.5 7.28333 3.52933 7.354 3.588 7.412C3.646 7.47067 3.71667 7.5 3.8 7.5H19.2ZM8.7 13.7H14.3V12.2H8.7V13.7Z" fill="#424242"/>
+    </svg>
+)
+export const Order = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.5 20.95C10.5 21.3642 10.1642 21.7 9.75 21.7H4.8C4.3 21.7 3.875 21.525 3.525 21.175C3.175 20.825 3 20.4 3 19.9V6.5C3 6 3.175 5.575 3.525 5.225C3.875 4.875 4.3 4.7 4.8 4.7H9.225C9.35833 4.21667 9.63733 3.81233 10.062 3.487C10.4873 3.16233 10.9667 3 11.5 3C12.05 3 12.5377 3.16233 12.963 3.487C13.3877 3.81233 13.6667 4.21667 13.8 4.7H18.2C18.7 4.7 19.125 4.875 19.475 5.225C19.825 5.575 20 6 20 6.5V10.45C20 10.8642 19.6642 11.2 19.25 11.2C18.8358 11.2 18.5 10.8642 18.5 10.45V6.5C18.5 6.43333 18.4667 6.36667 18.4 6.3C18.3333 6.23333 18.2667 6.2 18.2 6.2H16V8.825H7V6.2H4.8C4.73333 6.2 4.66667 6.23333 4.6 6.3C4.53333 6.36667 4.5 6.43333 4.5 6.5V19.9C4.5 19.9667 4.53333 20.0333 4.6 20.1C4.66667 20.1667 4.73333 20.2 4.8 20.2H9.75C10.1642 20.2 10.5 20.5358 10.5 20.95ZM15.3536 20.4214C15.1583 20.6167 14.8417 20.6167 14.6464 20.4214L11.625 17.4C11.3341 17.1091 11.3313 16.6382 11.6188 16.3438C11.9112 16.0445 12.3917 16.0417 12.6875 16.3375L15 18.65L20.1494 13.5233C20.4399 13.2341 20.9096 13.2346 21.1994 13.5244C21.4897 13.8147 21.4897 14.2853 21.1994 14.5756L15.3536 20.4214ZM11.5 6.325C11.75 6.325 11.9623 6.23733 12.137 6.062C12.3123 5.88733 12.4 5.66667 12.4 5.4C12.4 5.15 12.3123 4.93733 12.137 4.762C11.9623 4.58733 11.75 4.5 11.5 4.5C11.25 4.5 11.0377 4.58733 10.863 4.762C10.6877 4.93733 10.6 5.15 10.6 5.4C10.6 5.66667 10.6877 5.88733 10.863 6.062C11.0377 6.23733 11.25 6.325 11.5 6.325Z" fill="#424242"/>
+    </svg>
+)
+export const Coupon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.1087 8.64493C19.7662 9.09324 18.8856 10.4765 18.8856 12L21.3463 14.6437L21.1087 15.3551C21.1087 15.3551 21.1087 15.3551 21.1087 15.3551C21.1202 15.3589 21.1529 15.3749 21.1878 15.4291C21.2227 15.4835 21.25 15.5633 21.25 15.6584V17.5622C21.25 18.0525 20.93 18.25 20.7639 18.25H3.28068C3.08269 18.25 2.75 18.0162 2.75 17.5622V6.43775C2.75 5.98375 3.08269 5.75 3.28068 5.75H20.7639C20.93 5.75 21.25 5.94754 21.25 6.43775V8.34162C21.25 8.43674 21.2227 8.51652 21.1878 8.57088C21.1529 8.62514 21.1201 8.6411 21.1087 8.64493Z" stroke="#424242" stroke-width="1.5"/>
+    <path d="M11 9V15" stroke="#424242" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M14 12L8 12" stroke="#424242" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+)

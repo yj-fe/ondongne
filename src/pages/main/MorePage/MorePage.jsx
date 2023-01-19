@@ -14,7 +14,7 @@ import { Text } from 'components/commonUi/Text'
 import CheckBox from 'components/commonUi/CheckBox'
 import CheckBoxTitle from 'components/commonUi/CheckBoxTitle'
 import { Line } from '../DetailsPage/DetailsPageStyle'
-import { ArrowRight } from 'components/commonUi/Icon'
+import { ArrowRight, Floating, FloatingPush } from 'components/commonUi/Icon'
 import { RowDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle'
 
 
@@ -26,6 +26,8 @@ import * as I from 'components/commonUi/Input';
 import * as B from 'components/commonUi/Button';
 import FooterLayout from 'components/layout/Footer/Footer'
 import { getBizMember } from 'service/biz'
+import { FloatingToggle } from '../MainPage/MainPage'
+import { FloatingDivT } from 'pages/business/BusinessPage/BusinessPageStyle'
 
 
 function MorePage() {
@@ -36,6 +38,9 @@ function MorePage() {
   const [alert, setAlert] = useState(null);
   const [coachmark, setCoachmark] = useState(null);
   const [agreementModal, setAgreementModal] = useState(false);
+  const [floating, setFloating] = useState(false)
+  const [biz, setBiz] = useState(false)
+
 
   const memberLogout = async () => {
     const response = await logout();
@@ -91,7 +96,9 @@ function MorePage() {
 
     // 비즈 홈
     if (data.bizStatus) {
-      return navigate("/business")
+      setBiz(true);
+      return navigate("/business");
+
     }
 
   }
@@ -190,7 +197,15 @@ function MorePage() {
 
         <FooterLayout />
 
-
+        {
+          biz && 
+              <FloatingDivT
+                onClick={() => setFloating(!floating)}
+              >
+                {floating && <FloatingToggle />}
+                {floating ? <FloatingPush /> : <Floating />}
+              </FloatingDivT>
+        }
       </Layout>
 
       {
@@ -230,6 +245,7 @@ function BusinessAgreementModal() {
   // 버튼 활성화 여부
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
+
 
   const allChecked = () => {
     setRequestSave(!requestSave)
@@ -310,4 +326,7 @@ function BusinessAgreementModal() {
     </ModalOutside>
   )
 }
+
+
+
 export default MorePage
