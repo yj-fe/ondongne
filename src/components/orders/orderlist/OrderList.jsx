@@ -10,7 +10,7 @@ import Confirm from 'components/commonUi/Confirm';
 import Overlay from 'components/layout/Overlay/Overlay';
 import { S } from "./OrderListStyle";
 import { useSelector } from 'react-redux';
-import { orderList } from 'service/order';
+import { orderCancel, orderList } from 'service/order';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { OrderDelivery_Y } from './../../commonUi/Icon';
 import dayjs from 'dayjs';
@@ -21,7 +21,6 @@ const OrderList = () => {
 
     const auth = useSelector(state => state.auth);
 
-    const [loading, setLoading] = useState(false);
     const [orderData, setOrderData] = useState(null);
     // ui
     const [moreMenu, setMoreMenu] = useState(-1);
@@ -38,7 +37,6 @@ const OrderList = () => {
         const response = await orderList();
         if (response && response.data.data) {
             setOrderData(response.data.data);
-            setLoading(false);
         }
     };
 
@@ -55,9 +53,13 @@ const OrderList = () => {
     };
 
 
-    const handleOrderDelete = () => {
-        alert(`${delOrder}번 오더 삭제`);
-        setDelOrder(-1);
+    const handleOrderDelete = async () => {
+        const response = await orderCancel(delOrder);
+
+        if (response && response.data.data) {
+            loadData();
+            setDelOrder(-1);
+        }
     };
 
     const handleMarketShow = (e) => {
@@ -65,7 +67,7 @@ const OrderList = () => {
         setDelOrder(-1);
     }
 
-    const toTossOrderName = (item) => {
+    const orderName = (item) => {
         if (item.orderItems.length > 1) {
             return `${item.orderItems[0].name} 외 ${item.orderItems.length - 1}개`
         } else {
@@ -75,7 +77,6 @@ const OrderList = () => {
 
     useEffect(() => {
         if (auth.isAuthenticated) {
-            setLoading(true);
             loadData();
         }
     }, [auth])
@@ -92,8 +93,8 @@ const OrderList = () => {
                                         <L.FlexRows _content="space-between" _items="flex-start">
                                             <L.FlexCols _gap={4}>
                                                 <T.Text _size={18} _weight={500}>{item.storeName}</T.Text>
-                                                <T.Text _size={15} _color="gray800">{toTossOrderName(item)}</T.Text>
-                                                <T.Text _size={13} _color="gray500">{dayjs(item.createDate).format('YYYY-MM-DD')}</T.Text>
+                                                <T.Text _size={15} _color="gray800">{orderName(item)}</T.Text>
+                                                <T.Text _size={13} _color="gray500">{dayjs(item.createDate).format('YYYY/MM/DD HH:mm')}</T.Text>
                                             </L.FlexCols>
                                             <button
                                                 onClick={() => { setMoreMenu(item.orderId) }}
