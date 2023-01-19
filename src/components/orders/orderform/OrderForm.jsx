@@ -14,7 +14,7 @@ import { numberFormat, phoneFormatter, storeTotalPrice, totalPrice } from 'utils
 import { useSelector } from 'react-redux';
 import { getMember } from 'service/member';
 import DaumPost from 'components/DaumPost';
-import { requestPayment } from 'service/payment';
+import { requestPayment } from 'service/order';
 const IMGURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/';
 
 const OrderForm = ({ data }) => {

@@ -4,7 +4,8 @@ const urls = {
 	list: "/order/list",
 	details: "/order/details",
 	unView: "/order/unView",
-	cancel: "/payment/cancel",
+	request: "/order/request",
+	cancel: "/order/cancel",
 };
 
 /* ==============================
@@ -19,6 +20,13 @@ export function orderList() {
 ============================== */
 export function orderDetails(id) {
 	return client.get(`${urls.details}/${id}`);
+}
+
+/*
+ * 주문 요청
+ */
+export function requestPayment(data) {
+	return client.post(urls.request, data);
 }
 
 /* ==============================
