@@ -70,6 +70,7 @@ import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 import { localActions } from "store/slices/location";
 import jwtDecode from "jwt-decode";
+import MainPageTest from "pages/main/MainPage/MainPage";
 
 function App() {
 	const dispatch = useDispatch();

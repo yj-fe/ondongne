@@ -236,21 +236,14 @@ export const FloatingDivT = styled.div`
 	bottom: 40px;
 	z-index: 99;
 
-	/* position: sticky;
-	z-index: 99;
-	bottom: 100px;
-	max-width: 728px;
-	left: 500px; */
 `;
 export const FloatingDivMain = styled.div`
+	text-align: right;
+	margin: 0px;
+	padding: 0px;
 	position: sticky;
+	bottom: 50px;
 	z-index: 99;
-	bottom: 100px;
-	
-	/* left: 1250px; */
-	@media screen and (max-width: 728px) {
-		
-	}
 `;
 export const Footer = styled.div`
 	display: flex;

@@ -6,21 +6,19 @@ import MainBestProduct from 'components/Main/Main/MainBestProduct/MainBestProduc
 import MainNewMarket from 'components/Main/Main/MainNewMarket/MainNewMarket'
 import MainBestCollection from 'components/Main/Main/MainBestCollection/MainBestCollection'
 import MainFooter from 'components/Main/Main/MainFooter/MainFooter'
-import MainNav from 'components/Main/Main/MainNav/MainNav'
-import { MainNavBody, MainContainer, Img, Logo, FooterStyle, MainDivForFloate } from './MainPageStyle'
-import MainBanner from 'components/Main/Main/MainBanner/MainBanner';
+import {  Img, FooterStyle } from './MainPageStyle'
 import MainCategory from 'components/Main/Main/MainCategory/MainCategory';
-import MainProductTest from 'components/Main/Main/MainProductTest/MainProductTest';
 import FooterLayout from 'components/layout/Footer/Footer';
 import * as L from 'components/commonUi/Layout';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import Alert from 'components/commonUi/Alert'
 import { useNavigate } from 'react-router-dom';
-import { FloatingContentDiv, FloatingContentIcon, FloatingContentTitle, FloatingDivMain, FloatingDivT, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle'
-import { Floating, FloatingPush, Order, Product } from 'components/commonUi/Icon'
+import { FloatingContentDiv, FloatingContentTitle, FloatingDivMain, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle'
+import { Coupon, Floating, FloatingPush, Order, Product } from 'components/commonUi/Icon'
 import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
 import { getBizMember } from 'service/biz';
+import LayoutMain from 'components/layout/Layout/LayoutMain'
 
 
 
@@ -67,67 +65,58 @@ function MainPage() {
 
   return (
     <div>
-      <MainNav />
+      <LayoutMain>
+        <L.Container _padding="0px" >
+          <L.Container _padding="0px" _gap='0px' >
+            <Img _margint='0px' src={BannerImg}></Img>
+            <MainCategory />
+          </L.Container>
 
-      <MainNavBody>
-        <MainContainer>
-          <Img src={BannerImg}></Img>
-          <MainCategory />
-        </MainContainer>
+          {/* 우리동네 인기 쿠폰 */}
+            {/* <L.Contents _padding='20px 0px 20px 20px'>
+              <MainBestCoupon />
+            </L.Contents> */}
 
-        {/* 우리동네 인기 쿠폰 */}
-        {/* <L.Inner>
-          <L.Contents _padding='20px 0px 20px 20px'>
-            <MainBestCoupon />
-          </L.Contents>
-        </L.Inner> */}
+          {/* 공동구매 마지막 찬스 */}
+            <L.Contents _padding='20px 0px 20px 20px'>
+              <MainLastChance />
+            </L.Contents>
 
-        {/* 공동구매 마지막 찬스 */}
-        <L.Inner>
-          <L.Contents _padding='20px 0px 20px 20px'>
-            <MainLastChance />
-          </L.Contents>
-        </L.Inner>
 
-        {/* My단골 인기 상품 */}
-        {
-          isAuthenticated &&
-          <MainBestProduct />
-        }
+          {/* My단골 인기 상품 */}
+          {
+            isAuthenticated &&
+            <MainBestProduct />
+          }
 
-        {/* 우리동네 신규 입점 */}
-        <L.Inner>
-          <L.Contents _padding='20px 0px 20px 20px'>
-            <MainNewMarket />
-          </L.Contents>
-        </L.Inner>
+          {/* 우리동네 신규 입점 */}
+            <L.Contents _padding='20px 0px 20px 20px'>
+              <MainNewMarket />
+            </L.Contents>
 
-        {/* 우리동네 인기 추천 */}
-        <L.Inner>
-          <L.Contents _padding='20px 0px 20px 20px'>
-            <MainBestCollection />
-          </L.Contents>
-        </L.Inner>
+          {/* 우리동네 인기 추천 */}
+            <L.Contents _padding='20px 0px 20px 20px'>
+              <MainBestCollection />
+            </L.Contents>
 
-        <L.Inner>
 
-          <FooterLayout />
-        </L.Inner>
+            <L.Inner>
+              <FooterLayout />
+            </L.Inner>
         {
           biz && 
-              <FloatingDivT
+              <FloatingDivMain
                 onClick={() => setFloating(!floating)}
               >
                 {floating && <FloatingToggle />}
                 {floating ? <FloatingPush /> : <Floating />}
-              </FloatingDivT>
+              </FloatingDivMain>
         }
-      </MainNavBody>
-
-
-      <FooterStyle>
-        <MainFooter />
-      </FooterStyle>
+        </L.Container>
+        <FooterStyle>
+          <MainFooter />
+        </FooterStyle>
+      </LayoutMain>
 
       {alert && (
         <Alert
@@ -157,8 +146,8 @@ export function FloatingToggle(props) {
           <Link to="/business/coupon">
           <FloatingContentTitle>소식 등록</FloatingContentTitle>
           </Link>
-        </FloatingContentDiv> */}
-        {/* <FloatingContentDiv>
+        </FloatingContentDiv>
+        <FloatingContentDiv>
           <Coupon />
           <Link to="/business/coupon">
             <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>

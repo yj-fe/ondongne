@@ -19,12 +19,6 @@ export const Body = styled.div`
   height: auto;
   width: 100%;
 `
-export const MainDivForFloate = styled.div`
-  background: transparent;
-  max-width: 728px;
-  height: auto;
-  padding: 0;
-`
 
 export const MainContainer = styled.div`
   display: flex;
@@ -45,7 +39,7 @@ export const MainContainer = styled.div`
   }
 `
 export const Img = styled.img`
-  margin-top: 60px;
+  margin-top: ${props => props._margint || '60px'};
   width: 100%;
   height: auto;  
 `
