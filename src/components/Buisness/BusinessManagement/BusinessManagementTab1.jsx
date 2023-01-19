@@ -5,7 +5,7 @@ import CheckBox from 'components/commonUi/CheckBox';
 
 import ProfileAvatar from 'components/commonUi/ProfileAvatar'
 import { Text } from 'components/commonUi/Text';
-import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, CameraImg, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel, Size } from './BusinessManagementTabStyle'
+import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, CameraImg, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel, Size, ImgBanner } from './BusinessManagementTabStyle'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/bizStore';
@@ -17,7 +17,8 @@ import CalendarModel from 'components/commonUi/CalendarModel';
 import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-
+import ImgSize from 'assets/images/business/imgsize.png'
+import { AbsoluteDiv } from 'components/layout/Img/ImgSizeLayout';
 
 
 // 상점정보
@@ -201,13 +202,17 @@ function BusinessManagementTab1() {
       <TabDiv>
         {/* 배너 */}
         <TabProfileDiv
-          banner={store.banner && store.banner}
+          // banner={store.banner && store.banner}
         >
-          <ProfileBtnDiv for="bannerFile">
-            <CameraImg src={Camera} />
-            이미지 변경
-          </ProfileBtnDiv>
+          <AbsoluteDiv _right='16px' _top='120px'>
+            <ProfileBtnDiv for="bannerFile">
+              <CameraImg src={Camera} />
+              이미지 변경
+            </ProfileBtnDiv>
+          </AbsoluteDiv>
           <input type="file" id="bannerFile" onChange={bannerUpdate} />
+          <ImgBanner src={ImgSize}/>
+          {/* <ImgBanner src={store.banner && store.banner}/> */}
         </TabProfileDiv>
 
         {/* 프로필 */}

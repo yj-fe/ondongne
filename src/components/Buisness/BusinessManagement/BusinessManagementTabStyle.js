@@ -12,14 +12,16 @@ export const TabProfileDiv = styled.div`
 	height: auto;
 	height: 228px;
 	background: #e0e0e0;
-	padding: 16px;
+	/* padding: 16px; */
 	display: flex;
 	flex-direction: row;
 	justify-content: right;
-	background-image: url(${(props) => props.banner || ""});
+	/* background-image: url(${(props) => props.banner || ""}); */
 	/* background-size: contain; */
-	background-repeat: no-repeat;
-	object-fit: cover;
+	/* object-fit: fill;
+	background-repeat: no-repeat; */
+	/* object-fit: cover; */
+	 object-fit: cover;
 	& input[type="file"] {
 		display: none;
 	}
@@ -31,13 +33,10 @@ export const ProfileBtnDiv = styled.label`
 	align-items: center;
 	padding: 6px 8px;
 	gap: 4px;
-
 	width: 93px;
 	height: 30px;
-
 	background: #ffffff;
 	border-radius: 4px;
-
 	font-weight: 400;
 	font-size: 12px;
 	color: #212121;
@@ -46,9 +45,18 @@ export const CameraImg = styled.img`
 	width: 18px;
 	height: 18px;
 `;
+export const ImgBanner = styled.img`
+	background-image: url(${(props) => props.banner || ""});
+	position: relative;
+  overflow: hidden;
+	width: 100%;
+	height: ${props => props._height || ''};
+	object-fit: cover;
+	background-repeat: no-repeat;
+`;
 export const AvatarDiv = styled.div`
 	position: absolute;
-	top: 327px;
+	top: 285px;
 `;
 export const TabContent = styled.div`
 	display: flex;

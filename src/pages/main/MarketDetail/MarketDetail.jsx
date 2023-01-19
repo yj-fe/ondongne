@@ -15,8 +15,11 @@ import ModalMorePage from 'components/Main/More/ModalMorePage'
 import { getStoreDetails } from 'service/store';
 import { numberFormat, isEmptyObj } from 'utils/utils';
 import StoreLike from 'components/commonUi/StoreLike';
-const STOREURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+import { ImgSize } from 'assets/images/business/imgsize.png';
+import { ImgBanner } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import ImgSizee from 'assets/images/business/imgsize.png'
 
+const STOREURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
 function MarketDetail() {
   const { id } = useParams();
@@ -57,7 +60,10 @@ function MarketDetail() {
       >
         <L.Container >
           <L.Contents _padding="0">
-            <ImgPer src={item.banner ? STOREURL + item.banner : MarketImg} />
+
+            {/* <ImgPer src={item.banner ? STOREURL + item.banner : MarketImg} /> */}
+            <ImgBanner _height='390px' src={item.banner ? STOREURL + item.banner : MarketImg}/>
+            {/* <ImgBanner _height='390px' src={ImgSizee}/> */}
             <L.FlexCols _padding={0} _gap={0}>
 
               <L.Contents _padding="16px 20px">
