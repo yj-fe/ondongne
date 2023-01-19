@@ -7,6 +7,7 @@ import { AbsoluteDiv, AbsoluteDivGrid, ImgSizeH, ImgSizeLayout, RelativDiv } fro
 import ProductTimer from "components/commonUi/ProductTimer";
 import { numberFormat, totalPrice } from "utils/utils";
 import StarRate from "components/commonUi/StarRate";
+import ImgSize  from 'assets/images/business/imgsize.png';
 
 export function ProductCard({
     item, lastRef, width = 216, isCart = true
@@ -30,13 +31,16 @@ export function ProductCard({
                 {
                     !item.soldoutStatus
                     ? <ImgSizeLayout
-                    _width={width} _height={width} _bdr={6}
+                    _width={width} _height={width} _bdr={6} _object='cover'
+                    // src={ImgSize}
                             src={item.images && item.images.length > 0 && item.images[0]}
                             onClick={() => navigate(`/details/${item.itemId}`)}
                         />
                         : <div style={{ position: 'relative' }}>
                             <ImgSizeLayout
-                                _width={width} _height={width} _bdr={6}
+                                _width={width} _height={width} _bdr={6} _object='cover'
+                                                    // src={ImgSize}
+
                                 src={item.images && item.images.length > 0 && item.images[0]}
                             />
                             <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
