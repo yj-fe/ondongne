@@ -70,7 +70,7 @@ function LoginPage() {
     window.location.href = '/oauth2/authorization/naver';
   }
   const loginKakao = () => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
+    window.location.href = '/oauth2/authorization/kakao';
   }
   const loginGoogle = () => {
     window.location.href = '/oauth2/authorization/google';

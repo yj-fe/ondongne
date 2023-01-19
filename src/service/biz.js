@@ -3,6 +3,7 @@ import { client } from ".";
 const urls = {
 	getMember: "/biz/getMember",
 	getBiz: "/biz/getBiz",
+	dashboard: "/biz/dashboard",
 	signup: "/biz/signup",
 	update: "/biz/update",
 };
@@ -12,6 +13,13 @@ const urls = {
 ============================== */
 export function getBizMember() {
 	return client.get(urls.getMember);
+}
+
+/* ==============================
+   비즈 회원 대시보드
+============================== */
+export function getDashboard() {
+	return client.get(urls.dashboard);
 }
 
 /* ==============================
@@ -80,4 +88,3 @@ export function bizUpdate(bizData, updateFiles, deleteFiles) {
 
 	return client.post(urls.update, formData, { headers });
 }
-

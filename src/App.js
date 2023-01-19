@@ -18,10 +18,8 @@ import BusinessProductManagement from "pages/business/BusinessPage/BusinessProdu
 import BusinessCoupon from "pages/business/BusinessPage/BusinessCoupon";
 import BusinessReview from "pages/business/BusinessReview";
 import BusinessProductUpload from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductUpload";
-import BusinessProductEdit from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductEdit";
 import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
 import OrderManagement from "pages/business/BusinessPage/OrderManagement";
-import OrderManagementDetailsPage from "pages/business/BusinessPage/OrderManagementDetailsPage";
 import OrderManagementDetailsAuthPage from "pages/business/BusinessPage/OrderManagementDetailsAuthPage";
 /* ========== LOGIN ========== */
 import LoginPage from "pages/login/loginpage/LoginPage";
@@ -199,10 +197,6 @@ function App() {
 					<Route path="news" element={<BusinessNews />} />
 					{/* 주문관리 */}
 					<Route path="order" element={<OrderManagement />} />
-					<Route
-						path="order/details/:id"
-						element={<OrderManagementDetailsPage />}
-					/>
 					<Route
 						path="order/details/auth"
 						element={<OrderManagementDetailsAuthPage />}

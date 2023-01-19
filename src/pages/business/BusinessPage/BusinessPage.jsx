@@ -8,75 +8,82 @@ import { ReactComponent as Right } from "assets/main/right.svg";
 import { ReactComponent as OrderIcon } from "assets/icons/business/neworder.svg";
 import { ReactComponent as Pickup } from "assets/icons/business/pickup.svg";
 import { ReactComponent as NewReview } from "assets/icons/business/newreview.svg";
-import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
-
 import { MoreNavBody, MoreContainer, MoreDiv, FooterText, Logo } from 'pages/main/MorePage/MorePageStyle'
 import { TermsDiv, TermsTitle, TermsIconStyle } from 'pages/service/TermsPage/TermsPageStyle'
-import { TitleText, InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDiv, FloatingContentDiv, FloatingContentTitle, FloatingContentIcon, FloatingToggleDiv, CardTextDiv, CouponDiv, CouponInfoDiv, DownloadDiv, DownloadText, DownloadCount, DownloadCountTextB, DownloadCountTextN, MyBestProductContent, FloatingDiv, FooterDiv, CouponCard, CouponTitleDiv, CouponBadge, CouponTitleText, CouponTitleInfoDiv, FloatingDivT } from './BusinessPageStyle'
+import { TitleText, InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDiv, FloatingContentDiv, FloatingContentTitle, FloatingContentIcon, FloatingToggleDiv, CardTextDiv, CouponDiv, CouponInfoDiv, DownloadDiv, DownloadText, DownloadCount, DownloadCountTextB, DownloadCountTextN, MyBestProductContent, FloatingDiv, FooterDiv, CouponCard, CouponTitleDiv, CouponBadge, CouponTitleText, CouponTitleInfoDiv, FloatingDivT, EmptyDiv, EmptyText, EmptyButton, EmptyButtonIcon, EmptyButtonText } from './BusinessPageStyle'
 import { ContentDate, ContentImg, ContentMarket, ContentProduct, ContentStyle, ContentTitle, Discount, DiscountStyle, Price, FinalPrice, RateStyle, Star, Number } from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
-import { getBizMember } from 'service/biz';
-import { useSelector } from 'react-redux';
-
+import { getDashboard } from 'service/biz';
+import { useSelector, useDispatch } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import { Coupon, Floating, FloatingPush, FooterLogo, Order, Product } from 'components/commonUi/Icon';
-import { Grid } from 'swiper';
 import FooterLayout from 'components/layout/Footer/Footer';
+import { authActions } from 'store/slices/auth';
+import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function BusinessPage() {
   const navigate = useNavigate();
-  const [item] = useState(maindata)
+  const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
-
+  const [data, setData] = useState({
+    bizId: "",
+    storeId: "",
+    orderCount: "",
+    deliveryCount: "",
+    reviewCount: "",
+    itemList: {},
+  });
 
   // 비즈 회원 체크
-  const bizMember = async () => {
-    const response = await getBizMember();
+  const loadData = async () => {
+    const response = await getDashboard();
     const { data } = response.data;
 
-    if (!data || !data.bizStatus) {
-      return navigate("/")
+    if (!data) {
+      return navigate("/", { replace: true, state: { error: "잘못된 접근입니다." } })
     }
+
+    setData(data);
+    dispatch(authActions.biz(data));
   }
+
   useEffect(() => {
-    if (auth.isAuthenticated) bizMember()
+    if (auth.isAuthenticated) loadData()
   }, [auth])
 
   return (
-    <div>
+    <>
       <BusinessHeader />
       <LayoutBiz>
 
         <L.Container>
-        {/* ==================== 가게 정보 ==================== */}
+          {/* ==================== 가게 정보 ==================== */}
           <L.Contents>
             <TitleText>가게 정보</TitleText>
-                <L.GridTwo>
-                  <InfoCard>
-                    <OrderIcon/>
-                    <CardTextDiv>
-                      <CardText>신규 주문</CardText>
-                      <CardCount>0 건</CardCount>
-                    </CardTextDiv>
-                  </InfoCard>
-                  <InfoCard>
-                    <InfoIconStyle><Pickup /></InfoIconStyle>
-                    <CardTextDiv>
-                      <CardText>배달/픽업</CardText>
-                      <CardCount>0 건</CardCount>
-                    </CardTextDiv>
-                  </InfoCard>
-                  <InfoCard>
-                    <InfoIconStyle><NewReview /></InfoIconStyle>
-                    <CardTextDiv>
-                      <CardText>신규 리뷰</CardText>
-                      <CardCount>0 건</CardCount>
-                    </CardTextDiv>
-                  </InfoCard>
-                </L.GridTwo>
+            <L.GridTwo>
+              <InfoCard>
+                <OrderIcon />
+                <CardTextDiv>
+                  <CardText>신규 주문</CardText>
+                  <CardCount>{data.orderCount} 건</CardCount>
+                </CardTextDiv>
+              </InfoCard>
+              <InfoCard>
+                <InfoIconStyle><Pickup /></InfoIconStyle>
+                <CardTextDiv>
+                  <CardText>배달/픽업</CardText>
+                  <CardCount>{data.deliveryCount} 건</CardCount>
+                </CardTextDiv>
+              </InfoCard>
+              <InfoCard>
+                <InfoIconStyle><NewReview /></InfoIconStyle>
+                <CardTextDiv>
+                  <CardText>신규 리뷰</CardText>
+                  <CardCount>{data.reviewCount} 건</CardCount>
+                </CardTextDiv>
+              </InfoCard>
+            </L.GridTwo>
           </L.Contents>
-
         </L.Container>
 
 
@@ -85,8 +92,8 @@ function BusinessPage() {
           <L.Contents>
             <TitleText>발행한 쿠폰</TitleText>
             <CouponDiv> */}
-              {/* ========== 쿠폰배너생성시 뜨는 예시 ======= */}
-              {/* <CouponCard>
+        {/* ========== 쿠폰배너생성시 뜨는 예시 ======= */}
+        {/* <CouponCard>
                 <CouponTitleDiv>
                   <CouponBadge>발행중</CouponBadge>
                   <CouponTitleText>고객감사 할인 쿠폰</CouponTitleText>
@@ -121,70 +128,70 @@ function BusinessPage() {
 
         {/* ==================== 내 상점 인기상품 ==================== */}
         <L.Container>
-          <L.Contents _padding='20px 0px 20px 20px'>
+          <L.Contents>
             <TitleText>내 상점 인기상품</TitleText>
-
-            {/* <EmptyDiv>
-              <EmptyText>아직 등록된 상품이 없습니다.</EmptyText>
-              <EmptyButton>
-                <EmptyButtonText>상품 관리</EmptyButtonText>
-                <EmptyButtonIcon><Right/></EmptyButtonIcon>
-              </EmptyButton>
-            </EmptyDiv> */}
-            <L.FlexRowsCP>
-            <MyBestProductContent
-            // onClick={()=>{navigate(`/item/${}`, { state: {item}})}}
-            >
-            
-              {
-                item.map((a, i) => {
-                    return (
-                      <MyBestProductCard item={item[i]} i={i} />
-                    )
-                  // }
-                })
-              }
-            </MyBestProductContent>
-            </L.FlexRowsCP>
-            {/* item있으면 ? <MyBestProductContent/> : <EmptyDiv/>  */}
+            {
+              !data.itemList.items || (data.itemList.items && data.itemList.items.length) === 0 &&
+              <EmptyDiv>
+                <EmptyText>아직 등록된 상품이 없습니다.</EmptyText>
+                <EmptyButton onClick={() => navigate("/business/upload")}>
+                  <EmptyButtonText>상품 등록</EmptyButtonText>
+                  <EmptyButtonIcon><Right /></EmptyButtonIcon>
+                </EmptyButton>
+              </EmptyDiv>
+            }
+            {
+              data.itemList.items && data.itemList.items.length > 0 &&
+              <L.FlexRowsCP>
+                <MyBestProductContent>
+                  {
+                    data.itemList.items.map((item, index) => (
+                      <React.Fragment key={index}>
+                        <ProductCard item={item} lastRef={null} width={150} isCart={false} />
+                      </React.Fragment>
+                    ))
+                  }
+                </MyBestProductContent>
+              </L.FlexRowsCP>
+            }
           </L.Contents>
         </L.Container>
 
         {/* ==================== 비즈 정보 관리 ==================== */}
         <L.Container>
           <L.Contents>
-              <Link to="/business/management">
-            <TermsDiv>
-              <TermsTitle>비즈 정보 관리</TermsTitle>
+            <Link to="/business/management">
+              <TermsDiv>
+                <TermsTitle>비즈 정보 관리</TermsTitle>
                 <TermsIconStyle><Right /></TermsIconStyle>
-            </TermsDiv>
-              </Link>
-              <Link to="/business/product">
-            <TermsDiv>
-              <TermsTitle>상품 관리</TermsTitle>
+              </TermsDiv>
+            </Link>
+            <Link to="/business/product">
+              <TermsDiv>
+                <TermsTitle>상품 관리</TermsTitle>
                 <TermsIconStyle><Right /></TermsIconStyle>
-            </TermsDiv>
-              </Link>
-              <Link to="/business/order">
-            <TermsDiv>
-              <TermsTitle>주문 관리</TermsTitle>
+              </TermsDiv>
+            </Link>
+            <Link to="/business/order">
+              <TermsDiv>
+                <TermsTitle>주문 관리</TermsTitle>
                 <TermsIconStyle><Right /></TermsIconStyle>
-            </TermsDiv>
-              </Link>
-              <Link to="/business/review">
-            <TermsDiv>
-              <TermsTitle>리뷰 관리</TermsTitle>
+              </TermsDiv>
+            </Link>
+            <Link to="/business/review">
+              <TermsDiv>
+                <TermsTitle>리뷰 관리</TermsTitle>
                 <TermsIconStyle><Right /></TermsIconStyle>
-            </TermsDiv>
-              </Link>
-              {/* <Link to="">
+              </TermsDiv>
+            </Link>
+            {/* <Link to="">
             <TermsDiv>
               <TermsTitle>정산 관리</TermsTitle>
                 <TermsIconStyle><Right /></TermsIconStyle>
             </TermsDiv>
               </Link> */}
-              {/* 2차개발-상점 소식 관리 */}
-              {/* <Link to="">
+            {/* 2차개발-상점 소식 관리 */}
+            {/* <Link to="">
                 <TermsDiv>
                   <TermsTitle>상점 소식 관리</TermsTitle>
                     <TermsIconStyle><Right /></TermsIconStyle>
@@ -198,34 +205,8 @@ function BusinessPage() {
         </L.Inner>
 
 
-        </LayoutBiz>
-
-
-    </div>
-  )
-}
-
-function MyBestProductCard(props) {
-  return (
-    <div>
-      <ContentProduct>
-        <ContentImg src={props.item.img} />
-        <ContentStyle>
-          <ContentDate >{props.item.countdown}</ContentDate>
-          <ContentMarket>{props.item.market}</ContentMarket>
-          <ContentTitle>{props.item.title}</ContentTitle>
-          <DiscountStyle>
-            <Discount>{props.item.discount}</Discount>
-            <Price>{props.item.price}</Price>
-          </DiscountStyle>
-          <FinalPrice>{props.item.finalprice}</FinalPrice>
-          <RateStyle>
-            <Star><StarIcon /></Star>
-            <Number>(4.5)</Number>
-          </RateStyle>
-        </ContentStyle>
-      </ContentProduct>
-    </div>
+      </LayoutBiz>
+    </>
   )
 }
 

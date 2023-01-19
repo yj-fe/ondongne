@@ -237,3 +237,13 @@ export const Label = styled.label`
     align-items: center;
     cursor: pointer;
 `;
+
+export const LabelCols = styled.label`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+`;

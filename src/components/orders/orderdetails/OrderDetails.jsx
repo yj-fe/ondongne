@@ -9,7 +9,7 @@ import { Profile48 } from 'components/commonUi/Icon';
 import Confirm from 'components/commonUi/Confirm';
 import Alert from 'components/commonUi/Alert';
 import { S } from './OrderDetailsStyle'
-import { orderDetails } from 'service/order';
+import { orderCancel, orderDetails } from 'service/order';
 import { numberFormat, storeTotalPrice, totalPrice } from 'utils/utils';
 import dayjs from 'dayjs';
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
@@ -36,8 +36,6 @@ const OrderDetails = props => {
             setOrderData(response.data.data);
         }
     };
-
-    console.log(orderData);
 
     const onPickUpClick = e => {
         e.preventDefault();
@@ -104,6 +102,17 @@ const OrderDetails = props => {
             return `${item[0].name}`
         }
     }
+
+    /* ==============================
+        주문 취소
+    ============================== */
+    const handleOrderDelete = async () => {
+        const response = await orderCancel(id);
+
+        if (response && response.data.data) {
+            navigate(-1, { replace: true });
+        }
+    };
 
     useEffect(() => {
         loadData(id);
@@ -207,15 +216,37 @@ const OrderDetails = props => {
                 </L.Contents>
                 <S.Actions>
                     {
-                        orderData.orderSort === '픽업' &&
+                        orderData.orderStatus === '결제완료' &&
+                        <S.Action
+                            _color="error"
+                            onClick={() => setConfirm({
+                                warn: true,
+                                contents: `주문을 정말로 취소하시겠습니까?`,
+                                confirmText: "네",
+                                cancelText: "아니요",
+                                onConfirmClick: () => {
+                                    handleOrderDelete();
+                                },
+                                onCancelClick: () => {
+                                    setConfirm(null);
+                                }
+                            })}
+                        >주문 취소</S.Action>
+                    }
+                    {
+                        orderData.recetiveType === '방문포장' &&
+                        orderData.orderStatus === '상품준비중' &&
                         <S.Action
                             onClick={onPickUpClick}
                         >상점 수령</S.Action>
                     }
-                    <S.Action
-                        onClick={onDeleteClick}
-                        _color="error"
-                    >주문 내역 삭제</S.Action>
+                    {
+                        orderData.orderStatus === '상품수령완료' &&
+                        <S.Action
+                            onClick={onDeleteClick}
+                            _color="error"
+                        >주문 내역 삭제</S.Action>
+                    }
                 </S.Actions>
                 {/* CONFIRMS */}
                 {

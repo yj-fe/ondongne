@@ -39,6 +39,6 @@ export function orderCancel(id) {
 /* ==============================
    주문 내역 미노출 처리
 ============================== */
-export function unView(id) {
+export function orderUnView(id) {
 	return client.patch(`${urls.unView}/${id}`);
 }

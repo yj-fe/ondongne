@@ -5,6 +5,8 @@ import { client } from "service";
 const authenticationState = {
 	isAuthenticated: false,
 	id: "",
+	bizId: "",
+	storeId: "",
 };
 
 const authSlice = createSlice({
@@ -28,11 +30,18 @@ const authSlice = createSlice({
 		save(state, action) {
 			state.id = action.payload;
 		},
+		biz(state, action) {
+			const data = action.payload;
+			state.bizId = data.bizId;
+			state.storeId = data.storeId;
+		},
 		logout(state) {
 			localStorage.removeItem("accessToken");
 			delete client.defaults.headers.common["Authorization"];
 			state.isAuthenticated = false;
 			state.id = "";
+			state.bizId = "";
+			state.storeId = "";
 		},
 	},
 });

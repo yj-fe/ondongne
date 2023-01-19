@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import Layout from 'components/layout/Layout/Layout'
+import { useLocation, useNavigate } from 'react-router-dom'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
@@ -8,53 +7,69 @@ import * as C from 'components/commonUi/CommonStyles';
 import * as I from 'components/commonUi/Input';
 import { Down, Delete, Camera, ArrowTop, } from 'components/commonUi/Icon';
 import { InfoBoxDiv, TitleInfo } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
-import { AbsoluteTopDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
-import maindata from 'assets/data/maindata'
 import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
-import { InputFormOrder, NameToggleInput, NameToggleInputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
-import data from './../../../assets/data/maindata';
-import { type } from '@testing-library/user-event/dist/type';
+import { imageValidation } from 'utils/utils';
+import { deliveryCertificateSave } from 'service/deliveryCertificate';
 import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function OrderManagementDetailsAuthPage() {
   const navigate = useNavigate();
-  let [item] = useState(maindata)
+  const location = useLocation();
   const [show, setShow] = useState()
-  const [text, setText] = useState('')
-  const [alert1, setAlert1] = useState('')
-  const [alert2, setAlert2] = useState('')
+  const [alert, setAlert] = useState(null);
+  const [fileError, setFileError] = useState('');
 
-
-  const [data, setData] = useState ({
-    type:'예시문구',
+  const [data, setData] = useState({
+    orderId: location.state.id,
+    storeId: location.state.storeId,
+    type: '예시문구',
+    text: '',
+    files: [],
   })
 
-  const openAlert1 = () => {
-    return setAlert1({
-      contents: "텍스트를 입력해주세요.",
+  const onSubmit = async () => {
+
+    if (data.files.length === 0) {
+      return openAlert("사진을 등록해주세요.");
+    }
+
+    if (data.text === '') {
+      return openAlert("텍스트를 입력해주세요.");
+    }
+
+    const response = await deliveryCertificateSave(data);
+
+    if (response && response.data.data) {
+      return setAlert({
+        contents: "배달/픽업이 완료처리 되었습니다.",
+        confirmText: "확인",
+        onConfirmClick: () => navigate(-1, { replace: true }),
+        active: () => navigate(-1, { replace: true }),
+      })
+    } else {
+      openAlert("배달/픽업 인증 등록을")
+    }
+  }
+
+  const openAlert = (msg) => {
+    setAlert({
+      contents: msg,
       confirmText: "확인",
-      onConfirmClick: () => setAlert1(null),
-      active: () => setAlert1(null),
+      onConfirmClick: () => setAlert(null),
+      active: () => setAlert(null),
     })
   }
-  const openAlert2 = () => {
-    return setAlert2({
-      contents: "배달/픽업이 완료처리 되었습니다.",
-      confirmText: "확인",
-      onConfirmClick: () => setAlert2(null),
-      active: () => setAlert2(null),
-    })
-  }
-// 선택한 분류로 바꾸기
+
+  // 선택한 분류로 바꾸기
   const dataChecked = type => {
-    setData({...data, type: type})
+    setData({ ...data, type: type })
   }
 
   return (
     <div>
       <LayoutBiz
-        title='사진 등록'
+        title='배달/픽업 인증'
         cart={false}
         bell={false}
         onBackClick={() => navigate(-1)}
@@ -64,41 +79,65 @@ function OrderManagementDetailsAuthPage() {
           <L.Contents _height='calc(100vh - 68px)' _padding="0px">
             <L.FlexCols _gap={40} _padding="8px 20px">
               <L.FlexCols _gap={16}>
-                <T.Text _weight={600} _size={16} _color="gray900">판매 종류</T.Text>
+                <T.Text _weight={600} _size={16} _color="gray900">사진 등록</T.Text>
                 <L.FlexRows _gap={16}>
                   <B.LayerTextButton _width='100px' _height='100px'>
-                    <L.FlexCols _gap={4}>
-                      <L.FlexRows _content='center'>
-                        <Camera/>
-                      </L.FlexRows>
-                      <T.Text _align='center' _size={14}>파일 첨부</T.Text>
-                    </L.FlexCols>
+                    <B.LabelCols htmlFor="files">
+                      <Camera />
+                      <T.Text _weight={400} _size={15} _color="gray900" _align='center' _content='center'>파일 첨부</T.Text>
+                    </B.LabelCols>
                   </B.LayerTextButton>
+                  {
+                    data.files.length > 0 &&
+                    data.files.map((file, idx) => (
+                      <FileList
+                        key={idx}
+                        file={file}
+                        deleteFile={() => {
+                          setFileError('')
+                          setData({
+                            ...data,
+                            files: data.files.filter(item => item !== file)
+                          })
+                        }} />
+                    ))
+                  }
+                  <input
+                    type="file"
+                    id="files"
+                    accept='image/*'
+                    style={{ display: 'none' }}
+                    onChange={e => {
+                      if (!e.target.files[0]) return;
+                      const valid = imageValidation(e.target.files[0]);
+                      if (valid) return
 
-                  <RelativDiv>
-                    <ImgSizeLayout _width={100} _height={100} _bdr={4} src={item[0].img}/>
-                    <AbsoluteTopDiv _left='90px' >
-                      <Delete/>
-                    </AbsoluteTopDiv>
-                  </RelativDiv>
+                      if (data.files.length === 5) {
+                        return setFileError('최대 5개까지 추가 가능합니다.')
+                      }
+
+                      setData({
+                        ...data,
+                        files: [...data.files, e.target.files[0]]
+                      })
+                    }}
+                  />
                 </L.FlexRows>
+                {fileError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{fileError}</T.Text>}
               </L.FlexCols>
 
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">배달/픽업 인증 내용</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>
                   <TitleInfo>{data.type}</TitleInfo>
-                  {show ? <ArrowTop/> : <Down/> }
+                  {show ? <ArrowTop /> : <Down />}
                 </InfoBoxDiv>
-                {show && <Toggle  type={data.type} handler={dataChecked} closeSelector={() => setShow(false)}/>}
-                <InputFormOrder _height='140px'>
-                  <NameToggleInput
-                    type='text'
-                    placeholder='텍스트를 입력해 주세요.'
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                  />
-                </InputFormOrder>
+                {show && <Toggle type={data.type} handler={dataChecked} closeSelector={() => setShow(false)} />}
+                <I.Textarea
+                  placeholder='텍스트를 입력해 주세요.'
+                  value={data.text}
+                  onChange={e => setData({ ...data, text: e.target.value })}
+                />
               </L.FlexCols>
 
             </L.FlexCols>
@@ -106,7 +145,7 @@ function OrderManagementDetailsAuthPage() {
 
             <B.FixedActionButton
               type='button'
-              onClick={openAlert1}
+              onClick={onSubmit}
             >
               배달/픽업 완료
             </B.FixedActionButton>
@@ -114,24 +153,14 @@ function OrderManagementDetailsAuthPage() {
         </L.Container>
       </LayoutBiz>
       {
-        alert1 &&
+        alert &&
         <SimpleConfirm
-          contents={alert1.contents}
-          confirmText={alert1.confirmText}
-          onConfirmClick={alert1.onConfirmClick}
-          active={alert1.active}
+          contents={alert.contents}
+          confirmText={alert.confirmText}
+          onConfirmClick={alert.onConfirmClick}
+          active={alert.active}
         />
       }
-      {
-        alert2 &&
-        <SimpleConfirm
-          contents={alert2.contents}
-          confirmText={alert2.confirmText}
-          onConfirmClick={alert2.onConfirmClick}
-          active={alert2.active}
-        />
-      }
-
     </div>
   )
 }
@@ -160,52 +189,76 @@ function Toggle({ type, handler, closeSelector }) {
     }
   ])
 
-  const clickHandler = name =>{
+  const clickHandler = name => {
     setData(
       data.map(item =>
         item.name === name
-        ? {...item, checked: !item.checked}
-        : {...item, checked: false}
-        )
+          ? { ...item, checked: !item.checked }
+          : { ...item, checked: false }
       )
-      handler(name);
-      closeSelector();
+    )
+    handler(name);
+    closeSelector();
   }
-  useEffect(()=>{
+  useEffect(() => {
     setData(
-      data.map(item=>
+      data.map(item =>
         item.name === type
-        ? {...item, checked: !item.checked}
-        : item
-        )
+          ? { ...item, checked: !item.checked }
+          : item
+      )
     )
   }, [])
   return (
     <div>
       <ToggleS>
-      <L.FlexCols _gap='0px'>
+        <L.FlexCols _gap='0px'>
 
-      {
-        data.map(item => (
-          <L.FlexRows 
-            key={item.id}
-            _padding='12px 16px' 
-            _height='48px' 
-            _items='center'
-            onClick={() => clickHandler(item.name)}>
-            <T.Text 
-              _weight={item.checked ? 600 : 400} 
-              _size={15} 
-              _color={item.checked ? "green700" : "gray900"}
-            >
-              {item.name}
-            </T.Text>
-          </L.FlexRows>
-        ))
-      }
-      </L.FlexCols>
+          {
+            data.map(item => (
+              <L.FlexRows
+                key={item.id}
+                _padding='12px 16px'
+                _height='48px'
+                _items='center'
+                onClick={() => clickHandler(item.name)}>
+                <T.Text
+                  _weight={item.checked ? 600 : 400}
+                  _size={15}
+                  _color={item.checked ? "green700" : "gray900"}
+                >
+                  {item.name}
+                </T.Text>
+              </L.FlexRows>
+            ))
+          }
+        </L.FlexCols>
       </ToggleS>
     </div>
+  )
+}
+
+const FileList = ({ file, deleteFile }) => {
+
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    if (!file) return;
+
+    let reader = new FileReader();
+    reader.onload = function () {
+      setImage({ result: reader.result });
+    };
+    reader.readAsDataURL(file);
+  }, [file])
+
+  return (
+    <C.ImageBox style={{ width: "100px", height: "100px" }}>
+      <C.DeleteBtn onClick={deleteFile}>
+        <Delete />
+      </C.DeleteBtn>
+      <img src={image?.result} width={"100%"} height={"100%"} />
+    </C.ImageBox>
   )
 }
 
