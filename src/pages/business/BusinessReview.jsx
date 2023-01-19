@@ -16,6 +16,7 @@ import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Confirm from 'components/commonUi/Confirm';
 import {  NameToggleInput, NameToggleInputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
+import LayoutBiz from './../../components/layout/Layout/LayoutBiz';
 
 function BusinessReview() {
   const navigate = useNavigate()
@@ -41,7 +42,7 @@ function BusinessReview() {
 
   return (
     <div>
-      <Layout
+      <LayoutBiz
         title="리뷰 관리"
         bell={false}
         cart={false}
@@ -245,7 +246,7 @@ function BusinessReview() {
       }
       {modal && <ModalDelete PropsModal={PropsModal} closeText="취소" buttonText="삭제" titleText="리뷰를 삭제하시면 재작성이 불가합니다." titleText2="그래도 삭제하시겠습니까?"/>}
         </L.Container>
-      </Layout>
+      </LayoutBiz>
 
     </div>
   )

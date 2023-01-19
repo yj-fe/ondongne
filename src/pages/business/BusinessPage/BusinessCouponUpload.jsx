@@ -9,6 +9,7 @@ import 'react-quill/dist/quill.snow.css';
 import Confirm from 'components/commonUi/Confirm';
 import { CouponTitleInput } from 'components/commonUi/Input';
 import CouponAlert from 'components/commonUi/CouponAlert';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function BusinessCouponUpload() {
 
@@ -43,7 +44,7 @@ function BusinessCouponUpload() {
 
   return (
     <div>
-      <Layout
+      <LayoutBiz
           title="쿠폰소식 등록"
           cart={false}
           bell={false}
@@ -82,7 +83,7 @@ function BusinessCouponUpload() {
     }
           <B.FixedActionButton>완료</B.FixedActionButton>
         </L.Container>
-      </Layout>
+      </LayoutBiz>
       {
         confirm &&
         <Confirm

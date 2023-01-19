@@ -230,16 +230,15 @@ export const FooterDiv = styled.div`
 `;
 export const FloatingDivT = styled.div`
 	text-align: right;
-	margin: 0px;
+	margin: 14px;
 	padding: 0px;
 	position: sticky;
-	bottom: 40px;
+	bottom: 65px;
 	z-index: 99;
-
 `;
 export const FloatingDivMain = styled.div`
 	text-align: right;
-	margin: 0px;
+	margin: 14px;
 	padding: 0px;
 	position: sticky;
 	bottom: 50px;

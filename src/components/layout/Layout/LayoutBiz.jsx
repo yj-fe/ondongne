@@ -1,36 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router';
 import PropTypes from 'prop-types'
 
 import Header from '../Header/Header';
 
 import { S } from './LayoutStyle';
-import { FloatingContentDiv, FloatingContentTitle, FloatingDivMain, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle';
-import { getBizMember } from 'service/biz';
-import { useSelector } from 'react-redux';
+import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
 import { Coupon, Floating, FloatingPush, Order, Product } from 'components/commonUi/Icon';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
+import { FloatingContentDiv, FloatingContentTitle, FloatingDivT, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle';
 
-const Layout = (props) => {
-    const [biz, setBiz] = useState(false)
+const LayoutBiz = (props) => {
     const [floating, setFloating] = useState(false)
-    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-    const auth = useSelector(state => state.auth);
-
-// 비즈 회원 체크
-  const bizMember = async () => {
-    const response = await getBizMember();
-    const { data } = response.data;
-    if (data.bizStatus){
-      setBiz(true)
-    }
-  }
-  useEffect(() => {
-    if (auth.isAuthenticated) bizMember()
-  }, [auth])
-
-
     return (
         <S.Wrapper>
             <Header {...props}/>
@@ -39,22 +20,18 @@ const Layout = (props) => {
                 {/* parent component로 사용할 때: Outlet */}
                 {/* { <Outlet /> } */}
                 {props.children}
-                {
-                    biz && 
-                    <FloatingDivMain
-                        onClick={() => setFloating(!floating)}
-                    >
-                        {floating && <FloatingToggle />}
-                        {floating ? <FloatingPush /> : <Floating />}
-                    </FloatingDivMain>
-                }
+                <FloatingDivT
+                    onClick={() => setFloating(!floating)}
+                >
+                    {floating && <FloatingToggle />}
+                    {floating ? <FloatingPush /> : <Floating />}
+                </FloatingDivT>
             </S.Main>
         </S.Wrapper>
     )
 };
 
-
-export function FloatingToggle(props) {
+function FloatingToggle(props) {
     return (
       <div>
         <FloatingToggleDiv>
@@ -69,18 +46,18 @@ export function FloatingToggle(props) {
             <Link to="/business/coupon">
             <FloatingContentTitle>소식 등록</FloatingContentTitle>
             </Link>
-          </FloatingContentDiv>
-          <FloatingContentDiv>
+          </FloatingContentDiv> */}
+          {/* <FloatingContentDiv>
             <Coupon />
             <Link to="/business/coupon">
               <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
             </Link>
           </FloatingContentDiv> */}
           <FloatingContentDiv>
-            <Trans />
-            <Link to="/business">
+            <Trans/>
+            <Link to="/">
               <FloatingContentTitle>
-                비즈 전환
+                일반 전환
               </FloatingContentTitle>
             </Link>
           </FloatingContentDiv>
@@ -89,7 +66,7 @@ export function FloatingToggle(props) {
     )
   }
 
-Layout.props = {
+LayoutBiz.props = {
     title: PropTypes.string,
     search: PropTypes.bool,
     bell: PropTypes.bool,
@@ -101,4 +78,4 @@ Layout.props = {
     backPath: PropTypes.string
 }
 
-export default Layout;
+export default LayoutBiz;

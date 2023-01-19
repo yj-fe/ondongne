@@ -4,6 +4,7 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as Tb from 'components/commonUi/Table';
 import { Profile48 } from 'components/commonUi/Icon';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 
 
@@ -13,7 +14,7 @@ function OrderManagementDetailsPage() {
    
   return (
     <div>
-        <Layout
+        <LayoutBiz
           title="주문내역 상세"
         >
             <L.Container>
@@ -102,7 +103,7 @@ function OrderManagementDetailsPage() {
 
         </L.Container>
        
-        </Layout>
+        </LayoutBiz>
     </div>
   )
 }

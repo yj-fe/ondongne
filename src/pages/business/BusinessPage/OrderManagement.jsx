@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, Down, More, OrderDe, OrderDeC, OrderFin, OrderFinC, OrderPay, OrderPayC, OrderReady, OrderReadyC } from 'components/commonUi/Icon';
 import { S } from 'components/orders/orderlist/OrderListStyle';
 import Confirm from 'components/commonUi/Confirm';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function OrderManagement() {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ function OrderManagement() {
   }
   return (
     <div>
-      <Layout
+      <LayoutBiz
         title="주문 관리"
         bell={false}
         cart={false}
@@ -366,7 +367,7 @@ function OrderManagement() {
             </L.Contents>
 
       </L.Container>
-      </Layout>
+      </LayoutBiz>
       {delOrder&&
       <Confirm
           contents={delOrder.contents}

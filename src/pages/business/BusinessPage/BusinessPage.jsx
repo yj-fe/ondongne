@@ -16,20 +16,19 @@ import { TitleText, InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDi
 import { ContentDate, ContentImg, ContentMarket, ContentProduct, ContentStyle, ContentTitle, Discount, DiscountStyle, Price, FinalPrice, RateStyle, Star, Number } from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
 import { getBizMember } from 'service/biz';
 import { useSelector } from 'react-redux';
-import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
+
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-
-import Layout from 'components/layout/Layout/Layout';
 import { Coupon, Floating, FloatingPush, FooterLogo, Order, Product } from 'components/commonUi/Icon';
 import { Grid } from 'swiper';
 import FooterLayout from 'components/layout/Footer/Footer';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function BusinessPage() {
   const navigate = useNavigate();
   const [item] = useState(maindata)
   const auth = useSelector(state => state.auth);
-  const [floating, setFloating] = useState(false)
+
 
   // 비즈 회원 체크
   const bizMember = async () => {
@@ -39,7 +38,6 @@ function BusinessPage() {
     if (!data || !data.bizStatus) {
       return navigate("/")
     }
-    // console.log(data.bizStatus);
   }
   useEffect(() => {
     if (auth.isAuthenticated) bizMember()
@@ -48,7 +46,7 @@ function BusinessPage() {
   return (
     <div>
       <BusinessHeader />
-      <Layout>
+      <LayoutBiz>
 
         <L.Container>
         {/* ==================== 가게 정보 ==================== */}
@@ -77,28 +75,6 @@ function BusinessPage() {
                     </CardTextDiv>
                   </InfoCard>
                 </L.GridTwo>
-              {/* <InfoCard>
-                <InfoIconStyle><OrderIcon /></InfoIconStyle>
-                <CardTextDiv>
-                  <CardText>신규 주문</CardText>
-                  <CardCount>0 건</CardCount>
-                </CardTextDiv>
-              </InfoCard>
-              <InfoCard>
-                <InfoIconStyle><Pickup /></InfoIconStyle>
-                <CardTextDiv>
-                  <CardText>배달/픽업</CardText>
-                  <CardCount>0 건</CardCount>
-                </CardTextDiv>
-              </InfoCard>
-              <InfoCard>
-                <InfoIconStyle><NewReview /></InfoIconStyle>
-                <CardTextDiv>
-                  <CardText>신규 리뷰</CardText>
-                  <CardCount>0 건</CardCount>
-                </CardTextDiv>
-              </InfoCard> */}
-              {/* </L.FlexRowsWrapMedia> */}
           </L.Contents>
 
         </L.Container>
@@ -221,13 +197,8 @@ function BusinessPage() {
           <FooterLayout />
         </L.Inner>
 
-          <FloatingDivT
-            onClick={() => setFloating(!floating)}
-          >
-            {floating && <FloatingToggle />}
-            {floating ? <FloatingPush /> : <Floating />}
-          </FloatingDivT>
-        </Layout>
+
+        </LayoutBiz>
 
 
     </div>
@@ -257,39 +228,6 @@ function MyBestProductCard(props) {
     </div>
   )
 }
-function FloatingToggle(props) {
-  return (
-    <div>
-      <FloatingToggleDiv>
-        <FloatingContentDiv>
-          <Product />
-          <Link to="/business/upload">
-            <FloatingContentTitle>상품 등록</FloatingContentTitle>
-          </Link>
-        </FloatingContentDiv>
-        {/* <FloatingContentDiv>
-          <Order />
-          <Link to="/business/coupon">
-          <FloatingContentTitle>소식 등록</FloatingContentTitle>
-          </Link>
-        </FloatingContentDiv> */}
-        {/* <FloatingContentDiv>
-          <Coupon />
-          <Link to="/business/coupon">
-            <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
-          </Link>
-        </FloatingContentDiv> */}
-        <FloatingContentDiv>
-          <Trans/>
-          <Link to="/">
-            <FloatingContentTitle>
-              일반 전환
-            </FloatingContentTitle>
-          </Link>
-        </FloatingContentDiv>
-      </FloatingToggleDiv>
-    </div>
-  )
-}
+
 
 export default BusinessPage

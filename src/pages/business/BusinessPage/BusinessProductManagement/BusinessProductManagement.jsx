@@ -15,6 +15,7 @@ import { ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from 'compo
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 
 function BusinessProductManagement() {
@@ -74,7 +75,7 @@ function BusinessProductManagement() {
 
   return (
     <div>
-      <Layout
+      <LayoutBiz
         title="상품관리"
         cart={false}
         bell={false}
@@ -139,7 +140,7 @@ function BusinessProductManagement() {
           </L.Contents>
         </L.Container>
         {modal && <ModalFilter type={data.type} handler={dataChecked} closeSelector={() => setModal(false)} PropsModal={PropsModal} />}
-      </Layout>
+      </LayoutBiz>
     </div>
   )
 }

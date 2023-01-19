@@ -8,6 +8,7 @@ import { ImgPer } from 'components/layout/Img/ImgSizeLayout';
 import ImageSample from 'assets/images/sample.png'
 import { DownloadC, More } from 'components/commonUi/Icon';
 import MoreLayout from 'components/layout/Layout/MoreLayout';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 
 
@@ -18,7 +19,7 @@ function BusinessCoupon() {
 
   return (
     <div>
-      <Layout
+      <LayoutBiz
         title="쿠폰소식 관리"
         cart={false}
         bell={false}
@@ -34,7 +35,7 @@ function BusinessCoupon() {
 
 
         </L.Container>
-      </Layout>
+      </LayoutBiz>
     </div>
   )
 }

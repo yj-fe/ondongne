@@ -15,6 +15,7 @@ import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import { InputFormOrder, NameToggleInput, NameToggleInputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
 import data from './../../../assets/data/maindata';
 import { type } from '@testing-library/user-event/dist/type';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function OrderManagementDetailsAuthPage() {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ function OrderManagementDetailsAuthPage() {
 
   return (
     <div>
-      <Layout
+      <LayoutBiz
         title='사진 등록'
         cart={false}
         bell={false}
@@ -111,7 +112,7 @@ function OrderManagementDetailsAuthPage() {
             </B.FixedActionButton>
           </L.Contents>
         </L.Container>
-      </Layout>
+      </LayoutBiz>
       {
         alert1 &&
         <SimpleConfirm

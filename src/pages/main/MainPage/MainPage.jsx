@@ -26,8 +26,6 @@ function MainPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [alert, setAlert] = useState(null);
-  const [floating, setFloating] = useState(false)
-  const [biz, setBiz] = useState(false)
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const auth = useSelector(state => state.auth);
 
@@ -48,19 +46,6 @@ function MainPage() {
     }
   }, [state])
 
-  // 비즈 회원 체크
-  const bizMember = async () => {
-    const response = await getBizMember();
-    const { data } = response.data;
-    if (data.bizStatus){
-      setBiz(true)
-    }
-    // console.log(biz);
-    // console.log(data.bizStatus);
-  }
-  useEffect(() => {
-    if (auth.isAuthenticated) bizMember()
-  }, [auth])
 
 
   return (
@@ -103,15 +88,6 @@ function MainPage() {
             <L.Inner>
               <FooterLayout />
             </L.Inner>
-        {
-          biz && 
-              <FloatingDivMain
-                onClick={() => setFloating(!floating)}
-              >
-                {floating && <FloatingToggle />}
-                {floating ? <FloatingPush /> : <Floating />}
-              </FloatingDivMain>
-        }
         </L.Container>
         <FooterStyle>
           <MainFooter />
@@ -131,39 +107,5 @@ function MainPage() {
   )
 }
 
-export function FloatingToggle(props) {
-  return (
-    <div>
-      <FloatingToggleDiv>
-        <FloatingContentDiv>
-          <Product />
-          <Link to="/business/upload">
-            <FloatingContentTitle>상품 등록</FloatingContentTitle>
-          </Link>
-        </FloatingContentDiv>
-        {/* <FloatingContentDiv>
-          <Order />
-          <Link to="/business/coupon">
-          <FloatingContentTitle>소식 등록</FloatingContentTitle>
-          </Link>
-        </FloatingContentDiv>
-        <FloatingContentDiv>
-          <Coupon />
-          <Link to="/business/coupon">
-            <FloatingContentTitle>쿠폰 등록</FloatingContentTitle>
-          </Link>
-        </FloatingContentDiv> */}
-        <FloatingContentDiv>
-          <Trans />
-          <Link to="/business">
-            <FloatingContentTitle>
-              비즈 전환
-            </FloatingContentTitle>
-          </Link>
-        </FloatingContentDiv>
-      </FloatingToggleDiv>
-    </div>
-  )
-}
 
 export default MainPage

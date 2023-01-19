@@ -251,6 +251,7 @@ export const ButtonStyleNew = styled.div`
     margin: 0 auto;
     gap: ${props => props._gap || 8}px;
     padding: ${props => props._padding || '0px'};
+		z-index: 100;
     @media only screen and (max-width: 728px) { 
         width: 100%;
   }
@@ -261,6 +262,7 @@ export const ButtonStyle = styled.div`
 	justify-items: center;
 	width: 100%;
 	height: 70px;
+	z-index: 100;
 	@media screen and (max-width: 728px) {
 		width: 100%;
 	}

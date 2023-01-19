@@ -8,6 +8,7 @@ import { DetailTabDiv, TabButtonStyle, DetailTabInfo, DetailTabReview, TabConten
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import { useNavigate } from 'react-router-dom';
+import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat'
 
 
 function BusinessManagement() {
@@ -18,7 +19,7 @@ function BusinessManagement() {
 
   return (
     <div>
-      <Layout
+      <LayoutNotFloat
         title="비즈 정보 관리"
         cart={false}
         bell={false}
@@ -58,7 +59,7 @@ function BusinessManagement() {
             </L.FlexCols>
           </L.Contents>
         </L.Container>
-      </Layout>
+      </LayoutNotFloat>
     </div>
   )
 }

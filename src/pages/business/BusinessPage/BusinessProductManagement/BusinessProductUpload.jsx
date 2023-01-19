@@ -17,6 +17,7 @@ import Confirm from 'components/commonUi/Confirm';
 import { useSelector } from 'react-redux';
 import LayoutBPM from 'components/layout/Layout/LayoutBPM';
 import Layout from 'components/layout/Layout/Layout';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function BusinessProductUpload() {
 
@@ -159,7 +160,7 @@ function BusinessProductUpload() {
 
   return (
     <div>
-      <Layout
+      <LayoutBiz
         title={id ? '상품 수정' : '상품 등록'}
         cart={false}
         bell={false}
@@ -444,7 +445,7 @@ function BusinessProductUpload() {
             </B.FixedActionButton>
           </L.Contents>
         </L.Container>
-      </Layout>
+      </LayoutBiz>
       <BusinessProductEditInfo
         isOpen={editor}
         close={() => isEditor(false)}

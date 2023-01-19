@@ -404,6 +404,7 @@ const ButtonStyle = styled.div`
   max-width: 728px;
   justify-items: center;
   width: 100%;
+    z-index: 100;
 `
 const DetailButtonDiv = styled.div`
   display: flex;

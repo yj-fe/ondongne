@@ -74,7 +74,6 @@ function MorePage() {
     navigate('/member/management');
   }
   const bizMember = async () => {
-
     const response = await getBizMember();
     const { data } = response.data;
 
@@ -96,9 +95,8 @@ function MorePage() {
 
     // 비즈 홈
     if (data.bizStatus) {
-      setBiz(true);
+      console.log(biz);
       return navigate("/business");
-
     }
 
   }
@@ -123,6 +121,21 @@ function MorePage() {
   }, [auth])
 
 
+  // 비즈 회원 체크
+  const bizFloat = async () => {
+    const response = await getBizMember();
+    const { data } = response.data;
+    if (data.bizStatus){
+      setBiz(true)
+    }
+  }
+  useEffect(() => {
+    if (auth.isAuthenticated) bizFloat()
+  }, [auth])
+
+
+
+
   return (
     <div style={{ position: 'relative' }}>
       <Layout
@@ -132,7 +145,6 @@ function MorePage() {
         onBackClick={() => navigate('/')}
       >
         <L.Container _padding="0px 0px 8px" >
-
 
           {
             auth.isAuthenticated &&
@@ -197,7 +209,7 @@ function MorePage() {
 
         <FooterLayout />
 
-        {
+        {/* {
           biz && 
               <FloatingDivT
                 onClick={() => setFloating(!floating)}
@@ -205,7 +217,7 @@ function MorePage() {
                 {floating && <FloatingToggle />}
                 {floating ? <FloatingPush /> : <Floating />}
               </FloatingDivT>
-        }
+        } */}
       </Layout>
 
       {

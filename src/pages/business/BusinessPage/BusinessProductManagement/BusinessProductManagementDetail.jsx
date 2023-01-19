@@ -13,7 +13,6 @@ import Image from 'assets/main/shine.png'
 import ReviewImg from 'assets/main/reviewimg.png'
 import Avatar from 'assets/common/avatar.png'
 import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileTextDiv, FinalPrice, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, ButtonStyleNew } from 'pages/main/DetailsPage/DetailsPageStyle'
-import Layout from 'components/layout/Layout/Layout';
 import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 
 import * as L from 'components/commonUi/Layout';
@@ -22,6 +21,7 @@ import { getBizItemDetails } from 'service/bizItem';
 import StarRate from 'components/commonUi/StarRate';
 import { numberFormat, totalPrice } from 'utils/utils';
 import HTMLReactParser from 'html-react-parser';
+import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function BusinessProductManagementDetail() {
 
@@ -46,7 +46,7 @@ function BusinessProductManagementDetail() {
   return (
     <div>
       {loading &&
-        <Layout
+        <LayoutBiz
           title={item.storeName}
           cart={false}
           bell={false}
@@ -132,7 +132,7 @@ function BusinessProductManagementDetail() {
           </DetailBody>
 
 
-        </Layout>
+        </LayoutBiz>
       }
     </div>
   )
