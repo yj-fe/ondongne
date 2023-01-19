@@ -16,16 +16,18 @@ function Agreement({ setData, depthHandler }) {
   const [policy, setPolicy] = useState();
 
   const [active, setActive] = useState(false);
-  const [checkAll, setCheckAll] = useState(false);
-
+  
   //Toggle
   const [showAge, setShowAge] = useState()
   const [showService, setShowService] = useState()
   const [showCollect, setShowCollect] = useState()
   const [showSns, setShowSns] = useState()
-
+  
+  // CheckBox
+  // 모두 동의
+  const [checkAll, setCheckAll] = useState(false);
+  // 개별 체크박스
   const [checks, setChecks] = useState([false, false, false, false]);
-  const [checkList, setCheckList] = useState([false, false, false, false]);
 
   // 정책 데이터
   const getPolicy = async (type) => {
@@ -38,14 +40,6 @@ function Agreement({ setData, depthHandler }) {
     if (type === "MARKETING") setShowSns((s) => !s);
   }
 
-  const ButtonActive = () => {
-    setCheckList([...checkList])
-  }
-  // const CheckAllBtn = () => {
-  //   if (checkAll === true){
-  //     setChecks([true, true, true, true])
-  //   }
-  // }
   const onCheckClick = index => {
     setChecks(checks => checks.map((item, idx) => {
       if (idx === index) return !item;
@@ -68,39 +62,17 @@ function Agreement({ setData, depthHandler }) {
 
     depthHandler(2)
   }
-console.log(checks.filter(item => item).length );
-console.log(checks.length);
-console.log(checks.filter(item => item).length === checks.length);
 
-  // useEffect(() => {
-  //   if (checks.filter(item => item).length === checks.length){
-  //     setCheckAll(true)
-  //   }else{
-  //     setCheckAll(false)
-  //   }
-  // }, [checks])
-
-  // useEffect(() => {
-  //   if (checks([0]) && checks([1]) && checks([2]) === true) {
-  //     setCheckAll(true)
-  //   }
-  //   // const isAllCheck = checks.filter(item => item).length === checks.length;
-  //   // setCheckAll(isAllCheck);
-  // }, [checks]);
+  // 체크박스
   useEffect(() => {
     if (checkAll === true){
-      setChecks([true, true, true, true])
-    }
-    else{
-      setChecks([false, false, false, false])
+      setChecks([true, true, true, true]);
+    } else{
+      setChecks([false, false, false, false]);
     }
   }, [checkAll]);
-  
   useEffect(() => {
-    if(checks.filter(item => item).length < 4){
-      setCheckAll(false)
-    }else{
-    // if(checks.filter(item => item).length === 4){
+    if ( checks.filter(item => item).length === 4){
       setCheckAll(true)
     }
   }, [checks]);
@@ -117,14 +89,13 @@ console.log(checks.filter(item => item).length === checks.length);
           <CheckboxForm>
             <L.FlexRows
               _content='left' _items='center'
-              // onClick={()=>{setCheckAll((s) => !s); CheckAllBtn();}}
-              onClick={() => setCheckAll((s) => !s)}
+              onClick={() => setCheckAll((s) => !s) }
             >
               <CheckboxButton
                 id="All"
                 type="button"
               >
-                {checkAll ? <Checked /> : <UnCheck />}
+                { checkAll && checks.filter(item => item).length === checks.length ? <Checked /> : <UnCheck />}
               </CheckboxButton>
               <CheckboxText
                 size="16px"
@@ -147,7 +118,6 @@ console.log(checks.filter(item => item).length === checks.length);
                 <CheckboxButton
                   id="Age"
                   type="button"
-                  onChange={ButtonActive}
                 >
                   {checks[0] ? <Checked /> : <UnCheck />}
                 </CheckboxButton>
@@ -169,7 +139,6 @@ console.log(checks.filter(item => item).length === checks.length);
                 <CheckboxButton
                   id="Service"
                   type="button"
-                  onChange={ButtonActive}
                 >
                   {checks[1] ? <Checked /> : <UnCheck />}
                 </CheckboxButton>
@@ -199,7 +168,6 @@ console.log(checks.filter(item => item).length === checks.length);
                 <CheckboxButton
                   id="Collect"
                   type="button"
-                  onChange={ButtonActive}
                 >
                   {checks[2] ? <Checked /> : <UnCheck />}
                 </CheckboxButton>
