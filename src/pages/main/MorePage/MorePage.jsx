@@ -26,8 +26,9 @@ import * as I from 'components/commonUi/Input';
 import * as B from 'components/commonUi/Button';
 import FooterLayout from 'components/layout/Footer/Footer'
 import { getBizMember } from 'service/biz'
-import { FloatingToggle } from '../MainPage/MainPage'
 import { FloatingDivT } from 'pages/business/BusinessPage/BusinessPageStyle'
+import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat'
+import { FloatingToggle } from 'components/layout/Layout/LayoutMain'
 
 
 function MorePage() {
@@ -138,7 +139,7 @@ function MorePage() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <Layout
+      <LayoutNotFloat
         title="더보기"
         cart={false}
         bell={false}
@@ -209,16 +210,16 @@ function MorePage() {
 
         <FooterLayout />
 
-        {/* {
+        {
           biz && 
-              <FloatingDivT
+              <FloatingDivT _bottom='30px'
                 onClick={() => setFloating(!floating)}
               >
                 {floating && <FloatingToggle />}
                 {floating ? <FloatingPush /> : <Floating />}
               </FloatingDivT>
-        } */}
-      </Layout>
+        }
+      </LayoutNotFloat>
 
       {
         alert &&

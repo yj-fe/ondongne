@@ -167,7 +167,7 @@ function BusinessProductUpload() {
         onBackClick={() => navigate(-1)}
       >
 
-        <L.Container _padding="0px 0px 60px" >
+        <L.WhiteContainer _padding="0px 0px 60px" >
           <L.Contents _height='auto'>
             <L.FlexCols _gap={40} _padding="0px">
               <L.FlexCols _gap={16}>
@@ -444,7 +444,7 @@ function BusinessProductUpload() {
               {id ? '수정하기' : '등록하기'}
             </B.FixedActionButton>
           </L.Contents>
-        </L.Container>
+        </L.WhiteContainer>
       </LayoutBiz>
       <BusinessProductEditInfo
         isOpen={editor}

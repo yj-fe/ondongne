@@ -230,19 +230,34 @@ export const FooterDiv = styled.div`
 `;
 export const FloatingDivT = styled.div`
 	text-align: right;
-	margin: 14px;
+	margin:0px 14px 0px 0px;
 	padding: 0px;
 	position: sticky;
-	bottom: 65px;
+	bottom: ${props => props._bottom || '70px'};
 	z-index: 99;
+	/* height: ${props => props._height || '80px'}; */
 `;
 export const FloatingDivMain = styled.div`
-	text-align: right;
-	margin: 14px;
-	padding: 0px;
+	position: -webkit-sticky;
 	position: sticky;
+	text-align: right;
+	margin: 0px 14px 0px;
+	padding: 0px;
 	bottom: 50px;
 	z-index: 99;
+	/* height: 60px; */
+`;
+export const FloatingDivSearch = styled.div`
+	position: -webkit-sticky;
+	position: sticky;
+	text-align: right;
+	margin: 0px 14px 0px;
+	padding: 0px;
+	top: ${props => props._top || '90%'};
+	bottom: ${props => props._bottom || ''};
+	/* bottom: 0px; */
+	z-index: 99;
+	/* height: 60px; */
 `;
 export const Footer = styled.div`
 	display: flex;
@@ -256,7 +271,6 @@ export const Footer = styled.div`
 	> div {
 		max-width: 728px;
 		width: 100%;
-
 		@media only screen and (max-width: 728px) {
 			width: 100vw;
 		}

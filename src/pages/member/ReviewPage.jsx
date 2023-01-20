@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import Layout from 'components/layout/Layout/Layout';
 import { Link, useNavigate } from 'react-router-dom'
-import {  ArrowRightB } from 'components/commonUi/Icon';
+import {  ArrowRightB, Floating, FloatingPush, ReviewLike0 } from 'components/commonUi/Icon';
 import { MarketComments, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv,  MarketReviewDiv, Line, Comments, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, } from 'pages/main/DetailsPage/DetailsPageStyle'
-import { ReactComponent as ReviewLike0 } from "assets/main/reviewlikedisable.svg";
 import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
 import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import Avatar from 'assets/common/avatar.png';
@@ -15,10 +15,19 @@ import { Imgauto, ImgPer } from 'components/layout/Img/ImgSizeLayout';
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Confirm from 'components/commonUi/Confirm';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
-
+import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat';
+import { FloatingDivSearch } from 'pages/business/BusinessPage/BusinessPageStyle';
+import { FloatingToggle } from 'components/layout/Layout/LayoutMain';
+import { getBizMember } from 'service/biz';
 
 function ReviewPage() {
   const navigate = useNavigate()
+  // biz 플로팅
+  const [biz, setBiz] = useState(false);
+  const [floating, setFloating] = useState(false);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const auth = useSelector(state => state.auth);
+
   const [modal, setModal] = useState(false);
   const ShowDeleteModal = () => {
     setModal(!modal);
@@ -39,9 +48,22 @@ function ReviewPage() {
     })
   }
 
+  // 비즈 회원 체크
+  const bizMember = async () => {
+    const response = await getBizMember();
+    const { data } = response.data;
+    if (data.bizStatus){
+      setBiz(true)
+    }
+  }
+  useEffect(() => {
+    if (auth.isAuthenticated) bizMember()
+  }, [auth])
+
+
   return (
     <div>
-      <Layout
+      <LayoutNotFloat
         title="내가 쓴 리뷰"
         bell={false}
         cart={false}
@@ -66,6 +88,7 @@ function ReviewPage() {
 
             {/* 리뷰 있을 때 */}
             <L.Contents  _height='calc(100vh - 68px)'>
+
               <Scroll _height='calc(100vh - 120px)'>
                 <L.FlexCols _gap={12}>
                   <L.FlexRows >
@@ -77,7 +100,7 @@ function ReviewPage() {
  {/* =======Review1====== */}
                   <L.FlexCols _padding='20px 0px' _gap={16}>
                     <L.FlexRows _content='space-between' _items='center'>
-                      <L.FlexCols _gap={4}>
+                      <L.FlexCols _gap={4} _width='calc( 100% - 120px)'>
                         <L.FlexRows _gap='0px'  _items='center' _content='left'>
                           <T.Text _size={16} _weight={600}>Bhc 치킨</T.Text>
                           <ArrowRightB/>
@@ -108,7 +131,7 @@ function ReviewPage() {
                 <Comments>맛있습니다~</Comments>
                 <ReviewLikeStyle>
                   <ReviewLikeFrame color={false}>
-                    <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
+                    <ReviewLike0 />
                     <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
                     <ReviewLikeText color={false}>1</ReviewLikeText>
                   </ReviewLikeFrame>
@@ -117,7 +140,7 @@ function ReviewPage() {
             {/* =======Review2====== */}
                   <L.FlexCols _padding='20px 0px' _gap={16}>
                     <L.FlexRows _content='space-between' _items='center'>
-                      <L.FlexCols _gap={4}>
+                      <L.FlexCols _gap={4} _width='calc( 100% - 120px)'>
                         <L.FlexRows _gap='0px'  _items='center' _content='left'>
                           <T.Text _size={16} _weight={600}>교촌 치킨</T.Text>
                           <ArrowRightB/>
@@ -148,7 +171,7 @@ function ReviewPage() {
                     <Comments>담에 또 먹을래요~~~~~~~~</Comments>
                     <ReviewLikeStyle>
                       <ReviewLikeFrame color={false}>
-                        <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
+                        <ReviewLike0 />
                         <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
                         <ReviewLikeText color={false}>0</ReviewLikeText>
                       </ReviewLikeFrame>
@@ -173,7 +196,7 @@ function ReviewPage() {
             {/* =======Review3====== */}
                   <L.FlexCols _padding='20px 0px' _gap={16}>
                     <L.FlexRows _content='space-between' _items='center'>
-                      <L.FlexCols _gap={4}>
+                      <L.FlexCols _gap={4} _width='calc( 100% - 120px)'>
                         <L.FlexRows _gap='0px'  _items='center' _content='left'>
                           <T.Text _size={16} _weight={600}>BBQ 치킨</T.Text>
                           <ArrowRightB/>
@@ -201,7 +224,7 @@ function ReviewPage() {
                     <Comments>싱싱하고 맛있어요</Comments>
                     <ReviewLikeStyle>
                       <ReviewLikeFrame color={false}>
-                        <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
+                        <ReviewLike0 />
                         <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
                         <ReviewLikeText color={false}>0</ReviewLikeText>
                       </ReviewLikeFrame>
@@ -209,6 +232,17 @@ function ReviewPage() {
                   </L.FlexCols>
                 </L.FlexCols>
               </Scroll>
+              {/* {
+                biz && 
+                <FloatingDivSearch  _top='' _bottom='80px'
+                    onClick={() => setFloating(!floating)}
+                >
+                    {floating && <FloatingToggle />}
+                    {floating ? <FloatingPush /> : <Floating />}
+                </FloatingDivSearch>
+              } */}
+
+
             </L.Contents>
 
       {
@@ -223,7 +257,7 @@ function ReviewPage() {
       }
       {modal && <ModalDelete PropsModal={PropsModal} closeText="취소" buttonText="삭제" titleText="리뷰를 삭제하시면 재작성이 불가합니다." titleText2="그래도 삭제하시겠습니까?"/>}
         </L.Container>
-      </Layout>
+      </LayoutNotFloat>
 
     </div>
   )

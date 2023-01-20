@@ -13,6 +13,6 @@ export const S = {
 		background-color: ${props => props._bc || 'transparent'};
 		padding-top: 60px;
 		min-height: 100vh;
-		/* overflow: auto; */
+		/* overflow: visible; */
 	`,
 };

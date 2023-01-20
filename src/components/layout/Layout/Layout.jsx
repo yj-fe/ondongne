@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Header from '../Header/Header';
 
 import { S } from './LayoutStyle';
-import { FloatingContentDiv, FloatingContentTitle, FloatingDivMain, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle';
+import { FloatingContentDiv, FloatingContentTitle, FloatingDivMain, FloatingDivSearch, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle';
 import { getBizMember } from 'service/biz';
 import { useSelector } from 'react-redux';
 import { Coupon, Floating, FloatingPush, Order, Product } from 'components/commonUi/Icon';
@@ -41,12 +41,12 @@ const Layout = (props) => {
                 {props.children}
                 {
                     biz && 
-                    <FloatingDivMain
+                    <FloatingDivSearch
                         onClick={() => setFloating(!floating)}
                     >
                         {floating && <FloatingToggle />}
                         {floating ? <FloatingPush /> : <Floating />}
-                    </FloatingDivMain>
+                    </FloatingDivSearch>
                 }
             </S.Main>
         </S.Wrapper>

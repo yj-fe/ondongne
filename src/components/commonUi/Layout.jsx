@@ -18,6 +18,15 @@ export const Container = styled.div`
     padding: ${props => props._padding || '0 0 8px'};
 `;
 
+export const WhiteContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: ${props => props._gap || 8}px;
+    height: ${props => props._height || 'auto'};
+    padding: ${props => props._padding || '0 0 8px'};
+`;
+
 export const Overlay = styled.div`
     z-index: 90;
     position: fixed;
