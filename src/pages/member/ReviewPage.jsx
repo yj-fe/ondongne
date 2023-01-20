@@ -6,7 +6,6 @@ import Moment from 'react-moment';
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRightB, Floating, FloatingPush, ReviewLike0 } from 'components/commonUi/Icon';
 import { MarketComments, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, Line, Comments, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, } from 'pages/main/DetailsPage/DetailsPageStyle'
-import { ReactComponent as ReviewLike0 } from "assets/main/reviewlikedisable.svg";
 import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
 import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import Avatar from 'assets/common/avatar.png';
