@@ -9,20 +9,26 @@ import Confirm from 'components/commonUi/Confirm';
 import Overlay from 'components/layout/Overlay/Overlay';
 import { S } from "./OrderListStyle";
 import { useSelector } from 'react-redux';
-import { orderCancel, orderList, orderUnView } from 'service/order';
+import { orderCancel, orderList, orderSuccess, orderUnView } from 'service/order';
+import { getDeliveryCertificate } from 'service/deliveryCertificate';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { OrderDelivery_Y } from './../../commonUi/Icon';
 import dayjs from 'dayjs';
+import Alert from 'components/commonUi/Alert';
+const DELIVERYIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/deliveryCertificate/";
 
 const OrderList = () => {
 
     const auth = useSelector(state => state.auth);
 
     const [orderData, setOrderData] = useState(null);
+    const [deliveryData, setDeliveryData] = useState(null);
     // ui
     const [delOrder, setDelOrder] = useState(-1);
     const [cancelOrder, setCancelOrder] = useState(-1);
-    const [deliveryPopup, setDeliveryPopup] = useState(false);
+    const [successOrder, setSuccessOrder] = useState(-1);
+    const [alert, setAlert] = useState(null);
+
     // 
     const navigate = useNavigate();
 
@@ -36,6 +42,35 @@ const OrderList = () => {
             setOrderData(response.data.data);
         }
     };
+
+    /* ==============================
+        상품 수령 확인
+    ============================== */
+    const handleOrderSuccess = async () => {
+        const response = await orderSuccess(successOrder);
+
+        if (response && response.data.data) {
+            loadData();
+            setSuccessOrder(-1);
+            return setAlert({
+                contents: "상품 수령을 완료되었습니다.\n리뷰를 작성해주세요!",
+                buttonText: "확인",
+                onButtonClick: () => setAlert(false),
+                onOverlayClick: () => setAlert(false),
+            })
+        }
+    };
+
+    /* ==============================
+        배달&픽업 완료 데이터 불러오기
+    ============================== */
+    const getDeliveryAuth = async (id) => {
+        const response = await getDeliveryCertificate(id);
+        if (response && response.data.data) {
+            console.log(response);
+            setDeliveryData(response.data.data);
+        }
+    }
 
     /* ==============================
         주문 내역 삭제
@@ -155,28 +190,31 @@ const OrderList = () => {
                                                 >주문 취소</S.Action>
                                             }
                                             {
-                                                item.orderStatus === '배송완료' &&
-                                                item.orderStatus === '픽업완료' &&
+                                                (item.orderStatus == '배송완료') &&
+                                                <S.Action
+                                                    _type="bgb"
+                                                    onClick={() => getDeliveryAuth(item.orderId)}
+                                                >배달 인증 확인</S.Action>
+                                            }
+                                            {
+                                                (item.orderStatus == '배송완료' ||
+                                                    (orderData.recetiveType === '방문포장' && orderData.orderStatus === '상품준비중')) &&
                                                 <S.Action
                                                     _type="bg"
-                                                    onClick={() => { setDeliveryPopup(true) }}
+                                                    onClick={() => setSuccessOrder(item.orderId)}
                                                 >상품 수령</S.Action>
                                             }
-                                            {/* {
-                                                item.orderStatus === '배송완료' &&
-                                                item.orderStatus === '픽업완료' &&
-                                                <S.Action
-                                                    _type="cancel"
-                                                    onClick={() => { alert('환불 쓰기') }}
-                                                >환불 하기</S.Action>
-                                            } */}
                                             {
-                                                item.orderStatus === '상품수령완료' &&
+                                                !item.reviewStatus && item.orderStatus == '상품수령완료' &&
                                                 <S.Action
-                                                    _type="bd"
-                                                    onClick={() => { alert('리뷰 쓰기') }}
-                                                >리뷰 쓰기</S.Action>
+                                                    _type="bg"
+                                                    onClick={() => navigate("/member/review/upload", { state: { item: item } })}
+                                                >리뷰작성</S.Action>
                                             }
+                                            <S.Action
+                                                as={Link}
+                                                to={`/order/details/${item.orderId}`}
+                                            >주문내역 보기</S.Action>
                                             {
                                                 item.orderStatus === '상품수령완료' &&
                                                 <S.Action
@@ -184,10 +222,6 @@ const OrderList = () => {
                                                     onClick={() => { setDelOrder(item.orderId) }}
                                                 >주문 내역 삭제</S.Action>
                                             }
-                                            <S.Action
-                                                as={Link}
-                                                to={`/order/details/${item.orderId}`}
-                                            >주문내역 보기</S.Action>
                                         </L.FlexCols>
                                     </L.FlexCols>
                                 </L.Contents>
@@ -211,27 +245,53 @@ const OrderList = () => {
                             onConfirmClick={handleOrderCancel}
                             onCancelClick={() => setCancelOrder(-1)}
                         />
+                        <Confirm
+                            active={successOrder >= 0}
+                            contents={`정말로 상품을 수령하셨나요?\n상품을 수령하셨다면 확인버튼을 눌러주세요.`}
+                            warn={false}
+                            confirmText="네"
+                            cancelText="아니요"
+                            onConfirmClick={handleOrderSuccess}
+                            onCancelClick={() => setSuccessOrder(-1)}
+                        />
                         {
-                            deliveryPopup &&
+                            alert &&
+                            <Alert
+                                title={alert.title}
+                                contents={alert.contents}
+                                desc={alert.desc}
+                                buttonText={alert.buttonText}
+                                onButtonClick={alert.onButtonClick}
+                                onOverlayClick={alert.onOverlayClick}
+                            />
+                        }
+                        {
+                            deliveryData &&
                             <Overlay>
                                 <S.DeliveryPopup>
                                     <button
                                         className="close"
                                         style={{ background: '#FFF' }}
-                                        onClick={() => { setDeliveryPopup(false) }}
+                                        onClick={() => setDeliveryData(null)}
                                     >
                                         <Close />
                                     </button>
                                     <div className="top">
-                                        <div className="img" />
+                                        {
+                                            deliveryData.images.map((image, index) => (
+                                                <img
+                                                    key={index}
+                                                    className="img"
+                                                    src={DELIVERYIMGURL + image.name}
+                                                />
+                                            ))
+                                        }
                                     </div>
                                     <div className="contents">
                                         <strong>
-                                            배송이 완료되었습니다.
+                                            {deliveryData.title}
                                         </strong>
-                                        <p>
-                                            고객님, 오늘도 맛있는 저희 상품을 구매해주셔서 감사합니다.
-                                        </p>
+                                        <p>{deliveryData.contents}</p>
                                     </div>
                                 </S.DeliveryPopup>
                             </Overlay>

@@ -1,56 +1,75 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
+import * as B from 'components/commonUi/Button';
+import * as C from 'components/commonUi/CommonStyles';
+import * as I from 'components/commonUi/Input';
 import Layout from 'components/layout/Layout/Layout';
-import { Link, useNavigate } from 'react-router-dom'
-import { Delete, Down, OneEmptyBigStar } from 'components/commonUi/Icon';
-import { ActionButton, LayerOptionButtonC } from 'components/commonUi/Button';
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Delete, OneEmptyBigStar } from 'components/commonUi/Icon';
 import { OneBigStar } from './../../components/commonUi/Icon';
 import { ReviewLayout } from './../../components/layout/Layout/MoreLayout';
-import { AbsoluteTopDiv, ImgSizeLayout, RelativDiv } from 'components/layout/Img/ImgSizeLayout';
-import maindata from 'assets/data/maindata'
-import { NameToggleInput, NameToggleInputForm } from './MemberManagement/MemberManagementStyle';
+import { imageValidation } from 'utils/utils';
+import { insertReview, updateReview } from 'service/review';
+import Alert from 'components/commonUi/Alert';
+import Confirm from 'components/commonUi/Confirm';
 
 
 function ReviewUploadPage() {
-  let [item] = useState(maindata)
-  const navigate = useNavigate()
-  const [color, setColor] = useState(false)
-  const [modal, setModal] = useState(false)
-  const [star, setStar] = useState(0)
-  const [inputValue, setInputValue] = useState(null)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [modal, setModal] = useState(false);
+  const [fileError, setFileError] = useState('');
+  const [active, setActive] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const [data, setData] = useState({
+    reviewId: location.state.item.reviewId ?? 0,
+    orderId: location.state.item.orderId,
+    storeId: location.state.item.storeId,
+    items: location.state.item.orderItems,
+    rating: location.state.item.rating ?? 0,
+    contents: location.state.item.contents ?? "",
+    images: location.state.item.images ?? [],
+    files: [],
+    deleteFileId: [],
+  });
 
-  const ShowReviewModal = () => {
-    setModal(!modal);
-  }
-  const CloseModal = () => {
-    setModal(!modal);
+  console.log(data);
+
+  // 리뷰 작성
+  const onSubmit = async () => {
+    const response = data.reviewId ? await updateReview(data) : await insertReview(data);
+
+    if (response && response.data.data) {
+      if (data.reviewId) {
+        setAlert({
+          contents: "수정되었습니다.",
+          buttonText: "확인",
+          onButtonClick: () => navigate(-1),
+          onOverlayClick: () => navigate(-1),
+        })
+      } else {
+        setModal(true);
+      }
+    } else {
+      setAlert({
+        contents: "실패하였습니다.",
+        buttonText: "확인",
+        onButtonClick: () => navigate(-1),
+        onOverlayClick: () => navigate(-1),
+      })
+    }
   }
 
-  // 별점 계산
-  // const handleStar = () => {
-  //   switch (star) {
-  //     case 0:
-  //       return '0';
-  //     case 1:
-  //       return '1';
-  //     case 2:
-  //       return '2';
-  //     case 3:
-  //       return '3';
-  //     case 4:
-  //       return '4';
-  //     case 5:
-  //       return '5';
-  //     default:
-  //       return 'star'
-  //   }
-  // }
-  // const handleBtn = ()=>{
-  //   if(별체크 && 내용입력){
-  //     setColor(true)
-  //   }
-  // }
+  useEffect(() => {
+    if (data.rating > 0 && data.contents) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+
+  }, [data]);
+
 
   return (
     <div>
@@ -61,7 +80,7 @@ function ReviewUploadPage() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          <L.Contents  _height='calc(100vh - 68px)'>
+          <L.Contents _height='calc(100vh - 68px)'>
             <L.FlexCols _gap={28}>
               <div>
                 <T.Text _size={20} _weight={600} _color='gray900' _align='center' _line={2}>인싸 과일</T.Text>
@@ -71,75 +90,190 @@ function ReviewUploadPage() {
                 {Array(5)
                   .fill()
                   .map((_, index) => (
-                    star >= index +1 ? (
-                      <div onClick={()=> setStar(index + 1)}>
-                        <OneBigStar/>
+                    data.rating >= index + 1 ? (
+                      <div key={index} onClick={() => setData({ ...data, rating: index + 1 })}>
+                        <OneBigStar />
                       </div>
-                      ) : (
-                      <div onClick={()=> setStar(index + 1)}>
-                        <OneEmptyBigStar/>
+                    ) : (
+                      <div key={index} onClick={() => setData({ ...data, rating: index + 1 })}>
+                        <OneEmptyBigStar />
                       </div>
                     )
-                ))}
+                  ))}
                 {/* 별점 */}
                 {/* {handleStar()} */}
               </L.FlexRows>
 
+              <L.FlexCols _gap={16}>
+                <B.LabelCols htmlFor="files">
+                  <B.FileLebelForm>사진 첨부하기</B.FileLebelForm>
+                </B.LabelCols>
+                <L.FlexRows>
+                  {
+                    data.images.length > 0 &&
+                    data.images.map((file, index) => (
+                      <FileListForm
+                        key={index}
+                        file={file}
+                        fileDeleteHandler={() => {
+                          console.log(file);
+                          setData({
+                            ...data,
+                            images: data.images.filter(item => item !== file),
+                            deleteFileId: [...data.deleteFileId, file.reviewImageId]
+                          })
+                        }}
+                      />
+                    ))
+                  }
 
+                  {
+                    data.files.length > 0 &&
+                    data.files.map((file, idx) => (
+                      <React.Fragment key={idx}>
+                        <FileList
+                          file={file}
+                          deleteFile={() => {
+                            setFileError('')
+                            setData({
+                              ...data,
+                              files: data.files.filter(item => item !== file)
+                            })
+                          }} />
+                      </React.Fragment>
+                    ))
+                  }
+                </L.FlexRows>
+                <input
+                  type="file"
+                  id="files"
+                  accept='image/*'
+                  style={{ display: 'none' }}
+                  onChange={e => {
+                    if (!e.target.files[0]) return;
+                    const valid = imageValidation(e.target.files[0]);
+                    if (valid) return
 
-              <LayerOptionButtonC>사진 첨부하기</LayerOptionButtonC>
+                    if (data.files.length === 5) {
+                      return setFileError('최대 5개까지 추가 가능합니다.')
+                    }
 
-
-              <L.FlexRows _gap={20}>
-                <RelativDiv>
-                  <ImgSizeLayout _width={80} _height={80} _bdr={4} src={item[0].img}/>
-                  <AbsoluteTopDiv>
-                    <Delete/>
-                  </AbsoluteTopDiv>
-                </RelativDiv>
-                <RelativDiv>
-                  <ImgSizeLayout _width={80} _height={80} _bdr={4} src={item[1].img}/>
-                  <AbsoluteTopDiv>
-                    <Delete/>
-                  </AbsoluteTopDiv>
-                </RelativDiv>
-              </L.FlexRows>
-
-
-
-              <NameToggleInputForm _height='200px'>
-                <NameToggleInput
-                  placeholder='내용을 작성해주세요.'
-                  type='text'
-                  value={inputValue}
-                  onChange={e => setInputValue(e.target.value)}
-                  
+                    setData({
+                      ...data,
+                      files: [...data.files, e.target.files[0]]
+                    })
+                  }}
                 />
-              </NameToggleInputForm>
+                {fileError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{fileError}</T.Text>}
+              </L.FlexCols>
 
-
+              <I.Textarea
+                placeholder='내용를 입력해 주세요.'
+                value={data.contents}
+                onChange={e => setData({ ...data, contents: e.target.value })}
+              />
             </L.FlexCols>
-           
 
-
-
-            <ActionButton
+            <B.ActionButton
               type='button'
-              // color={color}
-              onClick={ShowReviewModal}
-              // active={inputValue.length > 5}
-              // disabled={inputValue.length > 5}
-            >리뷰 등록</ActionButton>
+              color={active}
+              onClick={onSubmit}
+              disabled={!active}
+            >{data.reviewId ? "리뷰 수정" : "리뷰 등록"}</B.ActionButton>
           </L.Contents>
         </L.Container>
-        {modal && <ReviewLayout CloseModal={CloseModal} />}
+        {modal && <ReviewLayout CloseModal={() => navigate(-1, { replace: true })} />}
+        {
+          alert &&
+          <Alert
+            title={alert.title}
+            contents={alert.contents}
+            buttonText={alert.buttonText}
+            onButtonClick={alert.onButtonClick}
+            onOverlayClick={alert.onOverlayClick}
+          />
+        }
       </Layout>
 
     </div>
   )
 }
 
+const FileListForm = ({ file, fileDeleteHandler }) => {
 
+  const [confirm, setConfirm] = useState(null);
+  const [alert, setAlert] = useState(null);
+  const url = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/review/'
+
+  return (
+    <>
+      <C.ImageBox>
+        <C.DeleteBtn onClick={() => {
+          setConfirm({
+            warn: true,
+            contents: `사진을 삭제하시겠습니까?`,
+            confirmText: "삭제",
+            cancelText: "취소",
+            onConfirmClick: () => {
+              setConfirm(null);
+              fileDeleteHandler(file);
+            },
+            onCancelClick: () => setConfirm(null)
+          })
+        }}>
+          <Delete />
+        </C.DeleteBtn>
+        <img src={url + file.name} width={"100%"} height={"100%"} />
+      </C.ImageBox>
+      {
+        confirm &&
+        <Confirm
+          warn={confirm.warn}
+          contents={confirm.contents}
+          confirmText={confirm.confirmText}
+          cancelText={confirm.cancelText}
+          onConfirmClick={confirm.onConfirmClick}
+          onCancelClick={confirm.onCancelClick}
+        />
+      }
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
+    </>
+  )
+}
+
+
+const FileList = ({ file, deleteFile }) => {
+
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    if (!file) return;
+
+    let reader = new FileReader();
+    reader.onload = function () {
+      setImage({ result: reader.result });
+    };
+    reader.readAsDataURL(file);
+  }, [file])
+
+  return (
+    <C.ImageBox>
+      <C.DeleteBtn onClick={deleteFile}>
+        <Delete />
+      </C.DeleteBtn>
+      <img src={image?.result} width={"100%"} height={"100%"} />
+    </C.ImageBox>
+  )
+}
 
 
 export default ReviewUploadPage

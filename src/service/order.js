@@ -6,6 +6,7 @@ const urls = {
 	unView: "/order/unView",
 	request: "/order/request",
 	cancel: "/order/cancel",
+	success: "/order/success",
 };
 
 /* ==============================
@@ -34,6 +35,13 @@ export function requestPayment(data) {
 ============================== */
 export function orderCancel(id) {
 	return client.get(`${urls.cancel}/${id}`);
+}
+
+/* ==============================
+   주문 상품 수령 완료
+============================== */
+export function orderSuccess(id) {
+	return client.patch(`${urls.success}/${id}`);
 }
 
 /* ==============================

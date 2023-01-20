@@ -247,3 +247,28 @@ export const LabelCols = styled.label`
     align-items: center;
     cursor: pointer;
 `;
+
+export const FileLebelForm = styled.div`
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 8px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
+    border: 1px solid ${props => props.theme.color.green700};
+    color: ${props => props.theme.color.green700};
+    border-radius: 4px; 
+    font-size: 15px;
+    font-weight: 600;
+
+    &::after {
+        content: '';
+        width: 24px;
+        height: 24px;
+        background: url(${CameraC}) center no-repeat;
+        transform: rotate(${props => props.active ? 180 : 0}deg);
+    }
+`;
