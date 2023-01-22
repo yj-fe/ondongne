@@ -3,6 +3,7 @@ import { client } from ".";
 const urls = {
 	get: "/review/details",
 	list: "/review/list",
+	itemList: "/review/item/list",
 	save: "/review/save",
 	update: "/review/update",
 	like: "/review/like",
@@ -14,6 +15,13 @@ const urls = {
 ============================== */
 export function getReview(id) {
 	return client.get(`${urls.get}/${id}`);
+}
+
+/* ==============================
+    상품 리뷰 리스트
+============================== */
+export function itemReviewList(id, sort) {
+	return client.get(`${urls.itemList}/${id}?sort=${sort}`);
 }
 
 /* ==============================
@@ -81,5 +89,5 @@ export function likeReview(id) {
     리뷰 삭제
 ============================== */
 export function deleteReview(id) {
-	return client.post(`${urls.delete}/${id}`);
+	return client.delete(`${urls.delete}/${id}`);
 }

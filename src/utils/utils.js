@@ -110,6 +110,7 @@ export const sortFormatter = (filter) => {
 	if (filter === "order") return "주문 많은 순";
 	if (filter === "orderDesc") return "최근 주문 순";
 	if (filter === "review") return "리뷰 별점 순";
+	if (filter === "reviewLike") return "리뷰 도움 순"
 	if (filter === "newstore") return "신규 매장 순";
 	if (filter === "like") return "단골 많은 순";
 };
@@ -156,3 +157,12 @@ export const phoneFormatter = (input) => {
 	}
 	return result;
 };
+
+// 주문 이름
+export const orderName = (item) => {
+	if (item.length > 1) {
+		return `${item[0].name} 외 ${item.length - 1}개`
+	} else {
+		return `${item[0].name}`
+	}
+}

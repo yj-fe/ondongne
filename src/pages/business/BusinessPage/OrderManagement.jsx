@@ -12,6 +12,7 @@ import dayjs from 'dayjs';
 import Alert from 'components/commonUi/Alert';
 import { orderCancel } from 'service/order';
 import LayoutBiz from 'components/layout/Layout/LayoutBiz';
+import { orderName } from 'utils/utils';
 
 function OrderManagement() {
   const navigate = useNavigate();
@@ -58,14 +59,6 @@ function OrderManagement() {
       loadData();
     }
   };
-
-  const orderName = (item) => {
-    if (item.orderItems.length > 1) {
-      return `${item.orderItems[0].name} 외 ${item.orderItems.length - 1}개`
-    } else {
-      return `${item.orderItems[0].name}`
-    }
-  }
 
   useEffect(() => {
     if (auth.isAuthenticated && auth.storeId) {
@@ -115,7 +108,7 @@ function OrderManagement() {
                   <L.FlexRows _content="space-between" _items="flex-start">
                     <L.FlexCols _gap={4}>
                       <T.Text _size={18} _weight={600}>{item.memberNickname}</T.Text>
-                      <T.Text _size={15} _color="gray800">{orderName(item)}</T.Text>
+                      <T.Text _size={15} _color="gray800">{orderName(item.orderItems)}</T.Text>
                       <T.Text _size={13} _color="gray500">{dayjs(item.createDate).format('YYYY/MM/DD HH:mm')}</T.Text>
                     </L.FlexCols>
                     <L.FlexCols _width={"15%"}>

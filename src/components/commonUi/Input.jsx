@@ -70,7 +70,7 @@ export const Textarea = styled.textarea`
 	font-weight: 400;
 	font-size: 16px;
 	width: 100%;
-	height: 180px;
+	height: ${props => props._height || 180}px;
 	background-color: ${(props) => (props.color ? "#EEEEEE" : "none")};
 	text-align: ${(props) => props.align || null};
 	color: #bdbdbd;

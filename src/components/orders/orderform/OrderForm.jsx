@@ -10,7 +10,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import CheckBox from 'components/commonUi/CheckBox';
 import LayerSelect from 'components/commonUi/LayerSelect';
 import Alert from 'components/commonUi/Alert';
-import { numberFormat, phoneFormatter, storeTotalPrice, totalPrice } from 'utils/utils';
+import { numberFormat, orderName, phoneFormatter, storeTotalPrice, totalPrice } from 'utils/utils';
 import { useSelector } from 'react-redux';
 import { getMember } from 'service/member';
 import DaumPost from 'components/DaumPost';
@@ -115,7 +115,7 @@ const OrderForm = ({ data }) => {
                 tossPayments.requestPayment(orderData.payType, {
                     amount: data.amount,
                     orderId: data.orderKey,
-                    orderName: toTossOrderName(),
+                    orderName: orderName(orderData.items),
                     customerName: orderData.items[0].storeName,
                     successUrl: data.successUrl,
                     failUrl: data.failUrl,
@@ -145,14 +145,6 @@ const OrderForm = ({ data }) => {
 
 
     };
-
-    const toTossOrderName = () => {
-        if (orderData.items.length > 1) {
-            return `${orderData.items[0].itemName} 외 ${orderData.items.length - 1}개`
-        } else {
-            return `${orderData.items[0].itemName}`
-        }
-    }
 
     const orderSuccess = () => {
 

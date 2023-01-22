@@ -10,7 +10,7 @@ import Confirm from 'components/commonUi/Confirm';
 import Alert from 'components/commonUi/Alert';
 import { S } from './OrderDetailsStyle'
 import { orderCancel, orderDetails } from 'service/order';
-import { numberFormat, storeTotalPrice, totalPrice } from 'utils/utils';
+import { numberFormat, orderName, storeTotalPrice, totalPrice } from 'utils/utils';
 import dayjs from 'dayjs';
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
@@ -95,14 +95,6 @@ const OrderDetails = props => {
         })
     };
 
-    const toOrderName = (item) => {
-        if (item.length > 1) {
-            return `${item[0].name} 외 ${item.length - 1}개`
-        } else {
-            return `${item[0].name}`
-        }
-    }
-
     /* ==============================
         주문 취소
     ============================== */
@@ -133,7 +125,7 @@ const OrderDetails = props => {
                                 }
                                 <L.FlexCols _width="auto" _gap={4}>
                                     <T.Text _size={18} _weight={600}>{orderData.storeName}</T.Text>
-                                    <T.Text _size={15} _color="gray800">{toOrderName(orderData.orderItems)}</T.Text>
+                                    <T.Text _size={15} _color="gray800">{orderName(orderData.orderItems)}</T.Text>
                                 </L.FlexCols>
                             </L.FlexRows>
                             <T.Text _size={14} _weight={500} _color="gray800">{orderData.orderStatus}</T.Text>

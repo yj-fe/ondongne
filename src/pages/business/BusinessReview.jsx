@@ -1,44 +1,93 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import Layout from 'components/layout/Layout/Layout';
-import { Link, useNavigate } from 'react-router-dom'
-import {  ArrowRightB } from 'components/commonUi/Icon';
-import { MarketComments, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv,  MarketReviewDiv, Line, Comments, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, } from 'pages/main/DetailsPage/DetailsPageStyle'
+import * as I from 'components/commonUi/Input';
+import { useNavigate } from 'react-router-dom'
+import { ArrowRightB, Cancel } from 'components/commonUi/Icon';
+import { MarketComments, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, Line, Comments, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, ReplyBox, } from 'pages/main/DetailsPage/DetailsPageStyle'
 import { ReactComponent as ReviewLike0 } from "assets/main/reviewlikedisable.svg";
-import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
 import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import Avatar from 'assets/common/avatar.png';
-import ReviewImg from 'assets/main/reviewimg.png'
 import { Badge } from 'components/commonUi/Button';
-import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { Imgauto, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Confirm from 'components/commonUi/Confirm';
-import {  NameToggleInput, NameToggleInputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
 import LayoutBiz from './../../components/layout/Layout/LayoutBiz';
+import { useSelector } from 'react-redux';
+import { bizReviewList, updateReviewComment } from 'service/bizReview';
+import Moment from 'react-moment';
+import StarRate from 'components/commonUi/StarRate';
+import { likeReview } from 'service/review';
+const MEMBERIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/member/";
+const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/review/";
+const STOREIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
 function BusinessReview() {
   const navigate = useNavigate()
+  const auth = useSelector(state => state.auth);
+
+  // ui
+  const [data, setData] = useState([]);
   const [modal, setModal] = useState(false);
-  const ShowDeleteModal = () => {
-    setModal(!modal);
-  }
-  const PropsModal = () => {
-    setModal(!modal);
+  const [confirm, setConfirm] = useState(null);
+  const [comment, setComment] = useState("");
+  const [deleteId, setDeleteId] = useState(0);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [commentItem, setCommentItem] = useState(null);
+
+  // 리뷰 목록
+  const loadData = async () => {
+    const response = await bizReviewList(auth.storeId);
+    if (response && response.data.data) {
+      setData(response.data.data);
+    }
   }
 
-  const [confirm, setConfirm] = useState(null)
+  //리뷰 댓글
+  const commentProcess = async (id, contents) => {
+    const response = await updateReviewComment(id, contents);
+    if (response && response.data.data) {
+      setModal(false);
+      setCommentItem(null);
+      setIsUpdate(false);
+      loadData();
+    }
+  }
 
-  const openConfirm = () => {
+  //리뷰 좋아요
+  const reviewLike = async (id) => {
+    const response = await likeReview(id);
+    if (response && response.data.data) {
+      loadData();
+    }
+  }
+
+  const openDeleteConfirm = (item) => {
+    setDeleteId(item.reviewId);
+    setModal(true);
+  }
+
+  const openConfirm = (item) => {
     return setConfirm({
-      contents: "리뷰를 수정하시겠습니까?",
+      contents: "리뷰 댓글를 수정하시겠습니까?",
       confirmText: "리뷰 수정",
       cancelText: "취소",
-      onConfirmClick: () => setConfirm(null),
+      onConfirmClick: () => {
+        setComment(item.comment);
+        setConfirm(null);
+        setIsUpdate(true);
+        setCommentItem(item);
+      },
       onCancelClick: () => setConfirm(null),
     })
   }
+
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      loadData();
+    }
+  }, [auth])
 
   return (
     <div>
@@ -48,203 +97,195 @@ function BusinessReview() {
         cart={false}
         onBackClick={() => navigate(-1)}
       >
-        <L.Container >
+        <L.Container>
 
 
-            {/* 리뷰 없을 때 */}
-          {/* <L.Contents  _height={'100vh'}>
-            <L.FlexCols _gap={80} >
-              <L.FlexRows >
+          {/* 리뷰 없을 때 */}
+          {
+            data.length === 0 &&
+            <L.Contents _height={'100vh'}>
+              <L.FlexCols _gap={80} >
+                <L.FlexRows >
                   <T.Text _size={15} _weight={400} _color='gray900'>전체 0건</T.Text>
-              </L.FlexRows>
-              <L.FlexRows  _content='center' _item='center'>
-                <T.Text _size={15} _weight={300} _color='gray600'>작성된 리뷰글이 없습니다.</T.Text>
-              </L.FlexRows>
+                </L.FlexRows>
+                <L.FlexRows _content='center' _item='center'>
+                  <T.Text _size={15} _weight={300} _color='gray600'>작성된 리뷰글이 없습니다.</T.Text>
+                </L.FlexRows>
 
-            </L.FlexCols>
-          </L.Contents> */}
+              </L.FlexCols>
+            </L.Contents>
+          }
 
 
-            {/* 리뷰 있을 때 */}
+          {/* 리뷰 있을 때 */}
+          {
+            data.length > 0 &&
+
             <L.Contents >
 
-            <L.FlexCols _gap={20}>
-              <L.FlexRows >
-                  <T.Text _size={15} _weight={400} _color='gray900'>전체 3건</T.Text>
-              </L.FlexRows>
-              <Line/>
+              <L.FlexCols _gap={20}>
+                <L.FlexRows >
+                  <T.Text _size={15} _weight={400} _color='gray900'>전체 {data.length}건</T.Text>
+                </L.FlexRows>
+                <Line />
 
-
- {/* =======Review1====== */}
-            <L.FlexCols _padding='20px 0px' _gap={16}>
-                  <L.FlexRows _content='space-between' _items='center'>
-                    <L.FlexRows>
-                      <ReviewProfileImg src={Avatar} />
-                      <L.FlexCols _gap={4}>
-                        <L.FlexRows _gap='0px'  _items='center' _content='left'>
-                          <T.Text _size={16} _weight={600}>아재의 과일</T.Text>
-                          <ArrowRightB/>
+                {/* =======Review2====== */}
+                {
+                  data.map((item, index) => (
+                    <React.Fragment key={index}>
+                      <L.FlexCols _padding='20px 0px' _gap={16}>
+                        <L.FlexRows _content='space-between' _items='center'>
+                          <L.FlexRows>
+                            <ReviewProfileImg src={item.memberProfile ? MEMBERIMGURL + item.memberProfile : Avatar} />
+                            <L.FlexCols _gap={4}>
+                              <L.FlexRows _gap='0px' _items='center' _content='left'>
+                                <T.Text _size={16} _weight={600}>{item.memberNickname}</T.Text>
+                                <ArrowRightB />
+                              </L.FlexRows>
+                              <L.FlexRows _gap={8} _items='center' _content='left'>
+                                <StarRate rate={Number(item.rating)} width={12} />
+                                <ReviewDate>
+                                  <CreatedAt date={item.createDate} />
+                                </ReviewDate>
+                              </L.FlexRows>
+                            </L.FlexCols>
+                          </L.FlexRows>
+                          <L.FlexRows _width='50px'>
+                            {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
+                          </L.FlexRows>
                         </L.FlexRows>
-                        <L.FlexRows _gap={8}  _items='center' _content='left'>
-                          <Reviewstar />
-                          <ReviewDate>2일 전</ReviewDate>
-                        </L.FlexRows>
-                      </L.FlexCols>
-                    </L.FlexRows>
-                    <L.FlexRows _width='50px'>
-                      {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
-                    </L.FlexRows>
-                  </L.FlexRows>
-
-              {/* <ImgPer src={ReviewImg}/> */}
-              <Comments>맛있습니다~</Comments>
-              <ReviewLikeStyle>
-                <ReviewLikeFrame color={false}>
-                  <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
-                  <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
-                  <ReviewLikeText color={false}>1</ReviewLikeText>
-                </ReviewLikeFrame>
-              </ReviewLikeStyle>
-
-              <L.FlexRows _gap={16}>
-                <ImgSizeLayout _width={40} _height={40} _bdr={50} src={Avatar} />
-                <NameToggleInputForm _height='58px'>
-                  <NameToggleInput
-                    _size='15px'
-                    placeholder='리뷰 답변을 남겨보세요.'
-                    type='text'
-                  />
-                  <Badge _padding='8px 12px' _width='47px' _height='34px' _bg='green700' _bdr='4px' _color='white' _weight='600' _size='13px'>등록</Badge>
-                </NameToggleInputForm>
-              </L.FlexRows>
-
-            </L.FlexCols>
-
-            
-            {/* =======Review2====== */}
-            <L.FlexCols _padding='20px 0px' _gap={16}>
-              <L.FlexRows _content='space-between' _items='center'>
-                    <L.FlexRows>
-                      <ReviewProfileImg src={Avatar} />
-                      <L.FlexCols _gap={4}>
-                        <L.FlexRows _gap='0px'  _items='center' _content='left'>
-                          <T.Text _size={16} _weight={600}>아재의 과일</T.Text>
-                          <ArrowRightB/>
-                        </L.FlexRows>
-                        <L.FlexRows _gap={8}  _items='center' _content='left'>
-                          <Reviewstar />
-                          <ReviewDate>2일 전</ReviewDate>
+                        {
+                          item.images.length > 0 &&
+                          item.images.map((image, idx) => (
+                            <React.Fragment key={idx}>
+                              <Imgauto _bdr={4} src={IMGURL + image.name} />
+                            </React.Fragment>
+                          ))
+                        }
+                        <Comments>{item.contents}</Comments>
+                        <L.FlexRows>
+                          <ReviewLikeStyle
+                            onClick={() => reviewLike(item.reviewId)}
+                          >
+                            <ReviewLikeFrame color={item.likeStatus}>
+                              <ReviewLikeButton>{item.likeStatus ? <ReviewLike /> : <ReviewLike0 />}</ReviewLikeButton>
+                              <ReviewLikeText color={item.likeStatus}>도움돼요!</ReviewLikeText>
+                              <ReviewLikeText color={item.likeStatus}>{item.likeCount}</ReviewLikeText>
+                            </ReviewLikeFrame>
+                          </ReviewLikeStyle>
+                          {
+                            !item.comment &&
+                            <ReviewLikeStyle
+                              onClick={() => setCommentItem(commentItem == null ? item : null)}
+                            >
+                              <ReviewLikeFrame color={true}>
+                                <ReviewLikeText color={true}>사장님 답변 달기</ReviewLikeText>
+                              </ReviewLikeFrame>
+                            </ReviewLikeStyle>
+                          }
                         </L.FlexRows>
                       </L.FlexCols>
-                    </L.FlexRows>
-                    <L.FlexRows _width='50px'>
-                    {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
-                    </L.FlexRows>
-                  </L.FlexRows>
-              <Comments>담에 또 먹을래요~~~~~~~~</Comments>
-              <ReviewLikeStyle>
-                <ReviewLikeFrame color={false}>
-                  <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
-                  <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
-                  <ReviewLikeText color={false}>0</ReviewLikeText>
-                </ReviewLikeFrame>
-              </ReviewLikeStyle>
-            </L.FlexCols>
 
-            {/* =======MarketReview====== */}
-            <MarketReviewDiv>
-              <ReviewProfileImg src={Avatar} />
-              <MarketCommentsStyle>
-                <L.FlexCols _gap={16}>
-                  <L.FlexRows _content='space-between'>
-                    <MarketIdDiv>
-                      <MarketId>사장님</MarketId>
-                      <MarketDate>2일 전</MarketDate>
-                    </MarketIdDiv>
-                    <L.FlexRows _width='118px'>
+                      {
+                        (item.comment && item.commentDate) &&
+                        <MarketReviewDiv>
+                          <ReviewProfileImg src={item.storeProfile ? STOREIMGURL + item.storeProfile : Avatar} />
+                          <MarketCommentsStyle>
+                            <L.FlexCols _gap={16}>
+                              <L.FlexRows _content='space-between'>
+                                <MarketIdDiv>
+                                  <MarketId>{item.storeName}</MarketId>
+                                  <MarketDate>
+                                    <CreatedAt date={item.commentDate} />
+                                  </MarketDate>
+                                </MarketIdDiv>
+                                <L.FlexRows _width='118px'>
+                                  <div
+                                    type='button'
+                                    onClick={() => openConfirm(item)}
+                                  >
+                                    <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _bg='white' _size='13px'>수정</Badge>
+                                  </div>
+                                  <div
+                                    type='button'
+                                    onClick={() => openDeleteConfirm(item)}
+                                  >
+                                    <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _bg='white' _size='13px'>삭제</Badge>
+                                  </div>
+                                </L.FlexRows>
+                              </L.FlexRows>
+                              <MarketComments>
+                                {item.comment}
+                              </MarketComments>
+                            </L.FlexCols>
+                          </MarketCommentsStyle>
+                        </MarketReviewDiv>
+                      }
+                    </React.Fragment>
+                  ))
+                }
+
+                {
+                  commentItem &&
+                  <L.FlexCols>
+
+                    <ReplyBox>
+                      <L.FlexRows _content='flex-start' _gap={4}>
+                        <T.Text _size={14} _weight={600} _color='white'>@{commentItem.memberNickname}</T.Text>
+                        <T.Text _size={14} _weight={400} _color='white'>님에게 리뷰 답변 {isUpdate ? "수정하기" : "남기기"}</T.Text>
+                      </L.FlexRows>
+                      <button
+                        type="button"
+                        onClick={() => setCommentItem(null)}
+                      >
+                        <Cancel />
+                      </button>
+                    </ReplyBox>
+
+                    <L.FlexRows _gap={16}>
+                      <ImgSizeLayout _width={40} _height={40} _bdr={50} src={data[0].storeProfile ? STOREIMGURL + data[0].storeProfile : Avatar} />
+                      <I.Textarea
+                        _height={150}
+                        placeholder='리뷰 답변을 남겨보세요.'
+                        value={comment}
+                        onChange={e => setComment(e.target.value)}
+                      />
                       <div
-                        type='button'
-                        onClick={openConfirm} 
-                        >
-                      <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _bg='white' _size='13px'>수정</Badge>
-                      </div>
-                      <div
-                        type='button'
-                        onClick={ShowDeleteModal} 
-                        >
-                      <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _bg='white' _size='13px'>삭제</Badge>
+                        onClick={() => commentProcess(commentItem.reviewId, comment)}
+                      >
+                        <Badge _width='47px' _height='34px' _bg='green700' _bdr='4px' _color='white' _weight='600' _size='13px'>
+                          {isUpdate ? "수정" : "등록"}
+                        </Badge>
                       </div>
                     </L.FlexRows>
-                  </L.FlexRows>
-                    <MarketComments>
-                      <p>주문해주셔서 감사합니다 우리동네님!</p><br />
-                      <p>더 좋은 상품으로 보답하겠습니다.</p>
-                      <p>감사합니다 ^^</p><br />
-                    </MarketComments>
-                </L.FlexCols>
-              </MarketCommentsStyle>
-            </MarketReviewDiv>
+                  </L.FlexCols>
+                }
 
-
-            {/* =======Review3====== */}
-            <L.FlexCols _padding='20px 0px' _gap={16}>
-
-                <L.FlexRows _content='space-between' _items='center'>
-                    <L.FlexRows>
-                      <ReviewProfileImg src={Avatar} />
-                      <L.FlexCols _gap={4}>
-                        <L.FlexRows _gap='0px'  _items='center' _content='left'>
-                          <T.Text _size={16} _weight={600}>아재의 과일</T.Text>
-                          <ArrowRightB/>
-                        </L.FlexRows>
-                        <L.FlexRows _gap={8}  _items='center' _content='left'>
-                          <Reviewstar />
-                          <ReviewDate>2일 전</ReviewDate>
-                        </L.FlexRows>
-                      </L.FlexCols>
-                    </L.FlexRows>
-                    <L.FlexRows _width='50px'>
-                    {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
-                    </L.FlexRows>
-                  </L.FlexRows>
-
-              <Comments>싱싱하고 맛있어요</Comments>
-              <ReviewLikeStyle>
-                <ReviewLikeFrame color={false}>
-                  <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
-                  <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
-                  <ReviewLikeText color={false}>0</ReviewLikeText>
-                </ReviewLikeFrame>
-              </ReviewLikeStyle>
-            </L.FlexCols>
-
-            <L.FlexRows _gap={16}>
-                <ImgSizeLayout _width={40} _height={40} _bdr={50} src={Avatar} />
-                <NameToggleInputForm _height='58px'>
-                  <NameToggleInput
-                    _size='15px'
-                    placeholder='리뷰 답변을 남겨보세요.'
-                    type='text'
-                  />
-                  <Badge _width='47px' _height='34px' _bg='green700' _bdr='4px' _color='white' _weight='600' _size='13px'>등록</Badge>
-                </NameToggleInputForm>
-              </L.FlexRows>
-
-            </L.FlexCols>
+              </L.FlexCols>
 
             </L.Contents>
+          }
 
-      {
-        confirm &&
-        <Confirm 
-          contents={confirm.contents}
-          confirmText={confirm.confirmText}
-          cancelText={confirm.cancelText}
-          onConfirmClick={confirm.onConfirmClick}
-          onCancelClick={confirm.onCancelClick}
-        />
-      }
-      {modal && <ModalDelete PropsModal={PropsModal} closeText="취소" buttonText="삭제" titleText="리뷰를 삭제하시면 재작성이 불가합니다." titleText2="그래도 삭제하시겠습니까?"/>}
+          {
+            confirm &&
+            <Confirm
+              contents={confirm.contents}
+              confirmText={confirm.confirmText}
+              cancelText={confirm.cancelText}
+              onConfirmClick={confirm.onConfirmClick}
+              onCancelClick={confirm.onCancelClick}
+            />
+          }
+          {modal &&
+            <ModalDelete
+              PropsModal={() => {
+                setModal(false);
+                setDeleteId(0);
+              }}
+              PropsWithdrwal={() => commentProcess(deleteId, "")}
+              closeText="취소"
+              buttonText="삭제"
+              titleText="리뷰 답변을 삭제하시겠습니까?" />}
         </L.Container>
       </LayoutBiz>
 
@@ -253,7 +294,25 @@ function BusinessReview() {
 }
 
 
+const CreatedAt = ({ date }) => {
+  let startTime = new Date(date);
+  let nowTime = Date.now();
 
+  // 방금전
+  if (parseInt(startTime - nowTime) > -60000) {
+    return <Moment format="방금 전">{startTime}</Moment>;
+  }
+
+  // 3일 후 날짜 표시
+  if (parseInt(startTime - nowTime) < (-86400000 * 3)) {
+    return <Moment format="YY.MM.DD">{startTime}</Moment>;
+  }
+
+  // 3일전 일, 시간, 분 표시
+  if (parseInt(startTime - nowTime) > (-86400000 * 3)) {
+    return <Moment fromNow>{startTime}</Moment>;
+  }
+};
 
 export default BusinessReview
 

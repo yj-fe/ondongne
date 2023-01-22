@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { ReactComponent as StarIcon2 } from "assets/main/ratestar2.svg";
-import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
-import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
-import { ReactComponent as ReviewLike0 } from "assets/main/reviewlikedisable.svg";
-import { ReactComponent as Filter } from "assets/main/filter.svg";
-import ReviewImg from 'assets/main/reviewimg.png'
-import Avatar from 'assets/common/avatar.png'
 import { DetailButtonDiv, DetailButtonStyle, DetailTabInfo, DetailTabReview, MarketComments, TabInfoContentText, TabInfoContentTitle, TypeLabel, TypeLabelInfo, TypeTextStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketReviewDiv, Price, ProfileDiv, ProfileTextDiv, MoreStyle, FlagStyle, FlagText, IconStyle, Line, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, ButtonStyle, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, OrderToggleBox } from './DetailsPageStyle'
 import ModalMorePage from 'components/Main/More/ModalMorePage'
 import Layout from 'components/layout/Layout/Layout';
@@ -29,6 +22,7 @@ import ProductComments from 'components/Main/productDetails/ProductComments';
 import { useDispatch } from 'react-redux';
 import { orderActions } from 'store/slices/order';
 import { ImgBanner } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import ProductReview from 'components/Main/productDetails/ProductReview';
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
 const STOREURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
@@ -97,8 +91,6 @@ function DetailsPage(props) {
     }
   }
 
-  console.log(location.pathname);
-
   const getItem = async () => {
     const response = await getItemDetails(id);
 
@@ -165,21 +157,24 @@ function DetailsPage(props) {
 
                 <Line />
                 <L.Contents _padding='16px 20px'>
-                    <L.FlexCols _gap={16}>
-                      <L.FlexCols _gap={4}>
+                  <L.FlexCols _gap={16}>
+                    <L.FlexCols _gap={4}>
+                      {
+                        item.type == 'GROUP' &&
+                        !item.soldoutStatus &&
+                        <ProductTimer date={item.endDate} />
+                      }
+                      <T.Text _width='100%' _size={18} _weight={500} _color='gray900' >{item.itemName}</T.Text>
+                      <L.FlexRows _items="center" width="16">
                         {
-                          item.type == 'GROUP' &&
-                          !item.soldoutStatus &&
-                          <ProductTimer date={item.endDate} />
+                          item.itemRating !== '' && 
+                          <StarRate rate={item.itemRating}/>
                         }
-                        <T.Text _width='100%' _size={18} _weight={500} _color='gray900' >{item.itemName}</T.Text>
-                        <L.FlexRows>
-                          <StarRate rate={item.itemRating} />
-                          <T.Text _size={11} _weight={400} _color='gray800'>({item.itemRating})</T.Text>
-                        </L.FlexRows>
-                      </L.FlexCols>
+                        <T.Text _size={11} _weight={400} _color='gray800'>({item.itemRating})</T.Text>
+                      </L.FlexRows>
+                    </L.FlexCols>
 
-                  <L.FlexRows _gap={12} _items='flex-end'>
+                    <L.FlexRows _gap={12} _items='flex-end'>
                       <L.FlexCols _gap={4}>
 
                         {
@@ -192,16 +187,16 @@ function DetailsPage(props) {
 
                         <T.Text _size={20} _weight={600} _color='gray900'>{totalPrice(item.price, item.salePercent)} 원</T.Text>
                       </L.FlexCols>
-                    {
-                      item.type == 'GROUP' &&
-                      <Badge _fdir='column' _bg='gray100' _padding='8px 16px' _height='auto' _bdr='8px'>
-                        <T.Text _align='center' _size={12} _color='gray600' _minWidth={'74px'}>최소 주문량</T.Text>
-                        <T.Text _width='76px' _align='center' _size={16} _weight={600} _color='gray800' >{item.minCount}/{item.maxCount}개</T.Text>
-                        {/* </L.FlexRows> */}
-                      </Badge>
-                    }
-                  </L.FlexRows>
-                    </L.FlexCols>
+                      {
+                        item.type == 'GROUP' &&
+                        <Badge _fdir='column' _bg='gray100' _padding='8px 16px' _height='auto' _bdr='8px'>
+                          <T.Text _align='center' _size={12} _color='gray600' _minWidth={'74px'}>최소 주문량</T.Text>
+                          <T.Text _width='76px' _align='center' _size={16} _weight={600} _color='gray800' >{item.minCount}/{item.maxCount}개</T.Text>
+                          {/* </L.FlexRows> */}
+                        </Badge>
+                      }
+                    </L.FlexRows>
+                  </L.FlexCols>
 
                 </L.Contents>
               </L.FlexCols>
@@ -287,9 +282,6 @@ function DetailsPage(props) {
 }
 
 
-
-
-
 function TabContent(props) {
   return [
 
@@ -331,137 +323,7 @@ function TabContent(props) {
 
     //=====================상품리뷰=====================
     <div>
-      <L.FlexRows _items='center' _content='center' _height='150px'>
-        <T.Text _size={14} _weight={400} _color={'gray600'}>등록된 리뷰정보가 없습니다.</T.Text>
-      </L.FlexRows>
-      {/* <L.FlexCols _gap='0px'>
-        <L.FlexCols _gap={4} _padding='20px 0px'>
-          <L.FlexRows _gap={4} _content='center' _items='center'>
-            <StarIcon2 />
-          </L.FlexRows>
-          <L.FlexRows _gap={4} _content='center' _items='center'>
-            <T.Text _size={20} _weight={500} _color='gray900' >4.5</T.Text>
-            <T.Text _size={20} _weight={500} _color='gray400' >/ 5</T.Text>
-          </L.FlexRows>
-        </L.FlexCols>
-
-        <L.FlexCols _gap={12} _padding='0px'>
-          <L.FlexRows _content='space-between' _items='center'>
-            <L.FlexRows _content='left' _items='center' _gap={4}>
-              <T.Text _size={15} _weight={400} _color='gray900' >총 리뷰</T.Text>
-              <T.Text _size={15} _weight={400} _color='gray900' >3</T.Text>
-              <T.Text _size={15} _weight={400} _color='gray900' >건</T.Text>
-            </L.FlexRows>
-            <L.FlexRows _content='right' _items='center' _gap={4}>
-              <T.Text _size={13} _weight={400} _color='gray900' >최신 순</T.Text>
-              <Filter />
-            </L.FlexRows>
-          </L.FlexRows>
-
-          <Line /> */}
-
-      {/* =======Review1====== */}
-      {/* <L.FlexRows _content='space-between' _items='center'>
-            <L.FlexRows>
-              <ReviewProfileImg src={Avatar} />
-              <L.FlexCols _gap={4}>
-                <L.FlexRows _items='center' _content='left'>
-                  <T.Text _size={16} _weight={600}>과일싹쓸이</T.Text>
-                  <ReviewDate>2일 전</ReviewDate>
-                </L.FlexRows>
-                <L.FlexRows _gap={8} _items='center' _content='left'>
-                  <Reviewstar />
-                </L.FlexRows>
-              </L.FlexCols>
-            </L.FlexRows>
-            <L.FlexRows _width='50px'> */}
-      {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
-      {/* </L.FlexRows>
-          </L.FlexRows> */}
-
-      {/* <UploadImg src={ReviewImg} />
-          <Comments>맛있습니다~</Comments>
-          <ReviewLikeStyle>
-            <ReviewLikeFrame color={true}>
-              <ReviewLikeButton><ReviewLike /></ReviewLikeButton>
-              <ReviewLikeText color={true}>도움돼요!</ReviewLikeText>
-              <ReviewLikeText color={true}>1</ReviewLikeText>
-            </ReviewLikeFrame>
-          </ReviewLikeStyle> */}
-      {/* =======Review2====== */}
-      {/* <L.FlexRows _content='space-between' _items='center'>
-            <L.FlexRows>
-              <ReviewProfileImg src={Avatar} />
-              <L.FlexCols _gap={4}>
-                <L.FlexRows _items='center' _content='left'>
-                  <T.Text _size={16} _weight={600}>우리동네</T.Text>
-                  <ReviewDate>2일 전</ReviewDate>
-                </L.FlexRows>
-                <L.FlexRows _gap={8} _items='center' _content='left'>
-                  <Reviewstar />
-                </L.FlexRows>
-              </L.FlexCols>
-            </L.FlexRows>
-            <L.FlexRows _width='50px'> */}
-      {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
-      {/* </L.FlexRows>
-          </L.FlexRows>
-          <Comments>담에 또 먹을래요~~~~~~~~</Comments>
-          <ReviewLikeStyle>
-            <ReviewLikeFrame color={false}>
-              <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
-              <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
-              <ReviewLikeText color={false}>0</ReviewLikeText>
-            </ReviewLikeFrame>
-          </ReviewLikeStyle> */}
-
-      {/* =======MarketReview====== */}
-      {/* <MarketReviewDiv>
-            <ReviewProfileImg src={Avatar} />
-            <MarketCommentsStyle>
-              <MarketIdDiv>
-                <MarketId>사장님</MarketId>
-                <MarketDate>2일 전</MarketDate>
-              </MarketIdDiv>
-              <MarketComments>
-                <p>주문해주셔서 감사합니다 우리동네님!</p><br />
-                <p>더 좋은 상품으로 보답하겠습니다.</p>
-                <p>감사합니다 ^^</p><br />
-              </MarketComments>
-            </MarketCommentsStyle>
-          </MarketReviewDiv> */}
-      {/* =======Review3====== */}
-      {/* <L.FlexRows _content='space-between' _items='center'>
-            <L.FlexRows>
-              <ReviewProfileImg src={Avatar} />
-              <L.FlexCols _gap={4}>
-                <L.FlexRows _items='center' _content='left'>
-                  <T.Text _size={16} _weight={600}>아이덴잇</T.Text>
-                  <ReviewDate>22.11.30</ReviewDate>
-                </L.FlexRows>
-                <L.FlexRows _gap={8} _items='center' _content='left'>
-                  <Reviewstar />
-                </L.FlexRows>
-              </L.FlexCols>
-            </L.FlexRows>
-            <L.FlexRows _width='50px'> */}
-      {/* <T.Text _size={12} _color='gray400'>신고하기</T.Text> */}
-      {/* </L.FlexRows>
-          </L.FlexRows>
-
-          <Comments>싱싱하고 맛있어요</Comments>
-          <ReviewLikeStyle>
-            <ReviewLikeFrame color={false}>
-              <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
-              <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
-              <ReviewLikeText color={false}>0</ReviewLikeText>
-            </ReviewLikeFrame>
-          </ReviewLikeStyle>
-
-
-
-        </L.FlexCols>
-      </L.FlexCols> */}
+      <ProductReview id={props.item.itemId} />
     </div>,
     //====================댓글=====================
     <div>

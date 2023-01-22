@@ -552,6 +552,7 @@ export const Comments = styled.p`
 export const ReviewLikeStyle = styled.div`
 	width: 109px;
 	height: 34px;
+	cursor: pointer;
 `;
 export const ReviewLikeFrame = styled.div`
 	box-sizing: border-box;
@@ -633,7 +634,7 @@ export const MarketIdDiv = styled.div`
 	align-items: center;
 	padding: 0px;
 	gap: 8px;
-	width: 100px;
+	width: 100%;
 	height: 24px;
 `;
 export const MarketId = styled.div`
@@ -667,3 +668,12 @@ export const OrderToggleBox = styled.div`
 		width: 100%;
 	}
 `;
+
+export const ReplyBox = styled.div`
+    width: 100%;
+    background: #2DAC9E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+`

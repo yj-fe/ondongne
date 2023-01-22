@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import Layout from 'components/layout/Layout/Layout';
 import Moment from 'react-moment';
-import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRightB, Floating, FloatingPush, ReviewLike0 } from 'components/commonUi/Icon';
+import { useNavigate } from 'react-router-dom'
+import { ArrowRightB, ReviewLike0 } from 'components/commonUi/Icon';
 import { MarketComments, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, Line, Comments, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, } from 'pages/main/DetailsPage/DetailsPageStyle'
 import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
 import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import Avatar from 'assets/common/avatar.png';
-import ReviewImg from 'assets/main/reviewimg.png'
 import { Badge } from 'components/commonUi/Button';
-import { Imgauto, ImgPer } from 'components/layout/Img/ImgSizeLayout';
+import { Imgauto } from 'components/layout/Img/ImgSizeLayout';
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Confirm from 'components/commonUi/Confirm';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import { useSelector } from 'react-redux';
-import { deleteReview, reviewList } from 'service/review';
+import { deleteReview, reviewList, likeReview } from 'service/review';
 import StarRate from "components/commonUi/StarRate";
 import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat';
-import { FloatingDivSearch } from 'pages/business/BusinessPage/BusinessPageStyle';
-import { FloatingToggle } from 'components/layout/Layout/LayoutMain';
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/review/";
 
 function ReviewPage() {
@@ -31,6 +27,7 @@ function ReviewPage() {
   const [data, setData] = useState([]);
   const [modal, setModal] = useState(false);
   const [confirm, setConfirm] = useState(null);
+  const [deleteId, setDeleteId] = useState(0);
 
   // 리뷰 목록
   const loadData = async () => {
@@ -41,26 +38,39 @@ function ReviewPage() {
   }
 
   // 리뷰 삭제
-  const reviewDelete = async (id) => {
-    const response = await deleteReview(id);
+  const reviewDelete = async () => {
+    if(!deleteId) {
+      return setModal(false);
+    }
+    const response = await deleteReview(deleteId);
     if (response && response.data.data) {
       setModal(false);
       loadData();
     }
   }
 
-  console.log(data);
-
+  //리뷰 좋아요
+  const reviewLike = async (id) => {
+    const response = await likeReview(id);
+    if(response && response.data.data) {
+      loadData();
+    }
+  }
 
   const openConfirm = (item) => {
-    console.log(item);
     return setConfirm({
+      warn: false,
       contents: "리뷰를 수정하시겠습니까?",
       confirmText: "리뷰 수정",
       cancelText: "취소",
       onConfirmClick: () => navigate("/member/review/upload", { state: { item } }),
       onCancelClick: () => setConfirm(null),
     })
+  }
+
+  const openDeleteConfirm = (item) => {
+    setDeleteId(item.reviewId);
+    setModal(true);
   }
 
   useEffect(() => {
@@ -115,11 +125,11 @@ function ReviewPage() {
                           <L.FlexRows _content='space-between' _items='center'>
                             <L.FlexCols _gap={4} _width='calc( 100% - 120px)'>
                               <L.FlexRows _gap='0px' _items='center' _content='left'>
-                                <T.Text _size={16} _weight={600}>Bhc 치킨</T.Text>
+                                <T.Text _size={16} _weight={600}>{item.storeName}</T.Text>
                                 <ArrowRightB />
                               </L.FlexRows>
                               <L.FlexRows _gap={8} _items='center' _content='left'>
-                                <StarRate rate={item.rating} width={12} />
+                                <StarRate rate={Number(item.rating)} width={12} />
                                 <ReviewDate>
                                   <CreatedAt date={item.createDate} />
                                 </ReviewDate>
@@ -135,13 +145,12 @@ function ReviewPage() {
                               </div>
                               <div
                                 type='button'
-                                onClick={() => setModal(true)}
+                                onClick={() => openDeleteConfirm(item)}
                               >
                                 <Badge _width='55px' _padding='6px 16px' _height='30px' _bdr='99px' _size='13px'>삭제</Badge>
                               </div>
                             </L.FlexRows>
                           </L.FlexRows>
-
                           {
                             item.images.length > 0 &&
                             item.images.map((image, idx) => (
@@ -151,11 +160,13 @@ function ReviewPage() {
                             ))
                           }
                           <Comments>{item.contents}</Comments>
-                          <ReviewLikeStyle>
-                            <ReviewLikeFrame color={false}>
-                              <ReviewLikeButton><ReviewLike0 /></ReviewLikeButton>
-                              <ReviewLikeText color={false}>도움돼요!</ReviewLikeText>
-                              <ReviewLikeText color={false}>1</ReviewLikeText>
+                          <ReviewLikeStyle
+                            onClick={() => reviewLike(item.reviewId)}
+                          >
+                            <ReviewLikeFrame color={item.likeStatus}>
+                              <ReviewLikeButton>{item.likeStatus ? <ReviewLike /> : <ReviewLike0 />}</ReviewLikeButton>
+                              <ReviewLikeText color={item.likeStatus}>도움돼요!</ReviewLikeText>
+                              <ReviewLikeText color={item.likeStatus}>{item.likeCount}</ReviewLikeText>
                             </ReviewLikeFrame>
                           </ReviewLikeStyle>
                         </L.FlexCols>
@@ -187,6 +198,7 @@ function ReviewPage() {
           {
             confirm &&
             <Confirm
+              warn={confirm.warn}
               contents={confirm.contents}
               confirmText={confirm.confirmText}
               cancelText={confirm.cancelText}
@@ -196,7 +208,10 @@ function ReviewPage() {
           }
           {modal &&
             <ModalDelete
-              PropsModal={() => setModal(false)}
+              PropsModal={() => {
+                setModal(false);
+                setDeleteId(0);
+              }}
               PropsWithdrwal={reviewDelete}
               closeText="취소"
               buttonText="삭제"

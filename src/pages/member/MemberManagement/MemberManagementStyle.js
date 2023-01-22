@@ -99,7 +99,7 @@ export const InputForm = styled.form`
     background: #FFFFFF;
   }
 `
-export const InputFormOrder = styled.form`
+export const InputFormOrder = styled.div`
 
   box-sizing: border-box;
   display: flex;
@@ -114,7 +114,7 @@ export const InputFormOrder = styled.form`
   border: 1px solid #EEEEEE;
   border-radius: 4px;
 `
-export const NameToggleInputForm = styled.form`
+export const NameToggleInputForm = styled.div`
 
   box-sizing: border-box;
   display: flex;

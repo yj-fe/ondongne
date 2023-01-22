@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Delete, OneEmptyBigStar } from 'components/commonUi/Icon';
 import { OneBigStar } from './../../components/commonUi/Icon';
 import { ReviewLayout } from './../../components/layout/Layout/MoreLayout';
-import { imageValidation } from 'utils/utils';
+import { imageValidation, orderName } from 'utils/utils';
 import { insertReview, updateReview } from 'service/review';
 import Alert from 'components/commonUi/Alert';
 import Confirm from 'components/commonUi/Confirm';
@@ -26,7 +26,8 @@ function ReviewUploadPage() {
     reviewId: location.state.item.reviewId ?? 0,
     orderId: location.state.item.orderId,
     storeId: location.state.item.storeId,
-    items: location.state.item.orderItems,
+    storeName: location.state.item.storeName,
+    items: location.state.item.orderItems ?? location.state.item.items,
     rating: location.state.item.rating ?? 0,
     contents: location.state.item.contents ?? "",
     images: location.state.item.images ?? [],
@@ -34,6 +35,7 @@ function ReviewUploadPage() {
     deleteFileId: [],
   });
 
+  console.log('location.state : ',location.state)
   console.log(data);
 
   // 리뷰 작성
@@ -83,8 +85,8 @@ function ReviewUploadPage() {
           <L.Contents _height='calc(100vh - 68px)'>
             <L.FlexCols _gap={28}>
               <div>
-                <T.Text _size={20} _weight={600} _color='gray900' _align='center' _line={2}>인싸 과일</T.Text>
-                <T.Text _size={16} _weight={400} _color='gray800' _align='center'>샤인머스켓 500g</T.Text>
+                <T.Text _size={20} _weight={600} _color='gray900' _align='center' _line={2}>{data.storeName}</T.Text>
+                <T.Text _size={16} _weight={400} _color='gray800' _align='center'>{orderName(data.items)}</T.Text>
               </div>
               <L.FlexRows _content='center' _items='center' _gap={16}>
                 {Array(5)

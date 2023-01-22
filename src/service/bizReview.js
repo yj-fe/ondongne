@@ -13,17 +13,15 @@ export function bizReviewList(id) {
 }
 
 /* ==============================
-    리뷰 댓글 수정
+    리뷰 사장님 댓글
 ============================== */
-export function updateReviewComment(data) {
+export function updateReviewComment(id, comment) {
 	const headers = { "Content-Type": "multipart/form-data" };
 	const formData = new FormData();
 
-	formData.append("reviewId", data.reviewId);
+	formData.append("reviewId", id);
 
-	if (data.comment) {
-		formData.append("comment", data.comment);
-	}
-
-	return client.post(urls.update, formData, { headers });
+	formData.append("comment", comment);
+	
+	return client.patch(urls.update, formData, { headers });
 }
