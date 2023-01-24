@@ -10,8 +10,11 @@ import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getAlarmMemberList } from 'service/alarm';
+import { useNavigate } from 'react-router-dom';
+const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
 function MemberNews() {
+  const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
   const [list, setList] = useState([]);
 
@@ -53,10 +56,14 @@ function MemberNews() {
               list.length > 0 &&
               list.map((item, index) => (
                 <React.Fragment  key={index}>
-                  <L.FlexRows _gap={16}>
+                  <L.FlexRows _gap={16}
+                    onClick={() => {
+                      if(item.href) navigate(item.href);
+                    }}
+                  >
                     {
                       item.image &&
-                      <ImgSizeLayout src={item.image} _height={48} _weight={48} />
+                      <ImgSizeLayout src={IMGURL + item.image} _height={48} _weight={48} />
                     }
                     <L.FlexCols _gap={4}>
                       {

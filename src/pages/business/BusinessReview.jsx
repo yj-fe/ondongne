@@ -45,8 +45,8 @@ function BusinessReview() {
   }
 
   //리뷰 댓글
-  const commentProcess = async (id, contents) => {
-    const response = await updateReviewComment(id, contents);
+  const commentProcess = async (id, contents, orderId = 0) => {
+    const response = await updateReviewComment(id, contents, orderId);
     if (response && response.data.data) {
       setModal(false);
       setCommentItem(null);
@@ -251,7 +251,7 @@ function BusinessReview() {
                         onChange={e => setComment(e.target.value)}
                       />
                       <div
-                        onClick={() => commentProcess(commentItem.reviewId, comment)}
+                        onClick={() => commentProcess(commentItem.reviewId ,comment, commentItem.orderId)}
                       >
                         <Badge _width='47px' _height='34px' _bg='green700' _bdr='4px' _color='white' _weight='600' _size='13px'>
                           {isUpdate ? "수정" : "등록"}

@@ -8,8 +8,11 @@ import { Line } from 'pages/main/DetailsPage/DetailsPageStyle';
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { getAlarmBizList } from 'service/alarm';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
+const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
 
 function BusinessNews() {
+  const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
   const [list, setList] = useState([]);
 
@@ -47,10 +50,14 @@ function BusinessNews() {
               list.length > 0 &&
               list.map((item, index) => (
                 <React.Fragment  key={index}>
-                  <L.FlexRows _gap={16}>
+                  <L.FlexRows _gap={16}
+                    onClick={() => {
+                      if(item.href) navigate(item.href);
+                    }}
+                  >
                     {
                       item.image &&
-                      <ImgSizeLayout src={item.image} _height={48} _weight={48} />
+                      <ImgSizeLayout src={IMGURL + item.image} _height={48} _weight={48} />
                     }
                     <L.FlexCols _gap={4}>
                       {
