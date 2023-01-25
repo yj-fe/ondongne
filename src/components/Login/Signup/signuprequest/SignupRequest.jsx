@@ -209,7 +209,7 @@ function SignupRequest({ setData, depthHandler }) {
             <RequestToggleForm>
             <RequesInputForm style={{ position: 'relative' }}>
               <RequesInput
-              _bordercolor={borderColor}
+                _bordercolor={borderColor}
                 style={{ width: '100%' }}
                 type='number'
                 name='authNumber'

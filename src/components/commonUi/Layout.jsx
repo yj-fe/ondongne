@@ -77,6 +77,19 @@ export const FlexCols = styled.div`
     padding: ${props => props._padding || '0px'};
 `;
 
+export const FlexColsHMedia = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: ${props => props._gap || 8}px;
+    width: ${props => props._width || '100%'};
+    height: auto;
+    padding: ${props => props._padding || '0px'};
+    @media screen and (max-height: 625px ) {
+        
+    }
+`;
+
 export const FlexColsGrid = styled.div`
     display: flex;
     flex-direction: column;
@@ -160,6 +173,24 @@ export const Inline = styled.div`
     height: ${props => props._height || 'auto'};
     padding: ${props => props._padding || '0px'};
     flex: 0 0 auto;
+`;
+
+export const BottomColsW = styled.div`
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 688px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    gap: ${props => props._gap || 8}px;
+    padding: ${props => props._padding || '0px'};
+    @media only screen and (max-width: 728px) { 
+        width: 100%;
+        padding: 0 20px;
+  }
 `;
 
 export const BottomCols = styled.div`

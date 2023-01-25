@@ -7,7 +7,6 @@ import { ImgSizeLayout } from '../Img/ImgSizeLayout';
 
 function FooterLayout() {
   return (
-    <div>
       <FooterDiv>
         <Footer>
           <div>
@@ -20,8 +19,7 @@ function FooterLayout() {
             <span>고객센터: 010-2481-2002 / 이메일문의: pay.hyperlocality@gmail.com</span>
           </FooterText>
         </Footer>
-        </FooterDiv>
-    </div>
+      </FooterDiv>
   )
 }
 

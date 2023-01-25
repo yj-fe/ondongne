@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as I from 'components/commonUi/Input';
@@ -11,10 +10,11 @@ import { ArrowTop, Down } from 'components/commonUi/Icon';
 import { DetailTabInfo, DetailTabReview, Line, TabButtonStyle, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import { ReactComponent as Check } from 'assets/login/checkgray.svg'
 import { ReactComponent as Checked } from 'assets/login/checked.svg'
-import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
+import { Scroll, ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import { postInquiry } from 'service/border';
 import { useSelector } from 'react-redux';
+import Layout from 'components/layout/Layout/Layout';
 
 
 
@@ -130,8 +130,8 @@ function TabInquiry({detailTab, tabHandler}){
 //=====================1. Tab 문의하기=====================
 
 <div>
-      <L.FlexCols _gap={24} _padding="8px 20px">
-              
+        <Scroll _height>
+      <L.FlexCols  _gap={24} _padding="8px 20px">
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>
@@ -161,31 +161,31 @@ function TabInquiry({detailTab, tabHandler}){
                     onChange={handleChange}
                     _boccolor={'#FFFFFF'} _height={140}
                   />
-                  
-             </L.FlexCols>
+              </L.FlexCols>
               <L.FlexRows _content="flex-start" _items="center" >
-              <CheckTitleDiv onClick={checkHandler}>
-                <CheckStyle
-                  id="confirm"
-                  type="button"
-                >
-                  {data.check ? <Checked /> : <Check />}
-                </CheckStyle>
-                <CheckTitle>개인정보 수집, 이용에 동의합니다.(필수)</CheckTitle>
-              </CheckTitleDiv>
+                <CheckTitleDiv onClick={checkHandler}>
+                  <CheckStyle
+                    id="confirm"
+                    type="button"
+                  >
+                    {data.check ? <Checked /> : <Check />}
+                  </CheckStyle>
+                  <CheckTitle>개인정보 수집, 이용에 동의합니다.(필수)</CheckTitle>
+                </CheckTitleDiv>
               </L.FlexRows>
 
       </L.FlexCols>
-
-            <L.BottomCols>
-              <ButtonDiv
+      </Scroll>
+            <L.BottomColsW >
+              <ButtonDiv 
+                _margin='0px 0px 24px'
                 type="button"
                 btn={btn}
                 disabled={!btn}
                 onClick={handleSubmit}
               >문의하기
               </ButtonDiv>
-            </L.BottomCols>
+            </L.BottomColsW>
       {
         confirm &&
         <SimpleConfirm 

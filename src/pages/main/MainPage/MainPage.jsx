@@ -83,6 +83,8 @@ function MainPage() {
 
           <L.Inner>
             <FooterLayout />
+            <L.FlexRows _padding='0px 0px 60px 0px'>
+            </L.FlexRows>
           </L.Inner>
         </L.Container>
         <FooterStyle>

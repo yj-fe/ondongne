@@ -114,6 +114,7 @@ export const ListCard = ({ list, lastRef }) => {
                   <StarRate rate={item.reviewRate} />
                   <T.Text _weight={500} _size={14} _color="gray900" _align='center'>({item.reviewRate})</T.Text>
                 </L.FlexRows>
+
                 <L.FlexRows>
                   <T.Text _weight={400} _size={14} _color="gray800" _align='center'>
                     최소주문 {item.orderMinPrice ? numberFormat(item.orderMinPrice) : 0}원,
@@ -122,6 +123,7 @@ export const ListCard = ({ list, lastRef }) => {
                     배달 {item.deliveryPrice ? numberFormat(item.deliveryPrice) : 0}원
                   </T.Text>
                 </L.FlexRows>
+                
                 <L.FlexRows>
                   {item.newStatus && <B.Badge _color='white' _bg='green500'>신규 입점</B.Badge>}
                   {item.couponStatus && <B.Badge _color='green600' _bg='green50'>쿠폰</B.Badge>}

@@ -208,11 +208,12 @@ export const Footer = styled.div`
     @media only screen and (max-width: 728px) { 
       width: 100%;
     } */
-  }
+  /* } */
 `;
 export const FooterText = styled.div`
 	font-weight: 500;
 	font-size: 11px;
 	line-height: 18px;
 	color: #bdbdbd;
+	width: 100%;
 `;
