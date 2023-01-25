@@ -50,9 +50,9 @@ function BusinessPage() {
       dispatch(authActions.biz(data));
 
       // 상점 게시 모달 오픈
-      // if (!data.approvalStatus || !data.address) {
-      //   setModal(true);
-      // }
+      if (!data.approvalStatus || data.address === null) {
+        setModal(true);
+      }
     }
   }
 

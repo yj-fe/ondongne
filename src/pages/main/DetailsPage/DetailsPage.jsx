@@ -44,6 +44,7 @@ function DetailsPage(props) {
     itemImage: '',
     itemName: '',
     itemRating: '',
+    category: '',
     likeStatus: '',
     maxCount: '',
     minCount: '',
@@ -167,8 +168,8 @@ function DetailsPage(props) {
                       <T.Text _width='100%' _size={18} _weight={500} _color='gray900' >{item.itemName}</T.Text>
                       <L.FlexRows _items="center" width="16">
                         {
-                          item.itemRating !== '' && 
-                          <StarRate rate={item.itemRating}/>
+                          item.itemRating !== '' &&
+                          <StarRate rate={item.itemRating} />
                         }
                         <T.Text _size={11} _weight={400} _color='gray800'>({item.itemRating})</T.Text>
                       </L.FlexRows>
@@ -244,16 +245,24 @@ function DetailsPage(props) {
                       setCount={setCount}
                     />
                   }
-                  <DetailButtonDiv>
-                    <LayerTextButton
-                      type='button'
-                      onClick={() => paymentsOrder(0)}
-                      _padding='0px' _width='48px'
-                    >
-                      <ProductCart id={item.itemId} count={count} type={'details'} disabled={!orderToggle} />
-                    </LayerTextButton>
-                    <DetailButtonStyle onClick={() => paymentsOrder(1)}>구매하기</DetailButtonStyle>
-                  </DetailButtonDiv>
+                  {
+                    item.storeId === auth.storeId
+                      ?
+                      <DetailButtonDiv>
+                        <DetailButtonStyle onClick={() => navigate(`/business/edit/${id}`)}>수정하기</DetailButtonStyle>
+                      </DetailButtonDiv>
+                      :
+                      <DetailButtonDiv>
+                        <LayerTextButton
+                          type='button'
+                          onClick={() => paymentsOrder(0)}
+                          _padding='0px' _width='48px'
+                        >
+                          <ProductCart id={item.itemId} count={count} type={'details'} disabled={!orderToggle} />
+                        </LayerTextButton>
+                        <DetailButtonStyle onClick={() => paymentsOrder(1)}>구매하기</DetailButtonStyle>
+                      </DetailButtonDiv>
+                  }
                 </ButtonStyle>
               }
 
@@ -294,7 +303,7 @@ function TabContent(props) {
         </TypeTextStyle>
         <TypeTextStyle>
           <TypeLabel>카테고리</TypeLabel>
-          <TypeLabelInfo>야채/과일</TypeLabelInfo>
+          <TypeLabelInfo>{props.item.category}</TypeLabelInfo>
         </TypeTextStyle>
         <TypeTextStyle>
           <TypeLabel>배달/주문금액</TypeLabel>

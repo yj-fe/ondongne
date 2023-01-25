@@ -206,11 +206,10 @@ export const DetailTabInfo = styled.div`
 	align-items: center;
 	padding: 8px 20px;
 	gap: 4px;
-	width: ${props => props.width || "33.3%"};
+	width: ${(props) => props.width || "33.3%"};
 	height: 50px;
-	border-bottom: solid
-		${(props) => (props._bottomsize || '2px')};
-		${(props) => (props.infocolor ? "#0B806F" : "#BDBDBD")};
+	border-bottom: solid ${(props) => props._bottomsize || "2px"};
+	${(props) => (props.infocolor ? "#0B806F" : "#BDBDBD")};
 	/* border-bottom: 2px solid #0B806F; */
 
 	font-weight: 600;
@@ -226,9 +225,8 @@ export const DetailTabReview = styled.div`
 	align-items: center;
 	padding: 8px 20px;
 	gap: 4px;
-	border-bottom: 			solid 
-	${(props) => (props._bottomsize || '2px')};
-	${props => (props.reviewcolor ? "#0B806F" : "#BDBDBD")};
+	border-bottom: solid ${(props) => props._bottomsize || "2px"};
+	${(props) => (props.reviewcolor ? "#0B806F" : "#BDBDBD")};
 	width: ${(props) => props.width || "33.3%"};
 	height: 50px;
 
@@ -241,20 +239,20 @@ export const DetailTabReview = styled.div`
 export const TabContentStyle = styled.div``;
 
 export const ButtonStyleNew = styled.div`
- position: fixed;
-    display: flex;
-    flex-direction: column;
-    width: 728px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    gap: ${props => props._gap || 8}px;
-    padding: ${props => props._padding || '0px'};
-		z-index: 100;
-    @media only screen and (max-width: 728px) { 
-        width: 100%;
-  }
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	width: 728px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	gap: ${(props) => props._gap || 8}px;
+	padding: ${(props) => props._padding || "0px"};
+	z-index: 100;
+	@media only screen and (max-width: 728px) {
+		width: 100%;
+	}
 `;
 export const ButtonStyle = styled.div`
 	position: fixed;
@@ -331,10 +329,10 @@ export const TypeLabel = styled.p`
 	font-size: 14px;
 	line-height: 20px;
 	color: #212121;
-	@media screen and (max-width:637px){
+	@media screen and (max-width: 637px) {
 		width: 20%;
 	}
-	@media screen and (max-width:435px){
+	@media screen and (max-width: 435px) {
 		width: 30%;
 	}
 `;
@@ -409,6 +407,12 @@ export const TabInfoContentText = styled.div`
 	color: #212121;
 	padding: 0;
 	gap: 0;
+	width: 100%;
+	overflow: hidden;
+
+	> .image img {
+		width: 100%;
+	}
 `;
 export const TabReviewType = styled.div`
 	display: flex;
@@ -635,7 +639,7 @@ export const MarketIdDiv = styled.div`
 	padding: 0px;
 	gap: 8px;
 	/* width: 100%; */
-	width: ${props => props._width || '100%'};
+	width: ${(props) => props._width || "100%"};
 	height: 24px;
 `;
 export const MarketId = styled.div`
@@ -671,10 +675,10 @@ export const OrderToggleBox = styled.div`
 `;
 
 export const ReplyBox = styled.div`
-    width: 100%;
-    background: #2DAC9E;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-`
+	width: 100%;
+	background: #2dac9e;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 16px;
+`;
