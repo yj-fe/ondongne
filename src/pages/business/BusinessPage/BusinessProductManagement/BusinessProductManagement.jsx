@@ -119,20 +119,20 @@ function BusinessProductManagement() {
                         ? <Link
                           ref={ref}
                           key={item.itemId}
-                          to={`/business/product/details/${item.itemId}`}
+                          to={`/details/${item.itemId}`}
                         >
                           <ProductCardGrid item={item} />
                         </Link>
 
                         : <Link
                           key={item.itemId}
-                          to={`/business/product/details/${item.itemId}`}
+                          to={`/details/${item.itemId}`}
                         >
                           <ProductCardGrid item={item} />
                         </Link>
                     ))
                   }
-                  </L.Grid>
+                </L.Grid>
                 {/* </L.FlexRowsWrapBPM> */}
               </L.Contents>
 

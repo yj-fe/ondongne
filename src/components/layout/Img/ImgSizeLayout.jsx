@@ -59,8 +59,8 @@ export const AbsoluteDiv = styled.div`
     height: ${props => props._height}px;
     display: flex;
     position: absolute;
-    right: ${props => props._right || '0%' };
-    bottom:${props => props._bottom || '0%' };
+    right: ${props => props._right || '0%'};
+    bottom:${props => props._bottom || '0%'};
     top:${props => props._top || ''};
     margin: 0;
     /* padding: 18px 12px; */

@@ -19,6 +19,7 @@ import { authActions } from "store/slices/auth";
 import * as L from 'components/commonUi/Layout';
 import { S } from 'components/layout/Layout/LayoutStyle'
 import { Logo } from "components/commonUi/Icon";
+import jwtDecode from "jwt-decode";
 
 
 function LoginPage() {
@@ -50,6 +51,8 @@ function LoginPage() {
     const response = await login(account);
     const { message, data, code } = response.data;
 
+    console.log("로그인 data : ", response.data);
+
     if (code != '200') {
       setAlert({
         title: "로그인 실패",
@@ -62,7 +65,6 @@ function LoginPage() {
 
     if (data) {
       dispatch(authActions.login(data));
-      navigate('/')
     }
   }
 
@@ -108,7 +110,6 @@ function LoginPage() {
     if (JSON.parse(isAuth)) {
       const data = { accessToken, expiresIn };
       dispatch(authActions.login(data));
-      navigate('/')
     }
   }, [isAuth])
 
@@ -126,7 +127,11 @@ function LoginPage() {
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      return navigate('/')
+      if (auth.role === "ROLE_BIZ") {
+        return navigate("/business", { replace: true });
+      } else {
+        return navigate("/", { replace: true });
+      }
     }
   }, [auth])
 

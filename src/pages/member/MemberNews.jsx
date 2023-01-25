@@ -38,7 +38,7 @@ function MemberNews() {
         <LoginHeader title="알림" to={-1} />
         <S.Main>
 
-          <L.Contents _padding='24px 20px ' _height='calc(100vh - 68px)'>
+          <L.Contents _padding='0 20px ' _height='calc(100vh - 68px)'>
 
             {/* ============ 알림없을때 ============ */}
             {
@@ -55,10 +55,10 @@ function MemberNews() {
             {
               list.length > 0 &&
               list.map((item, index) => (
-                <React.Fragment  key={index}>
-                  <L.FlexRows _gap={16}
+                <React.Fragment key={index}>
+                  <L.FlexRows _gap={16} _padding={"24px 0"}
                     onClick={() => {
-                      if(item.href) navigate(item.href);
+                      if (item.href) navigate(item.href);
                     }}
                   >
                     {
@@ -82,7 +82,7 @@ function MemberNews() {
                     </L.FlexCols>
                   </L.FlexRows>
                   {
-                    (item.length -1) > index &&
+                    index < (list.length - 1) &&
                     <Line />
                   }
                 </React.Fragment>

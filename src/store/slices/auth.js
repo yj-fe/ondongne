@@ -5,6 +5,7 @@ import { client } from "service";
 const authenticationState = {
 	isAuthenticated: false,
 	id: "",
+	auth: "",
 	bizId: "",
 	storeId: "",
 };
@@ -26,6 +27,7 @@ const authSlice = createSlice({
 
 			state.isAuthenticated = true;
 			state.id = member.sub;
+			state.role = member.auth;
 		},
 		save(state, action) {
 			state.id = action.payload;

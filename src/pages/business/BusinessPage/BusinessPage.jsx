@@ -20,14 +20,17 @@ import FooterLayout from 'components/layout/Footer/Footer';
 import { authActions } from 'store/slices/auth';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import LayoutBiz from 'components/layout/Layout/LayoutBiz';
+import StoreModal from 'components/layout/Modal/StoreModal';
 
 function BusinessPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
+  const [modal, setModal] = useState(false);
   const [data, setData] = useState({
     bizId: "",
     storeId: "",
+    approvalStatus: false,
     orderCount: "",
     deliveryCount: "",
     reviewCount: "",
@@ -37,14 +40,21 @@ function BusinessPage() {
   // 비즈 회원 체크
   const loadData = async () => {
     const response = await getDashboard();
-    const { data } = response.data;
 
-    if (!data) {
-      return navigate("/", { replace: true, state: { error: "잘못된 접근입니다." } })
+    if (response && response.data) {
+      const { data } = response.data;
+      if (!data) {
+        return navigate("/", { replace: true, state: { error: "잘못된 접근입니다." } })
+      }
+
+      setData(data);
+      dispatch(authActions.biz(data));
+
+      // 상점 게시 모달 오픈
+      if (!data.approvalStatus || !data.address) {
+        setModal(true);
+      }
     }
-
-    setData(data);
-    dispatch(authActions.biz(data));
   }
 
   useEffect(() => {
@@ -206,6 +216,11 @@ function BusinessPage() {
 
 
       </LayoutBiz>
+      {
+        modal && (
+          <StoreModal />
+        )
+      }
     </>
   )
 }

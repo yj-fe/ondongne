@@ -2,10 +2,7 @@ import React, { useState } from 'react'
 import BusinessManagementTab1 from 'components/Buisness/BusinessManagement/BusinessManagementTab1'
 import BusinessManagementTab2 from 'components/Buisness/BusinessManagement/BusinessManagementTab2'
 import { MarginBDiv } from 'components/Common/LayoutPageStyle'
-import { MoreNavBody, MoreContainer } from 'pages/main/MorePage/MorePageStyle'
-// import {MemberBody} from '../../login/member/MemberManagement/MemberManagementStyle'
-import { DetailTabDiv, TabButtonStyle, DetailTabInfo, DetailTabReview, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle'
-import Layout from 'components/layout/Layout/Layout'
+import { TabButtonStyle, DetailTabInfo, DetailTabReview, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle'
 import * as L from 'components/commonUi/Layout';
 import { useNavigate } from 'react-router-dom';
 import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat'
@@ -13,9 +10,11 @@ import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat'
 
 function BusinessManagement() {
   const navigate = useNavigate();
-  const [detailTab, setDetailTab] = useState(0)
+  const [detailTab, setDetailTab] = useState(0);
 
-
+  const tabHandler = (tab) => {
+    setDetailTab(tab);
+  }
 
   return (
     <div>
@@ -35,14 +34,14 @@ function BusinessManagement() {
               <TabButtonStyle>
                 <DetailTabInfo
                   width='50%'
-                  onClick={() => { setDetailTab(0); }}
+                  onClick={() => setDetailTab(0)}
                   infocolor={detailTab === 0}
                 >
                   상점 정보
                 </DetailTabInfo>
                 <DetailTabReview
                   width='50%'
-                  onClick={() => { setDetailTab(1); }}
+                  onClick={() => setDetailTab(1)}
                   reviewcolor={detailTab === 1}
                 >
                   사업자 정보
@@ -50,7 +49,7 @@ function BusinessManagement() {
               </TabButtonStyle>
 
               <TabContentStyle>
-                <TabContent detailTab={detailTab} />
+                <TabContent detailTab={detailTab} tabHandler={tabHandler} />
               </TabContentStyle>
               <MarginBDiv />
 
@@ -67,14 +66,10 @@ function TabContent(props) {
   return [
 
     //=====================상점 정보=====================
-    <div>
-      <BusinessManagementTab1 />
-    </div>,
+    <BusinessManagementTab1 tabHandler={props.tabHandler} />,
 
     //=====================사업자 정보=====================
-    <div>
-      <BusinessManagementTab2 />
-    </div>
+    <BusinessManagementTab2 tabHandler={props.tabHandler} />
   ][props.detailTab]
 }
 export default BusinessManagement

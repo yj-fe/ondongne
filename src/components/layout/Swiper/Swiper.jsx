@@ -25,7 +25,7 @@ function SwiperPage() {
   return (
     <div>
 
-<Swiper
+      <Swiper
         spaceBetween={0}
         pagination={{
           clickable: true,
@@ -33,10 +33,10 @@ function SwiperPage() {
         modules={[Pagination]}
         className="mySwiper"
       >
-          <SwiperSlide><Slide1/></SwiperSlide>
-          <SwiperSlide><Slide1/></SwiperSlide>
-          <SwiperSlide><Slide1/></SwiperSlide>
-          <SwiperSlide><Slide1/></SwiperSlide>
+        <SwiperSlide><Slide1 /></SwiperSlide>
+        <SwiperSlide><Slide1 /></SwiperSlide>
+        <SwiperSlide><Slide1 /></SwiperSlide>
+        <SwiperSlide><Slide1 /></SwiperSlide>
         {/* {SlideImages.map((index) => <SwiperSlide><SwiperSlideImg src={index.default} width='100%'/></SwiperSlide>)} */}
         {/* {SlideImages.map((index) => <SwiperSlide><SwiperSlideImg src={index.default} width='100%'/></SwiperSlide>)} */}
       </Swiper>
@@ -45,15 +45,15 @@ function SwiperPage() {
   )
 }
 
-function Slide1 (){
-  return(
+function Slide1() {
+  return (
     <div>
       <SwiperDiv>
-      <SwiperTextDiv>
-        <SwiperTitle>1. 나만의 상점을 한곳에서</SwiperTitle>
-        <SwiperText><p>내 동네 상품이라면 어디든지</p><p>상점 신청을 무료로 진행해 보세요.</p></SwiperText>
-      </SwiperTextDiv>
-      <SwiperSlideImg src={Img1}/>
+        <SwiperTextDiv>
+          <SwiperTitle>1. 나만의 상점을 한곳에서</SwiperTitle>
+          <SwiperText><p>내 동네 상품이라면 어디든지</p><p>상점 신청을 무료로 진행해 보세요.</p></SwiperText>
+        </SwiperTextDiv>
+        <SwiperSlideImg src={Img1} />
       </SwiperDiv>
     </div>
   )
@@ -81,7 +81,7 @@ const SwiperTextDiv = styled.div`
   align-items: center;
   padding: 0px;
   gap: 12px;
-  width: 241px;
+  width: 100%;
   height: auto;
 `
 const SwiperTitle = styled.p`

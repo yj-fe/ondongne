@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { screen } from '@testing-library/react';
+import { screen } from "@testing-library/react";
 export const TabDiv = styled.p`
 	display: flex;
 	flex-direction: column;
@@ -21,7 +21,7 @@ export const TabProfileDiv = styled.div`
 	/* object-fit: fill;
 	background-repeat: no-repeat; */
 	/* object-fit: cover; */
-	 object-fit: cover;
+	object-fit: cover;
 	& input[type="file"] {
 		display: none;
 	}
@@ -48,9 +48,9 @@ export const CameraImg = styled.img`
 export const ImgBanner = styled.img`
 	background-image: url(${(props) => props.banner || ""});
 	position: relative;
-  overflow: hidden;
+	overflow: hidden;
 	width: 100%;
-	height: ${props => props._height || ''};
+	height: ${(props) => props._height || ""};
 	object-fit: cover;
 	background-repeat: no-repeat;
 `;
@@ -87,7 +87,7 @@ export const TabBtn = styled.button`
 	bottom: 0px;
 	left: 50%;
 	transform: translate(-50%);
-	background: #0b806f;
+	background: ${(props) => (props._active ? "#0b806f" : "#E0E0E0")};
 	font-weight: 700;
 	font-size: 18px;
 	text-align: center;
@@ -116,7 +116,7 @@ export const RowDiv = styled.div`
 	justify-content: space-between;
 	/* justify-content: space-evenly; */
 	align-items: flex-start;
-	gap: ${props => props.gap || '16px'};
+	gap: ${(props) => props.gap || "16px"};
 	width: 100%;
 	height: auto;
 `;
@@ -127,8 +127,7 @@ export const RowDiv2 = styled.div`
 	align-items: flex-start;
 	gap: 20px;
 	width: 100%;
-	overflow-x:scroll;
-	
+	overflow-x: scroll;
 `;
 export const RowTitle = styled.div`
 	display: flex;
@@ -138,7 +137,7 @@ export const RowTitle = styled.div`
 	width: 100%;
 	height: ${(props) => props.height || "auto"};
 	gap: 40px;
-	@media screen and (max-width: 500px){
+	@media screen and (max-width: 500px) {
 		gap: 30px;
 	}
 `;
@@ -212,12 +211,12 @@ export const InputBox = styled.div`
 export const Input = styled.input`
 	font-weight: 400;
 	font-size: 16px;
-	width: ${(props) => (props._width || "70%")};
+	width: ${(props) => props._width || "70%"};
 	background-color: ${(props) => (props.color ? "#EEEEEE" : "none")};
 	text-align: ${(props) => props.align || null};
-	font-family: 'Pretendard';
+	font-family: "Pretendard";
 	font-style: normal;
-	&::placeholder{
+	&::placeholder {
 		color: #bdbdbd;
 	}
 	&:focus {
@@ -227,7 +226,6 @@ export const Input = styled.input`
 		display: none;
 	}
 `;
-
 
 export const Textarea = styled.textarea`
 	font-weight: 400;
@@ -254,9 +252,9 @@ export const Textarea = styled.textarea`
 		width: 4px;
 	}
 	margin: 0;
-    font-family: 'Pretendard';
-    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; */
-    -webkit-font-smoothing: antialiased;
+	font-family: "Pretendard";
+	/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; */
+	-webkit-font-smoothing: antialiased;
 `;
 
 export const RowInput = styled.input`
@@ -300,7 +298,7 @@ export const DayBox = styled.div`
 	border-radius: 4px;
 	font-weight: 400;
 	font-size: 16px;
-	
+
 	color: ${(props) => (props.color ? "#0B806F" : "#424242")};
 `;
 export const BankToggleDiv = styled.div`
@@ -344,7 +342,7 @@ export const RowTimeDiv = styled.div`
 	height: 44px;
 `;
 export const Size = styled.div`
-	width: ${props=>props._width || 'calc(100% - 80px)'};
+	width: ${(props) => props._width || "calc(100% - 80px)"};
 `;
 export const TimeDiv = styled.div`
 	box-sizing: border-box;

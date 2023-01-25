@@ -16,11 +16,13 @@ function MainLastChance() {
 
   const getItem = async () => {
     const response = await getLastGroupItemList(local);
-    const { data } = response.data;
-    setList(data.items);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000)
+    if (response && response.data) {
+      const { data } = response.data;
+      setList(data.items);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000)
+    }
   }
 
   const router = () => {

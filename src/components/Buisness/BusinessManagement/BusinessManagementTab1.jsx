@@ -10,25 +10,24 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/bizStore';
 import { Down } from 'components/commonUi/Icon';
-import { deliveryToString, numberFormatter } from 'utils/utils';
+import { deliveryToString, numberFormat, numberFormatter } from 'utils/utils';
 import AddressModel from 'components/AddressModel';
 import Alert from 'components/commonUi/Alert';
 import CalendarModel from 'components/commonUi/CalendarModel';
-import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import ImgSize from 'assets/images/business/imgsize.png'
 import { AbsoluteDiv } from 'components/layout/Img/ImgSizeLayout';
 
 
 // 상점정보
-function BusinessManagementTab1() {
+function BusinessManagementTab1({ tabHandler }) {
 
   const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
   const [alert, setAlert] = useState(null);
   const [store, setStore] = useState({});
   const [select, setSelect] = useState(false);
+  const [active, setActive] = useState(false);
   // 카테고리 데이터
   const [categories, setCategories] = useState([
     { "id": 0, "name": "야채/과일", "checked": false },
@@ -144,6 +143,16 @@ function BusinessManagementTab1() {
       return setAlert({
         contents: "상점 정보를 수정하였습니다.",
         buttonText: "확인",
+        onButtonClick: () => {
+          tabHandler(1);
+          setAlert(false);
+        },
+        onOverlayClick: () => setAlert(false),
+      })
+    } else {
+      return setAlert({
+        contents: "상점 정보 수정을 실패하였습니다.",
+        buttonText: "확인",
         onButtonClick: () => setAlert(false),
         onOverlayClick: () => setAlert(false),
       })
@@ -192,27 +201,35 @@ function BusinessManagementTab1() {
     })
   }, [deliveries]);
 
+  useEffect(() => {
+    if (store.banner && store.categories.length > 0 && store.deliveries.length > 0
+      && store.name && store.openDate && store.profile) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [store])
+
   // 상점 조회
   useEffect(() => {
     if (auth.isAuthenticated) getStore()
   }, [auth]);
 
+  console.log(store);
+
   return (
     <div>
       <TabDiv>
         {/* 배너 */}
-        <TabProfileDiv
-          // banner={store.banner && store.banner}
-        >
-          <AbsoluteDiv _right='16px' _top='120px'>
+        <TabProfileDiv>
+          <AbsoluteDiv __width='93' _height='30' _right='16px' _top='120px'>
             <ProfileBtnDiv for="bannerFile">
               <CameraImg src={Camera} />
               이미지 변경
             </ProfileBtnDiv>
           </AbsoluteDiv>
           <input type="file" id="bannerFile" onChange={bannerUpdate} />
-          <ImgBanner src={ImgSize}/>
-          {/* <ImgBanner src={store.banner && store.banner}/> */}
+          <ImgBanner src={store.banner && store.banner} />
         </TabProfileDiv>
 
         {/* 프로필 */}
@@ -230,7 +247,7 @@ function BusinessManagementTab1() {
             <ContentTitle>상점명</ContentTitle>
             <TitleInfoDiv>
               <Input
-              _width='90%'
+                _width='90%'
                 name='name'
                 value={store.name}
                 onChange={onChange}
@@ -299,7 +316,7 @@ function BusinessManagementTab1() {
                 <InputText>￦ </InputText>
                 <Input
                   name='deliveryPrice'
-                  value={store.deliveryPrice ?? ''}
+                  value={store.deliveryPrice ? numberFormat(store.deliveryPrice) : ''}
                   onChange={e => {
                     setStore({
                       ...store,
@@ -316,7 +333,7 @@ function BusinessManagementTab1() {
                 <InputText>￦ </InputText>
                 <Input
                   name='orderMinPrice'
-                  value={store.orderMinPrice ?? ''}
+                  value={store.orderMinPrice ? numberFormat(store.orderMinPrice) : ''}
                   onChange={e => {
                     setStore({
                       ...store,
@@ -338,7 +355,7 @@ function BusinessManagementTab1() {
             >
               <TitleInfoDiv>
                 <RowInput
-                  placeholder='YY'
+                  placeholder='YYYY'
                   type='text'
                   value={store.openDate?.split('-')[0]}
                 />
@@ -431,8 +448,12 @@ function BusinessManagementTab1() {
 
         </TabContent>
 
-
-        <TabBtn onClick={onSubmit}>수정 완료</TabBtn>
+        <TabBtn
+          type='button'
+          disabled={!active}
+          _active={active}
+          onClick={onSubmit}
+        >수정 완료</TabBtn>
 
       </TabDiv>
       {
@@ -458,6 +479,7 @@ function BusinessManagementTab1() {
         <CalendarModel
           modelClose={() => setCalendar(false)}
           now={store?.openDate}
+          dateFormat='yyyy-MM-dd'
           onChange={openDateHandler} />
       }
 
@@ -467,6 +489,7 @@ function BusinessManagementTab1() {
 
 const DayOffForm = ({ sales, dayOffHandler }) => {
   const { dayWeek, dayOffStatus } = sales;
+
   return (
     <DayBox
       onClick={() => dayOffHandler(dayWeek)}

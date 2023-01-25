@@ -33,7 +33,7 @@ function BusinessNews() {
       <S.Wrapper>
         <LoginHeader title="알림" to={-1} />
         <S.Main>
-          <L.Contents _padding='24px 20px ' _height='100vh'>
+          <L.Contents _padding='0 20px ' _height='100vh'>
             {/* ============ 알림없을때 ============ */}
             {
               list.length === 0 &&
@@ -49,10 +49,10 @@ function BusinessNews() {
             {
               list.length > 0 &&
               list.map((item, index) => (
-                <React.Fragment  key={index}>
-                  <L.FlexRows _gap={16}
+                <React.Fragment key={index}>
+                  <L.FlexRows _gap={16} _padding='24px 0'
                     onClick={() => {
-                      if(item.href) navigate(item.href);
+                      if (item.href) navigate(item.href);
                     }}
                   >
                     {
@@ -75,7 +75,7 @@ function BusinessNews() {
                     </L.FlexCols>
                   </L.FlexRows>
                   {
-                    (item.length -1) > index &&
+                    index < (list.length - 1) &&
                     <Line />
                   }
                 </React.Fragment>
