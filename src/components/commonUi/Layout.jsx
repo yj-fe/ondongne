@@ -292,8 +292,8 @@ export const FlexRowsCP = styled.div`
 `;
 
 export const FlexRowsWrapNew = styled.div`
-grid-column-start: 1;
-grid-column-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 4;
     display: flex;
     flex-direction: rows;
     flex-wrap: wrap;

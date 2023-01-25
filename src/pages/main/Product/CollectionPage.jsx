@@ -67,10 +67,11 @@ function CollectionPage() {
                     {
                       type === 0
                       ? 
-                        <L.FlexRowsWrapNew _gap={20} _padding={0}>
+                        <L.FlexCols _gap={20} _padding={0}>
                           <ListCard list={list} lastRef={null} />
-                        </L.FlexRowsWrapNew>
-                        : list.map(item => (
+                        </L.FlexCols>
+                        : 
+                          list.map(item => (
                           <ProductCardGrid
                             item={item}
                             lastRef={null}

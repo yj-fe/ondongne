@@ -121,7 +121,7 @@ export const AbsoluteDivGrid = styled.div`
         right: 2%;
     }
     @media screen and (max-width:336px) {
-        right: 5%;
+        right: 18%;
     }
 `;
 export const AbsoluteDivS = styled.div`
