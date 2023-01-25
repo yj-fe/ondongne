@@ -17,7 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import { FloatingContentDiv, FloatingContentTitle, FloatingDivMain, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle'
 import { Coupon, Floating, FloatingPush, Order, Product } from 'components/commonUi/Icon'
 import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
-import { getBizMember } from 'service/biz';
 import LayoutMain from 'components/layout/Layout/LayoutMain'
 
 

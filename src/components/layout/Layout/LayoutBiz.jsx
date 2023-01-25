@@ -3,15 +3,22 @@ import { Outlet } from 'react-router';
 import PropTypes from 'prop-types'
 
 import Header from '../Header/Header';
-
+import { useSelector } from 'react-redux'
 import { S } from './LayoutStyle';
 import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
 import { Coupon, Floating, FloatingPush, Order, Product } from 'components/commonUi/Icon';
 import { Link } from 'react-router-dom';
 import { FloatingContentDiv, FloatingContentTitle, FloatingDivT, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle';
+import { authActions } from 'store/slices/auth'
+
+
 
 const LayoutBiz = (props) => {
-    const [floating, setFloating] = useState(false)
+  const [floating, setFloating] = useState(false)
+  const auth = useSelector(state => state.auth);
+
+
+  
     return (
         <S.Wrapper>
             <Header {...props}/>

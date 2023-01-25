@@ -50,7 +50,7 @@ export const ReciptTable = styled.table`
 
 
 export const MarketTable = styled.table`
-    width: 100%;
+    width: 70%;
     tr {
         padding: 2px 0;
         line-height: 1.5;

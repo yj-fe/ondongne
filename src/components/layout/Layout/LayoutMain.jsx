@@ -43,16 +43,19 @@ const LayoutMain = (props) => {
                 {/* parent component로 사용할 때: Outlet */}
                 {/* { <Outlet /> } */}
                 {props.children}
+            </S.Main>
                 {
-                    biz && 
+                    biz
+                    &&
                     <FloatingDivMain
                         onClick={() => setFloating(!floating)}
                     >
                         {floating && <FloatingToggle />}
                         {floating ? <FloatingPush /> : <Floating />}
                     </FloatingDivMain>
+                    
+
                 }
-            </S.Main>
         </S.Wrapper>
     )
 };

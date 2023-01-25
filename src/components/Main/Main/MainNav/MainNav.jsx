@@ -15,7 +15,7 @@ function MainNav() {
 
   return (
     <MainNavDiv>
-      <NavContainer>
+      <NavContainer _paddingmedia='0px'>
         <MainLocation
           onClick={() => navigate('/member/location')}
         >

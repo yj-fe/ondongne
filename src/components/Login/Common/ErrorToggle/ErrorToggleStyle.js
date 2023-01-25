@@ -5,7 +5,7 @@ export const ErrorToggleBody = styled.div`
   align-items: flex-start;
   padding: 0px;
   margin: 0;
-  padding: 0;
+  padding: 8px 0px;
   > div {
   max-width: 648px;
   width: 100%;

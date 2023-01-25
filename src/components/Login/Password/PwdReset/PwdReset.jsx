@@ -27,12 +27,11 @@ function PwdReset({ id }) {
     client.defaults.headers.common['Authorization'] = id.accessToken;
 
     const response = await memberPasswordChange(password)
-
     const { data, message } = response.data
 
     if (data) {
       setAlert({
-        contents: message,
+        contents: "비밀번호 설정이 완료되었습니다. \n 로그인 후 이용해주세요.",
         buttonText: "확인",
         onButtonClick: () => navigate('/login'),
         onOverlayClick: () => navigate('/login'),
@@ -53,13 +52,13 @@ function PwdReset({ id }) {
 
     if (password === '') {
       setPasswordValid(false);
-      setPasswordValidMessage("변경하실 비밀번호를 입력해주세요.");
+      // setPasswordValidMessage("변경하실 비밀번호를 입력해주세요.");
       return;
     }
 
     if (!passwordValidation()) {
       setPasswordValid(false);
-      setPasswordValidMessage("비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 20이하로 입력해주세요.");
+      setPasswordValidMessage("비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 입력해주세요.");
       return;
     }
 

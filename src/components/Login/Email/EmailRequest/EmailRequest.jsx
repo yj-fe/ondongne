@@ -29,6 +29,7 @@ function EmailRequest({ setData, setFindEmailSuccess }) {
   const [authTime, setAuthTime] = useState(-1);
   const [authInterval, setAuthInterval] = useState(null); // 인증 번호 확인
   const [errorMessage, setErrorMessage] = useState('');
+  const [borderColor, setBorderColor] = useState('');
 
   const onAuthNumSubmit = async (event) => {
     event.preventDefault();
@@ -64,6 +65,7 @@ function EmailRequest({ setData, setFindEmailSuccess }) {
     }
     else {
       setErrorMessage('인증번호가 일치하지 않습니다.')
+      setBorderColor('#D32F2F')
     }
   };
 
@@ -174,6 +176,7 @@ function EmailRequest({ setData, setFindEmailSuccess }) {
           <RequestToggleForm>
             <RequesInputForm style={{ position: 'relative' }}>
               <RequesInput
+                _bordercolor={borderColor}
                 style={{ width: '100%' }}
                 type='number'
                 placeholder='인증번호 입력'

@@ -9,6 +9,8 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { NextButton } from '../agreement/AgreementStyle';
 import LoadingBar from 'components/commonUi/LoadingBar';
+import { RequestToggleButton, RequestToggleForm, RequestToggleText, RequestToggleTextLink, RequestToggleTextStyle } from 'components/Login/Common/RequestToggle/RequestToggleStyle';
+import ErrorToggle from 'components/Login/Common/ErrorToggle/ErrorToggle';
 
 
 /* ==============================
@@ -31,6 +33,8 @@ function SignupRequest({ setData, depthHandler }) {
   const [authTime, setAuthTime] = useState(-1);
   const [authInterval, setAuthInterval] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [borderColor, setBorderColor] = useState('');
 
   // 인증 번호 확인
   const onAuthNumSubmit = async (event) => {
@@ -66,12 +70,14 @@ function SignupRequest({ setData, depthHandler }) {
         });
     }
     else {
-      return setAlert({
-        contents: "인증번호가 일치하지 않습니다.",
-        buttonText: "확인",
-        onButtonClick: () => setAlert(null),
-        onOverlayClick: () => setAlert(null),
-      })
+        setErrorMessage('인증번호가 일치하지 않습니다.')
+        setBorderColor('#D32F2F')
+      // return setAlert({
+      //   contents: "인증번호가 일치하지 않습니다.",
+      //   buttonText: "확인",
+      //   onButtonClick: () => setAlert(null),
+      //   onOverlayClick: () => setAlert(null),
+      // })
     }
   };
 
@@ -184,7 +190,7 @@ function SignupRequest({ setData, depthHandler }) {
               인증요청
             </RequestButton>
           </RequesInputForm>
-          {authCode &&
+          {/* {authCode &&
             <RequesInputForm style={{ position: 'relative' }}>
               <RequesInput
                 style={{ width: '100%' }}
@@ -197,16 +203,44 @@ function SignupRequest({ setData, depthHandler }) {
               />
               <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
             </RequesInputForm>
-          }
+          } */}
           {
             authCode &&
-            <NextButton
-              type="button"
-              color={true}
+            <RequestToggleForm>
+            <RequesInputForm style={{ position: 'relative' }}>
+              <RequesInput
+              _bordercolor={borderColor}
+                style={{ width: '100%' }}
+                type='number'
+                name='authNumber'
+                placeholder='인증번호 입력'
+                outline='none'
+                value={authNum}
+                onChange={e => setAuthNum(e.target.value)}
+              />
+              <AuthTimer>{getFormattedTime(authTime)}</AuthTimer>
+            </RequesInputForm>
+            {errorMessage && <ErrorToggle errormessage={errorMessage} />}
+
+            <RequestToggleButton
+              active={authNum.length > 1}
+              disabled={authNum.length === 1}
               onClick={onAuthNumSubmit}
             >
-              인증 확인
-            </NextButton>
+              인증확인
+            </RequestToggleButton>
+            <RequestToggleTextStyle>
+              <RequestToggleText>인증번호를 못받으셨나요?</RequestToggleText>
+              <RequestToggleTextLink onClick={smsHandler}>인증번호 재전송</RequestToggleTextLink>
+            </RequestToggleTextStyle>
+          </RequestToggleForm>
+            // <NextButton
+            //   type="button"
+            //   color={true}
+            //   onClick={onAuthNumSubmit}
+            // >
+            //   인증 확인
+            // </NextButton>
           }
         </L.FlexCols>
       </L.FlexCols>

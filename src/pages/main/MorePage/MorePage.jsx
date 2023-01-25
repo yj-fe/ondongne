@@ -17,8 +17,6 @@ import { Line } from '../DetailsPage/DetailsPageStyle'
 import { ArrowRight, Floating, FloatingPush } from 'components/commonUi/Icon'
 import { RowDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle'
 
-
-
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
@@ -122,19 +120,6 @@ function MorePage() {
   }, [auth])
 
 
-  // 비즈 회원 체크
-  const bizFloat = async () => {
-    const response = await getBizMember();
-    const { data } = response.data;
-    if (data.bizStatus){
-      setBiz(true)
-    }
-  }
-  useEffect(() => {
-    if (auth.isAuthenticated) bizFloat()
-  }, [auth])
-
-
 
 
   return (
@@ -211,7 +196,7 @@ function MorePage() {
         <FooterLayout />
 
         {
-          biz && 
+          auth.bizId && 
               <FloatingDivT _bottom='30px'
                 onClick={() => setFloating(!floating)}
               >

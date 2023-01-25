@@ -97,15 +97,16 @@ export const ListCard = ({ list, lastRef }) => {
   }
   return (
     <div>
-    <L.FlexCols _gap={20}>
+    <L.FlexCols _gap={20} >
       {
         list.map(item => (
           <L.FlexRows
             key={item.storeId}
             _content='space-between'
             ref={null}
+            
           >
-            <L.FlexRows _content='row'>
+            <L.FlexRows _content='row' >
               <ImgSizeLayout _bdr={4} src={item.profile != null ? item.profile : Img} _width={98} _height={98}></ImgSizeLayout>
               <L.FlexCols _gap={2}>
                 <T.Text _weight={600} _size={18} _color="gray900">{item.name}</T.Text>

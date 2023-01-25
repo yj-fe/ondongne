@@ -66,8 +66,7 @@ const params = {
         content: {
           title: itemName,
           description: description,
-          imageUrl:
-          img,
+          imageUrl: img,
           link: {
           // [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
             mobileWebUrl: 'https://ondongnemarket.com',
@@ -117,11 +116,10 @@ const params = {
                   id="kakao-sharing"
                   onClick={() => KaKaoShareButton({itemName, description, img})}
                 >
-
-                <div>
-                  <Kakao/>
-                </div>
-                <T.Text _size={16} _width='100%' _align='center'>카카오톡</T.Text>
+                  <div>
+                    <Kakao/>
+                  </div>
+                  <T.Text _size={16} _width='100%' _align='center'>카카오톡</T.Text>
                 </button>
               </ModalDiv3>
             </ModalDiv4>

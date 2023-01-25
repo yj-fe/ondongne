@@ -25,6 +25,9 @@ export const NavContainer = styled.div`
 	max-width: 728px;
 	padding: 0px 20px;
 	width: 100%;
+	@media screen and (max-width : 320px) {
+		padding: ${props => props._paddingmedia || '0px 20px'};
+	}
 `;
 
 export const ImgLogoBox = styled.div`

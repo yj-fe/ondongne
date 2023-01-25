@@ -193,7 +193,7 @@ function BusinessReview() {
                           <MarketCommentsStyle>
                             <L.FlexCols _gap={16}>
                               <L.FlexRows _content='space-between'>
-                                <MarketIdDiv>
+                                <MarketIdDiv _width='calc(100% - 118px)'>
                                   <MarketId>{item.storeName}</MarketId>
                                   <MarketDate>
                                     <CreatedAt date={item.commentDate} />

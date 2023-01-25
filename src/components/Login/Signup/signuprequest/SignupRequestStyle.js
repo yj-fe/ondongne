@@ -74,6 +74,7 @@ export const RequesInputForm = styled.div`
 	gap: 12px;
 	width: 100%;
 	height: auto;
+	padding: ${props => props._padding || ''};
 `;
 export const RequesInput = styled.input`
 	display: flex;
@@ -127,7 +128,7 @@ export const RequestButton = styled.button`
 export const AuthTimer = styled.div`
 	position: absolute;
 	top: 0;
-	right: 5px;
+	right: 0px;
 	width: 90px;
 	height: 90%;
 	display: flex;

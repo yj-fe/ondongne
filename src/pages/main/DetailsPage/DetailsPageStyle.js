@@ -634,7 +634,8 @@ export const MarketIdDiv = styled.div`
 	align-items: center;
 	padding: 0px;
 	gap: 8px;
-	width: 100%;
+	/* width: 100%; */
+	width: ${props => props._width || '100%'};
 	height: 24px;
 `;
 export const MarketId = styled.div`

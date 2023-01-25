@@ -42,7 +42,8 @@ export const Input = styled.input`
   width: 100%;
   height: 48px;
   background: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid ${props => props._bordercolor || '#e0e0e0'} ;
+  /* border-bottom: 1px solid #e0e0e0; */
   padding: 12px;
   font-family: 'Pretendard';
   font-style: normal;
@@ -77,7 +78,8 @@ export const RequesInput = styled.input`
   width: calc(100% - 90px);
   height: 48px;
   background: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid ${props => props._bordercolor || '#e0e0e0'};
+  /* border-bottom: 1px solid #e0e0e0; */
   flex: none;
   padding: 12px;
   font-family: 'Pretendard';

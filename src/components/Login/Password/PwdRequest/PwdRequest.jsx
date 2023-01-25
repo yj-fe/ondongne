@@ -30,6 +30,7 @@ function PwdRequest({ setFindSuccess, setId }) {
   const [authTime, setAuthTime] = useState(-1);
   const [authInterval, setAuthInterval] = useState(null); // 인증 번호 확인
   const [errorMessage, setErrorMessage] = useState('');
+  const [borderColor, setBorderColor] = useState('');
 
   const onAuthNumSubmit = async (event) => {
     event.preventDefault();
@@ -59,6 +60,7 @@ function PwdRequest({ setFindSuccess, setId }) {
         })
     }
     else {
+      setBorderColor('#D32F2F')
       setErrorMessage('인증번호가 일치하지 않습니다.')
     }
   };
@@ -160,7 +162,7 @@ function PwdRequest({ setFindSuccess, setId }) {
               onChange={e => setEmail(e.target.value)}
               onKeyPress={handleOnKeyPress}
             />
-            <RequesInputForm>
+            <RequesInputForm _padding='5px'>
               <RequesInput
                 type='number'
                 placeholder='-를 제외한 휴대폰번호 입력'
@@ -176,14 +178,13 @@ function PwdRequest({ setFindSuccess, setId }) {
                 인증요청
               </RequestButton>
             </RequesInputForm>
-          </L.FlexCols>
-        </RequesInputForm>
 
         {
           authCode &&
           <RequestToggleForm>
             <RequesInputForm style={{ position: 'relative' }}>
               <RequesInput
+                _bordercolor={borderColor}
                 style={{ width: '100%' }}
                 type='number'
                 placeholder='인증번호 입력'
@@ -208,6 +209,9 @@ function PwdRequest({ setFindSuccess, setId }) {
             </RequestToggleTextStyle>
           </RequestToggleForm>
         }
+          </L.FlexCols>
+        </RequesInputForm>
+
         {
           alert &&
           <Alert

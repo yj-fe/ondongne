@@ -53,7 +53,7 @@ function SignupInfo({ data, setData }) {
 
     if (!isEmail(email)) {
       return setAlert({
-        contents: "이메일을 형식의 맞춰주세요.",
+        contents: "이메일을 형식을 맞춰주세요.",
         buttonText: "확인",
         onButtonClick: () => setAlert(null),
         onOverlayClick: () => setAlert(null),
@@ -103,6 +103,14 @@ function SignupInfo({ data, setData }) {
           if (authData) {
             localStorage.removeItem('auth');
           }
+          if (!passwordValidation()) {
+            setPasswordValid(false);
+            return setAlert({
+              contents: "비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 입력해주세요.",
+              buttonText: "확인",
+              onButtonClick: () => setAlert(null),
+              onOverlayClick: () => setAlert(null),
+            })} 
 
           setAlert({
             contents: "회원가입을 축하드립니다. \n 로그인 후 이용해 주세요.",
@@ -110,7 +118,8 @@ function SignupInfo({ data, setData }) {
             onButtonClick: () => navigate('/login'),
             onOverlayClick: () => navigate('/login'),
           })
-        } else {
+        }
+        else {
           setAlert({
             contents: "회원가입을 실패하였습니다.",
             buttonText: "확인",
@@ -138,12 +147,6 @@ function SignupInfo({ data, setData }) {
     }
 
     if (!password) {
-      return;
-    }
-
-    if (!passwordValidation()) {
-      setPasswordValid(false);
-      setPasswordValidMessage("비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 20이하로 입력해주세요.");
       return;
     }
 
@@ -248,7 +251,7 @@ function SignupInfo({ data, setData }) {
                 placeholder='이메일 입력'
                 outline='none'
                 value={email}
-                borderColor={emailValid == null ? '#E0E0E0' : emailValid ? '#388E3C' : '#D32F2F'}
+                _bordercolor={ emailValid === null ? '' : emailValid ? '#388E3C' : '#D32F2F'}
                 onChange={e => setEmail(e.target.value)}
               />
               <RequestButton
@@ -269,7 +272,7 @@ function SignupInfo({ data, setData }) {
               <RequesInputTitle>비밀번호</RequesInputTitle>
               <RequestInputDiv direction="column">
                 <PwdContainer
-                  borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
+                  _bordercolor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
                   <PwdInput
                     type={showPassword ? "text" : "password"}
                     placeholder="8자 이상 영문,숫자,특수문자 조합"
@@ -281,7 +284,7 @@ function SignupInfo({ data, setData }) {
                   </EyeOffStyle>
                 </PwdContainer>
                 <PwdContainer
-                  borderColor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
+                  _bordercolor={(passwordValid != null && !passwordValid) ? '#D32F2F' : '#E0E0E0'}>
                   <PwdInput
                     type={showPasswordCheck ? "text" : "password"}
                     placeholder="비밀번호 확인"
@@ -307,7 +310,7 @@ function SignupInfo({ data, setData }) {
                 placeholder='닉네임 입력'
                 outline='none'
                 value={nickname}
-                borderColor={nicknameValid == null ? '#E0E0E0' : nicknameValid ? '#388E3C' : '#D32F2F'}
+                _bordercolor={nicknameValid == null ? '#E0E0E0' : nicknameValid ? '#388E3C' : '#D32F2F'}
                 onChange={e => setNickname(e.target.value)}
               />
               <RequestButton

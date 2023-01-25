@@ -41,7 +41,7 @@ export const PwdContainer = styled.div`
 	/* align-items: center; */
 	width: 100%;
 	height: 48px;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid ${props => props._bordercolor || '#e0e0e0'};
 	padding: 12px;
 
 	font-weight: 400;
@@ -50,6 +50,7 @@ export const PwdContainer = styled.div`
 	color: #bdbdbd;
 `;
 export const PwdInput = styled.input`
+width: calc(100% - 50px);
 	font-family: "Pretendard";
 	font-style: normal;
 	font-weight: 400;
