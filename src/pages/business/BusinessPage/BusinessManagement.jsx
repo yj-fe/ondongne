@@ -5,7 +5,8 @@ import { MarginBDiv } from 'components/Common/LayoutPageStyle'
 import { TabButtonStyle, DetailTabInfo, DetailTabReview, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle'
 import * as L from 'components/commonUi/Layout';
 import { useNavigate } from 'react-router-dom';
-import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat'
+import Layout from 'components/layout/Layout/Layout'
+import { Floating } from 'components/commonUi/Icon';
 
 
 function BusinessManagement() {
@@ -18,10 +19,11 @@ function BusinessManagement() {
 
   return (
     <div>
-      <LayoutNotFloat
+      <Layout
         title="비즈 정보 관리"
         cart={false}
         bell={false}
+        floating={false}
         onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px" _gap='0px'>
@@ -58,7 +60,7 @@ function BusinessManagement() {
             </L.FlexCols>
           </L.Contents>
         </L.Container>
-      </LayoutNotFloat>
+      </Layout>
     </div>
   )
 }

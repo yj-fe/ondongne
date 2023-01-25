@@ -1,67 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import FooterImg from 'assets/main/footerlogo.svg'
-import BasicHeader from 'components/Main/Main/BasicHeader/BasicHeader'
 import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainer, MoreContainerDiv, MoreDiv, MoreNavBody, AccountBadge, AccountName, Footer, Logo, FooterText, MoreLoginDiv, MoreLoginText, MoreLoginButton, MoreAccountImgBox } from './MorePageStyle'
 import { Link, useNavigate } from 'react-router-dom'
-import { getMember, logout } from 'service/member'
-import { useDispatch, useSelector } from 'react-redux'
+import { getMember } from 'service/member'
+import { useSelector } from 'react-redux'
 import Alert from 'components/commonUi/Alert'
-import { authActions } from 'store/slices/auth'
-import { client } from 'service'
-import Modal, { Body, Container } from 'components/layout/Modal/Modal'
+import Modal from 'components/layout/Modal/Modal'
 import { AgreementDiv, Button, ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle, SpaceBet } from 'components/Main/More/ModalPageStyle'
 import { Text } from 'components/commonUi/Text'
 import CheckBox from 'components/commonUi/CheckBox'
 import CheckBoxTitle from 'components/commonUi/CheckBoxTitle'
 import { Line } from '../DetailsPage/DetailsPageStyle'
-import { ArrowRight, Floating, FloatingPush } from 'components/commonUi/Icon'
-import { RowDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle'
-
-import Layout from 'components/layout/Layout/Layout'
+import { ArrowRight } from 'components/commonUi/Icon'
 import * as L from 'components/commonUi/Layout';
-import * as T from 'components/commonUi/Text';
-import * as I from 'components/commonUi/Input';
-import * as B from 'components/commonUi/Button';
 import FooterLayout from 'components/layout/Footer/Footer'
 import { getBizMember } from 'service/biz'
-import { FloatingDivT } from 'pages/business/BusinessPage/BusinessPageStyle'
-import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat'
-import { FloatingToggle } from 'components/layout/Layout/LayoutMain'
+import Layout from 'components/layout/Layout/Layout'
 
 
 function MorePage() {
   const navigate = useNavigate()
   const [member, setMember] = useState({});
   const auth = useSelector(state => state.auth);
-  const dispatch = useDispatch();
   const [alert, setAlert] = useState(null);
   const [coachmark, setCoachmark] = useState(null);
   const [agreementModal, setAgreementModal] = useState(false);
-  const [floating, setFloating] = useState(false)
-  const [biz, setBiz] = useState(false)
-
-
-  const memberLogout = async () => {
-    const response = await logout();
-    if (response.status === 200) {
-      dispatch(authActions.logout())
-      setAlert({
-        title: "로그아웃 성공",
-        contents: "로그아웃 되었습니다.",
-        buttonText: "확인",
-        onButtonClick: () => setAlert(false),
-        onOverlayClick: () => setAlert(false),
-      })
-    } else {
-      setAlert({
-        title: "로그아웃 실패",
-        contents: "다시 한번 시도해주세요.",
-        buttonText: "확인",
-        onButtonClick: () => setAlert(false),
-        onOverlayClick: () => setAlert(false),
-      })
-    }
-  }
 
   const getMemberProfile = async () => {
     const response = await getMember()
@@ -94,7 +56,6 @@ function MorePage() {
 
     // 비즈 홈
     if (data.bizStatus) {
-      console.log(biz);
       return navigate("/business");
     }
 
@@ -120,11 +81,9 @@ function MorePage() {
   }, [auth])
 
 
-
-
   return (
     <div style={{ position: 'relative' }}>
-      <LayoutNotFloat
+      <Layout
         title="더보기"
         cart={false}
         bell={false}
@@ -194,17 +153,7 @@ function MorePage() {
         </L.Container>
 
         <FooterLayout />
-
-        {
-          auth.bizId && 
-              <FloatingDivT _bottom='30px'
-                onClick={() => setFloating(!floating)}
-              >
-                {floating && <FloatingToggle />}
-                {floating ? <FloatingPush /> : <Floating />}
-              </FloatingDivT>
-        }
-      </LayoutNotFloat>
+      </Layout>
 
       {
         alert &&

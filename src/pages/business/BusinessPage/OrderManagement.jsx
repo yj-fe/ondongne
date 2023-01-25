@@ -11,7 +11,6 @@ import { bizOrderList, orderStatusUpdate } from 'service/bizOrder';
 import dayjs from 'dayjs';
 import Alert from 'components/commonUi/Alert';
 import { orderCancel } from 'service/order';
-import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 import { orderName } from 'utils/utils';
 
 function OrderManagement() {
@@ -68,7 +67,7 @@ function OrderManagement() {
 
   return (
     <div>
-      <LayoutBiz
+      <Layout
         title="주문 관리"
         bell={false}
         cart={false}
@@ -219,7 +218,7 @@ function OrderManagement() {
             ))
           }
         </L.Container >
-      </LayoutBiz>
+      </Layout>
       {delOrder &&
         <Confirm
           contents={delOrder.contents}

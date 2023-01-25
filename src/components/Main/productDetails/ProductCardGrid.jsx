@@ -16,35 +16,35 @@ export function ProductCardGrid({
     return (
         <L.FlexColsGrid
             ref={lastRef}
-            _gap={12} _padding={0} 
+            _gap={12} _padding={0}
         >
             <RelativDiv>
                 {
                     isCart &&
-                    
+
                     <AbsoluteDivGrid>
                         <ProductCart id={item.itemId} count={1} type={"list"} />
                     </AbsoluteDivGrid>
                 }
                 {
                     !item.soldoutStatus
-                        ? 
+                        ?
                         <ImgSizeH
-                             _bdr={6}
+                            _bdr={6}
                             src={item.images && item.images.length > 0 && item.images[0]}
                             onClick={() => navigate(`/details/${item.itemId}`)}
                         />
-                        : 
+                        :
                         <div style={{ position: 'relative' }}>
                             <ImgSizeH
-                                 _bdr={6}
+                                _bdr={6}
                                 src={item.images && item.images.length > 0 && item.images[0]}
                             />
                             <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
                         </div>
                 }
             </RelativDiv>
-{/* <RelativDiv> */}
+            {/* <RelativDiv> */}
             <L.FlexCols _gap={4} _padding={0} >
                 {
                     item.type == 'GROUP' &&

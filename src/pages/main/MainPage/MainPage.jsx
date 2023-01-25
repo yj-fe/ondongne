@@ -6,17 +6,14 @@ import MainBestProduct from 'components/Main/Main/MainBestProduct/MainBestProduc
 import MainNewMarket from 'components/Main/Main/MainNewMarket/MainNewMarket'
 import MainBestCollection from 'components/Main/Main/MainBestCollection/MainBestCollection'
 import MainFooter from 'components/Main/Main/MainFooter/MainFooter'
-import {  Img, FooterStyle } from './MainPageStyle'
+import { Img, FooterStyle } from './MainPageStyle'
 import MainCategory from 'components/Main/Main/MainCategory/MainCategory';
 import FooterLayout from 'components/layout/Footer/Footer';
 import * as L from 'components/commonUi/Layout';
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Alert from 'components/commonUi/Alert'
 import { useNavigate } from 'react-router-dom';
-import { FloatingContentDiv, FloatingContentTitle, FloatingDivMain, FloatingToggleDiv } from 'pages/business/BusinessPage/BusinessPageStyle'
-import { Coupon, Floating, FloatingPush, Order, Product } from 'components/commonUi/Icon'
-import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
 import LayoutMain from 'components/layout/Layout/LayoutMain'
 
 
@@ -57,14 +54,14 @@ function MainPage() {
           </L.Container>
 
           {/* 우리동네 인기 쿠폰 */}
-            {/* <L.Contents _padding='20px 0px 20px 20px'>
+          {/* <L.Contents _padding='20px 0px 20px 20px'>
               <MainBestCoupon />
             </L.Contents> */}
 
           {/* 공동구매 마지막 찬스 */}
-            <L.Contents _padding='20px 0px 20px 20px'>
-              <MainLastChance />
-            </L.Contents>
+          <L.Contents _padding='20px 0px 20px 20px'>
+            <MainLastChance />
+          </L.Contents>
 
 
           {/* My단골 인기 상품 */}
@@ -74,19 +71,19 @@ function MainPage() {
           }
 
           {/* 우리동네 신규 입점 */}
-            <L.Contents _padding='20px 0px 20px 20px'>
-              <MainNewMarket />
-            </L.Contents>
+          <L.Contents _padding='20px 0px 20px 20px'>
+            <MainNewMarket />
+          </L.Contents>
 
           {/* 우리동네 인기 추천 */}
-            <L.Contents _padding='20px 0px 20px 20px'>
-              <MainBestCollection />
-            </L.Contents>
+          <L.Contents _padding='20px 0px 20px 20px'>
+            <MainBestCollection />
+          </L.Contents>
 
 
-            <L.Inner>
-              <FooterLayout />
-            </L.Inner>
+          <L.Inner>
+            <FooterLayout />
+          </L.Inner>
         </L.Container>
         <FooterStyle>
           <MainFooter />

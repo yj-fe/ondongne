@@ -5,13 +5,13 @@ import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
 import * as C from 'components/commonUi/CommonStyles';
 import * as I from 'components/commonUi/Input';
-import { Down, Delete, Camera, ArrowTop, } from 'components/commonUi/Icon';
+import { Down, Delete, Camera, ArrowTop } from 'components/commonUi/Icon';
 import { InfoBoxDiv, TitleInfo } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import { imageValidation } from 'utils/utils';
 import { deliveryCertificateSave } from 'service/deliveryCertificate';
-import LayoutBiz from 'components/layout/Layout/LayoutBiz';
+import Layout from 'components/layout/Layout/Layout';
 
 function OrderManagementDetailsAuthPage() {
   const navigate = useNavigate();
@@ -68,10 +68,11 @@ function OrderManagementDetailsAuthPage() {
 
   return (
     <div>
-      <LayoutBiz
+      <Layout
         title='배달/픽업 인증'
         cart={false}
         bell={false}
+        floating={false}
         onBackClick={() => navigate(-1)}
       >
 
@@ -151,7 +152,7 @@ function OrderManagementDetailsAuthPage() {
             </B.FixedActionButton>
           </L.Contents>
         </L.Container>
-      </LayoutBiz>
+      </Layout>Layout
       {
         alert &&
         <SimpleConfirm

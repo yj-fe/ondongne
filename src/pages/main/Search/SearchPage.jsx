@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import * as B from 'components/commonUi/Button';
-import { Down, Flag, FlagN, FlagNC, Floating, FloatingPush, OneStar } from 'components/commonUi/Icon';
+import { Down } from 'components/commonUi/Icon';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import { Line } from 'components/Login/Signup/agreement/AgreementStyle';
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
-import Img from 'assets/images/marketdetail.png'
 import { SearchSortLayout } from 'components/layout/Layout/MoreLayout';
 import CategoryTabs from 'components/commonUi/CategoryTabs';
-import { numberFormat, sortFormatter } from 'utils/utils';
+import { sortFormatter } from 'utils/utils';
 import { useInView } from 'react-intersection-observer';
 import { getStoreCategoryList } from 'service/store';
 import LoadingBar from 'components/commonUi/LoadingBar';
-import StarRate from 'components/commonUi/StarRate';
-import StoreLike from 'components/commonUi/StoreLike';
 import { StoreListCard } from 'components/commonUi/StoreListCard';
-import { FloatingDivSearch } from 'pages/business/BusinessPage/BusinessPageStyle';
-import { FloatingToggle } from 'components/layout/Layout/LayoutMain';
-import { getBizMember } from 'service/biz';
-import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat';
 
 function SearchPage() {
   const navigate = useNavigate();
+  const auth = useSelector(state => state.auth);
   const [filter01, setFilter01] = useState(false);
 
   const [page, setPage] = useState(1);
@@ -39,11 +31,7 @@ function SearchPage() {
   const [ref, inView] = useInView();
   const [loading, setLoading] = useState(false);
   const [fetching, isFetching] = useState(false);
-// biz 플로팅
-  const [biz, setBiz] = useState(false);
-  const [floating, setFloating] = useState(false);
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const auth = useSelector(state => state.auth);
+
 
 
   const getStores = async () => {
@@ -58,20 +46,6 @@ function SearchPage() {
       setLoading(false);
     }, 1000);
   }
-
-
-  // 비즈 회원 체크
-  const bizMember = async () => {
-    const response = await getBizMember();
-    const { data } = response.data;
-    if (data.bizStatus){
-      setBiz(true)
-    }
-  }
-  useEffect(() => {
-    if (auth.isAuthenticated) bizMember()
-  }, [auth])
-
 
   useEffect(() => {
     setPage(1);
@@ -106,7 +80,7 @@ function SearchPage() {
 
   return (
     <div>
-      <LayoutNotFloat
+      <Layout
         title="검색"
         cart={true}
         bell={true}
@@ -168,19 +142,10 @@ function SearchPage() {
               <Map />
               지도 보기
             </B.MapListButton>} */}
-            {
-              biz && 
-              <FloatingDivSearch
-                  onClick={() => setFloating(!floating)}
-              >
-                  {floating && <FloatingToggle />}
-                  {floating ? <FloatingPush /> : <Floating />}
-              </FloatingDivSearch>
-            }
           </L.Contents>
         </L.Container>
         {filter01 && <SearchSortLayout CloseModal={() => setFilter01(false)} data={sort} setData={setSort} />}
-      </LayoutNotFloat>
+      </Layout>
     </div>
   )
 }

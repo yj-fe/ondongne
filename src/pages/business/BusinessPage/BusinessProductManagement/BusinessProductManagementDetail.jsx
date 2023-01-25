@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
-import { ReactComponent as StarIcon2 } from "assets/main/ratestar2.svg";
+import { useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
 import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
-import { ReactComponent as ReviewLike0 } from "assets/main/reviewlikedisable.svg";
-import { ReactComponent as Flag } from "assets/main/flag.svg";
-import { ReactComponent as More } from "assets/main/moreverti.svg";
 import { ReactComponent as Filter } from "assets/main/filter.svg";
-import Image from 'assets/main/shine.png'
 import ReviewImg from 'assets/main/reviewimg.png'
 import Avatar from 'assets/common/avatar.png'
 import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketId, MarketIdDiv, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileTextDiv, FinalPrice, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, ButtonStyleNew } from 'pages/main/DetailsPage/DetailsPageStyle'
-import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer } from 'components/layout/Img/ImgSizeLayout';
 
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
@@ -21,7 +15,7 @@ import { getBizItemDetails } from 'service/bizItem';
 import StarRate from 'components/commonUi/StarRate';
 import { numberFormat, totalPrice } from 'utils/utils';
 import HTMLReactParser from 'html-react-parser';
-import LayoutBiz from 'components/layout/Layout/LayoutBiz';
+import Layout from 'components/layout/Layout/Layout';
 
 function BusinessProductManagementDetail() {
 
@@ -46,7 +40,7 @@ function BusinessProductManagementDetail() {
   return (
     <div>
       {loading &&
-        <LayoutBiz
+        <Layout
           title={item.storeName}
           cart={false}
           bell={false}
@@ -54,14 +48,14 @@ function BusinessProductManagementDetail() {
         >
           <DetailBody>
             <DetailContainer>
-            <ImgPer  src={item.images[0]}/>
+              <ImgPer src={item.images[0]} />
 
               <DetailMarketDiv>
                 <DetailMarketInfo>
                   <L.FlexRows _content="space-between" _items="center" _gap={12}>
                     <L.FlexRows >
-                      <ImgPer _height='40px' _width='40px' bdr={50} src={item.profile}/>
-                      <L.FlexCols  _gap={4}>
+                      <ImgPer _height='40px' _width='40px' bdr={50} src={item.profile} />
+                      <L.FlexCols _gap={4}>
                         <T.Text _weight={600} _size={18} _color="gray900">{item.storeName}</T.Text>
                         <T.Text _weight={400} _size={14} _color="gray800">{item.storeAddress}</T.Text>
                       </L.FlexCols>
@@ -100,14 +94,14 @@ function BusinessProductManagementDetail() {
               <DetailTabDiv>
                 <TabButtonStyle>
                   <DetailTabInfo
-                  width='50%'
+                    width='50%'
                     onClick={() => setDetailTab(0)}
                     infocolor={detailTab === 0}
                   >
                     상세정보
                   </DetailTabInfo>
                   <DetailTabReview
-                  width='50%'
+                    width='50%'
                     onClick={() => setDetailTab(1)}
                     reviewcolor={detailTab === 1}
                   >
@@ -132,7 +126,7 @@ function BusinessProductManagementDetail() {
           </DetailBody>
 
 
-        </LayoutBiz>
+        </Layout>
       }
     </div>
   )

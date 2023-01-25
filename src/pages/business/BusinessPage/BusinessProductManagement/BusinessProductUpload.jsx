@@ -6,7 +6,7 @@ import * as B from 'components/commonUi/Button';
 import * as C from 'components/commonUi/CommonStyles';
 import CheckBox from 'components/commonUi/CheckBox';
 import { ContentDiv, Input, RightStyle, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
-import { Down, ArrowRightB, X_Icon, Delete, Calendar } from 'components/commonUi/Icon';
+import { Down, ArrowRightB, X_Icon, Delete, Calendar, Floating } from 'components/commonUi/Icon';
 import { fileFormatter, imageValidation, numberFormat, numberFormatter, totalPrice } from 'utils/utils';
 import CategorySelect from 'components/commonUi/CategorySelect';
 import BusinessProductEditInfo from './BusinessProductEditInfo';
@@ -15,9 +15,7 @@ import Alert from 'components/commonUi/Alert';
 import CalendarModel from 'components/commonUi/CalendarModel';
 import Confirm from 'components/commonUi/Confirm';
 import { useSelector } from 'react-redux';
-import LayoutBPM from 'components/layout/Layout/LayoutBPM';
 import Layout from 'components/layout/Layout/Layout';
-import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function BusinessProductUpload() {
 
@@ -160,10 +158,11 @@ function BusinessProductUpload() {
 
   return (
     <div>
-      <LayoutBiz
+      <Layout
         title={id ? '상품 수정' : '상품 등록'}
         cart={false}
         bell={false}
+        floating={false}
         onBackClick={() => navigate(-1)}
       >
 
@@ -212,8 +211,8 @@ function BusinessProductUpload() {
                           file={file}
                           fileDeleteHandler={fileDeleteHandler}
                         />
-                        ))
-                      }
+                      ))
+                    }
                     {
                       data.files.length > 0 &&
                       data.files.map((file, index) => (
@@ -228,7 +227,7 @@ function BusinessProductUpload() {
                           } />
                       ))
                     }
-                    </L.FlexRows>
+                  </L.FlexRows>
                 }
                 <input
                   type="file"
@@ -254,14 +253,14 @@ function BusinessProductUpload() {
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">카테고리</T.Text>
                 <L.FlexRows _gap={16}>
-                  <TitleInfoDiv  onClick={() => setSelect(!select)}>
+                  <TitleInfoDiv onClick={() => setSelect(!select)}>
                     <TitleInfo>
                       {data.categories?.length > 0 ? data.categories.join(', ') : '카테고리 선택'}
                     </TitleInfo>
                     <RightStyle
                     ><Down /></RightStyle>
                   </TitleInfoDiv>
-                  
+
                 </L.FlexRows>
                 {
                   select &&
@@ -445,7 +444,7 @@ function BusinessProductUpload() {
             </B.FixedActionButton>
           </L.Contents>
         </L.WhiteContainer>
-      </LayoutBiz>
+      </Layout>
       <BusinessProductEditInfo
         isOpen={editor}
         close={() => isEditor(false)}

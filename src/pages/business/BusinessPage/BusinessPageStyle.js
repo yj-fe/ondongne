@@ -230,12 +230,12 @@ export const FooterDiv = styled.div`
 `;
 export const FloatingDivT = styled.div`
 	text-align: right;
-	margin:0px 14px 0px 0px;
+	margin: 0px 14px 0px 0px;
 	padding: 0px;
 	position: sticky;
-	bottom: ${props => props._bottom || '70px'};
+	bottom: ${(props) => props._bottom || "70px"};
 	z-index: 99;
-	/* height: ${props => props._height || '80px'}; */
+	/* height: ${(props) => props._height || "80px"}; */
 `;
 export const FloatingDivMain = styled.div`
 	position: -webkit-sticky;
@@ -253,8 +253,8 @@ export const FloatingDivSearch = styled.div`
 	text-align: right;
 	margin: 0px 14px 0px;
 	padding: 0px;
-	top: ${props => props._top || '90%'};
-	bottom: ${props => props._bottom || ''};
+	top: ${(props) => props._top || "90%"};
+	bottom: ${(props) => props._bottom || ""};
 	/* bottom: 0px; */
 	z-index: 99;
 	/* height: 60px; */
@@ -283,7 +283,7 @@ export const FloatingToggleDiv = styled.div`
 	padding: 16px;
 	position: absolute;
 	justify-content: center;
-	bottom: 120px;
+	bottom: 88px;
 	right: 0;
 	width: 152px;
 	height: auto;

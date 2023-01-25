@@ -15,12 +15,11 @@ import { ContentDate, ContentImg, ContentMarket, ContentProduct, ContentStyle, C
 import { getDashboard } from 'service/biz';
 import { useSelector, useDispatch } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
-import * as T from 'components/commonUi/Text';
 import FooterLayout from 'components/layout/Footer/Footer';
 import { authActions } from 'store/slices/auth';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
-import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 import StoreModal from 'components/layout/Modal/StoreModal';
+import Layout from 'components/layout/Layout/Layout';
 
 function BusinessPage() {
   const navigate = useNavigate();
@@ -51,9 +50,9 @@ function BusinessPage() {
       dispatch(authActions.biz(data));
 
       // 상점 게시 모달 오픈
-      if (!data.approvalStatus || !data.address) {
-        setModal(true);
-      }
+      // if (!data.approvalStatus || !data.address) {
+      //   setModal(true);
+      // }
     }
   }
 
@@ -64,7 +63,7 @@ function BusinessPage() {
   return (
     <>
       <BusinessHeader />
-      <LayoutBiz>
+      <Layout>
 
         <L.Container>
           {/* ==================== 가게 정보 ==================== */}
@@ -215,7 +214,7 @@ function BusinessPage() {
         </L.Inner>
 
 
-      </LayoutBiz>
+      </Layout>
       {
         modal && (
           <StoreModal />

@@ -13,12 +13,12 @@ import { Badge } from 'components/commonUi/Button';
 import { Imgauto, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Confirm from 'components/commonUi/Confirm';
-import LayoutBiz from './../../components/layout/Layout/LayoutBiz';
 import { useSelector } from 'react-redux';
 import { bizReviewList, updateReviewComment } from 'service/bizReview';
 import Moment from 'react-moment';
 import StarRate from 'components/commonUi/StarRate';
 import { likeReview } from 'service/review';
+import Layout from 'components/layout/Layout/Layout';
 const MEMBERIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/member/";
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/review/";
 const STOREIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
@@ -91,7 +91,7 @@ function BusinessReview() {
 
   return (
     <div>
-      <LayoutBiz
+      <Layout
         title="리뷰 관리"
         bell={false}
         cart={false}
@@ -251,7 +251,7 @@ function BusinessReview() {
                         onChange={e => setComment(e.target.value)}
                       />
                       <div
-                        onClick={() => commentProcess(commentItem.reviewId ,comment, commentItem.orderId)}
+                        onClick={() => commentProcess(commentItem.reviewId, comment, commentItem.orderId)}
                       >
                         <Badge _width='47px' _height='34px' _bg='green700' _bdr='4px' _color='white' _weight='600' _size='13px'>
                           {isUpdate ? "수정" : "등록"}
@@ -287,7 +287,7 @@ function BusinessReview() {
               buttonText="삭제"
               titleText="리뷰 답변을 삭제하시겠습니까?" />}
         </L.Container>
-      </LayoutBiz>
+      </Layout>
 
     </div>
   )

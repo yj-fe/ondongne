@@ -1,21 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { Down } from 'components/commonUi/Icon';
-import { ImgSizeH, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { bizItemList } from 'service/bizItem';
-import { numberFormat, totalPrice } from 'utils/utils';
-import StarRate from 'components/commonUi/StarRate';
-import ProductTimer from 'components/commonUi/ProductTimer';
 import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 import { ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from 'components/Main/More/ModalPageStyle';
-import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
-import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
-import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 
 function BusinessProductManagement() {
@@ -75,7 +68,7 @@ function BusinessProductManagement() {
 
   return (
     <div>
-      <LayoutBiz
+      <Layout
         title="상품관리"
         cart={false}
         bell={false}
@@ -140,7 +133,7 @@ function BusinessProductManagement() {
           </L.Contents>
         </L.Container>
         {modal && <ModalFilter type={data.type} handler={dataChecked} closeSelector={() => setModal(false)} PropsModal={PropsModal} />}
-      </LayoutBiz>
+      </Layout>
     </div>
   )
 }

@@ -9,7 +9,6 @@ import 'react-quill/dist/quill.snow.css';
 import Confirm from 'components/commonUi/Confirm';
 import { CouponTitleInput } from 'components/commonUi/Input';
 import CouponAlert from 'components/commonUi/CouponAlert';
-import LayoutBiz from 'components/layout/Layout/LayoutBiz';
 
 function BusinessCouponUpload() {
 
@@ -26,29 +25,29 @@ function BusinessCouponUpload() {
   }
   const modules = useMemo(
     () => ({
-        toolbar: {
-          container: [
-            ["bold", "italic", "underline", "strike", "blockquote"],
-            [{ size: ["small", false, "large", "huge"] }, { color: [] }],
-            [
-                { list: "ordered" },
-                { list: "bullet" },
-                { indent: "-1" },
-                { indent: "+1" },
-                { align: [] },
-            ],
-            ["image", "video"],
+      toolbar: {
+        container: [
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ size: ["small", false, "large", "huge"] }, { color: [] }],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" },
+            { align: [] },
           ],
-        },
+          ["image", "video"],
+        ],
+      },
     }), []);
 
   return (
     <div>
-      <LayoutBiz
-          title="쿠폰소식 등록"
-          cart={false}
-          bell={false}
-          onBackClick={() => {navigate(-1); }}
+      <Layout
+        title="쿠폰소식 등록"
+        cart={false}
+        bell={false}
+        onBackClick={() => { navigate(-1); }}
       >
         <L.Container>
           <L.Contents _padding='0px'>
@@ -70,20 +69,20 @@ function BusinessCouponUpload() {
 
 
           <B.CouponButton
-          onClick={openModal}
+            onClick={openModal}
           >
             쿠폰 등록하기
           </B.CouponButton>
-    {
-        modal &&
-        <CouponAlert
-          onButtonClick={modal.onButtonClick}
-          onOverlayClick={modal.onOverlayClick}
-        />
-    }
+          {
+            modal &&
+            <CouponAlert
+              onButtonClick={modal.onButtonClick}
+              onOverlayClick={modal.onOverlayClick}
+            />
+          }
           <B.FixedActionButton>완료</B.FixedActionButton>
         </L.Container>
-      </LayoutBiz>
+      </Layout>
       {
         confirm &&
         <Confirm

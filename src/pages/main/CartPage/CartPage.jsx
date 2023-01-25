@@ -14,7 +14,6 @@ import LoadingBar from 'components/commonUi/LoadingBar';
 import { groupBy, isEmptyObj, numberFormat, storeTotalPrice } from 'utils/utils';
 import { totalPrice } from 'utils/utils';
 import { orderActions } from 'store/slices/order';
-import LayoutNotFloat from 'components/layout/Layout/LayoutNotFloat';
 const IMGURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/';
 
 
@@ -80,10 +79,11 @@ function CartPage({ }) {
 
   return (
     <div>
-      <LayoutNotFloat
+      <Layout
         title="장바구니"
         bell={false}
         cart={false}
+        floating={false}
         onBackClick={() => navigate("/")}
       >
         <L.Container >
@@ -185,7 +185,7 @@ function CartPage({ }) {
 
           </L.Contents>
         </L.Container>
-      </LayoutNotFloat>
+      </Layout>
     </div>
   )
 }

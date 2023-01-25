@@ -37,7 +37,8 @@ const CategoryTabs = ({ currentData, onChange }) => {
                             _weight={600}
                             _align='center'
                             _color={currentData === category ? 'green700' : 'gray400'}
-                            _line={currentData === category ? '2.8' : '1.5'}
+                            // _line={currentData === category ? '2.8' : '1.5'}
+                            _line={'2.8'}
                             onClick={() => onChange(category)}
                             style={{ cursor: 'pointer', borderBottom: currentData === category ? '2px solid #0B806F' : 'none' }}
                         >{category.replace(',', '/')}</T.Text>
