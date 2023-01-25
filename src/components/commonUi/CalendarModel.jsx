@@ -24,6 +24,7 @@ const CalendarModel = ({ modelClose, onChange, dateFormat = 'yy-MM-dd' }) => {
                 date={date}
                 onChange={onChangeDate}
                 dateDisplayFormat={dateFormat}
+                minDate={date}
             />
         </Overlay>
     )

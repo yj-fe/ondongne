@@ -30,6 +30,7 @@ function BusinessProductUpload() {
   const [categoryError, setCategoryError] = useState('');
   const [fileErrorMessage, setFileErrorMessage] = useState('');
   const [validtion, isValidtion] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     type: '',
     files: [],
@@ -102,6 +103,7 @@ function BusinessProductUpload() {
   }
 
   const onSubmit = async () => {
+    setLoading(true);
     const response = id ? await updateItem(data) : await createItem(data);
 
     if (response.data.data) {
@@ -148,6 +150,11 @@ function BusinessProductUpload() {
     if (data.price === 0) return isValidtion(false);
     if (data.recetiveType.length == 0) return isValidtion(false);
     if (data.description === '') return isValidtion(false);
+    if (data.type === 'GROUP') {
+      if (!data.minCount) {
+        return isValidtion(false);
+      }
+    }
 
     return isValidtion(true);
   }, [data])
@@ -420,7 +427,7 @@ function BusinessProductUpload() {
             </L.FlexCols>
             <B.FixedActionButton
               type='button'
-              disabled={!validtion}
+              disabled={!validtion || loading}
               backgroundColor={validtion ? 'green700' : 'gray300'}
               onClick={() => {
                 if (id) {
