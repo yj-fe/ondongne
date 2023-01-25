@@ -26,6 +26,20 @@ export const Text = styled.p`
     width: ${props => props._width || 'auto'};
     min-width: ${props => props._minWidth || 'auto'};
 `;
+export const TextMedia = styled.p`
+    font-size: ${props => props._size || 16}px;
+    font-weight: ${props => props._weight || 400};
+    color: ${props => props.theme.color[props._color || 'gray900']};
+    line-height: ${props => props._line || 1.5};
+    white-space: pre-wrap;
+    text-align: ${props => props._align || 'left'};
+    text-decoration: ${props => props._decoration || 'none'};
+    width: ${props => props._width || 'auto'};
+    min-width: ${props => props._minWidth || 'auto'};
+    @media screen and (max-width : 675px) {
+        width: 170px;
+    }
+`;
 
 export const SoldoutText = styled.p`
     position: absolute;

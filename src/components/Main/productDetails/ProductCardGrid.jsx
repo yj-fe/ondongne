@@ -30,6 +30,7 @@ export function ProductCardGrid({
                     !item.soldoutStatus
                         ?
                         <ImgSizeH
+                            _width={'216px'} _height={216}
                             _bdr={6}
                             src={item.images && item.images.length > 0 && item.images[0]}
                             onClick={() => navigate(`/details/${item.itemId}`)}
@@ -37,6 +38,7 @@ export function ProductCardGrid({
                         :
                         <div style={{ position: 'relative' }}>
                             <ImgSizeH
+                                _width={'216px'} _height={216}
                                 _bdr={6}
                                 src={item.images && item.images.length > 0 && item.images[0]}
                             />
@@ -44,15 +46,14 @@ export function ProductCardGrid({
                         </div>
                 }
             </RelativDiv>
-            {/* <RelativDiv> */}
             <L.FlexCols _gap={4} _padding={0} >
                 {
-                    item.type == 'GROUP' &&
+                    item.type === 'GROUP' &&
                     !item.soldoutStatus &&
                     <ProductTimer date={item.endDate} />
                 }
                 <T.Text _size={12} _weight={500} _color='gray600' _line='1.8' >{item.storeName}</T.Text>
-                <T.Text _size={14} _weight={400} _color='gray900'>{item.name}</T.Text>
+                <T.TextMedia _size={14} _weight={400} _color='gray900'>{item.name}</T.TextMedia>
                 {
                     item.salePercent > 0 &&
                     <L.FlexRows _gap={4} _padding={0} _items='center' >

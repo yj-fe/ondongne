@@ -94,32 +94,31 @@ export const FlexColsGrid = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 75px;
+    /* gap: 75px; */
     width: ${props => props._width || '100%'};
     padding: ${props => props._padding || '0px'};
     @media screen and (max-width: 728px) {
-    gap: 73px;
+    /* gap: 73px; */
 }
     @media screen and (max-width: 700px) {
-    gap: 65px;
+    /* gap: 65px; */
 }
     @media screen and (max-width: 690px) {
-    gap: 60px;
+    /* gap: 60px; */
 }
     @media screen and (max-width: 650px) {
-    gap: 50px;
+    /* gap: 50px; */
 }
     @media screen and (max-width: 625px) {
-    gap: 32px;
+    /* gap: 32px; */
 }
     @media screen and (max-width: 600px) {
-    gap: 25px;
+    /* gap: 25px; */
 }
     @media screen and (max-width: 550px) {
-    gap: 10px;
+    /* gap: 10px; */
 }
-    @media screen and (max-width: 510px) {
-    gap: 0;
+    @media screen and (max-width: 336px) {
 }
 `;
 
@@ -405,21 +404,24 @@ export const Grid = styled.div`
     /* max-height: 370px; */
 	padding-top: 32px;
 	gap: 2.7%;
-    @media screen and (max-width:668px) {
-        grid-template-columns: repeat(3, 31.5%);
+    @media screen and (max-width:535px) {
+        grid-template-columns: repeat(2, 50%);
     }
     @media screen and (max-width:472px) {
         gap: 2%;
     }
     @media screen and (max-width:450px) {
         /* gap: 10px; */
-        grid-template-columns: repeat(2, 50%);
+        /* grid-template-columns: repeat(2, 50%); */
     }
     @media screen and (max-width:392px) {
         gap: 1%;
     }
     @media screen and (max-width:384px) {
         gap: 0.7%;
+    }
+    @media screen and (max-width:336px) {
+        gap: 0%;
     }
 `
 

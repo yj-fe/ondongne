@@ -12,14 +12,18 @@ export const ImgSizeH = styled.img`
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width || '100%'};
     height: ${props => props._height}px;
+    @media screen and (max-width: 678px){
+        width: 167px;
+        height: 167px;
+    }
     @media screen and (max-width: 450px){
         width: 167px;
         height: 167px;
     }
-    @media screen and (max-width: 372px){
+    /* @media screen and (max-width: 372px){
         width: 150px;
         height: 150px;
-    }
+    } */
     @media screen and (max-width: 336px){
         width: 130px;
         height: 130px;
@@ -73,54 +77,51 @@ export const AbsoluteDivGrid = styled.div`
     display: flex;
     position: absolute;
     right: 0;
-    bottom: -70px;
+    bottom: -10px;
     margin: 0;
     padding: 18px 12px;
     z-index: 9999;
-    @media screen and (max-width:695px) {
-        bottom: -35%;
-    }
-    @media screen and (max-width:685px) {
-        bottom: -30%;
-    }
-    @media screen and (max-width:644px) {
-        bottom: -29%;
-    }
-    @media screen and (max-width:633px) {
-        bottom: -27%;
-    }
-    @media screen and (max-width:620px) {
-        bottom: -25%;
-    }
-    @media screen and (max-width:600px) {
-        bottom: -20%;
-    }
-    @media screen and (max-width:580px) {
-        bottom: -17%;
-    }
-    @media screen and (max-width:570px) {
-        bottom: -15%;
-    }
-    @media screen and (max-width:555px) {
-        bottom: -10%;
-    }
-    @media screen and (max-width:533px) {
-        bottom: -7%;
-    }
-    @media screen and (max-width:500px) {
-        bottom: -5%;
-    }
-    @media screen and (max-width:450px) {
-        right: 15%;
-    }
-    @media screen and (max-width:440px) {
+    @media screen and (max-width:678px) {
         right: 12%;
     }
-    @media screen and (max-width:409px) {
+    @media screen and (max-width:645px) {
+        right: 7%;
+    }
+    @media screen and (max-width:625px) {
+        right: 3%;
+    }
+    @media screen and (max-width:615px) {
+        right: 0%;
+    }
+    @media screen and (max-width:590px) {
+        right: -2%;
+    }
+    @media screen and (max-width:535px) {
+        right: 27%;
+    }
+    @media screen and (max-width:500px) {
+        right: 22%;
+    }
+    @media screen and (max-width:485px) {
+        right: 20%;
+    }
+    @media screen and (max-width:465px) {
+        right: 16%;
+    }
+    @media screen and (max-width:455px) {
+        right: 13%;
+    }
+    @media screen and (max-width:435px) {
+        right: 10%;
+    }
+    @media screen and (max-width:415px) {
         right: 7%;
     }
     @media screen and (max-width:400px) {
-        right: 0;
+        right: 2%;
+    }
+    @media screen and (max-width:336px) {
+        right: 5%;
     }
 `;
 export const AbsoluteDivS = styled.div`
