@@ -184,7 +184,7 @@ function MorePage() {
 }
 
 function BusinessAgreementModal() {
-  // 체크버튼
+  // 체크박스
   const [requestSave, setRequestSave] = useState(false);
   const [servicerequestSave, setServiceRequestSave] = useState(false);
   const [privrequestSave, setPrivRequestSave] = useState(false);
@@ -193,22 +193,32 @@ function BusinessAgreementModal() {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
 
-
-  const allChecked = () => {
-    setRequestSave(!requestSave)
-    setServiceRequestSave(!servicerequestSave)
-    setPrivRequestSave(!privrequestSave)
-    setSnsRequestSave(!snsrequestSave)
-  }
-
+// 확인 버튼 활성화
   useEffect(() => {
     if (servicerequestSave && privrequestSave) {
       setActive(true)
     } else {
       setActive(false)
     }
-
   }, [servicerequestSave, privrequestSave])
+  // 체크박스
+  useEffect(() => {
+    if (requestSave === true){
+      setServiceRequestSave(true)
+      setPrivRequestSave(true)
+      setSnsRequestSave(true)
+    } else{
+      setServiceRequestSave(false)
+      setPrivRequestSave(false)
+      setSnsRequestSave(false);
+    }
+  }, [requestSave]);
+  useEffect(() => {
+    if ( servicerequestSave && privrequestSave && snsrequestSave === true){
+      setRequestSave(true)
+    }
+  },  [servicerequestSave, privrequestSave, snsrequestSave]);
+
 
   return (
     <ModalOutside>
@@ -224,8 +234,8 @@ function BusinessAgreementModal() {
           <CheckBoxTitle
             label="모두 동의합니다"
             name="requestSave"
-            checked={requestSave}
-            onChange={allChecked}
+            checked={requestSave && (servicerequestSave && privrequestSave && snsrequestSave) === true ? true : false}
+            onChange={e => { setRequestSave(e.currentTarget.checked) }}
           />
           <Line />
           <SpaceBet>

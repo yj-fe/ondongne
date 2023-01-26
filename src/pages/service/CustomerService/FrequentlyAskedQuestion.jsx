@@ -31,6 +31,7 @@ function FrequentlyAskedQuestion() {
           title="자주하는 질문"
           cart={false}
           bell={false}
+          floating={false}
           onBackClick={() => navigate(-1)}
       >
         <L.Container _height='calc(100vh - 60px)'>

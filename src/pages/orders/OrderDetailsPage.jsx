@@ -5,6 +5,7 @@ import OrderDetails from 'components/orders/orderdetails/OrderDetails';
 const OrderDetailsPage = () => {
     return (
         <Layout
+            floating={false}
             title="주문내역 상세"
         >
             <OrderDetails />

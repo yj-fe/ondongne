@@ -21,6 +21,7 @@ const OrderFormPage = () => {
     return (
         <Layout
             title="주문하기"
+            floating={false}
             onBackClick={() => {
                 setCancelConfirm(true)
             }}

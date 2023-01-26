@@ -3,13 +3,19 @@ import { Floating, FloatingPush } from 'components/commonUi/Icon'
 import FloatingToggle from "./FloatingToggle";
 import styled from "styled-components";
 import { useLocation } from 'react-router-dom';
+import { right } from 'assets/main/right.svg';
 
 
 const FloatingDiv = styled.div`
-	position: fixed;
-    right: 15px;
 	bottom: ${props => props._bottom};
+    /* position: sticky; */
+    right: 10px;
 	z-index: 99;
+    position: fixed;
+    @media screen and (max-width: 728px) {
+        position: fixed;
+        right: 15px;
+    }
 `;
 
 const FloatingUi = () => {

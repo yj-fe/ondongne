@@ -12,6 +12,7 @@ const OrderListPage = props => {
             title="주문 내역"
             cart={true}
             bell={true}
+            floating={false}
             onBackClick={() => navigate("/")}
         >
             <OrderList />

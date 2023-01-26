@@ -89,6 +89,7 @@ function VocPage() {
           title="Voc 의견"
           cart={false}
           bell={false}
+          floating={false}
           onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px" >
