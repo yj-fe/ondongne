@@ -44,14 +44,14 @@ export const Div1 = styled.p`
 	font-size: 18px;
 	color: #212121;
 `;
-export const Div2 = styled.p`
+export const Div2 = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 0px;
 	gap: 16px;
 	width: 100%;
-	height: 80px;
+	height: 90px;
 `;
 export const SearchDiv = styled.div`
 	box-sizing: border-box;
@@ -70,13 +70,12 @@ export const SearchInput = styled.input`
 	width: calc(100% - 20px);
 	font-weight: 400;
 	font-size: 16px;
-	font-family: 'Pretendard';
+	font-family: "Pretendard";
 	font-style: normal;
 	color: black;
 	background: #fafafa;
-	&::placeholder{
+	&::placeholder {
 		color: #bdbdbd;
-
 	}
 	&:focus {
 		color: #212121;

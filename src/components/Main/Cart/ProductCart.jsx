@@ -4,6 +4,8 @@ import { cartInsert } from 'service/cart';
 import styled from 'styled-components';
 import Alert from 'components/commonUi/Alert';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Confirm from 'components/commonUi/Confirm';
 
 const CartContainer = styled.button`
     cursor: pointer;
@@ -11,18 +13,15 @@ const CartContainer = styled.button`
 
 const ProductCart = ({ id, type, count = 1, disabled = false }) => {
 
+    const navigate = useNavigate();
+    const [confirm, setConfirm] = useState(false);
     const [alert, setAlert] = useState(null);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
     const onClick = async () => {
 
         if (!isAuthenticated) {
-            return setAlert({
-                contents: "로그인 후 이용 가능합니다.",
-                buttonText: "확인",
-                onButtonClick: () => setAlert(false),
-                onOverlayClick: () => setAlert(false),
-            });
+            return setConfirm(true);
         }
 
         const cart = { itemId: id, count: count }
@@ -51,6 +50,18 @@ const ProductCart = ({ id, type, count = 1, disabled = false }) => {
                         : <Cart />
                 }
             </CartContainer>
+            {
+                confirm &&
+                <Confirm
+                    contents="로그인 후 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
+                    confirmText="네"
+                    cancelText="아니오"
+                    onConfirmClick={() => { navigate('/login') }}
+                    onCancelClick={() => {
+                        setConfirm(false)
+                    }}
+                />
+            }
             {alert && (
                 <Alert
                     title={alert.title}

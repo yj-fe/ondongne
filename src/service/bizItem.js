@@ -44,7 +44,6 @@ export function createItem(data) {
 	formData.append("minCount", data.minCount);
 	formData.append("maxCount", data.maxCount);
 	formData.append("endDate", data.endDate);
-	formData.append("recetiveType", data.recetiveType.join(","));
 
 	data.categories.forEach((category) => {
 		formData.append("categories", category);
@@ -79,7 +78,6 @@ export function updateItem(data) {
 	formData.append("minCount", data.minCount);
 	formData.append("maxCount", data.maxCount);
 	formData.append("endDate", data.endDate);
-	formData.append("recetiveType", data.recetiveType.join(","));
 
 	data.categories.forEach((category) => {
 		formData.append("categories", category);

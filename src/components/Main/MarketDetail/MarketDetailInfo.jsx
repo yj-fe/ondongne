@@ -72,6 +72,10 @@ function MarketDetailInfo({ item }) {
                   <th>배달지역</th>
                   <td>{item.deliveryAddress}</td>
                 </tr>
+                <tr>
+                  <th>배달/픽업</th>
+                  <td>{item.recetiveType} 가능</td>
+                </tr>
               </tbody>
             </MarketTable>
           </L.FlexCols>

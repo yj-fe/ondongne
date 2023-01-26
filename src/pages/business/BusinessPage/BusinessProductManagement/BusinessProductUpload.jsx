@@ -42,7 +42,6 @@ function BusinessProductUpload() {
     minCount: 0,
     maxCount: 0,
     endDate: '',
-    recetiveType: [],
     description: '',
   })
 
@@ -51,16 +50,6 @@ function BusinessProductUpload() {
     setData({
       ...data,
       endDate: date,
-    })
-  }
-
-  // 수령 방법 데이터 핸들러
-  const recetiveTypeHandler = (value) => {
-    return setData({
-      ...data,
-      recetiveType: data.recetiveType.includes(value)
-        ? data.recetiveType.filter(r => r !== value)
-        : [...data.recetiveType, value]
     })
   }
 
@@ -133,7 +122,6 @@ function BusinessProductUpload() {
       minCount: responseData.minCount,
       maxCount: responseData.maxCount,
       endDate: responseData.endDate ? responseData.endDate : '',
-      recetiveType: responseData.recetiveType,
       description: responseData.description,
     })
   }
@@ -148,7 +136,6 @@ function BusinessProductUpload() {
     if (data.categories.length == 0) return isValidtion(false);
     if (data.name === '') return isValidtion(false);
     if (data.price === 0) return isValidtion(false);
-    if (data.recetiveType.length == 0) return isValidtion(false);
     if (data.description === '') return isValidtion(false);
     if (data.type === 'GROUP') {
       if (!data.minCount) {
@@ -380,38 +367,13 @@ function BusinessProductUpload() {
                         name='endDate'
                         placeholder='판매 종료일 선택'
                         style={{ background: '#fff' }}
-                        value={data.endDate ? data.endDate.split(' ')[0] : ''}
+                        value={data.endDate ? data.endDate.split('T')[0] : ''}
                       />
                       <span><Calendar /></span>
                     </TitleInfoDiv>
                   </L.FlexCols>
                 </>
               }
-
-
-              <L.FlexCols _gap={16}>
-                <T.Text _weight={600} _size={16} _color="gray900">배달/픽업 여부</T.Text>
-                <L.FlexRows _gap={16}>
-                  <CheckBox
-                    label="배달 가능"
-                    name="delivery"
-                    checked={data.recetiveType.includes('배달')}
-                    onChange={() => recetiveTypeHandler('배달')}
-                  />
-                  <CheckBox
-                    label="픽업 가능"
-                    name="pickup"
-                    checked={data.recetiveType.includes('픽업')}
-                    onChange={() => recetiveTypeHandler('픽업')}
-                  />
-                  <CheckBox
-                    label="택배 가능"
-                    name="parcel"
-                    checked={data.recetiveType.includes('택배')}
-                    onChange={() => recetiveTypeHandler('택배')}
-                  />
-                </L.FlexRows>
-              </L.FlexCols>
 
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">상품 정보</T.Text>

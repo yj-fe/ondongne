@@ -9,6 +9,7 @@ import Alert from "components/commonUi/Alert";
 import { getLocal, searchLocation } from "service/common";
 import { useNavigate } from "react-router-dom";
 import { localActions } from "store/slices/location";
+import * as T from 'components/commonUi/Text';
 import * as L from 'components/commonUi/Layout';
 import { S } from 'components/layout/Layout/LayoutStyle'
 
@@ -19,7 +20,7 @@ function LocationSetting() {
 
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState('경기도 김포시');
   const [searchList, setSearchList] = useState([]);
 
   // 지도 검색
@@ -105,9 +106,10 @@ function LocationSetting() {
                     </LocationIcon>
                     <MyLocationText>현재 내 위치</MyLocationText>
                     <MyLocationResult>
-                      {localState.addres}
+                      {localState.address}
                     </MyLocationResult>
                   </MyLocationDiv>
+                  <T.Text _color='gray400' _size='12' >현재는 '경기도 김포시'에만 위치 설정이 가능합니다.</T.Text>
                 </Div2>
               </L.FlexCols>
 

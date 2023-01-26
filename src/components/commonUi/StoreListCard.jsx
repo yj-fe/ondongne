@@ -54,8 +54,13 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
                                 <L.FlexRows>
                                     {item.newStatus && <B.Badge _color='white' _bg='green500'>신규 입점</B.Badge>}
                                     {item.couponStatus && <B.Badge _color='green600' _bg='green50'>쿠폰</B.Badge>}
-                                    {item.pickupStatus && <B.Badge>픽업가능</B.Badge>}
-                                    {item.deliveryStatus && <B.Badge>배달가능</B.Badge>}
+                                    {
+                                        item.recetiveType && item.recetiveType.split(',').map((r, i) => (
+                                            <React.Fragment key={i}>
+                                                <B.Badge>{r}가능</B.Badge>
+                                            </React.Fragment>
+                                        ))
+                                    }
                                 </L.FlexRows>
                             </L.FlexCols>
                         </L.FlexRows>

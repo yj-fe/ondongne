@@ -1,24 +1,21 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as L from 'components/commonUi/Layout';
 import { My, MyC } from 'components/commonUi/Icon';
 import { AlertText } from "components/Login/Member/MemberPhone/MemberPhoneStyle";
 import { storeLike } from "service/mystore";
+import Confirm from "./Confirm";
 
 
 const StoreLike = ({ id, checked, onChange }) => {
-    const [alert, setAlert] = useState(null);
+    const navigate = useNavigate();
+    const [confirm, setConfirm] = useState(false);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
     const likeHandler = async () => {
         if (!isAuthenticated) {
-            console.log('로그인 안됨')
-            return setAlert({
-                contents: "로그인 후 이용 가능합니다.",
-                buttonText: "확인",
-                onButtonClick: () => setAlert(false),
-                onOverlayClick: () => setAlert(false),
-            });
+            return setConfirm(true);
         }
 
         const response = await storeLike(id);
@@ -49,6 +46,19 @@ const StoreLike = ({ id, checked, onChange }) => {
                     onOverlayClick={alert.onOverlayClick}
                 />
             )}
+
+            {
+                confirm &&
+                <Confirm
+                    contents="로그인 후 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
+                    confirmText="네"
+                    cancelText="아니오"
+                    onConfirmClick={() => { navigate('/login') }}
+                    onCancelClick={() => {
+                        setConfirm(false)
+                    }}
+                />
+            }
         </>
     )
 }

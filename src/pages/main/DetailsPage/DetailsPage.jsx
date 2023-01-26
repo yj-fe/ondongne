@@ -23,11 +23,9 @@ import { useDispatch } from 'react-redux';
 import { orderActions } from 'store/slices/order';
 import { ImgBanner } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import ProductReview from 'components/Main/productDetails/ProductReview';
+import Alert from 'components/commonUi/Alert';
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
 const STOREURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
-
-
-
 
 
 function DetailsPage(props) {
@@ -67,6 +65,7 @@ function DetailsPage(props) {
   const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
   const [confirm, setConfirm] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [btn, setBtn] = useState(true);
 
   const PropsModal = () => {
@@ -74,6 +73,9 @@ function DetailsPage(props) {
   }
 
   const paymentsOrder = (type) => {
+
+    const account = totalPrice(item.price, item.salePercent).replaceAll(',', '');
+
     if (!auth.isAuthenticated) {
       return setConfirm(true)
     }
@@ -83,6 +85,17 @@ function DetailsPage(props) {
     if (orderToggle && type === 0) return;
 
     if (orderToggle && type === 1) {
+
+      // 최소금액 체크
+      if ((Number(account) * count) < Number(item.orderMinPrice)) {
+        return setAlert({
+          contents: `상점 최소주문 금액은 ${numberFormat(item.orderMinPrice)}입니다.`,
+          buttonText: "확인",
+          onButtonClick: () => setAlert(false),
+          onOverlayClick: () => setAlert(false),
+        })
+      }
+
       const data = {
         items: [{ ...item, count, cartId: 0 }],
         to: location.pathname
@@ -222,7 +235,7 @@ function DetailsPage(props) {
                   reviewcolor={detailTab === 2}
                   _bottomsize='7px'
                 >
-                  댓글
+                  댓글문의
                 </DetailTabReview>
               </L.FlexRows>
 
@@ -253,13 +266,16 @@ function DetailsPage(props) {
                       </DetailButtonDiv>
                       :
                       <DetailButtonDiv>
-                        <LayerTextButton
-                          type='button'
-                          onClick={() => paymentsOrder(0)}
-                          _padding='0px' _width='48px'
-                        >
-                          <ProductCart id={item.itemId} count={count} type={'details'} disabled={!orderToggle} />
-                        </LayerTextButton>
+                        {
+                          item.type === 'NORMAL' &&
+                          <LayerTextButton
+                            type='button'
+                            onClick={() => paymentsOrder(0)}
+                            _padding='0px' _width='48px'
+                          >
+                            <ProductCart id={item.itemId} count={count} type={'details'} disabled={!orderToggle} />
+                          </LayerTextButton>
+                        }
                         <DetailButtonStyle onClick={() => paymentsOrder(1)}>구매하기</DetailButtonStyle>
                       </DetailButtonDiv>
                   }
@@ -284,6 +300,16 @@ function DetailsPage(props) {
           }}
         />
       }
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
 
 
     </div>
@@ -292,6 +318,9 @@ function DetailsPage(props) {
 
 
 function TabContent(props) {
+
+  console.log(props.item);
+
   return [
 
     //=====================상세정보=====================

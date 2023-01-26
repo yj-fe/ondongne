@@ -3,21 +3,18 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { DetailTabInfo, DetailTabReview, TabButtonStyle, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import Image from 'assets/main/shine.png'
-import { ImgPer, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import FooterLayout from 'components/layout/Footer/Footer';
 import Layout from 'components/layout/Layout/Layout';
 import { useNavigate, useParams } from 'react-router-dom'
 import MarketImg from 'assets/images/marketdetail.png'
 import MarketDetailInfo from 'components/Main/MarketDetail/MarketDetailInfo';
 import MarketDetailProduct from 'components/Main/MarketDetail/MarketDetailProduct';
-import MarketDetailCoupon from 'components/Main/MarketDetail/MarketDetailCoupon';
 import ModalMorePage from 'components/Main/More/ModalMorePage'
 import { getStoreDetails } from 'service/store';
 import { numberFormat, isEmptyObj } from 'utils/utils';
 import StoreLike from 'components/commonUi/StoreLike';
-import { ImgSize } from 'assets/images/business/imgsize.png';
 import { ImgBanner } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
-import ImgSizee from 'assets/images/business/imgsize.png'
 
 const STOREURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
@@ -62,7 +59,7 @@ function MarketDetail() {
           <L.Contents _padding="0">
 
             {/* <ImgPer src={item.banner ? STOREURL + item.banner : MarketImg} /> */}
-            <ImgBanner _height='390px' src={item.banner ? STOREURL + item.banner : MarketImg}/>
+            <ImgBanner _height='390px' src={item.banner ? STOREURL + item.banner : MarketImg} />
             {/* <ImgBanner _height='390px' src={ImgSizee}/> */}
             <L.FlexCols _padding={0} _gap={0}>
 
@@ -119,7 +116,7 @@ function MarketDetail() {
         }
         {modal && <ModalMorePage PropsModal={() => setModal(false)} />}
 
-          <FooterLayout />
+        <FooterLayout />
 
       </Layout>
 

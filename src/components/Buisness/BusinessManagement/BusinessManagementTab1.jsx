@@ -17,6 +17,7 @@ import CalendarModel from 'components/commonUi/CalendarModel';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { AbsoluteDiv } from 'components/layout/Img/ImgSizeLayout';
+const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
 
 // 상점정보
@@ -83,18 +84,28 @@ function BusinessManagementTab1({ tabHandler }) {
   const bannerUpdate = async (e) => {
     const file = e.target.files[0];
     const response = await storeImageBannerUpdate(file, store.storeId);
-    const { data } = response.data
+    const { data } = response.data;
 
-    if (data) getStore()
+    if (data) {
+      setStore({
+        ...store,
+        banner: IMGURL + data.name
+      })
+    }
   }
 
   // 프로필 이미지 변경
   const profileUpdate = async (e) => {
     const file = e.target.files[0];
     const response = await storeImageProfileUpdate(file, store.storeId);
-    const { data } = response.data
+    const { data } = response.data;
 
-    if (data) getStore()
+    if (data) {
+      setStore({
+        ...store,
+        profile: IMGURL + data.name
+      })
+    }
   }
 
   // 오픈 날짜 변경
@@ -135,16 +146,26 @@ function BusinessManagementTab1({ tabHandler }) {
     })
   }
 
+  // 수령 방법 데이터 핸들러
+  const recetiveTypeHandler = (value) => {
+    return setStore({
+      ...store,
+      recetiveType: store.recetiveType.includes(value)
+        ? store.recetiveType.filter(r => r !== value)
+        : [...store.recetiveType, value]
+    })
+  }
+
   // 상점 수정
   const onSubmit = async () => {
-    const response = await storeUpdate(store);
+    const response = await storeUpdate({ ...store, recetiveType: store.recetiveType.join(",") });
 
     if (response && response.data.data) {
       return setAlert({
         contents: "상점 정보를 수정하였습니다.",
         buttonText: "확인",
         onButtonClick: () => {
-          tabHandler(1);
+          // tabHandler(1);
           setAlert(false);
         },
         onOverlayClick: () => setAlert(false),
@@ -174,7 +195,10 @@ function BusinessManagementTab1({ tabHandler }) {
       )
     )
 
-    setStore(data);
+    setStore({
+      ...data,
+      recetiveType: data.recetiveType ? data.recetiveType.split(',') : [],
+    });
   }
 
   // 카테고리 데이터 핸들러
@@ -203,7 +227,7 @@ function BusinessManagementTab1({ tabHandler }) {
 
   useEffect(() => {
     if (store.banner && store.categories.length > 0 && store.deliveries.length > 0
-      && store.name && store.openDate && store.profile) {
+      && store.name && store.openDate && store.profile && store.recetiveType.length > 0) {
       setActive(true);
     } else {
       setActive(false);
@@ -214,8 +238,6 @@ function BusinessManagementTab1({ tabHandler }) {
   useEffect(() => {
     if (auth.isAuthenticated) getStore()
   }, [auth]);
-
-  console.log(store);
 
   return (
     <div>
@@ -289,6 +311,31 @@ function BusinessManagementTab1({ tabHandler }) {
               <RightStyle><Right /></RightStyle>
             </TitleInfoDiv>
           </ContentDiv>
+
+          {/* ============== 배달/픽업 여부 ============== */}
+          <L.FlexCols _gap={16}>
+            <T.Text _weight={600} _size={16} _color="gray900">배달/픽업 여부</T.Text>
+            <L.FlexRows _gap={16}>
+              <CheckBox
+                label="배달 가능"
+                name="delivery"
+                checked={store.recetiveType && store.recetiveType.includes('배달')}
+                onChange={() => recetiveTypeHandler('배달')}
+              />
+              <CheckBox
+                label="픽업 가능"
+                name="pickup"
+                checked={store.recetiveType && store.recetiveType.includes('픽업')}
+                onChange={() => recetiveTypeHandler('픽업')}
+              />
+              <CheckBox
+                label="택배 가능"
+                name="parcel"
+                checked={store.recetiveType && store.recetiveType.includes('택배')}
+                onChange={() => recetiveTypeHandler('택배')}
+              />
+            </L.FlexRows>
+          </L.FlexCols>
 
 
           {/* ============== 상점 소개 ============== */}
@@ -427,7 +474,6 @@ function BusinessManagementTab1({ tabHandler }) {
               ))
             }
           </ContentDiv>
-
 
           {/* ============== 수령 안내 ============== */}
           <ContentDiv>

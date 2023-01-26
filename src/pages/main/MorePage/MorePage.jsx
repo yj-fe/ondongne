@@ -15,6 +15,7 @@ import * as L from 'components/commonUi/Layout';
 import FooterLayout from 'components/layout/Footer/Footer'
 import { getBizMember } from 'service/biz'
 import Layout from 'components/layout/Layout/Layout'
+import Confirm from 'components/commonUi/Confirm'
 
 
 function MorePage() {
@@ -22,6 +23,7 @@ function MorePage() {
   const [member, setMember] = useState({});
   const auth = useSelector(state => state.auth);
   const [alert, setAlert] = useState(null);
+  const [confirm, setConfirm] = useState(false);
   const [coachmark, setCoachmark] = useState(null);
   const [agreementModal, setAgreementModal] = useState(false);
 
@@ -64,12 +66,7 @@ function MorePage() {
   // 회원 권한 확인 후 페이지 이동
   const memberRoleRouter = (to) => {
     if (!auth.isAuthenticated) {
-      return setAlert({
-        contents: "로그인 후 이용가능합니다.",
-        buttonText: "확인",
-        onButtonClick: () => setAlert(false),
-        onOverlayClick: () => setAlert(false),
-      })
+      return setConfirm(true);
     }
     navigate(to);
   }
@@ -156,6 +153,18 @@ function MorePage() {
       </Layout>
 
       {
+        confirm &&
+        <Confirm
+          contents="로그인 후 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
+          confirmText="네"
+          cancelText="아니오"
+          onConfirmClick={() => { navigate('/login') }}
+          onCancelClick={() => {
+            setConfirm(false)
+          }}
+        />
+      }
+      {
         alert &&
         <Alert
           title={alert.title}
@@ -184,7 +193,7 @@ function MorePage() {
 }
 
 function BusinessAgreementModal() {
-  // 체크박스
+  // 체크버튼
   const [requestSave, setRequestSave] = useState(false);
   const [servicerequestSave, setServiceRequestSave] = useState(false);
   const [privrequestSave, setPrivRequestSave] = useState(false);
@@ -193,32 +202,22 @@ function BusinessAgreementModal() {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
 
-// 확인 버튼 활성화
+
+  const allChecked = () => {
+    setRequestSave(!requestSave)
+    setServiceRequestSave(!servicerequestSave)
+    setPrivRequestSave(!privrequestSave)
+    setSnsRequestSave(!snsrequestSave)
+  }
+
   useEffect(() => {
     if (servicerequestSave && privrequestSave) {
       setActive(true)
     } else {
       setActive(false)
     }
-  }, [servicerequestSave, privrequestSave])
-  // 체크박스
-  useEffect(() => {
-    if (requestSave === true){
-      setServiceRequestSave(true)
-      setPrivRequestSave(true)
-      setSnsRequestSave(true)
-    } else{
-      setServiceRequestSave(false)
-      setPrivRequestSave(false)
-      setSnsRequestSave(false);
-    }
-  }, [requestSave]);
-  useEffect(() => {
-    if ( servicerequestSave && privrequestSave && snsrequestSave === true){
-      setRequestSave(true)
-    }
-  },  [servicerequestSave, privrequestSave, snsrequestSave]);
 
+  }, [servicerequestSave, privrequestSave])
 
   return (
     <ModalOutside>
@@ -234,8 +233,8 @@ function BusinessAgreementModal() {
           <CheckBoxTitle
             label="모두 동의합니다"
             name="requestSave"
-            checked={requestSave && (servicerequestSave && privrequestSave && snsrequestSave) === true ? true : false}
-            onChange={e => { setRequestSave(e.currentTarget.checked) }}
+            checked={requestSave}
+            onChange={allChecked}
           />
           <Line />
           <SpaceBet>
