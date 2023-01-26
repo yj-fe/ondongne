@@ -1,9 +1,9 @@
 import React from 'react'
-import Overlay from '../../layout/Overlay/Overlay'
+import Overlay from '../Overlay/Overlay'
 import PopImg from "assets/main/popupimg.svg";
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import { Badge } from '../Button';
+import { Badge } from '../../commonUi/Button';
 import { Img } from '../../Buisness/BusinessManagement/BusinessManagementTabStyle';
 
 

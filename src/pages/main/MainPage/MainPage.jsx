@@ -15,6 +15,7 @@ import { useLocation } from 'react-router-dom';
 import Alert from 'components/commonUi/Alert'
 import { useNavigate } from 'react-router-dom';
 import LayoutMain from 'components/layout/Layout/LayoutMain'
+import CoachModalSlide from 'components/layout/PopUp/CoachModalSlide'
 
 
 
@@ -24,6 +25,7 @@ function MainPage() {
   const [alert, setAlert] = useState(null);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const auth = useSelector(state => state.auth);
+  const [coachmark, setCoachmark] = useState(false);
 
   useEffect(() => {
     if (state && state.error) {
@@ -46,6 +48,12 @@ function MainPage() {
 
   return (
     <div>
+      {
+        coachmark &&
+        <CoachModalSlide
+          closeModel={() => setCoachmark(false)}
+        />
+      }
       <LayoutMain>
         <L.Container _padding="0px" >
           <L.Container _padding="0px" _gap='0px' >

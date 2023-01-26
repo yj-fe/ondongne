@@ -61,13 +61,13 @@ export const Container = styled.div`
     border-radius: 0px;
   }
 `
-const Header = styled.div`
+export const Header = styled.div`
   width: 100%;
   height: 60px;
   padding: 20px;
   text-align: right;
 `
-const Content = styled.div`
+export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -77,7 +77,7 @@ const Content = styled.div`
   width: 100%;
   height: 706px;
 `
-const Btn = styled.div`
+export const Btn = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;

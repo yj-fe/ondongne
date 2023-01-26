@@ -64,7 +64,7 @@ function Slide1() {
 
 export default SwiperPage
 
-const SwiperDiv = styled.div`
+export const SwiperDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,7 +74,7 @@ const SwiperDiv = styled.div`
   gap: 40px;
   text-align: center;
   `
-const SwiperTextDiv = styled.div`
+export const SwiperTextDiv = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -84,18 +84,18 @@ const SwiperTextDiv = styled.div`
   width: 100%;
   height: auto;
 `
-const SwiperTitle = styled.p`
+export const SwiperTitle = styled.p`
   font-weight: 600;
   font-size: 24px;
   color: #212121;
 `
-const SwiperText = styled.p`
+export const SwiperText = styled.p`
   font-weight: 400;
   font-size: 15px;
   text-align: center;
   color: #757575;
 `
-const SwiperSlideImg = styled.img`
+export const SwiperSlideImg = styled.img`
   display: block;
   width: 350px;
   height: 287px;
