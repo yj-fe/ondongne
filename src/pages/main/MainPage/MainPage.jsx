@@ -25,7 +25,7 @@ function MainPage() {
   const [alert, setAlert] = useState(null);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const auth = useSelector(state => state.auth);
-  const [coachmark, setCoachmark] = useState(false);
+  const [coachmark, setCoachmark] = useState(true);
 
 
   // 코치마크 닫으면 스크롤 가능

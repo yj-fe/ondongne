@@ -14,20 +14,21 @@ const handleNext = (swiper) => {
   return (
     <Body>
       <Container>
-        <Content>
+        <Content _padding='80px 20px'>
           <CoachModalSlideSwiper handleNext={handleNext} />
           <L.FlexCols _gap={26}>
-            <Btn
+            {/* <Btn
               onClick={()=>handleNext()} 
             >다음</Btn>
             <Text 
+              // _margintop='-55px'
               onClick={closeModel} 
               _align={'center'} 
               _size={14} 
               _color={'gray600'}
               >
               다시보지 않기
-            </Text>
+            </Text> */}
           </L.FlexCols>
         </Content>
       </Container>

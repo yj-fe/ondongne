@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 // import "./styles.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -17,71 +17,37 @@ import { Btn } from '../Modal/Modal';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-function CoachModalSlideSwiper(handleNext) {
+function CoachModalSlideSwiper() {
 
-  const [next, setNext] = useState(false);
-
-  // const [prevEl, setPrevEl] = useState(null);
-  // const [nextEl, setNextEl] = useState(null);
-
-  const nextSlide = (swiper)=> {
-    swiper.slideNext()
-  }
-
-  // const swiper = new Swiper('.swiper', {
-  //   // ...
-  //   on: {
-  //     init: function () {
-  //       console.log('swiper initialized');
-  //     },
-  //   },
-  // });
-  
-  const SlideImages = [
-    // require(<Slide1/>),
-    // require(<Slide1/>),
-    // require(<Slide1/>),
-    // require('../../../assets/images/business/image1.png'),
-    // require('../../../assets/images/business/image1.png'),
-    // require('../../../assets/images/business/image1.png'),
-  ];
-
-  // useEffect(() => {
-  //   if (next === true) {
-  //     nextSlide()
-  //   }
-  // }, [next])
-
+  const slideRef = useRef(null);
 
   return (
     <div>
-
       <Swiper
+        style={{
+          "--swiper-pagination-color": "#0B806F",
+        }}
         spaceBetween={0}
         pagination={{
           clickable: true,
         }}
-        // navigation={{ prevEl, nextEl }}
         modules={[Pagination]}
         className="mySwiper"
-        // handleNext={handleNext}
-        onClick={nextSlide}
-        // onClick={handleNext}
+        ref={slideRef}
+        loop={true}
       >
         <SwiperSlide
         ><Slide1 /></SwiperSlide>
         <SwiperSlide><Slide2 /></SwiperSlide>
         <SwiperSlide><Slide3 /></SwiperSlide>
         <SwiperSlide><Slide4 /></SwiperSlide>
-        {/* <Btn
-              onClick={()=>{handleNext()}} 
-              >다음</Btn> */}
-
-        {/* {SlideImages.map((index) => <SwiperSlide><SwiperSlideImg src={index.default} width='100%'/></SwiperSlide>)} */}
-        {/* {SlideImages.map((index) => <SwiperSlide><SwiperSlideImg src={index.default} width='100%'/></SwiperSlide>)} */}
       </Swiper>
-      {/* <button ref={(node) => setPrevEl(node)}>prev</button>
-      <button ref={(node) => setNextEl(node)}>next</button> */}
+      <Btn
+        onClick={()=> {slideRef.current.swiper.slideNext()}}
+        _marginleft='5%'
+        _width='90%'
+      >다음</Btn>
+      
     </div>
   )
 }

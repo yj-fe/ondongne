@@ -25,6 +25,7 @@ export const Text = styled.p`
     text-decoration: ${props => props._decoration || 'none'};
     width: ${props => props._width || 'auto'};
     min-width: ${props => props._minWidth || 'auto'};
+    margin-top: ${props => props._margintop};
 `;
 export const TextMedia = styled.p`
     font-size: ${props => props._size || 16}px;

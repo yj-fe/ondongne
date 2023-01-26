@@ -72,20 +72,20 @@ export const Content = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 80px 20px;
+  padding: ${props => props._padding || '40px 20px'};
   gap: 12px;
   width: 100%;
-  height: 906px;
-  border: 1px solid black;
+  height: ${props => props._height || '906px'};
 `
 export const Btn = styled.div`
+  margin-left: ${props => props._marginleft};
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 12px 24px;
   gap: 4px;
-  width: 100%;
+  width: ${props => props._width || '100%'};
   height: 56px;
   background: #0B806F;
   border-radius: 4px;
