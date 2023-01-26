@@ -191,7 +191,7 @@ const OrderList = () => {
                                             }
                                             {
                                                 (item.orderStatus == '배송완료' ||
-                                                    (orderData.recetiveType === '방문포장' && orderData.orderStatus === '상품준비중')) &&
+                                                    (orderData.recetiveType === '픽업' && orderData.orderStatus === '상품준비중')) &&
                                                 <S.Action
                                                     _type="bg"
                                                     onClick={() => setSuccessOrder(item.orderId)}

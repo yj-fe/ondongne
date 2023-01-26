@@ -380,9 +380,9 @@ function OrderToggle({
       return;
     }
 
-    if (value === 1 && type === 'GROUP' && minCount == count) {
-      return;
-    }
+    // if (value === 1 && type === 'GROUP' && minCount == count) {
+    //   return;
+    // }
 
     setCount(count => count + value)
   }

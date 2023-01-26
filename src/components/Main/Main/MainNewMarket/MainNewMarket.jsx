@@ -31,7 +31,7 @@ function MainNewMarket() {
         {
           type: 0,
           title: "우리동네 신규 입점",
-          list: list
+          list: list,
         }
       }
     )

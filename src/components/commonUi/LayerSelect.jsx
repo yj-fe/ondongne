@@ -17,17 +17,17 @@ const S = {
         width: 100%;
         height: auto;
         border-radius: 20px 20px 0 0;
-        padding-bottom: ${props => props._pb? '16px' : '0'};
+        padding-bottom: ${props => props._pb ? '16px' : '0'};
         background-color: #FFF;
         transform: translateY(100%);
 
-        animation: ${ props => 
+        animation: ${props =>
             props.close
-            ? keyframes`
+                ? keyframes`
                 0% { transform: translateY(0) }
                 100% { transform: translateY(100%) }
             `
-            : keyframes`
+                : keyframes`
                 0% { transform: translateY(100%) }
                 100% { transform: translateY(0) }
             `
@@ -65,16 +65,16 @@ const S = {
             height: 100%;
             padding: 16px 20px;
             font-size: 15px;
-            font-weight: ${props => props.checked? 500 : 400};
-            color: ${props => props.theme.color[props.checked? 'green900' : 'gray900']};
+            font-weight: ${props => props.checked ? 500 : 400};
+            color: ${props => props.theme.color[props.checked ? 'green900' : 'gray900']};
 
             &::before {
 
             }
         }
-    `, 
+    `,
     close: styled.button`
-        display: ${props => props.show? 'block' : 'none'};
+        display: ${props => props.show ? 'block' : 'none'};
         width: 100%;
         height: 56px;
         line-height: 56px;
@@ -87,48 +87,48 @@ const LayerSelect = props => {
 
     const wrapRef = useRef(null);
     const [closeMotion, setCloseMotion] = useState(false);
-    
+
     const onWrapClick = (event) => {
         const target = event.target;
-        if( !closeMotion && target === wrapRef.current) {
+        if (!closeMotion && target === wrapRef.current) {
             setCloseMotion(true);
         }
-        
+
     }
-    
+
     useEffect(() => {
         let closeTimeout = undefined;
-        
-        if(closeMotion) {
-            closeTimeout = setTimeout(function() {
+
+        if (closeMotion) {
+            closeTimeout = setTimeout(function () {
                 props.onOverlayClick();
                 setCloseMotion(false);
             }, 200);
         }
 
-        return(() => {
+        return (() => {
             clearTimeout(closeTimeout);
         })
-    },[closeMotion])
+    }, [closeMotion])
 
     useEffect(() => {
-        if(props.active) {
+        if (props.active) {
             setCloseMotion(false);
         }
     }, [props.active])
 
-    if(props.active) {
+    if (props.active) {
         return (
             <Overlay>
                 <S.Wrap
                     {
-                        ...props.onOverlayClick &&
-                        (
-                            {
-                                ref: wrapRef,
-                                onClick: onWrapClick
-                            }
-                        )
+                    ...props.onOverlayClick &&
+                    (
+                        {
+                            ref: wrapRef,
+                            onClick: onWrapClick
+                        }
+                    )
                     }
                 >
                     <S.SelectBox close={closeMotion}>
@@ -142,8 +142,8 @@ const LayerSelect = props => {
                                                 key={idx}
                                                 checked={props.selected === item.value}
                                             >
-                                                <input 
-                                                    type="radio" 
+                                                <input
+                                                    type="radio"
                                                     id={`${props.name}_${idx}`}
                                                     name={`${props.name}_${idx}`}
                                                     value={item.value}
@@ -160,7 +160,7 @@ const LayerSelect = props => {
                             </S.Body>
                             <S.close
                                 show={props.close}
-                                onClick={() => {setCloseMotion(true)}}
+                                onClick={() => { setCloseMotion(true) }}
                             >닫기</S.close>
                         </L.FlexCols>
                     </S.SelectBox>

@@ -20,7 +20,7 @@ function LocationSetting() {
 
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-  const [address, setAddress] = useState('경기도 김포시');
+  const [address, setAddress] = useState('');
   const [searchList, setSearchList] = useState([]);
 
   // 지도 검색
@@ -109,7 +109,7 @@ function LocationSetting() {
                       {localState.address}
                     </MyLocationResult>
                   </MyLocationDiv>
-                  <T.Text _color='gray400' _size='12' >현재는 '경기도 김포시'에만 위치 설정이 가능합니다.</T.Text>
+                  <T.Text _color='gray400' _size='12' >현재는 '경기도 김포시' 지역으로 운영 중 입니다. 김포 지역으로 위치 설정이 가능합니다.</T.Text>
                 </Div2>
               </L.FlexCols>
 

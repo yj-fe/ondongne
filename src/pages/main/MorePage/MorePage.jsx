@@ -10,7 +10,7 @@ import { Text } from 'components/commonUi/Text'
 import CheckBox from 'components/commonUi/CheckBox'
 import CheckBoxTitle from 'components/commonUi/CheckBoxTitle'
 import { Line } from '../DetailsPage/DetailsPageStyle'
-import { ArrowRight } from 'components/commonUi/Icon'
+import { ArrowRight, Close } from 'components/commonUi/Icon'
 import * as L from 'components/commonUi/Layout';
 import FooterLayout from 'components/layout/Footer/Footer'
 import { getBizMember } from 'service/biz'
@@ -185,14 +185,14 @@ function MorePage() {
       {/* ============= 2. 비즈회원약관동의 ============= */}
       {
         agreementModal &&
-        <BusinessAgreementModal />
+        <BusinessAgreementModal closeModel={() => setAgreementModal(false)} />
       }
       {/* ============= 3-4 비즈회원신청페이지 => <BusinessApplication/> ============= */}
     </div>
   )
 }
 
-function BusinessAgreementModal() {
+function BusinessAgreementModal({ closeModel }) {
   // 체크버튼
   const [requestSave, setRequestSave] = useState(false);
   const [servicerequestSave, setServiceRequestSave] = useState(false);
@@ -204,10 +204,17 @@ function BusinessAgreementModal() {
 
 
   const allChecked = () => {
-    setRequestSave(!requestSave)
-    setServiceRequestSave(!servicerequestSave)
-    setPrivRequestSave(!privrequestSave)
-    setSnsRequestSave(!snsrequestSave)
+    if (requestSave) {
+      setRequestSave(false)
+      setServiceRequestSave(false)
+      setPrivRequestSave(false)
+      setSnsRequestSave(false)
+    } else {
+      setRequestSave(true)
+      setServiceRequestSave(true)
+      setPrivRequestSave(true)
+      setSnsRequestSave(true)
+    }
   }
 
   useEffect(() => {
@@ -220,7 +227,7 @@ function BusinessAgreementModal() {
   }, [servicerequestSave, privrequestSave])
 
   return (
-    <ModalOutside>
+    <ModalOutside onClick={closeModel} >
       <ModalBody>
         <ModalDiv1 />
         <ModalDiv2>

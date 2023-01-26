@@ -61,9 +61,16 @@ const OrderForm = ({ data }) => {
         수령 방법 옵션
     ============================== */
     const recetiveOption = () => {
-    }
+        if (!orderData.items.length > 0) {
+            return;
+        }
+        const types = orderData.items[0].recetiveType.split(',');
+        const tpyeArr = types.map(t => (
+            { text: t, value: t }
+        ))
 
-    console.log(orderData.items);
+        return tpyeArr;
+    }
 
     /* ==============================
         회원 조회 및 데이터 바인딩
@@ -237,10 +244,7 @@ const OrderForm = ({ data }) => {
                             selected={orderData.recetiveType}
                             name="recetiveType"
                             selectName="주문 방식"
-                            options={[
-                                { text: '배달', value: '배달' },
-                                { text: '방문 포장', value: '방문포장' },
-                            ]}
+                            options={recetiveOption()}
                             onChange={e => {
                                 e.preventDefault();
                                 setOrderData({
@@ -344,7 +348,6 @@ const OrderForm = ({ data }) => {
                         selectName="결제 수단"
                         options={[
                             { text: '카드 결제', value: '카드' },
-                            // { text: '방문 결제', value: '방문 결제' },
                         ]}
                         onChange={e => {
                             e.preventDefault();

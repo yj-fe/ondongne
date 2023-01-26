@@ -9,7 +9,6 @@ import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { getAlarmBizList } from 'service/alarm';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
-const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
 
 function BusinessNews() {
   const navigate = useNavigate();
@@ -33,7 +32,7 @@ function BusinessNews() {
       <S.Wrapper>
         <LoginHeader title="알림" to={-1} />
         <S.Main>
-          <L.Contents _padding='0 20px ' _height='100vh'>
+          <L.Contents _padding='0 20px ' _height='calc(100vh - 68px)'>
             {/* ============ 알림없을때 ============ */}
             {
               list.length === 0 &&
@@ -48,38 +47,40 @@ function BusinessNews() {
             {/* ============ 알림있을때 ============ */}
             {
               list.length > 0 &&
-              list.map((item, index) => (
-                <React.Fragment key={index}>
-                  <L.FlexRows _gap={16} _padding='24px 0'
-                    onClick={() => {
-                      if (item.href) navigate(item.href);
-                    }}
-                  >
-                    {
-                      item.image &&
-                      <ImgSizeLayout src={IMGURL + item.image} _height={48} _weight={48} />
-                    }
-                    <L.FlexCols _gap={4}>
+              <L.Scroll _height='calc(100vh - 100px)'>
+                {list.map((item, index) => (
+                  <React.Fragment key={index}>
+                    <L.FlexRows _gap={16} _padding='24px 0'
+                      onClick={() => {
+                        if (item.href) navigate(item.href);
+                      }}
+                    >
                       {
-                        item.title &&
-                        <L.FlexRows _items='center'>
-                          <T.Text _weight={600} _size={16} _color="gray900">{item.title ?? ""}</T.Text>
-                        </L.FlexRows>
+                        item.image &&
+                        <ImgSizeLayout src={item.image} _height={48} _weight={48} />
                       }
-                      <T.Text _weight={400} _size={15} _color="gray800">{item.contents}</T.Text>
-                      <L.FlexRows>
-                        <T.Text _weight={300} _size={12} _color="gray500"  >
-                          {dayjs(item.createDate).format('YYYY년 MM월 DD일 HH:mm')}
-                        </T.Text>
-                      </L.FlexRows>
-                    </L.FlexCols>
-                  </L.FlexRows>
-                  {
-                    index < (list.length - 1) &&
-                    <Line />
-                  }
-                </React.Fragment>
-              ))
+                      <L.FlexCols _gap={4}>
+                        {
+                          item.title &&
+                          <L.FlexRows _items='center'>
+                            <T.Text _weight={600} _size={16} _color="gray900">{item.title ?? ""}</T.Text>
+                          </L.FlexRows>
+                        }
+                        <T.Text _weight={400} _size={15} _color="gray800">{item.contents}</T.Text>
+                        <L.FlexRows>
+                          <T.Text _weight={300} _size={12} _color="gray500"  >
+                            {dayjs(item.createDate).format('YYYY년 MM월 DD일 HH:mm')}
+                          </T.Text>
+                        </L.FlexRows>
+                      </L.FlexCols>
+                    </L.FlexRows>
+                    {
+                      index < (list.length - 1) &&
+                      <Line />
+                    }
+                  </React.Fragment>
+                ))}
+              </L.Scroll>
             }
 
           </L.Contents>

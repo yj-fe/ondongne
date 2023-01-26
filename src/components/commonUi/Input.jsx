@@ -3,8 +3,8 @@ import Search from 'assets/icons/utils/Search.svg';
 
 
 export const TextInput = styled.input`
-    width: ${props => props._width? props._width + 'px' : '100%'};
-    height: ${props => props._height ||  44}px;
+    width: ${props => props._width ? props._width + 'px' : '100%'};
+    height: ${props => props._height || 44}px;
     padding: 12px 16px;
     border-width: ${props => props._border || 1}px;
     border-radius: 4px;
@@ -38,8 +38,8 @@ export const CouponTitleInput = styled.input`
 `;
 
 export const SearchInput = styled.input`
-    width: ${props => props._width? props._width + 'px' : '100%'};
-    height: ${props => props._height ||  44}px;
+    width: ${props => props._width ? props._width + 'px' : '100%'};
+    height: ${props => props._height || 44}px;
     padding: 12px 16px;
     margin: 0px 16px;
     border-width: ${props => props._border || 1}px;
@@ -68,7 +68,7 @@ export const SearchInput = styled.input`
 
 export const Textarea = styled.textarea`
 	font-weight: 400;
-	font-size: 16px;
+	font-size: ${props => props._size || 16}px;
 	width: 100%;
 	height: ${props => props._height || 180}px;
 	background-color: ${(props) => (props.color ? "#EEEEEE" : "none")};

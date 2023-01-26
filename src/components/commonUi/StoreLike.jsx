@@ -37,16 +37,6 @@ const StoreLike = ({ id, checked, onChange }) => {
                         : <My />
                 }
             </L.FlexRows>
-            {alert && (
-                <AlertText
-                    title={alert.title}
-                    contents={alert.contents}
-                    buttonText={alert.buttonText}
-                    onButtonClick={alert.onButtonClick}
-                    onOverlayClick={alert.onOverlayClick}
-                />
-            )}
-
             {
                 confirm &&
                 <Confirm

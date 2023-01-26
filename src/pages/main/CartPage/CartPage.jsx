@@ -8,6 +8,7 @@ import { CarContentDiv, CarProfiletDiv, CartContainer, CartDiv, ProductInfo, Pro
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Layout from 'components/layout/Layout/Layout';
 import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartCountUpdate, cartDelete, carts } from 'service/cart';
 import LoadingBar from 'components/commonUi/LoadingBar';
@@ -37,6 +38,8 @@ function CartPage({ }) {
 
     setLoading(false);
   }
+
+  console.log(list);
 
   // 상품 개수 변경
   const itemCount = async (item, type) => {
@@ -121,7 +124,10 @@ function CartPage({ }) {
                   <CartDiv>
                     <CarProfiletDiv>
                       <ProfileImg src={newList[0].storeProfile ? IMGURL + newList[0].storeProfile : Avatar} />
-                      <ProfileName>{newList[0].storeName}</ProfileName>
+                      <L.FlexCols _gap='2' style={{ alignItems: 'flex-start', justifyContent: 'center' }}>
+                        <ProfileName>{newList[0].storeName}</ProfileName>
+                        <T.Text _color='gray400' _size='12' >최소 주문 금액 : {numberFormat(newList[0].orderMinPrice)}</T.Text>
+                      </L.FlexCols>
                     </CarProfiletDiv>
                     {
                       newList.map(item => (
@@ -164,6 +170,8 @@ function CartPage({ }) {
                     }
                     <ContentButton
                       onClick={() => orderRoute(newList)}
+                      active={Number(newList[0].orderMinPrice) < Number(storeTotalPrice(newList))}
+                      disabled={!(Number(newList[0].orderMinPrice) < Number(storeTotalPrice(newList)))}
                     >
                       <ButtonText>{numberFormat(storeTotalPrice(newList))}원 주문</ButtonText>
                     </ContentButton>

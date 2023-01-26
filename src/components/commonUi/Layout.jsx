@@ -436,3 +436,11 @@ export const Icon = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
+export const Scroll = styled.div`
+	overflow: scroll;
+	height: ${(props) => props._height || "calc(100vh - 10%)"};
+	&::-webkit-scrollbar {
+		display: none;
+	}
+`;

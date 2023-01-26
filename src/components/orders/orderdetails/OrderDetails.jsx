@@ -226,7 +226,7 @@ const OrderDetails = props => {
                         >주문 취소</S.Action>
                     }
                     {
-                        (orderData.recetiveType === '방문포장' && orderData.orderStatus === '상품준비중') &&
+                        (orderData.recetiveType === '픽업' && orderData.orderStatus === '상품준비중') &&
                         <S.Action
                             onClick={onPickUpClick}
                         >상점 수령</S.Action>

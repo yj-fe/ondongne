@@ -28,12 +28,13 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
             {
                 list.map((item, index) => (
                     <L.FlexRows
-                        onClick={() => navigate(`/market/detail/${item.storeId}`)}
                         key={index}
                         _content='space-between'
                         ref={list.length == index + 1 ? lastRef : null}
                     >
-                        <L.FlexRows _content='row'>
+                        <L.FlexRows _content='row'
+                            onClick={() => navigate(`/market/detail/${item.storeId}`)}
+                        >
                             <ImgSizeLayout _bdr={4} src={item.profile != null ? item.profile : Img} _width={98} _height={98}></ImgSizeLayout>
                             <L.FlexCols _gap={2}>
                                 <L.FlexRows _gap='0px' _width='200px'>
