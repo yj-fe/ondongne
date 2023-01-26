@@ -127,7 +127,7 @@ function DetailsPage(props) {
     <div>
 
       <Layout
-        title={item.itemName}
+        title={item.storeName}
         description={item.storeName}
         img={IMGURL + item.itemImage}
         bell={false}

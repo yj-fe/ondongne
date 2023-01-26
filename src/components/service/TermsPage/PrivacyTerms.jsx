@@ -24,21 +24,19 @@ function PrivacyTerms() {
 
 
   return (
-    <div>
-      <Layout
-        title="개인정보 처리방침"
-        cart={false}
-        bell={false}
-      >
-        <L.Container>
-          <L.Contents _height='calc(100vh - 68px)'>
-            <Scroll _height='calc(100vh - 110px)'>
-              <T.Text _size={14} _color='gray800'>{policy}</T.Text>
-            </Scroll>
-          </L.Contents>
-        </L.Container>
-      </Layout>
-    </div>
+    <Layout
+      title="개인정보 처리방침"
+      cart={false}
+      bell={false}
+    >
+      <L.Container>
+        <L.Contents _height='calc(100vh - 68px)'>
+          <Scroll _height='calc(100vh - 110px)'>
+            <T.Text _size={14} _color='gray800'>{policy}</T.Text>
+          </Scroll>
+        </L.Contents>
+      </L.Container>
+    </Layout>
   )
 }
 

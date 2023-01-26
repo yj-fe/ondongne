@@ -20,7 +20,7 @@ function VocPage() {
   const [confirm, setConfirm] = useState(false);
   const [btn, setBtn] = useState(false)
   const [show, setShow] = useState()
-  const isAuthenticated = useSelector(state=> state.auth.isAuthenticated)
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
 
   //포스트맨 body
   const [data, setData] = useState({
@@ -33,26 +33,26 @@ function VocPage() {
 
   //분류type 확인
   const dataChecked = type => {
-    setData({...data, type: type})
+    setData({ ...data, type: type })
   }
-  
+
   // input 확인
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setData(item => ({...item, [name]: value}))
+    const { name, value } = e.target;
+    setData(item => ({ ...item, [name]: value }))
   }
 
   // 체크 박스 핸들러
   const checkHandler = (e) => {
     e.preventDefault();
-    setData(item => ({...item, check: !data.check}))
+    setData(item => ({ ...item, check: !data.check }))
   }
 
   // 데이터 넘기기
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!isAuthenticated) {
+    if (!isAuthenticated) {
       return setConfirm({
         contents: "로그인해주세요.",
         buttonText: "확인",
@@ -64,7 +64,14 @@ function VocPage() {
     const response = await postVoc(data);
     console.log(response)
 
-    if(response && response.data.data) {
+    if (response && response.data.data) {
+      setData({
+        category: "VOC",
+        type: "UI/UX",
+        title: "",
+        contents: "",
+        check: false
+      })
       return setConfirm({
         contents: "고객님의 문의가 정상적으로 접수되었습니다.\n빠른 시간내에 답변 드리도록 하겠습니다.",
         buttonText: "확인",
@@ -73,10 +80,10 @@ function VocPage() {
       })
     }
   }
-  
+
   //조건 충족하면 버튼 active
   useEffect(() => {
-    if(data.check && data.contents && data.title) {
+    if (data.check && data.contents && data.title) {
       setBtn(true);
     } else {
       setBtn(false);
@@ -85,12 +92,12 @@ function VocPage() {
 
   return (
     <div>
-       <Layout
-          title="Voc 의견"
-          cart={false}
-          bell={false}
-          floating={false}
-          onBackClick={() => navigate(-1)}
+      <Layout
+        title="Voc 의견"
+        cart={false}
+        bell={false}
+        floating={false}
+        onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px" >
           <L.Contents _height='calc(100vh - 68px)'>
@@ -99,32 +106,38 @@ function VocPage() {
                 <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>
                   <TitleInfo>{data.type}</TitleInfo>
-                  {show ? <ArrowTop/> : <Down/> }
+                  {show ? <ArrowTop /> : <Down />}
                 </InfoBoxDiv>
-                {show && <Toggle type={data.type} handler={dataChecked} closeSelector={() => setShow(false)}/>}
-             </L.FlexCols>
+                {show && <Toggle type={data.type} handler={dataChecked} closeSelector={() => setShow(false)} />}
+              </L.FlexCols>
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">제목</T.Text>
-                  <I.TextInput
-                    type='text'
-                    name='title'
-                    value={data.title}
-                    required
-                    onChange={handleChange}
-                    _boccolor={'#FFFFFF'}
-                  />
-             </L.FlexCols>
-              <L.FlexCols>
-                <T.Text _weight={600} _size={16} _color="gray900">의견내용</T.Text>
-                <I.Textarea 
+                <I.TextInput
                   type='text'
-                  name='contents'
-                  value={data.contents}
+                  name='title'
+                  value={data.title}
                   required
                   onChange={handleChange}
                   _boccolor={'#FFFFFF'}
-                  _height={140}
                 />
+              </L.FlexCols>
+              <L.FlexCols>
+                <T.Text _weight={600} _size={16} _color="gray900">의견내용</T.Text>
+                <L.Parents>
+                  <I.Textarea
+                    type='text'
+                    name='contents'
+                    value={data.contents}
+                    onChange={handleChange}
+                    _boccolor={'#FFFFFF'}
+                    _height={140}
+                    maxLength={500}
+                    required
+                  />
+                  <L.Child _bottom='10px' _right='10px'>
+                    <T.Text _color='gray600' _size='12'>{data.contents.length}/500</T.Text>
+                  </L.Child>
+                </L.Parents>
               </L.FlexCols>
               <L.FlexRows _content="flex-start" _items="center" >
                 <CheckTitleDiv onClick={checkHandler}>
@@ -136,7 +149,7 @@ function VocPage() {
                   </CheckStyle>
                   <CheckTitle>개인정보 수집, 이용에 동의합니다.(필수)</CheckTitle>
                 </CheckTitleDiv>
-            
+
               </L.FlexRows>
 
             </L.FlexCols>
@@ -155,13 +168,13 @@ function VocPage() {
         </L.Container>
       </Layout>
       {
-          confirm &&
-          <SimpleConfirm 
-              warn={confirm.warn}
-              contents={confirm.contents}
-              confirmText={confirm.confirmText}
-              onConfirmClick={confirm.onConfirmClick}
-          />
+        confirm &&
+        <SimpleConfirm
+          warn={confirm.warn}
+          contents={confirm.contents}
+          confirmText={confirm.confirmText}
+          onConfirmClick={confirm.onConfirmClick}
+        />
       }
     </div>
   )
@@ -196,10 +209,10 @@ function Toggle({ type, handler, closeSelector }) {
 
   const clickHandler = name => {
     setData(
-      data.map(item => 
-          item.name === name 
-            ? {...item, checked: !item.checked} 
-            : {...item, checked: false} 
+      data.map(item =>
+        item.name === name
+          ? { ...item, checked: !item.checked }
+          : { ...item, checked: false }
       )
     )
     handler(name);
@@ -208,10 +221,10 @@ function Toggle({ type, handler, closeSelector }) {
 
   useEffect(() => {
     setData(
-      data.map(item => 
-          item.name === type 
-            ? {...item, checked: !item.checked} 
-            : item
+      data.map(item =>
+        item.name === type
+          ? { ...item, checked: !item.checked }
+          : item
       )
     )
   }, []);
@@ -222,15 +235,15 @@ function Toggle({ type, handler, closeSelector }) {
         <L.FlexCols _gap='0px'>
           {
             data.map(item => (
-              <L.FlexRows 
+              <L.FlexRows
                 key={item.id}
-                 _padding='12px 16px' 
-                 _height='48px' 
-                 _items='center'
-                 onClick={() => clickHandler(item.name)}>
-                <T.Text 
-                  _weight={item.checked ? 600 : 400} 
-                  _size={15} 
+                _padding='12px 16px'
+                _height='48px'
+                _items='center'
+                onClick={() => clickHandler(item.name)}>
+                <T.Text
+                  _weight={item.checked ? 600 : 400}
+                  _size={15}
                   _color={item.checked ? "green700" : "gray900"}
                 >
                   {item.name}

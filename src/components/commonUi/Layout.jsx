@@ -444,3 +444,19 @@ export const Scroll = styled.div`
 		display: none;
 	}
 `;
+
+export const Parents = styled.div`
+	position: relative;
+    top: ${props => props._top || 'auth'};
+    left: ${props => props._left || 'auth'};
+    bottom: ${props => props._bottom || 'auth'};
+    right: ${props => props._right || 'auth'};
+`;
+
+export const Child = styled.div`
+    position: absolute;
+    top: ${props => props._top || 'auth'};
+    left: ${props => props._left || 'auth'};
+    bottom: ${props => props._bottom || 'auth'};
+    right: ${props => props._right || 'auth'};
+`;
