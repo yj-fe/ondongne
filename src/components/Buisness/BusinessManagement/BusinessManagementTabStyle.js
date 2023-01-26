@@ -41,9 +41,10 @@ export const ProfileBtnDiv = styled.label`
 	font-size: 12px;
 	color: #212121;
 `;
-export const CameraImg = styled.img`
-	width: 18px;
-	height: 18px;
+export const Img = styled.img`
+	width: ${props => props._width || '18px'};
+	height: ${props => props._height || '18px'};
+	border-radius: ${props => props._bdr};
 `;
 export const ImgBanner = styled.img`
 	background-image: url(${(props) => props.banner || ""});

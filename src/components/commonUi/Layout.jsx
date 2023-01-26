@@ -421,7 +421,7 @@ export const Grid = styled.div`
         gap: 0.7%;
     }
     @media screen and (max-width:336px) {
-        gap: 0%;
+        grid-template-columns: repeat(2, 40%);
     }
 `
 

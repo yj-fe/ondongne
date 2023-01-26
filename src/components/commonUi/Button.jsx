@@ -72,7 +72,7 @@ export const BorderBox = styled.button`
     align-items: center;
     line-height: 1.5;
     border: 1px solid ${props => props.theme.color.gray200};
-    border-radius: 4px; 
+    border-radius: ${props => props._bdr || '4px'}; 
     font-size: 15px;
     font-weight: 500;
 
@@ -84,8 +84,6 @@ export const BorderBox = styled.button`
         transform: rotate(${props => props.active ? 180 : 0}deg);
     }
 `;
-
-
 
 export const CouponButton = styled.button`
     bottom: 57px;
@@ -197,7 +195,7 @@ export const Badge = styled.button`
     justify-content: center;
     align-items: ${props => props._items || 'center'};
     padding: ${props => props._padding || '2px 6px'};
-    gap: 4px;
+    gap: ${props => props._gap || '4px'};
     width:  ${props => props._width || 'fit-content'};
     height: ${props => props._height || '22px'};
     background: ${props => props.theme.color[props._bg || 'gray100']};
@@ -205,6 +203,7 @@ export const Badge = styled.button`
     color: ${props => props.theme.color[props._color || 'gray800']};
     font-weight:  ${props => props._weight || 500};
     font-size: ${props => props._size || '11px'};
+    border-left: ${props => props._borderleft};
 `;
 export const MapListButton = styled.button`
     display: flex;

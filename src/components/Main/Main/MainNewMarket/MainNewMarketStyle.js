@@ -58,9 +58,9 @@ export const ContentProduct = styled.div`
 export const ContentImgDiv = styled.div`
   margin: 0;
   padding: 0;
-  width: 280px;
-  height: 160px;
-  border-radius: 6px 6px 0px 0px;
+  width: ${props => props._width || '280px'} ;
+  height: ${props => props._height || '160px'};
+  border-radius: ${props => props._bdr || '6px 6px 0px 0px'} ;
   position: relative;
 `
 export const ContentImgBadge = styled.div`
