@@ -58,6 +58,7 @@ function CoachModalSlide({setAgreementModal, neverWatch}) {
             >다음</Btn>
             <Text 
               onClick={neverWatch} 
+              // onClick={() => {neverWatch(); depthHandler(1);}} 
               _align={'center'} 
               _size={14} 
               _color={'gray600'}

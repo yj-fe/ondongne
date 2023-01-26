@@ -29,7 +29,7 @@ function MainPage() {
   const [alert, setAlert] = useState(null);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const auth = useSelector(state => state.auth);
-  const [coachmark, setCoachmark] = useState(true);
+  // const [coachmark, setCoachmark] = useState(true);
   // 다시보지않기
   const COOKIE_COACH_KEY = 'coachNeverWatch'; 
   const COOKIE_POPUP_KEY = 'popupNeverWatch'; 
@@ -41,18 +41,18 @@ function MainPage() {
   // const [depth03, setDepth03] = useState(false)
 
   // 뎁스 이동 핸들러
-  const depthHandler = (type) => {
-    switch (type) {
-      case 1:
-        setDepth01(false)
-        setDepth02(true)
-        break;
-      case 2:
-        setDepth02(false)
-        // setDepth03(true)
-        break;
-    }
-  }
+  // const depthHandler = (type) => {
+  //   switch (type) {
+  //     case 1:
+  //       setDepth01(false)
+  //       setDepth02(true)
+  //       break;
+  //     case 2:
+  //       setDepth02(false)
+  //       // setDepth03(true)
+  //       break;
+  //   }
+  // }
 
   // 코치마크 닫으면 스크롤 가능
   const openScroll = useCallback(() => {
@@ -103,36 +103,36 @@ function MainPage() {
   //   }
   // }, [depth01, depth02])
   useEffect(() => {
-    if (depth01  === true) {
+    if (cookiesCoach  === false) {
       document.body.style.overflow = 'hidden';
     }
-  }, [depth01])
+  }, [cookiesCoach])
   useEffect(() => {
-    if ( depth02 === true) {
+    if (cookiesPopup  === false) {
       document.body.style.overflow = 'hidden';
     }
-  }, [depth02])
+  }, [cookiesPopup])
 
-console.log(depth01);
-console.log(depth02);
 
   return (
     <div>
-      {/* { depth01 &&
+      { 
+      // depth01 &&
        cookiesCoach[COOKIE_COACH_KEY] ? null : 
        <CoachModalSlide
-         neverWatch={() => {handleNeverWatchCoach(); openScroll();}}
-         depthHandler={() => depthHandler(1)}
+         neverWatch={() => {handleNeverWatchCoach(); openScroll(); }}
+        //  depthHandler={() => depthHandler(1)}
         />
       }
-      { depth02 &&
+      { 
+      // depth02 &&
         cookiesPopup[COOKIE_POPUP_KEY] ? null : 
         <PopUp
-          closeModel={() => {depthHandler(2); openScroll();}}
+          closeModel={() => {setCookiePopup(); openScroll();}}
           neverWatch={() => {handleNeverWatchPopup(); openScroll();}}
           // depthHandler={() => depthHandler(2)}
         />
-      } */}
+      }
       {/* {depth03 &&} */}
       {/* {
         cookiesCoach[COOKIE_COACH_KEY] ? null : 
