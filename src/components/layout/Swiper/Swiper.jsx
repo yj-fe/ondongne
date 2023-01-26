@@ -73,6 +73,9 @@ export const SwiperDiv = styled.div`
   height: ${props => props._height || '100%'};
   gap: ${props => props._gap || '40px'};
   text-align: center;
+  /* @media screen and (max-width: 380px) {
+    width: 350px;
+  } */
   `
 export const SwiperTextDiv = styled.div`
   display: flex;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+
 import BannerImg from 'assets/Img.png'
 import MainBestCoupon from 'components/Main/Main/MainBestCoupon/MainBestCoupon'
 import MainLastChance from 'components/Main/Main/MainLastChance/MainLastChance'
@@ -17,7 +18,10 @@ import { useNavigate } from 'react-router-dom';
 import LayoutMain from 'components/layout/Layout/LayoutMain'
 import CoachModalSlide from 'components/layout/PopUp/CoachModalSlide'
 
-
+  // 다시보지않기
+  import { useCookies } from 'react-cookie'; 
+  import moment from 'moment';	
+import PopUp from 'components/layout/PopUp/PopUp'
 
 function MainPage() {
   const navigate = useNavigate();
@@ -26,13 +30,55 @@ function MainPage() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const auth = useSelector(state => state.auth);
   const [coachmark, setCoachmark] = useState(true);
+  // 다시보지않기
+  const COOKIE_COACH_KEY = 'coachNeverWatch'; 
+  const COOKIE_POPUP_KEY = 'popupNeverWatch'; 
+  const [cookiesCoach, setCookieCoach] = useCookies([COOKIE_COACH_KEY]);
+  const [cookiesPopup, setCookiePopup] = useCookies([COOKIE_POPUP_KEY]);
 
+  const [depth01, setDepth01] = useState(true)
+  const [depth02, setDepth02] = useState(false)
+  // const [depth03, setDepth03] = useState(false)
+
+  // 뎁스 이동 핸들러
+  const depthHandler = (type) => {
+    switch (type) {
+      case 1:
+        setDepth01(false)
+        setDepth02(true)
+        break;
+      case 2:
+        setDepth02(false)
+        // setDepth03(true)
+        break;
+    }
+  }
 
   // 코치마크 닫으면 스크롤 가능
   const openScroll = useCallback(() => {
     document.body.style.removeProperty('overflow');
   }, []);
 
+  
+  // 다시보지않기
+  const handleNeverWatchCoach = () => {
+    const decade = moment(); 	
+    decade.add(365, 'd'); 	
+    setCookieCoach(COOKIE_COACH_KEY, 'true', {
+      path: '/',	
+      expires: decade.toDate(),	
+    });
+  };
+  const handleNeverWatchPopup = () => {
+    const decade2 = moment(); 	
+    decade2.add(365, 'd'); 	
+    setCookiePopup(COOKIE_POPUP_KEY, 'true', {
+      path: '/',	
+      expires: decade2.toDate(),	
+    });
+  };
+
+  
   useEffect(() => {
     if (state && state.error) {
       return setAlert({
@@ -50,23 +96,57 @@ function MainPage() {
     }
   }, [state])
 
-  // 코치마크 뒷배경 스크롤 막기
+  // 뒷배경 스크롤 막기
+  // useEffect(() => {
+  //   if (depth01 || depth02 === true) {
+  //     document.body.style.overflow = 'hidden';
+  //   }
+  // }, [depth01, depth02])
   useEffect(() => {
-    if (coachmark === true) {
+    if (depth01  === true) {
       document.body.style.overflow = 'hidden';
     }
-  }, [coachmark])
+  }, [depth01])
+  useEffect(() => {
+    if ( depth02 === true) {
+      document.body.style.overflow = 'hidden';
+    }
+  }, [depth02])
 
-
+console.log(depth01);
+console.log(depth02);
 
   return (
     <div>
-      {
-        coachmark &&
-        <CoachModalSlide
-          closeModel={() => {setCoachmark(false);  openScroll();}}
+      {/* { depth01 &&
+       cookiesCoach[COOKIE_COACH_KEY] ? null : 
+       <CoachModalSlide
+         neverWatch={() => {handleNeverWatchCoach(); openScroll();}}
+         depthHandler={() => depthHandler(1)}
         />
       }
+      { depth02 &&
+        cookiesPopup[COOKIE_POPUP_KEY] ? null : 
+        <PopUp
+          closeModel={() => {depthHandler(2); openScroll();}}
+          neverWatch={() => {handleNeverWatchPopup(); openScroll();}}
+          // depthHandler={() => depthHandler(2)}
+        />
+      } */}
+      {/* {depth03 &&} */}
+      {/* {
+        cookiesCoach[COOKIE_COACH_KEY] ? null : 
+        <CoachModalSlide
+          neverWatch={() => {handleNeverWatchCoach(); openScroll(); setCookiePopup(true);}}
+        />
+      } */}
+      {/* {
+        cookiesPopup[COOKIE_POPUP_KEY] ? null : 
+        <PopUp
+          
+          neverWatch={() => {setCookiePopup(false); handleNeverWatchPopup(); openScroll(); }}
+        />
+      } */}
       <LayoutMain>
         <L.Container _padding="0px" >
           <L.Container _padding="0px" _gap='0px' >

@@ -7,21 +7,12 @@ import { Badge } from '../../commonUi/Button';
 import { Img } from '../../Buisness/BusinessManagement/BusinessManagementTabStyle';
 
 
-// 다시보지않기 버튼
-const handleNeverWatchBtn = () => {
-
-}
-// 닫기 버튼
-const handleCloseBtn = () => {
-
-}
-
-function PopUp() {
+function PopUp({closeModel, neverWatch}) {
   return (
     <div>
       <Overlay>
         <Badge _fdir='column' _padding='0px' _gap='0px' _width='350px' _height='406px' _bg='transparant' _bdr='10px'>
-          <Img src={PopImg} alt='popup img' _width='350px' _height='350px' _bdr='10px 10px 0px' />
+          <Img src={PopImg} alt='popup img' _width='350px' _height='350px' _bdr='10px 10px 0px 0px' />
           <L.FlexRows _gap='0px'>
             <Badge  
               _padding='0px' 
@@ -30,7 +21,7 @@ function PopUp() {
               _height='56px' 
               _bg='white' 
               _bdr='0px 0px 0px 10px'
-              onClick={handleNeverWatchBtn}
+              onClick={neverWatch}
             >
               <T.Text _size={15} _color='gray800' _align='center'>다시보지않기</T.Text>
             </Badge>
@@ -42,7 +33,7 @@ function PopUp() {
               _height='56px' 
               _bg='white' 
               _bdr='0px 0px 10px 0px'
-              onClick={handleCloseBtn}
+              onClick={closeModel}
             >
               <T.Text _size={15} _color='gray800' _align='center'>닫기</T.Text>
             </Badge>

@@ -60,6 +60,10 @@ export const Container = styled.div`
     height: 100%;
     border-radius: 0px;
   }
+  @media screen and (max-height: 720px) {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 `
 export const Header = styled.div`
   width: 100%;
@@ -73,9 +77,12 @@ export const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: ${props => props._padding || '40px 20px'};
-  gap: 12px;
+  gap: ${props => props._gap || '12px'};
   width: 100%;
   height: ${props => props._height || '906px'};
+  @media screen and (max-height: 720px) {
+    padding: ${props => props._paddingmedia};
+  }
 `
 export const Btn = styled.div`
   margin-left: ${props => props._marginleft};
