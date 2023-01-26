@@ -72,10 +72,11 @@ export const Content = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 20px;
+  padding: 80px 20px;
   gap: 12px;
   width: 100%;
-  height: 706px;
+  height: 906px;
+  border: 1px solid black;
 `
 export const Btn = styled.div`
   display: flex;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import BannerImg from 'assets/Img.png'
 import MainBestCoupon from 'components/Main/Main/MainBestCoupon/MainBestCoupon'
 import MainLastChance from 'components/Main/Main/MainLastChance/MainLastChance'
@@ -27,6 +27,12 @@ function MainPage() {
   const auth = useSelector(state => state.auth);
   const [coachmark, setCoachmark] = useState(false);
 
+
+  // 코치마크 닫으면 스크롤 가능
+  const openScroll = useCallback(() => {
+    document.body.style.removeProperty('overflow');
+  }, []);
+
   useEffect(() => {
     if (state && state.error) {
       return setAlert({
@@ -44,6 +50,13 @@ function MainPage() {
     }
   }, [state])
 
+  // 코치마크 뒷배경 스크롤 막기
+  useEffect(() => {
+    if (coachmark === true) {
+      document.body.style.overflow = 'hidden';
+    }
+  }, [coachmark])
+
 
 
   return (
@@ -51,7 +64,7 @@ function MainPage() {
       {
         coachmark &&
         <CoachModalSlide
-          closeModel={() => setCoachmark(false)}
+          closeModel={() => {setCoachmark(false);  openScroll();}}
         />
       }
       <LayoutMain>

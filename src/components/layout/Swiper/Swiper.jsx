@@ -70,8 +70,8 @@ export const SwiperDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 390px;
-  height: 100%;
-  gap: 40px;
+  height: ${props => props._height || '100%'};
+  gap: ${props => props._gap || '40px'};
   text-align: center;
   `
 export const SwiperTextDiv = styled.div`
@@ -82,7 +82,7 @@ export const SwiperTextDiv = styled.div`
   padding: 0px;
   gap: 12px;
   width: 100%;
-  height: auto;
+  height: ${props => props._height || 'auto'};
 `
 export const SwiperTitle = styled.p`
   font-weight: 600;
