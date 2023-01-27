@@ -188,6 +188,7 @@ function BusinessManagementTab2({ tabHandler }) {
 
               <InfoBoxDiv>
                 <Input
+                  type='number'
                   name='accountNumber'
                   value={biz.accountNumber}
                   placeholder='-를 제외한 계좌번호 입력'

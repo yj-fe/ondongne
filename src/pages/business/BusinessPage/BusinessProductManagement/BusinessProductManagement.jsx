@@ -114,14 +114,14 @@ function BusinessProductManagement() {
                           key={item.itemId}
                           to={`/details/${item.itemId}`}
                         >
-                          <ProductCardGrid item={item} />
+                          <ProductCardGrid isCart={false} item={item} />
                         </Link>
 
                         : <Link
                           key={item.itemId}
                           to={`/details/${item.itemId}`}
                         >
-                          <ProductCardGrid item={item} />
+                          <ProductCardGrid isCart={false} item={item} />
                         </Link>
                     ))
                   }

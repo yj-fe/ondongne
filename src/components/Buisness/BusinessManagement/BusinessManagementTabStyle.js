@@ -235,6 +235,9 @@ export const Input = styled.input`
 	&::-ms-reveal {
 		display: none;
 	}
+	&::-webkit-inner-spin-button{
+		-webkit-appearance: none;
+	}
 `;
 
 export const Textarea = styled.textarea`

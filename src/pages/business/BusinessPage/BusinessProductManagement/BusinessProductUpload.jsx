@@ -289,6 +289,7 @@ function BusinessProductUpload() {
                     <Input
                       name='price'
                       placeholder='0'
+                      type='number'
                       value={numberFormat(data.price)}
                       onChange={e => setData({ ...data, price: numberFormatter(e.target.value) })}
                       maxLength={12}
