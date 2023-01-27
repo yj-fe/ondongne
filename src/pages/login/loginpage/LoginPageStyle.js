@@ -82,6 +82,7 @@ export const PwdInput = styled.input`
 	line-height: 24px;
 	color: #bdbdbd;
 	outline: none;
+	ime-mode:inactive;
 	&::-ms-reveal {
 		display: none;
 	}

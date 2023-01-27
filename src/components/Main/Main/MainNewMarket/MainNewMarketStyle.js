@@ -128,7 +128,11 @@ export const ContentTextStyle = styled.div`
   height: 40px;
 `
 export const ContentInfo = styled.p`
+  display: block; 
   font-weight: 400;
   font-size: 13px;
   color: #757575;
+  width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `

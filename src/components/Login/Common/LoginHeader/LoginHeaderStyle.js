@@ -33,6 +33,7 @@ export const UtilBtn = styled.div`
 
 export const LoginNavTitle = styled.div`
 	width: 100%;
+	transform: translateX(-11px);
 	font-weight: 600;
 	font-size: 18px;
 	color: #212121;

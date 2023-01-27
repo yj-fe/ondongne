@@ -36,6 +36,10 @@ function BusinessManagementTab2({ tabHandler }) {
     setBiz({ ...biz, [name]: value });
   }
 
+  const goBiz = () => {
+    navigate('/business')
+  }
+
   //비즈 파일 삭제
   const deleteFile = id => {
     setDeleteFiles([
@@ -56,14 +60,14 @@ function BusinessManagementTab2({ tabHandler }) {
     if (response && response.data) {
       const { data, message, code } = response.data;
       return setAlert({
-        contents: message,
+        contents: "사업자 정보 등록이 완료되었습니다.",
         buttonText: "확인",
-        onButtonClick: () => setAlert(false),
+        onButtonClick: () => {setAlert(false); goBiz();},
         onOverlayClick: () => setAlert(false),
       })
     } else {
       return setAlert({
-        contents: "사업자 정보 수정을 실패하였습니다.",
+        contents: "사업자 정보 등록을 실패하였습니다.",
         buttonText: "확인",
         onButtonClick: () => setAlert(false),
         onOverlayClick: () => setAlert(false),
@@ -240,7 +244,7 @@ function BusinessManagementTab2({ tabHandler }) {
           disabled={!active}
           _active={active}
           onClick={businessInfoUpdate}
-        >수정 완료</TabBtn>
+        >확인</TabBtn>
 
       </TabDiv>
       {

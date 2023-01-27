@@ -51,6 +51,10 @@ function BusinessManagementTab1({ tabHandler }) {
   // 달력
   const [calendar, setCalendar] = useState(false);
 
+  const goBiz = () => {
+    navigate('/business')
+  }
+  
   // input 체인지 핸들러
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -162,17 +166,18 @@ function BusinessManagementTab1({ tabHandler }) {
 
     if (response && response.data.data) {
       return setAlert({
-        contents: "상점 정보를 수정하였습니다.",
+        contents: "상점 정보 등록이 완료되었습니다.",
         buttonText: "확인",
         onButtonClick: () => {
           // tabHandler(1);
           setAlert(false);
+          goBiz();
         },
         onOverlayClick: () => setAlert(false),
       })
     } else {
       return setAlert({
-        contents: "상점 정보 수정을 실패하였습니다.",
+        contents: "상점 정보 등록을 실패하였습니다.",
         buttonText: "확인",
         onButtonClick: () => setAlert(false),
         onOverlayClick: () => setAlert(false),
@@ -227,7 +232,7 @@ function BusinessManagementTab1({ tabHandler }) {
 
   useEffect(() => {
     if (store.banner && store.categories.length > 0 && store.deliveries.length > 0
-      && store.name && store.openDate && store.profile && store.recetiveType.length > 0) {
+      && store.name && store.openDate && store.profile && store.recetiveType.length > 0 && store.description.length > 0) {
       setActive(true);
     } else {
       setActive(false);
@@ -238,6 +243,8 @@ function BusinessManagementTab1({ tabHandler }) {
   useEffect(() => {
     if (auth.isAuthenticated) getStore()
   }, [auth]);
+
+  
 
   return (
     <div>
@@ -499,7 +506,7 @@ function BusinessManagementTab1({ tabHandler }) {
           disabled={!active}
           _active={active}
           onClick={onSubmit}
-        >수정 완료</TabBtn>
+        >확인</TabBtn>
 
       </TabDiv>
       {
