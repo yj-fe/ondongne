@@ -18,6 +18,9 @@ export const ImgStyle = styled.img`
   position: absolute;
   width: 100px;
   height: 100px;
+  overflow: ${props => props._hidden};
+  object-fit: ${props => props._object};
+  background-repeat: no-repeat;
   background: #FAFAFA;
   border-radius: 99px;
 `
@@ -49,7 +52,7 @@ function ProfileAvatar({ profile, onChange=null }) {
   return (
     <div>
       <ProfileDiv for="profile">
-        <ImgStyle
+        <ImgStyle _hidden='hidden' _object='cover'
           src={file ? file : defaultProfile}
         >
           {/* <Avatar src={Avatar}> */}

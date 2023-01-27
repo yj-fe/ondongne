@@ -5,7 +5,7 @@ import CheckBox from 'components/commonUi/CheckBox';
 
 import ProfileAvatar from 'components/commonUi/ProfileAvatar'
 import { Text } from 'components/commonUi/Text';
-import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, Img, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel, Size, ImgBanner } from './BusinessManagementTabStyle'
+import { TimeBox, TimeDiv, RowTimeDiv, DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, Img, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel, Size, ImgBanner, ImgCollect } from './BusinessManagementTabStyle'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/bizStore';

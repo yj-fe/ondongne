@@ -39,6 +39,7 @@ const BusinessProductEditInfo = ({ isOpen, close, data, dataHanler }) => {
         title="돌아가기"
         cart={false}
         bell={false}
+        floating={false}
         onBackClick={() => {
           setConfirm({
             contents: `지금 페이지를 나가시면\n작성중인 데이터가 저장되지 않을 수 있습니다.`,

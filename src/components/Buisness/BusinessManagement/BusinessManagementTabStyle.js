@@ -46,14 +46,23 @@ export const Img = styled.img`
 	height: ${props => props._height || '18px'};
 	border-radius: ${props => props._bdr};
 `;
+export const ImgCollect = styled.img`
+	overflow: hidden;
+	object-fit: fill;
+	background-repeat: no-repeat;
+	border-radius: ${props => props._bdr || '4px'} ;
+	width: ${props => props._width || '98px'};
+	height: ${props => props._height || '98px'};
+`;
 export const ImgBanner = styled.img`
 	background-image: url(${(props) => props.banner || ""});
 	position: relative;
 	overflow: hidden;
-	width: 100%;
+	width: ${props => props._width || '100%'};
 	height: ${(props) => props._height || ""};
 	object-fit: cover;
 	background-repeat: no-repeat;
+	border-radius: ${props => props._bdr};
 `;
 export const AvatarDiv = styled.div`
 	position: absolute;

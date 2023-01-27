@@ -44,6 +44,7 @@ function BusinessProductManagementDetail() {
           title={item.storeName}
           cart={false}
           bell={false}
+          floating={false}
           onBackClick={() => navigate(-1)}
         >
           <DetailBody>

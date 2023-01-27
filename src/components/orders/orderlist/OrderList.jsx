@@ -298,9 +298,7 @@ const OrderList = () => {
                             _height="calc(100vh - 80px)"
                         >
                             <T.Text _align="center" _color="gray600" _size={15} _weight={300}>
-                                주문 내역이 없습니다
-                                <br />
-                                내 주변 마켓을 이용해보세요.
+                                주문 내역이 없습니다.
                             </T.Text>
                         </L.Contents>
                     </L.Container>

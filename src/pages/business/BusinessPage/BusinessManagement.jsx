@@ -6,7 +6,6 @@ import { TabButtonStyle, DetailTabInfo, DetailTabReview, TabContentStyle } from 
 import * as L from 'components/commonUi/Layout';
 import { useNavigate } from 'react-router-dom';
 import Layout from 'components/layout/Layout/Layout'
-import { Floating } from 'components/commonUi/Icon';
 
 
 function BusinessManagement() {
@@ -30,8 +29,6 @@ function BusinessManagement() {
           <L.Contents _padding="0">
             <L.FlexCols _gap='0px'>
               {/* ============  ============ */}
-
-
 
               <TabButtonStyle>
                 <DetailTabInfo
