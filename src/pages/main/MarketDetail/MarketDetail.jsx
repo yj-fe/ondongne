@@ -53,7 +53,7 @@ function MarketDetail() {
         cart={true}
         share={true}
         // more={true}
-        onBackClick={() => navigate('/')}
+        onBackClick={() => navigate(-1)}
       >
         <L.Container >
           <L.Contents _padding="0">

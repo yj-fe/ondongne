@@ -37,44 +37,44 @@ function MarketDetailInfo({ item }) {
             <MarketTable>
               <tbody>
                 <tr>
-                  <th>운영시간</th>
-                  <td>월요일 : {dayweekToText("월요일")}</td>
+                  <th >운영시간</th>
+                  <td >월요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
-                  <th></th>
-                  <td>화요일 : {dayweekToText("월요일")}</td>
+                  <th ></th>
+                  <td >화요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
-                  <th></th>
-                  <td>수요일 : {dayweekToText("월요일")}</td>
+                  <th ></th>
+                  <td >수요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
-                  <th></th>
-                  <td>목요일 : {dayweekToText("월요일")}</td>
+                  <th ></th>
+                  <td >목요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
-                  <th></th>
-                  <td>금요일 : {dayweekToText("월요일")}</td>
+                  <th ></th>
+                  <td >금요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
-                  <th></th>
-                  <td>토요일 : {dayweekToText("월요일")}</td>
+                  <th ></th>
+                  <td >토요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
-                  <th></th>
-                  <td>일요일 : {dayweekToText("월요일")}</td>
+                  <th ></th>
+                  <td >일요일 : {dayweekToText("월요일")}</td>
                 </tr>
                 <tr>
-                  <th>전화번호</th>
-                  <td>{phoneFormatter(item.phone)}</td>
+                  <th >전화번호</th>
+                  <td >{phoneFormatter(item.phone)}</td>
                 </tr>
                 <tr>
-                  <th>배달지역</th>
-                  <td>{item.deliveryAddress}</td>
+                  <th >배달지역</th>
+                  <td >{item.deliveryAddress}</td>
                 </tr>
                 <tr>
-                  <th>배달/픽업</th>
-                  <td>{item.recetiveType} 가능</td>
+                  <th >배달/픽업</th>
+                  <td >{item.recetiveType} 가능</td>
                 </tr>
               </tbody>
             </MarketTable>

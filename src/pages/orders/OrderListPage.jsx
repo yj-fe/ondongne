@@ -13,7 +13,7 @@ const OrderListPage = props => {
             cart={true}
             bell={true}
             floating={false}
-            onBackClick={() => navigate("/")}
+            onBackClick={() => navigate(-1)}
         >
             <OrderList />
         </Layout>

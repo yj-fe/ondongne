@@ -49,9 +49,10 @@ export const Div2 = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 0px;
-	gap: 16px;
+	gap: ${props => props._gap || '16px'};
 	width: 100%;
-	height: 90px;
+	height: auto;
+	/* height: 90px; */
 `;
 export const SearchDiv = styled.div`
 	box-sizing: border-box;

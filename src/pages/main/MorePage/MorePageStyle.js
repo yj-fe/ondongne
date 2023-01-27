@@ -91,7 +91,8 @@ export const AccountBadge = styled.div`
 	align-items: flex-start;
 	padding: 2px 6px;
 	gap: 4px;
-	width: 54px;
+	width: max-content;
+	/* width: 54px; */
 	height: 22px;
 	background: #e1f3f2;
 	border-radius: 4px;

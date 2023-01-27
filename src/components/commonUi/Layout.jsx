@@ -382,6 +382,8 @@ export const GridContainer = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	padding-top: 32px;
 	gap: 16px;
+    margin-left: 20px;
+    margin-right: 16px;
 `
 export const GridTwo = styled.div`
     display: grid;

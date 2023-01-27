@@ -394,9 +394,9 @@ function BusinessManagementTab1({ tabHandler }) {
           </RowDiv>
 
 
-          {/* ============== 매장 오픈 날짜 ============== */}
+          {/* ============== 비즈 오픈 날짜 ============== */}
           <ContentDiv>
-            <ContentTitle>매장 오픈 날짜</ContentTitle>
+            <ContentTitle>비즈 오픈 날짜</ContentTitle>
             <RowDiv
               onClick={() => setCalendar(true)}
             >

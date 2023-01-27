@@ -50,23 +50,25 @@ export const ReciptTable = styled.table`
 
 
 export const MarketTable = styled.table`
-    width: 70%;
+    width: 100%;
     tr {
         padding: 2px 0;
         line-height: 1.5;
         font-weight: 400;
         height: 30px;
         color: #424242;
-
+        
         th {
+            white-space: nowrap;
             font-weight: 500;
             text-align: left;
-            width: 20%;
+            width: 89px;
         }
 
         td {
             text-align: left;
-            width: 80%;
+            /* width: calc(100% - 30px); */
+            width: auto;
         }
     }
 

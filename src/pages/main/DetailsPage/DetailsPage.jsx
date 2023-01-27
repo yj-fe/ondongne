@@ -133,6 +133,7 @@ function DetailsPage(props) {
         bell={false}
         cart={true}
         share={true}
+        floating={false}
         // more={true}
         onBackClick={() => navigate(-1)}
       >
@@ -400,9 +401,9 @@ function OrderToggle({
         </button>
         <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
           <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
-          <L.FlexRows _content='right' _gap={12} _items='center' _width='112px'>
+          <L.FlexRows _content='right' _gap='0px' _items='center' _width='120px'>
             <button type='button' onClick={() => counterHandler(-1)}><MinusB /></button>
-            <T.Text _weight={500}>{numberFormat(count)}</T.Text>
+            <T.Text _align='center' _width='80px' _weight={500}>{numberFormat(count)}</T.Text>
             <button type='button' onClick={() => counterHandler(1)}><PlusB /></button>
           </L.FlexRows>
         </L.FlexRows>

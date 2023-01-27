@@ -23,7 +23,7 @@ function PopUp({closeModal, neverWatch}) {
               _bdr='0px 0px 0px 10px'
               onClick={neverWatch}
             >
-              <T.Text _size={15} _color='gray800' _align='center'>다시보지않기</T.Text>
+              <T.Text _size={15} _color='gray800' _align='center'>일주일간 보지 않기</T.Text>
             </Badge>
             <Badge 
               type='button'

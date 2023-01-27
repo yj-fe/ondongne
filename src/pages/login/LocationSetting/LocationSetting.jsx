@@ -100,6 +100,7 @@ function LocationSetting() {
                       <Search />
                     </SearchIcon>
                   </SearchDiv>
+                  <Div2 _gap='10px'>
                   <MyLocationDiv>
                     <LocationIcon>
                       <Location />
@@ -110,6 +111,7 @@ function LocationSetting() {
                     </MyLocationResult>
                   </MyLocationDiv>
                   <T.Text _color='gray400' _size='12' >현재는 '경기도 김포시' 지역으로 운영 중 입니다. 김포 지역으로 위치 설정이 가능합니다.</T.Text>
+                  </Div2>
                 </Div2>
               </L.FlexCols>
 
