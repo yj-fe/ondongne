@@ -6,7 +6,7 @@ import PopUp from "components/layout/PopUp/PopUp";
 
 const COOKIE_COACH_KEY = "coachNeverWatch";
 const COOKIE_POPUP_KEY = "popupNeverWatch";
-const COOKIE_GUIDE_KEY = "guideNeverWatch";
+// const COOKIE_GUIDE_KEY = "guideNeverWatch";
 
 function MainCoachmark() {
 

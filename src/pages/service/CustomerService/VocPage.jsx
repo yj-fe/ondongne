@@ -48,6 +48,11 @@ function VocPage() {
     setData(item => ({ ...item, check: !data.check }))
   }
 
+  // 고객센터이동
+  const goService = (e) => {
+    navigate('/service');
+  }
+
   // 데이터 넘기기
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,7 +80,7 @@ function VocPage() {
       return setConfirm({
         contents: "고객님의 문의가 정상적으로 접수되었습니다.\n빠른 시간내에 답변 드리도록 하겠습니다.",
         buttonText: "확인",
-        onConfirmClick: () => setConfirm(null),
+        onConfirmClick: () => {setConfirm(null); goService();},
         onOverlayClick: () => setConfirm(null),
       })
     }
