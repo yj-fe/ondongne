@@ -7,7 +7,7 @@ import { Badge } from '../../commonUi/Button';
 import { Img } from '../../Buisness/BusinessManagement/BusinessManagementTabStyle';
 
 
-function PopUp({closeModel, neverWatch}) {
+function PopUp({closeModal, neverWatch}) {
   return (
     <div>
       <Overlay>
@@ -26,6 +26,7 @@ function PopUp({closeModel, neverWatch}) {
               <T.Text _size={15} _color='gray800' _align='center'>다시보지않기</T.Text>
             </Badge>
             <Badge 
+              type='button'
               _borderleft='1px solid #EEEEEE' 
               _padding='0px' 
               _gap='0px' 
@@ -33,7 +34,7 @@ function PopUp({closeModel, neverWatch}) {
               _height='56px' 
               _bg='white' 
               _bdr='0px 0px 10px 0px'
-              onClick={closeModel}
+              onClick={closeModal}
             >
               <T.Text _size={15} _color='gray800' _align='center'>닫기</T.Text>
             </Badge>

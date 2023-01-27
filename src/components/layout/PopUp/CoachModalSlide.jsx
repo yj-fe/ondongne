@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import * as L from 'components/commonUi/Layout';
 import { Text } from 'components/commonUi/Text'
 import { Body, Container, Content, Btn } from '../Modal/Modal'
@@ -20,12 +20,10 @@ import { SwiperDiv, SwiperTextDiv, SwiperTitle, SwiperText, SwiperSlideImg, navi
 
 
 
-function CoachModalSlide({setAgreementModal, neverWatch}) {
+function CoachModalSlide({ neverWatch, closeModal }) {
 
   const slideRef = useRef(null);
-
-
-
+  const [status, setStatus] = useState(false);
 
   return (
     <Body>
@@ -43,6 +41,15 @@ function CoachModalSlide({setAgreementModal, neverWatch}) {
             className="mySwiper"
             ref={slideRef}
             loop={true}
+            onSlideChange={(swiperCore) => {
+              const {
+                activeIndex
+              } = swiperCore;
+
+              if(activeIndex === 4) {
+                setStatus(true)
+              }
+          }}
           >
             <SwiperSlide
             ><Slide1 /></SwiperSlide>
@@ -54,11 +61,17 @@ function CoachModalSlide({setAgreementModal, neverWatch}) {
             <Btn
               _marginleft='5%'
               _width='90%'
-            onClick={()=> {slideRef.current.swiper.slideNext()}}
-            >다음</Btn>
+            onClick={
+              status 
+                ? closeModal
+                : () => slideRef.current.swiper.slideNext()
+            }
+            >
+              <Text _color='white' _size={16}>{status ? '시작하기' : '다음'}</Text>
+              
+            </Btn>
             <Text 
-              onClick={neverWatch} 
-              // onClick={() => {neverWatch(); depthHandler(1);}} 
+              onClick={neverWatch}
               _align={'center'} 
               _size={14} 
               _color={'gray600'}
