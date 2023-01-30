@@ -88,6 +88,9 @@ export const ContentImg = styled.img`
   width: 280px;
   height: 160px;
   border-radius: 6px 6px 0px 0px;
+	overflow: hidden;
+	object-fit: cover;
+	background-repeat: no-repeat;
 `
 export const ContentStyle = styled.div`
   display: flex;

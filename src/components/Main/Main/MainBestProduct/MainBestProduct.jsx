@@ -52,8 +52,8 @@ function MainBestProduct() {
         !loading &&
         list.length > 0 &&
         <L.Inner>
-          <L.Contents _padding='20px 0px 20px 20px'>
-            <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
+          <L.Contents _padding='20px 0px 20px 0px'>
+            <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 20px'>
               <T.Text _size={18} _weight={700} _color='black'>My단골 인기 상품</T.Text>
               <T.Text
                 _size={14}
