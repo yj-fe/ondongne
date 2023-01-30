@@ -2,27 +2,16 @@ import React from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
-import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import StarRate from './StarRate';
 import { numberFormat } from 'utils/utils';
-import StoreLike from './StoreLike';
 import Img from 'assets/images/marketdetail.png';
 import { useNavigate } from 'react-router-dom';
-import { ImgBanner, ImgCollect } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { ImgCollect } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 
-export const StoreListCard = ({ list, setData, lastRef }) => {
+export const StoreListCard = ({ list, lastRef }) => {
 
     const navigate = useNavigate();
 
-    const likeHandler = (id) => {
-        setData(
-            list.map(item =>
-                item.storeId === id
-                    ? { ...item, likeStatus: !item.likeStatus }
-                    : item
-            )
-        )
-    }
 
     return (
         <L.FlexCols _gap={20}>
@@ -38,7 +27,6 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
                             onClick={() => navigate(`/market/detail/${item.storeId}`)}
                         >
                             <ImgCollect  src={item.profile != null ? item.profile : Img}  />
-                            {/* <ImgSizeLayout _bdr={4} src={item.profile != null ? item.profile : Img} _width={98} _height={98} ></ImgSizeLayout> */}
                             <L.FlexCols _gap={2} _width='calc(100% - 135px)'>
                                 <L.FlexRows _gap='0px' _width='200px'>
                                     <T.TextCut _weight={600} _size={17} _color="gray900">{item.name.substring(0, 17)}</T.TextCut>
@@ -69,7 +57,6 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
                             </L.FlexCols>
                         </L.FlexRows>
 
-                        <StoreLike id={item.storeId} checked={item.likeStatus} onChange={likeHandler} />
 
                     </L.FlexRows>
                 ))
