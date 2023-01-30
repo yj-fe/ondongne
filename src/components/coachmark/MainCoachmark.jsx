@@ -49,6 +49,7 @@ function MainCoachmark() {
     if (depth01 || depth02 ) {
     // if (depth01 || depth02 || depth03) {
       document.body.style.overflow = "hidden";
+      window.scrollTo(0, 0);
     } else {
       document.body.style.overflow = "unset";
     }
