@@ -276,7 +276,7 @@ function BusinessProductUpload() {
                     placeholder='상품명을 입력해주세요.'
                     value={data.name}
                     onChange={e => setData({ ...data, name: e.target.value })}
-                    maxLength={255}
+                    maxLength={40}
                   />
                 </TitleInfoDiv>
               </L.FlexCols>

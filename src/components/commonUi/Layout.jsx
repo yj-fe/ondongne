@@ -382,7 +382,7 @@ export const GridContainer = styled.div`
 	padding-top: 32px;
 	gap: 16px;
     margin-left: 20px;
-    margin-right: 16px;
+    margin-right: ${props => props._marginr || '16px'};
 `
 export const GridTwo = styled.div`
     display: grid;

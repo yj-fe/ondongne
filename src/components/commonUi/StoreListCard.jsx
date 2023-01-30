@@ -20,14 +20,14 @@ export const StoreListCard = ({ list, lastRef }) => {
                     <L.FlexRows
                         key={index}
                         _gap='0px'
-                        _content='space-between'
+                        // _content='space-between'
                         ref={list.length == index + 1 ? lastRef : null}
                     >
-                        <L.FlexRows _content='row' _width='calc(100% - 30px)'
+                        <L.FlexRows _content='row' 
                             onClick={() => navigate(`/market/detail/${item.storeId}`)}
                         >
                             <ImgCollect  src={item.profile != null ? item.profile : Img}  />
-                            <L.FlexCols _gap={2} _width='calc(100% - 135px)'>
+                            <L.FlexCols _gap={2} _width='calc(100% - 100px)'>
                                 <L.FlexRows _gap='0px' _width='200px'>
                                     <T.TextCut _weight={600} _size={17} _color="gray900">{item.name.substring(0, 17)}</T.TextCut>
                                 </L.FlexRows>

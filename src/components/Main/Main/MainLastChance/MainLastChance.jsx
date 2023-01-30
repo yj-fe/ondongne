@@ -65,7 +65,7 @@ function MainLastChance() {
           {
             !loading &&
             list.length > 0 &&
-            <L.GridContainer>
+            <L.GridContainer _marginr='0px'>
               {
                 list.map((item, index) => (
                   <React.Fragment
