@@ -7,9 +7,14 @@ export const ImgSizeLayout = styled.img`
     height: ${props => props._height}px;
     object-fit: ${props => props._object || ''};
     /* object-fit:  fill; */
+    overflow: hidden;
+	background-repeat: no-repeat;
 `;
 
 export const ImgSizeH = styled.img`
+    overflow: hidden;
+	object-fit: cover;
+	background-repeat: no-repeat;
     border-radius: ${props => props._bdr}px;
     width: ${props => props._width || '100%'};
     height: ${props => props._height}px;
@@ -81,7 +86,7 @@ export const AbsoluteDivGrid = styled.div`
     bottom: -10px;
     margin: 0;
     padding: 18px 12px;
-    z-index: 9999;
+    z-index: 99;
     @media screen and (max-width:678px) {
         right: 12%;
     }

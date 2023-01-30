@@ -31,19 +31,19 @@ export function ProductCard({
                 {
                     !item.soldoutStatus
                     ? <ImgSizeLayout
-                    _width={width} _height={width} _bdr={6} _object='cover'
+                        _width={width} _height={width} _bdr={6} _object='cover'
                     // src={ImgSize}
-                            src={item.images && item.images.length > 0 && item.images[0]}
-                            onClick={() => navigate(`/details/${item.itemId}`)}
-                        />
-                        : <div style={{ position: 'relative' }}>
-                            <ImgSizeLayout
-                                _width={width} _height={width} _bdr={6} _object='cover'
-                                                    // src={ImgSize}
+                        src={item.images && item.images.length > 0 && item.images[0]}
+                        onClick={() => navigate(`/details/${item.itemId}`)}
+                    />
+                    : <div style={{ position: 'relative' }}>
+                        <ImgSizeLayout
+                            _width={width} _height={width} _bdr={6} _object='cover'
+                                                // src={ImgSize}
 
-                                src={item.images && item.images.length > 0 && item.images[0]}
-                            />
-                            <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
+                            src={item.images && item.images.length > 0 && item.images[0]}
+                        />
+                        <T.SoldoutText _size={20} _weight={600} _color='white'>판매완료</T.SoldoutText>
                         </div>
                 }
             </RelativDiv>

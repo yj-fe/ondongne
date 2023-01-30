@@ -17,6 +17,7 @@ const ScrollView = styled.div`
     height: 48px;
     padding-left: 24px;
     gap: 0 20px;
+    /* overflow: scroll; */
 `;
 
 const CategoryTabs = ({ currentData, onChange }) => {

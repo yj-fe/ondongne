@@ -32,9 +32,9 @@ function SearchDetailPage() {
           <L.Contents _padding='0px'>
             <MainCategory />
           </L.Contents>
-          <L.Contents _padding='20px' >
+          <L.Contents _padding='0px' >
             <L.FlexCols>
-              <L.FlexRows _content='space-between'>
+              <L.FlexRows _content='space-between' _padding='20px 20px 0px 20px'>
                 <T.Text _weight={700} _size={18} _color="black">우리동네 인기 추천</T.Text>
                 {/* <T.Text _weight={500} _size={14} _color="blue">전체 보기</T.Text> */}
               </L.FlexRows>

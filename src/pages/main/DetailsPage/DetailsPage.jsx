@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { DetailButtonDiv, DetailButtonStyle, DetailTabInfo, DetailTabReview, MarketComments, TabInfoContentText, TabInfoContentTitle, TypeLabel, TypeLabelInfo, TypeTextStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketReviewDiv, Price, ProfileDiv, ProfileTextDiv, MoreStyle, FlagStyle, FlagText, IconStyle, Line, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, ButtonStyle, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, OrderToggleBox } from './DetailsPageStyle'
+import { DetailButtonDiv, DetailButtonStyle, DetailTabInfo, DetailTabReview, MarketComments, TabInfoContentText, TabInfoContentTitle, TypeLabel, TypeLabelInfo, TypeTextStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketReviewDiv, Price, ProfileDiv, ProfileTextDiv, MoreStyle, FlagStyle, FlagText, IconStyle, Line, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, ButtonStyle, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, OrderToggleBox, CountButton } from './DetailsPageStyle'
 import ModalMorePage from 'components/Main/More/ModalMorePage'
 import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
@@ -401,10 +401,12 @@ function OrderToggle({
         </button>
         <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
           <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
-          <L.FlexRows _content='right' _gap='0px' _items='center' _width='120px'>
-            <button type='button' onClick={() => counterHandler(-1)}><MinusB /></button>
-            <T.Text _align='center' _width='80px' _weight={500}>{numberFormat(count)}</T.Text>
-            <button type='button' onClick={() => counterHandler(1)}><PlusB /></button>
+          <L.FlexRows _content='right' _gap='0px' _items='center' _width='114px'>
+            
+            <CountButton type='button' onClick={() => counterHandler(-1)}><MinusB /></CountButton>
+            <T.Text _align='center' _width='50px' _weight={500}>{numberFormat(count)}</T.Text>
+            {/* <T.Text _align='center' _width='80px' _weight={500}>{numberFormat(count)}</T.Text> */}
+            <CountButton type='button' onClick={() => counterHandler(1)}><PlusB /></CountButton>
           </L.FlexRows>
         </L.FlexRows>
         <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>

@@ -134,10 +134,12 @@ function BusinessApplication() {
         title="비즈 정보 관리"
         cart={false}
         bell={false}
+        floating={false}
         onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px">
           <L.Contents _padding="0" _height={'100vh'}>
+            <L.Scroll>
             <L.FlexCols>
               {
                 !isSuccess &&
@@ -206,12 +208,12 @@ function BusinessApplication() {
                     </TitleInfoDiv>
                   </ContentDiv>
                   <ContentDiv>
-                    <ContentTitle>첨부파일</ContentTitle>
+                    <ContentTitle>사업자 등록증 첨부</ContentTitle>
                     <Text _size={14} _color={'gray600'} >사업자 관련 파일 첨부(파일은 pdf, jpg, png만 첨부 가능)</Text>
                     <TextCenter
                       for={"files"}
                     >
-                      <TitleInfo >파일 첨부</TitleInfo>
+                      <TitleInfo >사업자 등록증 첨부</TitleInfo>
                     </TextCenter>
                     {fileErrorMessage && <Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{fileErrorMessage}</Text>}
                     <input type="file" id="files" onChange={e => {
@@ -284,6 +286,7 @@ function BusinessApplication() {
                 />
               }
             </L.FlexCols>
+            </L.Scroll>
           </L.Contents>
         </L.Container>
       </Layout>

@@ -137,8 +137,10 @@ function BusinessPage() {
 
         {/* ==================== 내 상점 인기상품 ==================== */}
         <L.Container>
-          <L.Contents>
+          <L.Contents _padding="20px 0px 20px 0px">
+          <L.FlexRows _items='center' _padding='0px 20px 0px 20px'>
             <TitleText>내 상점 인기상품</TitleText>
+          </L.FlexRows>
             {
               !data.itemList.items || (data.itemList.items && data.itemList.items.length) === 0 &&
               <EmptyDiv>
@@ -151,7 +153,7 @@ function BusinessPage() {
             }
             {
               data.itemList.items && data.itemList.items.length > 0 &&
-              <L.FlexRowsCP>
+              <L.FlexRowsCP _padding='0px 0px 10px 20px'>
                 <MyBestProductContent>
                   {
                     data.itemList.items.map((item, index) => (

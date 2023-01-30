@@ -26,6 +26,9 @@ function SwiperPage() {
     <div>
 
       <Swiper
+        style={{
+          "--swiper-pagination-color": "#0B806F",
+        }}
         spaceBetween={0}
         pagination={{
           clickable: true,

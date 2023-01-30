@@ -362,10 +362,10 @@ function BusinessManagementTab1({ tabHandler }) {
           </ContentDiv>
 
 
-          {/* ============== 배달 금액/최소 주문 ============== */}
+          {/* ============== 배달비/최소 주문 ============== */}
           <RowDiv>
             <ContentDiv>
-              <ContentTitle>배달 금액(원)</ContentTitle>
+              <ContentTitle>배달비(원)</ContentTitle>
               <TitleInfoDiv>
                 <InputText>￦ </InputText>
                 <Input

@@ -13,7 +13,9 @@ function MoreLayout({ PropsModal }) {
 
   return (
     <div>
-      <ModalOutside>
+      <ModalOutside
+        onClick={PropsModal}
+      >
         <ModalBody>
           <ModalDiv1>더보기</ModalDiv1>
           <L.Contents _padding='16px 20px' >
@@ -45,7 +47,9 @@ export function FilterLayout({ PropsModal, data, setData }) {
 
   return (
     <div>
-      <ModalOutside>
+      <ModalOutside
+        onClick={PropsModal}
+      >
         <ModalBody>
           <ModalDiv1>상품 필터</ModalDiv1>
           <L.Contents _padding='16px 20px' >
@@ -92,6 +96,7 @@ export function SortLayout({ CloseModal, data, setData }) {
   return (
     <div>
       <ModalOutside
+        onClick={CloseModal}
       >
         <ModalBody>
           <ModalDiv1>정렬</ModalDiv1>
@@ -139,6 +144,7 @@ export function SearchSortLayout({ CloseModal, data, setData }) {
   return (
     <div>
       <ModalOutside
+      onClick={CloseModal}
       >
         <ModalBody>
           <ModalDiv1>정렬</ModalDiv1>
@@ -186,6 +192,7 @@ export function MyStoreSortLayout({ CloseModal, data, setData }) {
   return (
     <div>
       <ModalOutside
+      onClick={CloseModal}
       >
         <ModalBody>
           <ModalDiv1>정렬</ModalDiv1>
@@ -233,6 +240,7 @@ export function ModalFilter({ CloseModal, data, setData }) {
   return (
     <div>
       <ModalOutside
+      onClick={CloseModal}
       >
         <ModalBody>
           <ModalDiv1>정렬</ModalDiv1>
@@ -272,6 +280,7 @@ export function ReviewLayout({ CloseModal }) {
   return (
     <div>
       <ModalOutside
+      onClick={CloseModal}
       >
         <ModalBody>
           <ModalDiv1>

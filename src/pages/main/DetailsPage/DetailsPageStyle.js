@@ -682,3 +682,10 @@ export const ReplyBox = styled.div`
 	align-items: center;
 	padding: 12px 16px;
 `;
+
+export const CountButton = styled.button`
+	padding: 0px;
+	width: 32px;
+	height: 32px;
+`;
+

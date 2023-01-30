@@ -265,7 +265,7 @@ export const FlexRowsCP = styled.div`
     overflow-x: scroll; 
     overflow-y: hidden;
     flex-wrap: nowrap;
-    padding: 0px 0px 10px 0px;
+    padding: ${props => props._padding || '0px 0px 10px 0px' };
     flex-direction: rows;
     gap: ${props => props._gap || 8}px;
     align-items: ${props => props._items || 'inherit'};
@@ -273,7 +273,6 @@ export const FlexRowsCP = styled.div`
     height: ${props => props._height || 'auto'};
     > Link {
         display: inline-block;
-        /* text-align: center; */
         text-decoration: none;
     }
     ::-webkit-scrollbar{
