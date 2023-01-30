@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TabDiv, TabContent, ContentDiv, ContentTitle, TitleInfoDiv, TitleInfo, Input, RightStyle, BankToggleDiv, BankListDiv, TextCenter, FileForm, } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle'
+import { TabDiv, TabContent, ContentDiv, ContentTitle, TitleInfoDiv, TitleInfo, Input, RightStyle, BankToggleDiv, BankListDiv, TextCenter, FileForm, Textarea, InputBox, } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle'
 import { Text } from 'components/commonUi/Text'
 import { ReactComponent as Right } from "assets/main/right.svg";
 import { ReactComponent as Down } from "assets/icons/arrow/Arrow-Down.svg";
@@ -120,6 +120,7 @@ function BusinessApplication() {
       && data.category.length > 0
       && data.delivery.length > 0
       && data.storeName.length > 0
+      && data.description.length > 0
       && data.files.length > 0) {
       setDisabled(true)
     } else {
@@ -190,6 +191,26 @@ function BusinessApplication() {
                       <TitleInfo>{data.delivery === '' ? '활동 지역 선택' : deliveryToString(data.delivery)}</TitleInfo>
                       <RightStyle><Right /></RightStyle>
                     </TitleInfoDiv>
+                  </ContentDiv>
+                  <ContentDiv>
+                    <ContentTitle>상점 소개</ContentTitle>
+                    <InputBox
+                      height={200}
+                    >
+                      <Textarea
+                        name='description'
+                        value={data.description}
+                        onChange={e => {
+                          const { name, value } = e.target;
+                          setData({
+                            ...data,
+                            [name]: value
+                          })
+                        }}
+                        placeholder='어떤 상점인지 소개해 주세요!'
+                        maxLength={255}
+                      />
+                    </InputBox>
                   </ContentDiv>
                   <ContentDiv>
                     <ContentTitle>사업자등록번호</ContentTitle>

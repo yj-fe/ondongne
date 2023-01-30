@@ -150,6 +150,8 @@ function BusinessProductUpload() {
     if (auth.isAuthenticated && id) getItem();
   }, [auth, id])
 
+  console.log(data.price);
+
   return (
     <div>
       <Layout
@@ -292,7 +294,6 @@ function BusinessProductUpload() {
                       type='number'
                       value={numberFormat(data.price)}
                       onChange={e => setData({ ...data, price: numberFormatter(e.target.value) })}
-                      maxLength={12}
                     />
                     <span>￦</span>
                   </TitleInfoDiv>
@@ -306,7 +307,6 @@ function BusinessProductUpload() {
                       placeholder='0'
                       value={data.salePercent}
                       onChange={e => setData({ ...data, salePercent: numberFormatter(e.target.value) })}
-                      maxLength={3}
                     />
                     <span>%</span>
                   </TitleInfoDiv>
@@ -326,7 +326,8 @@ function BusinessProductUpload() {
               </L.FlexRows>
 
               {
-                data.type === 'GROUP' &&
+                data.type === 'GROUP' 
+                ?
                 <>
                   <L.FlexRows>
                     <L.FlexCols _gap={16}>
@@ -374,6 +375,9 @@ function BusinessProductUpload() {
                     </TitleInfoDiv>
                   </L.FlexCols>
                 </>
+                :
+                <L.FlexRows>
+                </L.FlexRows>
               }
 
               <L.FlexCols _gap={16}>
