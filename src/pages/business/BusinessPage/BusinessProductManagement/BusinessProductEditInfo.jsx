@@ -74,7 +74,6 @@ const BusinessProductEditInfo = ({ isOpen, close, data, dataHanler }) => {
             />
           </L.Contents>
         </L.Container>
-      </Layout>
             <B.FixedActionButton
               onClick={() => {
                 dataHanler({
@@ -85,6 +84,7 @@ const BusinessProductEditInfo = ({ isOpen, close, data, dataHanler }) => {
               }}
             >저장
             </B.FixedActionButton>
+      </Layout>
       {
         confirm &&
         <Confirm
