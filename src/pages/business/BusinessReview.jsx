@@ -19,6 +19,7 @@ import Moment from 'react-moment';
 import StarRate from 'components/commonUi/StarRate';
 import { likeReview } from 'service/review';
 import Layout from 'components/layout/Layout/Layout';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 const MEMBERIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/member/";
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/review/";
 const STOREIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
@@ -90,7 +91,7 @@ function BusinessReview() {
   }, [auth])
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
         title="리뷰 관리"
         bell={false}
@@ -289,7 +290,7 @@ function BusinessReview() {
         </L.Container>
       </Layout>
 
-    </div>
+    </CursorDiv>
   )
 }
 

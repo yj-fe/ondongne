@@ -98,11 +98,11 @@ function BusinessProductEdit() {
               <L.FlexCols _gap={16}>
                 <T.Text _weight={600} _size={16} _color="gray900">카테고리</T.Text>
                 <L.FlexRows _gap={16}>
-                  <TitleInfoDiv>
-                    <TitleInfo>야채/과일</TitleInfo>
-                  <RightStyle
+                  <TitleInfoDiv
                     onClick={()=>setSelect(!select)}
-                  ><Down/></RightStyle>
+                  >
+                    <TitleInfo>야채/과일</TitleInfo>
+                    <RightStyle><Down/></RightStyle>
                   </TitleInfoDiv>
                 </L.FlexRows>
               </L.FlexCols>

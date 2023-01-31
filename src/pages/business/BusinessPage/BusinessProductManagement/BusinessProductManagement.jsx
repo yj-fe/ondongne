@@ -9,6 +9,7 @@ import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 import { ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from 'components/Main/More/ModalPageStyle';
 import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 
 function BusinessProductManagement() {
@@ -67,9 +68,9 @@ function BusinessProductManagement() {
   }, [inView, loading])
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
-        title="상품관리"
+        title="상품 관리"
         cart={false}
         bell={false}
         onBackClick={() => navigate(-1)}
@@ -83,8 +84,8 @@ function BusinessProductManagement() {
                 <div>
                   <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
                 </div>
-                <L.FlexRows onClick={ShowMoreModal} _gap={4} _content='flex-end' _width='100px'>
-                  <T.Text _size={13} _weight={400} _color='gray900'>{data.type}</T.Text>
+                <L.FlexRows onClick={ShowMoreModal} _gap={4} _content='flex-end' _width='150px'>
+                  <T.Text _align='right' _size={13} _weight={400} _color='gray900'>{data.type}</T.Text>
                   <button
                     type='button'
                   >
@@ -104,6 +105,7 @@ function BusinessProductManagement() {
                       </L.NoneDataContainer>
                     </L.Contents>
                   }
+                  <L.Scroll>
                       <L.Grid>
                   {
                     items && items.length > 0 &&
@@ -126,6 +128,7 @@ function BusinessProductManagement() {
                     ))
                   }
                 </L.Grid>
+                </L.Scroll>
                 {/* </L.FlexRowsWrapBPM> */}
               </L.Contents>
 
@@ -134,7 +137,7 @@ function BusinessProductManagement() {
         </L.Container>
         {modal && <ModalFilter type={data.type} handler={dataChecked} closeSelector={() => setModal(false)} PropsModal={PropsModal} />}
       </Layout>
-    </div>
+    </CursorDiv>
   )
 }
 

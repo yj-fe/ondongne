@@ -20,6 +20,7 @@ import { authActions } from 'store/slices/auth';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import StoreModal from 'components/layout/Modal/StoreModal';
 import Layout from 'components/layout/Layout/Layout';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function BusinessPage() {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ function BusinessPage() {
   }, [auth])
 
   return (
-    <>
+    <CursorDiv>
       <BusinessHeader />
       <Layout>
 
@@ -222,7 +223,7 @@ function BusinessPage() {
           <StoreModal />
         )
       }
-    </>
+    </CursorDiv>
   )
 }
 

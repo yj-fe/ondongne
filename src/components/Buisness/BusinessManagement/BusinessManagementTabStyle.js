@@ -155,6 +155,7 @@ export const ContentTitle = styled.p`
 	font-weight: 600;
 	font-size: 15px;
 	color: #212121;
+	width: 100%;
 `;
 export const TitleInfoDiv = styled.div`
 	box-sizing: border-box;
@@ -334,6 +335,41 @@ export const BankToggleDiv = styled.div`
 	}
 	&::-webkit-scrollbar {
 		width: 4px;
+	}
+`;
+export const BankToggleDiv2 = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0px;
+	isolation: isolate;
+	position: absolute;
+	max-width: 688px;
+	width: 100%;
+	height: 192px;
+	justify-content: flex-start;
+	background: #ffffff;
+	box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.06);
+	border-radius: 4px;
+	overflow: scroll;
+	&::-webkit-scrollbar-thumb {
+		background-color: #bdbdbd;
+		border-radius: 99px;
+	}
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+	@media screen and (max-width: 728px) {
+		width: 94%;
+	}
+	@media screen and (max-width: 565px) {
+		width: 92%;
+	}
+	@media screen and (max-width: 395px) {
+		width: 90%;
+	}
+	@media screen and (max-width: 365px) {
+		width: 88%;
 	}
 `;
 export const BankListDiv = styled.div`

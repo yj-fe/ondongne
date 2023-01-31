@@ -86,7 +86,8 @@ const List = styled.div`
 	padding: 0px;
 	isolation: isolate;
 	position: absolute;
-	width: 86%;
+	width: 90%;
+	/* width: 100%; */
 	height: 192px;
 	justify-content: flex-start;
 	background: #ffffff;

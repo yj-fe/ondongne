@@ -3,7 +3,7 @@ import { ReactComponent as Right } from "assets/main/right.svg";
 import { ReactComponent as Down } from "assets/icons/arrow/Arrow-Down.svg";
 import { Text } from 'components/commonUi/Text';
 
-import { BankListDiv, BankToggleDiv, TextCenter, InfoBoxDiv, TabDiv, TabContent, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, Input, FileForm } from './BusinessManagementTabStyle'
+import { BankListDiv, TextCenter, InfoBoxDiv, TabDiv, TabContent, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, Input, FileForm, BankToggleDiv2 } from './BusinessManagementTabStyle'
 import { useSelector } from 'react-redux';
 import { bizUpdate, getBiz } from 'service/biz';
 import { useNavigate } from 'react-router-dom';
@@ -178,14 +178,15 @@ function BusinessManagementTab2({ tabHandler }) {
             </ContentDiv>
             <ContentDiv>
               <ContentTitle>통장 정보</ContentTitle>
-              <InfoBoxDiv>
+              <InfoBoxDiv
+                onClick={() => setSelect(!select)}
+                >
                 <TitleInfo>{biz.bank ?? '은행 선택'}</TitleInfo>
                 <RightStyle
-                  onClick={() => setSelect(!select)}
-                ><Down /></RightStyle>
+                  
+                  ><Down /></RightStyle>
               </InfoBoxDiv>
-              {select && <BankToggle close={() => setSelect(false)} data={category} setData={setCategory} />}
-
+                  {select && <BankToggle close={() => setSelect(false)} data={category} setData={setCategory} />}
               <InfoBoxDiv>
                 <Input
                   type='number'
@@ -279,7 +280,7 @@ function BankToggle({ close, data, setData }) {
 
   return (
     <div>
-      <BankToggleDiv>
+      <BankToggleDiv2>
         <BankListDiv onClick={() => onSelect('NH은행')}>
           <TitleInfo
             weight={data == 'NH은행' && 600}
@@ -304,7 +305,7 @@ function BankToggle({ close, data, setData }) {
             color={data == '하나은행' && '#0B806F'}
           >하나은행</TitleInfo>
         </BankListDiv>
-      </BankToggleDiv>
+      </BankToggleDiv2>
     </div>
   )
 }

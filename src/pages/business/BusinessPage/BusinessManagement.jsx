@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import BusinessManagementTab1 from 'components/Buisness/BusinessManagement/BusinessManagementTab1'
 import BusinessManagementTab2 from 'components/Buisness/BusinessManagement/BusinessManagementTab2'
-import { MarginBDiv } from 'components/Common/LayoutPageStyle'
+import { CursorDiv, MarginBDiv } from 'components/Common/LayoutPageStyle'
 import { TabButtonStyle, DetailTabInfo, DetailTabReview, TabContentStyle } from 'pages/main/DetailsPage/DetailsPageStyle'
 import * as L from 'components/commonUi/Layout';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ function BusinessManagement() {
   }
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
         title="비즈 정보 관리"
         cart={false}
@@ -58,7 +58,7 @@ function BusinessManagement() {
           </L.Contents>
         </L.Container>
       </Layout>
-    </div>
+    </CursorDiv>
   )
 }
 function TabContent(props) {

@@ -135,9 +135,9 @@ function SearchPage() {
                 {/* =================== 상품 정보 있을 경우=================== */}
                 {
                   items.length > 0 &&
-                  // <L.Scroll _height='calc(100vh - 20%)'>
+                  <L.Scroll _height='calc(100vh - 170px)'>
                     <StoreListCard list={items} setData={setItems} lastRef={ref} />
-                  // </L.Scroll>
+                  </L.Scroll>
                 }
 
                 {/* ===================로딩=================== */}

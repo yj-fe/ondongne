@@ -12,6 +12,7 @@ import dayjs from 'dayjs';
 import Alert from 'components/commonUi/Alert';
 import { orderCancel } from 'service/order';
 import { orderName } from 'utils/utils';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function OrderManagement() {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ function OrderManagement() {
   }, [auth])
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
         title="주문 관리"
         bell={false}
@@ -80,7 +81,7 @@ function OrderManagement() {
                 <div>
                   <T.Text _size={16} _weight={600} _color='gray900'>전체 {orderData.length}</T.Text>
                 </div>
-                <L.FlexRows _gap={4} _content='flex-end' _width='100px' _items='center'>
+                <L.FlexRows _gap={4} _content='flex-end' _width='150px' _items='center'>
                   <T.Text _size={13} _weight={400} _color='gray900'>최근 주문 순</T.Text>
                   <Down />
                 </L.FlexRows>
@@ -240,7 +241,7 @@ function OrderManagement() {
           onOverlayClick={alert.onOverlayClick}
         />
       }
-    </div>
+    </CursorDiv>
   )
 }
 

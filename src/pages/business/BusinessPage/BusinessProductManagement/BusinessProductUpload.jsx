@@ -16,6 +16,7 @@ import CalendarModel from 'components/commonUi/CalendarModel';
 import Confirm from 'components/commonUi/Confirm';
 import { useSelector } from 'react-redux';
 import Layout from 'components/layout/Layout/Layout';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function BusinessProductUpload() {
 
@@ -153,7 +154,7 @@ function BusinessProductUpload() {
   console.log(data.price);
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
         title={id ? '상품 수정' : '상품 등록'}
         cart={false}
@@ -454,7 +455,7 @@ function BusinessProductUpload() {
           dateFormat={'yyyy-MM-dd HH:mm:ss'}
         />
       }
-    </div>
+    </CursorDiv>
   )
 }
 

@@ -9,6 +9,7 @@ import { Line } from 'components/Login/Signup/agreement/AgreementStyle';
 import { MarketCommentsStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import { detailsList } from 'service/border';
 import dayjs from 'dayjs';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function InquiryDetailsPage() {
   const { id } = useParams();
@@ -45,7 +46,7 @@ function InquiryDetailsPage() {
   }, [id])
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
         title="1:1 문의"
         cart={false}
@@ -92,7 +93,7 @@ function InquiryDetailsPage() {
           </L.Contents>
         </L.Container>
       </Layout>
-    </div>
+    </CursorDiv>
   )
 }
 

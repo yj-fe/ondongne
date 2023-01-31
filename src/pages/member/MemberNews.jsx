@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getAlarmMemberList } from 'service/alarm';
 import { useNavigate } from 'react-router-dom';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function MemberNews() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function MemberNews() {
 
 
   return (
-    <div>
+    <CursorDiv>
       <S.Wrapper>
         <LoginHeader title="알림" to={-1} />
         <S.Main>
@@ -93,7 +94,7 @@ function MemberNews() {
           </L.Contents>
         </S.Main>
       </S.Wrapper>
-    </div>
+    </CursorDiv>
   )
 }
 

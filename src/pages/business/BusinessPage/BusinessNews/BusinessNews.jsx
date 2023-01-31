@@ -9,6 +9,7 @@ import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { getAlarmBizList } from 'service/alarm';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function BusinessNews() {
   const navigate = useNavigate();
@@ -28,9 +29,12 @@ function BusinessNews() {
     }
   }, [auth])
   return (
-    <div>
+    <CursorDiv>
       <S.Wrapper>
-        <LoginHeader title="알림" to={-1} />
+        <LoginHeader 
+          title="알림" 
+          to={-1} 
+        />
         <S.Main>
           <L.Contents _padding='0 20px ' _height='calc(100vh - 68px)'>
             {/* ============ 알림없을때 ============ */}
@@ -86,7 +90,7 @@ function BusinessNews() {
           </L.Contents>
         </S.Main>
       </S.Wrapper>
-    </div>
+    </CursorDiv>
   )
 }
 
