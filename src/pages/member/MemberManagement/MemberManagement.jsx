@@ -68,7 +68,7 @@ function MemberManagement() {
         onBackClick={() => navigate(-1)}
       >
        <L.Container _cursor='default' _height='calc(100vh - 60px)'>
-          <L.Contents _height='calc(100vh - 60px)'>
+          <L.Contents _height='calc(100vh - 52px)'>
             <L.FlexCols _padding={0} _gap={0}>
 
         {/* ============ 회원정보관리 ============ */}
@@ -83,7 +83,7 @@ function MemberManagement() {
           </MemberProfileDiv>
 
 
-            <Scroll _height='calc(100vh - 65px)'>
+            <Scroll _height='calc(100vh - 282px)'>
           <L.FlexCols _gap={24}>
             {/* =========================== 닉네임 =========================== */}
             <L.FlexCols>
@@ -125,6 +125,7 @@ function MemberManagement() {
               로그아웃
             </MemberLinkText>
           </MemberLinkDiv>
+          <L.FlexRows _height='50px'></L.FlexRows>
       {
         alert &&
         <Alert

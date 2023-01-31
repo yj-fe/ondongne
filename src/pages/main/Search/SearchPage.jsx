@@ -123,7 +123,6 @@ function SearchPage() {
                 </L.FlexCols>
 
                 <L.FlexCols _gap={32} _padding='24px 20px'>
-                <L.Scroll >
 
                 {/* =================== 상품 정보 없을 경우=================== */}
                 {
@@ -144,7 +143,6 @@ function SearchPage() {
                 {
                   loading && <LoadingBar />
                 }
-</L.Scroll>
 </L.FlexCols>
 
             </L.FlexCols>
