@@ -11,6 +11,7 @@ export const Inner = styled.div`
 
 
 export const Container = styled.div`
+    cursor: ${props => props._cursor};
     display: flex;
     flex-direction: column;
     gap: ${props => props._gap || 8}px;
@@ -63,6 +64,7 @@ export const Contents = styled.div`
     max-width: 728px;
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};
+    cursor: ${props => props._cursor};
     @media screen and (max-width: 450px) {
         padding: ${props => props._paddingmedia};
     }
@@ -179,7 +181,7 @@ export const BottomColsW = styled.div`
     display: flex;
     flex-direction: column;
     background-color: white;
-    width: 688px;
+    width: ${props => props._width || '688px'};
     bottom: 0px;
     left: 0;
     right: 0;
@@ -246,6 +248,7 @@ export const FlexRows = styled.div`
     padding: ${props => props._padding || '0px'};
       white-space: nowrap;
   overflow: hidden;
+  cursor: ${props => props._cursor};
 `;
 
 export const FlexRowsCategory = styled.div`

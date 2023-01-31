@@ -3,6 +3,7 @@ import * as Common from 'components/commonUi/Layout';
 
 export const S = {
     Header: styled.header`
+        cursor: default;
         z-index: 30;
         position: fixed;
         top: 0;

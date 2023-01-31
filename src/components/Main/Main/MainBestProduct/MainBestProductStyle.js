@@ -34,6 +34,7 @@ export const LastChanceDiv = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 32px;
+  cursor: default;
 `
 export const LastChanceContent = styled.div`
   display: flex;

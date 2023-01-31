@@ -3,6 +3,7 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { MarketTable } from 'components/commonUi/Table';
 import { phoneFormatter } from 'utils/utils';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function MarketDetailInfo({ item }) {
 
@@ -17,10 +18,10 @@ function MarketDetailInfo({ item }) {
   }
 
   return (
-    <div>
+    <CursorDiv>
       {/* 상점 소개 */}
       <L.Container>
-        <L.Contents>
+        <L.Contents >
           <L.FlexCols>
             <T.Text _weight={700} _size={16} _color="gray900">상점 소개</T.Text>
             <T.Text _weight={400} _size={15} _color="gray800">{item.description}</T.Text>
@@ -109,7 +110,7 @@ function MarketDetailInfo({ item }) {
       </L.Container>
 
 
-    </div>
+    </CursorDiv>
   )
 }
 

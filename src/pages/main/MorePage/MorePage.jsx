@@ -87,7 +87,7 @@ function MorePage() {
         bell={false}
         onBackClick={() => navigate('/')}
       >
-        <L.Container _padding="0px 0px 8px" >
+        <L.Container _cursor='default' _padding="0px 0px 8px" >
 
           {
             auth.isAuthenticated &&

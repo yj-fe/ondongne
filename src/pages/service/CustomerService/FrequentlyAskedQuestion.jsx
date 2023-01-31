@@ -34,7 +34,7 @@ function FrequentlyAskedQuestion() {
           floating={false}
           onBackClick={() => navigate(-1)}
       >
-        <L.Container _height='calc(100vh - 60px)'>
+        <L.Container _cursor='default' _height='calc(100vh - 60px)'>
           <L.Contents _height='calc(100vh - 60px)'>
             <Scroll>
               <L.FlexCols _gap='0px' _padding="0px" _items="center">

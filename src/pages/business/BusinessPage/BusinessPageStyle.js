@@ -221,6 +221,7 @@ export const MyBestProductContent = styled.div`
 	height: 316px;
 `;
 export const FooterDiv = styled.div`
+	cursor: default;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

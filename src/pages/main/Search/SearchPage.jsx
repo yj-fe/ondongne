@@ -104,17 +104,26 @@ function SearchPage() {
                   <div>
                     <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
                   </div>
-                  <L.FlexRows _gap={4} _content='flex-end' _width='100px'>
+                  <L.FlexRows 
+                    _gap={4} 
+                    _content='flex-end' 
+                    _width='100px' 
+                    style={{cursor:'default'}}
+                    onClick={() => setFilter01(true)}
+                  >
                     <T.Text _size={13} _weight={400} _color='gray900'>{sortFormatter(sort)}</T.Text>
                     <button
                       type='button'
                       _bg={sort !== 'create' && 'green700'}
-                      onClick={() => setFilter01(true)}
                     >
                       <Down />
                     </button>
                   </L.FlexRows>
                 </L.FlexRows>
+                </L.FlexCols>
+
+                <L.FlexCols _gap={32} _padding='24px 20px'>
+                <L.Scroll >
 
                 {/* =================== 상품 정보 없을 경우=================== */}
                 {
@@ -126,17 +135,18 @@ function SearchPage() {
                 {/* =================== 상품 정보 있을 경우=================== */}
                 {
                   items.length > 0 &&
-                  <L.Scroll>
+                  // <L.Scroll _height='calc(100vh - 20%)'>
                     <StoreListCard list={items} setData={setItems} lastRef={ref} />
-                  </L.Scroll>
+                  // </L.Scroll>
                 }
 
                 {/* ===================로딩=================== */}
                 {
                   loading && <LoadingBar />
                 }
+</L.Scroll>
+</L.FlexCols>
 
-              </L.FlexCols>
             </L.FlexCols>
 
             {/* {!filter01 && 

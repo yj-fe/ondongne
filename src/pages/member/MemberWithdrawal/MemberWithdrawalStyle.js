@@ -159,5 +159,5 @@ export const ButtonDiv = styled.button`
   font-size: 18px;
   text-align: center;
   color: #FFFFFF;
-
+  margin: ${props => props._margin};
 `

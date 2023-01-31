@@ -23,7 +23,7 @@ function MainCategory() {
   }
 
   return (
-    <div>
+    <>
       <MainCategoryBody>
 
         <MainCategoryRow>
@@ -74,7 +74,7 @@ function MainCategory() {
         </MainCategoryRow>
 
       </MainCategoryBody>
-    </div>
+    </>
   )
 }
 

@@ -86,7 +86,7 @@ function ReviewPage() {
       floating={false}
       onBackClick={() => navigate(-1)}
     >
-      <L.Container >
+      <L.Container _cursor='default' >
 
 
         {/* 리뷰 없을 때 */}

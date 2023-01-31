@@ -29,7 +29,7 @@ function PrivacyTerms() {
       cart={false}
       bell={false}
     >
-      <L.Container>
+      <L.Container _cursor='default'>
         <L.Contents _height='calc(100vh - 68px)'>
           <Scroll _height='calc(100vh - 110px)'>
             <T.Text _size={14} _color='gray800'>{policy}</T.Text>

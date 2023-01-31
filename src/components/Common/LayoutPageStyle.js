@@ -30,6 +30,9 @@ export const Container = styled.div`
     }
   }
 `
+export const CursorDiv = styled.div`
+  cursor: default;
+`     
 export const Div = styled.div`
   /* margin-top: 60px; */
   display: flex;

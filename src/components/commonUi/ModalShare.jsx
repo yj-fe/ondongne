@@ -89,7 +89,9 @@ const params = {
   
   return (
     <div>
-      <ModalOutside>
+      <ModalOutside
+      onClick={ShowShareModal}  
+      >
         <ModalShareBody>
           <ModalDiv1>공유하기</ModalDiv1>
             <ModalDiv4>

@@ -70,12 +70,12 @@ function MainPage() {
           {isAuthenticated && <MainBestProduct />}
 
           {/* 우리동네 신규 입점 */}
-          <L.Contents _padding="20px 0px 20px 0px">
+          <L.Contents _cursor='default' _padding="20px 0px 20px 0px">
             <MainNewMarket />
           </L.Contents>
 
           {/* 우리동네 인기 추천 */}
-          <L.Contents _padding="20px 0px 20px 0px">
+          <L.Contents _cursor='default' _padding="20px 0px 20px 0px">
             <MainBestCollection />
           </L.Contents>
 

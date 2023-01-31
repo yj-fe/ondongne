@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 export const MainCategoryBody = styled.div`
+  cursor: default;
   padding: 20px 60px;
   gap: 12px;
   background: #FFFFFF;

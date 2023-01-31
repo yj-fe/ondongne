@@ -46,8 +46,8 @@ function MainLastChance() {
 
   return (
     <>
-      <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 20px'>
-        <T.Text _size={18} _weight={700} _color='black'>공동구매 마지막 찬스</T.Text>
+      <L.FlexRows _cursor='default' _content='space-between' _items='center' _padding='0px 20px 0px 20px'>
+        <T.Text  _size={18} _weight={700} _color='black'>공동구매 마지막 찬스</T.Text>
         <T.Text
           _size={14}
           _weight={500}

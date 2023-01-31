@@ -6,10 +6,11 @@ import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
 import Confirm from 'components/commonUi/Confirm';
 import { ArrowBottom, Cart, MinusB, PlusB } from 'components/commonUi/Icon';
+import { MarketTable } from 'components/commonUi/Table';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as I from 'components/commonUi/Input';
-import { ImgPer, ImgSize100, ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
+import { ImgPer, ImgSize100, ImgSizeLayout, ImgSizeH } from 'components/layout/Img/ImgSizeLayout';
 import { Badge, LayerTextButton } from 'components/commonUi/Button';
 import { getItemDetails } from 'service/item';
 import StoreLike from 'components/commonUi/StoreLike';
@@ -138,11 +139,10 @@ function DetailsPage(props) {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          <L.Contents _padding='0px 0px 60px 0px'>
+          <L.Contents _cursor='default' _padding='0px 0px 60px 0px'>
             <L.FlexCols >
               {
                 item.itemImage &&
-                // <ImgPer _bdr={0} src={IMGURL + item.itemImage} />
                 <ImgBanner _height='390px' _bdr={0} src={IMGURL + item.itemImage} />
               }
               <L.FlexCols >
@@ -325,40 +325,46 @@ function TabContent(props) {
   return [
 
     //=====================상세정보=====================
-    <div>
-      <L.FlexCols _padding={'0 0 16px 0'}>
-        <TypeTextStyle>
-          <TypeLabel>구매 형태</TypeLabel>
-          <TypeLabelInfo>{props.item.type === 'GROUP' ? '공동구매 상품' : '일반 상품'}</TypeLabelInfo>
-        </TypeTextStyle>
-        <TypeTextStyle>
-          <TypeLabel>카테고리</TypeLabel>
-          <TypeLabelInfo>{props.item.category}</TypeLabelInfo>
-        </TypeTextStyle>
-        <TypeTextStyle>
-          <TypeLabel>배달/주문금액</TypeLabel>
-          <TypeLabelInfo>배달비 {numberFormat(props.item.deliveryPrice)}원, 최소주문 {numberFormat(props.item.orderMinPrice)}원</TypeLabelInfo>
-        </TypeTextStyle>
-        <TypeTextStyle>
-          <TypeLabel>배달/픽업</TypeLabel>
-          <TypeLabelInfo>{props.item.recetiveType} 가능</TypeLabelInfo>
-        </TypeTextStyle>
-        {/* <CouponTextStyle>
-          <CouponLabel>쿠폰</CouponLabel>
-          <CouponLabelInfoDiv>
-            <CouponLabelInfo1>해당 상점에 쿠폰이 있습니다.</CouponLabelInfo1>
-            <CouponLabelInfo2>상점(스토어) {'>'} 소식을 확인해 주세요.</CouponLabelInfo2>
-          </CouponLabelInfoDiv>
-        </CouponTextStyle> */}
-      </L.FlexCols>
+    <>
+     <MarketTable>
+              <tbody>
+                <tr>
+                  <th >구매 형태</th>
+                  <td >{props.item.type === 'GROUP' ? '공동구매 상품' : '일반 상품'}</td>
+                </tr>
+                <tr>
+                  <th >카테고리</th>
+                  <td >{props.item.category}</td>
+                </tr>
+                <tr>
+                  <th >배달/주문금액</th>
+                  <td >배달비 {numberFormat(props.item.deliveryPrice)}원, 최소주문 {numberFormat(props.item.orderMinPrice)}원</td>
+                </tr>
+                <tr>
+                  <th >배달/픽업</th>
+                  <td >{props.item.recetiveType} 가능</td>
+                </tr>
+                {/* <tr>
+                  <th >쿠폰</th>
+                  <td >해당 상점에 쿠폰이 있습니다.</td>
+                </tr>
+                <tr>
+                  <th ></th>
+                  <td >상점(스토어) {'>'} 소식을 확인해 주세요.</td>
+                </tr> */}
+              </tbody>
+            </MarketTable>
+
+
       <Line />
+
       <L.FlexCols _padding={'16px 0 0 0'}>
         <TabInfoContentTitle>상품 정보</TabInfoContentTitle>
         <TabInfoContentText>
           {HTMLReactParser(props.item.description)}
         </TabInfoContentText>
       </L.FlexCols>
-    </div>,
+    </>,
 
     //=====================상품리뷰=====================
     <div>

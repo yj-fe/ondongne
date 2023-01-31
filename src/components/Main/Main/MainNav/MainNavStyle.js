@@ -37,6 +37,7 @@ export const ImgLogoBox = styled.div`
 	width: 100%;
 `;
 export const MainLocation = styled.div`
+	cursor: default;
 	display: flex;
 	align-items: center;
 	flex-direction: row;

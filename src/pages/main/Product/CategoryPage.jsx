@@ -95,7 +95,7 @@ function CategoryPage(props) {
         onBackClick={() => navigate('/')}
       >
         <L.Container >
-          <L.Contents _padding="0" >
+          <L.Contents _cursor='default' _padding="0" >
             <L.FlexCols _padding={0} _gap="0" >
 
               {/* =================== 메뉴 =================== */}

@@ -12,6 +12,7 @@ import { ModalFilter } from 'components/layout/Layout/MoreLayout';
 import { sortFormatter } from 'utils/utils';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function MarketDetailProduct({ id }) {
   const [filter, setFilter] = useState(false);
@@ -67,7 +68,7 @@ function MarketDetailProduct({ id }) {
   }, [fetching])
 
   return (
-    <div>
+    <CursorDiv>
       <L.Container>
         <L.Contents>
           <L.FlexCols _gap={16}>
@@ -111,7 +112,7 @@ function MarketDetailProduct({ id }) {
         </L.Contents>
       </L.Container>
       {filter && <ModalFilter CloseModal={() => setFilter(false)} data={sort} setData={setSort} />}
-    </div>
+    </CursorDiv>
   )
 }
 

@@ -12,8 +12,8 @@ function MainProductTest() {
   return (
     <div>
         <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 0px'>
-          <T.Text _size={18} _weight={700} _color='black'>우리동네 인기 상품</T.Text>
-          <T.Text _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
+          <T.Text _cursor='auto' _size={18} _weight={700} _color='black'>우리동네 인기 상품</T.Text>
+          <T.Text _cursor='default' _size={14} _weight={500} _color='blue'>전체 보기</T.Text>
         </L.FlexRows>
 
         <MainBestCouponContent>

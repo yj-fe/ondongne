@@ -52,6 +52,7 @@ export const ReciptTable = styled.table`
 export const MarketTable = styled.table`
     width: 100%;
     tr {
+        font-size: 14px;
         padding: 2px 0;
         line-height: 1.5;
         font-weight: 400;
@@ -96,7 +97,7 @@ export const MarketTable = styled.table`
             border-top: 32px;
             padding-top: 16px;
             th{
-                font-size: 15px;
+                font-size: 13px;
                 font-weight: 500;
                 color: #424242;
             };

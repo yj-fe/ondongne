@@ -16,6 +16,7 @@ import { postInquiry, noticeList } from 'service/border';
 import { useSelector } from 'react-redux';
 import Layout from 'components/layout/Layout/Layout';
 import dayjs from 'dayjs';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 
 
@@ -52,7 +53,7 @@ function InquiryPage() {
         floating={false}
         onBackClick={() => navigate(-1)}
       >
-        <L.Container _padding="0px 0px 8px" >
+        <L.Container  _padding="0px 0px 8px" >
           <L.Contents _padding="0" _height='calc(100vh - 68px)'>
             {/* =================== Tab버튼 ( 문의하기 / 문의내역 ) =================== */}
             <TabButtonStyle>
@@ -157,9 +158,9 @@ function TabInquiry({ detailTab, tabHandler, list }) {
   return [
     //=====================1. Tab 문의하기=====================
 
-    <div>
-      <Scroll _height>
-        <L.FlexCols _gap={24} _padding="8px 20px">
+    <CursorDiv>
+      <Scroll _height='calc(100vh - 110px)' >
+        <L.FlexCols _gap={24} _padding="8px 20px 100px">
           <L.FlexCols>
             <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
             <InfoBoxDiv onClick={() => setShow((s) => !s)}>
@@ -210,9 +211,11 @@ function TabInquiry({ detailTab, tabHandler, list }) {
 
         </L.FlexCols>
       </Scroll>
-      <L.BottomColsW >
+
+
+      <L.BottomColsW _width='728px' _padding='0px 16px'>
         <ButtonDiv
-          _margin='0px 0px 24px'
+          _margin='0px 0px 16px 0px'
           type="button"
           btn={btn}
           disabled={!btn}
@@ -231,9 +234,9 @@ function TabInquiry({ detailTab, tabHandler, list }) {
         />
       }
 
-    </div>,
+    </CursorDiv>,
     //=====================2. Tab 문의내역=====================
-    <div>
+    <CursorDiv>
       <L.FlexCols _gap='0px' _padding='0px 20px'>
 
         {
@@ -261,7 +264,7 @@ function TabInquiry({ detailTab, tabHandler, list }) {
           ))
         }
       </L.FlexCols>
-    </div>
+    </CursorDiv>
   ][detailTab]
 }
 

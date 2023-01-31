@@ -17,7 +17,7 @@ function CustomerService() {
           bell={false}
           onBackClick={() => navigate(-1)}
       >
-        <L.Container _padding="0px 0px 8px">
+        <L.Container _cursor='default' _padding="0px 0px 8px">
           <L.Contents  _padding='0px'>
             <L.FlexCols _gap='0px' _padding="8px 20px">
               <Link to='/service/faq'>

@@ -43,6 +43,7 @@ function NoticeDetailsPage(props) {
       >
         <L.Container
          _padding="0px 0px 8px" 
+         _cursor='default'
         >
           <L.Contents   _height='calc(100vh - 60px)' _padding="0px">
             <L.FlexCols _gap={20} _padding="0px">

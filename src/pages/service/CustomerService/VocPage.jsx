@@ -13,6 +13,8 @@ import { ToggleS } from 'components/Login/Password/ToggleDetail/ToggleDetailStyl
 import SimpleConfirm from './../../../components/commonUi/SimpleConfirm';
 import { postVoc } from 'service/border';
 import { useSelector } from 'react-redux';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
+import { Scroll } from './../../../components/Login/Password/ToggleDetail/ToggleDetailStyle';
 
 
 function VocPage() {
@@ -96,7 +98,7 @@ function VocPage() {
   }, [data])
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
         title="Voc 의견"
         cart={false}
@@ -106,7 +108,9 @@ function VocPage() {
       >
         <L.Container _padding="0px 0px 8px" >
           <L.Contents _height='calc(100vh - 68px)'>
-            <L.FlexCols _gap={24} _padding="0px">
+            <Scroll _height='calc(100vh - 83px)'>
+            <L.FlexCols _gap={24} _padding="0px 0px 100px">
+
               <L.FlexCols>
                 <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
                 <InfoBoxDiv onClick={() => setShow((s) => !s)}>
@@ -158,16 +162,17 @@ function VocPage() {
               </L.FlexRows>
 
             </L.FlexCols>
-
-            <L.BottomCols>
+            </Scroll>
+            <L.BottomColsW _width='728px' _padding='0px 16px'>
               <ButtonDiv
                 type="button"
+                _margin='0px 0px 16px 0px'
                 btn={btn}
                 disabled={!btn}
                 onClick={handleSubmit}
               >의견 보내기
               </ButtonDiv>
-            </L.BottomCols>
+            </L.BottomColsW>
 
           </L.Contents>
         </L.Container>
@@ -181,7 +186,7 @@ function VocPage() {
           onConfirmClick={confirm.onConfirmClick}
         />
       }
-    </div>
+    </CursorDiv>
   )
 }
 

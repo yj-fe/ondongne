@@ -56,7 +56,7 @@ function MarketDetail() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          <L.Contents _padding="0">
+          <L.Contents _cursor='default' _padding="0">
 
             {/* <ImgPer src={item.banner ? STOREURL + item.banner : MarketImg} /> */}
             <ImgBanner _height='390px' src={item.banner ? STOREURL + item.banner : MarketImg} />
