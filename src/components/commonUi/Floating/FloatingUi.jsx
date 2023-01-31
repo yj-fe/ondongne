@@ -3,8 +3,7 @@ import { Floating, FloatingPush } from 'components/commonUi/Icon'
 import FloatingToggle from "./FloatingToggle";
 import styled from "styled-components";
 import { useLocation } from 'react-router-dom';
-import { right } from 'assets/main/right.svg';
-
+import "./Floating.css";
 
 const FloatingDiv = styled.div`
 	bottom: ${props => props._bottom};
@@ -27,8 +26,11 @@ const FloatingUi = () => {
             _bottom={location.pathname === "/" ? "70px" : "15px"}
             onClick={() => setFloating(!floating)}
         >
-            {floating && <FloatingToggle />}
-            {floating ? <FloatingPush /> : <Floating />}
+            {floating && <FloatingToggle  />}
+            {floating 
+                ? <FloatingPush /> 
+                : <Floating />
+            }
         </FloatingDiv>
     )
 }

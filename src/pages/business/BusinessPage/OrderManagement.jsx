@@ -89,7 +89,7 @@ function OrderManagement() {
               {
                 orderData.length === 0 &&
                 <L.FlexRows _height='calc(100vh - 68px)' _content='center' _item='center'>
-                  <T.Text _align='center' _size={15} _weight={300} _color='gray600'><p>주문 내역이 없습니다.</p><p>내 주변 마켓을 이용해보세요!</p></T.Text>
+                  <T.Text _align='center' _size={15} _weight={300} _color='gray600'><p>주문 내역이 없습니다.</p></T.Text>
                 </L.FlexRows>
               }
 

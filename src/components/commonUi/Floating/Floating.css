@@ -1,0 +1,4 @@
+.btn:hover {
+  transform: rotateY('180deg');
+  transition: all 0.2s linear;
+}

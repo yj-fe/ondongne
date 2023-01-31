@@ -9,16 +9,16 @@ import { ReactComponent as Naver } from "assets/login/naver.svg";
 import { ReactComponent as Kakao } from "assets/login/kakao.svg";
 import { ReactComponent as Google } from "assets/login/google.svg";
 import { ReactComponent as Apple } from "assets/login/apple.svg";
-import { ReactComponent as Arrow } from "assets/login/Arrow-Right.svg";
-import { LogoImg, InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, LoginFooter, LoginText, Button, GapContainer, SignupText, ArrowStyle } from "./LoginPageStyle";
+import { LogoImg, InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, Button, GapContainer, ArrowStyle } from "./LoginPageStyle";
 import Alert from 'components/commonUi/Alert';
 import Confirm from 'components/commonUi/Confirm';
 import { login } from "service/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "store/slices/auth";
 import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 import { S } from 'components/layout/Layout/LayoutStyle'
-import { Logo } from "components/commonUi/Icon";
+import { ArrowRighteight, Logo } from "components/commonUi/Icon";
 import jwtDecode from "jwt-decode";
 
 
@@ -141,6 +141,7 @@ function LoginPage() {
 
       <S.Main as="main" _bc='#fff'>
         <L.ContentsMedia _padding='80px 40px 0px 40px ' _paddingm='60px 20px'>
+            <L.Scroll>
           <L.FlexColsMedia _gap={80} _gapm={60}>
             <L.FlexRows _content='center' >
               <Logo />
@@ -236,18 +237,19 @@ function LoginPage() {
               />
             }
 
-            <LoginFooter>
-              <LoginText>아직 온동네 회원이 아니신가요?</LoginText>
+            <L.FlexRows _gap='0px' _content='center'>
+              <T.Text _size={14} _color='gray800'>아직 온동네 회원이 아니신가요?</T.Text>
               <Link to="/login/signup">
                 <Button>
-                  <SignupText>회원가입</SignupText>
+                  <T.Text _weight={600} _size={14} _color='gray800'>회원가입</T.Text>
                   <ArrowStyle>
-                    <Arrow />
+                    <ArrowRighteight/>
                   </ArrowStyle>
                 </Button>
               </Link>
-            </LoginFooter>
+            </L.FlexRows>
           </L.FlexColsMedia>
+            </L.Scroll>
         </L.ContentsMedia>
       </S.Main>
     </S.Wrapper>
