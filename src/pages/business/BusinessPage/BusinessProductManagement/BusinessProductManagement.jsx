@@ -95,16 +95,16 @@ function BusinessProductManagement() {
 
               <L.Contents _padding='0px' _gap={20}>
                 {/* <L.FlexRowsWrapBPM _padding={0}> */}
-                <L.Grid>
                   {
                     items && items.length === 0 &&
                     <L.Contents _padding='50px 0px' _height='calc(100vh - 68px)'>
                       <L.NoneDataContainer>
-                        <T.Text _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
-                        <T.Text _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
+                        <T.Text _align='center' _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
+                        <T.Text _align='center' _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
                       </L.NoneDataContainer>
                     </L.Contents>
                   }
+                      <L.Grid>
                   {
                     items && items.length > 0 &&
                     items.map((item, index) => (
@@ -140,7 +140,7 @@ function BusinessProductManagement() {
 
 
 // 정렬 모달
-export function ModalFilter({ type, handler, closeSelector }) {
+export function ModalFilter({ type, handler, closeSelector, PropsModal }) {
 
   const [data, setData] = useState([
     {
@@ -182,7 +182,9 @@ export function ModalFilter({ type, handler, closeSelector }) {
   }, []);
   return (
     <div>
-      <ModalOutside>
+      <ModalOutside
+        onClick={PropsModal}
+      >
         <ModalBody>
           <ModalDiv1>정렬</ModalDiv1>
           <ModalDiv2>

@@ -230,7 +230,9 @@ function BusinessAgreementModal({ closeModel }) {
   }, [servicerequestSave, privrequestSave])
 
   return (
-    <ModalOutside>
+    <ModalOutside
+    onClick={closeModel}
+    >
       {
         service === null &&
         <ModalBody>
