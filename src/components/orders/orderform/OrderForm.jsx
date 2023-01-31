@@ -241,6 +241,7 @@ const OrderForm = ({ data }) => {
                         >{orderData.recetiveType}(으)로 주문</B.LayerOptionButton>
                         <LayerSelect
                             active={orderSelect}
+                            close={true}
                             selected={orderData.recetiveType}
                             name="recetiveType"
                             selectName="주문 방식"
@@ -343,6 +344,7 @@ const OrderForm = ({ data }) => {
                     </L.FlexCols>
                     <LayerSelect
                         active={paySelect}
+                        close={true}
                         selected={orderData.payType}
                         name="payType"
                         selectName="결제 수단"
