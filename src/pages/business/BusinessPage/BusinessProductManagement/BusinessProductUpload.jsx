@@ -252,7 +252,8 @@ function BusinessProductUpload() {
                 <L.FlexRows _gap={16}>
                   <TitleInfoDiv onClick={() => setSelect(!select)}>
                     <TitleInfo>
-                      {data.categories?.length > 0 ? data.categories.join(', ') : '카테고리 선택'}
+                      {data.categories ?? '카테고리 선택'}
+                      {/* {data.categories?.length > 0 ? data.categories.join(', ') : '카테고리 선택'} */}
                     </TitleInfo>
                     <RightStyle
                     ><Down /></RightStyle>
@@ -262,6 +263,7 @@ function BusinessProductUpload() {
                 {
                   select &&
                   <CategorySelect
+                    close={() => setSelect(false)}
                     isOpen={select}
                     data={data}
                     dataHanler={setData}

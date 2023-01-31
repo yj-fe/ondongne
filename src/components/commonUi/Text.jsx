@@ -41,6 +41,12 @@ export const TextMedia = styled.p`
     @media screen and (max-width : 675px) {
         width: 170px;
     }
+    @media screen and (max-width : 360px) {
+        width: 150px;
+    }
+    @media screen and (max-width : 340px) {
+        width: 130px;
+    }
 `;
 
 export const SoldoutText = styled.p`

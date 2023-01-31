@@ -28,7 +28,7 @@ export const Input = styled.input`
 	/* margin: 40px 40px 0px 40px; */
 	font-weight: 400;
 	font-size: 16px;
-
+	-webkit-appearance: none;
 	color: #bdbdbd;
 	&:focus {
 		outline: none;
@@ -190,12 +190,12 @@ export const LoginFooter = styled.div`
 		justify-content: center;
 	}
 `;
-export const LoginText = styled.p`
-	width: 180px;
-	font-weight: 400;
-	font-size: 14px;
-	color: #424242;
-`;
+// export const LoginText = styled.p`
+// 	width: 180px;
+// 	font-weight: 400;
+// 	font-size: 14px;
+// 	color: #424242;
+// `;
 export const Button = styled.button`
 	display: flex;
 	flex-direction: row;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-function CategorySelect({ isOpen, data, dataHanler, errorHandler }) {
+function CategorySelect({ isOpen, data, dataHanler, errorHandler, close }) {
 
     const [categories, setCategories] = useState([
         { "id": 0, "name": "야채/과일", "checked": false },
@@ -16,14 +16,19 @@ function CategorySelect({ isOpen, data, dataHanler, errorHandler }) {
         { "id": 9, "name": "기타", "checked": false }
     ]);
 
-    const categoryHandler = (id, checked) => {
 
-        if (!checked) {
-            const count = categories.filter(category => category.checked === true)
-            if (count.length == 5) {
-                return errorHandler('최대 5개까지 추가 가능합니다.');
-            }
-        }
+
+    const categoryHandler = ( id, checked) => {
+
+
+
+        // if (!checked) {
+        //     const count = categories.filter(category => category.checked === true)
+        //     // if (count.length == 5) {
+        //     //     return errorHandler('최대 5개까지 추가 가능합니다.');
+        //     // }
+        //     close();
+        // }
 
         setCategories(
             categories.map(category =>
@@ -49,6 +54,7 @@ function CategorySelect({ isOpen, data, dataHanler, errorHandler }) {
                     data.categories.includes(category.name) ? { ...category, checked: true } : category
                 )
             )
+            close();
         }
     }, [])
 

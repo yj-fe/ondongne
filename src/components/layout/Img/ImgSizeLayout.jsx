@@ -26,11 +26,11 @@ export const ImgSizeH = styled.img`
         width: 167px;
         height: 167px;
     }
-    /* @media screen and (max-width: 372px){
+    @media screen and (max-width: 360px){
         width: 150px;
         height: 150px;
-    } */
-    @media screen and (max-width: 336px){
+    }
+    @media screen and (max-width: 340px){
         width: 130px;
         height: 130px;
     }
@@ -126,8 +126,26 @@ export const AbsoluteDivGrid = styled.div`
     @media screen and (max-width:400px) {
         right: 2%;
     }
+    @media screen and (max-width:375px) {
+        right: -2%;
+    }
+    @media screen and (max-width:360px) {
+        right: 4%;
+    }
+    @media screen and (max-width:350px) {
+        right: -1%;
+    }
+    @media screen and (max-width:340px) {
+        right: 10%;
+    }
     @media screen and (max-width:336px) {
-        right: -3%;
+        right: 6%;
+    }
+    @media screen and (max-width:329px) {
+        right: 3%;
+    }
+    @media screen and (max-width:315px) {
+        right: 1%;
     }
 `;
 export const AbsoluteDivS = styled.div`

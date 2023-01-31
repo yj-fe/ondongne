@@ -23,6 +23,10 @@ const ContentDate = styled.div`
   @media screen  and (max-width:450px){
     width: 150px;
   }
+  @media screen  and (max-width:340px){
+    width: 129px;
+    font-size: 11px;
+  }
   @media screen  and (max-width:336px){
     width: 130px;
   }
