@@ -5,7 +5,15 @@ const urls = {
 	bestItem: "/item/best/list",
 	newstore: "/store/new/list",
 	mystore: "/mystore/best/list",
+	banner: "/banner",
 };
+
+/* ==============================
+   배너 목록
+============================== */
+export function getBanners() {
+	return client.get(urls.banner);
+}
 
 /* ==============================
    공동 구매 마지막 찬스 상품 리스트

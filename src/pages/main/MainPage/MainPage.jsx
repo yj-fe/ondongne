@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// import BannerImg from "assets/Img.png";
-import BannerImg from "assets/images/mainbanner.png";
 import MainBestCoupon from "components/Main/Main/MainBestCoupon/MainBestCoupon";
 import MainLastChance from "components/Main/Main/MainLastChance/MainLastChance";
 import MainBestProduct from "components/Main/Main/MainBestProduct/MainBestProduct";
@@ -18,7 +16,7 @@ import Alert from "components/commonUi/Alert";
 import { useNavigate } from "react-router-dom";
 import LayoutMain from "components/layout/Layout/LayoutMain";
 import MainCoachmark from "components/coachmark/MainCoachmark";
-import { ImgBanner } from "components/Buisness/BusinessManagement/BusinessManagementTabStyle";
+import MainBanner from "components/Main/Main/MainBanner/MainBanner";
 
 function MainPage() {
   const navigate = useNavigate();
@@ -51,8 +49,7 @@ function MainPage() {
       <LayoutMain>
         <L.Container _padding="0px">
           <L.Container _padding="0px" _gap="0px">
-            <ImgBanner _height='180px' _margint="0px" src={BannerImg}></ImgBanner>
-            {/* <Img _margint="0px" src={BannerImg}></Img> */}
+            <MainBanner />
             <MainCategory />
           </L.Container>
 
