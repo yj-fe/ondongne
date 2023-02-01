@@ -7,13 +7,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import Layout from 'components/layout/Layout/Layout';
 import { ArrowRightC } from 'components/commonUi/Icon';
 import Confirm from 'components/commonUi/Confirm';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
+import { useSelector } from 'react-redux';
+import { getCouponList } from 'service/coupon';
 
 function MyCoupon() {
   const navigate = useNavigate()
   const [detailTab, setDetailTab] = useState(0)
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
         title="받은 쿠폰함"
         cart={false}
@@ -29,12 +32,14 @@ function MyCoupon() {
             <TabButtonStyle>
               <DetailTabInfo
                 onClick={() => { setDetailTab(0); }}
+                width='50%'
                 infocolor={detailTab === 0}
               >
                 사용 가능
               </DetailTabInfo>
               <DetailTabReview
                 onClick={() => { setDetailTab(1); }}
+                width='50%'
                 reviewcolor={detailTab === 1}
               >
                 지난 쿠폰
@@ -50,17 +55,24 @@ function MyCoupon() {
           </L.Contents>
         </L.Container>
 
-
-
       </Layout>
-
-    </div>
+    </CursorDiv>
   )
 }
 
 
+
+
+
 function TabCoupon(props) {
+  const navigate = useNavigate();
   const [confirm, setConfirm] = useState(null)
+// 사용가능 쿠폰
+  const [couponData, setCouponData] = useState([true]);
+  // 지난쿠폰
+  const [usedCouponData, setusedCouponData] = useState([true]);
+  const auth = useSelector(state => state.auth);
+
 
   const openConfirm = () => {
     return setConfirm({
@@ -71,22 +83,40 @@ function TabCoupon(props) {
       onCancelClick: () => setConfirm(null),
     })
   }
+
+
+  const loadData = async () => {
+    const response = await getCouponList(auth.storeId);
+
+    if (response && response.data.data) {
+      setCouponData(response.data.data);
+    } else {
+      navigate("/", { replace: true, state: { error: "잘못된 접근입니다." } })
+    }
+  }
+
+
   return [
 
     //=====================1. Tab 1 사용 가능=====================
-    <div>
+    <>
 
 {/* =================== 쿠폰 없을 때 =================== */}
-        {/* <L.Contents _padding="80px 20px" >
-          <L.FlexCols _padding={0} _gap={4}>
-            <T.Text _weight={300} _size={15} _color="gray600" _align='center'>보유하신 쿠폰이 없습니다.</T.Text>
-          </L.FlexCols>
-        </L.Contents> */}
+      {
+        couponData.length === 0 &&
+        <ListEmpty desc='보유하신 쿠폰이 없습니다.'/>
+      }
 {/* =================== 쿠폰 있을 때 =================== */}
+      {
+        couponData && couponData.length > 0 &&
         <L.Contents _padding="24px 20px" _gap={20}>
           <L.FlexCols>
 {/* 쿠폰 1 */}
-            <C.Borderbox>
+            <CouponListCard 
+              couponData
+              openConfirm={openConfirm}
+            />
+            {/* <C.Borderbox>
               <C.Contentbox >
                   <L.FlexCols _gap={12}>
                     <L.FlexCols _gap={0}>
@@ -105,7 +135,7 @@ function TabCoupon(props) {
                 쿠폰사용
                 <ArrowRightC/>
               </C.CouponUsebox>
-            </C.Borderbox>
+            </C.Borderbox> */}
 {/* 쿠폰 2 */}
             <C.Borderbox>
               <C.Contentbox >
@@ -150,7 +180,7 @@ function TabCoupon(props) {
             </C.Borderbox>
           </L.FlexCols>
         </L.Contents>
-
+      }
         {
           confirm &&
           <Confirm 
@@ -161,10 +191,17 @@ function TabCoupon(props) {
             onCancelClick={confirm.onCancelClick}
           />
         }
-    </div>,
+    </>,
 
     //=====================2. Tab 2 지난 쿠폰=====================
-    <div>
+    <>
+        {
+          usedCouponData.length === 0 &&
+          <ListEmpty desc='지난 쿠폰이 없습니다.'/>
+        }
+
+        {
+          usedCouponData && usedCouponData.length > 0 &&
         <L.Contents _padding="24px 20px" _gap={20}>
           <L.FlexCols>
 {/* 쿠폰 1 */}
@@ -223,8 +260,57 @@ function TabCoupon(props) {
             </C.Borderbox>
           </L.FlexCols>
         </L.Contents>
-    </div>,
+        }
+    </>,
   ][props.detailTab]
+}
+
+
+// 쿠폰 없을 떼
+export const ListEmpty = ({desc}) => {
+  return (
+    <L.Contents _padding="80px 20px" >
+    <L.FlexCols _padding={0} _gap={4}>
+      <T.Text _weight={300} _size={15} _color="gray600" _align='center'>{desc}</T.Text>
+    </L.FlexCols>
+    </L.Contents>
+  )
+}
+
+// 쿠폰 있을 떼
+export const CouponListCard = ({openConfirm, item, couponData}) => {
+  return (
+    <C.Borderbox>
+      <C.Contentbox >
+          <L.FlexCols _gap={12}>
+            <L.FlexCols _gap={0}>
+              {/* <T.Text _size={15} _weight={500} _color='gray600'>{item.storeId}</T.Text> */}
+              {/* <T.Text _size={18} _weight={600} _color='gray900'>{item.couponName}</T.Text> */}
+            </L.FlexCols>
+            <L.FlexCols>
+              <T.Text  ext _size={13} _weight={400} _color='gray500'>
+                {/* <p>{item.date} 까지</p> */}
+                <p>방문결제 시 현장 할인</p>
+              </T.Text>
+            </L.FlexCols>
+          </L.FlexCols>
+      </C.Contentbox>
+
+  { couponData ?
+      <C.CouponUsebox
+        _pdleft='5px'
+        onClick={openConfirm}
+      >
+        쿠폰사용
+      <ArrowRightC/>
+    </C.CouponUsebox>
+    :
+    <C.CouponUsebox _color='#9E9E9E' _bg='#F5F5F5'>
+      사용 완료
+    </C.CouponUsebox>
+  }
+  </C.Borderbox>
+  )
 }
 
 

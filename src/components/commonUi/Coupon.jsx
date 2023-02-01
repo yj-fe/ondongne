@@ -47,5 +47,9 @@ export const CouponUsebox = styled.div`
   flex-direction: ${props => props._dir || 'row'};
   align-items: center;
   gap: ${props => props._gap || 0}px;
+  padding-left: ${props => props._pdleft};
+  @media screen and (max-width:354px) {
+    font-size: 13px;
+  }
 `;
 

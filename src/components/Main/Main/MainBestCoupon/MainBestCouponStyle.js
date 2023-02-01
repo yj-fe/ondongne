@@ -28,15 +28,6 @@ export const TopAll = styled.p`
   line-height: 20px;
   color: #1E88E5;
 `
-export const MainBestCouponContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding-top: 32px;
-  gap: 16px;
-  width: 688px;
-  height: auto;
-`
 export const ContentProduct = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,51 +61,4 @@ export const ContentCouponDiv = styled.div`
   width: 142px;
   height: 22px;
 `
-export const ContentCoupon = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 2px;
-  gap: 4px;
-  width: 32px;
-  height: 22px;
-  background: #E1F3F2;
-  border-radius: 2px;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 18px;
-  color: #0E907F;
-`
-export const ContentDrive = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 2px;
-  gap: 4px;
-  width: 51px;
-  height: 22px;
-  background: #F5F5F5;
-  border-radius: 2px;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 18px;
-  color: #424242;
-`
-export const ContentPick = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 2px;
-  gap: 4px;
-  width: 51px;
-  height: 22px;
-  background: #F5F5F5;
-  border-radius: 2px;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 18px;
-  color: #424242;
-`
+

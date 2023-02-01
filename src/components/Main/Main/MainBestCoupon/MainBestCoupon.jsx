@@ -4,11 +4,12 @@ import newmarket from 'assets/data/newmarket'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { getLastGroupItemList } from 'service/main';
-import {MainBestCouponBody,MainBestCouponContent,MainBestCouponTop,TopAll,TopTitle,ContentCoupon,ContentCouponDiv,ContentDrive,ContentImg,ContentMarket,ContentPick,ContentProduct} from './MainBestCouponStyle'
+import {ContentCouponDiv,ContentImg,ContentMarket,ContentProduct} from './MainBestCouponStyle'
 import { CursorDiv } from 'components/Common/LayoutPageStyle';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Badge } from 'components/commonUi/Button';
 
 function MainBestCoupon() {
   let [item] = useState(newmarket)
@@ -32,7 +33,7 @@ function MainBestCoupon() {
 
   const router = () => {
     navigate(
-      "/collections",
+      "/",
       {
         state:
         {
@@ -64,34 +65,22 @@ function MainBestCoupon() {
         </L.FlexRows>
 
         <L.FlexRowsCP>
-          {/* <MainBestCouponContent> */}
           {
             loading && <LoadingBar />
           }
           {
             !loading &&
             list.length > 0 &&
-            <L.GridContainer>
+            <L.GridContainer _marginr='0px'>
               {
-                list.map((item, index) => (
-                  <div
-                    key={index}
-                    onClick={() => navigate(``)}
-                  >
-                    <BestCouponCard item={item} />
-                  </div>
-                ))
-              }
+                item.map((a, i)=>{
+                  return(
+                    <BestCouponCard item={item[i]} i={i}/>
+                    )
+                  })
+                }
             </L.GridContainer>
           }
-            {/* {
-              item.map((a, i)=>{
-                return(
-                  <BestCouponCard item={item[i]} i={i}/>
-                  )
-                })
-              } */}
-          {/* </MainBestCouponContent> */}
         </L.FlexRowsCP>
 
 
@@ -107,9 +96,9 @@ function BestCouponCard(props){
       <ContentImg src={props.item.img}/>
       <ContentMarket>{props.item.market}</ContentMarket>
       <ContentCouponDiv>
-        <ContentCoupon>쿠폰</ContentCoupon>
-        <ContentDrive>배달가능</ContentDrive>
-        <ContentPick>픽업가능</ContentPick>
+        <Badge _bg='green50' _color='green600'>쿠폰</Badge>
+        <Badge>배달가능</Badge>
+        <Badge>픽업가능</Badge>
       </ContentCouponDiv>
     </ContentProduct>
   </div>

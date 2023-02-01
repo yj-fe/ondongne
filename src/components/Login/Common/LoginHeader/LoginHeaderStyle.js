@@ -24,11 +24,11 @@ export const Inner = styled.div`
 
 export const UtilBtn = styled.div`
 	display: flex;
-	justify-content: center;
+	justify-content: left;
 	align-items: center;
-	width: 24px;
+	width: 50px;
 	height: 24px;
-	padding: 0;
+	padding: 0px 10px;
 `;
 
 export const LoginNavTitle = styled.div`

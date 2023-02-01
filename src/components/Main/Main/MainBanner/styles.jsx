@@ -28,7 +28,7 @@ export const CurrentNumberBox = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2px 12px;
-  z-index: 9999;
+  z-index: 999;
   position: absolute;
   width: 43px;
   height: 22px;
