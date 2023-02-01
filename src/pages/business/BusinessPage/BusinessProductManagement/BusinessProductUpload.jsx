@@ -145,7 +145,6 @@ function BusinessProductUpload() {
         return isValidtion(false);
       }
     }
-
     return isValidtion(true);
   }, [data])
 
@@ -153,6 +152,7 @@ function BusinessProductUpload() {
     if (auth.isAuthenticated && id) getItem();
   }, [auth, id])
 
+  console.log(data.price);
   console.log(data.categories);
   console.log(data.categories.length);
 
@@ -298,8 +298,9 @@ function BusinessProductUpload() {
                       name='price'
                       placeholder='0'
                       type='number'
-                      value={numberFormat(data.price)}
-                      onChange={e => setData({ ...data, price: numberFormatter(e.target.value) })}
+                      value={data.price}
+                      // onChange={e => setData({ ...data, price: numberFormat(e.target.value) })}
+                      onChange={e => setData({ ...data, price: (e.target.value) })}
                     />
                     <span>￦</span>
                   </TitleInfoDiv>
@@ -312,7 +313,7 @@ function BusinessProductUpload() {
                       name='salePercent'
                       placeholder='0'
                       value={data.salePercent}
-                      onChange={e => setData({ ...data, salePercent: numberFormatter(e.target.value) })}
+                      onChange={e => setData({ ...data, salePercent: e.target.value })}
                     />
                     <span>%</span>
                   </TitleInfoDiv>

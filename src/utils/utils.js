@@ -49,11 +49,12 @@ export const numberFormatter = (value) => {
 
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
-
 // 숫자 쉼표 처리
 export const numberFormat = (value) => {
 	if(!value) return
-	// return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	// return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+	// return value.toLocaleString('en-US')
 	// return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 };
 

@@ -3,6 +3,7 @@ import CoachModalSlide from "components/layout/PopUp/CoachModalSlide";
 import { useCookies } from "react-cookie";
 import moment from "moment";
 import PopUp from "components/layout/PopUp/PopUp";
+import { CursorDiv } from "components/Common/LayoutPageStyle";
 
 const COOKIE_COACH_KEY = "coachNeverWatch";
 const COOKIE_POPUP_KEY = "popupNeverWatch";
@@ -64,7 +65,7 @@ function MainCoachmark() {
   // }, [cookiesCoach, cookiesPopup, cookiesGuide]);
 
   return (
-    <>
+    <CursorDiv>
       {depth01 && (
         <CoachModalSlide
           closeModal={() => setDepth01(false)}
@@ -83,7 +84,7 @@ function MainCoachmark() {
           neverWatch={() => eventhandler(7, 3)}
         />
       )} */}
-    </>
+    </CursorDiv>
   );
 }
 
