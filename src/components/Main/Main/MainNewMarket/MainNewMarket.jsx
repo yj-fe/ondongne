@@ -55,6 +55,7 @@ function MainNewMarket() {
           전체 보기
         </T.Text>
       </L.FlexRows>
+      
       <L.FlexRowsCP>
         {
           loading && <LoadingBar />

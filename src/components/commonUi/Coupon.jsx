@@ -3,6 +3,7 @@ import styled from "styled-components";
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { ArrowRightC } from './Icon';
+import dayjs from 'dayjs';
 
 export const CouponListCard = ({openConfirm, item, couponData}) => {
   return (
@@ -10,13 +11,13 @@ export const CouponListCard = ({openConfirm, item, couponData}) => {
       <Contentbox >
           <L.FlexCols _gap={12}>
             <L.FlexCols _gap={0}>
-              {/* <T.Text _size={15} _weight={500} _color='gray600'>{item.title}</T.Text> */}
-              {/* <T.Text _size={18} _weight={600} _color='gray900'>{item.couponName}</T.Text> */}
+              <T.Text _size={15} _weight={500} _color='gray600'>{item.title}</T.Text>
+              <T.Text _size={18} _weight={600} _color='gray900'>{item.couponName}</T.Text>
             </L.FlexCols>
             <L.FlexCols>
               <T.Text  ext _size={13} _weight={400} _color='gray500'>
-                {/* <p>{item.date} 까지</p> */}
-                {/* <p>{item.contents}</p> */}
+                <p>{dayjs(item.date).format('YY.MM.DD')} 까지</p>
+                <p>{item.contents}</p>
               </T.Text>
             </L.FlexCols>
           </L.FlexCols>

@@ -12,6 +12,9 @@ import { useSelector } from 'react-redux';
 import { getCouponList } from 'service/coupon';
 import { CouponListCard } from './../../components/commonUi/Coupon';
 
+
+
+
 function MyCoupon() {
   const navigate = useNavigate()
   const [detailTab, setDetailTab] = useState(0)
@@ -74,17 +77,57 @@ function TabCoupon(props) {
   const [usedCouponData, setusedCouponData] = useState([true]);
   const auth = useSelector(state => state.auth);
 
+  // 임시데이터
+  let couponList = {
+    "message": "success",
+    "data": [
+      { 
+        "memberId": '',
+        "storeId": "",
+        "title": "아재의 과일",
+        "couponName": "고객감사 할인 쿠폰",
+        "date": "2023-01-04T21:08:35.000+00:00",
+        "contents": "방문결제 시 현장 할인",
+      },
+      { 
+        "memberId": '',
+        "storeId": "",
+        "title": "김포 정육",
+        "couponName": "삼겹살 10% 할인",
+        "date": "2023-01-04T21:08:35.000+00:00",
+        "contents": "방문결제 시 현장 할인",
+      },
+      { 
+        "memberId": '',
+        "storeId": "",
+        "title": "길동 마트",
+        "couponName": "1+1 행사 이벤트",
+        "date": "2023-01-04T21:08:35.000+00:00",
+        "contents": "방문결제 시 현장 할인",
+      },
+    ]
+  }
+  const data = couponList.data;
+
+
 
   const openConfirm = () => {
     return setConfirm({
       contents: "쿠폰은 한번만 사용 가능합니다.\n사용하시겠습니까?",
       confirmText: "쿠폰 사용",
       cancelText: "취소",
-      onConfirmClick: () => setConfirm(null),
+      onConfirmClick: () => {
+        handleUse();
+        setConfirm(null)
+      },
       onCancelClick: () => setConfirm(null),
     })
   }
-
+// 쿠폰 사용 핸들러
+  const handleUse = () => {
+    // 지난쿠폰탭으로 이동
+    // 사용 가능탭에서 삭제
+  }
 
   const loadData = async () => {
     const response = await getCouponList(auth.storeId);
@@ -110,56 +153,23 @@ function TabCoupon(props) {
 {/* =================== 쿠폰 있을 때 =================== */}
       {
         couponData && couponData.length > 0 &&
+
         <L.Contents _padding="24px 20px" _gap={20}>
-          <L.FlexCols>
-{/* 쿠폰 1 */}
-            <C.CouponListCard 
-              couponData
-              openConfirm={openConfirm}
-            />
-{/* 쿠폰 2 */}
-            <C.Borderbox>
-              <C.Contentbox >
-                  <L.FlexCols _gap={12}>
-                    <L.FlexCols _gap={0}>
-                      <T.Text _size={15} _weight={500} _color='gray600'>김포 정육</T.Text>
-                      <T.Text _size={18} _weight={600} _color='gray900'>삼겹살 10% 할인</T.Text>
-                    </L.FlexCols>
-                    <L.FlexCols>
-                      <T.Text  ext _size={13} _weight={400} _color='gray500'><p>22.01.16 까지</p><p>방문결제 시 현장 할인</p></T.Text>
-                    </L.FlexCols>
-                  </L.FlexCols>
-              </C.Contentbox>
-
-              <C.CouponUsebox
-                onClick={openConfirm}
-              >
-                쿠폰사용
-                <ArrowRightC/>
-              </C.CouponUsebox>
-            </C.Borderbox>
-{/* 쿠폰 3 */}
-            <C.Borderbox>
-              <C.Contentbox >
-                  <L.FlexCols _gap={12}>
-                    <L.FlexCols _gap={0}>
-                      <T.Text _size={15} _weight={500} _color='gray600'>길동 마트</T.Text>
-                      <T.Text _size={18} _weight={600} _color='gray900'>1+1 행사 이벤트</T.Text>
-                    </L.FlexCols>
-                    <L.FlexCols>
-                      <T.Text  ext _size={13} _weight={400} _color='gray500'><p>22.01.16 까지</p><p>방문결제 시 현장 할인</p></T.Text>
-                    </L.FlexCols>
-                  </L.FlexCols>
-              </C.Contentbox>
-
-              <C.CouponUsebox
-                onClick={openConfirm}
-              >
-                쿠폰사용
-                <ArrowRightC/>
-              </C.CouponUsebox>
-            </C.Borderbox>
-          </L.FlexCols>
+          <L.Scroll _height='calc(100vh - 166px)'>
+            <L.FlexCols>
+  {/* 쿠폰 */}
+              {
+                data.map((item, index) => (
+                  <C.CouponListCard 
+                    key={index}
+                    couponData
+                    openConfirm={openConfirm}
+                    item={item}
+                  />
+                  ))
+                }
+            </L.FlexCols>
+          </L.Scroll>
         </L.Contents>
       }
         {
@@ -184,65 +194,19 @@ function TabCoupon(props) {
         {
           usedCouponData && usedCouponData.length > 0 &&
         <L.Contents _padding="24px 20px" _gap={20}>
-          <L.FlexCols>
-{/* 쿠폰 1 */}
-            <CouponListCard 
-              couponData={false}
-            />
-            {/* <C.Borderbox>
-              <C.Contentbox >
-                  <L.FlexCols _gap={12}>
-                    <L.FlexCols _gap={0}>
-                      <T.Text _size={15} _weight={500} _color='gray600'>아재의 과일</T.Text>
-                      <T.Text _size={18} _weight={600} _color='gray900'>고객감사 할인 쿠폰</T.Text>
-                    </L.FlexCols>
-                    <L.FlexCols>
-                      <T.Text  ext _size={13} _weight={400} _color='gray500'><p>22.01.16 까지</p><p>방문결제 시 현장 할인</p></T.Text>
-                    </L.FlexCols>
-                  </L.FlexCols>
-              </C.Contentbox>
-
-              <C.CouponUsebox _color='#9E9E9E' _bg='#F5F5F5'>
-              사용 완료
-              </C.CouponUsebox>
-            </C.Borderbox> */}
-{/* 쿠폰 2 */}
-            <C.Borderbox>
-              <C.Contentbox >
-                  <L.FlexCols _gap={12}>
-                    <L.FlexCols _gap={0}>
-                      <T.Text _size={15} _weight={500} _color='gray600'>김포 정육</T.Text>
-                      <T.Text _size={18} _weight={600} _color='gray900'>삼겹살 10% 할인</T.Text>
-                    </L.FlexCols>
-                    <L.FlexCols>
-                      <T.Text  ext _size={13} _weight={400} _color='gray500'><p>22.01.16 까지</p><p>방문결제 시 현장 할인</p></T.Text>
-                    </L.FlexCols>
-                  </L.FlexCols>
-              </C.Contentbox>
-
-              <C.CouponUsebox _color='#9E9E9E' _bg='#F5F5F5'>
-              기간 만료
-              </C.CouponUsebox>
-            </C.Borderbox>
-{/* 쿠폰 3 */}
-            <C.Borderbox>
-              <C.Contentbox >
-                  <L.FlexCols _gap={12}>
-                    <L.FlexCols _gap={0}>
-                      <T.Text _size={15} _weight={500} _color='gray600'>길동 마트</T.Text>
-                      <T.Text _size={18} _weight={600} _color='gray900'>1+1 행사 이벤트</T.Text>
-                    </L.FlexCols>
-                    <L.FlexCols>
-                      <T.Text  ext _size={13} _weight={400} _color='gray500'><p>22.01.16 까지</p><p>방문결제 시 현장 할인</p></T.Text>
-                    </L.FlexCols>
-                  </L.FlexCols>
-              </C.Contentbox>
-
-              <C.CouponUsebox _color='#9E9E9E' _bg='#F5F5F5'>
-              기간 만료
-              </C.CouponUsebox>
-            </C.Borderbox>
-          </L.FlexCols>
+          <L.Scroll _height='calc(100vh - 166px)'>
+            <L.FlexCols>
+{/* 쿠폰 */}
+              {
+                data.map((item, index) => (
+                    <C.CouponListCard 
+                      couponData={false}
+                      item={item}
+                    />
+                  ))
+                }
+            </L.FlexCols>
+          </L.Scroll>
         </L.Contents>
         }
     </>,
@@ -250,7 +214,7 @@ function TabCoupon(props) {
 }
 
 
-// 쿠폰 없을 떼
+// 쿠폰 없을 때
 export const ListEmpty = ({desc}) => {
   return (
     <L.Contents _padding="80px 20px" >
