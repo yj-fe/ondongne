@@ -36,7 +36,8 @@ function BusinessProductUpload() {
     type: '',
     files: [],
     images: [],
-    categories: [],
+    categories: '',
+    // categories: [],
     name: '',
     price: '',
     salePercent: '',
@@ -134,7 +135,8 @@ function BusinessProductUpload() {
 
     if (data.type === '') return isValidtion(false);
     if (!id && data.files.length == 0) return isValidtion(false);
-    if (data.categories.length == 0) return isValidtion(false);
+    if (data.categories == '') return isValidtion(false);
+    // if (data.categories.length == 0) return isValidtion(false);
     if (data.name === '') return isValidtion(false);
     if (data.price === 0) return isValidtion(false);
     if (data.description === '') return isValidtion(false);
@@ -151,7 +153,8 @@ function BusinessProductUpload() {
     if (auth.isAuthenticated && id) getItem();
   }, [auth, id])
 
-  console.log(data.price);
+  console.log(data.categories);
+  console.log(data.categories.length);
 
   return (
     <CursorDiv>
@@ -252,7 +255,7 @@ function BusinessProductUpload() {
                 <L.FlexRows _gap={16}>
                   <TitleInfoDiv onClick={() => setSelect(!select)}>
                     <TitleInfo>
-                      {data.categories ?? '카테고리 선택'}
+                      {data.categories === '' ? '카테고리 선택' : data.categories}
                       {/* {data.categories?.length > 0 ? data.categories.join(', ') : '카테고리 선택'} */}
                     </TitleInfo>
                     <RightStyle

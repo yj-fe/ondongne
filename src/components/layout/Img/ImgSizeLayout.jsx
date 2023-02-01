@@ -6,7 +6,6 @@ export const ImgSizeLayout = styled.img`
     width: ${props => props._width}px;
     height: ${props => props._height}px;
     object-fit: ${props => props._object || ''};
-    /* object-fit:  fill; */
     overflow: hidden;
 	background-repeat: no-repeat;
 `;

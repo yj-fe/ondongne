@@ -147,9 +147,9 @@ function DetailsPage(props) {
               }
               <L.FlexCols >
                 <L.FlexRows _content='space-between' _items='center' _padding=' 16px 20px'>
-                  <L.FlexRows _content='left' onClick={() => navigate(`/market/detail/${item.storeId}`)}>
-                    <ImgSizeLayout _bdr={50} _width={40} _height={40} src={item.storeProfile && STOREURL + item.storeProfile} />
-                    <L.FlexCols _gap={1}>
+                  <L.FlexRows _width='calc(100% - 50px)' _content='left' onClick={() => navigate(`/market/detail/${item.storeId}`)}>
+                    <ImgSizeLayout _object='cover' _bdr={99} _width={40} _height={40} src={item.storeProfile && STOREURL + item.storeProfile} />
+                    <L.FlexCols _gap={1} _width='calc(100% - 50px)'>
                       <T.Text _size={16} _weight={500} _color='gray900' >{item.storeName}</T.Text>
                       {
                         item.address &&
@@ -160,7 +160,7 @@ function DetailsPage(props) {
                       }
                     </L.FlexCols>
                   </L.FlexRows>
-                  <L.FlexRows _content='right' _gap='0px'>
+                  <L.FlexRows _width='50px' _content='right' _gap='0px'>
                     {
                       auth.isAuthenticated &&
                       <StoreLike id={item.storeId} checked={item.likeStatus} onChange={(id) => {
