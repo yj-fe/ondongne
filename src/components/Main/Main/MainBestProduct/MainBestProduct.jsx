@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { LastChanceDiv } from './MainBestProductStyle'
@@ -7,22 +7,22 @@ import { useSelector } from 'react-redux';
 import { MyStoreBestItem } from 'service/main';
 import { useNavigate } from 'react-router-dom';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
+import { useQuery } from 'react-query';
 
 
 function MainBestProduct() {
   const navigate = useNavigate();
   const local = useSelector(state => state.local);
-  const [loading, setLoading] = useState(false);
-  const [list, setList] = useState([]);
 
-  const getItem = async () => {
+  const loadData = async () => {
     const response = await MyStoreBestItem(local);
-    const { data } = response.data;
-    setList(data.items);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000)
+    return response.data.data.items;
   }
+
+  const { data, isLoading } = useQuery(['main-best-item-list'], loadData, {
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
+  });
 
   const router = () => {
     navigate(
@@ -32,29 +32,24 @@ function MainBestProduct() {
         {
           type: 1,
           title: "My단골 인기 상품",
-          list: list,
+          list: data,
         }
       }
     )
   }
 
-  useEffect(() => {
-    setLoading(true)
-    getItem();
-  }, [])
-
   return (
     <>
       {
-        loading && <LoadingBar />
+        isLoading && <LoadingBar />
       }
       {
-        !loading &&
-        list.length > 0 &&
+        !isLoading &&
+        data.length > 0 &&
         <L.Inner>
           <L.Contents _padding='20px 0px 20px 0px'>
             <L.FlexRows _cursor='default' _content='space-between' _items='center' _padding='0px 20px 0px 20px'>
-              <T.Text  _size={18} _weight={700} _color='black'>My단골 인기 상품</T.Text>
+              <T.Text _size={18} _weight={700} _color='black'>My단골 인기 상품</T.Text>
               <T.Text
                 _size={14}
                 _weight={500}
@@ -66,9 +61,11 @@ function MainBestProduct() {
             </L.FlexRows>
             <LastChanceDiv>
               <L.FlexRowsCP>
-                <L.GridContainer>
+                <L.GridContainer
+                  _count={data.length}
+                >
                   {
-                    list.map((item, index) => (
+                    data.map((item, index) => (
                       <React.Fragment
                         key={index}
                       >

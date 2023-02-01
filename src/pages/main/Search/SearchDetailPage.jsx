@@ -43,7 +43,7 @@ function SearchDetailPage() {
                 loading && <LoadingBar />
               }
               <L.FlexRowsCP>
-                <L.GridContainer >
+                <L.GridContainer _count={items.length}>
                   {
                     !loading && items.length > 0 &&
                     items.map((item, index) => (

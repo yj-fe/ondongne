@@ -6,22 +6,21 @@ import { useSelector } from 'react-redux';
 import { newStoreList } from 'service/main';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 function MainNewMarket() {
   const navigate = useNavigate();
   const local = useSelector(state => state.local);
-  const [loading, setLoading] = useState(false);
-  const [list, setList] = useState([]);
 
-  const getItem = async () => {
+  const loadData = async () => {
     const response = await newStoreList(local);
-    const { data } = response.data;
-    setList(data.stores);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000)
+    return response.data.data.stores;
   }
+
+  const { data, isLoading } = useQuery(['main-new-store-list'], loadData, {
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
+  });
 
   const router = () => {
     navigate(
@@ -31,16 +30,11 @@ function MainNewMarket() {
         {
           type: 0,
           title: "우리동네 신규 입점",
-          list: list,
+          list: data,
         }
       }
     )
   }
-
-  useEffect(() => {
-    setLoading(true)
-    getItem();
-  }, [])
 
   return (
     <div>
@@ -55,17 +49,16 @@ function MainNewMarket() {
           전체 보기
         </T.Text>
       </L.FlexRows>
-      
       <L.FlexRowsCP>
         {
-          loading && <LoadingBar />
+          isLoading && <LoadingBar />
         }
         {
-          !loading &&
-          list.length > 0 &&
-          <L.GridContainer>
+          !isLoading &&
+          data.length > 0 &&
+          <L.GridContainer _count={data.length}>
             {
-              list.map((item, index) => (
+              data.map((item, index) => (
                 <div
                   key={index}
                   onClick={() => navigate(`/market/detail/${item.storeId}`)}

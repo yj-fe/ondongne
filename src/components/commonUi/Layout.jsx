@@ -268,7 +268,7 @@ export const FlexRowsCP = styled.div`
     overflow-x: scroll; 
     overflow-y: hidden;
     flex-wrap: nowrap;
-    padding: ${props => props._padding || '0px 0px 10px 0px' };
+    padding: ${props => props._padding || '0px 0px 10px 0px'};
     flex-direction: rows;
     gap: ${props => props._gap || 8}px;
     align-items: ${props => props._items || 'inherit'};
@@ -380,7 +380,7 @@ export const GridContainerNew = styled.div`
 `
 export const GridContainer = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: ${props => props._count < 10 ? `repeat(${props._count}, 1fr)` : 'repeat(5, 1fr)'};
 	padding-top: 32px;
 	gap: 16px;
     margin-left: 20px;

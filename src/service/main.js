@@ -11,8 +11,9 @@ const urls = {
 /* ==============================
    배너 목록
 ============================== */
-export function getBanners() {
-	return client.get(urls.banner);
+export async function getBanners() {
+	const response = await client.get(urls.banner);
+	return response.data.data;
 }
 
 /* ==============================

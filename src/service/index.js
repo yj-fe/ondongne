@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getExpiry } from "utils/localStorage";
 
-
 export const client = axios.create({
 	// baseURL: "https://ondongnemarket.com/api",
 	baseURL: "http://localhost:8080/api",

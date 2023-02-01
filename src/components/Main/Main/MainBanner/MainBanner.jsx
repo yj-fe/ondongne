@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { getBanners } from 'service/main';
 import { SwiperSlide } from 'swiper/react';
 import "swiper/css";
@@ -16,15 +16,15 @@ const MainBanner = () => {
   const slideRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const { data, isLoading, isFetching, isError, error } = useQuery('banners', async () => {
-    const response = await getBanners();
-    return response.data.data;
-  }, { staleTime: 5000 });
+  const { data, isLoading } = useQuery(['banners'], getBanners, {
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>
       {
-        isFetching && <LoadingBar />
+        isLoading && <LoadingBar />
       }
       {
         !isLoading &&

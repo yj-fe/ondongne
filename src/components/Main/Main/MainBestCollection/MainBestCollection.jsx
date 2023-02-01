@@ -8,22 +8,22 @@ import { bestItemList } from 'service/main';
 
 import { useNavigate } from 'react-router-dom';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
+import { useQuery } from 'react-query';
 
 
 function MainBestCollection() {
   const navigate = useNavigate();
   const local = useSelector(state => state.local);
-  const [loading, setLoading] = useState(false);
-  const [list, setList] = useState([]);
 
-  const getItem = async () => {
+  const loadData = async () => {
     const response = await bestItemList(local);
-    const { data } = response.data;
-    setList(data.items);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000)
+    return response.data.data.items;
   }
+
+  const { data, isLoading } = useQuery(['main-best-item-list'], loadData, {
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
+  });
 
   const router = () => {
     navigate(
@@ -33,21 +33,16 @@ function MainBestCollection() {
         {
           type: 1,
           title: "우리동네 인기 추천",
-          list: list
+          list: data
         }
       }
     )
   }
 
-  useEffect(() => {
-    setLoading(true)
-    getItem();
-  }, [])
-
   return (
     <div>
       <L.FlexRows _content='space-between' _items='center' _padding='0px 20px 0px 20px'>
-        <T.Text  _size={18} _weight={700} _color='black'>우리동네 인기 추천</T.Text>
+        <T.Text _size={18} _weight={700} _color='black'>우리동네 인기 추천</T.Text>
         <T.Text
           _size={14}
           _weight={500}
@@ -60,14 +55,16 @@ function MainBestCollection() {
       <LastChanceDiv>
         <L.FlexRowsCP>
           {
-            loading && <LoadingBar />
+            isLoading && <LoadingBar />
           }
           {
-            !loading &&
-            list.length > 0 &&
-            <L.GridContainer>
+            !isLoading &&
+            data.length > 0 &&
+            <L.GridContainer
+              _count={data.length}
+            >
               {
-                list.map((item, index) => (
+                data.map((item, index) => (
                   <React.Fragment
                     key={index}
                   >
