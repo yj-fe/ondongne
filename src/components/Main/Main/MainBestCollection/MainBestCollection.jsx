@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { LastChanceDiv } from './MainBestCollectionStyle'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';

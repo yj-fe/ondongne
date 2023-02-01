@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { LastChanceDiv } from './MainBestProductStyle'
@@ -16,13 +16,11 @@ function MainBestProduct() {
 
   const loadData = async () => {
     const response = await MyStoreBestItem(local);
+    console.log('response : ', response)
     return response.data.data.items;
   }
 
-  const { data, isLoading } = useQuery(['main-best-item-list'], loadData, {
-    staleTime: 30000,
-    refetchOnWindowFocus: false,
-  });
+  const { data, isLoading } = useQuery(['main-mystore-list'], loadData);
 
   const router = () => {
     navigate(

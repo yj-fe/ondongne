@@ -24,6 +24,8 @@ function MainPage() {
   const [alert, setAlert] = useState(null);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+  console.log('isAuthenticated : ', isAuthenticated)
+
   useEffect(() => {
     if (state && state.error) {
       return setAlert({

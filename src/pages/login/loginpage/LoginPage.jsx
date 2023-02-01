@@ -51,8 +51,6 @@ function LoginPage() {
     const response = await login(account);
     const { message, data, code } = response.data;
 
-    console.log("로그인 data : ", response.data);
-
     if (code != '200') {
       setAlert({
         title: "로그인 실패",
@@ -141,115 +139,115 @@ function LoginPage() {
 
       <S.Main as="main" _bc='#fff'>
         <L.ContentsMedia _padding='80px 40px 0px 40px ' _paddingm='60px 20px'>
-            <L.Scroll>
-          <L.FlexColsMedia _gap={80} _gapm={60}>
-            <L.FlexRows _content='center' >
-              <Logo />
-            </L.FlexRows>
-            <L.FlexCols _gap={60}>
-              <L.FlexCols _gap={16}>
-                <InputForm>
-                  <L.FlexCols _gap={16}>
-                    <Input
-                      placeholder="이메일"
-                      name="email"
-                      type='text'
-                      value={account.email}
-                      onChange={onChangeInput}
-                    />
-                    <PwdContainer>
-                      <PwdInput
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        value={account.password}
-                        placeholder="비밀번호"
+          <L.Scroll>
+            <L.FlexColsMedia _gap={80} _gapm={60}>
+              <L.FlexRows _content='center' >
+                <Logo />
+              </L.FlexRows>
+              <L.FlexCols _gap={60}>
+                <L.FlexCols _gap={16}>
+                  <InputForm>
+                    <L.FlexCols _gap={16}>
+                      <Input
+                        placeholder="이메일"
+                        name="email"
+                        type='text'
+                        value={account.email}
                         onChange={onChangeInput}
                       />
-                      <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
-                        {showPassword ? <EyeOn /> : <EyeOff />}
-                      </EyeOffStyle>
-                    </PwdContainer>
-                  </L.FlexCols>
+                      <PwdContainer>
+                        <PwdInput
+                          name="password"
+                          type={showPassword ? "text" : "password"}
+                          value={account.password}
+                          placeholder="비밀번호"
+                          onChange={onChangeInput}
+                        />
+                        <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
+                          {showPassword ? <EyeOn /> : <EyeOff />}
+                        </EyeOffStyle>
+                      </PwdContainer>
+                    </L.FlexCols>
 
-                  <LoginButton
-                    type="button"
-                    onClick={onSubmut}
-                    disabled={!active}
-                    color={active}
-                  >
-                    로그인</LoginButton>
+                    <LoginButton
+                      type="button"
+                      onClick={onSubmut}
+                      disabled={!active}
+                      color={active}
+                    >
+                      로그인</LoginButton>
 
-                </InputForm>
-                <FindStyle>
-                  <Link to="/login/find/email">
-                    <FindAccount>
-                      이메일 찾기
-                    </FindAccount>
-                  </Link>
-                  <Bar />
-                  <Link to="/login/find/password">
-                    <FindAccount>
-                      비밀번호 찾기
-                    </FindAccount>
-                  </Link>
-                </FindStyle>
+                  </InputForm>
+                  <FindStyle>
+                    <Link to="/login/find/email">
+                      <FindAccount>
+                        이메일 찾기
+                      </FindAccount>
+                    </Link>
+                    <Bar />
+                    <Link to="/login/find/password">
+                      <FindAccount>
+                        비밀번호 찾기
+                      </FindAccount>
+                    </Link>
+                  </FindStyle>
+                </L.FlexCols>
+
+                <GapContainer>
+                  <SnsStyle>
+                    <SnsTextStyle>
+                      <Horizon />
+                      <Snstext>SNS로 1초만에 시작하기</Snstext>
+                      <Horizon />
+                    </SnsTextStyle>
+                    <SnsIcon>
+                      <Naver onClick={loginNaver} />
+                      <Kakao onClick={loginKakao} />
+                      <Google onClick={loginGoogle} />
+                      {/* <Apple onClick={loginApple}/> */}
+                    </SnsIcon>
+                  </SnsStyle>
+                </GapContainer>
               </L.FlexCols>
 
-              <GapContainer>
-                <SnsStyle>
-                  <SnsTextStyle>
-                    <Horizon />
-                    <Snstext>SNS로 1초만에 시작하기</Snstext>
-                    <Horizon />
-                  </SnsTextStyle>
-                  <SnsIcon>
-                    <Naver onClick={loginNaver} />
-                    <Kakao onClick={loginKakao} />
-                    <Google onClick={loginGoogle} />
-                    {/* <Apple onClick={loginApple}/> */}
-                  </SnsIcon>
-                </SnsStyle>
-              </GapContainer>
-            </L.FlexCols>
+              {
+                alert &&
+                <Alert
+                  title={alert.title}
+                  contents={alert.contents}
+                  buttonText={alert.buttonText}
+                  onButtonClick={alert.onButtonClick}
+                  onOverlayClick={alert.onOverlayClick}
+                />
+              }
+              {
+                confirm &&
+                <Confirm
+                  contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
+                  confirmText="네"
+                  cancelText="아니오"
+                  onConfirmClick={() => navigate('/login/signup', { replace: true })}
+                  onCancelClick={() => {
+                    setConfirm(false)
+                    localStorage.removeItem('auth');
+                    navigate('/login', { replace: true })
+                  }}
+                />
+              }
 
-            {
-              alert &&
-              <Alert
-                title={alert.title}
-                contents={alert.contents}
-                buttonText={alert.buttonText}
-                onButtonClick={alert.onButtonClick}
-                onOverlayClick={alert.onOverlayClick}
-              />
-            }
-            {
-              confirm &&
-              <Confirm
-                contents="가입하지 않은 계정입니다. 회원가입 하시겠습니까?"
-                confirmText="네"
-                cancelText="아니오"
-                onConfirmClick={() => navigate('/login/signup', { replace: true })}
-                onCancelClick={() => {
-                  setConfirm(false)
-                  localStorage.removeItem('auth');
-                  navigate('/login', { replace: true })
-                }}
-              />
-            }
-
-            <L.FlexRows _gap='0px' _content='center'>
-              <T.Text _width='200px' _size={14} _color='gray800'>아직 온동네마켓 회원이 아니신가요?</T.Text>
-              <Link to="/login/signup">
-                <Button>
-                  <T.Text _width='52px' _weight={600} _size={14} _color='gray800'>회원가입</T.Text>
-                  <ArrowStyle>
-                    <ArrowRighteight/>
-                  </ArrowStyle>
-                </Button>
-              </Link>
-            </L.FlexRows>
-          </L.FlexColsMedia>
-            </L.Scroll>
+              <L.FlexRows _gap='0px' _content='center'>
+                <T.Text _width='200px' _size={14} _color='gray800'>아직 온동네마켓 회원이 아니신가요?</T.Text>
+                <Link to="/login/signup">
+                  <Button>
+                    <T.Text _width='52px' _weight={600} _size={14} _color='gray800'>회원가입</T.Text>
+                    <ArrowStyle>
+                      <ArrowRighteight />
+                    </ArrowStyle>
+                  </Button>
+                </Link>
+              </L.FlexRows>
+            </L.FlexColsMedia>
+          </L.Scroll>
         </L.ContentsMedia>
       </S.Main>
     </S.Wrapper>
