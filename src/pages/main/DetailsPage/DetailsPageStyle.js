@@ -405,7 +405,7 @@ export const TabInfoContentText = styled.div`
 	font-size: 14px;
 	line-height: 20px;
 	color: #212121;
-	padding: 0;
+	padding: 10px 0px;
 	gap: 0;
 	width: 100%;
 	overflow: hidden;

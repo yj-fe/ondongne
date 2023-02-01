@@ -46,6 +46,11 @@ export const Input = styled.input`
 		/* -webkit-box-shadow: 0 0 0px 1000px #000 inset; */
 		transition: background-color 5000s ease-in-out 0s;
 	}
+	&input{
+		-webkit-appearance: none;
+		-webkit-border-radius: 0;
+		 visibility:hidden;
+	}
 `;
 export const InputError = styled.p`
 	align-items: flex-start;

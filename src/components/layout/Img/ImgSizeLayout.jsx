@@ -73,7 +73,7 @@ export const AbsoluteDiv = styled.div`
     top:${props => props._top || ''};
     margin: 0;
     /* padding: 18px 12px; */
-    z-index: 9999;
+    z-index: 999;
 `;
 export const AbsoluteDivGrid = styled.div`
     border-radius: ${props => props._bdr}px;
@@ -119,20 +119,32 @@ export const AbsoluteDivGrid = styled.div`
     @media screen and (max-width:435px) {
         right: 10%;
     }
+    @media screen and (max-width:425px) {
+        right: 8%;
+    }
     @media screen and (max-width:415px) {
         right: 7%;
+    }
+    @media screen and (max-width:410px) {
+        right: 5%;
     }
     @media screen and (max-width:400px) {
         right: 2%;
     }
-    @media screen and (max-width:375px) {
+    @media screen and (max-width:395px) {
+        right: 0%;
+    }
+    @media screen and (max-width:380px) {
         right: -2%;
     }
     @media screen and (max-width:360px) {
-        right: 4%;
+        right: 2%;
     }
-    @media screen and (max-width:350px) {
+    @media screen and (max-width:351px) {
         right: -1%;
+    }
+    @media screen and (max-width:343px) {
+        right: -3%;
     }
     @media screen and (max-width:340px) {
         right: 10%;

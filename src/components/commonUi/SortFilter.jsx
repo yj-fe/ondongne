@@ -19,12 +19,16 @@ const SortFilter = ({ sorts, close, selectedData, setSelectedData }) => {
 
                         {
                             sorts.map((sort, index) => (
-                                <L.FlexRows key={index} _content='space-between' _items='center'>
+                                <L.FlexRows 
+                                    key={index} 
+                                    _content='space-between' 
+                                    _items='center'
+                                    onClick={() => clickHandler(sort)}
+                                >
                                     <T.Text
                                         _weight={sort === selectedData ? 600 : 400}
                                         _size={15}
                                         _color={sort === selectedData ? "green800" : "gray700"}
-                                        onClick={() => clickHandler(sort)}
                                     >{sortFormatter(sort)}</T.Text>
                                     {
                                         sort === selectedData && <Check />

@@ -57,12 +57,16 @@ export function FilterLayout({ PropsModal, data, setData }) {
 
               {
                 filters.map((filter, index) => (
-                  <L.FlexRows key={index} _content='space-between' _items='center'>
+                  <L.FlexRows 
+                    key={index} 
+                    _content='space-between' 
+                    onClick={() => clickHandler(filter)}
+                    _items='center'
+                  >
                     <T.Text
                       _weight={filter === data ? 600 : 400}
                       _size={15}
                       _color={filter === data ? "green800" : "gray700"}
-                      onClick={() => clickHandler(filter)}
                     >{sortFormatter(filter)}</T.Text>
                     {
                       filter === data && <Check />
@@ -105,12 +109,16 @@ export function SortLayout({ CloseModal, data, setData }) {
 
               {
                 sorts.map((sort, index) => (
-                  <L.FlexRows key={index} _content='space-between' _items='center'>
+                  <L.FlexRows 
+                    key={index}  
+                    _content='space-between' 
+                    _items='center'
+                    onClick={() => clickHandler(sort)}
+                  >
                     <T.Text
                       _weight={sort === data ? 600 : 400}
                       _size={15}
                       _color={sort === data ? "green800" : "gray700"}
-                      onClick={() => clickHandler(sort)}
                     >{sortFormatter(sort)}</T.Text>
                     {
                       sort === data && <Check />
@@ -153,12 +161,16 @@ export function SearchSortLayout({ CloseModal, data, setData }) {
 
               {
                 sorts.map((sort, index) => (
-                  <L.FlexRows key={index} _content='space-between' _items='center'>
+                  <L.FlexRows 
+                    key={index} 
+                    _content='space-between' 
+                    _items='center'
+                    onClick={() => clickHandler(sort)}
+                  >
                     <T.Text
                       _weight={sort === data ? 600 : 400}
                       _size={15}
                       _color={sort === data ? "green800" : "gray700"}
-                      onClick={() => clickHandler(sort)}
                     >{sortFormatter(sort)}</T.Text>
                     {
                       sort === data && <Check />
@@ -201,12 +213,16 @@ export function MyStoreSortLayout({ CloseModal, data, setData }) {
 
               {
                 sorts.map((sort, index) => (
-                  <L.FlexRows key={index} _content='space-between' _items='center'>
+                  <L.FlexRows 
+                    key={index} 
+                    _content='space-between' 
+                    _items='center'
+                    onClick={() => clickHandler(sort)}
+                  >
                     <T.Text
                       _weight={sort === data ? 600 : 400}
                       _size={15}
                       _color={sort === data ? "green800" : "gray700"}
-                      onClick={() => clickHandler(sort)}
                     >{sortFormatter(sort)}</T.Text>
                     {
                       sort === data && <Check />
@@ -249,12 +265,16 @@ export function ModalFilter({ CloseModal, data, setData }) {
 
               {
                 sorts.map((sort, index) => (
-                  <L.FlexRows key={index} _content='space-between' _items='center'>
+                  <L.FlexRows 
+                    key={index} 
+                    _content='space-between' 
+                    _items='center'
+                    onClick={() => clickHandler(sort)}
+                  >
                     <T.Text
                       _weight={sort === data ? 600 : 400}
                       _size={15}
                       _color={sort === data ? "green800" : "gray700"}
-                      onClick={() => clickHandler(sort)}
                     >{sortFormatter(sort)}</T.Text>
                     {
                       sort === data && <Check />
