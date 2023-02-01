@@ -1,15 +1,43 @@
 import React from 'react'
 import styled from "styled-components";
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+import { ArrowRightC } from './Icon';
 
-function Coupon() {
+export const CouponListCard = ({openConfirm, item, couponData}) => {
   return (
-    <div>
+    <Borderbox>
+      <Contentbox >
+          <L.FlexCols _gap={12}>
+            <L.FlexCols _gap={0}>
+              {/* <T.Text _size={15} _weight={500} _color='gray600'>{item.title}</T.Text> */}
+              {/* <T.Text _size={18} _weight={600} _color='gray900'>{item.couponName}</T.Text> */}
+            </L.FlexCols>
+            <L.FlexCols>
+              <T.Text  ext _size={13} _weight={400} _color='gray500'>
+                {/* <p>{item.date} 까지</p> */}
+                {/* <p>{item.contents}</p> */}
+              </T.Text>
+            </L.FlexCols>
+          </L.FlexCols>
+      </Contentbox>
 
-    </div>
+  { couponData ?
+      <CouponUsebox
+        _pdleft='5px'
+        onClick={openConfirm}
+      >
+        쿠폰사용
+      <ArrowRightC/>
+    </CouponUsebox>
+    :
+    <CouponUsebox _color='#9E9E9E' _bg='#F5F5F5'>
+      사용 완료
+    </CouponUsebox>
+  }
+  </Borderbox>
   )
 }
-
-export default Coupon
 
 
 export const Borderbox = styled.div`
@@ -23,7 +51,6 @@ export const Borderbox = styled.div`
   flex-direction: row;
   display: flex;
 `;
-
 export const Contentbox = styled.div`
   width: ${props => props._width || '100%'};
   height: ${props => props._height || 134}px;
@@ -33,7 +60,6 @@ export const Contentbox = styled.div`
   display: flex;
   padding: 20px;
 `;
-
 export const CouponUsebox = styled.div`
   width: ${props => props._width || 102}px;
   height: ${props => props._height || 134}px;

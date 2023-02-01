@@ -10,6 +10,7 @@ import Confirm from 'components/commonUi/Confirm';
 import { CursorDiv } from 'components/Common/LayoutPageStyle';
 import { useSelector } from 'react-redux';
 import { getCouponList } from 'service/coupon';
+import { CouponListCard } from './../../components/commonUi/Coupon';
 
 function MyCoupon() {
   const navigate = useNavigate()
@@ -112,30 +113,10 @@ function TabCoupon(props) {
         <L.Contents _padding="24px 20px" _gap={20}>
           <L.FlexCols>
 {/* 쿠폰 1 */}
-            <CouponListCard 
+            <C.CouponListCard 
               couponData
               openConfirm={openConfirm}
             />
-            {/* <C.Borderbox>
-              <C.Contentbox >
-                  <L.FlexCols _gap={12}>
-                    <L.FlexCols _gap={0}>
-                      <T.Text _size={15} _weight={500} _color='gray600'>아재의 과일</T.Text>
-                      <T.Text _size={18} _weight={600} _color='gray900'>고객감사 할인 쿠폰</T.Text>
-                    </L.FlexCols>
-                    <L.FlexCols>
-                      <T.Text  ext _size={13} _weight={400} _color='gray500'><p>22.01.16 까지</p><p>방문결제 시 현장 할인</p></T.Text>
-                    </L.FlexCols>
-                  </L.FlexCols>
-              </C.Contentbox>
-
-              <C.CouponUsebox
-              onClick={openConfirm}
-              >
-                쿠폰사용
-                <ArrowRightC/>
-              </C.CouponUsebox>
-            </C.Borderbox> */}
 {/* 쿠폰 2 */}
             <C.Borderbox>
               <C.Contentbox >
@@ -205,7 +186,10 @@ function TabCoupon(props) {
         <L.Contents _padding="24px 20px" _gap={20}>
           <L.FlexCols>
 {/* 쿠폰 1 */}
-            <C.Borderbox>
+            <CouponListCard 
+              couponData={false}
+            />
+            {/* <C.Borderbox>
               <C.Contentbox >
                   <L.FlexCols _gap={12}>
                     <L.FlexCols _gap={0}>
@@ -221,7 +205,7 @@ function TabCoupon(props) {
               <C.CouponUsebox _color='#9E9E9E' _bg='#F5F5F5'>
               사용 완료
               </C.CouponUsebox>
-            </C.Borderbox>
+            </C.Borderbox> */}
 {/* 쿠폰 2 */}
             <C.Borderbox>
               <C.Contentbox >
@@ -274,42 +258,6 @@ export const ListEmpty = ({desc}) => {
       <T.Text _weight={300} _size={15} _color="gray600" _align='center'>{desc}</T.Text>
     </L.FlexCols>
     </L.Contents>
-  )
-}
-
-// 쿠폰 있을 떼
-export const CouponListCard = ({openConfirm, item, couponData}) => {
-  return (
-    <C.Borderbox>
-      <C.Contentbox >
-          <L.FlexCols _gap={12}>
-            <L.FlexCols _gap={0}>
-              {/* <T.Text _size={15} _weight={500} _color='gray600'>{item.storeId}</T.Text> */}
-              {/* <T.Text _size={18} _weight={600} _color='gray900'>{item.couponName}</T.Text> */}
-            </L.FlexCols>
-            <L.FlexCols>
-              <T.Text  ext _size={13} _weight={400} _color='gray500'>
-                {/* <p>{item.date} 까지</p> */}
-                <p>방문결제 시 현장 할인</p>
-              </T.Text>
-            </L.FlexCols>
-          </L.FlexCols>
-      </C.Contentbox>
-
-  { couponData ?
-      <C.CouponUsebox
-        _pdleft='5px'
-        onClick={openConfirm}
-      >
-        쿠폰사용
-      <ArrowRightC/>
-    </C.CouponUsebox>
-    :
-    <C.CouponUsebox _color='#9E9E9E' _bg='#F5F5F5'>
-      사용 완료
-    </C.CouponUsebox>
-  }
-  </C.Borderbox>
   )
 }
 

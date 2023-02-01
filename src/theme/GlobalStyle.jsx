@@ -83,6 +83,12 @@ const GlobalStyle = createGlobalStyle`
         outline: 0;
         border: 0;
     }
+
+    button, 
+    input,
+    a {
+        font-family: 'Pretendard' !important;
+    }
 `;
 
 export default GlobalStyle;
