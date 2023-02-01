@@ -1,10 +1,4 @@
 import styled from "styled-components";
-export const TitleText = styled.p`
-	font-weight: 600;
-	font-size: 18px;
-	color: #212121;
-	padding-bottom: 32px;
-`;
 export const InfoDiv = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -99,22 +93,6 @@ export const CouponTitleInfoDiv = styled.div`
 	font-size: 13px;
 	color: #ffffff;
 `;
-export const CouponBadge = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	padding: 2px 5px;
-	gap: 4px;
-	width: 45px;
-	height: 22px;
-	background: #e1f3f2;
-	border-radius: 4px;
-	font-weight: 600;
-	font-size: 12px;
-	letter-spacing: 0.07em;
-	color: #0b806f;
-`;
 export const CouponTitleText = styled.p`
 	font-weight: 600;
 	font-size: 18px;
@@ -131,6 +109,9 @@ export const CouponInfoDiv = styled.div`
 	gap: 16px;
 	width: 100%;
 	height: auto;
+	@media screen and (max-width: 550px) {
+		
+	}
 `;
 export const DownloadDiv = styled.div`
 	box-sizing: border-box;
@@ -140,7 +121,7 @@ export const DownloadDiv = styled.div`
 	align-items: center;
 	padding: 12px 24px;
 	gap: 8px;
-	width: 336px;
+	width: 100%;
 	height: 54px;
 	background: #ffffff;
 	border: 1px solid #eeeeee;

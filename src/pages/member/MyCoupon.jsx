@@ -71,6 +71,7 @@ function MyCoupon() {
 function TabCoupon(props) {
   const navigate = useNavigate();
   const [confirm, setConfirm] = useState(null)
+  const [useConfirm, setUseConfirm] = useState(null)
 // 사용가능 쿠폰
   const [couponData, setCouponData] = useState([true]);
   // 지난쿠폰
@@ -117,16 +118,27 @@ function TabCoupon(props) {
       confirmText: "쿠폰 사용",
       cancelText: "취소",
       onConfirmClick: () => {
-        handleUse();
+        setUseConfirm(true);
+        // handleUse();
         setConfirm(null)
       },
       onCancelClick: () => setConfirm(null),
     })
   }
-// 쿠폰 사용 핸들러
-  const handleUse = () => {
-    // 지난쿠폰탭으로 이동
-    // 사용 가능탭에서 삭제
+
+  // 쿠폰 사용 핸들러
+    const handleUse = () => {
+      // 지난쿠폰탭으로 이동
+      // 사용 가능탭에서 삭제
+    }
+  const openUseConfirm = () => {
+    return setUseConfirm({
+      contents: "쿠폰 사용이 완료되었습니다.",
+      confirmText: "확인",
+      onConfirmClick: () => {
+        setConfirm(null)
+      },
+    })
   }
 
   const loadData = async () => {
@@ -180,6 +192,14 @@ function TabCoupon(props) {
             cancelText={confirm.cancelText}
             onConfirmClick={confirm.onConfirmClick}
             onCancelClick={confirm.onCancelClick}
+          />
+        }
+        {
+          useConfirm &&
+          <Confirm 
+            contents={confirm.contents}
+            confirmText={confirm.confirmText}
+            onConfirmClick={confirm.onConfirmClick}
           />
         }
     </>,

@@ -10,17 +10,19 @@ import { ReactComponent as Pickup } from "assets/icons/business/pickup.svg";
 import { ReactComponent as NewReview } from "assets/icons/business/newreview.svg";
 import { MoreNavBody, MoreContainer, MoreDiv, FooterText, Logo } from 'pages/main/MorePage/MorePageStyle'
 import { TermsDiv, TermsTitle, TermsIconStyle } from 'pages/service/TermsPage/TermsPageStyle'
-import { TitleText, InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDiv, FloatingContentDiv, FloatingContentTitle, FloatingContentIcon, FloatingToggleDiv, CardTextDiv, CouponDiv, CouponInfoDiv, DownloadDiv, DownloadText, DownloadCount, DownloadCountTextB, DownloadCountTextN, MyBestProductContent, FloatingDiv, FooterDiv, CouponCard, CouponTitleDiv, CouponBadge, CouponTitleText, CouponTitleInfoDiv, FloatingDivT, EmptyDiv, EmptyText, EmptyButton, EmptyButtonIcon, EmptyButtonText } from './BusinessPageStyle'
+import { InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDiv, FloatingContentDiv, FloatingContentTitle, FloatingContentIcon, FloatingToggleDiv, CardTextDiv, CouponDiv, CouponInfoDiv, DownloadDiv, DownloadText, DownloadCount, DownloadCountTextB, DownloadCountTextN, MyBestProductContent, FloatingDiv, FooterDiv, CouponCard, CouponTitleDiv, CouponBadge, CouponTitleText, CouponTitleInfoDiv, FloatingDivT, EmptyDiv, EmptyText, EmptyButton, EmptyButtonIcon, EmptyButtonText } from './BusinessPageStyle'
 import { ContentDate, ContentImg, ContentMarket, ContentProduct, ContentStyle, ContentTitle, Discount, DiscountStyle, Price, FinalPrice, RateStyle, Star, Number } from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
 import { getDashboard } from 'service/biz';
 import { useSelector, useDispatch } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 import FooterLayout from 'components/layout/Footer/Footer';
 import { authActions } from 'store/slices/auth';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import StoreModal from 'components/layout/Modal/StoreModal';
 import Layout from 'components/layout/Layout/Layout';
 import { CursorDiv } from 'components/Common/LayoutPageStyle';
+import { Badge } from 'components/commonUi/Button';
 
 function BusinessPage() {
   const navigate = useNavigate();
@@ -68,8 +70,9 @@ function BusinessPage() {
 
         <L.Container>
           {/* ==================== 가게 정보 ==================== */}
-          <L.Contents>
-            <TitleText>가게 정보</TitleText>
+          <L.Contents >
+            <L.FlexCols _gap={32}>
+          <T.Text _weight={600} _size={18}>가게 정보</T.Text>
             <L.GridTwo>
               <InfoCard>
                 <OrderIcon />
@@ -93,6 +96,7 @@ function BusinessPage() {
                 </CardTextDiv>
               </InfoCard>
             </L.GridTwo>
+            </L.FlexCols>
           </L.Contents>
         </L.Container>
 
@@ -100,22 +104,22 @@ function BusinessPage() {
         {/* ==================== 2차개발 - 발행한 쿠폰 ==================== */}
         {/* <L.Container>
           <L.Contents>
-            <TitleText>발행한 쿠폰</TitleText>
+          <L.FlexCols _gap={32}>
+            <T.Text _weight={600} _size={18}>발행한 쿠폰</T.Text>
             <CouponDiv> */}
         {/* ========== 쿠폰배너생성시 뜨는 예시 ======= */}
-        {/* <CouponCard>
-                <CouponTitleDiv>
-                  <CouponBadge>발행중</CouponBadge>
-                  <CouponTitleText>고객감사 할인 쿠폰</CouponTitleText>
-                </CouponTitleDiv>
-                <CouponTitleInfoDiv>
-                <p>22.01.16 까지</p>
-                <p>방문결제 시 현장 할인</p>
-                </CouponTitleInfoDiv>
-              </CouponCard>
+            {/* <CouponCard>
+              <CouponTitleDiv>
+                <Badge _letspace='0.07em' _weight={600} _bg='green50' _bdr='4px' _color='green700' _size='12px'>발행중</Badge>
+                <CouponTitleText>고객감사 할인 쿠폰</CouponTitleText>
+              </CouponTitleDiv>
+              <CouponTitleInfoDiv>
+              <p>22.01.16 까지</p>
+              <p>방문결제 시 현장 할인</p>
+              </CouponTitleInfoDiv>
+            </CouponCard>
 
               <CouponInfoDiv>
-                <L.FlexRowsWrap>
                   <DownloadDiv>
                     <DownloadText>쿠폰 다운로드 수</DownloadText>
                     <DownloadCount>
@@ -130,9 +134,9 @@ function BusinessPage() {
                       <DownloadCountTextN>건</DownloadCountTextN>
                     </DownloadCount>
                   </DownloadDiv>
-                </L.FlexRowsWrap>
               </CouponInfoDiv>
             </CouponDiv>
+            </L.FlexCols>
           </L.Contents>
         </L.Container> */}
 
@@ -140,7 +144,7 @@ function BusinessPage() {
         <L.Container>
           <L.Contents _padding="20px 0px 20px 0px">
           <L.FlexRows _items='center' _padding='0px 20px 0px 20px'>
-            <TitleText>내 상점 인기상품</TitleText>
+          <T.Text _weight={600} _size={18}>내 상점 인기상품</T.Text>
           </L.FlexRows>
             {
               !data.itemList.items || (data.itemList.items && data.itemList.items.length) === 0 &&

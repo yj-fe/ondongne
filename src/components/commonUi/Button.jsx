@@ -204,6 +204,7 @@ export const Badge = styled.button`
     font-weight:  ${props => props._weight || 500};
     font-size: ${props => props._size || '11px'};
     border-left: ${props => props._borderleft};
+    letter-spacing: ${props => props._letspace};
 `;
 export const MapListButton = styled.button`
     display: flex;
