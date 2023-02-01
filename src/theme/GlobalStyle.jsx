@@ -86,8 +86,17 @@ const GlobalStyle = createGlobalStyle`
 
     button, 
     input,
+    p,
     a {
-        font-family: 'Pretendard' !important;
+        @font-face {
+        font-family: 'Pretendard' ;
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-style: normal;
+    }
+        /* font-family: 'Pretendard' !important; */
+    }
+    input, p{
+	-webkit-appearance: none;
     }
 `;
 

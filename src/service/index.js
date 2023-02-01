@@ -3,8 +3,8 @@ import { getExpiry } from "utils/localStorage";
 
 
 export const client = axios.create({
-	// baseURL: "https://ondongnemarket.com/api",
-	baseURL: "http://localhost:8080/api",
+	baseURL: "https://ondongnemarket.com/api",
+	// baseURL: "http://localhost:8080/api",
 	timeout: 3000,
 	headers: {
 		"Content-Type": "application/json",

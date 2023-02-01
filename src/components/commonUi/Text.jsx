@@ -27,6 +27,7 @@ export const Text = styled.p`
     min-width: ${props => props._minWidth || 'auto'};
     margin-top: ${props => props._margintop};
     cursor: ${props => props._cursor};
+    font-family: 'Pretendard';
 `;
 export const TextMedia = styled.p`
     font-size: ${props => props._size || 16}px;

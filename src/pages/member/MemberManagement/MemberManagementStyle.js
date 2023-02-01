@@ -317,6 +317,7 @@ export const ChangeButton = styled.button`
   font-size: 14px;
   color: #0B806F;
   width: 40px;
+  font-family: 'Pretendard';
 `
 // export const RequestButton = styled.button`
 //   display: flex;
