@@ -17,7 +17,6 @@ function TermsModal({ closeModel, type }) {
     }
 
     function getTitle() {
-        console.log("dataType.policyTpye : ", type);
         if (type === "USE") {
             return "서비스 이용약관"
         }

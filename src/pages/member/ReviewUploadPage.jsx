@@ -35,9 +35,6 @@ function ReviewUploadPage() {
     deleteFileId: [],
   });
 
-  console.log('location.state : ',location.state)
-  console.log(data);
-
   // 리뷰 작성
   const onSubmit = async () => {
     const response = data.reviewId ? await updateReview(data) : await insertReview(data);
@@ -118,7 +115,6 @@ function ReviewUploadPage() {
                         key={index}
                         file={file}
                         fileDeleteHandler={() => {
-                          console.log(file);
                           setData({
                             ...data,
                             images: data.images.filter(item => item !== file),

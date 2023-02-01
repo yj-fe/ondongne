@@ -37,8 +37,6 @@ function InquiryPage() {
     }
   }
 
-  console.log(list);
-
   useEffect(() => {
     loadData()
   }, [])
@@ -53,7 +51,7 @@ function InquiryPage() {
         floating={false}
         onBackClick={() => navigate(-1)}
       >
-        <L.Container  _padding="0px 0px 8px" >
+        <L.Container _padding="0px 0px 8px" >
           <L.Contents _padding="0" _height='calc(100vh - 68px)'>
             {/* =================== Tab버튼 ( 문의하기 / 문의내역 ) =================== */}
             <TabButtonStyle>
@@ -128,7 +126,6 @@ function TabInquiry({ detailTab, tabHandler, list }) {
     }
 
     const response = await postInquiry(data);
-    // console.log(response)
 
     if (response && response.data.data) {
       setData({

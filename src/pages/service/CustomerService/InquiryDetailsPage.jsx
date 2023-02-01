@@ -26,8 +26,6 @@ function InquiryDetailsPage() {
     type: ""
   });
 
-  console.log(id);
-
   const loadData = async () => {
     const response = await detailsList({ borderId: id })
 
@@ -36,8 +34,6 @@ function InquiryDetailsPage() {
       setItem(data);
     }
   }
-
-  console.log(item);
 
   useEffect(() => {
     if (id) {

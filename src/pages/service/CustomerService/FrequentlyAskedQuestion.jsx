@@ -19,27 +19,26 @@ function FrequentlyAskedQuestion() {
     const response = await faqList(requestData);
     const { data } = response.data;
     setFaq(data);
-    console.log(data);
   }
-  useEffect(()=>{
+  useEffect(() => {
     getFaq()
   }, [])
 
   return (
     <div>
-       <Layout
-          title="자주하는 질문"
-          cart={false}
-          bell={false}
-          floating={false}
-          onBackClick={() => navigate(-1)}
+      <Layout
+        title="자주하는 질문"
+        cart={false}
+        bell={false}
+        floating={false}
+        onBackClick={() => navigate(-1)}
       >
         <L.Container _cursor='default' _height='calc(100vh - 60px)'>
           <L.Contents _height='calc(100vh - 60px)'>
             <Scroll>
               <L.FlexCols _gap='0px' _padding="0px" _items="center">
                 {
-                  faq.map(item=>(
+                  faq.map(item => (
                     <FaqList item={item} />
                   ))
                 }
@@ -53,30 +52,30 @@ function FrequentlyAskedQuestion() {
   )
 }
 
-function FaqList ({item}) {
+function FaqList({ item }) {
 
   const [show, setShow] = useState();
 
-  return(
+  return (
     <>
-      <L.FlexRows  
-        id={item.borderId} 
-        key={item.borderId} 
-        onClick={() => setShow((s) => !s)} 
-        _height='56px' 
-        _content="space-between" 
-        _items="center" 
+      <L.FlexRows
+        id={item.borderId}
+        key={item.borderId}
+        onClick={() => setShow((s) => !s)}
+        _height='56px'
+        _content="space-between"
+        _items="center"
         _padding="0px "
       >
         <T.Text _weight={400} _size={16} _color="gray900">{item.title}</T.Text>
-        {show ? <ArrowTop/> : <Down/> }
+        {show ? <ArrowTop /> : <Down />}
       </L.FlexRows>
-        {show && <Toggle item={item}/>}
+      {show && <Toggle item={item} />}
     </>
   )
 }
 
-function Toggle({item}) {
+function Toggle({ item }) {
 
   return (
     <div>

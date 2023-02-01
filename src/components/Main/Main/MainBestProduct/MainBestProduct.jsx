@@ -16,7 +16,6 @@ function MainBestProduct() {
 
   const loadData = async () => {
     const response = await MyStoreBestItem(local);
-    console.log('response : ', response)
     return response.data.data.items;
   }
 

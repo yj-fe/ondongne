@@ -74,7 +74,6 @@ function PhoneToggle({ getMemberProfile, setToggle }) {
   const phoneChange = async () => {
     const response = await memberPhoneChange(phone)
 
-    console.log(response);
     const { data, message } = response.data;
 
     if (response.status === '500') {
@@ -106,7 +105,6 @@ function PhoneToggle({ getMemberProfile, setToggle }) {
 
   // 전화번호 체크
   useEffect(() => {
-    console.log(phone)
     if (phone.length === 0) {
       return setError('변경하실 전화번호를 입력해 주세요.')
     }

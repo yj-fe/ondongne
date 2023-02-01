@@ -56,8 +56,7 @@ function DetailsPageT(props) {
   }
 
   const paymentsOrder = () => {
-    console.log(auth)
-    if(auth.isAuthenticated) {
+    if (auth.isAuthenticated) {
       navigate('/order/new/:id')
     } else {
       setConfirm(true)
@@ -86,7 +85,7 @@ function DetailsPageT(props) {
               <L.FlexCols >
                 <L.FlexRows _content='space-between' _items='center' _padding=' 16px 20px'>
                   <L.FlexRows _width='150px' _content='left'>
-                    <ImgSizeLayout  _bdr={50} _width={40} _height={40} src={Image} />
+                    <ImgSizeLayout _bdr={50} _width={40} _height={40} src={Image} />
                     <L.FlexCols _gap={1}>
                       <T.Text _size={16} _weight={500} _color='gray900' >아재의 과일</T.Text>
                       <T.Text _size={13} _weight={400} _color='gray600' >김포 풍무동</T.Text>
@@ -103,10 +102,10 @@ function DetailsPageT(props) {
 
                 </L.FlexRows>
 
-                <Line/>
+                <Line />
 
                 <L.FlexCols>
-                  
+
                 </L.FlexCols>
 
               </L.FlexCols>
@@ -117,7 +116,7 @@ function DetailsPageT(props) {
           </L.Contents>
         </L.Container>
       </Layout>
-              
+
 
 
       <DetailBody>
@@ -244,9 +243,9 @@ function DetailsPageT(props) {
 
 
         </DetailContainer>
-        
+
         <ButtonStyle>
-        {/* <Cart/> */}
+          {/* <Cart/> */}
           <DetailButtonDiv>
             <DetailButtonStyle onClick={paymentsOrder}>구매하기</DetailButtonStyle>
           </DetailButtonDiv>
@@ -256,13 +255,13 @@ function DetailsPageT(props) {
       {
         confirm &&
         <Confirm
-            contents="로그인 후 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
-            confirmText="네"
-            cancelText="아니오"
-            onConfirmClick={() => {navigate('/login')}}
-            onCancelClick={() => {
-              setConfirm(false)
-            }}
+          contents="로그인 후 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
+          confirmText="네"
+          cancelText="아니오"
+          onConfirmClick={() => { navigate('/login') }}
+          onCancelClick={() => {
+            setConfirm(false)
+          }}
         />
       }
 

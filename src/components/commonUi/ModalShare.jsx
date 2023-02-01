@@ -10,25 +10,25 @@ import Link from 'assets/images/link.png'
 import SimpleConfirm from "./SimpleConfirm";
 // import { Helmet } from 'react-helmet'
 
-const ModalShare= ({
-  itemName='itemName',
-  description='description',
-  title='',
-  img='',
+const ModalShare = ({
+  itemName = 'itemName',
+  description = 'description',
+  title = '',
+  img = '',
   // itemtitle,
   // description= '',
   ShowShareModal,
   ...props
-})=> {
+}) => {
   const navigate = useNavigate();
-        
+
   // 링크복사하기
   const copyLinkRef = React.useRef()
   const copyLinkUrl = (e) => {
     if (!document.queryCommandSupported("copy")) {
       return alert("복사 기능이 지원되지 않는 브라우저입니다.");
     }
-    else{
+    else {
       copyLinkRef.current.select();
       document.execCommand('copy');
       e.target.focus();
@@ -44,13 +44,13 @@ const ModalShare= ({
       onConfirmClick: () => setAlert(null),
     })
   }
-// kakao공유
-const params = {
-  key: process.env.REACT_APP_KAKAO_SDK,
-  id: process.env.YOUR_TEMPLATE_ID
-}
-    
-// kakao공유
+  // kakao공유
+  const params = {
+    key: process.env.REACT_APP_KAKAO_SDK,
+    id: process.env.YOUR_TEMPLATE_ID
+  }
+
+  // kakao공유
   const KaKaoShareButton = () => {
     if (window.Kakao) {
       const kakao = window.Kakao
@@ -59,7 +59,7 @@ const params = {
         // kakao.init(params.key)
         kakao.init('fdc50dd3a91aebdea8c00271a6e1f5a3')
       }
-      // console.log(kakao.isInitialized());
+
       kakao.Share.createDefaultButton({
         container: '#kakao-sharing',
         objectType: 'feed',
@@ -68,7 +68,7 @@ const params = {
           description: description,
           imageUrl: img,
           link: {
-          // [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+            // [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
             mobileWebUrl: 'https://ondongnemarket.com',
             webUrl: 'https://ondongnemarket.com',
           },
@@ -83,53 +83,53 @@ const params = {
           },
         ],
         installTalk: true,
-    });
+      });
+    }
   }
-}
-  
+
   return (
     <div>
       <ModalOutside
-      onClick={ShowShareModal}  
+        onClick={ShowShareModal}
       >
         <ModalShareBody>
           <ModalDiv1>공유하기</ModalDiv1>
-            <ModalDiv4>
+          <ModalDiv4>
             {/* 링크복사 */}
-              <ModalDiv3
-                onClick={copyLinkUrl} 
-              >
-                <form>
-                  <TextArea
-                    ref={copyLinkRef}
-                    value={window.location.href}
-                  />
-                </form>
-                <div>
-                  <ImgSizeLayout _width={52} _height={52} src={Link}/>
-                </div>
-                <T.Text _size={16} _width='100%' _align='center'>링크복사</T.Text>
-              </ModalDiv3>
+            <ModalDiv3
+              onClick={copyLinkUrl}
+            >
+              <form>
+                <TextArea
+                  ref={copyLinkRef}
+                  value={window.location.href}
+                />
+              </form>
+              <div>
+                <ImgSizeLayout _width={52} _height={52} src={Link} />
+              </div>
+              <T.Text _size={16} _width='100%' _align='center'>링크복사</T.Text>
+            </ModalDiv3>
             {/* 카카오톡 공유 */}
-              <ModalDiv3
+            <ModalDiv3
+            >
+              <button
+                type="button"
+                id="kakao-sharing"
+                onClick={() => KaKaoShareButton({ itemName, description, img })}
               >
-                <button
-                  type="button"
-                  id="kakao-sharing"
-                  onClick={() => KaKaoShareButton({itemName, description, img})}
-                >
-                  <div>
-                    <Kakao/>
-                  </div>
-                  <T.Text _size={16} _width='100%' _align='center'>카카오톡</T.Text>
-                </button>
-              </ModalDiv3>
-            </ModalDiv4>
+                <div>
+                  <Kakao />
+                </div>
+                <T.Text _size={16} _width='100%' _align='center'>카카오톡</T.Text>
+              </button>
+            </ModalDiv3>
+          </ModalDiv4>
           <ModalButton
             type="button"
-            onClick={ShowShareModal}  
+            onClick={ShowShareModal}
           >
-          닫기
+            닫기
           </ModalButton>
         </ModalShareBody>
       </ModalOutside>

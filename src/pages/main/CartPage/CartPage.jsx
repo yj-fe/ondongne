@@ -39,7 +39,6 @@ function CartPage({ }) {
     setLoading(false);
   }
 
-  console.log(list);
 
   // 상품 개수 변경
   const itemCount = async (item, type) => {

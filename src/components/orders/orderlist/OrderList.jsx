@@ -68,7 +68,6 @@ const OrderList = () => {
     const getDeliveryAuth = async (id) => {
         const response = await getDeliveryCertificate(id);
         if (response && response.data.data) {
-            console.log(response);
             setDeliveryData(response.data.data);
         }
     }

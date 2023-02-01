@@ -26,7 +26,7 @@ function SettingPage() {
   // 체크 박스 핸들러(마케팅, Push)
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
-    if(!isAuthenticated) {
+    if (!isAuthenticated) {
       return setConfirm({
         contents: "로그인해주세요.",
         buttonText: "확인",
@@ -34,16 +34,15 @@ function SettingPage() {
         onOverlayClick: () => setConfirm(null),
       })
     }
-    setEmail(item => ({...item, check: !email.check}))
-    if(email.check === true){
-      setEmail(item => ({...item, emailSmsAgreeStatus: 0}))
-    }else if(email.check === false){
-      setEmail(item => ({...item, emailSmsAgreeStatus: 1}))
+    setEmail(item => ({ ...item, check: !email.check }))
+    if (email.check === true) {
+      setEmail(item => ({ ...item, emailSmsAgreeStatus: 0 }))
+    } else if (email.check === false) {
+      setEmail(item => ({ ...item, emailSmsAgreeStatus: 1 }))
     }
 
     const response = await postMarketing(email);
-    // console.log(response)
-    if(response && response.email) {
+    if (response && response.email) {
       return setConfirm({
         contents: "마케팅 활용 동의 하셨습니다",
         buttonText: "확인",
@@ -55,7 +54,7 @@ function SettingPage() {
   const handlePushSubmit = async (e) => {
     e.preventDefault();
 
-    if(!isAuthenticated) {
+    if (!isAuthenticated) {
       return setConfirm({
         contents: "로그인해주세요.",
         buttonText: "확인",
@@ -63,15 +62,14 @@ function SettingPage() {
         onOverlayClick: () => setConfirm(null),
       })
     }
-    setPush(item => ({...item, check: !push.check}));
-    if(push.check === true){
-      setPush(item => ({...item, pushAgreeStatus: 0}))
-    }else if(push.check === false){
-      setPush(item => ({...item, pushAgreeStatus: 1}))
+    setPush(item => ({ ...item, check: !push.check }));
+    if (push.check === true) {
+      setPush(item => ({ ...item, pushAgreeStatus: 0 }))
+    } else if (push.check === false) {
+      setPush(item => ({ ...item, pushAgreeStatus: 1 }))
     }
     const response = await postPush(push);
-    // console.log(response)
-    if(response && response.push) {
+    if (response && response.push) {
       return setConfirm({
         contents: "Push 동의 하셨습니다",
         buttonText: "확인",
@@ -81,8 +79,6 @@ function SettingPage() {
     }
 
   }
-  // console.log(email);
-  // console.log(push);
 
   useEffect(() => {
 
@@ -93,31 +89,31 @@ function SettingPage() {
   return (
     <div>
       <Layout
-          title="환경설정"
-          cart={false}
-          bell={false}
-          onBackClick={() => navigate(-1)}
+        title="환경설정"
+        cart={false}
+        bell={false}
+        onBackClick={() => navigate(-1)}
       >
         <L.Container _padding="0px 0px 8px" >
-          <L.Contents  _padding='0px'>
+          <L.Contents _padding='0px'>
             <L.FlexCols _gap='0px' _padding="8px 20px">
               <L.FlexRows
                 onClick={handleEmailSubmit}
                 value={email.emailSmsAgreeStatus}
-                _height='56px' 
-                _content="space-between" 
-                _items="center" 
+                _height='56px'
+                _content="space-between"
+                _items="center"
                 _padding="16px 0px"
               >
                 <T.Text _weight={500} _size={16} _color="gray900">마케팅 활용 동의</T.Text>
-                  {email.check ? <SwitchC /> : <Switch />}
+                {email.check ? <SwitchC /> : <Switch />}
               </L.FlexRows>
               <L.FlexRows
-                onClick={handlePushSubmit} 
-                value={push.pushAgreeStatus} 
-                _height='56px' 
-                _content="space-between" 
-                _items="center" 
+                onClick={handlePushSubmit}
+                value={push.pushAgreeStatus}
+                _height='56px'
+                _content="space-between"
+                _items="center"
                 _padding="16px 0px"
               >
                 <T.Text _weight={500} _size={16} _color="gray900">Push 수신 동의</T.Text>
@@ -136,12 +132,12 @@ function SettingPage() {
       </Layout>
       {
         confirm &&
-        <SimpleConfirm 
-            warn={confirm.warn}
-            contents={confirm.contents}
-            confirmText={confirm.confirmText}
-            onConfirmClick={confirm.onConfirmClick}
-            onOverlayClick={confirm.onOverlayClick}
+        <SimpleConfirm
+          warn={confirm.warn}
+          contents={confirm.contents}
+          confirmText={confirm.confirmText}
+          onConfirmClick={confirm.onConfirmClick}
+          onOverlayClick={confirm.onOverlayClick}
         />
       }
     </div>

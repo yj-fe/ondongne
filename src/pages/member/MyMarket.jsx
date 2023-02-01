@@ -43,8 +43,6 @@ function MyMarket() {
     if (response && response.data) {
       const { data } = response.data;
 
-      console.log(data);
-
       setTotalCount(data.count);
       setItems(detailTab === 0 ? data.items : data.stores);
       isFetching(false);

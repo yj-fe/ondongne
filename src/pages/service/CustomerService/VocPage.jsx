@@ -69,7 +69,6 @@ function VocPage() {
     }
 
     const response = await postVoc(data);
-    console.log(response)
 
     if (response && response.data.data) {
       setData({
@@ -82,7 +81,7 @@ function VocPage() {
       return setConfirm({
         contents: "고객님의 문의가 정상적으로 접수되었습니다.\n빠른 시간내에 답변 드리도록 하겠습니다.",
         buttonText: "확인",
-        onConfirmClick: () => {setConfirm(null); goService();},
+        onConfirmClick: () => { setConfirm(null); goService(); },
         onOverlayClick: () => setConfirm(null),
       })
     }
@@ -109,59 +108,59 @@ function VocPage() {
         <L.Container _padding="0px 0px 8px" >
           <L.Contents _height='calc(100vh - 68px)'>
             <Scroll _height='calc(100vh - 83px)'>
-            <L.FlexCols _gap={24} _padding="0px 0px 100px">
+              <L.FlexCols _gap={24} _padding="0px 0px 100px">
 
-              <L.FlexCols>
-                <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
-                <InfoBoxDiv onClick={() => setShow((s) => !s)}>
-                  <TitleInfo>{data.type}</TitleInfo>
-                  {show ? <ArrowTop /> : <Down />}
-                </InfoBoxDiv>
-                {show && <Toggle type={data.type} handler={dataChecked} closeSelector={() => setShow(false)} />}
-              </L.FlexCols>
-              <L.FlexCols>
-                <T.Text _weight={600} _size={16} _color="gray900">제목</T.Text>
-                <I.TextInput
-                  type='text'
-                  name='title'
-                  value={data.title}
-                  required
-                  onChange={handleChange}
-                  _boccolor={'#FFFFFF'}
-                />
-              </L.FlexCols>
-              <L.FlexCols>
-                <T.Text _weight={600} _size={16} _color="gray900">의견내용</T.Text>
-                <L.Parents>
-                  <I.Textarea
+                <L.FlexCols>
+                  <T.Text _weight={600} _size={16} _color="gray900">분류</T.Text>
+                  <InfoBoxDiv onClick={() => setShow((s) => !s)}>
+                    <TitleInfo>{data.type}</TitleInfo>
+                    {show ? <ArrowTop /> : <Down />}
+                  </InfoBoxDiv>
+                  {show && <Toggle type={data.type} handler={dataChecked} closeSelector={() => setShow(false)} />}
+                </L.FlexCols>
+                <L.FlexCols>
+                  <T.Text _weight={600} _size={16} _color="gray900">제목</T.Text>
+                  <I.TextInput
                     type='text'
-                    name='contents'
-                    value={data.contents}
+                    name='title'
+                    value={data.title}
+                    required
                     onChange={handleChange}
                     _boccolor={'#FFFFFF'}
-                    _height={140}
-                    maxLength={500}
-                    required
                   />
-                  <L.Child _bottom='10px' _right='10px'>
-                    <T.Text _color='gray600' _size='12'>{data.contents.length}/500</T.Text>
-                  </L.Child>
-                </L.Parents>
+                </L.FlexCols>
+                <L.FlexCols>
+                  <T.Text _weight={600} _size={16} _color="gray900">의견내용</T.Text>
+                  <L.Parents>
+                    <I.Textarea
+                      type='text'
+                      name='contents'
+                      value={data.contents}
+                      onChange={handleChange}
+                      _boccolor={'#FFFFFF'}
+                      _height={140}
+                      maxLength={500}
+                      required
+                    />
+                    <L.Child _bottom='10px' _right='10px'>
+                      <T.Text _color='gray600' _size='12'>{data.contents.length}/500</T.Text>
+                    </L.Child>
+                  </L.Parents>
+                </L.FlexCols>
+                <L.FlexRows _content="flex-start" _items="center" >
+                  <CheckTitleDiv onClick={checkHandler}>
+                    <CheckStyle
+                      id="confirm"
+                      type="button"
+                    >
+                      {data.check ? <Checked /> : <Check />}
+                    </CheckStyle>
+                    <CheckTitle>개인정보 수집, 이용에 동의합니다.(필수)</CheckTitle>
+                  </CheckTitleDiv>
+
+                </L.FlexRows>
+
               </L.FlexCols>
-              <L.FlexRows _content="flex-start" _items="center" >
-                <CheckTitleDiv onClick={checkHandler}>
-                  <CheckStyle
-                    id="confirm"
-                    type="button"
-                  >
-                    {data.check ? <Checked /> : <Check />}
-                  </CheckStyle>
-                  <CheckTitle>개인정보 수집, 이용에 동의합니다.(필수)</CheckTitle>
-                </CheckTitleDiv>
-
-              </L.FlexRows>
-
-            </L.FlexCols>
             </Scroll>
             <L.BottomColsW _width='728px' _padding='0px 16px'>
               <ButtonDiv

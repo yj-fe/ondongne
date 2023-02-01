@@ -67,79 +67,79 @@ function MemberManagement() {
         bell={false}
         onBackClick={() => navigate(-1)}
       >
-       <L.Container _cursor='default' _height='calc(100vh - 60px)'>
+        <L.Container _cursor='default' _height='calc(100vh - 60px)'>
           <L.Contents _height='calc(100vh - 52px)'>
             <L.FlexCols _padding={0} _gap={0}>
 
-        {/* ============ 회원정보관리 ============ */}
-          <MemberProfileDiv>
-            <ProfileAvatar 
-              profile={member.profile}
-            />
-            <ProfileTextDiv>
-              <TextName>{member.nickname}</TextName>
-              <TextEmail>{member.email}</TextEmail>
-            </ProfileTextDiv>
-          </MemberProfileDiv>
+              {/* ============ 회원정보관리 ============ */}
+              <MemberProfileDiv>
+                <ProfileAvatar
+                  profile={member.profile}
+                />
+                <ProfileTextDiv>
+                  <TextName>{member.nickname}</TextName>
+                  <TextEmail>{member.email}</TextEmail>
+                </ProfileTextDiv>
+              </MemberProfileDiv>
 
 
-            <Scroll _height='calc(100vh - 282px)'>
-          <L.FlexCols _gap={24}>
-            {/* =========================== 닉네임 =========================== */}
-            <L.FlexCols>
-              <TitleText>닉네임</TitleText>
-              
-              {
-                showNameToggle 
-                  ? <NameResetToggle namevalue={member.nickname} setToggle={() => setShowNameToggle(false)} /> 
-                  : <NameToggle namevalue={member.nickname} setToggle={() => setShowNameToggle(true)} getMemberProfile={getMemberProfile}/>
+              <Scroll _height='calc(100vh - 282px)'>
+                <L.FlexCols _gap={24}>
+                  {/* =========================== 닉네임 =========================== */}
+                  <L.FlexCols>
+                    <TitleText>닉네임</TitleText>
+
+                    {
+                      showNameToggle
+                        ? <NameResetToggle namevalue={member.nickname} setToggle={() => setShowNameToggle(false)} />
+                        : <NameToggle namevalue={member.nickname} setToggle={() => setShowNameToggle(true)} getMemberProfile={getMemberProfile} />
+                    }
+                  </L.FlexCols>
+
+
+                  {/* ========================== 전화번호 ========================== */}
+                  <L.FlexCols>
+                    <TitleText>전화번호</TitleText>
+                    <MemberPhone phone={member.phone} getMemberProfile={getMemberProfile} />
+                  </L.FlexCols>
+
+                  {/* ========================== 비밀번호 ========================== */}
+                  <L.FlexCols>
+                    <TitleText>비밀번호 변경</TitleText>
+                    <MemberPwd />
+                  </L.FlexCols>
+
+                </L.FlexCols>
+
+                <MemberLinkDiv>
+                  <Link to="/member/withdrawal" >
+                    <MemberLinkText
+                    >
+                      회원탈퇴
+                    </MemberLinkText>
+                  </Link>
+                  <MemberBar />
+                  <MemberLinkText
+                    onClick={Logout}
+                  >
+                    로그아웃
+                  </MemberLinkText>
+                </MemberLinkDiv>
+                <L.FlexRows _height='50px'></L.FlexRows>
+                {
+                  alert &&
+                  <Alert
+                    title={alert.title}
+                    contents={alert.contents}
+                    buttonText={alert.buttonText}
+                    onButtonClick={alert.onButtonClick}
+                    onOverlayClick={alert.onOverlayClick}
+                  />
                 }
+              </Scroll>
             </L.FlexCols>
-
-
-            {/* ========================== 전화번호 ========================== */}
-            <L.FlexCols>
-              <TitleText>전화번호</TitleText>
-              <MemberPhone phone={member.phone} getMemberProfile={getMemberProfile}/>
-            </L.FlexCols>
-
-            {/* ========================== 비밀번호 ========================== */}
-            <L.FlexCols>
-              <TitleText>비밀번호 변경</TitleText>
-              <MemberPwd />
-            </L.FlexCols>
-
-            </L.FlexCols>
-
-          <MemberLinkDiv>
-            <Link to="/member/withdrawal" >
-              <MemberLinkText
-              >
-                회원탈퇴
-              </MemberLinkText>
-            </Link>
-            <MemberBar />
-            <MemberLinkText
-              onClick={Logout}
-            >
-              로그아웃
-            </MemberLinkText>
-          </MemberLinkDiv>
-          <L.FlexRows _height='50px'></L.FlexRows>
-      {
-        alert &&
-        <Alert
-          title={alert.title}
-          contents={alert.contents}
-          buttonText={alert.buttonText}
-          onButtonClick={alert.onButtonClick}
-          onOverlayClick={alert.onOverlayClick}
-        />
-      }
-        </Scroll>
-        </L.FlexCols>
-        </L.Contents>
-      </L.Container>
+          </L.Contents>
+        </L.Container>
 
       </Layout>
     </div>
@@ -153,16 +153,16 @@ function NameResetToggle({ setToggle, namevalue }) {
 
   return (
     <div>
-        <InputForm>
-          <Input
-            disabled
-            value={namevalue}
-          />
-          <ChangeButton
-            _width='25px'
-            onClick={ setToggle }
-          >변경</ChangeButton>
-        </InputForm>
+      <InputForm>
+        <Input
+          disabled
+          value={namevalue}
+        />
+        <ChangeButton
+          _width='25px'
+          onClick={setToggle}
+        >변경</ChangeButton>
+      </InputForm>
     </div>
   )
 }
@@ -178,8 +178,6 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
     const { data, message, code } = response.data;
 
     if (code && code === '500') {
-      console.log('에러')
-      console.log(message)
       return setError(message);
     }
 
@@ -192,26 +190,26 @@ function NameToggle({ namevalue, setToggle, getMemberProfile }) {
         getMemberProfile();
       },
     })
-    
+
   }
 
   return (
     <InputForm _bg='#fff'>
 
-        <NameToggleInput
-          id='id'
-          type='text'
-          value={id}
-          onChange={e => setId(e.target.value)}
-          placeholder={namevalue}
-        />
-        <ChangeButton
-          type='button'
-          onClick={nicknameChange}
-        >적용</ChangeButton>
+      <NameToggleInput
+        id='id'
+        type='text'
+        value={id}
+        onChange={e => setId(e.target.value)}
+        placeholder={namevalue}
+      />
+      <ChangeButton
+        type='button'
+        onClick={nicknameChange}
+      >적용</ChangeButton>
       {
         error && (
-          <Text  
+          <Text
             style={{ marginTop: 8, color: '#D32F2F' }}
             _size={14}>
             {error}

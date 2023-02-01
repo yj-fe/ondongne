@@ -320,31 +320,29 @@ function DetailsPage(props) {
 
 function TabContent(props) {
 
-  console.log(props.item);
-
   return [
 
     //=====================상세정보=====================
     <>
-     <MarketTable>
-              <tbody>
-                <tr>
-                  <th >구매 형태</th>
-                  <td >{props.item.type === 'GROUP' ? '공동구매 상품' : '일반 상품'}</td>
-                </tr>
-                <tr>
-                  <th >카테고리</th>
-                  <td >{props.item.category}</td>
-                </tr>
-                <tr>
-                  <th >배달/주문금액</th>
-                  <td >배달비 {numberFormat(props.item.deliveryPrice)}원, 최소주문 {numberFormat(props.item.orderMinPrice)}원</td>
-                </tr>
-                <tr>
-                  <th >배달/픽업</th>
-                  <td >{props.item.recetiveType} 가능</td>
-                </tr>
-                {/* <tr>
+      <MarketTable>
+        <tbody>
+          <tr>
+            <th >구매 형태</th>
+            <td >{props.item.type === 'GROUP' ? '공동구매 상품' : '일반 상품'}</td>
+          </tr>
+          <tr>
+            <th >카테고리</th>
+            <td >{props.item.category}</td>
+          </tr>
+          <tr>
+            <th >배달/주문금액</th>
+            <td >배달비 {numberFormat(props.item.deliveryPrice)}원, 최소주문 {numberFormat(props.item.orderMinPrice)}원</td>
+          </tr>
+          <tr>
+            <th >배달/픽업</th>
+            <td >{props.item.recetiveType} 가능</td>
+          </tr>
+          {/* <tr>
                   <th >쿠폰</th>
                   <td >해당 상점에 쿠폰이 있습니다.</td>
                 </tr>
@@ -352,8 +350,8 @@ function TabContent(props) {
                   <th ></th>
                   <td >상점(스토어) {'>'} 소식을 확인해 주세요.</td>
                 </tr> */}
-              </tbody>
-            </MarketTable>
+        </tbody>
+      </MarketTable>
 
 
       <Line />
@@ -408,7 +406,7 @@ function OrderToggle({
         <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
           <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
           <L.FlexRows _content='right' _gap='0px' _items='center' _width='114px'>
-            
+
             <CountButton type='button' onClick={() => counterHandler(-1)}><MinusB /></CountButton>
             <T.Text _align='center' _width='50px' _weight={500}>{numberFormat(count)}</T.Text>
             {/* <T.Text _align='center' _width='80px' _weight={500}>{numberFormat(count)}</T.Text> */}

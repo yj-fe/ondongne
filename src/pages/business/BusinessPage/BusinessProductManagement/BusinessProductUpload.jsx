@@ -152,10 +152,6 @@ function BusinessProductUpload() {
     if (auth.isAuthenticated && id) getItem();
   }, [auth, id])
 
-  console.log(data.price);
-  console.log(data.categories);
-  console.log(data.categories.length);
-
   return (
     <CursorDiv>
       <Layout
@@ -333,58 +329,58 @@ function BusinessProductUpload() {
               </L.FlexRows>
 
               {
-                data.type === 'GROUP' 
-                ?
-                <>
+                data.type === 'GROUP'
+                  ?
+                  <>
+                    <L.FlexRows>
+                      <L.FlexCols _gap={16}>
+                        <T.Text _weight={600} _size={16} _color="gray900">최소 수량</T.Text>
+                        <TitleInfoDiv>
+                          <Input
+                            name='minCount'
+                            placeholder='0'
+                            value={data.minCount}
+                            onChange={e => setData({ ...data, minCount: numberFormatter(e.target.value) })}
+                            maxLength={10}
+                          />
+                          <span>개</span>
+                        </TitleInfoDiv>
+                      </L.FlexCols>
+
+                      <L.FlexCols _gap={16}>
+                        <T.Text _weight={600} _size={16} _color="gray900">최대 수량</T.Text>
+                        <TitleInfoDiv>
+                          <Input
+                            name='maxCount'
+                            placeholder='0'
+                            value={data.maxCount}
+                            onChange={e => setData({ ...data, maxCount: numberFormatter(e.target.value) })}
+                            maxLength={10}
+                          />
+                          <span>개</span>
+                        </TitleInfoDiv>
+                      </L.FlexCols>
+                    </L.FlexRows>
+
+                    <L.FlexCols _gap={16}>
+                      <T.Text _weight={600} _size={16} _color="gray900">판매 종료일</T.Text>
+                      <TitleInfoDiv
+                        onClick={() => setCalendar(true)}
+                      >
+                        <Input
+                          disabled
+                          name='endDate'
+                          placeholder='판매 종료일 선택'
+                          style={{ background: '#fff' }}
+                          value={data.endDate ? data.endDate.split('T')[0] : ''}
+                        />
+                        <span><Calendar /></span>
+                      </TitleInfoDiv>
+                    </L.FlexCols>
+                  </>
+                  :
                   <L.FlexRows>
-                    <L.FlexCols _gap={16}>
-                      <T.Text _weight={600} _size={16} _color="gray900">최소 수량</T.Text>
-                      <TitleInfoDiv>
-                        <Input
-                          name='minCount'
-                          placeholder='0'
-                          value={data.minCount}
-                          onChange={e => setData({ ...data, minCount: numberFormatter(e.target.value) })}
-                          maxLength={10}
-                        />
-                        <span>개</span>
-                      </TitleInfoDiv>
-                    </L.FlexCols>
-
-                    <L.FlexCols _gap={16}>
-                      <T.Text _weight={600} _size={16} _color="gray900">최대 수량</T.Text>
-                      <TitleInfoDiv>
-                        <Input
-                          name='maxCount'
-                          placeholder='0'
-                          value={data.maxCount}
-                          onChange={e => setData({ ...data, maxCount: numberFormatter(e.target.value) })}
-                          maxLength={10}
-                        />
-                        <span>개</span>
-                      </TitleInfoDiv>
-                    </L.FlexCols>
                   </L.FlexRows>
-
-                  <L.FlexCols _gap={16}>
-                    <T.Text _weight={600} _size={16} _color="gray900">판매 종료일</T.Text>
-                    <TitleInfoDiv
-                      onClick={() => setCalendar(true)}
-                    >
-                      <Input
-                        disabled
-                        name='endDate'
-                        placeholder='판매 종료일 선택'
-                        style={{ background: '#fff' }}
-                        value={data.endDate ? data.endDate.split('T')[0] : ''}
-                      />
-                      <span><Calendar /></span>
-                    </TitleInfoDiv>
-                  </L.FlexCols>
-                </>
-                :
-                <L.FlexRows>
-                </L.FlexRows>
               }
 
               <L.FlexCols _gap={16}>

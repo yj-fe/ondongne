@@ -16,13 +16,13 @@ function Agreement({ setData, depthHandler }) {
   const [policy, setPolicy] = useState();
 
   const [active, setActive] = useState(false);
-  
+
   //Toggle
   const [showAge, setShowAge] = useState()
   const [showService, setShowService] = useState()
   const [showCollect, setShowCollect] = useState()
   const [showSns, setShowSns] = useState()
-  
+
   // CheckBox
   // 모두 동의
   const [checkAll, setCheckAll] = useState(false);
@@ -32,7 +32,6 @@ function Agreement({ setData, depthHandler }) {
   // 정책 데이터
   const getPolicy = async (type) => {
     const response = await locationPolicy({ policyType: type });
-    console.log(response);
     const { data } = response.data;
     setPolicy(data);
     if (type === "USE") setShowService((s) => !s);
@@ -65,14 +64,14 @@ function Agreement({ setData, depthHandler }) {
 
   // 체크박스
   useEffect(() => {
-    if (checkAll === true){
+    if (checkAll === true) {
       setChecks([true, true, true, true]);
-    } else{
+    } else {
       setChecks([false, false, false, false]);
     }
   }, [checkAll]);
   useEffect(() => {
-    if ( checks.filter(item => item).length === 4){
+    if (checks.filter(item => item).length === 4) {
       setCheckAll(true)
     }
   }, [checks]);
@@ -89,13 +88,13 @@ function Agreement({ setData, depthHandler }) {
           <CheckboxForm>
             <L.FlexRows
               _content='left' _items='center'
-              onClick={() => setCheckAll((s) => !s) }
+              onClick={() => setCheckAll((s) => !s)}
             >
               <CheckboxButton
                 id="All"
                 type="button"
               >
-                { checkAll && checks.filter(item => item).length === checks.length ? <Checked /> : <UnCheck />}
+                {checkAll && checks.filter(item => item).length === checks.length ? <Checked /> : <UnCheck />}
               </CheckboxButton>
               <CheckboxText
                 size="16px"
