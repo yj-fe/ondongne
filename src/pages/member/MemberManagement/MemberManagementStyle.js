@@ -311,6 +311,7 @@ export const NameToggleInput = styled.input`
 //   margin-top: 8px;
 // `
 export const ChangeButton = styled.button`
+  width: ${props => props._width}
   display: flex;
   flex-direction: row;
   font-weight: 500;

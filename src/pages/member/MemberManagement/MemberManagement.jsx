@@ -159,6 +159,7 @@ function NameResetToggle({ setToggle, namevalue }) {
             value={namevalue}
           />
           <ChangeButton
+            _width='25px'
             onClick={ setToggle }
           >변경</ChangeButton>
         </InputForm>

@@ -211,6 +211,6 @@ export const SignupText = styled.p`
 	color: #424242;
 `;
 export const ArrowStyle = styled.svg`
-	width: 18px;
+	width: 15px;
 	padding-top: 1px;
 `;
