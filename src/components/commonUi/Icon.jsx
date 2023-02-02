@@ -678,3 +678,22 @@ export const ReviewLike0 = () => (
     <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1792 14.9604C11.9147 15.4477 11.4129 15.75 10.8682 15.75H1.33333C0.918868 15.75 0.5 15.3309 0.5 14.9167V6.75C0.5 6.33579 0.835534 6 1.25 6H3.5L7.24835 1.49269C7.30723 1.40832 7.35911 1.33004 7.40656 1.25843C7.7071 0.804899 7.83025 0.619063 8.43144 0.848326C9.07473 1.09364 9.50134 1.72234 9.50134 2.42503V5.70677C9.50134 5.74252 9.52965 5.77149 9.56457 5.77149H14.0003C14.8285 5.77149 15.5 6.4588 15.5 7.30665V8.444C15.5 8.70489 15.435 8.96148 15.3113 9.18954L12.1792 14.9604ZM10.8599 14.2452C10.8588 14.2473 10.8569 14.25 10.8569 14.25H5V6.75L7.64546 3.5072C7.76436 3.36145 8.00043 3.44552 8.00043 3.63362V5.70677C8.00043 6.53688 8.66704 7.27149 9.56457 7.27149H13.9772C13.9846 7.27149 13.9921 7.27483 13.9949 7.28163C13.9949 7.28163 13.9991 7.29393 13.9991 7.30665V8.444C13.9991 8.45656 13.9959 8.46714 13.9919 8.47436L10.8599 14.2452ZM2 14.25V7.5H3.5V14.25H2Z" fill="#757575"/>
     </svg>
 )
+export const Bubble = () => (
+<svg width="199" height="91" viewBox="0 0 199 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_2374_15094)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M25 11C19.4772 11 15 15.4772 15 21V53C15 58.5228 19.4772 63 25 63H94L99 72L104 63H174C179.523 63 184 58.5228 184 53V21C184 15.4772 179.523 11 174 11H25Z" fill="#E54E2B"/>
+</g>
+<defs>
+<filter id="filter0_d_2374_15094" x="0" y="0" width="199" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="7.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2374_15094"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2374_15094" result="shape"/>
+</filter>
+</defs>
+</svg>
+)

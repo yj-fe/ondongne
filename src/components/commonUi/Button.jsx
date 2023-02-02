@@ -113,7 +113,7 @@ export const CouponButton = styled.button`
         transform: rotate(${props => props.active ? 180 : 0}deg);
     }
     @media screen and (max-width: 500px) {
-        bottom: ${props => props._buttom};
+        bottom: ${props => props._buttommedia};
     }
 `;
 export const LayerTextButton = styled.button`
@@ -141,6 +141,23 @@ export const Fixed = styled.button`
     }
 `;
 
+export const Sticky = styled.button`
+        position: sticky;
+        width: 100%;
+        top: ${props => props._top};
+        bottom: ${props => props._bottom};
+        z-index: 999;
+        left: ${props => props._left};
+        right: ${props => props._right};
+    @media screen and (max-width : 500px){  
+        top: ${props => props._top};
+        bottom: ${props => props._bottom};
+        z-index: 999;
+        left: ${props => props._left};
+        right: ${props => props._right};
+    }
+`;
+
 export const FixedActionButton = styled.button`
     z-index: 29;
     position: fixed;
@@ -155,7 +172,7 @@ export const FixedActionButton = styled.button`
     transform: translateX(-50%);
     font-size: 18px;
     font-weight: 700;
-    @media screen {
+    @media screen and (max-width:500px) {
      display: ${props => props._displaymedia};
     }
 `;
@@ -194,9 +211,9 @@ export const FixedPaddingActionButton = styled.button`
 
 `;
 export const FilterButton = styled.button`
-    width: auto;
-    height: 36px;
-    padding:    5px 8px;
+    width: ${props => props._width || 'auto'};
+    height: ${props => props._height || '36px'};
+    padding:    ${props => props._pd || '5px 8px'};
     background: ${props => props.theme.color[props._bg || 'gray50']};
     border: 1px solid #EEEEEE;
     border-radius: 99px;

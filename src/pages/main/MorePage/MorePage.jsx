@@ -10,13 +10,15 @@ import { Text } from 'components/commonUi/Text'
 import CheckBox from 'components/commonUi/CheckBox'
 import CheckBoxTitle from 'components/commonUi/CheckBoxTitle'
 import { Line } from '../DetailsPage/DetailsPageStyle'
-import { ArrowRight, Close } from 'components/commonUi/Icon'
+import { ArrowRight, Bubble, Close } from 'components/commonUi/Icon'
 import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
 import FooterLayout from 'components/layout/Footer/Footer'
 import { getBizMember } from 'service/biz'
 import Layout from 'components/layout/Layout/Layout'
 import Confirm from 'components/commonUi/Confirm'
 import TermsModal from 'components/service/TermsPage/TermsModal'
+import { Fixed, Sticky } from 'components/commonUi/Button'
 
 
 function MorePage() {
@@ -99,6 +101,16 @@ function MorePage() {
                   <AccountBadge>{member.role === 'MEMBER' ? '일반회원' : '비즈회원'}</AccountBadge>
                   <AccountName>{member.nickname}</AccountName>
                 </MoreAccountTextDiv>
+              {
+                // <Sticky
+                //   _top=''
+                //   _right=''
+                // >
+                //   <Bubble>
+                //   </Bubble>
+                //   {/* <T.Text><p>상품 판매가 가능한<p></p>비즈 회원으로 전환해 보세요!</p></T.Text> */}
+                // </Sticky>
+              }
               </MoreAccountProfile>
               <MoreAccountButtonDiv>
                 <MoreAccountButton onClick={goToMember}>회원정보 관리</MoreAccountButton>

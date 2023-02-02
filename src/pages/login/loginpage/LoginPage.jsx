@@ -236,10 +236,10 @@ function LoginPage() {
               }
 
               <L.FlexRows _gap='0px' _content='center'>
-                <T.Text _width='200px' _size={14} _color='gray800'>아직 온동네마켓 회원이 아니신가요?</T.Text>
+                <T.Text _width='200px' _size={13} _color='gray800'>아직 온동네마켓 회원이 아니신가요?</T.Text>
                 <Link to="/login/signup">
                   <Button>
-                    <T.Text _width='52px' _weight={600} _size={14} _color='gray800'>회원가입</T.Text>
+                    <T.Text   _weight={600} _size={13} _color='gray800'>회원가입</T.Text>
                     <ArrowStyle>
                       <ArrowRighteight />
                     </ArrowStyle>
