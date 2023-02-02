@@ -102,13 +102,13 @@ function BusinessPage() {
 
 
         {/* ==================== 2차개발 - 발행한 쿠폰 ==================== */}
-        {/* <L.Container>
+        <L.Container>
           <L.Contents>
           <L.FlexCols _gap={32}>
             <T.Text _weight={600} _size={18}>발행한 쿠폰</T.Text>
-            <CouponDiv> */}
+            <CouponDiv>
         {/* ========== 쿠폰배너생성시 뜨는 예시 ======= */}
-            {/* <CouponCard>
+            <CouponCard>
               <CouponTitleDiv>
                 <Badge _letspace='0.07em' _weight={600} _bg='green50' _bdr='4px' _color='green700' _size='12px'>발행중</Badge>
                 <CouponTitleText>고객감사 할인 쿠폰</CouponTitleText>
@@ -138,7 +138,7 @@ function BusinessPage() {
             </CouponDiv>
             </L.FlexCols>
           </L.Contents>
-        </L.Container> */}
+        </L.Container>
 
         {/* ==================== 내 상점 인기상품 ==================== */}
         <L.Container>
@@ -207,12 +207,12 @@ function BusinessPage() {
             </TermsDiv>
               </Link> */}
             {/* 2차개발-상점 소식 관리 */}
-            {/* <Link to="">
+            <Link to="coupon">
                 <TermsDiv>
                   <TermsTitle>상점 소식 관리</TermsTitle>
                     <TermsIconStyle><Right /></TermsIconStyle>
                 </TermsDiv>
-              </Link> */}
+              </Link>
           </L.Contents>
         </L.Container>
 

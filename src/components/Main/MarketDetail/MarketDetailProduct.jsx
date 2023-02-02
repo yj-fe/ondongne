@@ -88,6 +88,10 @@ function MarketDetailProduct({ id }) {
               </L.FlexRows>
             </L.FlexRows>
 
+            {/* =================== 로딩 =================== */}
+            {
+              loading && <LoadingBar />
+            }
 
             {/* =================== 없을때 =================== */}
             {
@@ -102,10 +106,6 @@ function MarketDetailProduct({ id }) {
               <ProductList list={list} lastRef={ref} />
             }
 
-            {/* =================== 로딩 =================== */}
-            {
-              loading && <LoadingBar />
-            }
 
 
           </L.FlexCols>
@@ -142,7 +142,7 @@ export function ProductList({ list, lastRef }) {
           />
         </React.Fragment>
       ))}
-   </L.Grid>
+      </L.Grid>
     </Scroll>
   )
 }

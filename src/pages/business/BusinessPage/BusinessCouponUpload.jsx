@@ -9,6 +9,10 @@ import 'react-quill/dist/quill.snow.css';
 import Confirm from 'components/commonUi/Confirm';
 import { CouponTitleInput } from 'components/commonUi/Input';
 import CouponAlert from 'components/commonUi/CouponAlert';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+
 
 function BusinessCouponUpload() {
 
@@ -47,32 +51,64 @@ function BusinessCouponUpload() {
         title="쿠폰소식 등록"
         cart={false}
         bell={false}
+        // completed={true}
         onBackClick={() => { navigate(-1); }}
       >
-        <L.Container>
+        <B.Fixed
+          _right='20px'
+          _top='40px'
+        >
+          <T.Text _size={15} _weight={500} _color='green700'> 완료</T.Text>
+        </B.Fixed>
+        <L.Container >
           <L.Contents _padding='0px'>
             <CouponTitleInput
               placeholder='제목을 입력해 주세요.'
             />
           </L.Contents>
         </L.Container>
-        <L.Container _padding="0px" _gap='0px' _height='850px'>
+        <L.Container _gap='8px' _height='calc(100vh - 230px)'>
           <L.Contents _padding="0px" _height='100%'>
-            <ReactQuill
+            {/* <ReactQuill
               theme="snow"
               value={value}
               modules={modules}
               onChange={setValue}
+            /> */}
+            <CKEditor
+              editor={ClassicEditor}
+              config={{
+                extraPlugins: [(function (editor) {
+                  editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                    // return customUploadAdapter(loader);
+                  }
+                })],
+              }}
+              // data={data.description}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                setValue(data);
+              }}
+              // 높이
+              onReady={(editor) => {
+                editor.editing.view.change((writer) => {
+                writer.setStyle(
+                    "height",
+                    "calc(100vh - 277px)",
+                    editor.editing.view.document.getRoot()
+                );
+                });
+              }}
+              
             />
-          </L.Contents>
-
-
 
           <B.CouponButton
+            _buttommedia='0px'
             onClick={openModal}
           >
             쿠폰 등록하기
           </B.CouponButton>
+          </L.Contents>
           {
             modal &&
             <CouponAlert
@@ -80,7 +116,9 @@ function BusinessCouponUpload() {
               onOverlayClick={modal.onOverlayClick}
             />
           }
-          <B.FixedActionButton>완료</B.FixedActionButton>
+          <B.FixedActionButton
+            _displaymedia='none'
+          >완료</B.FixedActionButton>
         </L.Container>
       </Layout>
       {
