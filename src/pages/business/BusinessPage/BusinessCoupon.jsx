@@ -8,12 +8,18 @@ import { ImgPer } from 'components/layout/Img/ImgSizeLayout';
 import ImageSample from 'assets/images/sample.png'
 import { DownloadC, More } from 'components/commonUi/Icon';
 import MoreLayout from 'components/layout/Layout/MoreLayout';
+import LoadingBar from 'components/commonUi/LoadingBar';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function BusinessCoupon() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+// 사용가능 쿠폰
+  const [newsData, setNewsData] = useState([true]);
+
 
   return (
-    <div>
+    <CursorDiv>
       <Layout
         title="쿠폰소식 관리"
         cart={false}
@@ -21,41 +27,47 @@ function BusinessCoupon() {
         onBackClick={() => navigate(-1)}
       >
         <L.Container >
-          {/* =================== 쿠폰 없을 때 =================== */}
-          {/* <BusinessCouponEmpty/> */}
-
-
-          {/* =================== 쿠폰 있을 때 =================== */}
-          <BusinessCouponContent />
-
-
+          <L.Contents _height='calc(100vh - 50px)' _cursor='default' >
+            <L.Scroll _height='calc(100vh - 110px)'>
+            {
+              loading && <LoadingBar />
+            }
+            {/* =================== 쿠폰 없을 때 =================== */}
+            {
+              !loading && newsData.length === 0 && 
+              <BusinessCouponEmpty/>
+            }
+            {/* =================== 쿠폰 있을 때 =================== */}
+            {
+              !loading && newsData && newsData.length > 0 &&
+              <BusinessCouponContent/>
+            }
+            </L.Scroll>
+          </L.Contents>
         </L.Container>
       </Layout>
-    </div>
+    </CursorDiv>
   )
 }
 
 
 
-
+// {/* =================== 쿠폰 없을 때 =================== */}
 function BusinessCouponEmpty() {
   return (
-    <div>
-      <L.Contents _padding="24px 20px" _height={'100vh'}>
-        <L.FlexCols _padding={0} _gap={0}>
-          <T.Text _weight={400} _size={15} _color="gray900" >전체 0건</T.Text>
-          <L.Contents _padding="80px 20px" >
-            <L.FlexCols _padding={0} _gap={4}>
-              <T.Text _weight={300} _size={15} _color="gray600" _align='center'>작성된 리뷰글이 없습니다.</T.Text>
-            </L.FlexCols>
-          </L.Contents>
+    <L.FlexCols _padding={0} _gap={0}>
+      <T.Text _weight={400} _size={15} _color="gray900" >전체 0건</T.Text>
+      <L.Line/>
+      <L.Contents _padding="80px 20px" >
+        <L.FlexCols _padding={0} _gap={4}>
+          <T.Text _weight={300} _size={15} _color="gray600" _align='center'>작성된 리뷰글이 없습니다.</T.Text>
         </L.FlexCols>
       </L.Contents>
-    </div>
+    </L.FlexCols>
   )
 }
 
-
+// {/* =================== 쿠폰 있을 때 =================== */}
 function BusinessCouponContent() {
 
   const [modal, setModal] = useState(false);
@@ -67,9 +79,6 @@ function BusinessCouponContent() {
   }
 
   return (
-    <div>
-      <L.Contents _padding="24px 20px" >
-        <L.Contents _padding="0px" _gap={16}>
           <L.FlexCols _gap={16}>
 
             <L.FlexRows _align='center' _content='space-between'>
@@ -106,13 +115,9 @@ function BusinessCouponContent() {
                 쿠폰사용
               </C.CouponUsebox>
             </C.Borderbox>
+            {modal && <MoreLayout PropsModal={PropsModal} />}
           </L.FlexCols>
 
-
-        </L.Contents>
-      </L.Contents>
-      {modal && <MoreLayout PropsModal={PropsModal} />}
-    </div>
   )
 }
 

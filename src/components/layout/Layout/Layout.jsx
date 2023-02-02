@@ -34,6 +34,7 @@ Layout.props = {
   bell: PropTypes.bool,
   cart: PropTypes.bool,
   back: PropTypes.bool,
+  // completed: PropTypes.bool,
   floating: PropTypes.bool,
   backArrow: PropTypes.bool,
   titleCenter: PropTypes.bool,

@@ -12,6 +12,7 @@ import { S } from './HeaderStyle';
 import { MoreStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import ModalMorePage from 'components/Main/More/ModalMorePage'
 import ModalShare from 'components/commonUi/ModalShare';
+import { Text } from 'components/commonUi/Text';
 
 
 const Header = ({
@@ -23,6 +24,7 @@ const Header = ({
     back = true,
     search = false,
     more = false,
+    // completed = false,
     share = false,
     backArrow = true,
     ...props
@@ -113,6 +115,12 @@ const Header = ({
                         <More />
                         </MoreStyle>
                     }
+                    {/* {
+                        completed &&
+                        <S.UtilBtn _width='30px' as={Link} to="/cart">
+                            <Text _size={15} _weight={500} _color='green700'> 완료</Text>
+                        </S.UtilBtn>
+                    } */}
                 </S.Block>
             </S.Inner>
             {modal && <ModalMorePage PropsModal={PropsModal} />}
@@ -137,6 +145,7 @@ Header.propTypes = {
     search: PropTypes.bool,
     share: PropTypes.bool,
     more: PropTypes.bool,
+    completed: PropTypes.bool,
     cart: PropTypes.bool,
     back: PropTypes.bool,
     backArrow: PropTypes.bool,

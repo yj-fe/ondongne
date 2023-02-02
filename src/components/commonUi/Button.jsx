@@ -112,6 +112,9 @@ export const CouponButton = styled.button`
         background: url(${right}) center no-repeat;
         transform: rotate(${props => props.active ? 180 : 0}deg);
     }
+    @media screen and (max-width: 500px) {
+        bottom: ${props => props._buttom};
+    }
 `;
 export const LayerTextButton = styled.button`
     width: ${props => props._width || '100%'};
@@ -124,6 +127,18 @@ export const LayerTextButton = styled.button`
     line-height: 1.5;
     border: 1px solid ${props => props.theme.color.gray200};
     border-radius: 4px; 
+`;
+
+export const Fixed = styled.button`
+    display: none;
+    @media screen and (max-width : 500px){  
+        position: fixed;
+        top: ${props => props._top};
+        bottom: ${props => props._bottom};
+        z-index: 999;
+        left: ${props => props._left};
+        right: ${props => props._right};
+    }
 `;
 
 export const FixedActionButton = styled.button`
@@ -140,6 +155,9 @@ export const FixedActionButton = styled.button`
     transform: translateX(-50%);
     font-size: 18px;
     font-weight: 700;
+    @media screen {
+     display: ${props => props._displaymedia};
+    }
 `;
 
 export const ActionButton = styled.button`

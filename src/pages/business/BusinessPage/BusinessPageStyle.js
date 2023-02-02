@@ -101,16 +101,18 @@ export const CouponTitleText = styled.p`
 	color: #ffffff;
 `;
 export const CouponInfoDiv = styled.div`
-	display: flex;
-	flex-direction: row;
+	/* display: flex; */
+	/* flex-direction: row; */
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 	justify-content: center;
 	align-items: center;
 	padding: 0px;
 	gap: 16px;
 	width: 100%;
 	height: auto;
-	@media screen and (max-width: 550px) {
-		
+	@media screen and (max-width: 500px) {
+			grid-template-columns: 1fr ;
 	}
 `;
 export const DownloadDiv = styled.div`

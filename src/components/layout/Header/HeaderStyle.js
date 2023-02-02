@@ -33,8 +33,8 @@ export const S = {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 24px;
-        height: 24px;
+        width: ${props => props._width || '24px'};
+        height: ${props => props._height || '24px'};
         padding: 0;
         
     `,
