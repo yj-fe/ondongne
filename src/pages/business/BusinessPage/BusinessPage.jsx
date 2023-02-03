@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
-import maindata from 'assets/data/maindata'
-
 import BusinessHeader from 'components/Buisness/Header/BusinessHeader'
 import { ReactComponent as Right } from "assets/main/right.svg";
 import { ReactComponent as OrderIcon } from "assets/icons/business/neworder.svg";
 import { ReactComponent as Pickup } from "assets/icons/business/pickup.svg";
 import { ReactComponent as NewReview } from "assets/icons/business/newreview.svg";
-import { MoreNavBody, MoreContainer, MoreDiv, FooterText, Logo } from 'pages/main/MorePage/MorePageStyle'
 import { TermsDiv, TermsTitle, TermsIconStyle } from 'pages/service/TermsPage/TermsPageStyle'
-import { InfoCard, InfoIconStyle, CardCount, CardText, Footer, InfoDiv, FloatingContentDiv, FloatingContentTitle, FloatingContentIcon, FloatingToggleDiv, CardTextDiv, CouponDiv, CouponInfoDiv, DownloadDiv, DownloadText, DownloadCount, DownloadCountTextB, DownloadCountTextN, MyBestProductContent, FloatingDiv, FooterDiv, CouponCard, CouponTitleDiv, CouponBadge, CouponTitleText, CouponTitleInfoDiv, FloatingDivT, EmptyDiv, EmptyText, EmptyButton, EmptyButtonIcon, EmptyButtonText } from './BusinessPageStyle'
-import { ContentDate, ContentImg, ContentMarket, ContentProduct, ContentStyle, ContentTitle, Discount, DiscountStyle, Price, FinalPrice, RateStyle, Star, Number } from 'components/Main/Main/MainBestCollection/MainBestCollectionStyle'
+import { InfoCard, InfoIconStyle, CardCount, CardText, CardTextDiv,  MyBestProductContent, EmptyDiv, EmptyText, EmptyButton, EmptyButtonIcon, EmptyButtonText } from './BusinessPageStyle'
 import { getDashboard } from 'service/biz';
 import { useSelector, useDispatch } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
@@ -22,7 +18,6 @@ import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import StoreModal from 'components/layout/Modal/StoreModal';
 import Layout from 'components/layout/Layout/Layout';
 import { CursorDiv } from 'components/Common/LayoutPageStyle';
-import { Badge } from 'components/commonUi/Button';
 
 function BusinessPage() {
   const navigate = useNavigate();

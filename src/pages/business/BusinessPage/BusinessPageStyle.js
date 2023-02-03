@@ -1,13 +1,4 @@
 import styled from "styled-components";
-export const InfoDiv = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	padding: 0px;
-	gap: 16px;
-	width: 688px;
-	height: 154px;
-`;
 export const InfoCard = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -51,106 +42,6 @@ export const CardText = styled.p`
 export const CardCount = styled.p`
 	font-weight: 600;
 	font-size: 18px;
-	color: #212121;
-`;
-export const CouponDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 0px;
-	gap: 16px;
-	width: 100%;
-	height: auto;
-`;
-export const CouponCard = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 20px;
-	gap: 12px;
-	width: 100%;
-	height: 140px;
-	background: #2dac9e;
-	border-radius: 8px;
-`;
-export const CouponTitleDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 0px;
-	gap: 4px;
-	width: 200px;
-	height: 52px;
-`;
-export const CouponTitleInfoDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 0px;
-	width: 150px;
-	height: 36px;
-	font-weight: 400;
-	font-size: 13px;
-	color: #ffffff;
-`;
-export const CouponTitleText = styled.p`
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 26px;
-	letter-spacing: 0.07em;
-	color: #ffffff;
-`;
-export const CouponInfoDiv = styled.div`
-	/* display: flex; */
-	/* flex-direction: row; */
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-content: center;
-	align-items: center;
-	padding: 0px;
-	gap: 16px;
-	width: 100%;
-	height: auto;
-	@media screen and (max-width: 500px) {
-			grid-template-columns: 1fr ;
-	}
-`;
-export const DownloadDiv = styled.div`
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	padding: 12px 24px;
-	gap: 8px;
-	width: 100%;
-	height: 54px;
-	background: #ffffff;
-	border: 1px solid #eeeeee;
-	border-radius: 8px;
-`;
-export const DownloadText = styled.p`
-	font-weight: 400;
-	font-size: 15px;
-	color: #212121;
-`;
-export const DownloadCount = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding: 0px;
-	gap: 4px;
-	width: 52px;
-	height: 30px;
-`;
-export const DownloadCountTextB = styled.p`
-	font-weight: 600;
-	font-size: 20px;
-	color: #212121;
-`;
-export const DownloadCountTextN = styled.p`
-	font-weight: 400;
-	font-size: 15px;
 	color: #212121;
 `;
 export const EmptyDiv = styled.div`
@@ -275,10 +166,6 @@ export const FloatingToggleDiv = styled.div`
 	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.16);
 	border-radius: 20px;
 `;
-export const FloatingContentIcon = styled.div`
-	width: 24px;
-	height: 24px;
-`;
 export const FloatingContentTitle = styled.div`
 	font-weight: 400;
 	font-size: 16px;
@@ -293,4 +180,12 @@ export const FloatingContentDiv = styled.div`
 
 	width: 120px;
 	height: 56px;
+`;
+export const Display = styled.div`
+	@media screen and (max-width: 500px) {
+		display: ${props => props._displaynone};
+	}
+	@media screen and (min-width: 501px) {
+		display: ${props => props._display};
+	}
 `;
