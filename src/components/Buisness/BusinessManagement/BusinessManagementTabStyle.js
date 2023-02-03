@@ -307,7 +307,7 @@ export const DayBox = styled.div`
 	align-items: center;
 	/* padding: 12px 16px; */
 	gap: 4px;
-	width: 100%;
+	width: ${props => props._width || '100%'};
 	height: ${(props) => props._height || "48px"};
 	background: ${(props) => (props.color ? "#E1F3F2" : "#F5F5F5")};
 	border-radius: 4px;

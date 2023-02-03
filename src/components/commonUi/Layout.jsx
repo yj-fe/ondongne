@@ -446,6 +446,9 @@ export const Scroll = styled.div`
 	&::-webkit-scrollbar {
 		display: none;
 	}
+    @media screen and (max-width : 450px) {
+        height: ${(props) => props._heightmedia} ;
+    }
 `;
 
 export const Parents = styled.div`

@@ -2,26 +2,33 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import Overlay from '../layout/Overlay/Overlay'
 import styled from 'styled-components';
-import { FlexCols, FlexRows, Scroll } from './Layout';
+import { FlexCols, FlexRows } from './Layout';
 import { Text } from './Text';
-import { SimpleClose, EmptyCheck, InputValue, Calendar, EmptyUnCheck } from './Icon';
+import { SimpleClose, EmptyCheck, InputValue, EmptyUnCheck } from './Icon';
 import { TextInput } from './Input';
 import { Line } from 'pages/login/LocationSetting/LocationSettingStyle';
-import { Badge, BorderBox, Fixed, LayerTextButton } from './Button';
+import { BorderBox, } from './Button';
 import { DayBox, Input, InputBox } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { LoginNavTitle } from 'components/Login/Common/LoginHeader/LoginHeaderStyle'
-import { Container } from 'components/layout/Modal/Modal'
 import CalendarModel from './CalendarModel';
 import dayjs from 'dayjs';
 
 const S = {
     AlertBox: styled.div`
-        width: 342px;
-        height: auto;
-        max-width: calc(100vw - 40px);
-        max-height: calc(100vh - 40px);
-        border-radius: 12px;
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: 'center';
+        justify-content: 'center';
+        padding: 0px;
+        width: ${props => props._width || '390px'};
+        height: '688px';
+        border-radius: 16px;
+        background: #FFFFFF;
+        @media screen and (max-width: 450px) {
+            width: 100%;
+            height: 100%;
+            border-radius: 0px;
+        }
     `,
     Body: styled.div`
         padding: ${props => props._pd || '24px 24px 32px'};
@@ -34,7 +41,14 @@ const S = {
         height: 48px;
         line-height: 48px;
         color: #FFF;
-        background-color: ${props => props.theme.color.green600};
+        border-radius: 0px 0px 16px 16px;
+        background-color: ${props => props.theme.color.green700};
+        position: static;
+        @media screen and (max-width: 450px) {
+            position: ${props => props._position};
+            bottom: ${props => props._bottom};
+            border-radius: 0;
+        }
     `,
     SearchBox: styled.div`
         width: 310px;
@@ -70,57 +84,57 @@ const CouponAlert = ({
     });
 
       // 종료일 설정
-  const endDateHandler = (date) => {
-    setData({
-      ...data,
-      endDate: date,
-    })
-}
+    const endDateHandler = (date) => {
+        setData({
+        ...data,
+        endDate: date,
+        })
+    }
 
-  const onChangeBenefit = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const onChangeBenefit = (e) => {
+        setData({
+        ...data,
+        [e.target.name]: e.target.value,
+        });
+    };
 
-  const onSubmit = () => {
-    
-  }
+    const onSubmit = () => {
+
+    }
 
     if(active) {
         return (
             <Overlay
                 onOverlayClick={props.onOverlayClick}
             >
-                <Container  _height='636px' _br='16px' _items='center' _content='center'>
-                            <FlexCols>
-                            {/* <Scroll _height='100%'> */}
-                            <FlexRows _padding='0px 20px 0px 20px' _content='space-between'>
-                                <FlexRows _content='center' >
-                                    <LoginNavTitle _transform='translateX(+20px)'>쿠폰 등록</LoginNavTitle>
-                                </FlexRows>
-                                <button
-                                    onClick={() => {props.onOverlayClick()}}
-                                >
-                                    <SimpleClose/>
-                                </button>
+                <S.AlertBox  >
+                    <FlexCols>
+                            
+                        <FlexRows _padding='24px 20px 0px 20px' _content='space-between'>
+                            <FlexRows _content='center' >
+                                <LoginNavTitle _transform='translateX(+20px)'>쿠폰 등록</LoginNavTitle>
                             </FlexRows>
+                            <button
+                                onClick={() => {props.onOverlayClick()}}
+                            >
+                                <SimpleClose/>
+                            </button>
+                        </FlexRows>
+                        
                         <Line/>
 
-                        
-                            <FlexCols _gap={32} _padding='16px 20px 0px'>
+                            <FlexCols _gap={32} _padding='16px 20px'>
                                 <FlexCols _gap={16}>
                                     <Text as="p">쿠폰 종류</Text>
                                     <FlexRows>
                                         <DayBox
                                             onClick={()=>{setMoBox(!mobox)}}
-                                            color={mobox}
+                                            color={mobox} _width='108px' _height='40px'
                                         >
                                         일반 쿠폰</DayBox>
                                         <DayBox
                                             onClick={()=>{setTuBox(!tubox)}}
-                                            color={tubox}
+                                            color={tubox} _width='108px' _height='40px'
                                         >
                                         단골 쿠폰</DayBox>
                                     </FlexRows>
@@ -183,12 +197,12 @@ const CouponAlert = ({
 
                                 
                             </FlexCols>
-                            {/* </Scroll> */}
-                            </FlexCols>
-                                {/* <Text as="p" _size={13} _weight={400} _color={'gray600'} >{props.desc}</Text> */}
-                            <S.Button
-                                onClick={() => {props.onButtonClick(); onSubmit();}}
-                            >쿠폰 등록</S.Button>
+                        <S.Button
+                            _position='fixed'
+                            _bottom='0'
+                            onClick={() => {props.onButtonClick(); onSubmit();}}
+                        >쿠폰 등록</S.Button>
+                    </FlexCols>
                             {
                                 calendar &&
                                 <CalendarModel
@@ -197,7 +211,7 @@ const CouponAlert = ({
                                     dateFormat={'yyyy-MM-dd HH:mm:ss'}
                                 />
                             }
-                </Container>
+                </S.AlertBox>
             </Overlay>
         )
     }
