@@ -9,7 +9,7 @@ import { ReactComponent as Naver } from "assets/login/naver.svg";
 import { ReactComponent as Kakao } from "assets/login/kakao.svg";
 import { ReactComponent as Google } from "assets/login/google.svg";
 import { ReactComponent as Apple } from "assets/login/apple.svg";
-import { LogoImg, InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, Button, GapContainer, ArrowStyle } from "./LoginPageStyle";
+import {  InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, Button, GapContainer, ArrowStyle } from "./LoginPageStyle";
 import Alert from 'components/commonUi/Alert';
 import Confirm from 'components/commonUi/Confirm';
 import { login } from "service/auth";

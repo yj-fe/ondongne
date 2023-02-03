@@ -37,47 +37,6 @@ export const RequestInfo = styled.p`
     width: 100%;
   }
 `
-export const RequestInputForm = styled.form`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 12px;
-  width: 648px;
-  height: 48px;
-  margin-top: 40px;
-  margin-bottom: 16px;
-
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
-`
-export const RequestInput = styled.input`
-  box-sizing: border-box;
-  width: 546px;
-  height: 48px;
-  background: #FFFFFF;
-  border-bottom: 1px solid #E0E0E0;
-  flex: none;
-  padding: 12px;
-
-  font-weight: 400;
-  font-size: 16px;
-
-  color: #BDBDBD;
-  &:focus {
-    outline: none;
-    border-bottom: 1px solid #616161;
-    color: #212121;
-  }
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-
-  @media only screen and (max-width: 390px) {
-    width: 255px;
-  }
-`
 export const RequestButton = styled.button`
   box-sizing: border-box;
   display: flex;

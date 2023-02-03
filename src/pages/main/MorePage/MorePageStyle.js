@@ -1,33 +1,5 @@
 import styled from "styled-components";
-export const MoreNavBody = styled.div`
-	margin-top: 60px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: #f5f5f5;
-	flex-direction: column;
-	gap: 8px;
-	/* padding-bottom: 56px; */
-`;
-export const MoreContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background: #f5f5f5;
-	width: 728px;
-	/* height: auto; */
-	padding: 0px;
 
-	> div {
-		/* max-width: 728px; */
-		width: 100%;
-
-		@media only screen and (max-width: 728px) {
-			width: 100%;
-		}
-	}
-`;
 export const MoreLoginDiv = styled.div`
 	box-sizing: border-box;
 	display: flex;
@@ -182,10 +154,6 @@ export const MoreContainerDiv = styled.div`
 	text-align: center;
 	color: #212121;
 	cursor: pointer;
-`;
-export const Logo = styled.img`
-	width: 72px;
-	height: 32px;
 `;
 export const FooterDiv = styled.div`
 	width: 728px;

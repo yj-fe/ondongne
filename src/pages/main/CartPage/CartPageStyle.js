@@ -1,15 +1,5 @@
 import styled from "styled-components";
-export const CartBody = styled.div`
-	display: flex;
-	align-items: center;
-	/* justify-content: center; */
-	background: #f5f5f5;
-	flex-direction: column;
-	padding-bottom: 56px;
-	height: 100vh;
-	margin-top: 60px;
-	gap: 8px;
-`;
+
 export const CartContainer = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -19,23 +9,6 @@ export const CartContainer = styled.div`
 	width: 100%;
 	height: auto;
 	margin-bottom: 30px;
-`;
-export const CartEmptyDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 80px 20px;
-	gap: 4px;
-	height: 100vh;
-	margin-top: 60px;
-	background: #ffffff;
-`;
-export const CartEmptyTextDiv = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	margin-top: 80px;
 `;
 export const CartEmptyText = styled.p`
 	font-weight: 300;

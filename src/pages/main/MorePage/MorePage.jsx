@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainer, MoreContainerDiv, MoreDiv, MoreNavBody, AccountBadge, AccountName, Footer, Logo, FooterText, MoreLoginDiv, MoreLoginText, MoreLoginButton, MoreAccountImgBox } from './MorePageStyle'
+import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainerDiv, MoreDiv, AccountBadge, AccountName, MoreLoginDiv, MoreLoginText, MoreLoginButton, MoreAccountImgBox } from './MorePageStyle'
 import { Link, useNavigate } from 'react-router-dom'
 import { getMember } from 'service/member'
 import { useSelector } from 'react-redux'
 import Alert from 'components/commonUi/Alert'
 import Modal from 'components/layout/Modal/Modal'
-import { AgreementDiv, Button, ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle, SpaceBet } from 'components/Main/More/ModalPageStyle'
+import { AgreementDiv, Button, ModalBody, ModalDiv1, ModalDiv2, ModalOutside, SpaceBet } from 'components/Main/More/ModalPageStyle'
 import { Text } from 'components/commonUi/Text'
 import CheckBox from 'components/commonUi/CheckBox'
 import CheckBoxTitle from 'components/commonUi/CheckBoxTitle'
 import { Line } from '../DetailsPage/DetailsPageStyle'
-import { ArrowRight, Bubble, Close } from 'components/commonUi/Icon'
+import { ArrowRight, Close } from 'components/commonUi/Icon'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import FooterLayout from 'components/layout/Footer/Footer'
@@ -18,7 +18,6 @@ import { getBizMember } from 'service/biz'
 import Layout from 'components/layout/Layout/Layout'
 import Confirm from 'components/commonUi/Confirm'
 import TermsModal from 'components/service/TermsPage/TermsModal'
-import { Fixed, Sticky } from 'components/commonUi/Button'
 
 
 function MorePage() {

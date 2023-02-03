@@ -534,12 +534,6 @@ export const ReviewProfileStyle = styled.div`
 	align-items: center;
 	gap: 8px;
 `;
-export const ReportText = styled.p`
-	padding-top: 0;
-	font-weight: 400;
-	font-size: 12px;
-	color: #bdbdbd;
-`;
 export const UploadImg = styled.img`
 	width: 100%;
 	height: auto;

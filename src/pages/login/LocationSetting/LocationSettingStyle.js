@@ -1,42 +1,5 @@
 import styled from "styled-components";
-export const LocationBody = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: #f5f5f5;
-	flex-direction: column;
-	/* padding-bottom: 56px; */
-	height: 100vh;
-	/* gap: 8px; */
-`;
-export const LocationContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	background: #ffffff;
-	padding: 24px 20px;
-	margin-top: 60px;
-	gap: 15px;
-	width: 728px;
-	height: 100vh;
-	overflow: hidden;
-	> div {
-		/* max-width: 728px; */
-		width: 100%;
 
-		@media only screen and (max-width: 728px) {
-			width: 100%;
-		}
-	}
-`;
-export const LocationDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 0px;
-	gap: 20px;
-	width: 100%;
-	height: 126px;
-`;
 export const Div1 = styled.p`
 	width: 100%;
 	height: 26px;
@@ -114,75 +77,8 @@ export const Line = styled.div`
 	width: 100%;
 	background: #eeeeee;
 `;
-export const Spinner = styled.div`
-	width: 70px;
-	text-align: center;
 
-	> div {
-		width: 10px;
-		height: 10px;
-		background-color: #bdbdbd;
-		border-radius: 100%;
-		display: inline-block;
-	}
-`;
-export const Bounce1 = styled.div`
-	-webkit-animation-delay: -0.32s;
-	animation-delay: -0.32s;
-	-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-	animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 
-	@keyframes sk-bouncedelay {
-		0%,
-		80%,
-		100% {
-			-webkit-transform: scale(0);
-			transform: scale(0);
-		}
-		40% {
-			-webkit-transform: scale(1);
-			transform: scale(1);
-		}
-	}
-`;
-export const Bounce2 = styled.div`
-	-webkit-animation-delay: -0.16s;
-	animation-delay: -0.16s;
-	-webkit-animation: sk-bouncedelay 1s infinite ease-in-out both;
-	animation: sk-bouncedelay 1s infinite ease-in-out both;
-
-	@keyframes sk-bouncedelay {
-		0%,
-		80%,
-		100% {
-			-webkit-transform: scale(0);
-			transform: scale(0);
-		}
-		40% {
-			-webkit-transform: scale(1);
-			transform: scale(1);
-		}
-	}
-`;
-export const Bounce3 = styled.div`
-	-webkit-animation-delay: -0.32s;
-	animation-delay: -0.32s;
-	-webkit-animation: sk-bouncedelay 0.8s infinite ease-in-out both;
-	animation: sk-bouncedelay 0.8s infinite ease-in-out both;
-
-	@keyframes sk-bouncedelay {
-		0%,
-		80%,
-		100% {
-			-webkit-transform: scale(0);
-			transform: scale(0);
-		}
-		40% {
-			-webkit-transform: scale(1);
-			transform: scale(1);
-		}
-	}
-`;
 export const LocationListContainer = styled.div`
 	display: flex;
 	flex-direction: column;

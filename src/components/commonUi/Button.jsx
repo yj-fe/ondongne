@@ -129,35 +129,6 @@ export const LayerTextButton = styled.button`
     border-radius: 4px; 
 `;
 
-export const Fixed = styled.button`
-    display: none;
-    @media screen and (max-width : 500px){  
-        position: fixed;
-        top: ${props => props._top};
-        bottom: ${props => props._bottom};
-        z-index: 999;
-        left: ${props => props._left};
-        right: ${props => props._right};
-    }
-`;
-
-export const Sticky = styled.button`
-        position: sticky;
-        width: 100%;
-        top: ${props => props._top};
-        bottom: ${props => props._bottom};
-        z-index: 999;
-        left: ${props => props._left};
-        right: ${props => props._right};
-    @media screen and (max-width : 500px){  
-        top: ${props => props._top};
-        bottom: ${props => props._bottom};
-        z-index: 999;
-        left: ${props => props._left};
-        right: ${props => props._right};
-    }
-`;
-
 export const FixedActionButton = styled.button`
     z-index: 29;
     position: fixed;
@@ -192,23 +163,6 @@ export const ActionButton = styled.button`
     transform: translateX(-50%);
     font-size: 18px;
     font-weight: 700;
-`;
-export const FixedPaddingActionButton = styled.button`
-    z-index: 29;
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    width: 688px;
-    max-width: ${props => props.theme.breakpoint.tablet}px;
-    height: 56px;
-    padding: 0 16px;
-    background-color: ${props => props.theme.color.green700};
-    border-radius: 4px;
-    color: #FFF;
-    transform: translateX(-50%);
-    font-size: 18px;
-    font-weight: 600;
-
 `;
 export const FilterButton = styled.button`
     width: ${props => props._width || 'auto'};

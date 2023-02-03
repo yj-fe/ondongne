@@ -1,34 +1,5 @@
 import styled from 'styled-components'
-export const MemberBody = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #cccccc;
-  flex-direction: column;
-  /* padding-bottom: 56px; */
-  height: 100vh;
-  /* margin-top: 60px; */
-  /* gap: 8px; */
-`
-export const MemberContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #FFFFFF;
-  padding: 24px 20px;
-  gap: 40px;
-  width: 728px;
-  height: 100vh;  
-  margin-top: 60px;
-  > div {
-    /* max-width: 728px; */
-    width: 100%;
 
-    @media only screen and (max-width: 728px) { 
-      width: 100%;
-    }
-  }
-`
 export const MemberProfileDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,24 +30,6 @@ export const TextEmail = styled.p`
   font-size: 16px;
   text-align: center;
   color: #757575;
-`
-export const MemberInfoDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 24px;
-  width: 688px;
-  height: auto;
-`
-export const InfoDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-  width: 100%;
-  height: auto;
 `
 export const TitleText = styled.p`
   font-weight: 600;

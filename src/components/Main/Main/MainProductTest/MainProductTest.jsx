@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import detailtest from 'assets/data/detailtest'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import {MainBestCouponBody,MainBestCouponContent,MainBestCouponTop,TopAll,TopTitle,ContentCoupon,ContentCouponDiv,ContentDrive,ContentImg,ContentMarket,ContentPick,ContentProduct} from './MainProductTestStyle'
+import {MainBestCouponContent,ContentCouponDiv,ContentDrive,ContentImg,ContentMarket,ContentPick,ContentProduct} from './MainProductTestStyle'
 
 
 function MainProductTest() {

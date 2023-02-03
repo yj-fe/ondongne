@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { sendSMS } from 'service/common';
 import { memberPhoneValidation } from 'service/common';
-import { AuthTimer, RequesInputForm, RequestButton, RequestInfo, RequestText, RequestTextStyle } from './SignupRequestStyle'
+import { AuthTimer, RequesInputForm, RequestButton, } from './SignupRequestStyle'
 import Alert from 'components/commonUi/Alert';
-import { EmailRequestBody } from 'components/Login/Email/EmailRequest/EmailRequestStyle';
 import { RequesInput } from 'components/Login/Password/PwdRequest/PwdRequestStyle';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import { NextButton } from '../agreement/AgreementStyle';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import { RequestToggleButton, RequestToggleForm, RequestToggleText, RequestToggleTextLink, RequestToggleTextStyle } from 'components/Login/Common/RequestToggle/RequestToggleStyle';
 import ErrorToggle from 'components/Login/Common/ErrorToggle/ErrorToggle';

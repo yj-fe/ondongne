@@ -1,15 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-
-
 import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
 import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
-
 import { memberPasswordChange } from "service/member";
-
-import {EyeOffStyle,PwdToggleButton,PwdResetToggleForm,PwdResetToggleInput,PwdToggleInputForm,PwdToggleInput} from './MemberPwdStyle'
-import Alert from 'components/commonUi/Alert';
-// import ModalPage from 'components/Login/ModalPage';
+import {EyeOffStyle,PwdToggleButton,PwdToggleInputForm,PwdToggleInput} from './MemberPwdStyle'
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import { Text } from 'components/commonUi/Text';
 import { ChangeButton, Input, InputForm } from 'pages/member/MemberManagement/MemberManagementStyle';

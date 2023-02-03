@@ -1,33 +1,4 @@
 import styled from 'styled-components'
-export const MainBestCouponBody = styled.div`
-  padding: 20px;
-  gap: 32px;
-  width: 728px;
-  height: 310px;
-  background: #FFFFFF;
-`
-export const MainBestCouponTop = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px;
-  gap: 40px;
-  width: 688px;
-  height: 26px;
-`
-export const TopTitle = styled.p`
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 26px;
-  color: #000000;
-`
-export const TopAll = styled.p`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  color: #1E88E5;
-`
 export const ContentProduct = styled.div`
   display: flex;
   flex-direction: column;

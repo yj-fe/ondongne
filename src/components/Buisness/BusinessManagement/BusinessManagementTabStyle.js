@@ -131,14 +131,6 @@ export const RowDiv = styled.div`
 	height: auto;
 `;
 
-export const RowDiv2 = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	gap: 20px;
-	width: 100%;
-	overflow-x: scroll;
-`;
 export const RowTitle = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -380,16 +372,6 @@ export const BankListDiv = styled.div`
 	padding: 12px 16px;
 	width: 100%;
 	height: 48px;
-`;
-export const RowTimeDiv = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-	padding: 0px;
-	gap: 8px;
-	width: calc(100%-65px);
-	height: 44px;
 `;
 export const Size = styled.div`
 	width: ${(props) => props._width || "calc(100% - 80px)"};

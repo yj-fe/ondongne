@@ -1,17 +1,5 @@
 import styled from "styled-components";
 
-export const RequestTextStyle = styled.p`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 0px;
-  gap: 8px;
-
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
-`;
 export const RequestText = styled.p`
   font-weight: 600;
   font-size: 24px;
@@ -23,19 +11,6 @@ export const RequestInfo = styled.p`
   font-size: 14px;
   line-height: 20px;
   color: #424242;
-`;
-export const RequesInputForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  width: 648px;
-  height: 112px;
-  margin-top: 40px;
-
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
 `;
 export const Input = styled.input`
   box-sizing: border-box;
@@ -60,19 +35,6 @@ export const Input = styled.input`
   }
 
 `;
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 12px;
-  width: 648px;
-  height: 48px;
-
-  @media only screen and (max-width: 390px) {
-    width: 100%;
-  }
-`
 export const RequesInput = styled.input`
   box-sizing: border-box;
   width: calc(100% - 90px);

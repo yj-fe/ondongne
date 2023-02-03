@@ -4,7 +4,7 @@ import Avatar from 'assets/common/avatar.png'
 import { ReactComponent as Delete } from "assets/main/delete.svg";
 import { ReactComponent as Minus } from "assets/main/cart/minus.svg";
 import { ReactComponent as Plus } from "assets/main/cart/plus.svg";
-import { CarContentDiv, CarProfiletDiv, CartContainer, CartDiv, ProductInfo, ProductInfoText, ProductTitle, ProductTitleDiv, ProfileImg, ProfileName, ButtonText, CountAddDiv, DeleteStyle, ContentProductDiv, CountText, CoundAddNum, CountAddIconStyle, ContentCountDiv, ContentButton, CartEmptyDiv, CartEmptyTextDiv, CartEmptyText, } from './CartPageStyle'
+import { CarContentDiv, CarProfiletDiv, CartContainer, CartDiv, ProductInfo, ProductInfoText, ProductTitle, ProductTitleDiv, ProfileImg, ProfileName, ButtonText, CountAddDiv, DeleteStyle, ContentProductDiv, CountText, CoundAddNum, CountAddIconStyle, ContentCountDiv, ContentButton, CartEmptyText, } from './CartPageStyle'
 import ModalDelete from 'components/Main/Cart/ModalDelete/ModalDelete';
 import Layout from 'components/layout/Layout/Layout';
 import * as L from 'components/commonUi/Layout';

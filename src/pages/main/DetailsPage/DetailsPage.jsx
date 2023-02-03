@@ -9,8 +9,7 @@ import { ArrowBottom, Cart, MinusB, PlusB } from 'components/commonUi/Icon';
 import { MarketTable } from 'components/commonUi/Table';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
-import * as I from 'components/commonUi/Input';
-import { ImgPer, ImgSize100, ImgSizeLayout, ImgSizeH } from 'components/layout/Img/ImgSizeLayout';
+import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { Badge, LayerTextButton } from 'components/commonUi/Button';
 import { getItemDetails } from 'service/item';
 import StoreLike from 'components/commonUi/StoreLike';
@@ -342,7 +341,8 @@ function TabContent(props) {
             <th >배달/픽업</th>
             <td >{props.item.recetiveType} 가능</td>
           </tr>
-          {/* <tr>
+          {/* 2차 
+          <tr>
                   <th >쿠폰</th>
                   <td >해당 상점에 쿠폰이 있습니다.</td>
                 </tr>

@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const LogoImg = styled.img`
-	width: 148px;
-	height: 40px;
-`;
 export const InputForm = styled.form`
 	display: flex;
 	flex-direction: column;
@@ -51,14 +47,6 @@ export const Input = styled.input`
 		-webkit-border-radius: 0;
 		 visibility:hidden;
 	}
-`;
-export const InputError = styled.p`
-	align-items: flex-start;
-	font-weight: 400;
-	font-size: 13px;
-	color: #d32f2f;
-	padding: 0;
-	margin: 0;
 `;
 export const PwdContainer = styled.div`
 	justify-content: space-between;
@@ -178,42 +166,12 @@ export const SnsIcon = styled.div`
 	align-self: stretch;
 	flex-grow: 0;
 `;
-export const LoginFooter = styled.div`
-	position: fixed;
-	display: flex;
-	flex-direction: row;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	gap: 0px;
-	bottom: 80px;
-	@media screen and (max-width: 600px) {
-		bottom: 60px;
-	}
-	@media screen and (max-height: 740px) {
-		position: initial;
-		transform: inherit;
-		justify-content: center;
-	}
-`;
-// export const LoginText = styled.p`
-// 	width: 180px;
-// 	font-weight: 400;
-// 	font-size: 14px;
-// 	color: #424242;
-// `;
 export const Button = styled.button`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	height: 20px;
 	width: 80px;
-`;
-export const SignupText = styled.p`
-	font-weight: 600;
-	width: 50px;
-	white-space: nowrap;
-	font-size: 14px;
-	color: #424242;
 `;
 export const ArrowStyle = styled.svg`
 	width: 15px;

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
-import { NameToggleInput, MemberBar, MemberLinkText, MemberLinkDiv, MemberProfileDiv, TextEmail, TextName, TitleText, ProfileTextDiv, Input, ChangeButton, InputForm, MaxWidth } from './MemberManagementStyle'
+import { NameToggleInput, MemberBar, MemberLinkText, MemberLinkDiv, MemberProfileDiv, TextEmail, TextName, TitleText, ProfileTextDiv, Input, ChangeButton, InputForm } from './MemberManagementStyle'
 import Alert from "components/commonUi/Alert";
 import MemberPhone from 'components/Login/Member/MemberPhone/MemberPhone';
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import MemberPwd from 'components/Login/Member/MemberPwd/MemberPwd';
 import ProfileAvatar from 'components/commonUi/ProfileAvatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMember, logout, memberNicknameChange, memberProfileChange } from 'service/member';
+import { getMember, logout, memberNicknameChange } from 'service/member';
 import { authActions } from 'store/slices/auth';
 import { Text } from 'components/commonUi/Text';
 import Layout from 'components/layout/Layout/Layout';

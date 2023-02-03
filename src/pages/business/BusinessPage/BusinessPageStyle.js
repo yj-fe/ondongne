@@ -24,12 +24,6 @@ export const CardTextDiv = styled.div`
 	height: 54px;
 `;
 export const InfoIconStyle = styled.div`
-	/* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-  gap: 4px; */
 	width: 48px;
 	height: 48px;
 	border-radius: 4px;
@@ -102,54 +96,6 @@ export const FooterDiv = styled.div`
 	width: 100%;
 	height: auto;
 	padding: 0 24px 0px 0;
-`;
-export const FloatingDivT = styled.div`
-	text-align: right;
-	margin: 0px 14px 0px 0px;
-	padding: 0px;
-	position: sticky;
-	bottom: ${(props) => props._bottom || "70px"};
-	z-index: 99;
-	/* height: ${(props) => props._height || "80px"}; */
-`;
-export const FloatingDivMain = styled.div`
-	position: -webkit-sticky;
-	position: sticky;
-	text-align: right;
-	margin: 0px 14px 0px;
-	padding: 0px;
-	bottom: 50px;
-	z-index: 99;
-	/* height: 60px; */
-`;
-export const FloatingDivSearch = styled.div`
-	position: -webkit-sticky;
-	position: sticky;
-	text-align: right;
-	margin: 0px 14px 0px;
-	padding: 0px;
-	top: ${(props) => props._top || "90%"};
-	bottom: ${(props) => props._bottom || ""};
-	/* bottom: 0px; */
-	z-index: 99;
-	/* height: 60px; */
-`;
-export const Footer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
-	width: 95%;
-	height: auto;
-	padding: 20px;
-	gap: 12px;
-	> div {
-		max-width: 728px;
-		width: 100%;
-		@media only screen and (max-width: 728px) {
-			width: 100vw;
-		}
-	}
 `;
 export const FloatingToggleDiv = styled.div`
 	display: flex;

@@ -40,15 +40,6 @@ export const TextDiv = styled.div`
   text-align: center;
   color: #212121;
 `
-export const ButtonDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-top: 30px;
-  gap: 8px;
-  width: 100%;
-  height: 104px;
-`
 export const ButtonDelete = styled.button`
   /* display: flex;
   flex-direction: column; */

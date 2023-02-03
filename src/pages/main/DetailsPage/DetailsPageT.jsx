@@ -3,11 +3,7 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import Layout from 'components/layout/Layout/Layout';
 
-
-
-
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import data from 'assets/data/detailtest'
 import { ReactComponent as StarIcon } from "assets/main/ratestar.svg";
 import { ReactComponent as StarIcon2 } from "assets/main/ratestar2.svg";
 import { ReactComponent as Reviewstar } from "assets/main/reviewstar.svg";
@@ -20,7 +16,6 @@ import Image from 'assets/main/shine.png'
 import ReviewImg from 'assets/main/reviewimg.png'
 import Avatar from 'assets/common/avatar.png'
 import { DetailBody, DetailButtonDiv, DetailButtonStyle, DetailContainer, DetailImg, DetailMarketDiv, DetailMarketInfo, DetailMarketTitle, DetailTabDiv, DetailTabInfo, DetailTabReview, Discount, MarketComments, TabBody, TabButtonStyle, TabContentStyle, TabInfoContent, TabInfoContentText, TabInfoContentTitle, TabInfoType, TabReviewType, TypeLabel, TypeLabelInfo, TypeTextStyle, RateStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketLocation, MarketName, MarketProfile, MarketReviewDiv, MarketTitle, MenuFilterDiv, MenuFilterIcon, Price, ProfileDiv, ProfileImg, ProfileName, ProfileTextDiv, MoreStyle, FinalPrice, FlagStyle, FlagText, IconStyle, Line, Star, Number, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, DiscountStyle, ButtonStyle, ReviewRateDiv, ReviewRateStyle, ReviewStar, ReviewNum, MenuQuantity, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewListStyle, ReviewMenu, MenuFilterText, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile } from './DetailsPageStyle'
-import MainHeader from 'components/Main/Main/BasicHeader/BasicHeader';
 import ModalMorePage from 'components/Main/More/ModalMorePage'
 import { useSelector } from 'react-redux';
 import Confirm from 'components/commonUi/Confirm';

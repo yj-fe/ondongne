@@ -1,6 +1,6 @@
 import { FlexCols } from 'components/commonUi/Layout';
 import React, { useState } from 'react'
-import {ModalBody,TextDiv,ButtonClose,ButtonDelete,ButtonDiv,ModalOutside} from './ModalDeleteStyle'
+import {ModalBody,TextDiv,ButtonClose,ButtonDelete,ModalOutside} from './ModalDeleteStyle'
 
 
 
