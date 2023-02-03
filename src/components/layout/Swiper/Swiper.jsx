@@ -76,16 +76,17 @@ export const SwiperDiv = styled.div`
   height: ${props => props._height || '100%'};
   gap: ${props => props._gap || '40px'};
   text-align: center;
-  /* @media screen and (max-width: 380px) {
-    width: 350px;
-  } */
+  @media screen and (max-width: 400px) {
+    width: 100%;
+  }
   `
 export const SwiperTextDiv = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
-  padding: 0px;
+  align-items: flex-start;
+  /* align-items: center; */
+  padding: 0px 24px;
   gap: 12px;
   width: 100%;
   height: ${props => props._height || 'auto'};
@@ -97,15 +98,16 @@ export const SwiperTitle = styled.p`
 `
 export const SwiperText = styled.p`
   font-weight: 400;
-  font-size: 15px;
-  text-align: center;
-  color: #757575;
+  font-size: 16px;
+  text-align: left;
+  /* text-align: center; */
+  color: #424242;
 `
 export const SwiperSlideImg = styled.img`
   display: block;
-  width: 350px;
-  height: 287px;
+  width: ${props => props._width || '350px'};
+  height: ${props => props._height || '287px'};
   object-fit: cover;
-  margin-top: 50px;
+  margin-top:  ${props => props._margintop || '50px'};
   margin-bottom: 80px;
 `

@@ -52,97 +52,6 @@ export const InputForm = styled.form`
     background: #FFFFFF;
   }
 `
-export const InputFormOrder = styled.div`
-
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  gap: 24px;
-  width: 100%;
-  height: ${props=>props._height || '48px'};
-  background: #FFFFFF;
-  border: 1px solid #EEEEEE;
-  border-radius: 4px;
-`
-export const NameToggleInputForm = styled.div`
-
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  gap: 24px;
-  width: calc(100% - 40px);
-  height: ${props=>props._height || '48px'};
-  background: #FFFFFF;
-  border: 1px solid #EEEEEE;
-  border-radius: 4px;
-`
-export const MaxWidth = styled.div`
-  max-width: ${props => props.theme.breakpoint.tablet}px;
-  width: 100%;
-`
-// export const PwdResetToggleInput = styled.input`
-//   width: 550px;
-//   height: 24px;
-//   font-weight: 400;
-//   font-size: 16px;
-//   font-weight: 400;
-//   font-size: 16px;
-//   line-height: 24px;
-//   color: #1E1E1E;
-//   background-color: #F5F5F5;
-//   &:focus{
-//     background: #FFFFFF;
-//     color: #212121;
-//   }
-// `
-// export const PhoneToggleInputForm = styled.form`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: flex-start;
-//   padding: 0px;
-//   gap: 8px;
-//   width: 688px;
-//   height: 48px;
-// `
-// export const PhoneToggleInput = styled.input`
-//   box-sizing: border-box;
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   padding: 12px 16px;
-//   width: 599px;
-//   height: 48px;
-//   background: #FFFFFF;
-//   border: 1px solid #EEEEEE;
-//   border-radius: 4px;
-//   color: #BDBDBD;
-//   &:focus{
-//     background: #FFFFFF;
-//     color: #212121;
-//   }
-// `
-// export const PwdResetToggleForm = styled.form`
-//   box-sizing: border-box;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 12px 16px;
-//   gap: 24px;
-//   width: 688px;
-//   height: 48px;
-//   background: #F5F5F5;
-//   border: 1px solid #EEEEEE;
-//   border-radius: 4px;
-
-//   margin-bottom: 8px;
-// `
 export const Input = styled.input`
   width: calc(100% - 40px);
   height: 24px;
@@ -159,37 +68,7 @@ export const Input = styled.input`
     color: #BDBDBD;
   }
 `
-// export const PhoneRequestForm = styled.form`
-//   box-sizing: border-box;
-//   display: flex;
-//   justify-items: flex-start;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 12px 16px;
-//   width: 688px;
-//   height: 48px;
-//   background: #FFFFFF;
-//   border: 1px solid #EEEEEE;
-//   border-radius: 4px;
-//   margin-top: 8px;
-//   margin-bottom: 16px;
-// `
-// export const PhoneRequestInput = styled.input`
-//   width: 450px;
-//   height: 24px;
-//   font-weight: 400;
-//   font-size: 16px;
-//   line-height: 24px;
-//   color: #BDBDBD;
-// `
-// export const AuthTimerStyle = styled.div`
-//   display: flex;  
-//   width: 38px;
-//   height: 20px;
-//   font-weight: 400;
-//   font-size: 14px;
-//   color: #1565C0;
-// `
+
 export const NameToggleInput = styled.input`
   width: calc(100% - 70px);
   height: 24px;
@@ -210,59 +89,6 @@ export const NameToggleInput = styled.input`
     color: #BDBDBD;
   }
 `
-// export const PwdToggleInputForm = styled.form`
-//   box-sizing: border-box;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 12px 16px;
-//   gap: 24px;
-//   width: 688px;
-//   height: 48px;
-//   background: #FFFFFF;
-//   border: 1px solid #EEEEEE;
-//   border-radius: 4px;
-//   margin-bottom: 8px;
-// `
-// export const PwdToggleInput = styled.input`
-//   width: 550px;
-//   height: 24px;
-//   font-weight: 400;
-//   font-size: 16px;
-//   font-weight: 400;
-//   font-size: 16px;
-//   line-height: 24px;
-//   color: #1E1E1E;
-//   background-color: #FFFFFF;
-//   &:focus{
-//     color: #424242;
-//   }
-//   &::-ms-reveal {
-//    display: none;
-//   }
-// `
-// export const PhoneRequestButton = styled.button`
-//   width: 100%;
-//   height: 52px;
-//   background: #E0E0E0;
-//   border-radius: 4px;
-//   font-weight: 700;
-//   font-size: 16px;
-//   text-align: center;
-//   color: #FFFFFF;
-// `
-// export const PwdToggleButton = styled.button`
-//   width: 100%;
-//   height: 52px;
-//   background: #0B806F;
-//   border-radius: 4px;
-//   font-weight: 700;
-//   font-size: 16px;
-//   text-align: center;
-//   color: #FFFFFF;
-//   margin-top: 8px;
-// `
 export const ChangeButton = styled.button`
   width: ${props => props._width};
   display: flex;
@@ -273,24 +99,7 @@ export const ChangeButton = styled.button`
   width: 40px;
   font-family: 'Pretendard';
 `
-// export const RequestButton = styled.button`
-//   display: flex;
-//   box-sizing: border-box;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 13px 15px;
-//   gap: 4px;
-//   width: 81px;
-//   height: 48px;
-//   background: #FFFFFF;
-//   border: 1px solid #EEEEEE;
-//   border-radius: 4px;
-//   font-weight: 400;
-//   font-size: 14px;
-//   color: #212121;
-// `
+
 export const MemberLinkDiv = styled.div`
   display: flex;
   flex-direction: row;

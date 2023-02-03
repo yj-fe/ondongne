@@ -17,6 +17,7 @@ import Img4 from 'assets/images/CoachModal/slide4.png'
 // import required modules
 import { Pagination } from "swiper";
 import { SwiperDiv, SwiperTextDiv, SwiperTitle, SwiperText, SwiperSlideImg, navigation } from '../Swiper/Swiper';
+import { SimpleClose } from 'components/commonUi/Icon';
 
 
 
@@ -28,7 +29,13 @@ function CoachModalSlide({ neverWatch, closeModal }) {
   return (
     <Body>
       <Container>
-        <Content _padding='80px 0px' _paddingmedia='10px 0px'>
+        <Content _padding='48px 0px' _paddingmedia='10px 0px'>
+          <L.FlexRows 
+            _content='right' _padding='20px' _height='18px'
+            onClick={closeModal}
+          >
+            <SimpleClose/>
+          </L.FlexRows>
           <Swiper
             style={{
               "--swiper-pagination-color": "#0B806F",
@@ -51,8 +58,7 @@ function CoachModalSlide({ neverWatch, closeModal }) {
               }
           }}
           >
-            <SwiperSlide
-            ><Slide1 /></SwiperSlide>
+            <SwiperSlide><Slide1 /></SwiperSlide>
             <SwiperSlide><Slide2 /></SwiperSlide>
             <SwiperSlide><Slide3 /></SwiperSlide>
             <SwiperSlide><Slide4 /></SwiperSlide>
@@ -84,15 +90,16 @@ function CoachModalSlide({ neverWatch, closeModal }) {
     </Body>
   )
 }
+
 function Slide1() {
   return (
     <div>
       <SwiperDiv _gap='0px' _height='498px'>
         <SwiperTextDiv _height='84px'>
-          <SwiperTitle>1. 알림/장바구니</SwiperTitle>
-          <SwiperText><p>새로운 정보와 장바구니에 저장한 상품을</p><p>확인해 보실 수 있어요.</p></SwiperText>
+          <SwiperTitle>보다 더 간편하게</SwiperTitle>
+          <SwiperText><p>이제 힘들게 돌아다니지 않아도</p><p>우리동네 상점/상품을 쉽게 확인하실 수 있어요.</p></SwiperText>
         </SwiperTextDiv>
-        <SwiperSlideImg src={Img1} />
+        <SwiperSlideImg _width='245px' _height='218px' src={Img1} />
       </SwiperDiv>
     </div>
   )
@@ -102,10 +109,10 @@ function Slide2() {
     <div>
       <SwiperDiv _gap='0px' _height='498px'>
         <SwiperTextDiv>
-          <SwiperTitle>2. 공동구매</SwiperTitle>
-          <SwiperText><p>동네 주민들과 함께 다양한 상품을</p><p>저렴하게 공동구매해 보세요.</p></SwiperText>
+          <SwiperTitle>공동구매로 저렴하게</SwiperTitle>
+          <SwiperText><p>온동네마켓에 상품을 등록하고 빠르게 홍보해서 제품을</p><p>공동구매로 저렴하게 공구할 수 있어요.</p></SwiperText>
         </SwiperTextDiv>
-        <SwiperSlideImg src={Img2} />
+        <SwiperSlideImg _width='245px' _height='218px' src={Img2} />
       </SwiperDiv>
     </div>
   )
@@ -115,10 +122,10 @@ function Slide3() {
     <div>
       <SwiperDiv _gap='0px' _height='498px'>
         <SwiperTextDiv>
-          <SwiperTitle>3. 단골가게</SwiperTitle>
-          <SwiperText><p>회원가입하고 단골가게를 등록해 보세요.</p><p>우리 동네 상품정보를 빠르게 받아보실 수 있어요.</p></SwiperText>
+          <SwiperTitle>쉽고 빠른 상품등록</SwiperTitle>
+          <SwiperText><p>회원가입하고 단골가게를 등록해 보세요.</p><p>판매해보세요.</p></SwiperText>
         </SwiperTextDiv>
-        <SwiperSlideImg src={Img3} />
+        <SwiperSlideImg _width='245px' _height='218px' src={Img3} />
       </SwiperDiv>
     </div>
   )
@@ -128,10 +135,10 @@ function Slide4() {
     <div>
       <SwiperDiv _gap='0px' _height='498px'>
         <SwiperTextDiv>
-          <SwiperTitle>4. 더 보기</SwiperTitle>
-          <SwiperText><p>쉽게 회원 가입하실 수 있고</p><p>다양한 정보를 확인해 보실 수 있어요.</p></SwiperText>
+          <SwiperTitle>홍보는 무료! 매출은 쑥쑥!</SwiperTitle>
+          <SwiperText><p>비즈계정으로 전환하여 나만의 상점을 만들어 보세요.</p></SwiperText>
         </SwiperTextDiv>
-        <SwiperSlideImg src={Img4} />
+        <SwiperSlideImg _margintop='122px' _width='308px' _height='168px' src={Img4} />
       </SwiperDiv>
     </div>
   )
