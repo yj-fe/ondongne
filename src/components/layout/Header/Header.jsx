@@ -24,9 +24,10 @@ const Header = ({
     back = true,
     search = false,
     more = false,
-    // completed = false,
+    completed = false,
     share = false,
     backArrow = true,
+    bottom='',
     ...props
 }) => {
     const navigate = useNavigate();
@@ -56,7 +57,7 @@ const Header = ({
     }
 
     return (
-        <S.Header>
+        <S.Header _bbot={bottom}>
             <S.Inner>
                 <S.Block>
                     {
@@ -115,12 +116,12 @@ const Header = ({
                         <More />
                         </MoreStyle>
                     }
-                    {/* {
+                    {
                         completed &&
-                        <S.UtilBtn _width='30px' as={Link} to="/cart">
+                        <S.UtilBtn _displaymedia='none' _width='30px' as={Link} to="/">
                             <Text _size={15} _weight={500} _color='green700'> 완료</Text>
                         </S.UtilBtn>
-                    } */}
+                    }
                 </S.Block>
             </S.Inner>
             {modal && <ModalMorePage PropsModal={PropsModal} />}

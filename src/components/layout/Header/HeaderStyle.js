@@ -14,7 +14,7 @@ export const S = {
         border-bottom: 1px solid ${props => props.theme.color.gray200};
 
         @media(${props => props.theme.media.tablet}) {
-            border-bottom: 0;
+            border-bottom: ${props => props._bbot ||'0'};
         }
     `,
     Inner: styled(Common.Inner)`
@@ -36,7 +36,9 @@ export const S = {
         width: ${props => props._width || '24px'};
         height: ${props => props._height || '24px'};
         padding: 0;
-        
+        @media screen and (min-width : 501px) {
+            display: ${props => props._displaymedia};
+        }
     `,
     SearchUtilBtn: styled.button`
         display: flex;

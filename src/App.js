@@ -181,10 +181,10 @@ function App() {
 						path="edit/:id"
 						element={<BusinessProductUpload />}
 					/>
-					{/* <Route
+					<Route
 						path="edit/info"
 						element={<BusinessProductEditInfo />}
-					/> */}
+					/>
 					{/* 쿠폰관리 */}
 					<Route path="coupon" element={<BusinessCoupon />} />
 					{/* 쿠폰등록 */}

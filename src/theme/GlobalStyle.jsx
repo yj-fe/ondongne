@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import 'pretendard/dist/web/static/pretendard.css';
 
 const GlobalStyle = createGlobalStyle`
     /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -50,11 +51,11 @@ const GlobalStyle = createGlobalStyle`
         border-spacing: 0;
     }
 
-    @font-face {
+    /* @font-face {
         font-family: 'Pretendard' ;
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
         font-style: normal;
-    }
+    } */
 
     * {
         box-sizing: border-box;
@@ -88,12 +89,12 @@ const GlobalStyle = createGlobalStyle`
     input,
     p,
     a {
-        @font-face {
+        /* @font-face {
         font-family: 'Pretendard' ;
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
         font-style: normal;
-    }
-        /* font-family: 'Pretendard' !important; */
+    } */
+        font-family: 'Pretendard' !important;
     }
     input, p{
 	-webkit-appearance: none;

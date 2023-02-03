@@ -2,13 +2,17 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import Overlay from '../layout/Overlay/Overlay'
 import styled from 'styled-components';
-import { FlexCols, FlexRows } from './Layout';
+import { FlexCols, FlexRows, Scroll } from './Layout';
 import { Text } from './Text';
-import { SimpleClose, EmptyCheck } from './Icon';
+import { SimpleClose, EmptyCheck, InputValue, Calendar, EmptyUnCheck } from './Icon';
 import { TextInput } from './Input';
 import { Line } from 'pages/login/LocationSetting/LocationSettingStyle';
-import { Badge, BorderBox, LayerTextButton } from './Button';
-import { DayBox } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { Badge, BorderBox, Fixed, LayerTextButton } from './Button';
+import { DayBox, Input, InputBox } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { LoginNavTitle } from 'components/Login/Common/LoginHeader/LoginHeaderStyle'
+import { Container } from 'components/layout/Modal/Modal'
+import CalendarModel from './CalendarModel';
+import dayjs from 'dayjs';
 
 const S = {
     AlertBox: styled.div`
@@ -20,7 +24,7 @@ const S = {
         overflow: hidden;
     `,
     Body: styled.div`
-        padding: 24px 24px 32px;
+        padding: ${props => props._pd || '24px 24px 32px'};
         text-align: center;
         background-color: #FFF;
     `,
@@ -56,80 +60,144 @@ const CouponAlert = ({
 }) => {
     const [mobox, setMoBox] = useState(true);
     const [tubox, setTuBox] = useState(false);
+    const [couponLimit, setCouponLimit] = useState(false);
+    const [calendar, setCalendar] = useState(false);
+    const [data, setData] = useState({
+        endDate: '',
+        benefitName: '',
+        couponCount: '',
+
+    });
+
+      // 종료일 설정
+  const endDateHandler = (date) => {
+    setData({
+      ...data,
+      endDate: date,
+    })
+}
+
+  const onChangeBenefit = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmit = () => {
+    
+  }
 
     if(active) {
         return (
             <Overlay
                 onOverlayClick={props.onOverlayClick}
             >
-                <S.AlertBox>
-                    <S.Body>
-                        <FlexRows _content='space-between'>
-                            <FlexRows _content='center'>
-                                <Text as="span" _size={18} _weight={600} _align="center">쿠폰 등록</Text>
+                <Container  _height='636px' _br='16px' _items='center' _content='center'>
+                            <FlexCols>
+                            {/* <Scroll _height='100%'> */}
+                            <FlexRows _padding='0px 20px 0px 20px' _content='space-between'>
+                                <FlexRows _content='center' >
+                                    <LoginNavTitle _transform='translateX(+20px)'>쿠폰 등록</LoginNavTitle>
+                                </FlexRows>
+                                <button
+                                    onClick={() => {props.onOverlayClick()}}
+                                >
+                                    <SimpleClose/>
+                                </button>
                             </FlexRows>
-                            <div
-                            onClick={() => {props.onOverlayClick()}}
-                            >
-                                <SimpleClose/>
-                            </div>
-                        </FlexRows>
-                    </S.Body>
-                    <Line/>
-                    <S.Body>
-                        <FlexCols _gap={32}>
-                            <FlexCols _gap={16}>
-                                <Text as="p">쿠폰 종류</Text>
-                                <FlexRows>
-                                <DayBox
-                                    onClick={()=>{setMoBox(!mobox)}}
-                                    color={mobox}
-                                >
-                                일반 쿠폰</DayBox>
-                                <DayBox
-                                    onClick={()=>{setTuBox(!tubox)}}
-                                    color={tubox}
-                                >
-                                단골 쿠폰</DayBox>
-                                    {/* <Badge _bdr='8px' _height='auto' _padding='12px 24px' _bg='green50' _color='green700'  _size='15px'>일반 쿠폰</Badge> */}
-                                    {/* <Badge _bdr='8px' _height='auto' _padding='12px 24px' _bg='gray50' _color='gray600'  _size='15px'>단골 쿠폰</Badge> */}
-                                </FlexRows>
-                            </FlexCols>
-                            <FlexCols _gap={16}>
-                                <Text as="p">쿠폰 혜택</Text>
-                                <TextInput
-                                    _boccolor='#FFFFFF'
-                                    placeholder='혜택을 입력해 주세요.'
-                                />
-                            </FlexCols>
-                            <FlexCols _gap={16}>
-                                <Text as="p">사용 기간</Text>
-                                    <BorderBox>
-                                        <Text _weight={400} _size={16} _color="gray900">2022-12-15</Text>
-                                    </BorderBox>
-                            </FlexCols>
-                            <FlexCols _gap={16}>
-                                <FlexRows _content='space-between'>
-                                    <Text as="p">쿠폰 갯수</Text>
-                                    <FlexRows _content='right' _width='80px'>
-                                        <EmptyCheck/>
-                                        <Text _weight={400} _size={14} _color="gray600">제한 없음</Text>
-                                    </FlexRows>
-                                </FlexRows>
-                                    <LayerTextButton _content='right'>
-                                        <Text _weight={400} _size={16} _color="gray400">0</Text>
-                                        <Text _weight={400} _size={16} _color="gray900">개</Text>
-                                    </LayerTextButton>
-                            </FlexCols>
+                        <Line/>
 
-                            
-                        </FlexCols>
-                    </S.Body>
-                            <Text as="p" _size={13} _weight={400} _color={'gray600'} >{props.desc}</Text>
-                    <S.Button
-                        onClick={() => {props.onButtonClick()}}
-                    >쿠폰 등록</S.Button>
-                </S.AlertBox>
+                        
+                            <FlexCols _gap={32} _padding='16px 20px 0px'>
+                                <FlexCols _gap={16}>
+                                    <Text as="p">쿠폰 종류</Text>
+                                    <FlexRows>
+                                        <DayBox
+                                            onClick={()=>{setMoBox(!mobox)}}
+                                            color={mobox}
+                                        >
+                                        일반 쿠폰</DayBox>
+                                        <DayBox
+                                            onClick={()=>{setTuBox(!tubox)}}
+                                            color={tubox}
+                                        >
+                                        단골 쿠폰</DayBox>
+                                    </FlexRows>
+                                </FlexCols>
+                                <FlexCols _gap={16}>
+                                    <Text as="p">쿠폰 혜택</Text>
+                                    <FlexCols>
+                                        <TextInput
+                                            _boccolor='#FFFFFF'
+                                            name='benefitName'
+                                            onChange={onChangeBenefit}
+                                            placeholder='혜택을 입력해 주세요.'
+                                        />
+                                        {
+                                            !data.benefitName &&
+                                            <Text _color='error' _size={13} as="p">쿠폰 혜택을 입력해 주세요.(최대 12자)</Text>
+                                        }
+                                    </FlexCols>
+                                </FlexCols>
+                                <FlexCols _gap={16}>
+                                    <Text as="p">사용 기간</Text>
+                                        <BorderBox
+                                            onClick={() => setCalendar(true)}
+                                        >
+                                            <Input
+                                                disabled
+                                                name='endDate'
+                                                _place='#212121' style={{ background: '#fff' }}
+                                                value={data.endDate ? dayjs(data.endDate).format('YYYY-MM-DD') : ''}
+                                            />
+                                        </BorderBox>
+                                </FlexCols>
+                                <FlexCols _gap={16}>
+                                    <FlexRows _content='space-between'>
+                                        <Text as="p">쿠폰 갯수</Text>
+                                        <FlexRows _content='right' _width='80px' onClick={()=> setCouponLimit(!couponLimit)}>
+                                           { couponLimit ? <EmptyCheck/> : <EmptyUnCheck/>}
+                                            <Text _weight={400} _size={14} _color="gray600">제한 없음</Text>
+                                        </FlexRows>
+                                    </FlexRows>
+                                    <FlexCols>
+                                        <InputBox _content='right'>
+                                            <Input
+                                                name='couponCount'
+                                                onChange={onChangeBenefit}
+                                                placeholder='0'
+                                                type='number'
+                                                align='right' style={{ background: '#fff' }}
+                                            />
+                                            <FlexRows _gap='0px' _padding='3px 0px' _width='auto'>
+                                                <InputValue/>
+                                            </FlexRows>
+                                        </InputBox>
+                                        {
+                                            !data.couponCount &&
+                                            <Text _color='error' _size={13} as="p">쿠폰 갯수를 입력해 주세요.</Text>
+                                        }
+                                    </FlexCols>
+                                </FlexCols>
+
+                                
+                            </FlexCols>
+                            {/* </Scroll> */}
+                            </FlexCols>
+                                {/* <Text as="p" _size={13} _weight={400} _color={'gray600'} >{props.desc}</Text> */}
+                            <S.Button
+                                onClick={() => {props.onButtonClick(); onSubmit();}}
+                            >쿠폰 등록</S.Button>
+                            {
+                                calendar &&
+                                <CalendarModel
+                                    modelClose={() => setCalendar(false)}
+                                    onChange={endDateHandler}
+                                    dateFormat={'yyyy-MM-dd HH:mm:ss'}
+                                />
+                            }
+                </Container>
             </Overlay>
         )
     }

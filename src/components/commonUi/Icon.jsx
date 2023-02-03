@@ -244,6 +244,11 @@ export const Check = () => (
         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8334 6.92279L8.57266 14.1663L4.16675 9.77088L5.36564 8.68109L8.57266 11.8805L14.6345 5.83301L15.8334 6.92279Z" fill="#0B806F" />
     </svg>
 );
+export const EmptyCheck = () => (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8334 6.92279L8.57266 14.1663L4.16675 9.77088L5.36564 8.68109L8.57266 11.8805L14.6345 5.83301L15.8334 6.92279Z" fill="#0B806F" />
+    </svg>
+);
 
 export const UnCheck = () => (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -252,7 +257,7 @@ export const UnCheck = () => (
     </svg>
 );
 
-export const EmptyCheck = () => (
+export const EmptyUnCheck = () => (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="0.5" y="0.5" width="17" height="17" rx="1.5" fill="white" />
         <rect x="0.5" y="0.5" width="17" height="17" rx="1.5" stroke="#EEEEEE" />
@@ -679,21 +684,26 @@ export const ReviewLike0 = () => (
     </svg>
 )
 export const Bubble = () => (
-<svg width="199" height="91" viewBox="0 0 199 91" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_d_2374_15094)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M25 11C19.4772 11 15 15.4772 15 21V53C15 58.5228 19.4772 63 25 63H94L99 72L104 63H174C179.523 63 184 58.5228 184 53V21C184 15.4772 179.523 11 174 11H25Z" fill="#E54E2B"/>
-</g>
-<defs>
-<filter id="filter0_d_2374_15094" x="0" y="0" width="199" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="4"/>
-<feGaussianBlur stdDeviation="7.5"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2374_15094"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2374_15094" result="shape"/>
-</filter>
-</defs>
-</svg>
+    <svg width="199" height="91" viewBox="0 0 199 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_d_2374_15094)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M25 11C19.4772 11 15 15.4772 15 21V53C15 58.5228 19.4772 63 25 63H94L99 72L104 63H174C179.523 63 184 58.5228 184 53V21C184 15.4772 179.523 11 174 11H25Z" fill="#E54E2B"/>
+    </g>
+    <defs>
+    <filter id="filter0_d_2374_15094" x="0" y="0" width="199" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+    <feOffset dy="4"/>
+    <feGaussianBlur stdDeviation="7.5"/>
+    <feComposite in2="hardAlpha" operator="out"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2374_15094"/>
+    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2374_15094" result="shape"/>
+    </filter>
+    </defs>
+    </svg>
+)
+export const InputValue = () => (
+    <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.4219 0.375H11.2188V5.98438H9.29688V0.75H8.125V13.5781H9.29688V7H11.2188V14.2656H12.4219V0.375ZM0.578125 10.4219L1.29688 11.2812C5.28906 9.05469 6.53125 5.71875 6.54688 2.1875H1.10938V3.20312H5.34375C5.13281 6.07812 3.80469 8.61719 0.578125 10.4219Z" fill="#212121"/>
+    </svg>
 )

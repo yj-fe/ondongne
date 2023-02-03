@@ -17,6 +17,7 @@ export const TextInput = styled.input`
     align-self: start;
     font-family: 'Pretendard';
     font-style: normal;
+    text-align: ${props => props._align};
     &::placeholder {
         color: ${props => props.theme.color.gray400};
     }

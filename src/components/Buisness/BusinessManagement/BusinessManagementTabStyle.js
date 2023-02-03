@@ -209,6 +209,7 @@ export const InputBox = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
+	justify-content: ${props => props._content};
 	align-items: flex-start;
 	padding: 12px;
 	gap: 4px;
@@ -228,7 +229,7 @@ export const Input = styled.input`
 	font-family: "Pretendard";
 	font-style: normal;
 	&::placeholder {
-		color: #bdbdbd;
+		color: ${props => props._place || '#bdbdbd'};
 	}
 	&:focus {
 		color: #212121;

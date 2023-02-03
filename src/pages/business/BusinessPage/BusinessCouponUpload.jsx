@@ -50,15 +50,10 @@ function BusinessCouponUpload() {
         title="쿠폰소식 등록"
         cart={false}
         bell={false}
-        // completed={true}
+        completed={true}
+        bottom={'1px solid #EEEEEE'}
         onBackClick={() => { navigate(-1); }}
       >
-        <B.Fixed
-          _right='20px'
-          _top='40px'
-        >
-          <T.Text _size={15} _weight={500} _color='green700'> 완료</T.Text>
-        </B.Fixed>
         <L.Container >
           <L.Contents _padding='0px'>
             <CouponTitleInput

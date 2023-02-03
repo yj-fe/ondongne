@@ -52,11 +52,12 @@ export const Body = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: ${props => props._items || 'flex-start'};
+  justify-content: ${props => props._content};
   padding: 0px;
-  width: 390px;
-  height: 766px;
-  border-radius: 12px;
+  width: ${props => props._width || '390px'};
+  height: ${props => props._height || '766px'};
+  border-radius: ${props => props._br || '12px'};
   background: #FFFFFF;
   @media screen and (max-width: 450px) {
     width: 100%;
