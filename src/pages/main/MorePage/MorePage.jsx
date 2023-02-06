@@ -50,7 +50,7 @@ function MorePage() {
   // 다시보지않기 이벤트
   const close = () => {
     const decade = moment(); 
-    decade.add(7, 'd'); //일주일보지않기
+    decade.add(7, 'd');  //일주일보지않기
     setCookieBubble(COOKIE_BUBBLE_KEY, 'true', {
       path: '/',
       expires: decade.toDate(),
@@ -126,10 +126,10 @@ function MorePage() {
               {
                 cookiesBubble[COOKIE_BUBBLE_KEY] ? null :
                   <Sticky>
-                    <RelativDiv _width={199} _height={100} _widthmedia='170px'>
+                    <RelativDiv _width={199} _height={100} _widthmedia='170px' >
                       <Bubble/>
                       <AbsoluteDiv 
-                        _width={20} _height={20} _right='6%' _top='11%' _rightmedia='-10%'
+                        _pd='3px' _width={20} _height={20} _right='7%' _top='12%' _rightmedia='-10%'
                         onClick={close}
                       >
                         <T.Text _size={13} _weight={600} _color='white' _align='center'>X</T.Text>

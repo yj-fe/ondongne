@@ -75,6 +75,7 @@ export const AbsoluteDiv = styled.div`
     bottom:${props => props._bottom || '0%'};
     top:${props => props._top || ''};
     margin: 0;
+    padding: ${props => props._pd};
     /* padding: 18px 12px; */
     z-index: 999;
     @media screen and (max-width : 370px) {
