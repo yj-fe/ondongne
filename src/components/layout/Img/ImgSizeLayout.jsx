@@ -81,13 +81,16 @@ export const AbsoluteDivGrid = styled.div`
     height: ${props => props._height}px;
     display: flex;
     position: absolute;
-    right: 0;
+    right: -3%;
     bottom: -10px;
     margin: 0;
     padding: 18px 12px;
     z-index: 99;
     @media screen and (max-width:678px) {
         right: 12%;
+    }
+    @media screen and (max-width:660px) {
+        right: 10%;
     }
     @media screen and (max-width:645px) {
         right: 7%;
@@ -134,14 +137,20 @@ export const AbsoluteDivGrid = styled.div`
     @media screen and (max-width:395px) {
         right: 0%;
     }
-    @media screen and (max-width:380px) {
+    @media screen and (max-width:390px) {
         right: -2%;
     }
-    @media screen and (max-width:360px) {
-        right: 2%;
+    @media screen and (max-width:380px) {
+        right: -4%;
     }
-    @media screen and (max-width:351px) {
+    @media screen and (max-width:360px) {
+        right: 1%;
+    }
+    @media screen and (max-width:356px) {
         right: -1%;
+    }
+    @media screen and (max-width:347px) {
+        right: -3%;
     }
     @media screen and (max-width:343px) {
         right: -3%;
@@ -157,6 +166,12 @@ export const AbsoluteDivGrid = styled.div`
     }
     @media screen and (max-width:315px) {
         right: 1%;
+    }
+    @media screen and (max-width:308px) {
+        right: -2%;
+    }
+    @media screen and (max-width:303px) {
+        right: -4%;
     }
 `;
 export const AbsoluteDivS = styled.div`

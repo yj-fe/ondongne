@@ -1,0 +1,15 @@
+@keyframes bounce {
+  0% {
+    transform: none;
+    animation-timing-function: cubic-bezier(.78,.01,.83,.67);
+  }
+  
+  25%, 45% {
+    transform: translateY(7px);
+  }
+  
+  100% {
+    transform: none;
+    animation-timing-function: ease-in;
+  }
+}

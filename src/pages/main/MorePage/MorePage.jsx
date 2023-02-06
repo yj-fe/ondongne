@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainerDiv, MoreDiv, AccountBadge, AccountName, MoreLoginDiv, MoreLoginText, MoreLoginButton, MoreAccountImgBox } from './MorePageStyle'
+import { MoreAccountButton, MoreAccountButtonDiv, MoreAccountDiv, MoreAccountImg, MoreAccountProfile, MoreAccountTextDiv, MoreContainerDiv, MoreDiv, AccountBadge, AccountName, MoreLoginDiv, MoreLoginText, MoreLoginButton, MoreAccountImgBox, Sticky } from './MorePageStyle'
 import { Link, useNavigate } from 'react-router-dom'
 import { getMember } from 'service/member'
 import { useSelector } from 'react-redux'
 import Alert from 'components/commonUi/Alert'
 import Modal from 'components/layout/Modal/Modal'
 import { AgreementDiv, Button, ModalBody, ModalDiv1, ModalDiv2, ModalOutside, SpaceBet } from 'components/Main/More/ModalPageStyle'
+import 'pages/main/MorePage/MorePage.css'
 import { Text } from 'components/commonUi/Text'
 import CheckBox from 'components/commonUi/CheckBox'
 import CheckBoxTitle from 'components/commonUi/CheckBoxTitle'
 import { Line } from '../DetailsPage/DetailsPageStyle'
-import { ArrowRight, Close } from 'components/commonUi/Icon'
+import { ArrowRight, Bubble, Close } from 'components/commonUi/Icon'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import FooterLayout from 'components/layout/Footer/Footer'
@@ -18,6 +19,7 @@ import { getBizMember } from 'service/biz'
 import Layout from 'components/layout/Layout/Layout'
 import Confirm from 'components/commonUi/Confirm'
 import TermsModal from 'components/service/TermsPage/TermsModal'
+import { AbsoluteDiv, RelativDiv } from 'components/layout/Img/ImgSizeLayout'
 
 
 function MorePage() {
@@ -26,6 +28,7 @@ function MorePage() {
   const auth = useSelector(state => state.auth);
   const [alert, setAlert] = useState(null);
   const [confirm, setConfirm] = useState(false);
+  const [textBubble, setTextBubble] = useState(false);
   const [coachmark, setCoachmark] = useState(null);
   const [agreementModal, setAgreementModal] = useState(false);
 
@@ -38,6 +41,11 @@ function MorePage() {
   const goToMember = () => {
     navigate('/member/management');
   }
+
+  const close = () => {
+    setTextBubble(false)
+  }
+
   const bizMember = async () => {
     const response = await getBizMember();
     const { data } = response.data;
@@ -94,23 +102,34 @@ function MorePage() {
             auth.isAuthenticated &&
             <MoreAccountDiv>
               <MoreAccountProfile>
+                <L.FlexRows _gap={16} _content='flex-start'>
                 {member.profile && <MoreAccountImg src={member.profile} />}
                 {!member.profile && <MoreAccountImgBox />}
                 <MoreAccountTextDiv>
                   <AccountBadge>{member.role === 'MEMBER' ? '일반회원' : '비즈회원'}</AccountBadge>
                   <AccountName>{member.nickname}</AccountName>
                 </MoreAccountTextDiv>
+                </L.FlexRows>
               {
-                // <Sticky
-                //   _top=''
-                //   _right=''
-                // >
-                //   <Bubble>
-                //   </Bubble>
-                //   {/* <T.Text><p>상품 판매가 가능한<p></p>비즈 회원으로 전환해 보세요!</p></T.Text> */}
-                // </Sticky>
+                textBubble &&
+                  <Sticky>
+                    {/* <RelativDiv _width='100%' _height={100}> */}
+                    <RelativDiv _width={199} _height={100}>
+                      <Bubble/>
+                      <AbsoluteDiv 
+                        _width={20} _height={20} _right='6%' _top='11%'
+                        onClick={close}
+                      >
+                        <T.Text _size={13} _weight={600} _color='white' _align='center'>X</T.Text>
+                      </AbsoluteDiv>
+                      <AbsoluteDiv _width={190} _height={80} _right='-11%'>
+                        <T.Text _size={12} _weight={600} _color='white' _align='center'><p>상품 판매가 가능한<p></p>비즈 회원으로 전환해 보세요!</p></T.Text>
+                      </AbsoluteDiv>
+                    </RelativDiv>
+                  </Sticky>
               }
               </MoreAccountProfile>
+
               <MoreAccountButtonDiv>
                 <MoreAccountButton onClick={goToMember}>회원정보 관리</MoreAccountButton>
                 <MoreAccountButton

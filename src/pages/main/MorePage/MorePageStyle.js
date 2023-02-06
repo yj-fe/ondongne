@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const MoreLoginDiv = styled.div`
 	box-sizing: border-box;
@@ -26,6 +26,7 @@ export const MoreAccountDiv = styled.div`
 `;
 export const MoreAccountProfile = styled.div`
 	display: flex;
+	justify-content: space-between;
 	flex-direction: row;
 	align-items: center;
 	padding: 0px;
@@ -186,3 +187,20 @@ export const FooterText = styled.div`
 	color: #bdbdbd;
 	width: 100%;
 `;
+export const Sticky = styled.div`
+    position: sticky;
+    max-width: 200px;
+    margin-right: 10%;
+		animation-duration: 3s;
+    animation: .75s bounce infinite;
+    @media screen and (max-width: 728px) {
+        margin-right: 7%;
+    }
+    @media screen and (max-width: 550px) {
+        margin-right: 0%;
+    }
+`
+
+// @keyframes bounce {
+
+// }
