@@ -10,9 +10,13 @@ export const S = {
 	`,
 	Main: styled(Common.Inner)`
 		z-index: 20;
-		background-color: ${props => props._bc || 'transparent'};
+		background-color: ${(props) => props._bc || "transparent"};
 		padding-top: 60px;
-		min-height: 100vh;
+		min-height: calc(100vh - 60px);
 		/* overflow: visible; */
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	`,
 };

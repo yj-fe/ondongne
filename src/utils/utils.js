@@ -51,7 +51,7 @@ export const numberFormatter = (value) => {
 };
 // 숫자 쉼표 처리
 export const numberFormat = (value) => {
-	if(!value) return
+	if (!value) return;
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	// return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	// return value.toLocaleString('en-US')
@@ -65,7 +65,7 @@ export const imageValidation = (file) => {
 	const reg = /(.*?)\.(jpg|jpeg|png)$/;
 
 	if (!file.name.toLowerCase().match(reg)) {
-		return ".jpg/.jpeg/.png 형식의 파일을 첨부해주세요.";
+		return "jpg|jpeg|png 형식의 파일을 첨부해주세요.";
 	}
 
 	if (fileSize > maxSize) {
@@ -112,7 +112,7 @@ export const sortFormatter = (filter) => {
 	if (filter === "order") return "주문 많은 순";
 	if (filter === "orderDesc") return "최근 주문 순";
 	if (filter === "review") return "리뷰 별점 순";
-	if (filter === "reviewLike") return "리뷰 도움 순"
+	if (filter === "reviewLike") return "리뷰 도움 순";
 	if (filter === "newstore") return "신규 매장 순";
 	if (filter === "like") return "단골 많은 순";
 };
@@ -163,8 +163,8 @@ export const phoneFormatter = (input) => {
 // 주문 이름
 export const orderName = (item) => {
 	if (item.length > 1) {
-		return `${item[0].name} 외 ${item.length - 1}개`
+		return `${item[0].name} 외 ${item.length - 1}개`;
 	} else {
-		return `${item[0].name}`
+		return `${item[0].name}`;
 	}
-}
+};

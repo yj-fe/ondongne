@@ -7,11 +7,11 @@ import { numberFormat } from 'utils/utils';
 import Img from 'assets/images/marketdetail.png';
 import { useNavigate } from 'react-router-dom';
 import { ImgCollect } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import StoreLike from './StoreLike';
 
-export const StoreListCard = ({ list, lastRef }) => {
+export const StoreListCard = ({ list, setData, lastRef }) => {
 
     const navigate = useNavigate();
-
 
     return (
         <L.FlexCols _gap={20}>
@@ -23,10 +23,10 @@ export const StoreListCard = ({ list, lastRef }) => {
                         // _content='space-between'
                         ref={list.length == index + 1 ? lastRef : null}
                     >
-                        <L.FlexRows _content='row' 
+                        <L.FlexRows _content='row'
                             onClick={() => navigate(`/market/detail/${item.storeId}`)}
                         >
-                            <ImgCollect  src={item.profile != null ? item.profile : Img}  />
+                            <ImgCollect src={item.profile != null ? item.profile : Img} />
                             <L.FlexCols _gap={2} _width='calc(100% - 100px)'>
                                 <L.FlexRows _gap='0px' _width='200px'>
                                     <T.TextCut _weight={600} _size={17} _color="gray900">{item.name.substring(0, 17)}</T.TextCut>
@@ -57,7 +57,15 @@ export const StoreListCard = ({ list, lastRef }) => {
                             </L.FlexCols>
                         </L.FlexRows>
 
-
+                        <StoreLike id={item.storeId} checked={item.likeStatus} onChange={(id) => {
+                            setData(
+                                list.map(l =>
+                                    l.storeId === id
+                                        ? { ...l, likeStatus: !l.likeStatus }
+                                        : l
+                                )
+                            )
+                        }} />
                     </L.FlexRows>
                 ))
             }

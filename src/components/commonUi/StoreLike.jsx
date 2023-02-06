@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as L from 'components/commonUi/Layout';
 import { My, MyC } from 'components/commonUi/Icon';
-import { AlertText } from "components/Login/Member/MemberPhone/MemberPhoneStyle";
 import { storeLike } from "service/mystore";
 import Confirm from "./Confirm";
 

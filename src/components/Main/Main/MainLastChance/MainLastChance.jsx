@@ -12,9 +12,11 @@ import { useQuery } from 'react-query';
 function MainLastChance() {
   const navigate = useNavigate();
   const local = useSelector(state => state.local);
+  const limit = 10;
+  const page = 1;
 
   const getItem = async () => {
-    const response = await getLastGroupItemList(local);
+    const response = await getLastGroupItemList(local, limit, page);
     return response.data.data.items;
   }
 

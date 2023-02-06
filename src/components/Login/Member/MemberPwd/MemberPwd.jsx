@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { ReactComponent as EyeOn } from "assets/login/Eyeon.svg";
 import { ReactComponent as EyeOff } from "assets/login/Eyeoff.svg";
 import { memberPasswordChange } from "service/member";
-import {EyeOffStyle,PwdToggleButton,PwdToggleInputForm,PwdToggleInput} from './MemberPwdStyle'
+import { EyeOffStyle, PwdToggleButton, PwdToggleInputForm, PwdToggleInput } from './MemberPwdStyle'
 import SimpleConfirm from 'components/commonUi/SimpleConfirm';
 import { Text } from 'components/commonUi/Text';
 import { ChangeButton, Input, InputForm } from 'pages/member/MemberManagement/MemberManagementStyle';
@@ -10,25 +10,28 @@ import * as L from 'components/commonUi/Layout';
 
 
 function MemberPwd() {
-  const [showPwdToggle,setShowPwdToggle] = useState(true)
+  const [showPwdToggle, setShowPwdToggle] = useState(true)
   return (
-    <div>
-      { showPwdToggle ? <PwdResetToggle setShowPwdToggle={setShowPwdToggle}/> : <PwdToggle setShowPwdToggle={setShowPwdToggle}/> }
-    </div>
+    <>
+      {
+        showPwdToggle
+          ? <PwdResetToggle setShowPwdToggle={setShowPwdToggle} />
+          : <PwdToggle setShowPwdToggle={setShowPwdToggle} />
+      }
+    </>
   )
 }
 // 비밀번호 변경전
-function PwdResetToggle({setShowPwdToggle}){
-  return(
-    <div>
-      <L.FlexCols>
+function PwdResetToggle({ setShowPwdToggle }) {
+  return (
+    <L.FlexCols>
       <InputForm>
         <Input
           placeholder='8자 이상 영문,숫자,특수문자 조합'
           disabled
         />
         <ChangeButton
-          onClick={()=>{setShowPwdToggle(false)}}
+          onClick={() => { setShowPwdToggle(false) }}
         >
           변경
         </ChangeButton>
@@ -38,23 +41,21 @@ function PwdResetToggle({setShowPwdToggle}){
           placeholder='비밀번호 확인'
           disabled
         />
-      </InputForm> 
-      </L.FlexCols>
-
-    </div>
+      </InputForm>
+    </L.FlexCols>
   )
 }
 
 // 비밀번호 변경 토글
-function PwdToggle({setShowPwdToggle}){
-  
+function PwdToggle({ setShowPwdToggle }) {
+
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState('');
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
   const [passwordValid, setPasswordValid] = useState(null);
   const [passwordValidMessage, setPasswordValidMessage] = useState('');
-  
+
   const [confirm, setConfirm] = useState(null)
 
 
@@ -62,7 +63,7 @@ function PwdToggle({setShowPwdToggle}){
   const onSubmit = async () => {
     const response = await memberPasswordChange(password)
 
-    const { data, message } = response.data
+    const { data } = response.data
 
     if (data) {
       setConfirm({
@@ -81,7 +82,7 @@ function PwdToggle({setShowPwdToggle}){
     const regExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
     return regExp.test(password);
   }
-  
+
   //비밀번호 체크
   useEffect(() => {
 
@@ -112,55 +113,57 @@ function PwdToggle({setShowPwdToggle}){
     }
   }, [password, passwordCheck])
 
-  return(
-    <div>
-        <PwdToggleInputForm>
-          <PwdToggleInput
-            placeholder='8자 이상 영문,숫자,특수문자 조합'
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? <EyeOn /> : <EyeOff />}
-          </EyeOffStyle>
-        </PwdToggleInputForm>
-        <PwdToggleInputForm>
-          <PwdToggleInput
-            placeholder='비밀번호 확인'
-            type={showPasswordCheck ? "text" : "password"}
-            value={passwordCheck}
-            onChange={e => setPasswordCheck(e.target.value)}
-          />
-          <EyeOffStyle onClick={() => setShowPasswordCheck(!showPasswordCheck)}>
-            {showPasswordCheck ? <EyeOn /> : <EyeOff />}
-          </EyeOffStyle>
-        </PwdToggleInputForm>
-        {
-          passwordValidMessage &&
-          <Text  
-            style={{ marginTop: 8, color: '#D32F2F' }}
-            _size={14}>
-            {passwordValidMessage}
-          </Text>
-        }
-        <PwdToggleButton
-          type="button" 
-          onClick={onSubmit}
-        >
-          변경 완료
-        </PwdToggleButton>
-        {
-          confirm &&
-          <SimpleConfirm
-            contents={confirm.contents}
-            confirmText={confirm.confirmText}
-            onConfirmClick={confirm.onConfirmClick}
-            warn={confirm.warn}
-            active={confirm.active}
-          />
-        }
-    </div>
+  return (
+    <>
+      <PwdToggleInputForm>
+        <PwdToggleInput
+          placeholder='8자 이상 영문,숫자,특수문자 조합'
+          type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <EyeOffStyle onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? <EyeOn /> : <EyeOff />}
+        </EyeOffStyle>
+      </PwdToggleInputForm>
+      <PwdToggleInputForm>
+        <PwdToggleInput
+          placeholder='비밀번호 확인'
+          type={showPasswordCheck ? "text" : "password"}
+          value={passwordCheck}
+          onChange={e => setPasswordCheck(e.target.value)}
+        />
+        <EyeOffStyle onClick={() => setShowPasswordCheck(!showPasswordCheck)}>
+          {showPasswordCheck ? <EyeOn /> : <EyeOff />}
+        </EyeOffStyle>
+      </PwdToggleInputForm>
+      {
+        passwordValidMessage &&
+        <Text
+          style={{ marginTop: 8, color: '#D32F2F' }}
+          _size={14}>
+          {passwordValidMessage}
+        </Text>
+      }
+      <PwdToggleButton
+        type="button"
+        disabled={!passwordValid}
+        _bg={passwordValid}
+        onClick={onSubmit}
+      >
+        변경 완료
+      </PwdToggleButton>
+      {
+        confirm &&
+        <SimpleConfirm
+          contents={confirm.contents}
+          confirmText={confirm.confirmText}
+          onConfirmClick={confirm.onConfirmClick}
+          warn={confirm.warn}
+          active={confirm.active}
+        />
+      }
+    </>
   )
 }
 export default MemberPwd

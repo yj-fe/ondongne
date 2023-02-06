@@ -93,7 +93,7 @@ function SearchPage() {
 
         <L.Container >
           <L.Contents _height={'100vh'} _padding='0'>
-            <L.FlexCols _padding="0" _gap='0'>
+            <L.Scroll _padding="0" _gap='0'>
 
 
               {/* =================== 메뉴 =================== */}
@@ -101,34 +101,34 @@ function SearchPage() {
 
               <Line />
 
-            {
-              pageChange 
-                ?
-                <MapComponent/>
-                :
-                <>
-                  {/* =================== 필터 =================== */}
-                  <L.FlexCols _gap={32} _padding='24px 20px'>
-                    <L.FlexRows _gap={16} _content='space-between'>
-                      <div>
-                        <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
-                      </div>
-                      <L.FlexRows 
-                        _gap={4} 
-                        _content='flex-end' 
-                        _width='100px' 
-                        style={{cursor:'default'}}
-                        onClick={() => setFilter01(true)}
-                      >
-                        <T.Text _size={13} _weight={400} _color='gray900'>{sortFormatter(sort)}</T.Text>
-                        <button
-                          type='button'
-                          _bg={sort !== 'create' && 'green700'}
+              {
+                pageChange
+                  ?
+                  <MapComponent />
+                  :
+                  <>
+                    {/* =================== 필터 =================== */}
+                    <L.FlexCols _gap={32} _padding='24px 20px 0 20px'>
+                      <L.FlexRows _gap={16} _content='space-between'>
+                        <div>
+                          <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
+                        </div>
+                        <L.FlexRows
+                          _gap={4}
+                          _content='flex-end'
+                          _width='100px'
+                          style={{ cursor: 'default' }}
+                          onClick={() => setFilter01(true)}
                         >
-                          <Down />
-                        </button>
+                          <T.Text _size={13} _weight={400} _color='gray900'>{sortFormatter(sort)}</T.Text>
+                          <button
+                            type='button'
+                            _bg={sort !== 'create' && 'green700'}
+                          >
+                            <Down />
+                          </button>
+                        </L.FlexRows>
                       </L.FlexRows>
-                    </L.FlexRows>
                     </L.FlexCols>
 
                     <L.FlexCols _gap={32} _padding='24px 20px'>
@@ -143,9 +143,7 @@ function SearchPage() {
                       {/* =================== 상품 정보 있을 경우=================== */}
                       {
                         items.length > 0 &&
-                        <L.Scroll _height='calc(100vh - 170px)'>
-                          <StoreListCard list={items} setData={setItems} lastRef={ref} />
-                        </L.Scroll>
+                        <StoreListCard list={items} setData={setItems} lastRef={ref} />
                       }
 
                       {/* ===================로딩=================== */}
@@ -153,15 +151,15 @@ function SearchPage() {
                         loading && <LoadingBar />
                       }
                     </L.FlexCols>
-                </>
-}
-            </L.FlexCols>
+                  </>
+              }
+            </L.Scroll>
 
-              <MapListButton
-                onClick={() => setPageChange(!pageChange)}
-              >
-                { pageChange ? <><List /><p>목록 보기</p></> : <><Map /><p>지도 보기</p></> } 
-              </MapListButton>
+            {/* <MapListButton
+              onClick={() => setPageChange(!pageChange)}
+            >
+              {pageChange ? <><List /><p>목록 보기</p></> : <><Map /><p>지도 보기</p></>}
+            </MapListButton> */}
 
           </L.Contents>
         </L.Container>
