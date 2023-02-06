@@ -6,6 +6,7 @@ import { Check } from 'components/commonUi/Icon';
 import { ImgSizeLayout } from '../Img/ImgSizeLayout';
 import Review from 'assets/images/Review.png'
 import { sortFormatter } from 'utils/utils';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 
 function MoreLayout({ PropsModal }) {
@@ -150,7 +151,7 @@ export function SearchSortLayout({ CloseModal, data, setData }) {
   }
 
   return (
-    <div>
+    <CursorDiv>
       <ModalOutside
       onClick={CloseModal}
       >
@@ -188,7 +189,7 @@ export function SearchSortLayout({ CloseModal, data, setData }) {
           </ModalButton>
         </ModalBody>
       </ModalOutside>
-    </div>
+    </CursorDiv>
   )
 }
 

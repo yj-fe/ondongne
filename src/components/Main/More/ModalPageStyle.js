@@ -23,6 +23,7 @@ export const ModalBody = styled.div`
 	bottom: 0;
 	position: absolute;
 	z-index: 999;
+	
 `;
 export const ModalShareBody = styled.div`
 	left: 50%;
@@ -43,9 +44,9 @@ export const ModalDiv1 = styled.div`
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	padding: 12px 4px;
+	padding: ${props => props._pd || '12px 4px'};
 	gap: 4px;
-	height: auto;
+	height: ${props => props._height || 'auto'};
 	background: #ffffff;
 	border-radius: 20px 20px 0px 0px;
 	flex: none;
@@ -56,6 +57,7 @@ export const ModalDiv1 = styled.div`
 	font-size: 14px;
 	line-height: 20px;
 	color: #212121;
+	box-shadow: ${props => props._shadow};
 `;
 export const ModalDiv3 = styled.button`
 	display: flex;

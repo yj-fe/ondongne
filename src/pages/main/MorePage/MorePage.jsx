@@ -11,7 +11,7 @@ import { Text } from 'components/commonUi/Text'
 import CheckBox from 'components/commonUi/CheckBox'
 import CheckBoxTitle from 'components/commonUi/CheckBoxTitle'
 import { Line } from '../DetailsPage/DetailsPageStyle'
-import { ArrowRight, Bubble, Close } from 'components/commonUi/Icon'
+import { ArrowRight, Bubble, Close, Switch, SwitchC } from 'components/commonUi/Icon'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import FooterLayout from 'components/layout/Footer/Footer'
@@ -36,6 +36,9 @@ function MorePage() {
 
   const COOKIE_BUBBLE_KEY = "bubbleNeverWatch";
   const [cookiesBubble, setCookieBubble] = useCookies([COOKIE_BUBBLE_KEY]);
+// 2차범위
+  const [checkMarketing, setCheckMarketing] = useState(false);
+  const [checkPush, setCheckPush] = useState(false);
 
   const getMemberProfile = async () => {
     const response = await getMember()
@@ -129,12 +132,12 @@ function MorePage() {
                     <RelativDiv _width={199} _height={100} _widthmedia='170px' >
                       <Bubble/>
                       <AbsoluteDiv 
-                        _pd='3px' _width={20} _height={20} _right='7%' _top='12%' _rightmedia='-10%'
+                        _pd='6px' _width={20} _height={20} _right='9%' _top='10%' _rightmedia='-10%'
                         onClick={close}
                       >
                         <T.Text _size={13} _weight={600} _color='white' _align='center'>X</T.Text>
                       </AbsoluteDiv>
-                      <AbsoluteDiv _width={190} _height={80} _right='-11%' _rightmedia='-30%'>
+                      <AbsoluteDiv _width={190} _height={80} _left='30px'>
                         <T.Text _size={12} _weight={600} _color='white' _align='center'><p>상품 판매가 가능한<p></p>비즈 회원으로 전환해 보세요!</p></T.Text>
                       </AbsoluteDiv>
                     </RelativDiv>
@@ -160,16 +163,26 @@ function MorePage() {
 
           <MoreDiv>
             <MoreContainerDiv onClick={() => memberRoleRouter("/order/all")}>My 주문</MoreContainerDiv>
-
             <MoreContainerDiv onClick={() => memberRoleRouter("/member/market")}>My 단골</MoreContainerDiv>
-
             <MoreContainerDiv onClick={() => memberRoleRouter("/member/review")}>내가 쓴 리뷰</MoreContainerDiv>
-            {/* <Link to="/member/coupon">
-              <MoreContainerDiv>쿠폰함</MoreContainerDiv>
-            </Link> */}
+            {/* <MoreContainerDiv onClick={() => memberRoleRouter("/member/coupon")}>쿠폰함</MoreContainerDiv> */}
           </MoreDiv>
           <MoreDiv>
 
+
+{/*  2차범위
+              <MoreContainerDiv>
+                <L.FlexRows  _content='space-between' onClick={() => setCheckMarketing(!checkMarketing)}>
+                  <p>마케팅 활용 동의</p>
+                  { checkMarketing ?  <SwitchC/> : <Switch/> }
+                </L.FlexRows>
+              </MoreContainerDiv>
+              <MoreContainerDiv>
+                <L.FlexRows  _content='space-between' onClick={() => setCheckPush(!checkPush)}>
+                  <p>Push 수신 동의</p>
+                  { checkPush ?  <SwitchC/> : <Switch/> }
+                </L.FlexRows>
+              </MoreContainerDiv> */}
 
             <Link to="/service">
               <MoreContainerDiv>고객센터</MoreContainerDiv>
@@ -178,8 +191,7 @@ function MorePage() {
               <MoreContainerDiv>공지사항</MoreContainerDiv>
             </Link>
             <Link to="/service/terms">
-              <MoreContainerDiv
-              >약관 및 정책</MoreContainerDiv>
+              <MoreContainerDiv>약관 및 정책</MoreContainerDiv>
             </Link>
             {/* <Link to="/setting">
               <MoreContainerDiv>환경설정</MoreContainerDiv>

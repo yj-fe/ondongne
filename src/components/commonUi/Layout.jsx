@@ -249,6 +249,7 @@ export const FlexRows = styled.div`
       white-space: nowrap;
   overflow: hidden;
   cursor: ${props => props._cursor};
+  transform: ${props => props._transform};
 `;
 
 export const FlexRowsCategory = styled.div`

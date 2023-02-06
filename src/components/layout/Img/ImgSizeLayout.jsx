@@ -71,13 +71,14 @@ export const AbsoluteDiv = styled.div`
     height: ${props => props._height}px;
     display: flex;
     position: absolute;
+    left: ${props => props._left};
     right: ${props => props._right || '0%'};
     bottom:${props => props._bottom || '0%'};
     top:${props => props._top || ''};
     margin: 0;
     padding: ${props => props._pd};
     /* padding: 18px 12px; */
-    z-index: 999;
+    z-index: ${props => props._z || '999'};
     @media screen and (max-width : 370px) {
      right: ${props => props._rightmedia};
     }

@@ -11,6 +11,8 @@ export const TextCut = styled.p`
     width: ${props => props._width || 'auto'};
     min-width: ${props => props._minWidth || 'auto'};
     text-overflow: ellipsis;
+    overflow: ${props => props._over};
+    white-space: ${props => props._wspace};
     /* text-overflow: ellipsis " [..]"; */
     /* overflow: hidden; */
 /* white-space: nowrap; */
