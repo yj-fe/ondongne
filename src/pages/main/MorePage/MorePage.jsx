@@ -21,6 +21,9 @@ import Confirm from 'components/commonUi/Confirm'
 import TermsModal from 'components/service/TermsPage/TermsModal'
 import { AbsoluteDiv, RelativDiv } from 'components/layout/Img/ImgSizeLayout'
 
+import { useCookies } from "react-cookie";
+import moment from "moment";
+
 
 function MorePage() {
   const navigate = useNavigate()
@@ -28,9 +31,11 @@ function MorePage() {
   const auth = useSelector(state => state.auth);
   const [alert, setAlert] = useState(null);
   const [confirm, setConfirm] = useState(false);
-  const [textBubble, setTextBubble] = useState(false);
   const [coachmark, setCoachmark] = useState(null);
   const [agreementModal, setAgreementModal] = useState(false);
+
+  const COOKIE_BUBBLE_KEY = "bubbleNeverWatch";
+  const [cookiesBubble, setCookieBubble] = useCookies([COOKIE_BUBBLE_KEY]);
 
   const getMemberProfile = async () => {
     const response = await getMember()
@@ -42,9 +47,15 @@ function MorePage() {
     navigate('/member/management');
   }
 
+  // 다시보지않기 이벤트
   const close = () => {
-    setTextBubble(false)
-  }
+    const decade = moment(); 
+    decade.add(7, 'd'); //일주일보지않기
+    setCookieBubble(COOKIE_BUBBLE_KEY, 'true', {
+      path: '/',
+      expires: decade.toDate(),
+    });
+  };
 
   const bizMember = async () => {
     const response = await getBizMember();
@@ -102,27 +113,28 @@ function MorePage() {
             auth.isAuthenticated &&
             <MoreAccountDiv>
               <MoreAccountProfile>
-                <L.FlexRows _gap={16} _content='flex-start'>
-                {member.profile && <MoreAccountImg src={member.profile} />}
-                {!member.profile && <MoreAccountImgBox />}
-                <MoreAccountTextDiv>
-                  <AccountBadge>{member.role === 'MEMBER' ? '일반회원' : '비즈회원'}</AccountBadge>
-                  <AccountName>{member.nickname}</AccountName>
-                </MoreAccountTextDiv>
+                <L.FlexRows _width='calc(100% - 200px)' _gap={16} _content='flex-start'>
+                  {member.profile && <MoreAccountImg src={member.profile} />}
+                  {!member.profile && <MoreAccountImgBox />}
+                  <MoreAccountTextDiv>
+                    <AccountBadge>{member.role === 'MEMBER' ? '일반회원' : '비즈회원'}</AccountBadge>
+                    <AccountName>{member.nickname}</AccountName>
+                  </MoreAccountTextDiv>
                 </L.FlexRows>
+
+{/*====== 비즈회원전환 말풍선 ======*/}
               {
-                textBubble &&
+                cookiesBubble[COOKIE_BUBBLE_KEY] ? null :
                   <Sticky>
-                    {/* <RelativDiv _width='100%' _height={100}> */}
-                    <RelativDiv _width={199} _height={100}>
+                    <RelativDiv _width={199} _height={100} _widthmedia='170px'>
                       <Bubble/>
                       <AbsoluteDiv 
-                        _width={20} _height={20} _right='6%' _top='11%'
+                        _width={20} _height={20} _right='6%' _top='11%' _rightmedia='-10%'
                         onClick={close}
                       >
                         <T.Text _size={13} _weight={600} _color='white' _align='center'>X</T.Text>
                       </AbsoluteDiv>
-                      <AbsoluteDiv _width={190} _height={80} _right='-11%'>
+                      <AbsoluteDiv _width={190} _height={80} _right='-11%' _rightmedia='-30%'>
                         <T.Text _size={12} _weight={600} _color='white' _align='center'><p>상품 판매가 가능한<p></p>비즈 회원으로 전환해 보세요!</p></T.Text>
                       </AbsoluteDiv>
                     </RelativDiv>

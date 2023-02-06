@@ -53,6 +53,9 @@ export const RelativDiv = styled.div`
     position: relative;
     margin: 0;
     padding: 0;
+    @media screen and (max-width : 370px) {
+     width: ${props => props._widthmedia};
+    }
 `;
 export const RelativDivS = styled.div`
     border-radius: ${props => props._bdr}px;
@@ -74,6 +77,9 @@ export const AbsoluteDiv = styled.div`
     margin: 0;
     /* padding: 18px 12px; */
     z-index: 999;
+    @media screen and (max-width : 370px) {
+     right: ${props => props._rightmedia};
+    }
 `;
 export const AbsoluteDivGrid = styled.div`
     border-radius: ${props => props._bdr}px;

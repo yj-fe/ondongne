@@ -30,8 +30,7 @@ export const MoreAccountProfile = styled.div`
 	flex-direction: row;
 	align-items: center;
 	padding: 0px;
-	gap: 16px;
-
+	/* gap: 16px; */
 	width: 100%;
 	height: 52px;
 `;
@@ -189,15 +188,21 @@ export const FooterText = styled.div`
 `;
 export const Sticky = styled.div`
     position: sticky;
-    max-width: 200px;
+    width: 200px;
     margin-right: 10%;
 		animation-duration: 3s;
     animation: .75s bounce infinite;
     @media screen and (max-width: 728px) {
-        margin-right: 7%;
+			margin-right: 7%;
     }
     @media screen and (max-width: 550px) {
-        margin-right: 0%;
+			margin-right: 0%;
+    }
+    @media screen and (max-width: 450px) {
+			width: 180px;
+    }
+    @media screen and (max-width: 370px) {
+			/* max-width: 170px; */
     }
 `
 
