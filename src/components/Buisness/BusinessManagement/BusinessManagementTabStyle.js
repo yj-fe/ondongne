@@ -42,27 +42,27 @@ export const ProfileBtnDiv = styled.label`
 	color: #212121;
 `;
 export const Img = styled.img`
-	width: ${props => props._width || '18px'};
-	height: ${props => props._height || '18px'};
-	border-radius: ${props => props._bdr};
+	width: ${(props) => props._width || "18px"};
+	height: ${(props) => props._height || "18px"};
+	border-radius: ${(props) => props._bdr};
 `;
 export const ImgCollect = styled.img`
 	overflow: hidden;
 	object-fit: fill;
 	background-repeat: no-repeat;
-	border-radius: ${props => props._bdr || '4px'} ;
-	width: ${props => props._width || '98px'};
-	height: ${props => props._height || '98px'};
+	border-radius: ${(props) => props._bdr || "4px"};
+	width: ${(props) => props._width || "98px"};
+	height: ${(props) => props._height || "98px"};
 `;
 export const ImgBanner = styled.img`
 	background-image: url(${(props) => props.banner || ""});
 	position: relative;
 	overflow: hidden;
-	width: ${props => props._width || '100%'};
+	width: ${(props) => props._width || "100%"};
 	height: ${(props) => props._height || ""};
 	object-fit: cover;
 	background-repeat: no-repeat;
-	border-radius: ${props => props._bdr};
+	border-radius: ${(props) => props._bdr};
 `;
 export const AvatarDiv = styled.div`
 	position: absolute;
@@ -72,7 +72,7 @@ export const TabContent = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 60px 20px 80px;
+	padding: 40px 20px 80px;
 	gap: 40px;
 	width: 100%;
 	height: 90%;
@@ -201,7 +201,7 @@ export const InputBox = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
-	justify-content: ${props => props._content};
+	justify-content: ${(props) => props._content};
 	align-items: flex-start;
 	padding: 12px;
 	gap: 4px;
@@ -221,7 +221,7 @@ export const Input = styled.input`
 	font-family: "Pretendard";
 	font-style: normal;
 	&::placeholder {
-		color: ${props => props._place || '#bdbdbd'};
+		color: ${(props) => props._place || "#bdbdbd"};
 	}
 	&:focus {
 		color: #212121;
@@ -229,7 +229,7 @@ export const Input = styled.input`
 	&::-ms-reveal {
 		display: none;
 	}
-	&::-webkit-inner-spin-button{
+	&::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 	}
 `;
@@ -299,7 +299,7 @@ export const DayBox = styled.div`
 	align-items: center;
 	/* padding: 12px 16px; */
 	gap: 4px;
-	width: ${props => props._width || '100%'};
+	width: ${(props) => props._width || "100%"};
 	height: ${(props) => props._height || "48px"};
 	background: ${(props) => (props.color ? "#E1F3F2" : "#F5F5F5")};
 	border-radius: 4px;

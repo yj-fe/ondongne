@@ -1,28 +1,22 @@
-import REACT, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DaumPostCode from 'react-daum-postcode';
+import Overlay from './layout/Overlay/Overlay';
 import styled from 'styled-components';
-
-const Model = styled.div`
-    background-color: rgba(0, 0, 0, 0.6);
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-`;
+import Header from './layout/Header/Header';
+import Alert from './commonUi/Alert';
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
-    max-height: 560px;
-    max-width: 530px;
+    height: calc(100vh - 60px);
+    max-width: 728px;
+    position: absolute;
+    top: 60px;
 `;
 
 const DaumPost = ({ closeModel, setAddress }) => {
+    const [alert, setAlert] = useState(null);
+    const portal = document.getElementById('portal');
+
     const handleComplete = (data) => {
         let address = data.address;
         let extraAddress = '';
@@ -35,21 +29,51 @@ const DaumPost = ({ closeModel, setAddress }) => {
             }
             address += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
+
+        if (!address.includes("김포")) {
+            return setAlert({
+                contents: `현재는 '경기도 김포시' 지역으로 운영 중 입니다.\n김포 지역으로 위치 설정이 가능합니다.`,
+                buttonText: "확인",
+                onButtonClick: () => setAlert(false),
+                onOverlayClick: () => setAlert(false),
+            })
+        }
+
         setAddress(address);
         closeModel();
     }
+
+    useEffect(() => {
+        portal.firstChild.style.backgroundColor = "#F5F5F5";
+    }, [])
+
     return (
-        <Model
-            onClick={closeModel}
+        <Overlay
+            style={{ alignItems: "flex-end" }}
+            onOverlayClick={closeModel}
         >
+            <Header
+                title={"주소검색"}
+                onBackClick={closeModel}
+            />
             <Container>
                 <DaumPostCode
                     className="post-code"
                     onComplete={handleComplete}
+                    autoClose={false}
                     style={{ width: "100%", height: "100%" }}
                 />
+                {
+                    alert &&
+                    <Alert
+                        contents={alert.contents}
+                        buttonText={alert.buttonText}
+                        onButtonClick={alert.onButtonClick}
+                        onOverlayClick={alert.onOverlayClick}
+                    />
+                }
             </Container>
-        </Model>
+        </Overlay>
     );
 }
 export default DaumPost;

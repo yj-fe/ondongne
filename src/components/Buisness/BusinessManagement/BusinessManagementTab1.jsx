@@ -5,7 +5,7 @@ import CheckBox from 'components/commonUi/CheckBox';
 
 import ProfileAvatar from 'components/commonUi/ProfileAvatar'
 import { Text } from 'components/commonUi/Text';
-import { TimeBox, TimeDiv,  DayDiv, DayBox, RowTitle, RowInput, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, Img, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, RowInfoDiv, Input, BankToggleDiv, BankListDiv, Textarea, TimerModel, Size, ImgBanner, ImgCollect } from './BusinessManagementTabStyle'
+import { TimeBox, TimeDiv, DayDiv, DayBox, RowTitle, InputText, TabDiv, TabProfileDiv, ProfileBtnDiv, Img, AvatarDiv, TabContent, RowDiv, ContentDiv, ContentTitle, TitleInfo, TitleInfoDiv, RightStyle, TabBtn, InputBox, Input, BankToggleDiv, BankListDiv, Textarea, Size, ImgBanner } from './BusinessManagementTabStyle'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getBizStore, storeImageBannerUpdate, storeImageProfileUpdate, storeUpdate } from 'service/bizStore';
@@ -13,7 +13,6 @@ import { Down } from 'components/commonUi/Icon';
 import { deliveryToString, numberFormat, numberFormatter } from 'utils/utils';
 import AddressModel from 'components/AddressModel';
 import Alert from 'components/commonUi/Alert';
-import CalendarModel from 'components/commonUi/CalendarModel';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { AbsoluteDiv } from 'components/layout/Img/ImgSizeLayout';
@@ -48,13 +47,10 @@ function BusinessManagementTab1({ tabHandler }) {
   const [deliveries, setDeliverise] = useState([]);
   const [deliveryModel, isDeliveryModel] = useState(false);
 
-  // 달력
-  const [calendar, setCalendar] = useState(false);
-
   const goBiz = () => {
     navigate('/business')
   }
-  
+
   // input 체인지 핸들러
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -110,14 +106,6 @@ function BusinessManagementTab1({ tabHandler }) {
         profile: IMGURL + data.name
       })
     }
-  }
-
-  // 오픈 날짜 변경
-  const openDateHandler = (date) => {
-    setStore({
-      ...store,
-      openDate: date,
-    })
   }
 
   // 휴무일 변경
@@ -232,7 +220,7 @@ function BusinessManagementTab1({ tabHandler }) {
 
   useEffect(() => {
     if (store.banner && store.categories.length > 0 && store.deliveries.length > 0
-      && store.name && store.openDate && store.profile && store.recetiveType.length > 0 && store.description.length > 0) {
+      && store.name && store.profile && store.recetiveType.length > 0 && store.description.length > 0) {
       setActive(true);
     } else {
       setActive(false);
@@ -244,7 +232,7 @@ function BusinessManagementTab1({ tabHandler }) {
     if (auth.isAuthenticated) getStore()
   }, [auth]);
 
-  
+
 
   return (
     <div>
@@ -318,6 +306,8 @@ function BusinessManagementTab1({ tabHandler }) {
               <RightStyle><Right /></RightStyle>
             </TitleInfoDiv>
           </ContentDiv>
+
+
 
           {/* ============== 배달/픽업 여부 ============== */}
           <L.FlexCols _gap={16}>
@@ -400,41 +390,6 @@ function BusinessManagementTab1({ tabHandler }) {
             </ContentDiv>
           </RowDiv>
 
-
-          {/* ============== 비즈 오픈 날짜 ============== */}
-          <ContentDiv>
-            <ContentTitle>비즈 오픈 날짜</ContentTitle>
-            <RowDiv
-              onClick={() => setCalendar(true)}
-            >
-              <TitleInfoDiv>
-                <RowInput
-                  placeholder='YYYY'
-                  type='text'
-                  value={store.openDate?.split('-')[0]}
-                />
-                <InputText>년</InputText>
-              </TitleInfoDiv>
-              <TitleInfoDiv>
-                <RowInput
-                  placeholder='MM'
-                  type='text'
-                  value={store.openDate?.split('-')[1]}
-                />
-                <InputText>월</InputText>
-              </TitleInfoDiv>
-              <TitleInfoDiv>
-                <RowInput
-                  placeholder='DD'
-                  type='text'
-                  value={store.openDate?.split('-')[2]}
-                />
-                <InputText>일</InputText>
-              </TitleInfoDiv>
-            </RowDiv>
-          </ContentDiv>
-
-
           {/* ============== 휴무일 ============== */}
           <RowDiv>
             <ContentDiv>
@@ -482,23 +437,6 @@ function BusinessManagementTab1({ tabHandler }) {
             }
           </ContentDiv>
 
-          {/* ============== 수령 안내 ============== */}
-          <ContentDiv>
-            <ContentTitle>수령 안내</ContentTitle>
-            <InputBox
-              height={200}
-            >
-              <Textarea
-                name='recetiveDescription'
-                value={store.recetiveDescription}
-                onChange={onChange}
-                placeholder='수령 안내 메세지를 입력해주세요.'
-                maxLength={255}
-              />
-            </InputBox>
-          </ContentDiv>
-
-
         </TabContent>
 
         <TabBtn
@@ -526,14 +464,6 @@ function BusinessManagementTab1({ tabHandler }) {
           setModelClose={() => isDeliveryModel(false)}
           setDeliverise={setDeliverise}
         />
-      }
-      {
-        calendar &&
-        <CalendarModel
-          modelClose={() => setCalendar(false)}
-          now={store?.openDate}
-          dateFormat='yyyy-MM-dd'
-          onChange={openDateHandler} />
       }
 
     </div>

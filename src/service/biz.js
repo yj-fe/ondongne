@@ -36,25 +36,22 @@ export function bizSignup(bizData) {
 	const headers = { "Content-Type": "multipart/form-data" };
 	const data = new FormData();
 
-	// 상점
 	data.append("storeName", bizData.storeName);
-
-	// 사업자 번호
+	data.append("address", bizData.address);
+	data.append("addressDetails", bizData.addressDetails);
+	data.append("description", bizData.description);
 	data.append("businessNumber", bizData.businessNumber);
+	data.append("bank", bizData.bank);
+	data.append("accountNumber", bizData.accountNumber);
 
-	//카테고리
-	const categories = bizData.category.split(",");
-	categories.forEach((category) => {
+	data.categories.forEach((category) => {
 		data.append("categories", category);
 	});
 
-	//활동지역
-	const deliveries = bizData.delivery.split(",");
-	deliveries.forEach((delivery) => {
+	data.deliveries.forEach((delivery) => {
 		data.append("deliveries", delivery);
 	});
 
-	//파일
 	bizData.files.forEach((file) => {
 		data.append("files", file);
 	});

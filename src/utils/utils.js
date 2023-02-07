@@ -58,7 +58,7 @@ export const numberFormat = (value) => {
 	// return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 };
 
-// 파일 체크
+// 이미지 체크
 export const imageValidation = (file) => {
 	const fileSize = file.size;
 	const maxSize = 10 * 1024 * 1024;
@@ -66,6 +66,21 @@ export const imageValidation = (file) => {
 
 	if (!file.name.toLowerCase().match(reg)) {
 		return "jpg|jpeg|png 형식의 파일을 첨부해주세요.";
+	}
+
+	if (fileSize > maxSize) {
+		return "사진 용량은 10MB 이내로 등록 가능합니다.";
+	}
+};
+
+// 파일 체크
+export const fileValidation = (file) => {
+	const fileSize = file.size;
+	const maxSize = 10 * 1024 * 1024;
+	const reg = /(.*?)\.(jpg|jpeg|png|pdf)$/;
+
+	if (!file.name.toLowerCase().match(reg)) {
+		return "pdf, jpg, png형식의 파일을 첨부해주세요.";
 	}
 
 	if (fileSize > maxSize) {

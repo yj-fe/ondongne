@@ -414,6 +414,7 @@ export const Scroll = styled.div`
     }
 `;
 export const Parents = styled.div`
+    width: 100%;
 	position: relative;
     top: ${props => props._top || 'auth'};
     left: ${props => props._left || 'auth'};

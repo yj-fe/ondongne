@@ -8,7 +8,7 @@ import CheckBox from 'components/commonUi/CheckBox';
 import { ContentDiv, Input, RightStyle, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { Down, ArrowRightB, X_Icon, Delete, Calendar, Floating } from 'components/commonUi/Icon';
 import { fileFormatter, imageValidation, numberFormat, numberFormatter, totalPrice } from 'utils/utils';
-import CategorySelect from 'components/commonUi/CategorySelect';
+import CategorySelect from 'components/commonUi/Category/CategorySelect';
 import BusinessProductEditInfo from './BusinessProductEditInfo';
 import { bizItemdeleteFile, createItem, getBizItem, updateItem } from 'service/bizItem';
 import Alert from 'components/commonUi/Alert';
@@ -259,17 +259,12 @@ function BusinessProductUpload() {
                   </TitleInfoDiv>
 
                 </L.FlexRows>
-                {
-                  select &&
-                  <CategorySelect
-                    close={() => setSelect(false)}
-                    isOpen={select}
-                    data={data}
-                    dataHanler={setData}
-                    errorHandler={setCategoryError}
-                  />
-                }
-                {categoryError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{categoryError}</T.Text>}
+                <CategorySelect
+                  close={() => setSelect(false)}
+                  isOpen={select}
+                  data={data}
+                  dataHanler={setData}
+                />
               </L.FlexCols>
 
               <L.FlexCols _gap={16}>

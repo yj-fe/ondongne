@@ -284,7 +284,7 @@ function BusinessAgreementModal({ closeModel }) {
 
   return (
     <ModalOutside
-      onClick={closeModel}
+    // onClick={closeModel}
     >
       {
         service === null &&

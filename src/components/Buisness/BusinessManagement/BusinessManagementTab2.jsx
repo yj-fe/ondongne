@@ -62,7 +62,7 @@ function BusinessManagementTab2({ tabHandler }) {
       return setAlert({
         contents: "사업자 정보 등록이 완료되었습니다.",
         buttonText: "확인",
-        onButtonClick: () => {setAlert(false); goBiz();},
+        onButtonClick: () => { setAlert(false); goBiz(); },
         onOverlayClick: () => setAlert(false),
       })
     } else {
@@ -180,13 +180,13 @@ function BusinessManagementTab2({ tabHandler }) {
               <ContentTitle>통장 정보</ContentTitle>
               <InfoBoxDiv
                 onClick={() => setSelect(!select)}
-                >
+              >
                 <TitleInfo>{biz.bank ?? '은행 선택'}</TitleInfo>
                 <RightStyle
-                  
-                  ><Down /></RightStyle>
+
+                ><Down /></RightStyle>
               </InfoBoxDiv>
-                  {select && <BankToggle close={() => setSelect(false)} data={category} setData={setCategory} />}
+              {select && <BankToggle close={() => setSelect(false)} data={category} setData={setCategory} />}
               <InfoBoxDiv>
                 <Input
                   type='number'

@@ -52,6 +52,7 @@ export const NextButton = styled.button`
 	line-height: 26px;
 	text-align: center;
 	color: #ffffff;
+	z-index: 99999 !important;
 	@media only screen and (max-width: 728px) {
 		width: 100%;
 	}

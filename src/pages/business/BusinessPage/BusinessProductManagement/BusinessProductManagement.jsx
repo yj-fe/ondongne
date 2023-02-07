@@ -96,38 +96,38 @@ function BusinessProductManagement() {
 
               <L.Contents _padding='0px' _gap={20}>
                 {/* <L.FlexRowsWrapBPM _padding={0}> */}
-                  {
-                    items && items.length === 0 &&
-                    <L.Contents _padding='50px 0px' _height='calc(100vh - 68px)'>
-                      <L.NoneDataContainer>
-                        <T.Text _align='center' _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
-                        <T.Text _align='center' _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
-                      </L.NoneDataContainer>
-                    </L.Contents>
-                  }
-                  <L.Scroll>
-                      <L.Grid>
-                  {
-                    items && items.length > 0 &&
-                    items.map((item, index) => (
-                      items.length === index + 1
-                        ? <Link
-                          ref={ref}
-                          key={item.itemId}
-                          to={`/details/${item.itemId}`}
-                        >
-                          <ProductCardGrid isCart={false} item={item} />
-                        </Link>
+                {
+                  items && items.length === 0 &&
+                  <L.Contents _padding='50px 0px' _height='calc(100vh - 68px)'>
+                    <L.NoneDataContainer>
+                      <T.Text _align='center' _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
+                      <T.Text _align='center' _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
+                    </L.NoneDataContainer>
+                  </L.Contents>
+                }
+                <L.Scroll>
+                  <L.Grid>
+                    {
+                      items && items.length > 0 &&
+                      items.map((item, index) => (
+                        items.length === index + 1
+                          ? <Link
+                            ref={ref}
+                            key={item.itemId}
+                            to={`/details/${item.itemId}`}
+                          >
+                            <ProductCardGrid isCart={false} item={item} />
+                          </Link>
 
-                        : <Link
-                          key={item.itemId}
-                          to={`/details/${item.itemId}`}
-                        >
-                          <ProductCardGrid isCart={false} item={item} />
-                        </Link>
-                    ))
-                  }
-                </L.Grid>
+                          : <Link
+                            key={item.itemId}
+                            to={`/details/${item.itemId}`}
+                          >
+                            <ProductCardGrid isCart={false} item={item} />
+                          </Link>
+                      ))
+                    }
+                  </L.Grid>
                 </L.Scroll>
                 {/* </L.FlexRowsWrapBPM> */}
               </L.Contents>

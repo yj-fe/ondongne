@@ -7,6 +7,119 @@ import { Green_Search, Search } from './commonUi/Icon';
 import { TextInput } from './commonUi/Input';
 import { Text } from './commonUi/Text';
 
+const AddressModel = ({
+    modelClose, currentData, dataHandler
+}) => {
+
+    const [errorMessage, setErrorMessage] = useState('');
+    const [address, setAddress] = useState('');
+    const [list, setList] = useState([]);
+
+    // 위치 검색
+    const searchHandler = async () => {
+        if (!address) {
+            return false;
+        }
+
+        setList([]);
+        setErrorMessage('');
+
+        const response = await searchLocation(address);
+        const { data, message } = response.data;
+        if (message) setErrorMessage(message);
+        if (data) {
+            data.forEach(item => {
+                setList(state => ([
+                    ...state,
+                    { name: item, checked: currentData.includes(item) }
+                ]))
+            });
+        }
+    }
+
+    // 체크 핸들러
+    const checkHanler = (name) => {
+
+        setErrorMessage('')
+
+        setList(
+            list.map(item =>
+                item.name === name
+                    ? { ...item, checked: !item.checked }
+                    : item
+            )
+        )
+    }
+
+    // 적용
+    const onSubmit = () => {
+        dataHandler(
+            list.filter(item => item.checked === true).map(item => item.name)
+        );
+        modelClose();
+    }
+
+    return (
+        <Overlay
+            onOverlayClick={modelClose}
+        >
+            <S.AlertBox>
+                <S.Body>
+                    {/* ============ 검색창 ============ */}
+                    <FlexCols _gap={12}>
+                        <Text as="span" _size={18} _weight={600} _align="center">활동 지역 검색</Text>
+
+                        <S.SearchBox>
+                            <TextInput
+                                _borcolor={'#fff'}
+                                _boccolor={'#fff'}
+                                maxLength={50}
+                                value={address}
+                                onChange={e => setAddress(e.target.value)}
+                                placeholder={"시/구, 동 이름으로 검색"}
+                                onKeyDown={e => {
+                                    if (e.key == 'Enter') searchHandler()
+                                }}
+                            />
+                            <button
+                                type='button'
+                                onClick={searchHandler} >
+                                <Search />
+                            </button>
+                        </S.SearchBox>
+                        {
+                            errorMessage &&
+                            <Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{errorMessage}</Text>
+                        }
+                    </FlexCols>
+                    {/* ============ 검색리스트 ============ */}
+                    <S.List>
+                        {
+                            list.length > 0 &&
+                            list.map((item, i) => (
+                                <S.Item
+                                    key={i}
+                                    checked={item.checked}
+                                    onClick={() => checkHanler(item.name, item.checked)}
+                                >
+                                    {item.checked ? <Green_Search /> : <Search />}
+                                    <S.ItemText _size={15}
+                                        _weight={item.checked && 600}
+                                        _color={item.checked ? '#0B806F' : 'gray500'}
+                                    >
+                                        {item.name}
+                                    </S.ItemText>
+                                </S.Item>
+                            ))
+                        }
+                    </S.List>
+                </S.Body>
+                <S.Button onClick={onSubmit}>적용</S.Button>
+            </S.AlertBox>
+        </Overlay>
+    )
+}
+
 const S = {
     AlertBox: styled.div`
         width: 342px;
@@ -73,124 +186,5 @@ const S = {
         text-align: left;
     `
 };
-
-const AddressModel = ({
-    setModelClose, setDeliverise
-}) => {
-
-    const [errorMessage, setErrorMessage] = useState('');
-    const [address, setAddress] = useState('');
-    const [list, setList] = useState([]);
-
-    // 위치 검색
-    const searchHandler = async () => {
-        if (!address) {
-            return false;
-        }
-
-        setList([]);
-        setErrorMessage('');
-
-        const response = await searchLocation(address);
-        const { data, message } = response.data;
-        if (message) setErrorMessage(message);
-        if (data) {
-            data.forEach(item => {
-                setList(state => ([
-                    ...state,
-                    { name: item, checked: false }
-                ]))
-            });
-        }
-    }
-
-    // 체크 핸들러
-    const checkHanler = (name, checked) => {
-
-        setErrorMessage('')
-
-        if (!checked) {
-            const count = list.filter(item => item.checked === true)
-            if (count.length == 7) {
-                return setErrorMessage('최대 7개까지 추가 가능합니다.');
-            }
-        }
-
-        setList(
-            list.map(item =>
-                item.name === name
-                    ? { ...item, checked: !item.checked }
-                    : item
-            )
-        )
-    }
-
-    // 적용
-    const onSubmit = () => {
-        setDeliverise(
-            list.filter(item => item.checked === true).map(item => item.name)
-        );
-        setModelClose();
-    }
-
-    return (
-        <Overlay
-            onOverlayClick={setModelClose}
-        >
-            <S.AlertBox>
-                <S.Body>
-                    {/* ============ 검색창 ============ */}
-                    <FlexCols _gap={12}>
-                        <Text as="span" _size={18} _weight={600} _align="center">활동 지역 검색</Text>
-
-                        <S.SearchBox>
-                            <TextInput
-                                _borcolor={'#fff'}
-                                _boccolor={'#fff'}
-                                maxLength={50}
-                                value={address}
-                                onChange={e => setAddress(e.target.value)}
-                                placeholder={"시/구, 동 이름으로 검색"}
-                                onKeyDown={e => {
-                                    if (e.key == 'Enter') searchHandler()
-                                }}
-                            />
-                            <Search onClick={searchHandler} />
-                        </S.SearchBox>
-                        {
-                            errorMessage
-                                ? <Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{errorMessage}</Text>
-                                : <Text as="p" _size={13} _weight={400} _color={'gray600'} >최대 7개까지 추가 가능합니다.</Text>
-                        }
-                    </FlexCols>
-                    {/* ============ 검색리스트 ============ */}
-                    <S.List>
-                        {
-                            list.length > 0 &&
-                            list.map((item, i) => (
-                                <S.Item
-                                    key={i}
-                                    checked={item.checked}
-                                    onClick={() => checkHanler(item.name, item.checked)}
-                                >
-                                    {item.checked ? <Green_Search /> : <Search />}
-                                    <S.ItemText _size={15}
-                                        _weight={item.checked && 600}
-                                        _color={item.checked ? '#0B806F' : 'gray500'}
-                                    >
-                                        {item.name}
-                                    </S.ItemText>
-                                </S.Item>
-                            ))
-                        }
-                    </S.List>
-                </S.Body>
-                <S.Button onClick={onSubmit}>적용</S.Button>
-            </S.AlertBox>
-        </Overlay>
-    )
-
-
-}
 
 export default AddressModel
