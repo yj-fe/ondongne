@@ -336,37 +336,6 @@ export const FlexRowsWrapCategory = styled.div`
 }
 `;
 
-export const FlexRowsWrapMedia = styled.div`
-    display: flex;
-    flex-direction: rows;
-    flex-wrap: wrap;
-    gap: ${props => props._gap || 8}px;
-    justify-content: ${props => props._content || 'inherit'};
-    align-items: ${props => props._items || 'inherit'};
-    width: ${props => props._width || '100%'};
-    height: ${props => props._height || 'auto'};
-    padding: ${props => props._padding || '0px'};
-@media screen and (max-width:600px){
-    
-}
-`;
-
-export const FlexRowsWrapBPM = styled.div`
-    display: flex;
-    flex-direction: rows;
-    flex-wrap: wrap;
-    gap: 1.2em;
-    /* gap: ${props => props._gap || '20px'}; */
-    justify-content: ${props => props._content || 'inherit'};
-    align-items: ${props => props._items || 'flex-start'};
-    width: ${props => props._width || '100%'};
-    height: ${props => props._height || 'auto'};
-    padding: ${props => props._padding || '0px'};
-    /* @media screen and (max-width: 500px) {
-        gap: 16px;
-    } */
-`;
-
 export const NoneDataContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -434,13 +403,6 @@ export const Line = styled.div`
   height: 1px;
   background: #F5F5F5;
 `
-
-export const Icon = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
 export const Scroll = styled.div`
 	overflow: scroll;
 	height: ${(props) => props._height || "calc(100vh - 10%)"};
@@ -451,7 +413,6 @@ export const Scroll = styled.div`
         height: ${(props) => props._heightmedia} ;
     }
 `;
-
 export const Parents = styled.div`
 	position: relative;
     top: ${props => props._top || 'auth'};
@@ -466,4 +427,9 @@ export const Child = styled.div`
     left: ${props => props._left || 'auth'};
     bottom: ${props => props._bottom || 'auth'};
     right: ${props => props._right || 'auth'};
+`;
+export const Zindex = styled.div`
+    z-index: 999;
+    width: ${props => props._width};
+    height: ${props => props._height};
 `;

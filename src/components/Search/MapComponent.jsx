@@ -10,6 +10,7 @@ import { ImgCollect } from 'components/Buisness/BusinessManagement/BusinessManag
 import StarRate from 'components/commonUi/StarRate';
 import { useState } from 'react';
 import { numberFormat } from 'utils/utils';
+import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
 function MapComponent() {
   const [modal, setModal] = useState(false)
@@ -27,12 +28,6 @@ function MapComponent() {
     recetiveType:'픽업'
 })
 
-const handleData =()=>{
-  setData({
-    ...data,
-    })
-}
-
 // 모달-스크롤하단고정
   useEffect(() => {
     if ( modal ) {
@@ -41,31 +36,34 @@ const handleData =()=>{
   }, [modal]);
 
   return (
-    <>
+    <CursorDiv>
       <L.FlexCols _gap='0px' _padding='0px'>
         <L.Scroll _height='calc(100vh - 40px)'>
           <L.FlexRows _padding='100px'>
 
+{/*===== 지도마커 예시 =====*/}
+            <L.Zindex  
+              _width='150px' _height='60px'
+              onClick={()=>setModal(true)}
+            >
+              <MapMarker
+                name={data.name}
+                category={data.category}
+                list={data.list}
+                marketnum={data.marketnum}
+                newMarket={data.newMarket}
+              />
+            </L.Zindex>
 
-          <button 
-            onClick={()=>setModal(true)}
-          >
-            <MapMarker
-              name={data.name}
-              category={data.category}
-              list={data.list}
-              marketnum={data.marketnum}
-              newMarket={data.newMarket}
-            />
-          </button>
+
           </L.FlexRows>
-
+{/*===== 업체정보모달 =====*/}
           {modal && <Modal setModal={setModal} item={data}/>}
 
         </L.Scroll>
       </L.FlexCols>
 
-    </>
+    </CursorDiv>
   )
 }
 
