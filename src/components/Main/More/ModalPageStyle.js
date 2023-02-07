@@ -23,7 +23,7 @@ export const ModalBody = styled.div`
 	bottom: 0;
 	position: absolute;
 	z-index: 999;
-	
+
 `;
 export const ModalShareBody = styled.div`
 	left: 50%;

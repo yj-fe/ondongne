@@ -34,7 +34,7 @@ function SearchPage() {
   const [loading, setLoading] = useState(false);
   const [fetching, isFetching] = useState(false);
 
-  const [pageChange, setPageChange] = useState(true)
+  const [pageChange, setPageChange] = useState(false)
 
 
   const getStores = async () => {
@@ -80,6 +80,8 @@ function SearchPage() {
     setLoading(true);
     getStores();
   }, [fetching])
+
+  
 
   return (
     <div>

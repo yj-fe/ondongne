@@ -264,15 +264,4 @@ export const FileLebelForm = styled.div`
 export const Fixed = styled.div`
     position: fixed;
 `
-export const Sticky = styled.div`
-    position: sticky;
-    max-width: 200px;
-    margin-right: 10%;
-    animation: .75s bounce infinite;
-    @media screen and (max-width: 728px) {
-        margin-right: 7%;
-    }
-    @media screen and (max-width: 550px) {
-        margin-right: 0%;
-    }
-`
+

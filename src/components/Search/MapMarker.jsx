@@ -5,7 +5,6 @@ import { Text, TextCut } from '../commonUi/Text';
 import * as L from 'components/commonUi/Layout';
 import { Dessert, Drink, Meat, New, Rice, Vege } from '../commonUi/Icon';
 import { AbsoluteDiv } from 'components/layout/Img/ImgSizeLayout';
-import { ModalBody, ModalDiv1 } from 'components/Main/More/ModalPageStyle';
 
 const StyledMapMarker = styled.div`
   position: relative;

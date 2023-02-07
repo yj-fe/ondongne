@@ -48,7 +48,7 @@ function MainCoachmark() {
 
   useEffect(() => {
     if (depth01 || depth02 ) {
-    // if (depth01 || depth02 || depth03) {
+      // if (depth01 || depth02 || depth03) {
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0);
     } else {
