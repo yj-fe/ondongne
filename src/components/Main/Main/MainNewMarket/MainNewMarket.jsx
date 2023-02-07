@@ -11,9 +11,11 @@ import { useQuery } from 'react-query';
 function MainNewMarket() {
   const navigate = useNavigate();
   const local = useSelector(state => state.local);
+  const limit = 10;
+  const page = 1;
 
   const loadData = async () => {
-    const response = await newStoreList(local);
+    const response = await newStoreList(local, limit, page);
     return response.data.data.stores;
   }
 

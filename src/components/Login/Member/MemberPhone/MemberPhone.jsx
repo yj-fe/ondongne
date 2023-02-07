@@ -55,7 +55,7 @@ function PhoneToggle({ getMemberProfile, setToggle }) {
     }
 
     const response = await sendSMS(phone);
-    const { data, message, code } = response.data;
+    const { data } = response.data;
 
     if (data) {
       setAuthCode(data);
@@ -76,7 +76,7 @@ function PhoneToggle({ getMemberProfile, setToggle }) {
 
     const { data, message } = response.data;
 
-    if (response.status === '500') {
+    if (!data) {
       return setConfirm({
         contents: message,
         confirmText: "확인",
@@ -85,7 +85,6 @@ function PhoneToggle({ getMemberProfile, setToggle }) {
           setConfirm(null)
         }
       })
-
     }
 
     if (data) {

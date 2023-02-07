@@ -36,7 +36,7 @@ root.render(
 					<ScrollToTop />
 					<GlobalStyle />
 					<QueryClientProvider client={queryClient}>
-						<ReactQueryDevtools initialIsOpen={false} />
+						{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 						<App />
 					</QueryClientProvider>
 				</BrowserRouter>

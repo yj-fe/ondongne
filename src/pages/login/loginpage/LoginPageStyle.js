@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputForm = styled.form`
+export const InputForm = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -42,10 +42,10 @@ export const Input = styled.input`
 		/* -webkit-box-shadow: 0 0 0px 1000px #000 inset; */
 		transition: background-color 5000s ease-in-out 0s;
 	}
-	&input{
+	&input {
 		-webkit-appearance: none;
 		-webkit-border-radius: 0;
-		 visibility:hidden;
+		visibility: hidden;
 	}
 `;
 export const PwdContainer = styled.div`
@@ -75,7 +75,7 @@ export const PwdInput = styled.input`
 	line-height: 24px;
 	color: #bdbdbd;
 	outline: none;
-	ime-mode:inactive;
+	ime-mode: inactive;
 	&::-ms-reveal {
 		display: none;
 	}

@@ -110,6 +110,7 @@ function MemberWithdrawal() {
                   <ButtonDiv
                     type="button"
                     btn={btn}
+                    disabled={!btn}
                     onClick={ShowDeleteModal}
                   >
                     회원탈퇴

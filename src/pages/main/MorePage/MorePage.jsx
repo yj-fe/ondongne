@@ -20,7 +20,7 @@ import Layout from 'components/layout/Layout/Layout'
 import Confirm from 'components/commonUi/Confirm'
 import TermsModal from 'components/service/TermsPage/TermsModal'
 import { AbsoluteDiv, RelativDiv } from 'components/layout/Img/ImgSizeLayout'
-
+import defaultProfile from 'assets/common/Profile.png'
 import { useCookies } from "react-cookie";
 import moment from "moment";
 
@@ -36,7 +36,7 @@ function MorePage() {
 
   const COOKIE_BUBBLE_KEY = "bubbleNeverWatch";
   const [cookiesBubble, setCookieBubble] = useCookies([COOKIE_BUBBLE_KEY]);
-// 2차범위
+  // 2차범위
   const [checkMarketing, setCheckMarketing] = useState(false);
   const [checkPush, setCheckPush] = useState(false);
 
@@ -52,7 +52,7 @@ function MorePage() {
 
   // 다시보지않기 이벤트
   const close = () => {
-    const decade = moment(); 
+    const decade = moment();
     decade.add(7, 'd');  //일주일보지않기
     setCookieBubble(COOKIE_BUBBLE_KEY, 'true', {
       path: '/',
@@ -117,32 +117,31 @@ function MorePage() {
             <MoreAccountDiv>
               <MoreAccountProfile>
                 <L.FlexRows _width='calc(100% - 200px)' _gap={16} _content='flex-start'>
-                  {member.profile && <MoreAccountImg src={member.profile} />}
-                  {!member.profile && <MoreAccountImgBox />}
+                  <MoreAccountImg src={member.profile ?? defaultProfile} />
                   <MoreAccountTextDiv>
                     <AccountBadge>{member.role === 'MEMBER' ? '일반회원' : '비즈회원'}</AccountBadge>
                     <AccountName>{member.nickname}</AccountName>
                   </MoreAccountTextDiv>
                 </L.FlexRows>
 
-{/*====== 비즈회원전환 말풍선 ======*/}
-              {
-                cookiesBubble[COOKIE_BUBBLE_KEY] ? null :
-                  <Sticky>
-                    <RelativDiv _width={199} _height={100} _widthmedia='170px' >
-                      <Bubble/>
-                      <AbsoluteDiv 
-                        _pd='6px' _width={20} _height={20} _right='9%' _top='10%' _rightmedia='-10%'
-                        onClick={close}
-                      >
-                        <T.Text _size={13} _weight={600} _color='white' _align='center'>X</T.Text>
-                      </AbsoluteDiv>
-                      <AbsoluteDiv _width={190} _height={80} _left='30px'>
-                        <T.Text _size={12} _weight={600} _color='white' _align='center'><p>상품 판매가 가능한<p></p>비즈 회원으로 전환해 보세요!</p></T.Text>
-                      </AbsoluteDiv>
-                    </RelativDiv>
-                  </Sticky>
-              }
+                {/*====== 비즈회원전환 말풍선 ======*/}
+                {
+                  cookiesBubble[COOKIE_BUBBLE_KEY] ? null :
+                    <Sticky>
+                      <RelativDiv _width={199} _height={100} _widthmedia='170px' >
+                        <Bubble />
+                        <AbsoluteDiv
+                          _pd='6px' _width={20} _height={20} _right='9%' _top='10%' _rightmedia='-10%'
+                          onClick={close}
+                        >
+                          <T.Text _size={13} _weight={600} _color='white' _align='center'>X</T.Text>
+                        </AbsoluteDiv>
+                        <AbsoluteDiv _width={190} _height={80} _left='30px'>
+                          <T.Text _size={12} _weight={600} _color='white' _align='center'><p>상품 판매가 가능한<p></p>비즈 회원으로 전환해 보세요!</p></T.Text>
+                        </AbsoluteDiv>
+                      </RelativDiv>
+                    </Sticky>
+                }
               </MoreAccountProfile>
 
               <MoreAccountButtonDiv>
@@ -170,7 +169,7 @@ function MorePage() {
           <MoreDiv>
 
 
-{/*  2차범위
+            {/*  2차범위
               <MoreContainerDiv>
                 <L.FlexRows  _content='space-between' onClick={() => setCheckMarketing(!checkMarketing)}>
                   <p>마케팅 활용 동의</p>
@@ -285,7 +284,7 @@ function BusinessAgreementModal({ closeModel }) {
 
   return (
     <ModalOutside
-    onClick={closeModel}
+      onClick={closeModel}
     >
       {
         service === null &&

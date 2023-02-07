@@ -13,27 +13,15 @@ import { useQuery } from 'react-query';
 function MainBestProduct() {
   const navigate = useNavigate();
   const local = useSelector(state => state.local);
+  const limit = 10;
+  const page = 1;
 
   const loadData = async () => {
-    const response = await MyStoreBestItem(local);
+    const response = await MyStoreBestItem(local, limit, page);
     return response.data.data.items;
   }
 
   const { data, isLoading } = useQuery(['main-mystore-list'], loadData);
-
-  const router = () => {
-    navigate(
-      "/collections",
-      {
-        state:
-        {
-          type: 1,
-          title: "My단골 인기 상품",
-          list: data,
-        }
-      }
-    )
-  }
 
   return (
     <>
@@ -51,7 +39,7 @@ function MainBestProduct() {
                 _size={14}
                 _weight={500}
                 _color='blue'
-                onClick={router}
+                onClick={() => navigate("/member/market")}
               >
                 전체 보기
               </T.Text>

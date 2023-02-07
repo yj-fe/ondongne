@@ -14,9 +14,11 @@ import { useQuery } from 'react-query';
 function MainBestCollection() {
   const navigate = useNavigate();
   const local = useSelector(state => state.local);
+  const limit = 10;
+  const page = 1;
 
   const loadData = async () => {
-    const response = await bestItemList(local);
+    const response = await bestItemList(local, limit, page);
     return response.data.data.items;
   }
 

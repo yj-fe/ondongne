@@ -1,14 +1,13 @@
 import LastDateCountDown from "hooks/LastDateCountDown";
+import { Watch } from "react-loader-spinner";
 import styled from "styled-components";
 
 const ContentDate = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding: 2px;
+  padding: 2px 6px;
   gap: 4px;
-  width: 150px;
+  width: auto !important;
   height: 22px;
   background: #FDECEE;
   border-radius: 2px;
@@ -17,28 +16,26 @@ const ContentDate = styled.div`
   line-height: 18px;
   color: #ED4F62;
   margin-bottom: 4px;
-  @media screen  and (max-width:500px){
-    width: 130px;
-  }
-  @media screen  and (max-width:450px){
-    width: 150px;
-  }
-  @media screen  and (max-width:340px){
-    width: 129px;
-    font-size: 11px;
-  }
-  @media screen  and (max-width:336px){
-    width: 130px;
-  }
 `
 
 const ProductTimer = ({ date }) => {
 
-    const [days, hours, minutes, seconds] = LastDateCountDown(date);
+  const [days, hours, minutes, seconds] = LastDateCountDown(date);
 
-    return (
-        <ContentDate>{`D-${days}일 ${Number(hours) > 9 ? hours : `0${hours}`}시간 ${Number(minutes) > 9 ? minutes : `0${minutes}`}분`}</ContentDate>
-    )
+  return (
+    <ContentDate>
+      <Watch
+        height="12"
+        width="12"
+        radius="48"
+        color="red"
+        ariaLabel="watch-loading"
+        wrapperStyle={{ fontWeight: "blod" }}
+        visible={true}
+      />
+      {`D-${days}일 ${Number(hours) > 9 ? hours : `0${hours}`}시간 ${Number(minutes) > 9 ? minutes : `0${minutes}`}분`}
+    </ContentDate>
+  )
 
 }
 

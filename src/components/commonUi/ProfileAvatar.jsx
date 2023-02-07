@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import defaultProfile from '../../assets/common/Profile.png'
 import Camera from '../../assets/common/Camera.png'
 import { memberProfileChange } from 'service/member'
+import { imageValidation } from 'utils/utils'
+import Alert from './Alert'
 
 export const ProfileDiv = styled.label`
   width: 100px;
@@ -35,13 +37,26 @@ const FileInput = styled.input`
   display: none;
 `;
 
-function ProfileAvatar({ profile, onChange=null }) {
-  const [file, setFile] = useState()
+function ProfileAvatar({ profile, onChange = null }) {
+  const [alert, setAlert] = useState(null);
+  const [file, setFile] = useState(null)
 
   const fileUpload = async (e) => {
-    const file = e.target.files[0];
-    const response = await memberProfileChange(file);
-    const { data, message } = response.data;
+    const uploadFile = e.target.files[0];
+    const valid = imageValidation(uploadFile);
+
+    if (valid) {
+      return setAlert({
+        title: "프로필 등록 실패",
+        contents: valid,
+        buttonText: "확인",
+        onButtonClick: () => setAlert(null),
+        onOverlayClick: () => setAlert(null),
+      })
+    }
+
+    const response = await memberProfileChange(uploadFile);
+    const { data } = response.data;
     if (data) setFile(data)
   }
 
@@ -50,20 +65,23 @@ function ProfileAvatar({ profile, onChange=null }) {
   }, [profile])
 
   return (
-    <div>
-      <ProfileDiv for="profile">
-        <ImgStyle _hidden='hidden' _object='cover'
-          src={file ? file : defaultProfile}
-        >
-          {/* <Avatar src={Avatar}> */}
-        </ImgStyle>
-        <CameraStyle
-          src={Camera}
-        >
-        </CameraStyle>
+    <>
+      <ProfileDiv htmlFor="profile">
+        <ImgStyle _hidden='hidden' _object='cover' src={file ?? defaultProfile} />
+        <CameraStyle src={Camera} />
       </ProfileDiv>
       <FileInput type="file" id="profile" onChange={onChange ?? fileUpload} />
-    </div>
+      {
+        alert &&
+        <Alert
+          title={alert.title}
+          contents={alert.contents}
+          buttonText={alert.buttonText}
+          onButtonClick={alert.onButtonClick}
+          onOverlayClick={alert.onOverlayClick}
+        />
+      }
+    </>
   )
 }
 
