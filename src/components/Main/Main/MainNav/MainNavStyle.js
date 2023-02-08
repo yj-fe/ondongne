@@ -41,7 +41,7 @@ export const MainLocation = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: row;
-	height: 20px;
+	height: 44px;
 	gap: 2px;
 	width: 33%;
 	@media only screen and (max-width: 768px) {
@@ -93,6 +93,7 @@ export const Icon = styled.div`
 	gap: 20px;
 	padding-top: 7px;
 	width: 33%;
+	height: 44px;
 	@media only screen and (max-width: 768px) {
 		padding-right: 16px;
 		width: 30%;

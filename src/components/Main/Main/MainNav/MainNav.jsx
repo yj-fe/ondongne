@@ -8,6 +8,7 @@ import { ReactComponent as ArrowDown } from "assets/login/Arrow-Down.svg";
 import { MainLocation, NavContainer, MainNavDiv, PinStyle, LocationText, ArrowStyle, LogoImg, Icon, NewsStyle, CartStyle, LogoBox } from './MainNavStyle'
 import { useSelector } from 'react-redux';
 import { Logo } from 'components/commonUi/Icon';
+import { ShepherdBox } from 'components/commonUi/Box';
 
 function MainNav() {
   const navigate = useNavigate();
@@ -18,7 +19,11 @@ function MainNav() {
       <NavContainer _paddingmedia='0px'>
         <MainLocation
           onClick={() => navigate('/member/location')}
-        >
+          >
+          <ShepherdBox 
+            className="shepherd-first"
+            _display='flex' _gap='2px' _pdlef='0px' _height='44px'
+          >
           <PinStyle>
             <Pin />
           </PinStyle>
@@ -28,13 +33,19 @@ function MainNav() {
           <ArrowStyle>
             <ArrowDown />
           </ArrowStyle>
+          </ShepherdBox>
         </MainLocation>
 
         <LogoBox>
           <Logo/>
         </LogoBox>
 
-        <Icon>
+        <Icon
+        >
+          <ShepherdBox 
+            className="shepherd-second"
+            _display='flex' _gap='20px' _pdlef='0px' _height='44px' _mbottom='6px'
+          >
           {/* 일반알림 */}
             <NewsStyle
               onClick={() => {
@@ -49,6 +60,7 @@ function MainNav() {
           >
             <Cart />
           </CartStyle>
+          </ShepherdBox>
         </Icon>
       </NavContainer>
     </MainNavDiv>

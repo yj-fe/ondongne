@@ -8,6 +8,7 @@ import { ReactComponent as Order } from "assets/main/Order.svg";
 import { ReactComponent as More } from "assets/main/More.svg";
 import { MainFooterDiv, FooterNav, NavIcon, } from './MainFooterStyle'
 import Confirm from 'components/commonUi/Confirm';
+import { ShepherdBox } from 'components/commonUi/Box';
 
 function MainFooter() {
   const navigate = useNavigate();
@@ -25,7 +26,11 @@ function MainFooter() {
             <Search />
           </Link>
         </NavIcon>
-        <NavIcon>
+        <ShepherdBox _width='48px'
+          className="shepherd-forth"
+        >
+        <NavIcon
+        >
           {
             isAuthenticated
               ? <Link to="/member/market" style={{ textDecoration: 'none' }}>
@@ -36,8 +41,9 @@ function MainFooter() {
               </div>
           }
         </NavIcon>
-
-        <NavIcon>
+        </ShepherdBox>
+        <NavIcon
+        >
           {
             isAuthenticated
               ? <Link to="/order/all" style={{ textDecoration: 'none' }}>
@@ -48,13 +54,17 @@ function MainFooter() {
               </div>
           }
         </NavIcon>
-
+        <ShepherdBox _width='48px'
+          className="shepherd-fifth"
+        >
         <NavIcon
+        // className="shepherd-fifth"
         >
           <Link to="/more" style={{ textDecoration: 'none' }}>
             <More />
           </Link>
         </NavIcon>
+        </ShepherdBox>
       </FooterNav>
       {
         confirm &&

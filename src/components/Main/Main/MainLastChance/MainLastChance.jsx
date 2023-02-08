@@ -8,6 +8,7 @@ import LoadingBar from 'components/commonUi/LoadingBar';
 import { useNavigate } from 'react-router-dom';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import { useQuery } from 'react-query';
+import { ShepherdBox } from 'components/commonUi/Box';
 
 function MainLastChance() {
   const navigate = useNavigate();
@@ -41,8 +42,17 @@ function MainLastChance() {
 
   return (
     <>
-      <L.FlexRows _cursor='default' _content='space-between' _items='center' _padding='0px 20px 0px 20px'>
-        <T.Text _size={18} _weight={700} _color='black'>공동구매 마지막 찬스</T.Text>
+      <L.FlexRows _cursor='default' _content='space-between' _items='center' _padding='9px 20px 0px 10px'>
+        <ShepherdBox 
+          _width='180px' _height='44px'
+          className="shepherd-third"
+        >
+        <T.Text 
+          _size={18} _weight={700} _color='black' _line='44px'
+          >
+          공동구매 마지막 찬스
+        </T.Text>
+        </ShepherdBox>
         <T.Text
           _size={14}
           _weight={500}
@@ -52,7 +62,9 @@ function MainLastChance() {
           전체 보기
         </T.Text>
       </L.FlexRows>
-      <LastChanceDiv>
+
+
+      <LastChanceDiv _pd='0px 0px 0px 10px'>
         <L.FlexRowsCP>
           {
             isLoading && <LoadingBar />
