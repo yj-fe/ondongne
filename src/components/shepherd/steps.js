@@ -177,15 +177,20 @@ export const newSteps  = [
     },
     buttons: [
       {
+        classes: 'shepherd-button-never',
+        text: '다시보지 않기',
+        type: 'next'
+      },
+      {
         classes: 'shepherd-button-back',
         text: '이전',
         type: 'back'
       },
       {
         classes: 'shepherd-button-next',
-        text: '닫기',
-        type: 'next'
-      }
+        text: '시작하기',
+        type: 'cancel'
+      },
     ],
     classes: 'custom-class-name-1 custom-class-name-2',
     highlightClass: 'highlight',
@@ -197,8 +202,10 @@ export const newSteps  = [
     text: ['쉽게 회원가입하실 수 있고 다양한 정보를 확인해 보실 수 있어요. 사장님 전용 비즈회원으로 전환해서 상품 판매를 시작해 보세요.'],
     when: {
       show: () => {
+        console.log('show');
       },
       hide: () => {
+        console.log('hide');
       }
     }
   },
