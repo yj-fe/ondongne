@@ -53,9 +53,6 @@ export const numberFormatter = (value) => {
 export const numberFormat = (value) => {
 	if (!value) return;
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	// return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-	// return value.toLocaleString('en-US')
-	// return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 };
 
 // 이미지 체크

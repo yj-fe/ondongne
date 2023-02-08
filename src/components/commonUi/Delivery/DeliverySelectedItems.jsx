@@ -26,7 +26,7 @@ const DeliverySelectedItems = ({ data, setData }) => {
                                     onEventHandler(delivery);
                                 }}
                             >
-                                <Close width={12} height={12} />
+                                <Close width={12} height={12} fill={"#0B806F"} />
                             </button>
                         </div>
                     ))
@@ -53,7 +53,7 @@ const Container = styled.div`
         & p {
             font-size: 14px;
             font-weight: 500;
-            color: #333333;
+            color: #0B806F;
         }
 
         & button {

@@ -7,7 +7,7 @@ import DeliverySelectedItems from './DeliverySelectedItems';
 const DeliveryForm = ({ data, setData }) => {
 
     const [open, isOpen] = useState(false);
-    const [deliveries, setDeliverise] = useState([]);
+    const [deliveries, setDeliverise] = useState(data.deliveries?.length > 0 ? data.deliveries : []);
 
     useEffect(() => {
         setData({ ...data, delivery: deliveries })

@@ -45,6 +45,16 @@ const CategoryForm = ({ data, setData, multiple = false }) => {
         setSelect(false);
     }, [categories]);
 
+    useEffect(() => {
+        if (data.categories.length > 0) {
+            setCategories(
+                categories.map(category =>
+                    data.categories.includes(category.name) ? { ...category, checked: true } : category
+                )
+            )
+        }
+    }, []);
+
     return (
         <Container>
             <h1>카테고리</h1>

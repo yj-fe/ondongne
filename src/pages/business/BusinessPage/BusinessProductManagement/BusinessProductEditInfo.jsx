@@ -56,7 +56,7 @@ const BusinessProductEditInfo = ({ isOpen, close, data, dataHanler }) => {
         }}
       >
         <L.Container _padding="0px" >
-          <L.Contents _padding="0px" _height='calc(100vh - 120px)'>
+          <L.Contents _padding="0px" _height='calc(100vh - 60px)'>
             <CKEditor
               editor={ClassicEditor}
               config={{
@@ -74,26 +74,26 @@ const BusinessProductEditInfo = ({ isOpen, close, data, dataHanler }) => {
               // 높이
               onReady={(editor) => {
                 editor.editing.view.change((writer) => {
-                writer.setStyle(
+                  writer.setStyle(
                     "height",
-                    "calc(100vh - 158px)",
+                    "calc(100vh - 156px)",
                     editor.editing.view.document.getRoot()
-                );
+                  );
                 });
-            }}
+              }}
             />
           </L.Contents>
-            <B.FixedActionButton
-              onClick={() => {
-                dataHanler({
-                  ...data,
-                  description: value
-                })
-                close();
-              }}
-            >
-              저장
-            </B.FixedActionButton>
+          <B.FixedActionButton
+            onClick={() => {
+              dataHanler({
+                ...data,
+                description: value
+              })
+              close();
+            }}
+          >
+            저장
+          </B.FixedActionButton>
         </L.Container>
       </Layout>
       {

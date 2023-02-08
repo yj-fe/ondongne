@@ -96,9 +96,9 @@ export const More = () => (
     </svg>
 );
 
-export const Close = ({ width = 16, height = 16 }) => (
+export const Close = ({ width = 16, height = 16, fill = "#424242" }) => (
     <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fillRule="evenodd" clipRule="evenodd" d="M7.07043 8L2 2.92957L2.92957 2L8 7.07043L13.0704 2L14 2.92957L8.92957 8L14 13.0704L13.0704 14L8 8.92957L2.92957 14L2 13.0704L7.07043 8Z" fill="#424242" />
+        <path fillRule="evenodd" clipRule="evenodd" d="M7.07043 8L2 2.92957L2.92957 2L8 7.07043L13.0704 2L14 2.92957L8.92957 8L14 13.0704L13.0704 14L8 8.92957L2.92957 14L2 13.0704L7.07043 8Z" fill={fill} />
     </svg>
 );
 

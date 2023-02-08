@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { Close } from "../Icon";
 
 const BusinessFileForm = ({ data, setData }) => {
-
     const [files, setFiles] = useState([]);
     const [error, setError] = useState("");
 
@@ -19,6 +18,15 @@ const BusinessFileForm = ({ data, setData }) => {
 
         setError("");
         setFiles([...files, uploadFile]);
+    }
+
+    //파일 삭제
+    const deleteFile = id => {
+        setData({
+            ...data,
+            deleteFiles: [...data.deleteFiles, id],
+            bizFiles: data.bizFiles.filter(b => b.bizFileId !== id)
+        })
     }
 
     useEffect(() => {
@@ -38,20 +46,34 @@ const BusinessFileForm = ({ data, setData }) => {
             </label>
             {error && <ErrorText _color='#D32F2F' >{error}</ErrorText>}
             <input type="file" id="files" onChange={fileUpload} />
-            {
-                files.length > 0 &&
-                <FileForm>
-                    {files.map(file => (
-                        <div>
+
+            <FileForm>
+                {
+                    files.length > 0 &&
+                    files.map((file, i) => (
+                        <div key={i}>
                             <p>{file.name}</p>
                             <button
                                 type='button'
                                 onClick={() => setFiles(files.filter(item => item.name !== file.name))}
                             ><Close /></button>
                         </div>
-                    ))}
-                </FileForm>
-            }
+                    ))
+                }
+                {
+                    data.bizFiles?.length > 0 &&
+                    data.bizFiles.map((file, i) => (
+                        <div key={i}>
+                            <p>{file.originalName}</p>
+                            <button
+                                type='button'
+                                onClick={() => deleteFile(file.bizFileId)}
+                            ><Close /></button>
+                        </div>
+                    ))
+                }
+            </FileForm>
+
         </Container>
     )
 }
@@ -155,5 +177,6 @@ const ErrorText = styled.span`
     font-weight: 400 !important;
     color: ${props => props._color || '#757575'}  !important;
 `;
+
 
 export default BusinessFileForm;

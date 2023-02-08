@@ -31,6 +31,7 @@ function BusinessApplication() {
     addressDetails: '',
     delivery: [],
     description: '',
+    ceo: '',
     businessNumber: '',
     bank: '',
     accountNumber: '',
@@ -62,7 +63,7 @@ function BusinessApplication() {
       && data.address.length > 0
       && data.addressDetails.length > 0
       && data.delivery.length > 0
-      && data.description.length > 0
+      && data.ceo.length > 0
       && data.businessNumber.length === 12
       && data.bank.length > 0
       && data.accountNumber.length > 0
@@ -115,25 +116,17 @@ function BusinessApplication() {
                   {/* =========활동지역========= */}
                   <DeliveryForm data={data} setData={setData} />
 
-                  {/* =========상점 소개========= */}
+                  {/* =========사업자등록번호========= */}
                   <ContentDiv>
-                    <ContentTitle>상점 소개</ContentTitle>
-                    <InputBox
-                      height={200}
-                    >
-                      <L.Parents>
-                        <Textarea
-                          name='description'
-                          value={data.description}
-                          onChange={e => setData({ ...data, description: e.target.value })}
-                          placeholder='어떤 상점인지 소개해 주세요!'
-                          maxLength={500}
-                        />
-                        <L.Child _bottom='10px' _right='10px'>
-                          <Text _color='gray600' _size='12'>{data.description.length}/500</Text>
-                        </L.Child>
-                      </L.Parents>
-                    </InputBox>
+                    <ContentTitle>대표자</ContentTitle>
+                    <TitleInfoDiv>
+                      <Input
+                        placeholder="대표자 명 입력"
+                        value={data.ceo}
+                        maxLength={30}
+                        onChange={e => setData({ ...data, ceo: e.target.value })}
+                      />
+                    </TitleInfoDiv>
                   </ContentDiv>
 
                   {/* =========사업자등록번호========= */}

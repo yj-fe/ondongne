@@ -7,7 +7,7 @@ import { ReactComponent as OrderIcon } from "assets/icons/business/neworder.svg"
 import { ReactComponent as Pickup } from "assets/icons/business/pickup.svg";
 import { ReactComponent as NewReview } from "assets/icons/business/newreview.svg";
 import { TermsDiv, TermsTitle, TermsIconStyle } from 'pages/service/TermsPage/TermsPageStyle'
-import { InfoCard, InfoIconStyle, CardCount, CardText, CardTextDiv,  MyBestProductContent, EmptyDiv, EmptyText, EmptyButton, EmptyButtonIcon, EmptyButtonText } from './BusinessPageStyle'
+import { InfoCard, InfoIconStyle, CardCount, CardText, CardTextDiv, MyBestProductContent, EmptyDiv, EmptyText, EmptyButton, EmptyButtonIcon, EmptyButtonText } from './BusinessPageStyle'
 import { getDashboard } from 'service/biz';
 import { useSelector, useDispatch } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
@@ -15,7 +15,6 @@ import * as T from 'components/commonUi/Text';
 import FooterLayout from 'components/layout/Footer/Footer';
 import { authActions } from 'store/slices/auth';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
-import StoreModal from 'components/layout/Modal/StoreModal';
 import Layout from 'components/layout/Layout/Layout';
 import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
@@ -23,7 +22,6 @@ function BusinessPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
-  const [modal, setModal] = useState(false);
   const [data, setData] = useState({
     bizId: "",
     storeId: "",
@@ -46,16 +44,11 @@ function BusinessPage() {
 
       setData(data);
       dispatch(authActions.biz(data));
-
-      // 상점 게시 모달 오픈
-      if (!data.approvalStatus || data.address === null) {
-        setModal(true);
-      }
     }
   }
 
   useEffect(() => {
-    if (auth.isAuthenticated) loadData()
+    if (auth.isAuthenticated) loadData();
   }, [auth])
 
   return (
@@ -67,30 +60,30 @@ function BusinessPage() {
           {/* ==================== 가게 정보 ==================== */}
           <L.Contents >
             <L.FlexCols _gap={32}>
-          <T.Text _weight={600} _size={18}>가게 정보</T.Text>
-            <L.GridTwo>
-              <InfoCard>
-                <OrderIcon />
-                <CardTextDiv>
-                  <CardText>신규 주문</CardText>
-                  <CardCount>{data.orderCount} 건</CardCount>
-                </CardTextDiv>
-              </InfoCard>
-              <InfoCard>
-                <InfoIconStyle><Pickup /></InfoIconStyle>
-                <CardTextDiv>
-                  <CardText>배달/픽업</CardText>
-                  <CardCount>{data.deliveryCount} 건</CardCount>
-                </CardTextDiv>
-              </InfoCard>
-              <InfoCard>
-                <InfoIconStyle><NewReview /></InfoIconStyle>
-                <CardTextDiv>
-                  <CardText>신규 리뷰</CardText>
-                  <CardCount>{data.reviewCount} 건</CardCount>
-                </CardTextDiv>
-              </InfoCard>
-            </L.GridTwo>
+              <T.Text _weight={600} _size={18}>가게 정보</T.Text>
+              <L.GridTwo>
+                <InfoCard>
+                  <OrderIcon />
+                  <CardTextDiv>
+                    <CardText>신규 주문</CardText>
+                    <CardCount>{data.orderCount} 건</CardCount>
+                  </CardTextDiv>
+                </InfoCard>
+                <InfoCard>
+                  <InfoIconStyle><Pickup /></InfoIconStyle>
+                  <CardTextDiv>
+                    <CardText>배달/픽업</CardText>
+                    <CardCount>{data.deliveryCount} 건</CardCount>
+                  </CardTextDiv>
+                </InfoCard>
+                <InfoCard>
+                  <InfoIconStyle><NewReview /></InfoIconStyle>
+                  <CardTextDiv>
+                    <CardText>신규 리뷰</CardText>
+                    <CardCount>{data.reviewCount} 건</CardCount>
+                  </CardTextDiv>
+                </InfoCard>
+              </L.GridTwo>
             </L.FlexCols>
           </L.Contents>
         </L.Container>
@@ -137,9 +130,9 @@ function BusinessPage() {
         {/* ==================== 내 상점 인기상품 ==================== */}
         <L.Container>
           <L.Contents _padding="20px 0px 20px 0px">
-          <L.FlexRows _items='center' _padding='0px 20px 0px 20px'>
-          <T.Text _weight={600} _size={18}>내 상점 인기상품</T.Text>
-          </L.FlexRows>
+            <L.FlexRows _items='center' _padding='0px 20px 0px 20px'>
+              <T.Text _weight={600} _size={18}>내 상점 인기상품</T.Text>
+            </L.FlexRows>
             {
               !data.itemList.items || (data.itemList.items && data.itemList.items.length) === 0 &&
               <EmptyDiv>
@@ -216,11 +209,6 @@ function BusinessPage() {
 
 
       </Layout>
-      {
-        modal && (
-          <StoreModal />
-        )
-      }
     </CursorDiv>
   )
 }

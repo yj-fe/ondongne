@@ -40,7 +40,7 @@ export function createItem(data) {
 	formData.append("name", data.name);
 	formData.append("description", data.description);
 	formData.append("price", data.price);
-	formData.append("salePercent", data.salePercent);
+	formData.append("salePrice", data.salePrice);
 	formData.append("minCount", data.minCount);
 	formData.append("maxCount", data.maxCount);
 	formData.append("endDate", data.endDate);
@@ -74,7 +74,7 @@ export function updateItem(data) {
 	formData.append("name", data.name);
 	formData.append("description", data.description);
 	formData.append("price", data.price);
-	formData.append("salePercent", data.salePercent);
+	formData.append("salePrice", data.salePrice);
 	formData.append("minCount", data.minCount);
 	formData.append("maxCount", data.maxCount);
 	formData.append("endDate", data.endDate);

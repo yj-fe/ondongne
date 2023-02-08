@@ -20,7 +20,7 @@ const BankBookForm = ({ data, setData }) => {
                 className="contents"
                 onClick={() => isOpen(!open)}
             >
-                <p>{data.bank ?? '은행 선택'}</p>
+                <p>{data.bank ? data.bank : '은행 선택'}</p>
                 <div
                     className='icon'
                 ><Down /></div>
