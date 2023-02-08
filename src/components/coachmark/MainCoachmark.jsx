@@ -65,31 +65,31 @@ function MainCoachmark() {
       });
     }
 
-    if (type === 3) {
-      return setCookieGuide(COOKIE_GUIDE_KEY, "true", {
-        path: "/",
-        expires: decade.toDate(),
-      });
-    }
+    // if (type === 3) {
+    //   return setCookieGuide(COOKIE_GUIDE_KEY, "true", {
+    //     path: "/",
+    //     expires: decade.toDate(),
+    //   });
+    // }
   };
 
   useEffect(() => {
-    // if (depth01 || depth02 ) {
-      if (depth01 || depth02 || depth03) {
+    if (depth01 || depth02 ) {
+      // if (depth01 || depth02 || depth03) {
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0);
     } else {
       document.body.style.overflow = "unset";
     }
-  // }, [depth01, depth02]);
-  }, [depth01, depth02, depth03]);
+  }, [depth01, depth02]);
+  // }, [depth01, depth02, depth03]);
 
   useEffect(() => {
     setDepth01(!cookiesCoach[COOKIE_COACH_KEY]);
     setDepth02(!cookiesPopup[COOKIE_POPUP_KEY]);
-    setDepth03(!cookiesGuide[COOKIE_GUIDE_KEY]);
-  // }, [cookiesCoach, cookiesPopup]);
-  }, [cookiesCoach, cookiesPopup, cookiesGuide]);
+    // setDepth03(!cookiesGuide[COOKIE_GUIDE_KEY]);
+  }, [cookiesCoach, cookiesPopup]);
+  // }, [cookiesCoach, cookiesPopup, cookiesGuide]);
 
   return (
     <CursorDiv>
@@ -105,11 +105,11 @@ function MainCoachmark() {
           neverWatch={() => eventhandler(7, 2)}
         />
       )}
-      {!depth01 && !depth02 && depth03 && (
+      {/* {!depth01 && !depth02 && depth03 && (
         <ShepherdTour steps={newSteps} tourOptions={tourOptions}>
           <Button />
         </ShepherdTour>
-      )}
+      )} */}
     </CursorDiv>
   );
 }
