@@ -1,11 +1,12 @@
 import "./styles.css";
 import { React } from 'react';
 
-export const newSteps  = [
+export const newSteps  =[
   {
     id: 'locate',
     floatingUIOptions:{margin: '50',},
-    attachTo: { element: '.shepherd-first', on:  'bottom-start'  },
+    attachTo: { element: '.shepherd-first' },
+    // attachTo: { element: '.shepherd-first', on:  'bottom-start'  },
     modalOverlayOpeningRadius:4,
     modalOverlayOpeningPadding:	4,
     beforeShowPromise: function () {
@@ -42,7 +43,7 @@ export const newSteps  = [
   },
   {
     id: 'news',
-    attachTo: { element: '.shepherd-second', on: 'bottom-end' },
+    attachTo: { element: '.shepherd-second', },
     modalOverlayOpeningRadius:4,
     modalOverlayOpeningPadding:	4,
     beforeShowPromise: function () {
@@ -82,13 +83,13 @@ export const newSteps  = [
   },
   {
     id: 'group',
-    attachTo: { element: '.shepherd-third', on: 'right-start' },
+    attachTo: { element: '.shepherd-third', },
     modalOverlayOpeningRadius:4,
     modalOverlayOpeningPadding:	4,
     beforeShowPromise: function () {
       return new Promise(function (resolve) {
         setTimeout(function () {
-          window.scrollTo(100, 100);
+          window.scrollTo(300, 300);
           resolve();
         }, 500);
       });
@@ -121,7 +122,7 @@ export const newSteps  = [
   },
   {
     id: 'mystore',
-    attachTo: { element: '.shepherd-forth', on: 'top' },
+    attachTo: { element: '.shepherd-forth', },
     modalOverlayOpeningRadius:4,
     modalOverlayOpeningPadding:	4,
     beforeShowPromise: function () {
@@ -161,9 +162,8 @@ export const newSteps  = [
   },
   {
     id: 'more',
-    attachTo: { element: '.shepherd-fifth', on: 'top-end' },
-    floatingUIOptions: {
-      
+    attachTo: { element: '.shepherd-fifth', },
+    floatingUIOptions: {      
     },
     modalOverlayOpeningRadius:4,
     modalOverlayOpeningPadding:	4,
@@ -201,8 +201,13 @@ export const newSteps  = [
     // title: '5. 더 보기',
     text: ['쉽게 회원가입하실 수 있고 다양한 정보를 확인해 보실 수 있어요. 사장님 전용 비즈회원으로 전환해서 상품 판매를 시작해 보세요.'],
     when: {
-      show: () => {
-        console.log('show');
+      show: function(){
+        return(
+          console.log('show')
+          // neverWatch={() => eventhandler(365, 3)}
+          // 다시보지않기 값 넘겨주기
+
+        );
       },
       hide: () => {
         console.log('hide');

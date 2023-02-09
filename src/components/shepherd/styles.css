@@ -47,6 +47,32 @@
     margin-right: 10%;
   }
 }
+.shepherd-button-never-biz{
+  color: black;
+  background:#ffffff;
+  border: 1px solid #eeeeee;
+  margin-right: 41%;
+}
+@media (max-width: 400px) {
+  .shepherd-button-never-biz {
+    margin-right: 40%;
+  }
+}
+@media (max-width: 368px) {
+  .shepherd-button-never-biz {
+    margin-right: 37%;
+  }
+}
+@media (max-width: 354px) {
+  .shepherd-button-never-biz {
+    margin-right: 34%;
+  }
+}
+@media (max-width: 341px) {
+  .shepherd-button-never-biz {
+    margin-right: 30%;
+  }
+}
 .shepherd-button-back:not(:disabled):hover{
   background:#eeeeee;
 }
@@ -180,6 +206,7 @@
   width:100%;
   z-index:9999;
   padding: 24px;
+  transform: translateY(-100px);
 }
 @media (max-width: 400px) {
   .shepherd-element {
@@ -254,4 +281,5 @@
 .shepherd-modal-overlay-container.shepherd-modal-is-visible path{
   pointer-events:all; 
 }
+
 

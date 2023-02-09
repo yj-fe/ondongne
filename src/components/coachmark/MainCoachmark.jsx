@@ -88,7 +88,7 @@ function MainCoachmark() {
   useEffect(() => {
     setDepth01(!cookiesCoach[COOKIE_COACH_KEY]);
     setDepth02(!cookiesPopup[COOKIE_POPUP_KEY]);
-    setDepth03(!cookiesGuide[COOKIE_GUIDE_KEY]);
+    // setDepth03(!cookiesGuide[COOKIE_GUIDE_KEY]);
   }, [cookiesCoach, cookiesPopup]);
   // }, [cookiesCoach, cookiesPopup, cookiesGuide]);
 
@@ -106,8 +106,11 @@ function MainCoachmark() {
           neverWatch={() => eventhandler(7, 2)}
         />
       )}
+{/* ===================== 온보딩 주석 ===================== */}
       {/* {!depth01 && !depth02 && depth03 && (
-        <ShepherdTour steps={newSteps}  tourOptions={tourOptions}>
+        <ShepherdTour 
+          steps={newSteps}  tourOptions={tourOptions}
+        >
           <Button />
         </ShepherdTour>
       )} */}

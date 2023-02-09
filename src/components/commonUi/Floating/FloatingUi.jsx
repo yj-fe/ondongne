@@ -29,7 +29,10 @@ const FloatingUi = () => {
             {floating && <FloatingToggle  />}
             {floating 
                 ? <FloatingPush /> 
-                : <Floating />
+                :
+                <div className="shepherd-biz">
+                <Floating />
+                </div> 
             }
         </FloatingDiv>
     )

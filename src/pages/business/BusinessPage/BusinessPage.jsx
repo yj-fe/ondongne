@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-
+import moment from "moment";
 import BusinessHeader from 'components/Buisness/Header/BusinessHeader'
 import { ReactComponent as Right } from "assets/main/right.svg";
 import { ReactComponent as OrderIcon } from "assets/icons/business/neworder.svg";
@@ -17,7 +17,35 @@ import { authActions } from 'store/slices/auth';
 import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import Layout from 'components/layout/Layout/Layout';
 import { CursorDiv } from 'components/Common/LayoutPageStyle';
+import { useCookies } from 'react-cookie';
+import { ShepherdTour, ShepherdTourContext } from 'react-shepherd';
+import { MapListButton } from 'components/commonUi/Button';
+import { moreSteps } from 'components/shepherd/moresteps';
 
+const COOKIE_BIZ_KEY = "bizNeverWatch";
+
+  // shepherd
+  const tourOptions = {
+    defaultStepOptions: {
+      classes: 'shepherd-theme-custom',
+      cancelIcon: {
+        enabled: true
+      }
+    },
+    classPrefix:true,
+    useModalOverlay: true
+  };
+
+  function Button() {
+
+    const tour = useContext(ShepherdTourContext);
+    
+    return (
+      <MapListButton className="button dark" onClick={tour.start}>
+        Start Tour
+      </MapListButton>
+    );
+  } 
 function BusinessPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,6 +59,9 @@ function BusinessPage() {
     reviewCount: "",
     itemList: {},
   });
+
+  const [cookiesBiz, setCookieBiz] = useCookies([COOKIE_BIZ_KEY]);
+  // const [depth01, setDepth01] = useState(true);
 
   // 비즈 회원 체크
   const loadData = async () => {
@@ -47,12 +78,34 @@ function BusinessPage() {
     }
   }
 
+
+  // 다시보지않기 이벤트
+  const eventhandler = (day, type) => {
+    const decade = moment();
+    decade.add(day, "d");
+
+    if (type === 1) {
+      return setCookieBiz(COOKIE_BIZ_KEY, "true", {
+        path: "/",
+        expires: decade.toDate(),
+      });
+    }
+  };
+
+
   useEffect(() => {
     if (auth.isAuthenticated) loadData();
   }, [auth])
 
   return (
     <CursorDiv>
+      {/* ===================== 온보딩 주석 ===================== */}
+        {/* <ShepherdTour 
+          steps={moreSteps}  tourOptions={tourOptions} eventhandler={eventhandler}
+        >
+          <Button />
+        </ShepherdTour> */}
+
       <BusinessHeader />
       <Layout>
 
