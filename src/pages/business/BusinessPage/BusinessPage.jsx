@@ -20,9 +20,10 @@ import { CursorDiv } from 'components/Common/LayoutPageStyle';
 import { useCookies } from 'react-cookie';
 import { ShepherdTour, ShepherdTourContext } from 'react-shepherd';
 import { MapListButton } from 'components/commonUi/Button';
-import { moreSteps } from 'components/shepherd/moresteps';
+import StepBizOptions, { moreSteps } from 'components/shepherd/moresteps';
 
 const COOKIE_BIZ_KEY = "bizNeverWatch";
+
 
   // shepherd
   const tourOptions = {
@@ -37,19 +38,22 @@ const COOKIE_BIZ_KEY = "bizNeverWatch";
   };
 
   function Button() {
-
     const tour = useContext(ShepherdTourContext);
-    
-    return (
-      <MapListButton className="button dark" onClick={tour.start}>
-        Start Tour
-      </MapListButton>
-    );
+    // 바로시작버튼
+    return tour.start();
   } 
+
+
 function BusinessPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
+  
+  const [cookiesBiz, setCookieBiz] = useCookies([COOKIE_BIZ_KEY]);
+  const [depth01, setDepth01] = useState(false);
+  
+  const { moreSteps } = StepBizOptions(() => eventhandler(365, 1));
+
   const [data, setData] = useState({
     bizId: "",
     storeId: "",
@@ -60,8 +64,6 @@ function BusinessPage() {
     itemList: {},
   });
 
-  const [cookiesBiz, setCookieBiz] = useCookies([COOKIE_BIZ_KEY]);
-  // const [depth01, setDepth01] = useState(true);
 
   // 비즈 회원 체크
   const loadData = async () => {
@@ -72,7 +74,6 @@ function BusinessPage() {
       if (!data) {
         return navigate("/", { replace: true, state: { error: "잘못된 접근입니다." } })
       }
-
       setData(data);
       dispatch(authActions.biz(data));
     }
@@ -92,6 +93,9 @@ function BusinessPage() {
     }
   };
 
+  useEffect(() => {
+    setDepth01(!cookiesBiz[COOKIE_BIZ_KEY]);
+  }, [cookiesBiz]);
 
   useEffect(() => {
     if (auth.isAuthenticated) loadData();
@@ -99,12 +103,15 @@ function BusinessPage() {
 
   return (
     <CursorDiv>
-      {/* ===================== 온보딩 주석 ===================== */}
-        {/* <ShepherdTour 
-          steps={moreSteps}  tourOptions={tourOptions} eventhandler={eventhandler}
-        >
-          <Button />
-        </ShepherdTour> */}
+      {/* ===================== 온보딩 ===================== */}
+      {/* {depth01 && (
+          <ShepherdTour 
+            steps={moreSteps}  tourOptions={tourOptions}
+          >
+            <Button/>
+          </ShepherdTour>
+        )
+      } */}
 
       <BusinessHeader />
       <Layout>

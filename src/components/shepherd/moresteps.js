@@ -1,7 +1,8 @@
 import "./styles.css";
-import { React } from 'react';
 
-export const moreSteps  =[
+// 비즈메인페이지 온보딩 STEP
+const StepBizOptions = (eventHandler) => {
+ const moreSteps  =[
   {
     id: 'biz',
     attachTo: { element: '.shepherd-biz', },
@@ -19,9 +20,13 @@ export const moreSteps  =[
     },
     buttons: [
       {
+        // 다시보지 않기
+        action() {
+          eventHandler();
+          return this.cancel();
+        },
         classes: 'shepherd-button-never-biz',
         text: '다시보지 않기',
-        type: 'next'
       },
       {
         classes: 'shepherd-button-next',
@@ -37,21 +42,15 @@ export const moreSteps  =[
     },
     text: ['퀵메뉴를 이용하여 쉽고 빠르게 이용이 가능해요!'],
     when: {
-      show: function(){
-        return(
-          console.log('show')
-          // neverWatch={() => eventhandler(365, 3)}
-          // 다시보지않기 값 넘겨주기
-
-        );
+      show: () => {
+        console.log('시작');
       },
       hide: () => {
-        console.log('hide');
+        console.log('다시보지않기');
       }
     }
   },
-
-
-
-
 ];
+return { moreSteps }
+}
+export default StepBizOptions;
