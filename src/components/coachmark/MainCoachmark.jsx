@@ -14,35 +14,34 @@ const COOKIE_COACH_KEY = "coachNeverWatch";
 const COOKIE_POPUP_KEY = "popupNeverWatch";
 const COOKIE_GUIDE_KEY = "guideNeverWatch";
 
-  // shepherd
-  const tourOptions = {
-    defaultStepOptions: {
-      classes: 'shepherd-theme-custom',
-      cancelIcon: {
-        enabled: true
-      }
-    },
-    classPrefix:true,
-    useModalOverlay: true
-  };
-  function Button() {
-    const tour = useContext(ShepherdTourContext);
-    // 바로시작버튼
-    return tour.start();
-  }
+// shepherd
+const tourOptions = {
+  defaultStepOptions: {
+    classes: 'shepherd-theme-custom',
+    cancelIcon: {
+      enabled: true
+    }
+  },
+  classPrefix: true,
+  useModalOverlay: true
+};
+function Button() {
+  const tour = useContext(ShepherdTourContext);
+  // 바로시작버튼
+  return tour.start();
+}
 
 function MainCoachmark() {
   const tour = useContext(ShepherdTourContext);
-  console.log('button tour : ',tour)
 
   const [cookiesCoach, setCookieCoach] = useCookies([COOKIE_COACH_KEY]);
   const [cookiesPopup, setCookiePopup] = useCookies([COOKIE_POPUP_KEY]);
   const [cookiesGuide, setCookieGuide] = useCookies([COOKIE_GUIDE_KEY]);
-  
+
   const [depth01, setDepth01] = useState(false);
   const [depth02, setDepth02] = useState(false);
   const [depth03, setDepth03] = useState(false);
-  
+
   const { newSteps } = StepOptions(() => eventhandler(365, 3));
 
   // 다시보지않기 이벤트
@@ -73,14 +72,14 @@ function MainCoachmark() {
   };
 
   useEffect(() => {
-      if (depth01 || depth02) {
+    if (depth01 || depth02) {
       // if (depth01 || depth02 || depth03) {
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0);
     } else {
       document.body.style.overflow = "unset";
     }
-  // }, [depth01, depth02, depth03]);
+    // }, [depth01, depth02, depth03]);
   }, [depth01, depth02]);
 
   useEffect(() => {
@@ -90,8 +89,6 @@ function MainCoachmark() {
   }, [cookiesCoach, cookiesPopup]);
   // }, [cookiesCoach, cookiesPopup, cookiesGuide]);
 
-  console.log(depth03)
-
   return (
     <CursorDiv>
       {depth01 && (
@@ -100,13 +97,13 @@ function MainCoachmark() {
           neverWatch={() => eventhandler(365, 1)}
         />
       )}
-      {!depth01 && depth02  && (
+      {!depth01 && depth02 && (
         <PopUp
-          closeModal={() => {setDepth02(false); }}
-          neverWatch={() => {eventhandler(7, 2);}}
+          closeModal={() => { setDepth02(false); }}
+          neverWatch={() => { eventhandler(7, 2); }}
         />
       )}
-{/* ===================== 온보딩 주석 ===================== */}
+      {/* ===================== 온보딩 주석 ===================== */}
       {/* {!depth01 && !depth02 && depth03 && (
           <ShepherdTour 
             steps={newSteps} tourOptions={tourOptions}

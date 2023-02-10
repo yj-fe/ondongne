@@ -246,10 +246,10 @@ export const FlexRows = styled.div`
     width: ${props => props._width || '100%'};
     height: ${props => props._height || 'auto'};
     padding: ${props => props._padding || '0px'};
-      white-space: nowrap;
-  overflow: hidden;
-  cursor: ${props => props._cursor};
-  transform: ${props => props._transform};
+    white-space: nowrap;
+    overflow: ${props => props._overflow || 'hidden'};
+    cursor: ${props => props._cursor};
+    transform: ${props => props._transform};
 `;
 
 export const FlexRowsCategory = styled.div`
@@ -371,30 +371,13 @@ export const GridTwo = styled.div`
 
 export const Grid = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 31.5%);
+    grid-template-columns: repeat(3, 1fr);
     padding: 0px;
     width: 100%;
-    /* max-height: 370px; */
 	padding-top: 32px;
-	gap: 2.7%;
+	gap: 32px 20px;
     @media screen and (max-width:535px) {
-        grid-template-columns: repeat(2, 50%);
-    }
-    @media screen and (max-width:472px) {
-        gap: 2%;
-    }
-    @media screen and (max-width:450px) {
-        /* gap: 10px; */
-        /* grid-template-columns: repeat(2, 50%); */
-    }
-    @media screen and (max-width:392px) {
-        gap: 1%;
-    }
-    @media screen and (max-width:384px) {
-        gap: 0.7%;
-    }
-    @media screen and (max-width:336px) {
-        /* grid-template-columns: repeat(2, 40%); */
+        grid-template-columns: repeat(2, 1fr);
     }
 `
 

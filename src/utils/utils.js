@@ -115,6 +115,13 @@ export const storeTotalPrice = (values) => {
 	return price;
 };
 
+// 주문 총 가격
+export const orderTotalPrice = (values) => {
+	let price = 0;
+	values.map((item) => (price += Number(item.salePrice) * item.count));
+	return price;
+};
+
 // 상품 정렬 한글화
 export const sortFormatter = (filter) => {
 	if (filter === "all") return "상품 전체";
@@ -174,9 +181,26 @@ export const phoneFormatter = (input) => {
 
 // 주문 이름
 export const orderName = (item) => {
+	console.log(item);
 	if (item.length > 1) {
-		return `${item[0].name} 외 ${item.length - 1}개`;
+		return `${item[0].itemName} 외 ${item.length - 1}개`;
 	} else {
-		return `${item[0].name}`;
+		return `${item[0].itemName}`;
 	}
+};
+
+// 퍼센트 구하기
+export const disRate = (price, disPrice) => {
+	if (!price) return 0;
+
+	const originPrice = Number(price.toString().replaceAll(",", ""));
+
+	const result = 100 - (disPrice / originPrice) * 100;
+
+	return result ? Math.floor(result) : "0";
+};
+
+// 글자 수 넘길 시
+export const overNaming = (name, max) => {
+	return name.length > max ? name.substring(0, max) + "..." : name;
 };

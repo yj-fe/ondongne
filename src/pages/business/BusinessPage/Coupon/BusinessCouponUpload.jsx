@@ -10,7 +10,7 @@ import { CouponTitleInput } from 'components/commonUi/Input';
 import CouponAlert from 'components/commonUi/CouponAlert';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Display } from './BusinessPageStyle';
+import { Display } from '../BusinessPageStyle';
 
 
 function BusinessCouponUpload() {
@@ -81,11 +81,11 @@ function BusinessCouponUpload() {
                 // 높이
                 onReady={(editor) => {
                   editor.editing.view.change((writer) => {
-                  writer.setStyle(
+                    writer.setStyle(
                       "height",
                       "calc(100vh - 277px)",
                       editor.editing.view.document.getRoot()
-                  );
+                    );
                   });
                 }}
               />
@@ -108,21 +108,21 @@ function BusinessCouponUpload() {
                 // 높이
                 onReady={(editor) => {
                   editor.editing.view.change((writer) => {
-                  writer.setStyle(
+                    writer.setStyle(
                       "height",
                       "calc(100vh - 220px)",
                       editor.editing.view.document.getRoot()
-                  );
+                    );
                   });
                 }}
               />
             </Display>
-          <B.CouponButton
-            _buttommedia='0px'
-            onClick={openModal}
-          >
-            쿠폰 등록하기
-          </B.CouponButton>
+            <B.CouponButton
+              _buttommedia='0px'
+              onClick={openModal}
+            >
+              쿠폰 등록하기
+            </B.CouponButton>
           </L.Contents>
           {
             modal &&

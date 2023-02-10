@@ -7,7 +7,7 @@ const ContentDate = styled.div`
   align-items: center;
   padding: 2px 6px;
   gap: 4px;
-  width: auto !important;
+  width: max-content !important;
   height: 22px;
   background: #FDECEE;
   border-radius: 2px;
@@ -16,6 +16,14 @@ const ContentDate = styled.div`
   line-height: 18px;
   color: #ED4F62;
   margin-bottom: 4px;
+
+  & div {
+    width: auto;
+  }
+
+  & p {
+    width: auto;
+  }
 `
 
 const ProductTimer = ({ date }) => {
@@ -33,7 +41,9 @@ const ProductTimer = ({ date }) => {
         wrapperStyle={{ fontWeight: "blod" }}
         visible={true}
       />
-      {`D-${days}일 ${Number(hours) > 9 ? hours : `0${hours}`}시간 ${Number(minutes) > 9 ? minutes : `0${minutes}`}분`}
+      <p>
+        {`D-${days === 0 ? 'Day' : `${days}일`} ${Number(hours) > 9 ? hours : `0${hours}`}시간 ${Number(minutes) > 9 ? minutes : `0${minutes}`}분`}
+      </p>
     </ContentDate>
   )
 

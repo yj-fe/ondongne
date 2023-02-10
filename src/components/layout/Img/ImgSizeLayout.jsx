@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { screen } from '@testing-library/react';
 
 export const ImgSizeLayout = styled.img`
     border-radius: ${props => props._bdr}px;
@@ -14,14 +13,14 @@ export const ImgSizeH = styled.img`
     overflow: hidden;
 	object-fit: cover;
 	background-repeat: no-repeat;
-    border-radius: ${props => props._bdr}px;
-    width: ${props => props._width || '100%'};
-    height: ${props => props._height}px;
+    border-radius: 6px;
+    width: 216px;
+    height: 216px;
     @media screen and (max-width: 678px){
-        width: 167px;
-        height: 167px;
+        width: 187px;
+        height: 187px;
     }
-    @media screen and (max-width: 450px){
+    @media screen and (max-width: 578px){
         width: 167px;
         height: 167px;
     }
@@ -48,8 +47,8 @@ export const ImgPer = styled.img`
 
 export const RelativDiv = styled.div`
     border-radius: ${props => props._bdr}px;
-    width: ${props => props._width}px;
-    height: ${props => props._height}px;
+    width: ${props => props._width || "100%"};
+    height: ${props => props._height || "auto"};
     position: relative;
     margin: 0;
     padding: 0;

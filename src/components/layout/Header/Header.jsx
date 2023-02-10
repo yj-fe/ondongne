@@ -13,12 +13,15 @@ import { MoreStyle } from 'pages/main/DetailsPage/DetailsPageStyle';
 import ModalMorePage from 'components/Main/More/ModalMorePage'
 import ModalShare from 'components/commonUi/ModalShare';
 import { Text } from 'components/commonUi/Text';
+import { isMobile } from 'react-device-detect';
+import MobileShare from 'components/share/share';
+import ShareMobile from 'components/share/share';
 
 
 const Header = ({
     title = "title",
-    description='description',
-    img='img',
+    description = 'description',
+    img = 'img',
     bell = false,
     cart = false,
     back = true,
@@ -27,7 +30,7 @@ const Header = ({
     completed = false,
     share = false,
     backArrow = true,
-    bottom='',
+    bottom = '',
     ...props
 }) => {
     const navigate = useNavigate();
@@ -37,7 +40,7 @@ const Header = ({
     ==================== */
     const handleBackClick = (e) => {
         e.preventDefault();
-        if(props.onBackClick) {
+        if (props.onBackClick) {
             props.onBackClick();
         } else {
             navigate(props.backPath || -1);
@@ -47,10 +50,10 @@ const Header = ({
     const [modal, setModal] = useState(false);
     const [shareModal, setShareModal] = useState(false);
     const ShowMoreModal = () => {
-    setModal(!modal);
+        setModal(!modal);
     }
     const PropsModal = () => {
-    setModal(!modal);
+        setModal(!modal);
     }
     const ShowShareModal = () => {
         setShareModal(!shareModal);
@@ -63,13 +66,13 @@ const Header = ({
                     {
                         back &&
                         <S.UtilBtn
-                            onClick={handleBackClick}  
+                            onClick={handleBackClick}
                         >
-                        {
-                            backArrow
-                            ? <ArrowLeft_tail />
-                            : <ArrowLeft />
-                        }
+                            {
+                                backArrow
+                                    ? <ArrowLeft_tail />
+                                    : <ArrowLeft />
+                            }
                         </S.UtilBtn>
 
                     }
@@ -95,7 +98,7 @@ const Header = ({
                     {
                         share &&
                         <S.UtilBtn
-                            onClick={ShowShareModal}
+                            onClick={isMobile ? () => ShareMobile({ title, text: description, url: window.location.href }) : ShowShareModal}
                         >
                             <img src={Share} alt="공유" />
                         </S.UtilBtn>
@@ -113,7 +116,7 @@ const Header = ({
                             type='button'
                             onClick={ShowMoreModal}
                         >
-                        <More />
+                            <More />
                         </MoreStyle>
                     }
                     {
@@ -126,17 +129,17 @@ const Header = ({
             </S.Inner>
             {modal && <ModalMorePage PropsModal={PropsModal} />}
             {
-                shareModal && 
-                <ModalShare 
+                shareModal &&
+                <ModalShare
                     title='공유하기'
-                    ShowShareModal={ShowShareModal} 
+                    ShowShareModal={ShowShareModal}
                     itemName={title}
                     description={description}
                     img={img}
                 />
             }
         </S.Header>
-        
+
     )
 }
 

@@ -27,6 +27,7 @@ function ReviewUploadPage() {
     orderId: location.state.item.orderId,
     storeId: location.state.item.storeId,
     storeName: location.state.item.storeName,
+    orderName: location.state.item.orderName,
     items: location.state.item.orderItems ?? location.state.item.items,
     rating: location.state.item.rating ?? 0,
     contents: location.state.item.contents ?? "",
@@ -83,7 +84,7 @@ function ReviewUploadPage() {
             <L.FlexCols _gap={28}>
               <div>
                 <T.Text _size={20} _weight={600} _color='gray900' _align='center' _line={2}>{data.storeName}</T.Text>
-                <T.Text _size={16} _weight={400} _color='gray800' _align='center'>{orderName(data.items)}</T.Text>
+                <T.Text _size={16} _weight={400} _color='gray800' _align='center'>{data.orderName}</T.Text>
               </div>
               <L.FlexRows _content='center' _items='center' _gap={16}>
                 {Array(5)

@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 /* ========= MEMBER ========= */
 import MyPage from "components/MyPage";
@@ -15,12 +15,12 @@ import BusinessPage from "pages/business/BusinessPage/BusinessPage";
 import BusinessApplication from "pages/business/BusinessPage/BusinessApplication/BusinessApplication";
 import BusinessManagement from "pages/business/BusinessPage/BusinessManagement";
 import BusinessProductManagement from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagement";
-import BusinessCoupon from "pages/business/BusinessPage/BusinessCoupon";
+import BusinessCoupon from "pages/business/BusinessPage/Coupon/BusinessCoupon";
 import BusinessReview from "pages/business/BusinessReview";
 import BusinessProductUpload from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductUpload";
 import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
-import OrderManagement from "pages/business/BusinessPage/OrderManagement";
-import OrderManagementDetailsAuthPage from "pages/business/BusinessPage/OrderManagementDetailsAuthPage";
+import OrderManagement from "pages/business/BusinessPage/Order/OrderManagement";
+import OrderManagementDetailsAuthPage from "pages/business/BusinessPage/Order/OrderManagementDetailsAuthPage";
 /* ========== LOGIN ========== */
 import LoginPage from "pages/login/loginpage/LoginPage";
 import FindEmail from "pages/login/email/FindEmail";
@@ -57,13 +57,12 @@ import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage
 import ConfigurationPage from "pages/main/ConfigurationPage/ConfigurationPage";
 import Alert from "components/commonUi/Alert";
 import { authActions } from "store/slices/auth";
-import BusinessProductManagementDetail from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagementDetail";
 import { getExpiry } from "utils/localStorage";
 import BusinessProductEditInfo from "./pages/business/BusinessPage/BusinessProductManagement/BusinessProductEditInfo";
 import ReviewPage from "pages/member/ReviewPage";
 import SearchDetailPage from "pages/main/Search/SearchDetailPage";
 import SearchResultPage from "pages/main/Search/SearchResultPage";
-import BusinessCouponUpload from "./pages/business/BusinessPage/BusinessCouponUpload";
+import BusinessCouponUpload from "./pages/business/BusinessPage/Coupon/BusinessCouponUpload";
 import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 import { localActions } from "store/slices/location";
@@ -169,10 +168,6 @@ function App() {
 					<Route
 						path="product"
 						element={<BusinessProductManagement />}
-					/>
-					<Route
-						path="product/details/:id"
-						element={<BusinessProductManagementDetail />}
 					/>
 					{/* 상품 등록 */}
 					<Route path="upload" element={<BusinessProductUpload />} />

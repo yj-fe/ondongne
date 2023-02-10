@@ -10,7 +10,7 @@ import Confirm from 'components/commonUi/Confirm';
 import Alert from 'components/commonUi/Alert';
 import { S } from './OrderDetailsStyle'
 import { orderCancel, orderDetails } from 'service/order';
-import { numberFormat, orderName, storeTotalPrice, totalPrice } from 'utils/utils';
+import { numberFormat, orderTotalPrice, storeTotalPrice } from 'utils/utils';
 import dayjs from 'dayjs';
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
@@ -125,7 +125,7 @@ const OrderDetails = props => {
                                 }
                                 <L.FlexCols _width="auto" _gap={4}>
                                     <T.Text _size={18} _weight={600}>{orderData.storeName}</T.Text>
-                                    <T.Text _size={15} _color="gray800">{orderName(orderData.orderItems)}</T.Text>
+                                    <T.Text _size={15} _color="gray800">{orderData.orderName}</T.Text>
                                 </L.FlexCols>
                             </L.FlexRows>
                             <T.Text _size={14} _weight={500} _color="gray800">{orderData.orderStatus}</T.Text>
@@ -133,7 +133,7 @@ const OrderDetails = props => {
                         <L.FlexCols _gap={4}>
                             <L.FlexCols _gap={4}>
                                 <T.Text _size={14} _color="gray600">주문 일시: {dayjs(orderData.createDate).format('YYYY.MM.DD')}</T.Text>
-                                <T.Text _size={14} _color="gray600">주문 번호: {orderData.orderKey}</T.Text>
+                                <T.Text _size={14} _color="gray600">주문 번호: {orderData.orderId}</T.Text>
                                 <T.Text _size={14} _color="gray600">수령 방법: {orderData.recetiveType}</T.Text>
                             </L.FlexCols>
                         </L.FlexCols>
@@ -171,7 +171,7 @@ const OrderDetails = props => {
                                 <T.Text _weight={600} _size={18}>{item.name}</T.Text>
                                 <L.FlexCols _gap={4}>
                                     <T.Text _color="gray800">수량: {item.count}개</T.Text>
-                                    <T.Text _color="gray800">기본: {totalPrice(Number(item.price) * item.count, item.salePercent)}원</T.Text>
+                                    <T.Text _color="gray800">기본: {numberFormat(Number(item.price) * item.count)}원</T.Text>
                                 </L.FlexCols>
                             </L.FlexCols>
                         </L.Contents>
@@ -186,7 +186,7 @@ const OrderDetails = props => {
                             <tbody>
                                 <tr>
                                     <th>상품 주문 금액</th>
-                                    <td>{numberFormat(storeTotalPrice(orderData.orderItems))} 원</td>
+                                    <td>{numberFormat(orderTotalPrice(orderData.orderItems))} 원</td>
                                 </tr>
                                 <tr>
                                     <th>배달비</th>

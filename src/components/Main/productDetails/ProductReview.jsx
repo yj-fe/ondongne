@@ -13,7 +13,7 @@ import StarRate from "components/commonUi/StarRate";
 import SortFilter from "components/commonUi/SortFilter";
 import { sortFormatter } from 'utils/utils';
 
-const MEMBERIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/member/";
+const MEMBERIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/member/profile/";
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/review/";
 const STOREIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
@@ -23,7 +23,7 @@ const ProductReview = ({ id }) => {
     const [filter, setFilter] = useState(false);
     const [sort, setSort] = useState("create");
     const auth = useSelector(state => state.auth);
-    
+
 
     // 리뷰 목록
     const loadData = async () => {
@@ -47,7 +47,7 @@ const ProductReview = ({ id }) => {
     // 리뷰 총 점수
     const reviewAvgRating = () => {
         let avgRating = 0;
-        if(data.length > 0) {
+        if (data.length > 0) {
             data.map(d => avgRating = Number(avgRating) + Number(d.rating));
         }
         return Number(avgRating);
@@ -58,6 +58,8 @@ const ProductReview = ({ id }) => {
         loadData();
     }, [sort]);
 
+
+    console.log(data)
     return (
         <>
             {
@@ -160,11 +162,11 @@ const ProductReview = ({ id }) => {
                     </L.FlexCols>
                 </L.FlexCols>
             }
-            {filter && 
+            {filter &&
                 <SortFilter
-                    sorts={["create", "review", "reviewLike"]} 
-                    close={() => setFilter(false)} 
-                    selectedData={sort} 
+                    sorts={["create", "review", "reviewLike"]}
+                    close={() => setFilter(false)}
+                    selectedData={sort}
                     setSelectedData={setSort} />}
         </>
     )

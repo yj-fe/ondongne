@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { DetailButtonDiv, DetailButtonStyle, DetailTabInfo, DetailTabReview, MarketComments, TabInfoContentText, TabInfoContentTitle, TypeLabel, TypeLabelInfo, TypeTextStyle, ReviewLikeButton, ReviewDate, MarketCommentsStyle, MarketDate, MarketIcon, MarketId, MarketIdDiv, MarketReviewDiv, Price, ProfileDiv, ProfileTextDiv, MoreStyle, FlagStyle, FlagText, IconStyle, Line, Comments, CouponLabel, CouponLabelInfo1, CouponLabelInfo2, CouponLabelInfoDiv, CouponTextStyle, ReviewContentDiv, UploadImg, ButtonStyle, ReviewId, ReviewLikeStyle, ReviewLikeText, ReviewLikeFrame, ReviewProfileImg, ReviewProfileStyle, ReviewContentProfile, OrderToggleBox, CountButton } from './DetailsPageStyle'
+import { DetailButtonDiv, DetailButtonStyle, DetailTabInfo, DetailTabReview, TabInfoContentText, TabInfoContentTitle, OrderToggleBox, CountButton, SwiperWapper, ButtonStyle, ReactiveWrap } from './DetailsPageStyle'
 import ModalMorePage from 'components/Main/More/ModalMorePage'
 import Layout from 'components/layout/Layout/Layout';
 import { useSelector } from 'react-redux';
 import Confirm from 'components/commonUi/Confirm';
-import { ArrowBottom, Cart, MinusB, PlusB } from 'components/commonUi/Icon';
+import { ArrowBottom, MinusB, PlusB } from 'components/commonUi/Icon';
 import { MarketTable } from 'components/commonUi/Table';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
@@ -13,7 +16,7 @@ import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import { Badge, LayerTextButton } from 'components/commonUi/Button';
 import { getItemDetails } from 'service/item';
 import StoreLike from 'components/commonUi/StoreLike';
-import { numberFormat, totalPrice } from 'utils/utils';
+import { disRate, numberFormat, totalPrice } from 'utils/utils';
 import ProductTimer from 'components/commonUi/ProductTimer';
 import StarRate from 'components/commonUi/StarRate';
 import HTMLReactParser from 'html-react-parser';
@@ -39,7 +42,7 @@ function DetailsPage(props) {
     description: '',
     endDate: '',
     itemId: '',
-    itemImage: '',
+    itemImages: '',
     itemName: '',
     itemRating: '',
     category: '',
@@ -74,7 +77,7 @@ function DetailsPage(props) {
 
   const paymentsOrder = (type) => {
 
-    const account = totalPrice(item.price, item.salePercent).replaceAll(',', '');
+    const account = item.salePrice;
 
     if (!auth.isAuthenticated) {
       return setConfirm(true)
@@ -85,7 +88,6 @@ function DetailsPage(props) {
     if (orderToggle && type === 0) return;
 
     if (orderToggle && type === 1) {
-
       // 최소금액 체크
       if ((Number(account) * count) < Number(item.orderMinPrice)) {
         return setAlert({
@@ -113,7 +115,11 @@ function DetailsPage(props) {
     }
 
     if (response && response.data.data) {
-      setItem(response.data.data);
+      const resData = response.data.data;
+      setItem({
+        ...resData,
+        salePercent: disRate(resData.price, resData.salePrice)
+      });
     }
   }
 
@@ -123,13 +129,15 @@ function DetailsPage(props) {
     }
   }, [id])
 
+  if (!item.itemId) return <></>
+
   return (
     <div>
 
       <Layout
         title={item.storeName}
         description={item.storeName}
-        img={IMGURL + item.itemImage}
+        img={IMGURL + item.itemImages[0]}
         bell={false}
         cart={true}
         share={true}
@@ -141,8 +149,16 @@ function DetailsPage(props) {
           <L.Contents _cursor='default' _padding='0px 0px 60px 0px'>
             <L.FlexCols >
               {
-                item.itemImage &&
-                <ImgBanner _height='390px' _bdr={0} src={IMGURL + item.itemImage} />
+                item.itemImages &&
+                <SwiperWapper
+                  spaceBetween={0}
+                >
+                  {item.itemImages.map((image, i) => (
+                    <SwiperSlide key={i}>
+                      <ImgBanner _height='390px' _bdr={0} src={IMGURL + image} />
+                    </SwiperSlide>
+                  ))}
+                </SwiperWapper>
               }
               <L.FlexCols >
                 <L.FlexRows _content='space-between' _items='center' _padding=' 16px 20px'>
@@ -169,7 +185,7 @@ function DetailsPage(props) {
                   </L.FlexRows>
                 </L.FlexRows>
 
-                <Line />
+                <L.Line />
                 <L.Contents _padding='16px 20px'>
                   <L.FlexCols _gap={16}>
                     <L.FlexCols _gap={4}>
@@ -188,28 +204,37 @@ function DetailsPage(props) {
                       </L.FlexRows>
                     </L.FlexCols>
 
-                    <L.FlexRows _gap={12} _items='flex-end'>
+                    <ReactiveWrap _gap={12} _items='flex-start'>
                       <L.FlexCols _gap={4}>
 
                         {
-                          item.salePercent > 0 &&
+                          item.salePercent != 0 &&
                           <L.FlexRows _gap={4} _padding={0} _items='center' >
                             <T.Text _size={16} _weight={600} _color='red'>{item.salePercent}%</T.Text>
                             <T.Text _size={16} _weight={400} _color='gray500' _decoration={'line-through'}>{numberFormat(item.price)}원</T.Text>
                           </L.FlexRows>
                         }
 
-                        <T.Text _size={20} _weight={600} _color='gray900'>{totalPrice(item.price, item.salePercent)} 원</T.Text>
+                        <T.Text _size={20} _weight={600} _color='gray900'>{item.salePrice} 원</T.Text>
                       </L.FlexCols>
                       {
                         item.type == 'GROUP' &&
-                        <Badge _fdir='column' _bg='gray100' _padding='8px 16px' _height='auto' _bdr='8px'>
-                          <T.Text _align='center' _size={12} _color='gray600' _minWidth={'74px'}>최소 주문량</T.Text>
-                          <T.Text _width='76px' _align='center' _size={16} _weight={600} _color='gray800' >{item.minCount}/{item.maxCount}개</T.Text>
-                          {/* </L.FlexRows> */}
-                        </Badge>
+                        <L.FlexRows _items='center' _content='flex-start'>
+                          <Badge _fdir='column' _bg='gray100' _padding='8px 16px' _width={'max-content'} _height='auto' _bdr='8px'>
+                            <T.Text _align='center' _size={12} _color='gray600'>최소 주문량</T.Text>
+                            <T.Text _width='76px' _align='center' _size={16} _weight={600} _color='gray800' >{item.minCount}개</T.Text>
+                          </Badge>
+                          <Badge _fdir='column' _bg='gray100' _padding='8px 16px' _width={'max-content'} _height='auto' _bdr='8px'>
+                            <T.Text _align='center' _size={12} _color='gray600'>누적 주문량</T.Text>
+                            <T.Text _width='76px' _align='center' _size={16} _weight={600} _color='gray800' >{item.orderCount}개</T.Text>
+                          </Badge>
+                          <Badge _fdir='column' _bg='gray100' _padding='8px 16px' _width={'max-content'} _height='auto' _bdr='8px'>
+                            <T.Text _align='center' _size={12} _color='gray600'>판매 수량</T.Text>
+                            <T.Text _width='76px' _align='center' _size={16} _weight={600} _color='gray800' >{item.maxCount}개</T.Text>
+                          </Badge>
+                        </L.FlexRows>
                       }
-                    </L.FlexRows>
+                    </ReactiveWrap>
                   </L.FlexCols>
 
                 </L.Contents>
@@ -250,11 +275,11 @@ function DetailsPage(props) {
                     orderToggle &&
                     <OrderToggle
                       closeOrderToggle={() => setOrderToggle(false)}
-                      price={item.price}
-                      salePercent={item.salePercent}
+                      salePrice={item.salePrice}
                       type={item.type}
                       count={count}
-                      minCount={item.maxCount - item.minCount}
+                      maxCount={item.maxCount}
+                      orderCount={item.orderCount}
                       setCount={setCount}
                     />
                   }
@@ -262,7 +287,11 @@ function DetailsPage(props) {
                     item.storeId === auth.storeId
                       ?
                       <DetailButtonDiv>
-                        <DetailButtonStyle onClick={() => navigate(`/business/edit/${id}`)}>수정하기</DetailButtonStyle>
+                        <DetailButtonStyle
+                          color={true}
+                          onClick={() => navigate(`/business/edit/${id}`)}>
+                          수정하기
+                        </DetailButtonStyle>
                       </DetailButtonDiv>
                       :
                       <DetailButtonDiv>
@@ -271,12 +300,26 @@ function DetailsPage(props) {
                           <LayerTextButton
                             type='button'
                             onClick={() => paymentsOrder(0)}
+                            color={true}
                             _padding='0px' _width='48px'
                           >
                             <ProductCart id={item.itemId} count={count} type={'details'} disabled={!orderToggle} />
                           </LayerTextButton>
                         }
-                        <DetailButtonStyle onClick={() => paymentsOrder(1)}>구매하기</DetailButtonStyle>
+                        {
+                          item.type === "NORMAL"
+                            ? <DetailButtonStyle
+                              color={true}
+                              onClick={() => paymentsOrder(1)}>
+                              구매하기
+                            </DetailButtonStyle>
+                            : <DetailButtonStyle
+                              disabled={item.orderCount >= item.maxCount}
+                              color={item.orderCount < item.maxCount}
+                              onClick={() => paymentsOrder(1)}>
+                              {item.orderCount >= item.maxCount ? "판매종료" : "구매하기"}
+                            </DetailButtonStyle>
+                        }
                       </DetailButtonDiv>
                   }
                 </ButtonStyle>
@@ -334,12 +377,16 @@ function TabContent(props) {
             <td >{props.item.category}</td>
           </tr>
           <tr>
-            <th >배달/주문금액</th>
-            <td >배달비 {numberFormat(props.item.deliveryPrice)}원, 최소주문 {numberFormat(props.item.orderMinPrice)}원</td>
+            <th >배달/택배/픽업</th>
+            <td >{props.item.recetiveType} 가능</td>
           </tr>
           <tr>
-            <th >배달/픽업</th>
-            <td >{props.item.recetiveType} 가능</td>
+            <th >주문금액</th>
+            <td >
+              최소주문 {numberFormat(props.item.orderMinPrice)}원
+              {props.item.deliveryPrice ? `, 배달비 ${numberFormat(props.item.deliveryPrice)}원` : ''}
+              {props.item.parcelPrice ? `, 택배비 ${numberFormat(props.item.parcelPrice)}원` : ''}
+            </td>
           </tr>
           {/* 2차 
           <tr>
@@ -354,7 +401,7 @@ function TabContent(props) {
       </MarketTable>
 
 
-      <Line />
+      <L.Line />
 
       <L.FlexCols _padding={'16px 0 0 0'}>
         <TabInfoContentTitle>상품 정보</TabInfoContentTitle>
@@ -377,7 +424,7 @@ function TabContent(props) {
 
 
 function OrderToggle({
-  closeOrderToggle, count, setCount, type, price, salePercent, minCount
+  closeOrderToggle, count, setCount, salePrice, maxCount, orderCount, type
 }) {
 
   const counterHandler = (value) => {
@@ -385,9 +432,9 @@ function OrderToggle({
       return;
     }
 
-    // if (value === 1 && type === 'GROUP' && minCount == count) {
-    //   return;
-    // }
+    if (value === 1 && type === 'GROUP' && (maxCount - orderCount) == count) {
+      return;
+    }
 
     setCount(count => count + value)
   }
@@ -406,16 +453,14 @@ function OrderToggle({
         <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
           <T.Text _size={16} _weight={500} _color='gray800' >수량 선택</T.Text>
           <L.FlexRows _content='right' _gap='0px' _items='center' _width='114px'>
-
             <CountButton type='button' onClick={() => counterHandler(-1)}><MinusB /></CountButton>
             <T.Text _align='center' _width='50px' _weight={500}>{numberFormat(count)}</T.Text>
-            {/* <T.Text _align='center' _width='80px' _weight={500}>{numberFormat(count)}</T.Text> */}
             <CountButton type='button' onClick={() => counterHandler(1)}><PlusB /></CountButton>
           </L.FlexRows>
         </L.FlexRows>
         <L.FlexRows _height='56px' _content='space-between' _gap={16} _items='center' _padding='12px 0px'>
           <T.Text _size={16} _weight={500} _color='gray800' >상품 금액</T.Text>
-          <T.Text _size={16} _weight={600} _color='gray800' >{totalPrice(price * count, salePercent)} 원</T.Text>
+          <T.Text _size={16} _weight={600} _color='gray800' >{numberFormat(salePrice * count)} 원</T.Text>
         </L.FlexRows>
       </L.FlexCols>
     </OrderToggleBox>

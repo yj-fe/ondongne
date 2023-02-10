@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Swiper } from "swiper/react";
 
 export const DetailBody = styled.div`
 	display: flex;
@@ -278,7 +279,7 @@ export const DetailButtonDiv = styled.div`
 	background: #ffffff;
 	box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.08);
 `;
-export const DetailButtonStyle = styled.div`
+export const DetailButtonStyle = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -286,7 +287,7 @@ export const DetailButtonStyle = styled.div`
 
 	height: ${(props) => props.height || "48px"};
 	bottom: 0;
-	background: #0b806f;
+	background: ${(props) => (props.color ? "#0b806f" : "#E0E0E0")};
 	border-radius: 4px;
 
 	font-weight: 700;
@@ -683,3 +684,23 @@ export const CountButton = styled.button`
 	height: 32px;
 `;
 
+export const SwiperWapper = styled(Swiper)`
+	width: 100% !important;
+	max-width: 728px !important;
+	height: 390px !important;
+	overflow: hidden !important;
+`;
+
+export const ReactiveWrap = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: rows;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: nowrap;
+
+	@media only screen and (max-width: 728px) {
+		flex-wrap: wrap;
+	}
+`;

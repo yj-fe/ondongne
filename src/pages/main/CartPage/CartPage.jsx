@@ -12,7 +12,7 @@ import * as T from 'components/commonUi/Text';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartCountUpdate, cartDelete, carts } from 'service/cart';
 import LoadingBar from 'components/commonUi/LoadingBar';
-import { groupBy, isEmptyObj, numberFormat, storeTotalPrice } from 'utils/utils';
+import { groupBy, isEmptyObj, numberFormat, orderTotalPrice, storeTotalPrice } from 'utils/utils';
 import { totalPrice } from 'utils/utils';
 import { orderActions } from 'store/slices/order';
 const IMGURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/';
@@ -65,7 +65,7 @@ function CartPage({ }) {
   // 주문페이지 이동
   const orderRoute = (items) => {
     const data = {
-      items: items,
+      items,
       to: location.pathname
     };
     dispatch(orderActions.save(data));
@@ -125,7 +125,7 @@ function CartPage({ }) {
                       <ProfileImg src={newList[0].storeProfile ? IMGURL + newList[0].storeProfile : Avatar} />
                       <L.FlexCols _gap='2' style={{ alignItems: 'flex-start', justifyContent: 'center' }}>
                         <ProfileName>{newList[0].storeName}</ProfileName>
-                        <T.Text _color='gray400' _size='12' >최소 주문 금액 : {numberFormat(newList[0].orderMinPrice)}</T.Text>
+                        <T.Text _color='gray400' _size='12' >최소 주문 금액 {numberFormat(newList[0].orderMinPrice)}원</T.Text>
                       </L.FlexCols>
                     </CarProfiletDiv>
                     {
@@ -145,7 +145,7 @@ function CartPage({ }) {
                               </DeleteStyle>
                             </ProductTitleDiv>
                             <ProductInfo>
-                              <ProductInfoText>기본: {totalPrice(Number(item.price) * item.count, item.salePercent)}원</ProductInfoText>
+                              <ProductInfoText>기본: {item.salePrice}원</ProductInfoText>
                             </ProductInfo>
                           </ContentProductDiv>
                           <ContentCountDiv>
@@ -169,10 +169,10 @@ function CartPage({ }) {
                     }
                     <ContentButton
                       onClick={() => orderRoute(newList)}
-                      active={Number(newList[0].orderMinPrice) < Number(storeTotalPrice(newList))}
-                      disabled={!(Number(newList[0].orderMinPrice) < Number(storeTotalPrice(newList)))}
+                      active={Number(newList[0].orderMinPrice) <= Number(orderTotalPrice(newList))}
+                      disabled={!(Number(newList[0].orderMinPrice) <= Number(orderTotalPrice(newList)))}
                     >
-                      <ButtonText>{numberFormat(storeTotalPrice(newList))}원 주문</ButtonText>
+                      <ButtonText>{numberFormat(orderTotalPrice(newList))}원 주문</ButtonText>
                     </ContentButton>
                   </CartDiv>
                 </CartContainer>

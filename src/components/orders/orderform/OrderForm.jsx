@@ -10,7 +10,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import CheckBox from 'components/commonUi/CheckBox';
 import LayerSelect from 'components/commonUi/LayerSelect';
 import Alert from 'components/commonUi/Alert';
-import { numberFormat, orderName, phoneFormatter, storeTotalPrice, totalPrice } from 'utils/utils';
+import { numberFormat, orderName, orderTotalPrice, phoneFormatter, storeTotalPrice, totalPrice } from 'utils/utils';
 import { useSelector } from 'react-redux';
 import { getMember } from 'service/member';
 import DaumPost from 'components/DaumPost';
@@ -35,7 +35,7 @@ const OrderForm = ({ data }) => {
         deliveryContents: '',
         items: [],
         deliveryPrice: 0,
-        amount: 0,
+        parcelPrice: 0,
         recetiveType: '배달',
         payType: '카드',
         requestSave: false,
@@ -82,7 +82,6 @@ const OrderForm = ({ data }) => {
         const response = await getMember();
         if (response && response.data.data) {
             const member = response.data.data;
-
             setOrderData({
                 ...orderData,
                 memberId: member.memberId,
@@ -94,11 +93,26 @@ const OrderForm = ({ data }) => {
                 addressDetails: member.addressDetails === null ? '' : member.addressDetails,
                 deliveryContents: member.deliveryContents === null ? '' : member.deliveryContents,
                 items: orderItems,
-                amount: Number(orderItems[0].deliveryPrice + storeTotalPrice(orderItems)),
-                deliveryPrice: orderItems[0].deliveryPrice,
+                deliveryPrice: orderItems[0].deliveryPrice ?? 0,
+                parcelPrice: orderItems[0].parcelPrice ?? 0,
+                amount: totalOrderPrice(),
+                orderName: orderName(orderItems),
             })
         } else {
             return goHome();
+        }
+    }
+
+    // 총가격
+    const totalOrderPrice = () => {
+        if (orderData.recetiveType === "배달") {
+            return Number(orderItems[0].deliveryPrice + orderTotalPrice(orderItems))
+        }
+        if (orderData.recetiveType === "택배") {
+            return Number(orderItems[0].parcelPrice + orderTotalPrice(orderItems))
+        }
+        if (orderData.recetiveType === "픽업") {
+            return Number(orderTotalPrice(orderItems))
         }
     }
 
@@ -109,7 +123,8 @@ const OrderForm = ({ data }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (orderData.recetiveType === '배달'
+        if ((orderData.recetiveType === '배달'
+            || orderData.recetiveType === '택배')
             && orderData.address === ""
             && orderData.addressDetails === "") {
             return setAlert({
@@ -130,7 +145,7 @@ const OrderForm = ({ data }) => {
                 tossPayments.requestPayment(orderData.payType, {
                     amount: data.amount,
                     orderId: data.orderKey,
-                    orderName: orderName(orderData.items),
+                    orderName: data.orderName,
                     customerName: orderData.items[0].storeName,
                     successUrl: data.successUrl,
                     failUrl: data.failUrl,
@@ -156,9 +171,6 @@ const OrderForm = ({ data }) => {
                     })
             })
         }
-
-
-
     };
 
     const orderSuccess = () => {
@@ -190,6 +202,13 @@ const OrderForm = ({ data }) => {
         }
     }, [auth])
 
+    useEffect(() => {
+        setOrderData({
+            ...orderData,
+            amount: totalOrderPrice()
+        })
+    }, [orderData.recetiveType])
+
     return (
         orderData
             ? <L.Container as="form" _padding="8px 0 68px">
@@ -201,6 +220,37 @@ const OrderForm = ({ data }) => {
                             <L.FlexCols _gap={8}>
                                 <T.Text _size={15} _color="gray600">{orderData.nickname}</T.Text>
                                 <T.Text _size={15} _color="gray600">{phoneFormatter(orderData.phone)}</T.Text>
+                                {
+                                    orderData.recetiveType == '택배' &&
+                                    !orderData.address &&
+                                    <L.FlexRows>
+                                        <IP.TextInput
+                                            placeholder="배송 받으실 주소를 검색해주세요."
+                                            onClick={() => setIsDaumPost(true)}
+                                            readOnly
+                                        />
+                                    </L.FlexRows>
+                                }
+                                {
+                                    orderData.recetiveType == '택배' &&
+                                    orderData.address &&
+                                    <L.FlexCols _gap={8}>
+                                        <L.FlexRows>
+                                            <T.Text _size={15} _color="gray600">{orderData.address}</T.Text>
+                                            <B.Badge
+                                                type="button"
+                                                onClick={() => setIsDaumPost(true)}
+                                            >
+                                                주소 변경
+                                            </B.Badge>
+                                        </L.FlexRows>
+                                        <IP.TextInput
+                                            placeholder="상세주소를 입력해주세요."
+                                            value={orderData.addressDetails ?? ''}
+                                            onChange={e => setOrderData({ ...orderData, addressDetails: e.target.value })}
+                                        />
+                                    </L.FlexCols>
+                                }
                                 {
                                     orderData.recetiveType == '배달' &&
                                     !orderData.address &&
@@ -250,7 +300,9 @@ const OrderForm = ({ data }) => {
                                 e.preventDefault();
                                 setOrderData({
                                     ...orderData,
-                                    recetiveType: e.currentTarget.value
+                                    recetiveType: e.currentTarget.value,
+                                    address: e.currentTarget.value == '택배' ? '' : orderData.address,
+                                    addressDetails: e.currentTarget.value == '택배' ? '' : orderData.addressDetails,
                                 })
                                 setOrderSelect(false);
                             }}
@@ -295,7 +347,7 @@ const OrderForm = ({ data }) => {
                                                 <T.Text _weight={600}>{o.itemName}</T.Text>
                                                 <L.FlexCols _gap={4}>
                                                     <T.Text _color="gray600">수량: {o.count}개</T.Text>
-                                                    <T.Text _color="gray600">기본: {totalPrice(Number(o.price) * o.count, o.salePercent)} 원</T.Text>
+                                                    <T.Text _color="gray600">기본: {numberFormat(Number(o.salePrice) * o.count)} 원</T.Text>
                                                 </L.FlexCols>
                                             </L.FlexCols>
                                         </L.FlexCols>
@@ -311,12 +363,22 @@ const OrderForm = ({ data }) => {
                                     <tbody>
                                         <tr>
                                             <th>상품 주문 금액</th>
-                                            <td>{numberFormat(storeTotalPrice(orderData.items))} 원</td>
+                                            <td>{numberFormat(orderTotalPrice(orderData.items))} 원</td>
                                         </tr>
-                                        <tr>
-                                            <th>배달비</th>
-                                            <td>{numberFormat(orderData.deliveryPrice)} 원</td>
-                                        </tr>
+                                        {
+                                            orderData.recetiveType == "배달" &&
+                                            <tr>
+                                                <th>배달비</th>
+                                                <td>{numberFormat(orderData.deliveryPrice)} 원</td>
+                                            </tr>
+                                        }
+                                        {
+                                            orderData.recetiveType == "택배" &&
+                                            <tr>
+                                                <th>택배비</th>
+                                                <td>{numberFormat(orderData.parcelPrice)} 원</td>
+                                            </tr>
+                                        }
                                         {/* <tr>
                                     <th>결제 수단</th>
                                     <td>{ payType }</td>
@@ -325,7 +387,9 @@ const OrderForm = ({ data }) => {
                                     <tfoot>
                                         <tr>
                                             <th>총 결제금액</th>
-                                            <td>{numberFormat(orderData.amount)} 원</td>
+                                            <td>
+                                                {numberFormat(orderData.amount) + "원"}
+                                            </td>
                                         </tr>
                                     </tfoot>
                                 </Tb.ReciptTable>
@@ -375,6 +439,7 @@ const OrderForm = ({ data }) => {
                             ...orderData,
                             address: address
                         })}
+                        active={orderData.recetiveType == "택배"}
                     />
                 }
                 {

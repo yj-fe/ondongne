@@ -13,7 +13,7 @@ const Container = styled.div`
     top: 60px;
 `;
 
-const DaumPost = ({ closeModel, setAddress }) => {
+const DaumPost = ({ closeModel, setAddress, active = false }) => {
     const [alert, setAlert] = useState(null);
     const portal = document.getElementById('portal');
 
@@ -30,7 +30,7 @@ const DaumPost = ({ closeModel, setAddress }) => {
             address += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
 
-        if (!address.includes("김포")) {
+        if (!active && !address.includes("김포")) {
             return setAlert({
                 contents: `현재는 '경기도 김포시' 지역으로 운영 중 입니다.\n김포 지역으로 위치 설정이 가능합니다.`,
                 buttonText: "확인",

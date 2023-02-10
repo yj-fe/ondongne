@@ -431,3 +431,27 @@ export const FileForm = styled.div`
 		}
 	}
 `;
+
+export const FileListScroll = styled.div`
+	display: flex;
+	overflow-x: scroll;
+	padding: 0px 0px 10px 0px;
+	gap: 8px;
+	align-items: flex-end;
+	width: 100%;
+	height: 110px;
+
+	::-webkit-scrollbar {
+		height: 4px;
+		background-color: transparent;
+		@media screen and (max-width: 710px) {
+			display: none;
+		}
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: #bdbdbd;
+		border-radius: 99px;
+	}
+	&::-webkit-scrollbar-track {
+	}
+`;

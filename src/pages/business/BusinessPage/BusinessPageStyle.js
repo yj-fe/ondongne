@@ -86,7 +86,7 @@ export const MyBestProductContent = styled.div`
 	align-items: flex-start;
 	gap: 16px;
 	width: 100%;
-	height: 316px;
+	/* height: 316px; */
 `;
 export const FooterDiv = styled.div`
 	cursor: default;
@@ -129,9 +129,9 @@ export const FloatingContentDiv = styled.div`
 `;
 export const Display = styled.div`
 	@media screen and (max-width: 500px) {
-		display: ${props => props._displaynone};
+		display: ${(props) => props._displaynone};
 	}
 	@media screen and (min-width: 501px) {
-		display: ${props => props._display};
+		display: ${(props) => props._display};
 	}
 `;

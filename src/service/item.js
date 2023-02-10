@@ -38,8 +38,10 @@ export function searchItmeList(search, sort, page, x, y) {
 /* ==============================
    우리 동네 인기 추천 상품 리스트
 ============================== */
-export function getBestItemList(x, y) {
-	return client.get(`${urls.bestItemList}?x=${x}&y=${y}`);
+export function getBestItemList(x, y, page, limit) {
+	return client.get(
+		`${urls.bestItemList}?x=${x}&y=${y}&page=${page}&limit=${limit}`
+	);
 }
 
 /* ==============================

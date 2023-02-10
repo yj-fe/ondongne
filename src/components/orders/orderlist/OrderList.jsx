@@ -102,6 +102,8 @@ const OrderList = () => {
         }
     }, [auth])
 
+    console.log(deliveryData);
+
     return (
         orderData
             ? (
@@ -114,7 +116,7 @@ const OrderList = () => {
                                         <L.FlexRows _content="space-between" _items="flex-start">
                                             <L.FlexCols _gap={4} onClick={() => navigate(`/market/detail/${item.storeId}`)}>
                                                 <T.Text _size={18} _weight={500}>{item.storeName}</T.Text>
-                                                <T.Text _size={15} _color="gray800">{orderName(item.orderItems)}</T.Text>
+                                                <T.Text _size={15} _color="gray800">{item.orderName}</T.Text>
                                                 <T.Text _size={13} _color="gray500">{dayjs(item.createDate).format('YYYY/MM/DD HH:mm')}</T.Text>
                                             </L.FlexCols>
                                         </L.FlexRows>
@@ -174,23 +176,22 @@ const OrderList = () => {
                                             </L.FlexCols>
                                         </L.FlexRows>
                                         <L.FlexCols _gap={8}>
-                                            {
+                                            {/* {
                                                 item.orderStatus === '결제완료' &&
                                                 <S.Action
                                                     _type="cancel"
                                                     onClick={() => { setCancelOrder(item.orderId) }}
                                                 >주문 취소</S.Action>
-                                            }
+                                            } */}
                                             {
-                                                (item.orderStatus == '배송완료') &&
+                                                item.orderStatus == '배송완료' &&
                                                 <S.Action
                                                     _type="bgb"
                                                     onClick={() => getDeliveryAuth(item.orderId)}
                                                 >배달 인증 확인</S.Action>
                                             }
                                             {
-                                                (item.orderStatus == '배송완료' ||
-                                                    (orderData.recetiveType === '픽업' && orderData.orderStatus === '상품준비중')) &&
+                                                orderData.recetiveType === '픽업' && orderData.orderStatus === '상품준비중' &&
                                                 <S.Action
                                                     _type="bg"
                                                     onClick={() => setSuccessOrder(item.orderId)}
@@ -284,6 +285,10 @@ const OrderList = () => {
                                             {deliveryData.title}
                                         </strong>
                                         <p>{deliveryData.contents}</p>
+                                        <button
+                                            type='button'
+                                            onClick={() => setSuccessOrder(deliveryData.orderId)}
+                                        >상품 수령</button>
                                     </div>
                                 </S.DeliveryPopup>
                             </Overlay>

@@ -14,7 +14,7 @@ function SearchDetailPage() {
   const local = useSelector(state => state.local);
 
   const getItems = async () => {
-    const response = await getBestItemList(local.x, local.y);
+    const response = await getBestItemList(local.x, local.y, 1, 10);
     const { data } = response.data;
     setItems(data.items);
     setLoading(false);

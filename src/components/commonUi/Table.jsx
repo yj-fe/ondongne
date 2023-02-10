@@ -63,7 +63,7 @@ export const MarketTable = styled.table`
             white-space: nowrap;
             font-weight: 500;
             text-align: left;
-            width: 89px;
+            width: 120px;
         }
 
         td {

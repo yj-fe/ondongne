@@ -25,33 +25,33 @@ import StepBizOptions, { moreSteps } from 'components/shepherd/moresteps';
 const COOKIE_BIZ_KEY = "bizNeverWatch";
 
 
-  // shepherd
-  const tourOptions = {
-    defaultStepOptions: {
-      classes: 'shepherd-theme-custom',
-      cancelIcon: {
-        enabled: true
-      }
-    },
-    classPrefix:true,
-    useModalOverlay: true
-  };
+// shepherd
+const tourOptions = {
+  defaultStepOptions: {
+    classes: 'shepherd-theme-custom',
+    cancelIcon: {
+      enabled: true
+    }
+  },
+  classPrefix: true,
+  useModalOverlay: true
+};
 
-  function Button() {
-    const tour = useContext(ShepherdTourContext);
-    // 바로시작버튼
-    return tour.start();
-  } 
+function Button() {
+  const tour = useContext(ShepherdTourContext);
+  // 바로시작버튼
+  return tour.start();
+}
 
 
 function BusinessPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
-  
+
   const [cookiesBiz, setCookieBiz] = useCookies([COOKIE_BIZ_KEY]);
   const [depth01, setDepth01] = useState(false);
-  
+
   const { moreSteps } = StepBizOptions(() => eventhandler(365, 1));
 
   const [data, setData] = useState({
@@ -189,8 +189,8 @@ function BusinessPage() {
 
         {/* ==================== 내 상점 인기상품 ==================== */}
         <L.Container>
-          <L.Contents _padding="20px 0px 20px 0px">
-            <L.FlexRows _items='center' _padding='0px 20px 0px 20px'>
+          <L.Contents _padding="20px">
+            <L.FlexRows _items='center' _padding='0 0 32px'>
               <T.Text _weight={600} _size={18}>내 상점 인기상품</T.Text>
             </L.FlexRows>
             {
@@ -205,7 +205,7 @@ function BusinessPage() {
             }
             {
               data.itemList.items && data.itemList.items.length > 0 &&
-              <L.FlexRowsCP _padding='0px 0px 10px 20px'>
+              <L.FlexRowsCP>
                 <MyBestProductContent>
                   {
                     data.itemList.items.map((item, index) => (

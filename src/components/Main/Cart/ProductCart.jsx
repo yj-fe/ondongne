@@ -9,6 +9,11 @@ import Confirm from 'components/commonUi/Confirm';
 
 const CartContainer = styled.button`
     cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const ProductCart = ({ id, type, count = 1, disabled = false }) => {

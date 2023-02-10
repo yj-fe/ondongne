@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types'
 import { useNavigate } from "react-router-dom";
-import { ModalButton, ModalDiv1, ModalDiv3, ModalDiv4, ModalOutside, ModalShareBody, ModalTitle, ModalTitle2, TextArea } from 'components/Main/More/ModalPageStyle';
-import * as L from 'components/commonUi/Layout';
+import { ModalButton, ModalDiv1, ModalDiv3, ModalDiv4, ModalOutside, ModalShareBody, TextArea } from 'components/Main/More/ModalPageStyle';
 import * as T from 'components/commonUi/Text';
 import { Kakao } from './Icon';
 import { ImgSizeLayout } from 'components/layout/Img/ImgSizeLayout';
 import Link from 'assets/images/link.png'
 import SimpleConfirm from "./SimpleConfirm";
-// import { Helmet } from 'react-helmet'
 
 const ModalShare = ({
   itemName = 'itemName',

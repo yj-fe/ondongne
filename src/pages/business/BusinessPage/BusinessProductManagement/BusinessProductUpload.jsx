@@ -5,9 +5,9 @@ import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
 import * as C from 'components/commonUi/CommonStyles';
 import CheckBox from 'components/commonUi/CheckBox';
-import { ContentDiv, Input, RightStyle, TitleInfo, TitleInfoDiv } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { ContentDiv, Input, RightStyle, TitleInfo, TitleInfoDiv, FileListScroll } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import { ArrowRightB, Delete, Calendar } from 'components/commonUi/Icon';
-import { imageValidation, numberFormat, numberFormatter, totalPrice } from 'utils/utils';
+import { imageValidation, numberFormat, numberFormatter } from 'utils/utils';
 import BusinessProductEditInfo from './BusinessProductEditInfo';
 import { bizItemdeleteFile, createItem, getBizItem, updateItem } from 'service/bizItem';
 import Alert from 'components/commonUi/Alert';
@@ -28,12 +28,14 @@ function BusinessProductUpload() {
   const [calendar, setCalendar] = useState(false);
   const [fileErrorMessage, setFileErrorMessage] = useState('');
   const [validtion, isValidtion] = useState(false);
+  const [salePriceError, setSalePriceError] = useState("");
+  const [maxCountError, setMaxCountError] = useState("");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     type: '',
     files: [],
     images: [],
-    categories: [],
+    categories: id ? [] : [auth.category],
     name: '',
     price: 0,
     salePrice: 0,
@@ -42,14 +44,6 @@ function BusinessProductUpload() {
     endDate: '',
     description: '',
   })
-
-  // 종료일 설정
-  const endDateHandler = (date) => {
-    setData({
-      ...data,
-      endDate: date,
-    })
-  }
 
   // 파일 삭제
   const fileDeleteHandler = async (file) => {
@@ -91,6 +85,7 @@ function BusinessProductUpload() {
 
   const onSubmit = async () => {
     setLoading(true);
+
     const response = id ? await updateItem(data) : await createItem(data);
 
     if (response.data.data) {
@@ -114,19 +109,64 @@ function BusinessProductUpload() {
       categories: responseData.categories,
       images: responseData.images,
       name: responseData.name,
-      price: responseData.price,
-      salePrice: responseData.salePrice,
-      minCount: responseData.minCount,
-      maxCount: responseData.maxCount,
+      price: numberFormat(responseData.price),
+      salePrice: numberFormat(responseData.salePrice),
+      minCount: responseData.maxCount ? numberFormat(responseData.minCount) : 0,
+      maxCount: responseData.maxCount ? numberFormat(responseData.maxCount) : 0,
       endDate: responseData.endDate ? responseData.endDate : '',
       description: responseData.description,
     })
   }
 
+  useEffect(() => {
+    if (auth.isAuthenticated && id) getItem();
+  }, [auth, id])
+
+  // 할인 가격 체크
+  useEffect(() => {
+
+    if (!data.salePrice) {
+      return;
+    }
+
+    if (!data.price) {
+      return setSalePriceError("상품 가격을 입력해주세요.")
+    }
+    const maxValue = data.salePrice.replaceAll(",", "");
+    const price = data.price.replaceAll(",", "");
+
+    if (Number(maxValue) > Number(price)) {
+      return setSalePriceError("할인 가격은 상품 가격보다 높을 수 없습니다.")
+    }
+
+    setSalePriceError("");
+
+  }, [data.salePrice, data.price])
+
+  // 최대 수량 체크
+  useEffect(() => {
+
+    if (!data.maxCount) {
+      return;
+    }
+
+    if (!data.minCount) {
+      return setMaxCountError("최소 수량을 입력해주세요.")
+    }
+
+    const maxValue = data.maxCount.replaceAll(",", "");
+    const minCount = data.minCount.replaceAll(",", "");
+
+    if (Number(maxValue) < Number(minCount)) {
+      return setMaxCountError("최대 수량은 최소 수량보다 낮을 수 없습니다.")
+    }
+
+    setMaxCountError("");
+
+  }, [data.minCount, data.maxCount])
 
   useEffect(() => {
     setFileErrorMessage('');
-
     if (data.type === '') return isValidtion(false);
     if (!id && data.files.length == 0) return isValidtion(false);
     if (data.categories.length == 0) return isValidtion(false);
@@ -135,16 +175,16 @@ function BusinessProductUpload() {
     if (data.salePrice === 0) return isValidtion(false);
     if (data.description === '') return isValidtion(false);
     if (data.type === 'GROUP') {
-      if (!data.minCount) {
-        return isValidtion(false);
-      }
+      if (!data.minCount) return isValidtion(false);
+      if (!data.endDate) return isValidtion(false);
     }
+    if (salePriceError !== '') return isValidtion(false);
+    if (maxCountError !== '') return isValidtion(false);
     return isValidtion(true);
-  }, [data])
+  }, [data, salePriceError, maxCountError])
 
-  useEffect(() => {
-    if (auth.isAuthenticated && id) getItem();
-  }, [auth, id])
+
+  if (id && !data.itemId) return <></>;
 
   return (
     <>
@@ -193,32 +233,34 @@ function BusinessProductUpload() {
                   {fileErrorMessage && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{fileErrorMessage}</T.Text>}
                   {
                     (data.files.length > 0 || data.images.length > 0) &&
-                    <L.FlexRows _gap={20}>
-                      {
-                        data.images.length > 0 &&
-                        data.images.map((file, index) => (
-                          <FileListForm
-                            key={index}
-                            file={file}
-                            fileDeleteHandler={fileDeleteHandler}
-                          />
-                        ))
-                      }
-                      {
-                        data.files.length > 0 &&
-                        data.files.map((file, index) => (
-                          <FileList
-                            key={index}
-                            file={file}
-                            deleteFile={() =>
-                              setData({
-                                ...data,
-                                files: data.files.filter(item => item !== file)
-                              })
-                            } />
-                        ))
-                      }
-                    </L.FlexRows>
+                    <FileListScroll>
+                      <L.FlexRows _gap={20} _width="auto" _overflow="unset">
+                        {
+                          data.files.length > 0 &&
+                          data.files.map((file, index) => (
+                            <FileList
+                              key={index}
+                              file={file}
+                              deleteFile={() =>
+                                setData({
+                                  ...data,
+                                  files: data.files.filter(item => item !== file)
+                                })
+                              } />
+                          ))
+                        }
+                        {
+                          data.images.length > 0 &&
+                          data.images.map((file, index) => (
+                            <FileListForm
+                              key={index}
+                              file={file}
+                              fileDeleteHandler={fileDeleteHandler}
+                            />
+                          ))
+                        }
+                      </L.FlexRows>
+                    </FileListScroll>
                   }
                   <input
                     type="file"
@@ -229,7 +271,7 @@ function BusinessProductUpload() {
                       const valid = imageValidation(e.target.files[0]);
                       if (valid) return setFileErrorMessage(valid);
 
-                      if (data.files.length === 7) {
+                      if (data.images.length + data.files.length === 7) {
                         return setFileErrorMessage('최대 7개까지 추가 가능합니다.');
                       }
 
@@ -258,69 +300,75 @@ function BusinessProductUpload() {
                   </TitleInfoDiv>
                 </L.FlexCols>
 
+                {/* ============상품가격============= */}
+                <L.FlexCols>
 
-                <L.FlexRows>
-                  <L.FlexCols _gap={16}>
-                    <T.Text _weight={600} _size={16} _color="gray900">상품 가격(원)</T.Text>
-                    <TitleInfoDiv>
-                      <Input
-                        placeholder='0'
-                        value={numberFormat(data.price)}
-                        maxLength={15}
-                        onChange={e => setData({ ...data, price: numberFormatter(e.target.value) })}
-                      />
-                      <span>￦</span>
-                    </TitleInfoDiv>
-                  </L.FlexCols>
+                  <L.FlexRows>
+                    <L.FlexCols _gap={16}>
+                      <T.Text _weight={600} _size={16} _color="gray900">상품 가격(원)</T.Text>
+                      <TitleInfoDiv>
+                        <Input
+                          placeholder='0'
+                          value={numberFormat(data.price)}
+                          maxLength={15}
+                          onChange={e => setData({ ...data, price: numberFormatter(e.target.value) })}
+                        />
+                        <span>￦</span>
+                      </TitleInfoDiv>
+                    </L.FlexCols>
 
-                  <L.FlexCols _gap={16}>
-                    <T.Text _weight={600} _size={16} _color="gray900">할인 가격(원)</T.Text>
-                    <TitleInfoDiv>
-                      <Input
-                        placeholder='0'
-                        style={{ background: '#fff' }}
-                        value={numberFormat(data.salePrice)}
-                        maxLength={15}
-                        onChange={e => setData({ ...data, salePrice: numberFormatter(e.target.value) })}
-                      />
-                      <span>￦</span>
-                    </TitleInfoDiv>
-                  </L.FlexCols>
-                </L.FlexRows>
+                    <L.FlexCols _gap={16}>
+                      <T.Text _weight={600} _size={16} _color="gray900">할인 가격(원)</T.Text>
+                      <TitleInfoDiv>
+                        <Input
+                          placeholder='0'
+                          style={{ background: '#fff' }}
+                          value={numberFormat(data.salePrice)}
+                          maxLength={15}
+                          onChange={e => setData({ ...data, salePrice: numberFormatter(e.target.value) })}
+                        />
+                        <span>￦</span>
+                      </TitleInfoDiv>
+                    </L.FlexCols>
+                  </L.FlexRows>
+                  {salePriceError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{salePriceError}</T.Text>}
+                </L.FlexCols>
 
                 {
                   data.type === 'GROUP' &&
                   <>
-                    <L.FlexRows>
-                      <L.FlexCols _gap={16}>
-                        <T.Text _weight={600} _size={16} _color="gray900">최소 수량</T.Text>
-                        <TitleInfoDiv>
-                          <Input
-                            name='minCount'
-                            placeholder='0'
-                            value={data.minCount}
-                            onChange={e => setData({ ...data, minCount: numberFormatter(e.target.value) })}
-                            maxLength={10}
-                          />
-                          <span>개</span>
-                        </TitleInfoDiv>
-                      </L.FlexCols>
+                    <L.FlexCols>
+                      <L.FlexRows>
+                        <L.FlexCols _gap={16}>
+                          <T.Text _weight={600} _size={16} _color="gray900">최소 수량</T.Text>
+                          <TitleInfoDiv>
+                            <Input
+                              name='minCount'
+                              placeholder='0'
+                              value={data.minCount}
+                              onChange={e => setData({ ...data, minCount: numberFormatter(e.target.value) })}
+                              maxLength={10}
+                            />
+                            <span>개</span>
+                          </TitleInfoDiv>
+                        </L.FlexCols>
 
-                      <L.FlexCols _gap={16}>
-                        <T.Text _weight={600} _size={16} _color="gray900">최대 수량</T.Text>
-                        <TitleInfoDiv>
-                          <Input
-                            name='maxCount'
-                            placeholder='0'
-                            value={data.maxCount}
-                            onChange={e => setData({ ...data, maxCount: numberFormatter(e.target.value) })}
-                            maxLength={10}
-                          />
-                          <span>개</span>
-                        </TitleInfoDiv>
-                      </L.FlexCols>
-                    </L.FlexRows>
-
+                        <L.FlexCols _gap={16}>
+                          <T.Text _weight={600} _size={16} _color="gray900">최대 수량</T.Text>
+                          <TitleInfoDiv>
+                            <Input
+                              name='maxCount'
+                              placeholder='0'
+                              value={data.maxCount}
+                              onChange={e => setData({ ...data, maxCount: numberFormatter(e.target.value) })}
+                              maxLength={10}
+                            />
+                            <span>개</span>
+                          </TitleInfoDiv>
+                        </L.FlexCols>
+                      </L.FlexRows>
+                      {maxCountError && <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }} >{maxCountError}</T.Text>}
+                    </L.FlexCols>
                     <L.FlexCols _gap={16}>
                       <T.Text _weight={600} _size={16} _color="gray900">판매 종료일</T.Text>
                       <TitleInfoDiv
@@ -331,7 +379,7 @@ function BusinessProductUpload() {
                           name='endDate'
                           placeholder='판매 종료일 선택'
                           style={{ background: '#fff' }}
-                          value={data.endDate ? data.endDate.split('T')[0] : ''}
+                          value={data.endDate ? data.endDate : ''}
                         />
                         <span><Calendar /></span>
                       </TitleInfoDiv>
@@ -410,8 +458,8 @@ function BusinessProductUpload() {
         calendar &&
         <CalendarModel
           modelClose={() => setCalendar(false)}
-          onChange={endDateHandler}
-          dateFormat={'yyyy-MM-dd HH:mm:ss'}
+          onChange={date => setData({ ...data, endDate: date })}
+          dateFormat={'yyyy-MM-dd'}
         />
       }
     </>
@@ -421,7 +469,6 @@ function BusinessProductUpload() {
 const FileListForm = ({ file, fileDeleteHandler }) => {
 
   const [confirm, setConfirm] = useState(null);
-  const [alert, setAlert] = useState(null);
   const url = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/'
 
   return (
@@ -453,16 +500,6 @@ const FileListForm = ({ file, fileDeleteHandler }) => {
           cancelText={confirm.cancelText}
           onConfirmClick={confirm.onConfirmClick}
           onCancelClick={confirm.onCancelClick}
-        />
-      }
-      {
-        alert &&
-        <Alert
-          title={alert.title}
-          contents={alert.contents}
-          buttonText={alert.buttonText}
-          onButtonClick={alert.onButtonClick}
-          onOverlayClick={alert.onOverlayClick}
         />
       }
     </>

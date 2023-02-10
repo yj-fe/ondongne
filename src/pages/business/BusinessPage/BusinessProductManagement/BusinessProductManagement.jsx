@@ -11,13 +11,11 @@ import { ModalBody, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from 'compo
 import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
 import { CursorDiv } from 'components/Common/LayoutPageStyle';
 
-
 function BusinessProductManagement() {
   const navigate = useNavigate();
   const auth = useSelector(state => state.auth);
-  const [items, setItems] = useState([])
-  const [totalCount, setTotalCount] = useState(0)
-  const [consfirm, setConfirm] = useState(null)
+  const [items, setItems] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [modal, setModal] = useState(false);
   const [ref, inView] = useInView();
 
@@ -76,36 +74,36 @@ function BusinessProductManagement() {
         onBackClick={() => navigate(-1)}
       >
 
-        <L.Container >
-          <L.Contents>
-            <L.FlexCols _padding={0} _gap={0}>
+        <L.Container>
+          <L.Contents _padding="24px 20px" _height={"calc(100vh - 70px)"}>
+            <L.Scroll>
+              <L.FlexCols _padding={0} _gap={0}>
 
-              <L.FlexRows _gap={16} _content='space-between'>
-                <div>
-                  <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
-                </div>
-                <L.FlexRows onClick={ShowMoreModal} _gap={4} _content='flex-end' _width='150px'>
-                  <T.Text _align='right' _size={13} _weight={400} _color='gray900'>{data.type}</T.Text>
-                  <button
-                    type='button'
-                  >
-                    <Down />
-                  </button>
+                <L.FlexRows _gap={16} _content='space-between'>
+                  <div>
+                    <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
+                  </div>
+                  <L.FlexRows onClick={ShowMoreModal} _gap={4} _content='flex-end' _width='150px'>
+                    <T.Text _align='right' _size={13} _weight={400} _color='gray900'>{data.type}</T.Text>
+                    <button
+                      type='button'
+                    >
+                      <Down />
+                    </button>
+                  </L.FlexRows>
                 </L.FlexRows>
-              </L.FlexRows>
 
-              <L.Contents _padding='0px' _gap={20}>
-                {/* <L.FlexRowsWrapBPM _padding={0}> */}
-                {
-                  items && items.length === 0 &&
-                  <L.Contents _padding='50px 0px' _height='calc(100vh - 68px)'>
-                    <L.NoneDataContainer>
-                      <T.Text _align='center' _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
-                      <T.Text _align='center' _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
-                    </L.NoneDataContainer>
-                  </L.Contents>
-                }
-                <L.Scroll>
+                <L.Contents _padding='0px' _gap={20}>
+                  {/* <L.FlexRowsWrapBPM _padding={0}> */}
+                  {
+                    items && items.length === 0 &&
+                    <L.Contents _padding='50px 0px'>
+                      <L.NoneDataContainer>
+                        <T.Text _align='center' _size={15} _weight={400} _color='gray600'>준비된 상품이 없습니다.</T.Text>
+                        <T.Text _align='center' _size={15} _weight={400} _color='gray600'>상품을 등록해보세요!</T.Text>
+                      </L.NoneDataContainer>
+                    </L.Contents>
+                  }
                   <L.Grid>
                     {
                       items && items.length > 0 &&
@@ -128,11 +126,11 @@ function BusinessProductManagement() {
                       ))
                     }
                   </L.Grid>
-                </L.Scroll>
-                {/* </L.FlexRowsWrapBPM> */}
-              </L.Contents>
+                  {/* </L.FlexRowsWrapBPM> */}
+                </L.Contents>
 
-            </L.FlexCols>
+              </L.FlexCols>
+            </L.Scroll>
           </L.Contents>
         </L.Container>
         {modal && <ModalFilter type={data.type} handler={dataChecked} closeSelector={() => setModal(false)} PropsModal={PropsModal} />}

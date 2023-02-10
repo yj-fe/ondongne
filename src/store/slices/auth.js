@@ -8,6 +8,7 @@ const authenticationState = {
 	auth: "",
 	bizId: "",
 	storeId: "",
+	category: "",
 };
 
 const authSlice = createSlice({
@@ -36,6 +37,7 @@ const authSlice = createSlice({
 			const data = action.payload;
 			state.bizId = data.bizId;
 			state.storeId = data.storeId;
+			state.category = data.category;
 		},
 		logout(state) {
 			localStorage.removeItem("accessToken");

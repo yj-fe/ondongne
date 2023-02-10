@@ -51,7 +51,7 @@ export const S = {
 	DeliveryPopup: styled.div`
 		z-index: 91;
 		position: relative;
-		width: 300px;
+		width: 350px;
 		max-width: calc(100vw - 40px);
 		max-height: calc(100vh - 40px);
 		border-radius: 12px;
@@ -94,12 +94,25 @@ export const S = {
 		.contents {
 			display: flex;
 			flex-direction: column;
-			align-items: center;
+			align-items: flex-start;
 			gap: 4px;
 			padding: 16px 20px;
 
 			strong {
 				font-weight: 500;
+			}
+
+			button {
+				width: 100%;
+				height: 48px;
+				line-height: 46px;
+				border-radius: 4px;
+				text-align: center;
+				background-color: ${(props) => props.theme.color.blue};
+				border: 1px solid ${(props) => props.theme.color.blue};
+				color: #fff;
+				font-weight: 500;
+				margin-top: 24px;
 			}
 		}
 	`,
