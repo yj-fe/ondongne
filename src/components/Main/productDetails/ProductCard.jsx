@@ -11,7 +11,6 @@ import StarRate from "components/commonUi/StarRate";
 export function ProductCard({
     item, lastRef, width = 216, isCart = true
 }) {
-    console.log(item);
     const navigate = useNavigate();
     const salePercent = disRate(item.price, item.salePrice);
     return (
