@@ -142,7 +142,7 @@ function DetailsPage(props) {
         cart={true}
         share={true}
         floating={false}
-        // more={true}
+        more={true}
         onBackClick={() => navigate(-1)}
       >
         <L.Container >

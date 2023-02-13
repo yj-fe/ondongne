@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import StarRate from "components/commonUi/StarRate";
 import SortFilter from "components/commonUi/SortFilter";
 import { sortFormatter } from 'utils/utils';
+import ReportAlert from "components/commonUi/ReportAlert";
 
 const MEMBERIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/member/profile/";
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/review/";
@@ -19,11 +20,11 @@ const STOREIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/sto
 
 const ProductReview = ({ id }) => {
 
+    const auth = useSelector(state => state.auth);
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState(false);
     const [sort, setSort] = useState("create");
-    const auth = useSelector(state => state.auth);
-
+    const [report, setReport] = useState(null);
 
     // 리뷰 목록
     const loadData = async () => {
@@ -50,16 +51,15 @@ const ProductReview = ({ id }) => {
         if (data.length > 0) {
             data.map(d => avgRating = Number(avgRating) + Number(d.rating));
         }
-        return Number(avgRating);
+        return Math.floor((Number(avgRating) / data.length), -1);
     };
-
 
     useEffect(() => {
         loadData();
     }, [sort]);
 
+    if (!data) return <></>;
 
-    console.log(data)
     return (
         <>
             {
@@ -76,7 +76,7 @@ const ProductReview = ({ id }) => {
                             <StarRate rate={reviewAvgRating()} width={24} />
                         </L.FlexRows>
                         <L.FlexRows _gap={4} _content='center' _items='center'>
-                            <T.Text _size={20} _weight={500} _color='gray900' >{reviewAvgRating().toString()}</T.Text>
+                            <T.Text _size={20} _weight={500} _color='gray900' >{reviewAvgRating()}</T.Text>
                             <T.Text _size={20} _weight={500} _color='gray400' >/ 5</T.Text>
                         </L.FlexRows>
                     </L.FlexCols>
@@ -116,9 +116,12 @@ const ProductReview = ({ id }) => {
                                             </L.FlexRows>
                                         </L.FlexCols>
                                     </L.FlexRows>
-                                    {/* <L.FlexRows _width='50px'>
-                                        <T.Text _size={12} _color='gray400'>신고하기</T.Text>
-                                    </L.FlexRows> */}
+                                    {
+                                        auth.isAuthenticated &&
+                                        <L.FlexRows _width='50px'>
+                                            <T.Text _size={12} _color='gray400' onClick={() => setReport(item.reviewId)}>신고하기</T.Text>
+                                        </L.FlexRows>
+                                    }
                                 </L.FlexRows>
                                 {
                                     item.images.length > 0 &&
@@ -162,12 +165,23 @@ const ProductReview = ({ id }) => {
                     </L.FlexCols>
                 </L.FlexCols>
             }
-            {filter &&
+            {
+                filter &&
                 <SortFilter
                     sorts={["create", "review", "reviewLike"]}
                     close={() => setFilter(false)}
                     selectedData={sort}
-                    setSelectedData={setSort} />}
+                    setSelectedData={setSort} />
+            }
+            {
+                report &&
+                <ReportAlert
+                    onOverlayClick={() => setReport(null)}
+                    onCloseClick={() => setReport(null)}
+                    id={report}
+                    type={"REVIEW"}
+                />
+            }
         </>
     )
 }

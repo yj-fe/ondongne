@@ -12,6 +12,7 @@ import CommentBottomSheet from "./CommentBottomSheet";
 import { useSelector } from 'react-redux';
 import Moment from "react-moment";
 import 'moment/locale/ko'
+import ReportAlert from "components/commonUi/ReportAlert";
 
 const writerError = "댓글 등록 중 오류가 발생하였습니다.";
 const updateError = "댓글 수정 중 오류가 발생하였습니다.";
@@ -39,6 +40,9 @@ const ProductComments = ({ id }) => {
     const getComments = async () => {
         const response = await getCommentList(id)
         if (response && response.data.data) {
+            let totalCount = 0;
+            list.forEach(item => totalCount += item.childs.length)
+            setCount(totalCount + Number(list.length));
             setList(response.data.data)
             setData({
                 itemId: id,
@@ -48,7 +52,6 @@ const ProductComments = ({ id }) => {
                 replyer: '',
             })
             setMode(0);
-            commentTotalCount();
         }
     }
 
@@ -149,15 +152,6 @@ const ProductComments = ({ id }) => {
             itemCommentId: '',
             replyer: '',
         })
-    }
-
-    // 댓글 전체 개수
-    const commentTotalCount = () => {
-        let totalCount = list.length;
-        list.forEach(item => {
-            totalCount += item.childs.length;
-        })
-        setCount(totalCount);
     }
 
     useEffect(() => {
@@ -290,6 +284,8 @@ const Comments = ({ item, child, replyHandler, updateHandler, remove }) => {
     const memberId = useSelector(state => state.auth.id);
     const [confirm, setConfirm] = useState(null);
     const [modal, setModal] = useState(false);
+    const [report, setReport] = useState(null);
+
 
     // 댓글 삭제 confirm
     const removeConfirm = (id) => {
@@ -306,6 +302,13 @@ const Comments = ({ item, child, replyHandler, updateHandler, remove }) => {
         });
     }
 
+    useEffect(() => {
+        if (report) {
+            setConfirm(false);
+            setModal(false);
+        }
+    }, [report])
+
     return (
         <>
             <L.FlexRows key={item.itemCommentId} _gap={16} _padding={child ? '0 0 0 36px' : '0px'}>
@@ -319,17 +322,20 @@ const Comments = ({ item, child, replyHandler, updateHandler, remove }) => {
                             </T.Text>
                         </L.FlexRows>
                         <T.Text _size={15} _weight={400} _color='gray800'>{item.contents}</T.Text>
-                        <L.FlexRows>
-                            <T.Text
-                                onClick={replyHandler}
-                                _size={13} _weight={500} _color='gray500'
-                            >
-                                댓글달기
-                            </T.Text>
-                        </L.FlexRows>
+                        {
+                            memberId &&
+                            <L.FlexRows>
+                                <T.Text
+                                    onClick={replyHandler}
+                                    _size={13} _weight={500} _color='gray500'
+                                >
+                                    댓글달기
+                                </T.Text>
+                            </L.FlexRows>
+                        }
                     </L.FlexCols>
                     {
-                        item.memberId == memberId &&
+                        memberId &&
                         <button type="button" onClick={() => setModal(true)}>
                             <More />
                         </button>
@@ -337,13 +343,23 @@ const Comments = ({ item, child, replyHandler, updateHandler, remove }) => {
                 </L.FlexRows>
             </L.FlexRows>
             {
-                modal &&
-                <CommentBottomSheet
-                    remove={() => removeConfirm(item.itemCommentId)}
-                    update={() => updateHandler(item)}
-                    closeModal={() => setModal(false)}
+                report &&
+                <ReportAlert
+                    onOverlayClick={() => setReport(null)}
+                    onCloseClick={() => setReport(null)}
+                    id={report}
+                    type={"COMMENT"}
                 />
             }
+
+            <CommentBottomSheet
+                active={modal}
+                remove={() => removeConfirm(item.itemCommentId)}
+                update={() => updateHandler(item)}
+                closeModal={() => setModal(false)}
+                isMe={item.memberId == memberId}
+                report={() => setReport(item.itemCommentId)}
+            />
             {
                 confirm &&
                 <Confirm

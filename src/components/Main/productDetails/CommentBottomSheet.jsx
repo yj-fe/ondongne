@@ -1,37 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from "styled-components";
 
-function CommentBottomSheet({ closeModal, update, remove }) {
+function CommentBottomSheet({ active, closeModal, update, remove, isMe, report }) {
+
+  if (active) {
 
     return (
-        <div>
-            <ModalOutside>
-                <ModalBody>
-                    <ModalDiv1>더보기</ModalDiv1>
-                    <ModalDiv2>
-                        <ModalTitle onClick={() => {
-                            update();
-                            closeModal();
-                        }}>
-                            수정하기
-                        </ModalTitle>
-                        <ModalTitle
-                            onClick={remove}
-                        >
-                            삭제하기
-                        </ModalTitle>
-                        {/* <ModalTitle>신고하기</ModalTitle> */}
-                    </ModalDiv2>
-                    <ModalButton
-                        type="button"
-                        onClick={closeModal}
-                    >
-                        닫기
-                    </ModalButton>
-                </ModalBody>
-            </ModalOutside>
-        </div>
+      <ModalOutside>
+        <ModalBody>
+          <ModalDiv1>더보기</ModalDiv1>
+          <ModalDiv2>
+            {
+              isMe &&
+              <>
+                <ModalTitle onClick={() => {
+                  update();
+                  closeModal();
+                }}>
+                  수정하기
+                </ModalTitle>
+                <ModalTitle
+                  onClick={remove}
+                >
+                  삭제하기
+                </ModalTitle>
+              </>
+            }
+            <ModalTitle onClick={report}>신고하기</ModalTitle>
+          </ModalDiv2>
+          <ModalButton
+            type="button"
+            onClick={closeModal}
+          >
+            닫기
+          </ModalButton>
+        </ModalBody>
+      </ModalOutside>
     )
+  }
 }
 
 const ModalOutside = styled.div`
