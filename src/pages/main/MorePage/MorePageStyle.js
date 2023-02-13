@@ -190,7 +190,7 @@ export const Sticky = styled.div`
     position: sticky;
     width: 200px;
     margin-right: 10%;
-    animation: 5s bounce infinite;
+    animation: 2s bounce infinite;
     @media screen and (max-width: 728px) {
 			margin-right: 7%;
     }
