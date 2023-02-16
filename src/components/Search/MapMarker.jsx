@@ -40,37 +40,34 @@ const Div = styled.div`
 
 function MapMarker(props) {
 
-  const [newMarket, setNewMarket] = useState(true)
-
   const categoryIcon = (type) => {
-    if (type === "야채/과일") return <Vege/>
-    if (type === "정육") return <Meat/>
-    if (type === "수산/해산") return 
-    if (type === "쌀/잡곡") return <Rice/>
-    if (type === "식품") return 
-    if (type === "생활용품") return 
-    if (type === "디저트") return <Dessert/>
-    if (type === "식음료") return <Drink/>
-    if (type === "반려동물") return 
-    if (type === "기타") return 
+    if (type === "야채/과일") return <Vege />
+    if (type === "정육") return <Meat />
+    if (type === "수산/해산") return
+    if (type === "쌀/잡곡") return <Rice />
+    if (type === "식품") return
+    if (type === "생활용품") return
+    if (type === "디저트") return <Dessert />
+    if (type === "식음료") return <Drink />
+    if (type === "반려동물") return
+    if (type === "기타") return
   };
 
   return (
     <StyledMapMarker>
-
       { // 신규입점이면 N 띄워주기
         props.newMarket &&
-          <AbsoluteDiv
-            _top='-25%' _z='30' _right='none' _bottom='none'
-          >
-            <New/>
-          </AbsoluteDiv>
+        <AbsoluteDiv
+          _top='-25%' _z='30' _right='none' _bottom='none'
+        >
+          <New />
+        </AbsoluteDiv>
       }
       <L.FlexCols _gap='0px'>
         <Marker
           onClick={props.list}
         >
-          <L.FlexRows _content='center' _height='36px' _items='center' _padding='8px 13px'> 
+          <L.FlexRows _content='center' _height='36px' _items='center' _padding='8px 13px'>
             {/* 아이콘 */}
             {categoryIcon(props.category)}
             <L.FlexRows _gap='0px' _width='auto'>
@@ -83,7 +80,7 @@ function MapMarker(props) {
             </L.FlexRows>
           </L.FlexRows>
         </Marker>
-        <Div/>
+        <Div />
       </L.FlexCols>
     </StyledMapMarker>
   )

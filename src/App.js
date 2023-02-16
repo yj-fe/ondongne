@@ -54,7 +54,6 @@ import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAsk
 import InquiryPage from "pages/service/CustomerService/InquiryPage";
 import VocPage from "pages/service/CustomerService/VocPage";
 import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage";
-import ConfigurationPage from "pages/main/ConfigurationPage/ConfigurationPage";
 import Alert from "components/commonUi/Alert";
 import { authActions } from "store/slices/auth";
 import { getExpiry } from "utils/localStorage";
@@ -63,11 +62,7 @@ import ReviewPage from "pages/member/ReviewPage";
 import SearchDetailPage from "pages/main/Search/SearchDetailPage";
 import SearchResultPage from "pages/main/Search/SearchResultPage";
 import BusinessCouponUpload from "./pages/business/BusinessPage/Coupon/BusinessCouponUpload";
-import NotFound from "./pages/NotFound";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
-import { localActions } from "store/slices/location";
-import jwtDecode from "jwt-decode";
-import MainPageTest from "pages/main/MainPage/MainPage";
 
 function App() {
 	const dispatch = useDispatch();

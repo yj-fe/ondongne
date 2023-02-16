@@ -15,6 +15,7 @@ import LoadingBar from 'components/commonUi/LoadingBar';
 import { StoreListCard } from 'components/commonUi/StoreListCard';
 import { MapListButton } from 'components/commonUi/Button';
 import MapComponent from 'components/Search/MapComponent';
+import MapView from 'components/Search/MapView';
 
 function SearchPage() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function SearchPage() {
   const [loading, setLoading] = useState(false);
   const [fetching, isFetching] = useState(false);
 
-  const [pageChange, setPageChange] = useState(false)
+  const [pageChange, setPageChange] = useState(false);
 
 
   const getStores = async () => {
@@ -81,7 +82,7 @@ function SearchPage() {
     getStores();
   }, [fetching])
 
-  
+
 
   return (
     <div>
@@ -94,8 +95,8 @@ function SearchPage() {
       >
 
         <L.Container >
-          <L.Contents _height={'100vh'} _padding='0'>
-            <L.Scroll _padding="0" _gap='0'>
+          <L.Contents _height={'100vh - 108px'} _padding='0'>
+            <L.Scroll _padding="0" _gap='0' _height='calc(100vh - 68px)'>
 
 
               {/* =================== 메뉴 =================== */}
@@ -106,7 +107,9 @@ function SearchPage() {
               {
                 pageChange
                   ?
-                  <MapComponent />
+                  <>
+                    <MapView />
+                  </>
                   :
                   <>
                     {/* =================== 필터 =================== */}
@@ -157,11 +160,11 @@ function SearchPage() {
               }
             </L.Scroll>
 
-            {/* <MapListButton
+            <MapListButton
               onClick={() => setPageChange(!pageChange)}
             >
               {pageChange ? <><List /><p>목록 보기</p></> : <><Map /><p>지도 보기</p></>}
-            </MapListButton> */}
+            </MapListButton>
 
           </L.Contents>
         </L.Container>

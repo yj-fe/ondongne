@@ -4,6 +4,7 @@ const urls = {
 	details: "/store/details",
 	categoryList: "/store/category/list",
 	searchList: "/store/search/list",
+	map: "/store/map/list",
 };
 /* ==============================
    상점 상세
@@ -35,4 +36,8 @@ export function searchStoreList(search, sort, page, x, y) {
 	return client.get(
 		`${urls.searchList}?search=${search}&sort=${sort}&page=${page}&x=${x}&y=${y}`
 	);
+}
+
+export function storeMapList(data) {
+	return client.get(`${urls.map}?x=${data.x}&y=${data.y}`);
 }

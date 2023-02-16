@@ -16,6 +16,9 @@ import { persistStore } from "redux-persist";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
+/* react naver map */
+import { NavermapsProvider } from "react-naver-maps";
+
 import App from "./App";
 import "./index.css";
 import store from "./store";
@@ -37,7 +40,9 @@ root.render(
 					<GlobalStyle />
 					<QueryClientProvider client={queryClient}>
 						{/* <ReactQueryDevtools initialIsOpen={false} /> */}
-						<App />
+						<NavermapsProvider ncpClientId="z8897i8jrt">
+							<App />
+						</NavermapsProvider>
 					</QueryClientProvider>
 				</BrowserRouter>
 			</ThemeProvider>

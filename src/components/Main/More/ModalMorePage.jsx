@@ -2,13 +2,19 @@ import React from 'react'
 import { ModalBody, ModalButton, ModalDiv1, ModalDiv2, ModalOutside, ModalTitle } from './ModalPageStyle'
 
 function ModalPage({ PropsModal, report }) {
+
+  const reportHandler = () => {
+    report();
+    PropsModal();
+  }
+
   return (
     <ModalOutside>
       <ModalBody>
         <ModalDiv1>더보기</ModalDiv1>
         <ModalDiv2>
           <ModalTitle>전화문의</ModalTitle>
-          <ModalTitle onClick={report}>신고하기</ModalTitle>
+          <ModalTitle onClick={reportHandler}>신고하기</ModalTitle>
           {/* <ModalTitle>채팅문의</ModalTitle> */}
           {/* <ModalTitle>공유하기</ModalTitle> */}
         </ModalDiv2>

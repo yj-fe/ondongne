@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { ArrowLeft_tail, ArrowLeft, More } from 'components/commonUi/Icon';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { Text } from 'components/commonUi/Text';
 import { isMobile } from 'react-device-detect';
 import MobileShare from 'components/share/share';
 import ShareMobile from 'components/share/share';
+import ReportAlert from 'components/commonUi/ReportAlert';
 
 
 const Header = ({
@@ -34,6 +35,9 @@ const Header = ({
     ...props
 }) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { id } = useParams();
+    const [report, setReport] = useState(false);
 
     /* ====================
         click action or path or prev url
@@ -127,7 +131,7 @@ const Header = ({
                     }
                 </S.Block>
             </S.Inner>
-            {modal && <ModalMorePage PropsModal={PropsModal} />}
+            {modal && <ModalMorePage PropsModal={PropsModal} report={() => setReport(true)} />}
             {
                 shareModal &&
                 <ModalShare
@@ -136,6 +140,15 @@ const Header = ({
                     itemName={title}
                     description={description}
                     img={img}
+                />
+            }
+            {
+                report &&
+                <ReportAlert
+                    onOverlayClick={() => setReport(null)}
+                    onCloseClick={() => setReport(null)}
+                    id={id}
+                    type={location.pathname.includes('market') ? "STORE" : "ITEM"}
                 />
             }
         </S.Header>
