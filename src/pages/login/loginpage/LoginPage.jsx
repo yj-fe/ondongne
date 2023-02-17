@@ -9,7 +9,7 @@ import { ReactComponent as Naver } from "assets/login/naver.svg";
 import { ReactComponent as Kakao } from "assets/login/kakao.svg";
 import { ReactComponent as Google } from "assets/login/google.svg";
 import { ReactComponent as Apple } from "assets/login/apple.svg";
-import {  InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, Button, GapContainer, ArrowStyle } from "./LoginPageStyle";
+import { InputForm, Input, PwdContainer, PwdInput, EyeOffStyle, LoginButton, FindStyle, FindAccount, SnsIcon, SnsStyle, SnsTextStyle, Snstext, Button, GapContainer, ArrowStyle } from "./LoginPageStyle";
 import Alert from 'components/commonUi/Alert';
 import Confirm from 'components/commonUi/Confirm';
 import { login } from "service/auth";
@@ -138,7 +138,7 @@ function LoginPage() {
       <LoginHeader title="로그인" to={"/more"} />
 
       <S.Main as="main" _bc='#fff'>
-        <L.ContentsMedia _padding='80px 40px 0px 40px ' _paddingm='60px 20px'>
+        <L.ContentsMedia _height="calc(100vh - 60px)">
           <L.Scroll>
             <L.FlexColsMedia _gap={80} _gapm={60}>
               <L.FlexRows _content='center' >
@@ -239,7 +239,7 @@ function LoginPage() {
                 <T.Text _width='200px' _size={13} _color='gray800'>아직 온동네마켓 회원이 아니신가요?</T.Text>
                 <Link to="/login/signup">
                   <Button>
-                    <T.Text   _weight={600} _size={13} _color='gray800'>회원가입</T.Text>
+                    <T.Text _weight={600} _size={13} _color='gray800'>회원가입</T.Text>
                     <ArrowStyle>
                       <ArrowRighteight />
                     </ArrowStyle>

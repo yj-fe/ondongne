@@ -5,7 +5,7 @@ import { storeMapList } from 'service/store';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
-import { ModalBody, ModalDiv1, ModalOutside } from 'components/Main/More/ModalPageStyle';
+import { ModalBody, ModalDiv1 } from 'components/Main/More/ModalPageStyle';
 import { Close } from 'components/commonUi/Icon';
 import { ImgCollect } from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
 import StarRate from 'components/commonUi/StarRate';
@@ -101,11 +101,10 @@ const MapView = () => {
             setList(response.data.data);
         }
     }
-    console.log(list);
 
     useEffect(() => {
         loadData();
-    }, [local]);
+    }, []);
 
     return (
         <MapDiv

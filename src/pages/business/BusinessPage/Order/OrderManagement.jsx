@@ -3,7 +3,7 @@ import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import Layout from 'components/layout/Layout/Layout';
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight, Down, More, OrderDe, OrderDeC, OrderDelivery, OrderDelivery_Y, OrderEnd, OrderEnd_Y, OrderFin, OrderFinC, OrderNextIcon, OrderPay, OrderPayC, OrderReady, OrderReadyC, OrderStandBy, OrderStandBy_Y, OrderSuccess, OrderSuccess_Y } from 'components/commonUi/Icon';
+import { ArrowRight, Down, OrderDelivery, OrderDelivery_Y, OrderEnd, OrderEnd_Y, OrderStandBy, OrderStandBy_Y, OrderSuccess, OrderSuccess_Y } from 'components/commonUi/Icon';
 import { S } from 'components/orders/orderlist/OrderListStyle';
 import Confirm from 'components/commonUi/Confirm';
 import { useSelector } from 'react-redux';
@@ -74,7 +74,7 @@ function OrderManagement() {
         cart={false}
         onBackClick={() => navigate(-1)}
       >
-        <L.Container >
+        <L.Container _height="calc(100vh - 60px)">
           <L.Contents >
             <L.FlexCols _gap={80} >
               <L.FlexRows _gap={4} _content='space-between' _items='center'>
@@ -108,7 +108,7 @@ function OrderManagement() {
                   <L.FlexRows _content="space-between" _items="flex-start">
                     <L.FlexCols _gap={4}>
                       <T.Text _size={18} _weight={600}>{item.memberNickname}</T.Text>
-                      <T.Text _size={15} _color="gray800">{orderName(item.orderItems)}</T.Text>
+                      <T.Text _size={15} _color="gray800">{item.orderName}</T.Text>
                       <T.Text _size={13} _color="gray500">{dayjs(item.createDate).format('YYYY/MM/DD HH:mm')}</T.Text>
                     </L.FlexCols>
                     <L.FlexCols _width={"15%"}>

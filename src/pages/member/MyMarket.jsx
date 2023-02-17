@@ -8,7 +8,6 @@ import { FilterLayout, MyStoreSortLayout, SortLayout } from 'components/layout/L
 import { sortFormatter } from 'utils/utils';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import LoadingBar from 'components/commonUi/LoadingBar';
 import { useInView } from 'react-intersection-observer';
 import { CategoryCard } from 'pages/main/Product/CategoryPage';
 import { StoreListCard } from 'components/commonUi/StoreListCard';
@@ -17,6 +16,8 @@ import { getMyStores } from 'service/mystore';
 import Layout from 'components/layout/Layout/Layout';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
 import { CursorDiv } from 'components/Common/LayoutPageStyle';
+import LoadingDots from 'components/commonUi/LoadingDots';
+import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
 
 function MyMarket() {
 
@@ -29,9 +30,6 @@ function MyMarket() {
   const [type, setType] = useState('all');
   const [sort, setSort] = useState('create');
   const [page, setPage] = useState(1);
-  
-  const [normal, setNormal] = useState('');
-  const [group, setGroup] = useState('');
 
   const [ref, inView] = useInView();
   const [loading, setLoading] = useState(false);
@@ -128,37 +126,27 @@ function MyMarket() {
           <L.FlexCols>
             {
               detailTab === 0
-                ? 
-                // <L.FlexRows _gap='12' _items='center' _width='auto'>
+                ?
                 <L.FlexRows _content='space-between' _gap='16' _items='center' _width='auto'>
-                <L.FlexRows _content='flex-start' _gap='12' _items='center' _width='calc(100% - 120px)'>
-                  <B.FilterButton
-                    type='button'
-                    _pd='8px 12px'
-                    _bg={normal && 'green700'}
-                    onClick={() => 
-                      setNormal(!normal)
-                    }
-                    // _bg={type !== 'all' && 'green700'}
-                    // onClick={() => setFilter01(true)}
-                  >
-                    <T.Text _weight={400} _size={13} _color={normal ? 'white' : 'gray900'} _align='center'>일반상품</T.Text>
-                  </B.FilterButton>
-                  <B.FilterButton
-                    type='button'
-                    _pd='8px 12px'
-                    _bg={group && 'green700'}
-                    onClick={() => 
-                      setGroup(!group)
-                    }
-                    // _bg={sort != 'create' && 'green700'}
-                    // onClick={() => setFilter02(true)}
-                  >
-                    <T.Text _weight={400} _size={13} _color={group ? 'white' : 'gray900'} _align='center'>공동구매 상품</T.Text>
-                  </B.FilterButton>
+                  <L.FlexRows _content='flex-start' _gap='12' _items='center' _width='calc(100% - 120px)'>
+
+                    <B.FilterButton
+                      type='button'
+                      _bg={type === 'normal' && 'green700'}
+                      onClick={() => setType(type === 'normal' ? 'all' : 'normal')}
+                    >
+                      <T.Text _weight={400} _size={13} _color={type === 'normal' ? 'white' : 'gray900'} _align='center'>일반 상품</T.Text>
+                    </B.FilterButton>
+                    <B.FilterButton
+                      type='button'
+                      _bg={type === 'group' && 'green700'}
+                      onClick={() => setType(type === 'group' ? 'all' : 'group')}
+                    >
+                      <T.Text _weight={400} _size={13} _color={type === 'group' ? 'white' : 'gray900'} _align='center'>공동구매 상품</T.Text>
+                    </B.FilterButton>
                   </L.FlexRows>
 
-                  <L.FlexRows 
+                  <L.FlexRows
                     _gap={4} _content='flex-end' _width='120px'
                     onClick={() => setFilter02(true)}
                   >
@@ -174,12 +162,12 @@ function MyMarket() {
                   </L.FlexRows>
 
                 </L.FlexRows>
-                : 
+                :
                 <L.FlexRows _gap={16} _content='space-between'>
                   <div>
                     <T.Text _size={16} _weight={600} _color='gray900'>전체 {totalCount}</T.Text>
                   </div>
-                  <L.FlexRows 
+                  <L.FlexRows
                     _gap={4} _content='flex-end' _width='100px'
                     onClick={() => setFilter01(true)}
                   >
@@ -198,7 +186,7 @@ function MyMarket() {
 
         <L.Contents _padding="0px" _height='calc(100vh - 195px)'>
           <Scroll _height='calc(100vh - 200px)'>
-            <TabContent detailTab={detailTab} items={items} setData={setItems} loading={loading} lastRef={ref} />
+            <TabContent detailTab={detailTab} items={items} setData={setItems} loading={loading} lastRef={ref} type={type} />
           </Scroll>
         </L.Contents>
 
@@ -221,7 +209,15 @@ function MyMarket() {
     </CursorDiv>
   )
 }
-function TabContent({ detailTab, items, setData, loading, lastRef }) {
+function TabContent({ detailTab, items, setData, loading, lastRef, type }) {
+
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    if (type === 'all') return setList(items);
+    setList(items.filter(i => i.type === type.toUpperCase()));
+  }, [items, type])
+
   return [
 
     //=====================상품=====================
@@ -229,7 +225,7 @@ function TabContent({ detailTab, items, setData, loading, lastRef }) {
       {/* 없을때 */}
       {
         !loading &&
-        items.length === 0 &&
+        list.length === 0 &&
         <L.Contents _padding="80px 20px 600px" >
           <T.Text _weight={300} _size={15} _color="gray600" _align='center'>아직 단골가게가 없습니다.</T.Text>
           <T.Text _weight={300} _size={15} _color="gray600" _align='center'>주변 단골가게를 추가해보세요!</T.Text>
@@ -237,16 +233,27 @@ function TabContent({ detailTab, items, setData, loading, lastRef }) {
       }
       {/* 있을때 */}
       {
-        items.length > 0 &&
+        list.length > 0 &&
         <L.Contents _padding="0 20px">
-          <CategoryCard list={items} lastRef={lastRef} />
+          <L.Scroll>
+            <L.Grid>
+              {list.length > 0 &&
+                list.map((item, index) => (
+                  <React.Fragment key={index}>
+                    <ProductCardGrid
+                      item={item}
+                      lastRef={list.length === index + 1 ? lastRef : null}
+                    />
+                  </React.Fragment>
+                ))
+              }
+            </L.Grid>
+          </L.Scroll>
         </L.Contents>
       }
 
       {/* =================== 로딩 =================== */}
-      {
-        loading && <LoadingBar />
-      }
+      <LoadingDots isVisible={loading} />
 
     </>,
 
@@ -272,9 +279,7 @@ function TabContent({ detailTab, items, setData, loading, lastRef }) {
       }
 
       {/* =================== 로딩 =================== */}
-      {
-        loading && <LoadingBar />
-      }
+      <LoadingDots isVisible={loading} />
 
     </>,
   ][detailTab]

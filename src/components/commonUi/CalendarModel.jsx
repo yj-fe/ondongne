@@ -23,7 +23,7 @@ const CalendarModel = ({ modelClose, onChange, dateFormat = 'yy-MM-dd' }) => {
                 onChange={onChangeDate}
                 date={date}
                 dateDisplayFormat={dateFormat}
-                minDate={date}
+                minDate={new Date(date.setDate(date.getDate() + 1))}
             />
         </Overlay>
     )

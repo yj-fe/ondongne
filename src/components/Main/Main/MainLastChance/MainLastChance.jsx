@@ -43,15 +43,15 @@ function MainLastChance() {
   return (
     <>
       <L.FlexRows _cursor='default' _content='space-between' _items='center' _padding='9px 20px 0px 10px'>
-        <ShepherdBox 
+        <ShepherdBox
           _width='180px' _height='44px'
           className="shepherd-third"
         >
-        <T.Text 
-          _size={18} _weight={700} _color='black' _line='44px'
+          <T.Text
+            _size={18} _weight={700} _color='black' _line='44px'
           >
-          공동구매 마지막 찬스
-        </T.Text>
+            공동구매 마지막 찬스
+          </T.Text>
         </ShepherdBox>
         <T.Text
           _size={14}
@@ -71,7 +71,7 @@ function MainLastChance() {
           }
           {
             !isLoading &&
-            data.length > 0 &&
+            data?.length > 0 &&
             <L.GridContainer _marginr='0px' _count={data.length}>
               {
                 data.map((item, index) => (

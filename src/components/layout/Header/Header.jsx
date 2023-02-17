@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types'
-import { ArrowLeft_tail, ArrowLeft, More } from 'components/commonUi/Icon';
+import { ArrowLeft_tail, ArrowLeft, More, Bell } from 'components/commonUi/Icon';
 import { useNavigate } from 'react-router-dom';
-import Bell from 'assets/icons/utils/Bell.svg';
 import Cart from 'assets/icons/utils/Cart.svg';
-import Search from 'assets/icons/utils/Search.svg';
 import Share from 'assets/icons/utils/Share.svg';
 
 import { S } from './HeaderStyle';
@@ -17,6 +15,7 @@ import { isMobile } from 'react-device-detect';
 import MobileShare from 'components/share/share';
 import ShareMobile from 'components/share/share';
 import ReportAlert from 'components/commonUi/ReportAlert';
+import { Search } from './../../commonUi/Icon';
 
 
 const Header = ({
@@ -90,13 +89,13 @@ const Header = ({
                     {
                         search &&
                         <S.UtilBtn as={Link} to="/search/detailpage">
-                            <img src={Search} alt="검색" />
+                            <Search width={24} height={24} />
                         </S.UtilBtn>
                     }
                     {
                         bell &&
                         <S.UtilBtn as={Link} to="/member/news">
-                            <img src={Bell} alt="알림" />
+                            <Bell />
                         </S.UtilBtn>
                     }
                     {

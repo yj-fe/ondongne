@@ -407,13 +407,27 @@ export const Parents = styled.div`
 
 export const Child = styled.div`
     position: absolute;
-    top: ${props => props._top || 'auth'};
-    left: ${props => props._left || 'auth'};
-    bottom: ${props => props._bottom || 'auth'};
-    right: ${props => props._right || 'auth'};
+    top: ${props => props._top || 'auto'};
+    left: ${props => props._left || 'auto'};
+    bottom: ${props => props._bottom || 'auto'};
+    right: ${props => props._right || 'auto'};
+    z-index: ${props => props._zIdx || 'auto'};
 `;
 export const Zindex = styled.div`
     z-index: 999;
     width: ${props => props._width};
     height: ${props => props._height};
+`;
+
+export const FlexNewScroll = styled.div`
+    padding: 8px 0;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    height: calc(100vh - 70px);
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+		display: none;
+	}
 `;

@@ -30,7 +30,7 @@ function MainBestProduct() {
       }
       {
         !isLoading &&
-        data.length > 0 &&
+        data?.length > 0 &&
         <L.Inner>
           <L.Contents _padding='20px 0px 20px 0px'>
             <L.FlexRows _cursor='default' _content='space-between' _items='center' _padding='0px 20px 0px 20px'>

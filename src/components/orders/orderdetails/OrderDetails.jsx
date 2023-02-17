@@ -112,7 +112,7 @@ const OrderDetails = props => {
 
     return (
         orderData
-            ? <L.Container>
+            ? <L.Container _height="calc(100vh - 60px)">
                 {/* 주문 완료 */}
                 <L.Contents>
                     <L.FlexCols _gap={24}>

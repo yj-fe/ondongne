@@ -110,8 +110,7 @@ function MorePage() {
         bell={false}
         onBackClick={() => navigate('/')}
       >
-        <L.Container _cursor='default' _padding="0px 0px 8px" >
-
+        <L.Container _cursor='default' _height="calc(100vh - 60px)">
           {
             auth.isAuthenticated &&
             <MoreAccountDiv>
@@ -201,9 +200,9 @@ function MorePage() {
             </L.FlexRows> */}
           </MoreDiv>
 
+          <FooterLayout />
         </L.Container>
 
-        <FooterLayout />
       </Layout>
 
       {

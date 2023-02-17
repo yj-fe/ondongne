@@ -6,7 +6,7 @@ import { Close } from 'components/commonUi/Icon'
 
 
 
-function Modal({setAgreementModal, closeModel}) {
+function Modal({ setAgreementModal, closeModel }) {
 
   const goToMore = () => {
     // 더보기>비즈회원신청>약관동의토글이동
@@ -17,7 +17,7 @@ function Modal({setAgreementModal, closeModel}) {
     <Body>
       <Container>
         <Header onClick={closeModel}>
-          <Close/>
+          <Close />
           {/* <Text onClick={closeModel} _align={'right'} _size={14} _weight={400} _color={'gray600'}>건너뛰기</Text> */}
         </Header>
         <Content>
@@ -38,7 +38,7 @@ export const Body = styled.div`
   background: rgba(0, 0, 0, 0.6);
   /* width: 100%; */
   width: ${props => props._width || '100%'};
-  height: ${props => props._height || '100%'};
+  height: ${props => props._height || '100vh'};
   /* height: 100%; */
   display: flex;
   align-items: center;

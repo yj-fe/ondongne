@@ -95,6 +95,7 @@ function SignupInfo({ data, setData }) {
 
   // 회원가입
   const onSubmit = async () => {
+
     await signup(data)
       .then(response => {
         if (response.status == 200) {
@@ -103,14 +104,6 @@ function SignupInfo({ data, setData }) {
           if (authData) {
             localStorage.removeItem('auth');
           }
-          if (!passwordValidation()) {
-            setPasswordValid(false);
-            return setAlert({
-              contents: "비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 입력해주세요.",
-              buttonText: "확인",
-              onButtonClick: () => setAlert(null),
-              onOverlayClick: () => setAlert(null),
-            })} 
 
           setAlert({
             contents: "회원가입을 축하드립니다. \n 로그인 후 이용해 주세요.",
@@ -148,6 +141,12 @@ function SignupInfo({ data, setData }) {
 
     if (!password) {
       return;
+    }
+
+    if (password && !passwordValidation()) {
+      setPasswordValid(false);
+      setPasswordValidMessage("비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 입력해주세요.");
+      return
     }
 
     if (!passwordCheck) {
@@ -251,7 +250,7 @@ function SignupInfo({ data, setData }) {
                 placeholder='이메일 입력'
                 outline='none'
                 value={email}
-                _bordercolor={ emailValid === null ? '' : emailValid ? '#388E3C' : '#D32F2F'}
+                _bordercolor={emailValid === null ? '' : emailValid ? '#388E3C' : '#D32F2F'}
                 onChange={e => setEmail(e.target.value)}
               />
               <RequestButton

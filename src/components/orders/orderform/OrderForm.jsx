@@ -10,15 +10,17 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import CheckBox from 'components/commonUi/CheckBox';
 import LayerSelect from 'components/commonUi/LayerSelect';
 import Alert from 'components/commonUi/Alert';
-import { numberFormat, orderName, orderTotalPrice, phoneFormatter, storeTotalPrice, totalPrice } from 'utils/utils';
-import { useSelector } from 'react-redux';
+import { numberFormat, orderName, orderTotalPrice, phoneFormatter } from 'utils/utils';
+import { useDispatch, useSelector } from 'react-redux';
 import { getMember } from 'service/member';
 import DaumPost from 'components/DaumPost';
 import { requestPayment } from 'service/order';
+import { orderActions } from 'store/slices/order';
 const IMGURL = 'https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/';
 
-const OrderForm = ({ data }) => {
+const OrderForm = () => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const auth = useSelector(state => state.auth);
     const orderItems = useSelector(state => state.order.items);
@@ -53,8 +55,8 @@ const OrderForm = ({ data }) => {
     /* ==============================
         비정상 데이터 예외처리
     ============================== */
-    const goHome = () => {
-        navigate("/", { state: { error: "회원전용 페이지입니다." } })
+    const goBack = (to, message) => {
+        navigate(to, { state: { error: message } })
     }
 
     /* ==============================
@@ -77,7 +79,7 @@ const OrderForm = ({ data }) => {
     ============================== */
     const dataHandler = async () => {
 
-        if (!data && !orderItems) return goHome();
+        if (orderItems.length === 0) return goBack("/", "비정상 접근입니다.");
 
         const response = await getMember();
         if (response && response.data.data) {
@@ -99,17 +101,17 @@ const OrderForm = ({ data }) => {
                 orderName: orderName(orderItems),
             })
         } else {
-            return goHome();
+            return goBack("/", "회원 전용 페이지입니다.");
         }
     }
 
     // 총가격
     const totalOrderPrice = () => {
         if (orderData.recetiveType === "배달") {
-            return Number(orderItems[0].deliveryPrice + orderTotalPrice(orderItems))
+            return Number(orderItems[0]?.deliveryPrice + orderTotalPrice(orderItems))
         }
         if (orderData.recetiveType === "택배") {
-            return Number(orderItems[0].parcelPrice + orderTotalPrice(orderItems))
+            return Number(orderItems[0]?.parcelPrice + orderTotalPrice(orderItems))
         }
         if (orderData.recetiveType === "픽업") {
             return Number(orderTotalPrice(orderItems))
@@ -180,11 +182,13 @@ const OrderForm = ({ data }) => {
             contents: JSON.parse(status) ? "주문이 완료되었습니다." : "주문을 실패하였습니다.",
             buttonText: "확인",
             onButtonClick: () => {
+                dispatch(orderActions.remove());
                 JSON.parse(status)
                     ? navigate('/order/all', { replace: true })
                     : navigate(backTo, { replace: true });
             },
             onOverlayClick: () => {
+                dispatch(orderActions.remove());
                 JSON.parse(status)
                     ? navigate('/order/all', { replace: true })
                     : navigate(backTo, { replace: true });

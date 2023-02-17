@@ -3,9 +3,8 @@ import { useSelector } from 'react-redux';
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import * as B from 'components/commonUi/Button';
-
 import Layout from 'components/layout/Layout/Layout';
-import { Link, useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Down } from 'components/commonUi/Icon';
 import { Line } from '../DetailsPage/DetailsPageStyle';
 import { FilterLayout, SortLayout } from 'components/layout/Layout/MoreLayout';
@@ -15,8 +14,8 @@ import { getItemCategoryList } from 'service/item';
 import LoadingBar from 'components/commonUi/LoadingBar';
 import CategoryTabs from 'components/commonUi/CategoryTabs';
 import { Scroll } from 'components/Login/Password/ToggleDetail/ToggleDetailStyle';
-import { ProductCard } from 'components/Main/productDetails/ProductCard';
 import { ProductCardGrid } from 'components/Main/productDetails/ProductCardGrid';
+import LoadingDots from 'components/commonUi/LoadingDots';
 
 function CategoryPage(props) {
   const navigate = useNavigate();
@@ -95,53 +94,57 @@ function CategoryPage(props) {
         onBackClick={() => navigate('/')}
       >
         <L.Container >
-          <L.Contents _cursor='default' _padding="0" >
-            <L.FlexCols _padding={0} _gap="0" >
+          <L.Contents _cursor='default' _padding="0" _height='calc(100vh - 70px)'>
+            {/* =================== 메뉴 =================== */}
+            <CategoryTabs currentData={category} onChange={categoryHandler} />
 
-              {/* =================== 메뉴 =================== */}
-              <CategoryTabs currentData={category} onChange={categoryHandler} />
+            <Line />
 
-              <Line />
-
-              <L.FlexColsScroll _padding='24px 20px'>
-                {/* =================== 필터 =================== */}
-                <L.FlexRows _gap='12' _items='center' _width='auto'>
+            <L.FlexColsScroll _padding='24px 20px'>
+              {/* =================== 필터 =================== */}
+              <L.FlexRows _gap='12' _items='center' _content='space-between' _width='auto'>
+                <L.FlexRows _width={'max-content'}>
                   <B.FilterButton
                     type='button'
-                    _bg={type !== 'all' && 'green700'}
-                    onClick={() => setFilter01(true)}
+                    _bg={type === 'normal' && 'green700'}
+                    onClick={() => setType(type === 'normal' ? 'all' : 'normal')}
                   >
-                    <T.Text _weight={400} _size={13} _color={type !== 'all' ? 'white' : 'gray900'} _align='center'>{sortFormatter(type)}</T.Text>
-                    <Down color={type !== 'all' ? 'white' : '#424242'} />
+                    <T.Text _weight={400} _size={13} _color={type === 'normal' ? 'white' : 'gray900'} _align='center'>일반 상품</T.Text>
                   </B.FilterButton>
                   <B.FilterButton
                     type='button'
-                    _bg={sort !== 'create' && 'green700'}
-                    onClick={() => setFilter02(true)}
+                    _bg={type === 'group' && 'green700'}
+                    onClick={() => setType(type === 'group' ? 'all' : 'group')}
                   >
-                    <T.Text _weight={400} _size={13} _color={sort !== 'create' ? 'white' : 'gray900'} _align='center'>{sortFormatter(sort)}</T.Text>
-                    <Down color={sort !== 'create' ? 'white' : '#424242'} />
+                    <T.Text _weight={400} _size={13} _color={type === 'group' ? 'white' : 'gray900'} _align='center'>공동구매 상품</T.Text>
                   </B.FilterButton>
                 </L.FlexRows>
-                {/* =================== 없을때 =================== */}
-                {
-                  !loading &&
-                  items.length === 0 &&
-                  <CategoryEmpty />
-                }
 
-                {/* =================== 있을때 =================== */}
-                {
-                  items.length > 0 &&
-                  <CategoryCard list={items} lastRef={ref} />
-                }
 
-                {/* =================== 로딩 =================== */}
-                {
-                  loading && <LoadingBar />
-                }
-              </L.FlexColsScroll>
-            </L.FlexCols>
+                <L.FlexRows
+                  _width={'max-content'}
+                  onClick={() => setFilter02(true)}
+                >
+                  <T.Text _weight={400} _size={13} _color={'gray900'} _align='center'>{sortFormatter(sort)}</T.Text>
+                  <Down color={'#424242'} />
+                </L.FlexRows>
+              </L.FlexRows>
+              {/* =================== 없을때 =================== */}
+              {
+                !loading &&
+                items.length === 0 &&
+                <CategoryEmpty />
+              }
+
+              {/* =================== 있을때 =================== */}
+              {
+                items.length > 0 &&
+                <CategoryCard list={items} lastRef={ref} />
+              }
+
+              {/* =================== 로딩 =================== */}
+              <LoadingDots isVisible={loading} />
+            </L.FlexColsScroll>
           </L.Contents>
         </L.Container>
         {filter01 && <FilterLayout PropsModal={() => setFilter01(false)} data={type} setData={setType} />}
@@ -155,7 +158,7 @@ function CategoryPage(props) {
 
 function CategoryEmpty() {
   return (
-    <L.FlexRows _content='center' _gap='0px' _padding='56px 0px' _height='calc(100vh - 230px)'>
+    <L.FlexRows _content='center' _gap='0px' _padding='56px 0px' _height='calc(100vh - 218px)'>
       <T.Text _weight={300} _size={15} _color="gray600" _align='center'>
         <p>해당 카테고리에</p>
         <p>등록된 상품이 없습니다.</p>
@@ -168,18 +171,18 @@ function CategoryEmpty() {
 export function CategoryCard({ list, lastRef }) {
 
   return (
-      <Scroll _height='calc(100vh - 210px)'>
-        <L.Grid>
-          {list.length > 0 && list.map((item, index) => (
-            <React.Fragment key={index}>
-              <ProductCardGrid
-                item={item}
-                lastRef={list.length === index + 1 ? lastRef : null}
-              />
-            </React.Fragment>
-          ))}
-          </L.Grid>
-      </Scroll>
+    <Scroll _height='calc(100vh - 218px)'>
+      <L.Grid>
+        {list.length > 0 && list.map((item, index) => (
+          <React.Fragment key={index}>
+            <ProductCardGrid
+              item={item}
+              lastRef={list.length === index + 1 ? lastRef : null}
+            />
+          </React.Fragment>
+        ))}
+      </L.Grid>
+    </Scroll>
   )
 }
 

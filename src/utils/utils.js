@@ -181,7 +181,6 @@ export const phoneFormatter = (input) => {
 
 // 주문 이름
 export const orderName = (item) => {
-	console.log(item);
 	if (item.length > 1) {
 		return `${item[0].itemName} 외 ${item.length - 1}개`;
 	} else {

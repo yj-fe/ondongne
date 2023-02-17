@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import * as L from 'components/commonUi/Layout';
 import * as T from 'components/commonUi/Text';
 import { ContentDiv, ContentImg, ContentImgBadge, ContentImgDiv, ContentInfo, ContentMarket, ContentMarketImg, ContentProduct, ContentStyle, ContentTextStyle } from './MainNewMarketStyle'
@@ -57,7 +57,7 @@ function MainNewMarket() {
         }
         {
           !isLoading &&
-          data.length > 0 &&
+          data?.length > 0 &&
           <L.GridContainer _count={data.length}>
             {
               data.map((item, index) => (

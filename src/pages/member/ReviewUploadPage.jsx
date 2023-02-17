@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Delete, OneEmptyBigStar } from 'components/commonUi/Icon';
 import { OneBigStar } from './../../components/commonUi/Icon';
 import { ReviewLayout } from './../../components/layout/Layout/MoreLayout';
-import { imageValidation, orderName } from 'utils/utils';
+import { imageValidation } from 'utils/utils';
 import { insertReview, updateReview } from 'service/review';
 import Alert from 'components/commonUi/Alert';
 import Confirm from 'components/commonUi/Confirm';

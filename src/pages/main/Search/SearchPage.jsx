@@ -160,11 +160,11 @@ function SearchPage() {
               }
             </L.Scroll>
 
-            <MapListButton
+            {/* <MapListButton
               onClick={() => setPageChange(!pageChange)}
             >
               {pageChange ? <><List /><p>목록 보기</p></> : <><Map /><p>지도 보기</p></>}
-            </MapListButton>
+            </MapListButton> */}
 
           </L.Contents>
         </L.Container>

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, { useRef, useState } from 'react'
 import * as L from 'components/commonUi/Layout';
 import { Text } from 'components/commonUi/Text'
 import { Body, Container, Content, Btn } from '../Modal/Modal'
@@ -28,14 +28,14 @@ function CoachModalSlide({ neverWatch, closeModal }) {
 
   return (
     <Body>
-      <Container>
+      <Container style={{ position: 'relative' }}>
         <Content _padding='48px 0px' _paddingmedia='10px 0px'>
-          <L.FlexRows 
-            _content='right' _padding='20px' _height='18px'
+          <L.Child
+            _top={'15px'} _right={'15px'} _zIdx={999}
             onClick={closeModal}
           >
-            <SimpleClose/>
-          </L.FlexRows>
+            <SimpleClose />
+          </L.Child>
           <Swiper
             style={{
               "--swiper-pagination-color": "#0B806F",
@@ -53,10 +53,10 @@ function CoachModalSlide({ neverWatch, closeModal }) {
                 activeIndex
               } = swiperCore;
 
-              if(activeIndex === 4) {
+              if (activeIndex === 4) {
                 setStatus(true)
               }
-          }}
+            }}
           >
             <SwiperSlide><Slide1 /></SwiperSlide>
             <SwiperSlide><Slide2 /></SwiperSlide>
@@ -67,21 +67,21 @@ function CoachModalSlide({ neverWatch, closeModal }) {
             <Btn
               _marginleft='5%'
               _width='90%'
-            onClick={
-              status 
-                ? closeModal
-                : () => slideRef.current.swiper.slideNext()
-            }
+              onClick={
+                status
+                  ? closeModal
+                  : () => slideRef.current.swiper.slideNext()
+              }
             >
               <Text _color='white' _size={16}>{status ? '시작하기' : '다음'}</Text>
-              
+
             </Btn>
-            <Text 
+            <Text
               onClick={neverWatch}
-              _align={'center'} 
-              _size={14} 
+              _align={'center'}
+              _size={14}
               _color={'gray600'}
-              >
+            >
               다시보지 않기
             </Text>
           </L.FlexCols>

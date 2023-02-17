@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
 import { ArrowLeft_tail, ArrowLeft } from 'components/commonUi/Icon';
 import { useNavigate } from 'react-router-dom';
-import Bell from 'assets/icons/utils/Bell.svg';
 import Cart from 'assets/icons/utils/Cart.svg';
-import Search from 'assets/icons/utils/Search.svg';
-
 import { S } from './HeaderStyle';
 import { SearchInput } from 'components/commonUi/Input';
-import { AbsoluteDiv, AbsoluteDivS, RelativDiv, RelativDivS } from './../Img/ImgSizeLayout';
+import { AbsoluteDivS, RelativDivS } from './../Img/ImgSizeLayout';
+import { Search } from './../../commonUi/Icon';
 
 const HeaderSearch = ({
     cart = true,
@@ -71,7 +68,7 @@ const HeaderSearch = ({
                     <AbsoluteDivS
                         onClick={getSearch}
                     >
-                        <img src={Search} alt="" />
+                        <Search width={24} height={24} />
                     </AbsoluteDivS>
                 </RelativDivS>
                 <S.Block>
