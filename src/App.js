@@ -65,191 +65,191 @@ import BusinessCouponUpload from "./pages/business/BusinessPage/Coupon/BusinessC
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 
 function App() {
-	const dispatch = useDispatch();
-	const location = useLocation();
-	const [alert, setAlert] = useState(null);
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const [alert, setAlert] = useState(null);
 
-	const member = () => {
-		const data = getExpiry("accessToken");
-		if (data !== null) {
-			if (data.status) {
-				dispatch(authActions.logout());
-				return setAlert({
-					title: "인증 기간 만료",
-					contents:
-						"인증 기간이 만료되었습니다.\n다시 로그인해주세요.",
-					buttonText: "확인",
-					onButtonClick: () => setAlert(false),
-					onOverlayClick: () => setAlert(false),
-				});
-			}
+    const member = () => {
+        const data = getExpiry("accessToken");
+        if (data !== null) {
+            if (data.status) {
+                dispatch(authActions.logout());
+                return setAlert({
+                    title: "인증 기간 만료",
+                    contents:
+                        "인증 기간이 만료되었습니다.\n다시 로그인해주세요.",
+                    buttonText: "확인",
+                    onButtonClick: () => setAlert(false),
+                    onOverlayClick: () => setAlert(false),
+                });
+            }
 
-			dispatch(authActions.login(data));
-		}
-	};
+            dispatch(authActions.login(data));
+        }
+    };
 
-	// 로그인 유지
-	useEffect(() => {
-		member();
-	}, [location]);
+    // 로그인 유지
+    useEffect(() => {
+        member();
+    }, [location]);
 
-	return (
-		<>
-			<Routes>
-				{/* ========== 메인 ========== */}
-				<Route path="/">
-					<Route path="" element={<MainPage />} />
-					{/* 1) 검색페이지 */}
-					<Route path="search" element={<SearchPage />} />
-					{/* 2) 검색누르면나오는페이지 */}
-					<Route
-						path="search/detailpage"
-						element={<SearchDetailPage />}
-					/>
-					{/* 3) 검색어입력후페이지 */}
-					<Route
-						path="search/result"
-						element={<SearchResultPage />}
-					/>
-					<Route path="cart" element={<CartPage />} />
-					<Route path="categories" element={<CategoryPage />} />
-					<Route path="collections" element={<CollectionPage />} />
-					<Route path="details/:id" element={<DetailsPage />} />
-					<Route path="more" element={<MorePage />} />
-					{/* 상점정보 */}
-					<Route
-						path="market/detail/:id"
-						element={<MarketDetail />}
-					/>
-				</Route>
+    return (
+        <>
+            <Routes>
+                {/* ========== 메인 ========== */}
+                <Route path="/">
+                    <Route path="" element={<MainPage />} />
+                    {/* 1) 검색페이지 */}
+                    <Route path="search" element={<SearchPage />} />
+                    {/* 2) 검색누르면나오는페이지 */}
+                    <Route
+                        path="search/detailpage"
+                        element={<SearchDetailPage />}
+                    />
+                    {/* 3) 검색어입력후페이지 */}
+                    <Route
+                        path="search/result"
+                        element={<SearchResultPage />}
+                    />
+                    <Route path="cart" element={<CartPage />} />
+                    <Route path="categories" element={<CategoryPage />} />
+                    <Route path="collections" element={<CollectionPage />} />
+                    <Route path="details/:id" element={<DetailsPage />} />
+                    <Route path="more" element={<MorePage />} />
+                    {/* 상점정보 */}
+                    <Route
+                        path="market/detail/:id"
+                        element={<MarketDetail />}
+                    />
+                </Route>
 
-				{/* ========== 회원관리 ========== */}
-				<Route path="/member">
-					<Route path="" element={<MyPage />} />
-					{/* 1주차-회원-회원수정 */}
-					<Route path="management" element={<MemberManagement />} />
-					{/* 1주차-회원-회원탈퇴 */}
-					<Route path="withdrawal" element={<MemberWithdrawal />} />
-					{/* 1주차-회원-위치설정 */}
-					<Route path="location" element={<LocationSetting />} />
-					{/* 회원알림 */}
-					<Route path="news" element={<MemberNews />} />
-					{/* 받은쿠폰함 */}
-					<Route path="coupon" element={<MyCoupon />} />
-					{/* MY단골 */}
-					<Route path="market" element={<MyMarket />} />
-					{/* 리뷰 - 1) 내가쓴리뷰 */}
-					<Route path="review" element={<ReviewPage />} />
-					{/* 리뷰 - 2) 리뷰작성 */}
-					<Route
-						path="review/upload"
-						element={<ReviewUploadPage />}
-					/>
-				</Route>
+                {/* ========== 회원관리 ========== */}
+                <Route path="/member">
+                    <Route path="" element={<MyPage />} />
+                    {/* 1주차-회원-회원수정 */}
+                    <Route path="management" element={<MemberManagement />} />
+                    {/* 1주차-회원-회원탈퇴 */}
+                    <Route path="withdrawal" element={<MemberWithdrawal />} />
+                    {/* 1주차-회원-위치설정 */}
+                    <Route path="location" element={<LocationSetting />} />
+                    {/* 회원알림 */}
+                    <Route path="news" element={<MemberNews />} />
+                    {/* 받은쿠폰함 */}
+                    <Route path="coupon" element={<MyCoupon />} />
+                    {/* MY단골 */}
+                    <Route path="market" element={<MyMarket />} />
+                    {/* 리뷰 - 1) 내가쓴리뷰 */}
+                    <Route path="review" element={<ReviewPage />} />
+                    {/* 리뷰 - 2) 리뷰작성 */}
+                    <Route
+                        path="review/upload"
+                        element={<ReviewUploadPage />}
+                    />
+                </Route>
 
-				{/* ========== 비즈회원관리 ========== */}
-				<Route path="/business">
-					{/* 1주차-비즈회원-메인페이지 */}
-					<Route path="" element={<BusinessPage />} />
-					{/* 1주차-비즈회원-비즈회원신청 */}
-					<Route
-						path="application"
-						element={<BusinessApplication />}
-					/>
-					{/* 1주차-비즈회원-비즈정보관리(상점, 사업자) */}
-					<Route path="management" element={<BusinessManagement />} />
-					{/* 2주차-비즈회원-비즈상품 관리/등록/수정 */}
-					{/* 상품 관리 */}
-					<Route
-						path="product"
-						element={<BusinessProductManagement />}
-					/>
-					{/* 상품 등록 */}
-					<Route path="upload" element={<BusinessProductUpload />} />
-					{/* 상품 수정 */}
-					<Route
-						path="edit/:id"
-						element={<BusinessProductUpload />}
-					/>
-					<Route
-						path="edit/info"
-						element={<BusinessProductEditInfo />}
-					/>
-					{/* 쿠폰관리 */}
-					<Route path="coupon" element={<BusinessCoupon />} />
-					{/* 쿠폰등록 */}
-					<Route
-						path="coupon/upload"
-						element={<BusinessCouponUpload />}
-					/>
-					{/* 리뷰관리 */}
-					<Route path="review" element={<BusinessReview />} />
-					<Route path="news" element={<BusinessNews />} />
-					{/* 주문관리 */}
-					<Route path="order" element={<OrderManagement />} />
-					<Route
-						path="order/details/auth"
-						element={<OrderManagementDetailsAuthPage />}
-					/>
-				</Route>
+                {/* ========== 비즈회원관리 ========== */}
+                <Route path="/business">
+                    {/* 1주차-비즈회원-메인페이지 */}
+                    <Route path="" element={<BusinessPage />} />
+                    {/* 1주차-비즈회원-비즈회원신청 */}
+                    <Route
+                        path="application"
+                        element={<BusinessApplication />}
+                    />
+                    {/* 1주차-비즈회원-비즈정보관리(상점, 사업자) */}
+                    <Route path="management" element={<BusinessManagement />} />
+                    {/* 2주차-비즈회원-비즈상품 관리/등록/수정 */}
+                    {/* 상품 관리 */}
+                    <Route
+                        path="product"
+                        element={<BusinessProductManagement />}
+                    />
+                    {/* 상품 등록 */}
+                    <Route path="upload" element={<BusinessProductUpload />} />
+                    {/* 상품 수정 */}
+                    <Route
+                        path="edit/:id"
+                        element={<BusinessProductUpload />}
+                    />
+                    <Route
+                        path="edit/info"
+                        element={<BusinessProductEditInfo />}
+                    />
+                    {/* 쿠폰관리 */}
+                    <Route path="coupon" element={<BusinessCoupon />} />
+                    {/* 쿠폰등록 */}
+                    <Route
+                        path="coupon/upload"
+                        element={<BusinessCouponUpload />}
+                    />
+                    {/* 리뷰관리 */}
+                    <Route path="review" element={<BusinessReview />} />
+                    <Route path="news" element={<BusinessNews />} />
+                    {/* 주문관리 */}
+                    <Route path="order" element={<OrderManagement />} />
+                    <Route
+                        path="order/details/auth"
+                        element={<OrderManagementDetailsAuthPage />}
+                    />
+                </Route>
 
-				{/* ========== 로그인 ========== */}
-				<Route path="/login">
-					<Route path="" element={<LoginPage />} />
-					<Route path="find/email" element={<FindEmail />} />
-					<Route path="find/password" element={<FindPwd />} />
-					<Route path="signup" element={<SignupPage />} />
-				</Route>
+                {/* ========== 로그인 ========== */}
+                <Route path="/login">
+                    <Route path="" element={<LoginPage />} />
+                    <Route path="find/email" element={<FindEmail />} />
+                    <Route path="find/password" element={<FindPwd />} />
+                    <Route path="signup" element={<SignupPage />} />
+                </Route>
 
-				{/* ========== 주문 ========== */}
-				<Route path="/order">
-					<Route path="all" element={<OrderListPage />} />
-					<Route path="new" element={<OrderFormPage />} />
-					<Route path="details/:id" element={<OrderDetailsPage />} />
-				</Route>
+                {/* ========== 주문 ========== */}
+                <Route path="/order">
+                    <Route path="all" element={<OrderListPage />} />
+                    <Route path="new" element={<OrderFormPage />} />
+                    <Route path="details/:id" element={<OrderDetailsPage />} />
+                </Route>
 
-				{/* ========== 환경설정 ========== */}
-				<Route path="/setting">
-					<Route path="" element={<SettingPage />} />
-				</Route>
+                {/* ========== 환경설정 ========== */}
+                <Route path="/setting">
+                    <Route path="" element={<SettingPage />} />
+                </Route>
 
-				{/* ========== 공지사항 ========== */}
-				<Route path="/notice">
-					<Route path="" element={<NoticePage />} />
-					<Route path="details/:id" element={<NoticeDetailsPage />} />
-				</Route>
+                {/* ========== 공지사항 ========== */}
+                <Route path="/notice">
+                    <Route path="" element={<NoticePage />} />
+                    <Route path="details/:id" element={<NoticeDetailsPage />} />
+                </Route>
 
-				{/* ========== 고객센터 ========== */}
-				<Route path="/service">
-					<Route path="" element={<CustomerService />} />
-					{/* 자주하는질문 */}
-					<Route path="faq" element={<FrequentlyAskedQuestion />} />
-					{/* 1:1 */}
-					<Route path="inquiry" element={<InquiryPage />} />
-					<Route
-						path="inquiry/details/:id"
-						element={<InquiryDetailsPage />}
-					/>
-					{/* voc */}
-					<Route path="voc" element={<VocPage />} />
-					{/* 약관 */}
-					<Route path="terms" element={<TermsPage />} />
-					<Route path="terms/service" element={<ServiceTerms />} />
-					<Route path="terms/location" element={<LocationTerms />} />
-					<Route path="terms/privacy" element={<PrivacyTerms />} />
-				</Route>
-			</Routes>
-			{alert && (
-				<Alert
-					title={alert.title}
-					contents={alert.contents}
-					buttonText={alert.buttonText}
-					onButtonClick={alert.onButtonClick}
-					onOverlayClick={alert.onOverlayClick}
-				/>
-			)}
-		</>
-	);
+                {/* ========== 고객센터 ========== */}
+                <Route path="/service">
+                    <Route path="" element={<CustomerService />} />
+                    {/* 자주하는질문 */}
+                    <Route path="faq" element={<FrequentlyAskedQuestion />} />
+                    {/* 1:1 */}
+                    <Route path="inquiry" element={<InquiryPage />} />
+                    <Route
+                        path="inquiry/details/:id"
+                        element={<InquiryDetailsPage />}
+                    />
+                    {/* voc */}
+                    <Route path="voc" element={<VocPage />} />
+                    {/* 약관 */}
+                    <Route path="terms" element={<TermsPage />} />
+                    <Route path="terms/service" element={<ServiceTerms />} />
+                    <Route path="terms/location" element={<LocationTerms />} />
+                    <Route path="terms/privacy" element={<PrivacyTerms />} />
+                </Route>
+            </Routes>
+            {alert && (
+                <Alert
+                    title={alert.title}
+                    contents={alert.contents}
+                    buttonText={alert.buttonText}
+                    onButtonClick={alert.onButtonClick}
+                    onOverlayClick={alert.onOverlayClick}
+                />
+            )}
+        </>
+    );
 }
 
 export default App;

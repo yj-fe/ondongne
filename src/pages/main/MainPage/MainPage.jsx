@@ -15,90 +15,87 @@ import { useLocation } from "react-router-dom";
 import Alert from "components/commonUi/Alert";
 import { useNavigate } from "react-router-dom";
 import LayoutMain from "components/layout/Layout/LayoutMain";
-import MainCoachmark from "components/coachmark/MainCoachmark";
 import MainBanner from "components/Main/Main/MainBanner/MainBanner";
 
 function MainPage() {
-  const navigate = useNavigate();
-  const { state } = useLocation();
-  const [alert, setAlert] = useState(null);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const navigate = useNavigate();
+    const { state } = useLocation();
+    const [alert, setAlert] = useState(null);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+    useEffect(() => {
+        if (state && state.error) {
+            return setAlert({
+                contents: state.error,
+                buttonText: "확인",
+                onButtonClick: () => {
+                    setAlert(false);
+                    navigate("/");
+                },
+                onOverlayClick: () => {
+                    setAlert(false);
+                    navigate("/");
+                },
+            });
+        }
+    }, [state]);
 
+    return (
+        <>
+            {/* 코치마크 */}
+            {/* <MainCoachmark /> */}
 
-  useEffect(() => {
-    if (state && state.error) {
-      return setAlert({
-        contents: state.error,
-        buttonText: "확인",
-        onButtonClick: () => {
-          setAlert(false);
-          navigate("/");
-        },
-        onOverlayClick: () => {
-          setAlert(false);
-          navigate("/");
-        },
-      });
-    }
-  }, [state]);
+            <LayoutMain>
+                <L.Container _padding="0px">
+                    <L.Container _padding="0px" _gap="0px">
+                        <MainBanner />
+                        <MainCategory />
+                    </L.Container>
 
-  return (
-    <>
-      {/* 코치마크 */}
-      <MainCoachmark />
+                    {/* 우리동네 인기 쿠폰 */}
+                    {/* <L.Contents _padding='20px 0px 20px 0px'>
+                      <MainBestCoupon />
+                    </L.Contents> */}
 
-      <LayoutMain>
-        <L.Container _padding="0px">
-          <L.Container _padding="0px" _gap="0px">
-            <MainBanner />
-            <MainCategory />
-          </L.Container>
+                    {/* 공동구매 마지막 찬스 */}
+                    <L.Contents _padding="0px 0px 20px 0px">
+                        <MainLastChance />
+                    </L.Contents>
 
-          {/* 우리동네 인기 쿠폰 */}
-          {/* <L.Contents _padding='20px 0px 20px 0px'>
-            <MainBestCoupon />
-          </L.Contents> */}
+                    {/* My단골 인기 상품 */}
+                    {isAuthenticated && <MainBestProduct />}
 
-          {/* 공동구매 마지막 찬스 */}
-          <L.Contents _padding="0px 0px 20px 0px">
-            <MainLastChance />
-          </L.Contents>
+                    {/* 우리동네 신규 입점 */}
+                    <L.Contents _cursor="default" _padding="20px 0px 20px 0px">
+                        <MainNewMarket />
+                    </L.Contents>
 
-          {/* My단골 인기 상품 */}
-          {isAuthenticated && <MainBestProduct />}
+                    {/* 우리동네 인기 추천 */}
+                    <L.Contents _cursor="default" _padding="20px 0px 20px 0px">
+                        <MainBestCollection />
+                    </L.Contents>
 
-          {/* 우리동네 신규 입점 */}
-          <L.Contents _cursor='default' _padding="20px 0px 20px 0px">
-            <MainNewMarket />
-          </L.Contents>
+                    <L.Inner>
+                        <FooterLayout />
+                        <L.FlexRows _padding="0px 0px 60px 0px"></L.FlexRows>
+                    </L.Inner>
+                </L.Container>
+                <FooterStyle>
+                    <MainFooter />
+                </FooterStyle>
 
-          {/* 우리동네 인기 추천 */}
-          <L.Contents _cursor='default' _padding="20px 0px 20px 0px">
-            <MainBestCollection />
-          </L.Contents>
-
-          <L.Inner>
-            <FooterLayout />
-            <L.FlexRows _padding="0px 0px 60px 0px"></L.FlexRows>
-          </L.Inner>
-        </L.Container>
-        <FooterStyle>
-          <MainFooter />
-        </FooterStyle>
-
-        {alert && (
-          <Alert
-            title={alert.title}
-            contents={alert.contents}
-            buttonText={alert.buttonText}
-            onButtonClick={alert.onButtonClick}
-            onOverlayClick={alert.onOverlayClick}
-          />
-        )}
-      </LayoutMain>
-    </>
-  );
+                {alert && (
+                    <Alert
+                        title={alert.title}
+                        contents={alert.contents}
+                        buttonText={alert.buttonText}
+                        onButtonClick={alert.onButtonClick}
+                        onOverlayClick={alert.onOverlayClick}
+                    />
+                )}
+            </LayoutMain>
+        </>
+    );
 }
 
 export default MainPage;
