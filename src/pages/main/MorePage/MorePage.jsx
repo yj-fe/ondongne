@@ -13,13 +13,12 @@ import {
     MoreLoginDiv,
     MoreLoginText,
     MoreLoginButton,
-    Sticky,
 } from "./MorePageStyle";
 import { Link, useNavigate } from "react-router-dom";
-import { getMember } from "service/member";
+import { getMember, memberAgreeStatusChange } from "service/member";
 import { useSelector } from "react-redux";
 import Alert from "components/commonUi/Alert";
-import Modal from "components/layout/Modal/Modal";
+import BizSignupModal from "components/layout/Modal/BizSignupModal";
 import {
     AgreementDiv,
     Button,
@@ -34,7 +33,7 @@ import { Text } from "components/commonUi/Text";
 import CheckBox from "components/commonUi/CheckBox";
 import CheckBoxTitle from "components/commonUi/CheckBoxTitle";
 import { Line } from "../DetailsPage/DetailsPageStyle";
-import { ArrowRight, Bubble, Close } from "components/commonUi/Icon";
+import { ArrowRight, Close, SwitchC, Switch } from "components/commonUi/Icon";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
 import FooterLayout from "components/layout/Footer/Footer";
@@ -42,10 +41,8 @@ import { getBizMember } from "service/biz";
 import Layout from "components/layout/Layout/Layout";
 import Confirm from "components/commonUi/Confirm";
 import TermsModal from "components/service/TermsPage/TermsModal";
-import { AbsoluteDiv, RelativDiv } from "components/layout/Img/ImgSizeLayout";
 import defaultProfile from "assets/common/Profile.png";
-import { useCookies } from "react-cookie";
-import moment from "moment";
+import BubbleModal from "./BubbleModal";
 
 function MorePage() {
     const navigate = useNavigate();
@@ -56,30 +53,21 @@ function MorePage() {
     const [coachmark, setCoachmark] = useState(null);
     const [agreementModal, setAgreementModal] = useState(false);
 
-    const COOKIE_BUBBLE_KEY = "bubbleNeverWatch";
-    const [cookiesBubble, setCookieBubble] = useCookies([COOKIE_BUBBLE_KEY]);
-    // 2차범위
-    const [checkMarketing, setCheckMarketing] = useState(false);
-    const [checkPush, setCheckPush] = useState(false);
-
     const getMemberProfile = async () => {
         const response = await getMember();
-        const { message, data } = response.data;
+        const { data } = response.data;
         if (data) setMember(data);
+    };
+
+    const memberStatusChange = async (key, value) => {
+        const response = await memberAgreeStatusChange(key, value);
+        if (response && response.data) {
+            getMemberProfile();
+        }
     };
 
     const goToMember = () => {
         navigate("/member/management");
-    };
-
-    // 다시보지않기 이벤트
-    const close = () => {
-        const decade = moment();
-        decade.add(7, "d"); //일주일보지않기
-        setCookieBubble(COOKIE_BUBBLE_KEY, "true", {
-            path: "/",
-            expires: decade.toDate(),
-        });
     };
 
     const bizMember = async () => {
@@ -150,55 +138,7 @@ function MorePage() {
                                         </AccountName>
                                     </MoreAccountTextDiv>
                                 </L.FlexRows>
-
-                                {/*====== 비즈회원전환 말풍선 ======*/}
-                                {cookiesBubble[COOKIE_BUBBLE_KEY] ? null : (
-                                    <Sticky>
-                                        <RelativDiv
-                                            _width={199}
-                                            _height={100}
-                                            _widthmedia="170px"
-                                        >
-                                            <Bubble />
-                                            <AbsoluteDiv
-                                                _pd="6px"
-                                                _width={20}
-                                                _height={20}
-                                                _right="9%"
-                                                _top="10%"
-                                                _rightmedia="-10%"
-                                                onClick={close}
-                                            >
-                                                <T.Text
-                                                    _size={13}
-                                                    _weight={600}
-                                                    _color="white"
-                                                    _align="center"
-                                                >
-                                                    X
-                                                </T.Text>
-                                            </AbsoluteDiv>
-                                            <AbsoluteDiv
-                                                _width={190}
-                                                _height={80}
-                                                _left="30px"
-                                            >
-                                                <T.Text
-                                                    _size={12}
-                                                    _weight={600}
-                                                    _color="white"
-                                                    _align="center"
-                                                >
-                                                    <p>
-                                                        상품 판매가 가능한
-                                                        <p></p>비즈 회원으로
-                                                        전환해 보세요!
-                                                    </p>
-                                                </T.Text>
-                                            </AbsoluteDiv>
-                                        </RelativDiv>
-                                    </Sticky>
-                                )}
+                                <BubbleModal />
                             </MoreAccountProfile>
 
                             <MoreAccountButtonDiv>
@@ -242,19 +182,46 @@ function MorePage() {
                         {/* <MoreContainerDiv onClick={() => memberRoleRouter("/member/coupon")}>쿠폰함</MoreContainerDiv> */}
                     </MoreDiv>
                     <MoreDiv>
-                        {/*  2차범위
-              <MoreContainerDiv>
-                <L.FlexRows  _content='space-between' onClick={() => setCheckMarketing(!checkMarketing)}>
-                  <p>마케팅 활용 동의</p>
-                  { checkMarketing ?  <SwitchC/> : <Switch/> }
-                </L.FlexRows>
-              </MoreContainerDiv>
-              <MoreContainerDiv>
-                <L.FlexRows  _content='space-between' onClick={() => setCheckPush(!checkPush)}>
-                  <p>Push 수신 동의</p>
-                  { checkPush ?  <SwitchC/> : <Switch/> }
-                </L.FlexRows>
-              </MoreContainerDiv> */}
+                        {auth.isAuthenticated && (
+                            <>
+                                <MoreContainerDiv>
+                                    <L.FlexRows
+                                        _content="space-between"
+                                        onClick={() =>
+                                            memberStatusChange(
+                                                "sms",
+                                                !member.emailSmsAgreeStatus
+                                            )
+                                        }
+                                    >
+                                        <p>마케팅 활용 동의</p>
+                                        {member.emailSmsAgreeStatus ? (
+                                            <SwitchC />
+                                        ) : (
+                                            <Switch />
+                                        )}
+                                    </L.FlexRows>
+                                </MoreContainerDiv>
+                                <MoreContainerDiv>
+                                    <L.FlexRows
+                                        _content="space-between"
+                                        onClick={() =>
+                                            memberStatusChange(
+                                                "push",
+                                                !member.pushAgreeStatus
+                                            )
+                                        }
+                                    >
+                                        <p>Push 수신 동의</p>
+                                        {member.pushAgreeStatus ? (
+                                            <SwitchC />
+                                        ) : (
+                                            <Switch />
+                                        )}
+                                    </L.FlexRows>
+                                </MoreContainerDiv>
+                            </>
+                        )}
 
                         <Link to="/service">
                             <MoreContainerDiv>고객센터</MoreContainerDiv>
@@ -265,13 +232,19 @@ function MorePage() {
                         <Link to="/service/terms">
                             <MoreContainerDiv>약관 및 정책</MoreContainerDiv>
                         </Link>
-                        {/* <Link to="/setting">
-              <MoreContainerDiv>환경설정</MoreContainerDiv>
-            </Link> */}
-                        {/* <L.FlexRows _height='52px' _content="space-between" _items="center" _padding="0px">
-              <T.Text _weight={500} _size={16} _color="gray900">앱 버전 정보</T.Text>
-              <T.Text _weight={400} _size={14} _color="gray800">1.1.1</T.Text>
-            </L.FlexRows> */}
+                        <L.FlexRows
+                            _height="52px"
+                            _content="space-between"
+                            _items="center"
+                            _padding="0px"
+                        >
+                            <T.Text _weight={500} _size={16} _color="gray900">
+                                앱 버전 정보
+                            </T.Text>
+                            <T.Text _weight={400} _size={14} _color="gray800">
+                                1.0
+                            </T.Text>
+                        </L.FlexRows>
                     </MoreDiv>
 
                     <FooterLayout />
@@ -302,7 +275,7 @@ function MorePage() {
             )}
             {/* ============= 1. 비즈회원코치모달 ============= */}
             {coachmark && (
-                <Modal
+                <BizSignupModal
                     setAgreementModal={setAgreementModal}
                     closeModel={() => setCoachmark(false)}
                 />

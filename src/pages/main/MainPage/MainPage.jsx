@@ -6,7 +6,7 @@ import MainBestProduct from "components/Main/Main/MainBestProduct/MainBestProduc
 import MainNewMarket from "components/Main/Main/MainNewMarket/MainNewMarket";
 import MainBestCollection from "components/Main/Main/MainBestCollection/MainBestCollection";
 import MainFooter from "components/Main/Main/MainFooter/MainFooter";
-import { Img, FooterStyle } from "./MainPageStyle";
+import { FooterStyle } from "./MainPageStyle";
 import MainCategory from "components/Main/Main/MainCategory/MainCategory";
 import FooterLayout from "components/layout/Footer/Footer";
 import * as L from "components/commonUi/Layout";
