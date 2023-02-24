@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { screen } from "@testing-library/react";
 
 export const Inner = styled.div`
     position: relative;

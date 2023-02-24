@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { getBanners } from "service/main";
 import { SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper"; // 추가
+import SwiperCore, { Pagination, Autoplay } from "swiper"; // 추가
 import "swiper/css";
 import "swiper/css/pagination";
 import * as S from "./styles";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import LoadingBar from "components/commonUi/LoadingBar";
 
-SwiperCore.use([Navigation, Pagination, Autoplay]); // 추가
+SwiperCore.use([Pagination, Autoplay]); // 추가
 
 /*
  *  배너
@@ -32,9 +32,8 @@ const MainBanner = () => {
                     <S.SwiperWapper
                         ref={slideRef}
                         spaceBetween={0}
-                        navigation
                         pagination={{ clickable: true }}
-                        autoplay={{ delay: 3000 }}
+                        autoplay={{ delay: 3000, disableOnInteraction: false }}
                         style={{
                             "--swiper-pagination-color": "#0B806F",
                         }}
