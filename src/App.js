@@ -182,6 +182,11 @@ function App() {
                         path="coupon/upload"
                         element={<BusinessCouponUpload />}
                     />
+                    {/* 쿠폰 수정 */}
+                    <Route
+                        path="coupon/update/:id"
+                        element={<BusinessCouponUpload />}
+                    />
                     {/* 리뷰관리 */}
                     <Route path="review" element={<BusinessReview />} />
                     <Route path="news" element={<BusinessNews />} />

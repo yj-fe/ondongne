@@ -23,12 +23,12 @@ const Auth = () => {
                 <>
                     <Floating
                         icon={<I.Coupon />}
-                        to="/business/coupon"
+                        to="/business/coupon/upload"
                         title="쿠폰 발행"
                     />
                     <Floating
                         icon={<I.Store />}
-                        to="/business/coupon"
+                        to="/business/coupon/upload"
                         title="상점 소식 등록"
                     />
                     <Floating

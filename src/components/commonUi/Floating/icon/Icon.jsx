@@ -9,21 +9,21 @@ const Coupon = () => (
         <path
             d="M21.1087 8.64493C19.7662 9.09324 18.8856 10.4765 18.8856 12L21.3463 14.6437L21.1087 15.3551C21.1087 15.3551 21.1087 15.3551 21.1087 15.3551C21.1202 15.3589 21.1529 15.3749 21.1878 15.4291C21.2227 15.4835 21.25 15.5633 21.25 15.6584V17.5622C21.25 18.0525 20.93 18.25 20.7639 18.25H3.28068C3.08269 18.25 2.75 18.0162 2.75 17.5622V6.43775C2.75 5.98375 3.08269 5.75 3.28068 5.75H20.7639C20.93 5.75 21.25 5.94754 21.25 6.43775V8.34162C21.25 8.43674 21.2227 8.51652 21.1878 8.57088C21.1529 8.62514 21.1201 8.6411 21.1087 8.64493Z"
             stroke="#424242"
-            stroke-width="1.5"
+            strokeWidth="1.5"
         />
         <path
             d="M11 9V15"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
         <path
             d="M14 12L8 12"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
     </svg>
 );
@@ -36,26 +36,26 @@ const Join = () => (
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <circle cx="12" cy="7" r="5" stroke="#424242" stroke-width="1.5" />
+        <circle cx="12" cy="7" r="5" stroke="#424242" strokeWidth="1.5" />
         <path
             d="M3 22V22C3 18.134 6.13401 15 10 15H14"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
         />
         <path
             d="M18 16L18 22"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
         <path
             d="M21 19L15 19"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
     </svg>
 );
@@ -68,19 +68,19 @@ const Login = () => (
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <circle cx="12" cy="7" r="5" stroke="#424242" stroke-width="1.5" />
+        <circle cx="12" cy="7" r="5" stroke="#424242" strokeWidth="1.5" />
         <path
             d="M3 22V22C3 18.134 6.13401 15 10 15H14"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
         />
         <path
             d="M18 17C16.8954 17 16 17.8954 16 19C16 20.1046 16.8954 21 18 21C19.1046 21 20 20.1046 20 19C20 17.8954 19.1046 17 18 17ZM18 17V14M21 12H18V14M18 14H20"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
     </svg>
 );
@@ -100,16 +100,16 @@ const Product = () => (
         <path
             d="M11.5 11.5V16.5"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
         <path
             d="M14 14L9 14"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
     </svg>
 );
@@ -144,36 +144,36 @@ const Voc = () => (
             height="14"
             rx="2"
             stroke="#424242"
-            stroke-width="1.5"
+            strokeWidth="1.5"
         />
         <path
             d="M7 12H17"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
         <path
             d="M9 3V12H16V3H9Z"
             fill="white"
             stroke="#424242"
-            stroke-width="1.5"
-            stroke-linecap="square"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="square"
+            strokeLinejoin="round"
         />
         <path
             d="M11 6H13"
             stroke="#424242"
-            stroke-width="1.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
         <path
             d="M11 9H14"
             stroke="#424242"
-            stroke-width="1.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
         />
     </svg>
 );
