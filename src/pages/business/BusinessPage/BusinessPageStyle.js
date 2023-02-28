@@ -7,6 +7,7 @@ export const InfoCard = styled.div`
     align-items: flex-start;
     padding: 16px;
     gap: 20px;
+    width: 100%;
     max-width: 167px;
     height: 154px;
     background: #ffffff;

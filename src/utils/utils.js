@@ -134,6 +134,7 @@ export const sortFormatter = (filter) => {
     if (filter === "reviewLike") return "리뷰 도움 순";
     if (filter === "newstore") return "신규 매장 순";
     if (filter === "like") return "단골 많은 순";
+    if (filter === "coupon") return "쿠폰 인기 순";
 };
 
 // 데이터 상점 리스트 그룹화

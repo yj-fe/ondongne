@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
 import {
@@ -15,6 +15,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import MarketImg from "assets/images/marketdetail.png";
 import MarketDetailInfo from "components/Main/MarketDetail/MarketDetailInfo";
 import MarketDetailProduct from "components/Main/MarketDetail/MarketDetailProduct";
+import MarketDetailCoupon from "components/Main/MarketDetail/MarketDetailCoupon";
 import ModalMorePage from "components/Main/More/ModalMorePage";
 import { getStoreDetails } from "service/store";
 import { numberFormat, isEmptyObj } from "utils/utils";
@@ -33,21 +34,21 @@ function MarketDetail() {
     const [detailTab, setDetailTab] = useState(0);
     const [modal, setModal] = useState(false);
 
-    const getItem = async () => {
+    const getItem = useCallback(async () => {
         const response = await getStoreDetails(id);
 
         if (response && response.data.data) {
             setItem(response.data.data);
             setLoading(false);
         }
-    };
+    }, [id]);
 
     useEffect(() => {
         if (id) {
             getItem(id);
             setLoading(true);
         }
-    }, [id]);
+    }, [getItem, id]);
 
     if (loading) return <></>;
 
@@ -62,12 +63,10 @@ function MarketDetail() {
         >
             <L.Container>
                 <L.Contents _cursor="default" _padding="0">
-                    {/* <ImgPer src={item.banner ? STOREURL + item.banner : MarketImg} /> */}
                     <ImgBanner
                         _height="390px"
                         src={item.banner ? STOREURL + item.banner : MarketImg}
                     />
-                    {/* <ImgBanner _height='390px' src={ImgSizee}/> */}
                     <L.FlexCols _padding={0} _gap={0}>
                         <L.Contents _padding="16px 20px">
                             <L.FlexRows
@@ -138,7 +137,6 @@ function MarketDetail() {
 
                         <TabButtonStyle>
                             <DetailTabInfo
-                                width={"50%"}
                                 onClick={() => {
                                     setDetailTab(0);
                                 }}
@@ -147,7 +145,6 @@ function MarketDetail() {
                                 상점정보
                             </DetailTabInfo>
                             <DetailTabReview
-                                width={"50%"}
                                 onClick={() => {
                                     setDetailTab(1);
                                 }}
@@ -155,12 +152,14 @@ function MarketDetail() {
                             >
                                 상품
                             </DetailTabReview>
-                            {/* <DetailTabReview
-                  onClick={() => { setDetailTab(2); }}
-                  reviewcolor={detailTab === 2}
-                >
-                  쿠폰 소식
-                </DetailTabReview> */}
+                            <DetailTabReview
+                                onClick={() => {
+                                    setDetailTab(2);
+                                }}
+                                reviewcolor={detailTab === 2}
+                            >
+                                쿠폰 소식
+                            </DetailTabReview>
                         </TabButtonStyle>
                     </L.FlexCols>
                 </L.Contents>
@@ -190,7 +189,9 @@ function TabContent({ detailTab, item }) {
         </div>,
 
         //=====================쿠폰 소식=====================
-        <div>{/* <MarketDetailCoupon /> */}</div>,
+        <div>
+            <MarketDetailCoupon id={item.storeId} />
+        </div>,
     ][detailTab];
 }
 export default MarketDetail;

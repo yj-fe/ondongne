@@ -133,7 +133,7 @@ export function SortLayout({ CloseModal, data, setData }) {
 }
 
 export function SearchSortLayout({ CloseModal, data, setData }) {
-    const sorts = ["create", "order", "review", "like"];
+    const sorts = ["create", "order", "review", "like", "coupon"];
 
     const clickHandler = (sort) => {
         setData(sort);

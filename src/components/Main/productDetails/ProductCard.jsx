@@ -9,7 +9,7 @@ import {
     RelativDiv,
 } from "components/layout/Img/ImgSizeLayout";
 import ProductTimer from "components/commonUi/ProductTimer";
-import { disRate, numberFormat, overNaming, totalPrice } from "utils/utils";
+import { disRate, numberFormat, overNaming } from "utils/utils";
 import StarRate from "components/commonUi/StarRate";
 
 export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
@@ -60,7 +60,7 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
             </RelativDiv>
 
             <L.FlexCols _gap={"4"} _padding={0}>
-                {item.type == "GROUP" && !item.soldoutStatus && (
+                {item.type === "GROUP" && !item.soldoutStatus && (
                     <ProductTimer date={item.endDate} />
                 )}
                 <L.FlexCols _gap={"0"}>
@@ -73,7 +73,7 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
                 </L.FlexCols>
 
                 <L.FlexCols _gap={"0"}>
-                    {salePercent != 0 && (
+                    {salePercent !== 0 && (
                         <L.FlexRows _gap={4} _padding={0} _items="center">
                             <T.Text
                                 _size={15}

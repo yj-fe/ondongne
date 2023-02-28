@@ -13,7 +13,6 @@ import { useInView } from "react-intersection-observer";
 import { getStoreCategoryList } from "service/store";
 import LoadingBar from "components/commonUi/LoadingBar";
 import { StoreListCard } from "components/commonUi/StoreListCard";
-import { MapListButton } from "components/commonUi/Button";
 import MapView from "components/Search/MapView";
 
 function SearchPage() {

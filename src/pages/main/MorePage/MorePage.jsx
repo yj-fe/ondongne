@@ -179,7 +179,11 @@ function MorePage() {
                         >
                             내가 쓴 리뷰
                         </MoreContainerDiv>
-                        {/* <MoreContainerDiv onClick={() => memberRoleRouter("/member/coupon")}>쿠폰함</MoreContainerDiv> */}
+                        <MoreContainerDiv
+                            onClick={() => memberRoleRouter("/member/coupon")}
+                        >
+                            쿠폰함
+                        </MoreContainerDiv>
                     </MoreDiv>
                     <MoreDiv>
                         {auth.isAuthenticated && (

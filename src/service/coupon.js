@@ -1,20 +1,17 @@
 import { client } from ".";
 
 const urls = {
-    list: "/item/coupon/list",
+    list: "/coupon/list",
+    storeList: "/coupon/store/list",
+    memberList: "/coupon/member/list",
+    download: "/coupon/download",
+    use: "/coupon/use",
     save: "/biz/coupon/save",
     bizList: "/biz/coupon/list",
     getBizCoupon: "/biz/coupon/get",
     delete: "/biz/coupon/delete",
     update: "/biz/coupon/update",
 };
-
-/* ==============================
-    쿠폰 상품 리스트
-============================== */
-export function getCouponList(id) {
-    return client.get(`${urls.list}/${id}`);
-}
 
 /* ==============================
     쿠폰 등록
@@ -49,4 +46,32 @@ export function bizCouponList(storeId) {
 ============================== */
 export function getBizCoupon(id) {
     return client.get(`${urls.getBizCoupon}/${id}`);
+}
+
+/* ==============================
+    상점 쿠폰 목록
+============================== */
+export function storeConponList(id) {
+    return client.get(`${urls.storeList}/${id}`);
+}
+
+/* ==============================
+    회원 쿠폰 목록
+============================== */
+export function getMemberCouponList(id, useStatus) {
+    return client.get(`${urls.memberList}/${id}?useStatus=${useStatus}`);
+}
+
+/* ==============================
+    쿠폰 다운로드
+============================== */
+export function couponDownload(id) {
+    return client.post(`${urls.download}/${id}`);
+}
+
+/* ==============================
+    쿠폰 사용
+============================== */
+export function couponUse(id) {
+    return client.post(`${urls.use}/${id}`);
 }
