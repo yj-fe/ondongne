@@ -20,7 +20,7 @@ import {
     SwiperSlideImg,
     navigation,
 } from "../Swiper/Swiper";
-import { Btn } from "../Modal/BizSignupModal";
+import { Btn } from "../../BizSignup/BizSignupModal";
 import { useState } from "react";
 import { useEffect } from "react";
 

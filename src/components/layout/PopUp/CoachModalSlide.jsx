@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import * as L from "components/commonUi/Layout";
 import { Text } from "components/commonUi/Text";
-import { Body, Container, Content, Btn } from "../Modal/BizSignupModal";
+import { Body, Container, Content, Btn } from "../../BizSignup/BizSignupModal";
 import CoachModalSlideSwiper from "./CoachModalSlideSwiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";

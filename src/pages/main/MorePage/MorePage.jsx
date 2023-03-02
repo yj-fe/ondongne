@@ -18,31 +18,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { getMember, memberAgreeStatusChange } from "service/member";
 import { useSelector } from "react-redux";
 import Alert from "components/commonUi/Alert";
-import BizSignupModal from "components/layout/Modal/BizSignupModal";
-import {
-    AgreementDiv,
-    Button,
-    ModalBody,
-    ModalDiv1,
-    ModalDiv2,
-    ModalOutside,
-    SpaceBet,
-} from "components/Main/More/ModalPageStyle";
 import "pages/main/MorePage/MorePage.css";
-import { Text } from "components/commonUi/Text";
-import CheckBox from "components/commonUi/CheckBox";
-import CheckBoxTitle from "components/commonUi/CheckBoxTitle";
-import { Line } from "../DetailsPage/DetailsPageStyle";
-import { ArrowRight, Close, SwitchC, Switch } from "components/commonUi/Icon";
+import { SwitchC, Switch } from "components/commonUi/Icon";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
 import FooterLayout from "components/layout/Footer/Footer";
 import { getBizMember } from "service/biz";
 import Layout from "components/layout/Layout/Layout";
 import Confirm from "components/commonUi/Confirm";
-import TermsModal from "components/service/TermsPage/TermsModal";
 import defaultProfile from "assets/common/Profile.png";
 import BubbleModal from "./BubbleModal";
+import BizSignupForm from "components/BizSignup/BizSignupForm";
 
 function MorePage() {
     const navigate = useNavigate();
@@ -50,8 +36,7 @@ function MorePage() {
     const auth = useSelector((state) => state.auth);
     const [alert, setAlert] = useState(null);
     const [confirm, setConfirm] = useState(false);
-    const [coachmark, setCoachmark] = useState(null);
-    const [agreementModal, setAgreementModal] = useState(false);
+    const [bizModal, setBizModal] = useState(false);
 
     const getMemberProfile = async () => {
         const response = await getMember();
@@ -76,7 +61,7 @@ function MorePage() {
 
         // 비즈 신청하기
         if (!data) {
-            return setCoachmark(true);
+            return setBizModal(true);
         }
 
         // 비즈 심사 대기 중
@@ -277,157 +262,9 @@ function MorePage() {
                     onOverlayClick={alert.onOverlayClick}
                 />
             )}
-            {/* ============= 1. 비즈회원코치모달 ============= */}
-            {coachmark && (
-                <BizSignupModal
-                    setAgreementModal={setAgreementModal}
-                    closeModel={() => setCoachmark(false)}
-                />
-            )}
-            {/* ============= 2. 비즈회원약관동의 ============= */}
-            {agreementModal && (
-                <BusinessAgreementModal
-                    closeModel={() => setAgreementModal(false)}
-                />
-            )}
-            {/* ============= 3-4 비즈회원신청페이지 => <BusinessApplication/> ============= */}
+            {/* ============= 비즈회원 가입 모달창 ============= */}
+            {bizModal && <BizSignupForm close={() => setBizModal(false)} />}
         </div>
-    );
-}
-
-function BusinessAgreementModal({ closeModel }) {
-    const [service, setService] = useState(null);
-    // 체크버튼
-    const [requestSave, setRequestSave] = useState(false);
-    const [servicerequestSave, setServiceRequestSave] = useState(false);
-    const [privrequestSave, setPrivRequestSave] = useState(false);
-    const [snsrequestSave, setSnsRequestSave] = useState(false);
-
-    // 버튼 활성화 여부
-    const [active, setActive] = useState(false);
-    const navigate = useNavigate();
-
-    const allChecked = () => {
-        if (requestSave) {
-            setRequestSave(false);
-            setServiceRequestSave(false);
-            setPrivRequestSave(false);
-            setSnsRequestSave(false);
-        } else {
-            setRequestSave(true);
-            setServiceRequestSave(true);
-            setPrivRequestSave(true);
-            setSnsRequestSave(true);
-        }
-    };
-
-    useEffect(() => {
-        if (servicerequestSave && privrequestSave) {
-            setActive(true);
-        } else {
-            setActive(false);
-        }
-    }, [servicerequestSave, privrequestSave]);
-
-    return (
-        <ModalOutside
-        // onClick={closeModel}
-        >
-            {service === null && (
-                <ModalBody>
-                    <ModalDiv1 />
-                    <ModalDiv2>
-                        <L.FlexRows
-                            _padding="0 24px"
-                            _content="space-between"
-                            _bg="#fff"
-                        >
-                            <Text _size={18} _weight={500} _color={"gray900"}>
-                                <p>비즈회원으로 전환하시려면</p>
-                                <p>약관동의가 필요합니다.</p>
-                            </Text>
-                            <button onClick={closeModel}>
-                                <Close />
-                            </button>
-                        </L.FlexRows>
-                    </ModalDiv2>
-                    <AgreementDiv>
-                        <CheckBoxTitle
-                            label="모두 동의합니다"
-                            name="requestSave"
-                            checked={requestSave}
-                            onChange={allChecked}
-                        />
-                        <Line />
-                        <SpaceBet>
-                            <CheckBox
-                                label="[필수] 비즈회원 이용약관"
-                                name="servicerequestSave"
-                                checked={servicerequestSave}
-                                onChange={(e) => {
-                                    setServiceRequestSave(
-                                        e.currentTarget.checked
-                                    );
-                                }}
-                            />
-                            <button type="button" onClick={() => setService(0)}>
-                                <ArrowRight />
-                            </button>
-                        </SpaceBet>
-                        <SpaceBet>
-                            <CheckBox
-                                label="[필수] 개인정보 수집 이용 동의"
-                                name="privrequestSave"
-                                checked={privrequestSave}
-                                onChange={(e) => {
-                                    setPrivRequestSave(e.currentTarget.checked);
-                                }}
-                            />
-                            <button type="button" onClick={() => setService(1)}>
-                                <ArrowRight />
-                            </button>
-                        </SpaceBet>
-                        <SpaceBet>
-                            <CheckBox
-                                label="[선택] 마케팅 활용 동의"
-                                name="snsrequestSave"
-                                checked={snsrequestSave}
-                                onChange={(e) => {
-                                    setSnsRequestSave(e.currentTarget.checked);
-                                }}
-                            />
-                            <button type="button" onClick={() => setService(2)}>
-                                <ArrowRight />
-                            </button>
-                        </SpaceBet>
-
-                        <Button
-                            active={active}
-                            type="button"
-                            disabled={!active}
-                            onClick={() => navigate("/business/application")}
-                        >
-                            확인
-                        </Button>
-                    </AgreementDiv>
-                </ModalBody>
-            )}
-            {service === 0 && (
-                <TermsModal type={"USE"} closeModel={() => setService(null)} />
-            )}
-            {service === 1 && (
-                <TermsModal
-                    type={"PRIVACY"}
-                    closeModel={() => setService(null)}
-                />
-            )}
-            {service === 2 && (
-                <TermsModal
-                    type={"MARKETING"}
-                    closeModel={() => setService(null)}
-                />
-            )}
-        </ModalOutside>
     );
 }
 

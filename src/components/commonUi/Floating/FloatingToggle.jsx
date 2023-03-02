@@ -6,50 +6,65 @@ import {
     FloatingLink,
     FloatingContentTitle,
     FloatingToggleDiv,
+    FloatingBox,
 } from "pages/business/BusinessPage/BusinessPageStyle";
 import { useSelector } from "react-redux";
 
-export default function FloatingToggle({ active }) {
+export default function FloatingToggle({ active, bizMember }) {
     const auth = useSelector((state) => state.auth);
     if (!active) return <></>;
-    return auth.isAuthenticated ? <Auth /> : <UnAuth />;
+    return auth.isAuthenticated ? <Auth bizMember={bizMember} /> : <UnAuth />;
 }
 
-const Auth = () => {
+const Auth = ({ bizMember }) => {
     const location = useLocation();
     return (
         <FloatingToggleDiv>
             {location.pathname.includes("business") ? (
                 <>
-                    <Floating
-                        icon={<I.Coupon />}
-                        to="/business/coupon/upload"
-                        title="쿠폰 발행"
-                    />
-                    <Floating
-                        icon={<I.Store />}
-                        to="/business/coupon/upload"
-                        title="상점 소식 등록"
-                    />
-                    <Floating
-                        icon={<I.Product />}
-                        to="/business/upload"
-                        title="상품 등록"
-                    />
-                    <Floating icon={<Trans />} to="/" title="일반 전환" />
+                    <FloatingBox>
+                        <Floating
+                            icon={<I.Coupon />}
+                            to="/business/coupon/upload"
+                            title="쿠폰 등록"
+                        />
+                        <Floating
+                            icon={<I.Store />}
+                            to="/business/management"
+                            title="상점 소식"
+                        />
+                        <Floating
+                            icon={<I.Product />}
+                            to="/business/upload"
+                            title="상품 등록"
+                        />
+                    </FloatingBox>
+                    <FloatingBox>
+                        <Floating icon={<Trans />} to="/" title="구매자 전환" />
+                    </FloatingBox>
                 </>
             ) : (
                 <>
-                    <Floating
-                        icon={<I.Voc />}
-                        to="/service/voc"
-                        title="의견/건의"
-                    />
-                    <Floating
-                        icon={<Trans />}
-                        to="/business"
-                        title="비즈 전환"
-                    />
+                    <FloatingBox>
+                        <Floating
+                            icon={<I.Service />}
+                            to="/service"
+                            title="고객센터"
+                        />
+                        <Floating
+                            icon={<I.Voc />}
+                            to="/service/voc"
+                            title="상품 제안 하기"
+                        />
+                    </FloatingBox>
+                    <FloatingBox>
+                        <FloatingLink onClick={bizMember}>
+                            <Trans />
+                            <FloatingContentTitle>
+                                사장님 전환
+                            </FloatingContentTitle>
+                        </FloatingLink>
+                    </FloatingBox>
                 </>
             )}
         </FloatingToggleDiv>
@@ -59,8 +74,14 @@ const Auth = () => {
 const UnAuth = () => {
     return (
         <FloatingToggleDiv>
-            <Floating icon={<I.Login />} to="/login" title="로그인" />
-            <Floating icon={<I.Join />} to="/login/signup" title="회원가입" />
+            <FloatingBox>
+                <Floating icon={<I.Login />} to="/login" title="로그인" />
+                <Floating
+                    icon={<I.Join />}
+                    to="/login/signup"
+                    title="회원가입"
+                />
+            </FloatingBox>
         </FloatingToggleDiv>
     );
 };

@@ -5,18 +5,12 @@ import {
     NaverMap,
     Marker,
     useNavermaps,
-    useMap,
 } from "react-naver-maps";
 import { storeMapList } from "service/store";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
-import * as B from "components/commonUi/Button";
 import { ModalBody, ModalDiv1 } from "components/Main/More/ModalPageStyle";
 import { Close } from "components/commonUi/Icon";
-import { ImgCollect } from "components/Buisness/BusinessManagement/BusinessManagementTabStyle";
-import StarRate from "components/commonUi/StarRate";
-import { numberFormat } from "utils/utils";
-import Img from "assets/images/marketdetail.png";
 import Daily from "assets/icons/category/Daily.svg";
 import Dessert from "assets/icons/category/Dessert.svg";
 import drink from "assets/icons/category/drink.svg";
@@ -27,17 +21,20 @@ import Pet from "assets/icons/category/Pet.svg";
 import Rice from "assets/icons/category/Rice.svg";
 import Seafood from "assets/icons/category/Seafood.svg";
 import vegetables from "assets/icons/category/vegetables.svg";
+import { groupBy, isEmptyObj } from "utils/utils";
 import "./style.css";
+import { StoreListCard } from "components/commonUi/StoreListCard";
 
 const MapView = ({ category }) => {
     const local = useSelector((state) => state.local);
     const [list, setList] = useState([]);
 
     const loadData = useCallback(async () => {
+        setList([]);
         const response = await storeMapList(local, category.replace(",", "/"));
 
         if (response?.data) {
-            setList(response.data.data);
+            setList(groupBy(response.data.data, "addressX"));
         }
     }, [local, category]);
 
@@ -59,9 +56,7 @@ const MapView = ({ category }) => {
 
 function MyMap({ list, local }) {
     const navermaps = useNavermaps();
-    const map = useMap();
     const [item, setItem] = useState(null);
-    // const MarkerClustering = makeMarkerClustering(window.naver);
 
     const categoryIcon = (type) => {
         if (type === "야채/과일") return `<img src="${vegetables}" />`;
@@ -76,7 +71,15 @@ function MyMap({ list, local }) {
         if (type === "기타") return `<img src="${Etc}"/>`;
     };
 
-    function markerOnClick(data) {
+    function markerOnClick(data, key) {
+        const markers = document.querySelectorAll(".markerContainer");
+        markers.forEach((m, i) => {
+            if (i === key) {
+                m.classList.add("on");
+            } else {
+                m.classList.remove("on");
+            }
+        });
         setItem(data);
     }
 
@@ -86,34 +89,42 @@ function MyMap({ list, local }) {
             defaultZoom={15}
             minZoom={15}
         >
-            {list.length > 0 &&
-                list.map((data, i) => (
+            {!isEmptyObj(list) &&
+                Object.values(list).map((newList, i) => (
                     <Marker
                         key={i}
                         defaultPosition={
-                            new navermaps.LatLng(data.addressX, data.addressY)
+                            new navermaps.LatLng(
+                                newList[0].addressX,
+                                newList[0].addressY
+                            )
                         }
-                        onClick={() => markerOnClick(data)}
+                        onClick={() => markerOnClick(newList, i)}
                         icon={{
                             content: `
-                                    <div class='markerContainer'>
-                                        ${
-                                            data.newStatus
-                                                ? `<div class="newBegie"> 
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <rect width="24" height="24" rx="12" fill="#E54E2B" />
-                                                            <path d="M16.0674 7.10156H14.3037V13.8691H14.208L9.5459 7.10156H7.93262V17H9.70996V10.2324H9.79199L14.4814 17H16.0674V7.10156Z" fill="white" />
-                                                        </svg>
-                                                    </div>`
-                                                : ""
-                                        }
-                                        <div class="marker">
-                                            ${categoryIcon(data.category)}
-                                            <p class="text">${data.name}</p>
-                                        </div>
-                                        <div class="arrow" /> 
+                                <div class='markerContainer'>
+                                    ${
+                                        newList[0].newStatus
+                                            ? `<div class="newBegie"> 
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="24" height="24" rx="12" fill="#E54E2B" />
+                                                        <path d="M16.0674 7.10156H14.3037V13.8691H14.208L9.5459 7.10156H7.93262V17H9.70996V10.2324H9.79199L14.4814 17H16.0674V7.10156Z" fill="white" />
+                                                    </svg>
+                                                </div>`
+                                            : ""
+                                    }
+                                    <div class="marker">
+                                        ${categoryIcon(newList[0].category)}
+                                        <p class="text">${
+                                            newList.length > 1
+                                                ? newList[0].name +
+                                                  `외 ${newList.length}개`
+                                                : newList[0].name
+                                        }</p>
                                     </div>
-                                    `,
+                                    <div class="arrow" /> 
+                                </div>
+                            `,
                         }}
                     />
                 ))}
@@ -143,79 +154,12 @@ function Modal({ close, item }) {
                 </L.FlexRows>
             </ModalDiv1>
             <L.Contents _padding="8px 20px 16px 20px">
-                <L.FlexRows _content="row">
-                    <ImgCollect src={Img} />
-                    <L.FlexCols _gap={2} _width="calc(100% - 100px)">
-                        <L.FlexRows _gap="0px" _width="200px">
-                            <T.TextCut
-                                _weight={600}
-                                _size={17}
-                                _color="gray900"
-                            >
-                                {item.name}
-                            </T.TextCut>
-                        </L.FlexRows>
-                        <L.FlexRows
-                            _content="flex-start"
-                            _items="center"
-                            _gap={2}
-                        >
-                            <StarRate rate={item.reviewRate} />
-                            <T.Text
-                                _weight={500}
-                                _size={13}
-                                _color="gray900"
-                                _align="center"
-                            >
-                                {item.reviewRate}
-                            </T.Text>
-                        </L.FlexRows>
-                        <L.FlexRows>
-                            <T.Text
-                                _weight={400}
-                                _size={13}
-                                _color="gray800"
-                                _align="center"
-                            >
-                                최소주문{" "}
-                                {item.orderMinPrice
-                                    ? numberFormat(item.orderMinPrice)
-                                    : 0}
-                                원,
-                            </T.Text>
-                            <T.Text
-                                _weight={400}
-                                _size={13}
-                                _color="gray800"
-                                _align="center"
-                            >
-                                배달{" "}
-                                {item.deliveryPrice
-                                    ? numberFormat(item.deliveryPrice)
-                                    : 0}
-                                원
-                            </T.Text>
-                        </L.FlexRows>
-                        <L.FlexRows>
-                            {item.newStatus && (
-                                <B.Badge _color="white" _bg="green500">
-                                    신규 입점
-                                </B.Badge>
-                            )}
-                            {item.couponStatus && (
-                                <B.Badge _color="green600" _bg="green50">
-                                    쿠폰
-                                </B.Badge>
-                            )}
-                            {item.recetiveType &&
-                                item.recetiveType.split(",").map((r, i) => (
-                                    <React.Fragment key={i}>
-                                        <B.Badge>{r}가능</B.Badge>
-                                    </React.Fragment>
-                                ))}
-                        </L.FlexRows>
-                    </L.FlexCols>
-                </L.FlexRows>
+                <StoreListCard
+                    list={item}
+                    setData={() => {}}
+                    lastRef={null}
+                    isLike={false}
+                />
             </L.Contents>
         </ModalBody>
     );

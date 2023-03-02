@@ -57,8 +57,9 @@ export const numberFormat = (value) => {
 
 // 이미지 체크
 export const imageValidation = (file) => {
+    if (!file) return false;
     const fileSize = file.size;
-    const maxSize = 10 * 1024 * 1024;
+    const maxSize = 5 * 1024 * 1024;
     const reg = /(.*?)\.(jpg|jpeg|png)$/;
 
     if (!file.name.toLowerCase().match(reg)) {
@@ -66,14 +67,15 @@ export const imageValidation = (file) => {
     }
 
     if (fileSize > maxSize) {
-        return "사진 용량은 10MB 이내로 등록 가능합니다.";
+        return "사진 용량은 5MB 이내로 등록 가능합니다.";
     }
 };
 
 // 파일 체크
 export const fileValidation = (file) => {
+    if (!file) return false;
     const fileSize = file.size;
-    const maxSize = 10 * 1024 * 1024;
+    const maxSize = 5 * 1024 * 1024;
     const reg = /(.*?)\.(jpg|jpeg|png|pdf)$/;
 
     if (!file.name.toLowerCase().match(reg)) {
@@ -81,7 +83,7 @@ export const fileValidation = (file) => {
     }
 
     if (fileSize > maxSize) {
-        return "사진 용량은 10MB 이내로 등록 가능합니다.";
+        return "사진 용량은 5MB 이내로 등록 가능합니다.";
     }
 };
 

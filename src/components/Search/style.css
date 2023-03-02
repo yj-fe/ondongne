@@ -2,9 +2,6 @@
     position: relative;
     max-width: 150px;
     height: auto;
-    justify-content: center;
-    align-items: center;
-    gap: 0px;
 }
 
 .newBegie {
@@ -30,6 +27,17 @@
     z-index: 28;
     padding: 14px 8px;
 }
+
+.markerContainer.on .marker {
+    background-color: #2dac9e;
+    z-index: 99;
+}
+
+.markerContainer.on .marker p {
+    color: #fff !important;
+    font-weight: 700;
+}
+
 .arrow {
     width: 0px;
     height: 0px;
@@ -41,6 +49,11 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
+}
+
+.markerContainer.on .arrow {
+    border-top: 10px solid #2dac9e;
+    z-index: 99;
 }
 
 .text {

@@ -178,4 +178,34 @@ const Voc = () => (
     </svg>
 );
 
-export { Coupon, Join, Login, Product, Store, Voc };
+const Service = () => (
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M5 12V9C5 5.68629 7.68629 3 11 3H13C16.3137 3 19 5.68629 19 9V12"
+            stroke="#424242"
+            strokeWidth="1.5"
+        />
+        <path
+            d="M2 14.4435C2 12.5417 3.5417 11 5.44348 11C5.75084 11 6 11.2492 6 11.5565V20.4435C6 20.7508 5.75084 21 5.44348 21C3.5417 21 2 19.4583 2 17.5565V14.4435Z"
+            fill="white"
+            stroke="#424242"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+        />
+        <path
+            d="M22 17.5565C22 19.4583 20.4583 21 18.5565 21C18.2492 21 18 20.7508 18 20.4435L18 11.5565C18 11.2492 18.2492 11 18.5565 11C20.4583 11 22 12.5417 22 14.4435L22 17.5565Z"
+            fill="white"
+            stroke="#424242"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+        />
+    </svg>
+);
+
+export { Coupon, Join, Login, Product, Store, Voc, Service };

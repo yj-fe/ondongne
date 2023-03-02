@@ -8,8 +8,9 @@ import Img from "assets/images/marketdetail.png";
 import { useNavigate } from "react-router-dom";
 import { ImgCollect } from "components/Buisness/BusinessManagement/BusinessManagementTabStyle";
 import StoreLike from "./StoreLike";
+const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
 
-export const StoreListCard = ({ list, setData, lastRef }) => {
+export const StoreListCard = ({ list, setData, lastRef, isLike = true }) => {
     const navigate = useNavigate();
 
     return (
@@ -22,12 +23,19 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
                 >
                     <L.FlexRows
                         _content="row"
+                        _gap="16"
                         onClick={() =>
                             navigate(`/market/detail/${item.storeId}`)
                         }
                     >
                         <ImgCollect
-                            src={item.profile != null ? item.profile : Img}
+                            src={
+                                item.banner != null
+                                    ? item.banner.includes("https") > 0
+                                        ? item.banner
+                                        : IMGURL + item.banner
+                                    : Img
+                            }
                         />
                         <L.FlexCols _gap={2} _width="calc(100% - 100px)">
                             <L.FlexRows _gap="0px" _width="200px">
@@ -101,19 +109,24 @@ export const StoreListCard = ({ list, setData, lastRef }) => {
                         </L.FlexCols>
                     </L.FlexRows>
 
-                    <StoreLike
-                        id={item.storeId}
-                        checked={item.likeStatus}
-                        onChange={(id) => {
-                            setData(
-                                list.map((l) =>
-                                    l.storeId === id
-                                        ? { ...l, likeStatus: !l.likeStatus }
-                                        : l
-                                )
-                            );
-                        }}
-                    />
+                    {isLike && (
+                        <StoreLike
+                            id={item.storeId}
+                            checked={item.likeStatus}
+                            onChange={(id) => {
+                                setData(
+                                    list.map((l) =>
+                                        l.storeId === id
+                                            ? {
+                                                  ...l,
+                                                  likeStatus: !l.likeStatus,
+                                              }
+                                            : l
+                                    )
+                                );
+                            }}
+                        />
+                    )}
                 </L.FlexRows>
             ))}
         </L.FlexCols>

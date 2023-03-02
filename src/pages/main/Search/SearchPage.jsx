@@ -14,6 +14,7 @@ import { getStoreCategoryList } from "service/store";
 import LoadingBar from "components/commonUi/LoadingBar";
 import { StoreListCard } from "components/commonUi/StoreListCard";
 import MapView from "components/Search/MapView";
+import { MapListButton } from "components/commonUi/Button";
 
 function SearchPage() {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ function SearchPage() {
     const [loading, setLoading] = useState(false);
     const [fetching, isFetching] = useState(false);
 
-    const [pageChange, setPageChange] = useState(false);
+    const [pageChange, setPageChange] = useState(true);
 
     const getStores = async () => {
         const response = await getStoreCategoryList(
@@ -180,7 +181,7 @@ function SearchPage() {
                             )}
                         </L.Scroll>
 
-                        {/* <MapListButton
+                        <MapListButton
                             onClick={() => setPageChange(!pageChange)}
                         >
                             {pageChange ? (
@@ -194,7 +195,7 @@ function SearchPage() {
                                     <p>지도 보기</p>
                                 </>
                             )}
-                        </MapListButton> */}
+                        </MapListButton>
                     </L.Contents>
                 </L.Container>
                 {filter01 && (

@@ -33,7 +33,7 @@ function MainBestCoupon() {
     const router = () => {
         navigate("/collections", {
             state: {
-                type: 1,
+                type: 0,
                 title: "우리동네 인기 쿠폰",
                 list: data,
             },

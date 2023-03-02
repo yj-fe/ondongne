@@ -89,7 +89,6 @@ export const MyBestProductContent = styled.div`
     align-items: flex-start;
     gap: 16px;
     width: 100%;
-    /* height: 316px; */
 `;
 export const FooterDiv = styled.div`
     cursor: default;
@@ -101,20 +100,26 @@ export const FooterDiv = styled.div`
     padding: 0 24px 0px 0;
 `;
 export const FloatingToggleDiv = styled.div`
+    position: absolute;
+    bottom: 88px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+`;
+export const FloatingBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 16px;
-    position: absolute;
     justify-content: center;
-    bottom: 88px;
-    right: 0;
+    padding: 8px 16px;
     width: auto;
     height: auto;
     background: #ffffff;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 0px 20px 1px rgb(0 0 0 / 16%);
     border-radius: 20px;
 `;
+
 export const FloatingContentTitle = styled.div`
     font-weight: 400;
     font-size: 16px;

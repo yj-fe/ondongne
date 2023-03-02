@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 import styled from "styled-components";
-import { fileValidation } from 'utils/utils';
-import { useEffect } from 'react';
+import { fileValidation } from "utils/utils";
+import { useEffect } from "react";
 import { Close } from "../Icon";
 
 const BusinessFileForm = ({ data, setData }) => {
@@ -12,80 +12,86 @@ const BusinessFileForm = ({ data, setData }) => {
         const uploadFile = e.target.files[0];
         const valid = fileValidation(uploadFile);
 
-        if (files.length === 5) return setError('최대 5개까지 추가 가능합니다.');
+        if (files.length === 5)
+            return setError("최대 5개까지 추가 가능합니다.");
 
         if (valid) return setError(valid);
 
         setError("");
         setFiles([...files, uploadFile]);
-    }
+    };
 
     //파일 삭제
-    const deleteFile = id => {
+    const deleteFile = (id) => {
         setData({
             ...data,
             deleteFiles: [...data.deleteFiles, id],
-            bizFiles: data.bizFiles.filter(b => b.bizFileId !== id)
-        })
-    }
+            bizFiles: data.bizFiles.filter((b) => b.bizFileId !== id),
+        });
+    };
 
     useEffect(() => {
-        setData({ ...data, files })
+        setData({ ...data, files });
     }, [files]);
 
     return (
         <Container>
             <div>
                 <h1>사업자 등록증 첨부</h1>
-                <ErrorText>사업자 관련 파일 첨부(파일은 pdf, jpg, png만 첨부 가능)</ErrorText>
+                <ErrorText>
+                    사업자 관련 파일 첨부(파일은 pdf, jpg, png만 첨부 가능)
+                </ErrorText>
             </div>
-            <label
-                htmlFor="files"
-            >
-                <p >사업자 등록증 첨부</p>
+            <label htmlFor="files">
+                <p>사업자 등록증 첨부</p>
             </label>
-            {error && <ErrorText _color='#D32F2F' >{error}</ErrorText>}
+            {error && <ErrorText _color="#D32F2F">{error}</ErrorText>}
             <input type="file" id="files" onChange={fileUpload} />
 
             <FileForm>
-                {
-                    files.length > 0 &&
+                {files.length > 0 &&
                     files.map((file, i) => (
                         <div key={i}>
                             <p>{file.name}</p>
                             <button
-                                type='button'
-                                onClick={() => setFiles(files.filter(item => item.name !== file.name))}
-                            ><Close /></button>
+                                type="button"
+                                onClick={() =>
+                                    setFiles(
+                                        files.filter(
+                                            (item) => item.name !== file.name
+                                        )
+                                    )
+                                }
+                            >
+                                <Close />
+                            </button>
                         </div>
-                    ))
-                }
-                {
-                    data.bizFiles?.length > 0 &&
+                    ))}
+                {data.bizFiles?.length > 0 &&
                     data.bizFiles.map((file, i) => (
                         <div key={i}>
                             <p>{file.originalName}</p>
                             <button
-                                type='button'
+                                type="button"
                                 onClick={() => deleteFile(file.bizFileId)}
-                            ><Close /></button>
+                            >
+                                <Close />
+                            </button>
                         </div>
-                    ))
-                }
+                    ))}
             </FileForm>
-
         </Container>
-    )
-}
+    );
+};
 
 const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 0px;
-	gap: 16px;
-	width: 100%;
-	height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+    width: 100%;
+    height: auto;
     position: relative;
 
     & h1 {
@@ -135,48 +141,47 @@ const Container = styled.div`
 
     > .icon {
         width: 24px;
-	    height: 24px;
+        height: 24px;
     }
 
     & input[type="file"] {
-		display: none;
-	}
+        display: none;
+    }
 `;
 
 const FileForm = styled.div`
-	width: 100%;
+    width: 100%;
 
-	& div {
-		width: 100%;
-		height: 44px;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
-		padding: 12px 16px;
-		background: #f5f5f5;
+    & div {
+        width: 100%;
+        height: 44px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        background: #f5f5f5;
 
-		& p {
-			font-family: "Pretendard";
-			font-style: normal;
-			font-weight: 400;
-			font-size: 14px;
-			line-height: 20px;
-			color: #757575;
-		}
+        & p {
+            font-family: "Pretendard";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #757575;
+        }
 
-		& button {
-			cursor: pointer;
-			color: #757575;
-		}
-	}
+        & button {
+            cursor: pointer;
+            color: #757575;
+        }
+    }
 `;
 
 const ErrorText = styled.span`
     font-size: 14px !important;
     font-weight: 400 !important;
-    color: ${props => props._color || '#757575'}  !important;
+    color: ${(props) => props._color || "#757575"} !important;
 `;
-
 
 export default BusinessFileForm;
