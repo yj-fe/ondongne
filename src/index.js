@@ -24,7 +24,6 @@ import "./index.css";
 import store from "./store";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import ScrollToTop from "components/commonUi/ScrollTop";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const persistor = persistStore(store);
@@ -32,20 +31,19 @@ const persistor = persistStore(store);
 const queryClient = new QueryClient();
 
 root.render(
-	<Provider store={store}>
-		<PersistGate loading={null} persistor={persistor}>
-			<ThemeProvider theme={theme}>
-				<BrowserRouter>
-					<ScrollToTop />
-					<GlobalStyle />
-					<QueryClientProvider client={queryClient}>
-						{/* <ReactQueryDevtools initialIsOpen={false} /> */}
-						<NavermapsProvider ncpClientId="z8897i8jrt">
-							<App />
-						</NavermapsProvider>
-					</QueryClientProvider>
-				</BrowserRouter>
-			</ThemeProvider>
-		</PersistGate>
-	</Provider>
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+                <BrowserRouter>
+                    <GlobalStyle />
+                    <QueryClientProvider client={queryClient}>
+                        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+                        <NavermapsProvider ncpClientId="z8897i8jrt">
+                            <App />
+                        </NavermapsProvider>
+                    </QueryClientProvider>
+                </BrowserRouter>
+            </ThemeProvider>
+        </PersistGate>
+    </Provider>
 );

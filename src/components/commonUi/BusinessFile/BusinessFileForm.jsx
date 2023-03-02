@@ -37,13 +37,13 @@ const BusinessFileForm = ({ data, setData }) => {
     return (
         <Container>
             <div>
-                <h1>사업자 등록증 첨부</h1>
+                <h1>첨부파일(사업자 등록증)</h1>
                 <ErrorText>
-                    사업자 관련 파일 첨부(파일은 pdf, jpg, png만 첨부 가능)
+                    첨부파일은 10Mb이내 pdf, jpg, png만 첨부 가능
                 </ErrorText>
             </div>
             <label htmlFor="files">
-                <p>사업자 등록증 첨부</p>
+                <p>파일 첨부</p>
             </label>
             {error && <ErrorText _color="#D32F2F">{error}</ErrorText>}
             <input type="file" id="files" onChange={fileUpload} />

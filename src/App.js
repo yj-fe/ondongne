@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 /* ========= MEMBER ========= */
-import MyPage from "components/MyPage";
 import LocationSetting from "pages/login/LocationSetting/LocationSetting";
 import MemberManagement from "pages/member/MemberManagement/MemberManagement";
 import MemberWithdrawal from "pages/member/MemberWithdrawal/MemberWithdrawal";
@@ -91,6 +90,7 @@ function App() {
     // 로그인 유지
     useEffect(() => {
         member();
+        window.scrollTo(0, 0);
     }, [location]);
 
     return (
@@ -125,7 +125,6 @@ function App() {
 
                 {/* ========== 회원관리 ========== */}
                 <Route path="/member">
-                    <Route path="" element={<MyPage />} />
                     {/* 1주차-회원-회원수정 */}
                     <Route path="management" element={<MemberManagement />} />
                     {/* 1주차-회원-회원탈퇴 */}

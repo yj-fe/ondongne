@@ -16,6 +16,19 @@ import Alert from "components/commonUi/Alert";
 import { useNavigate } from "react-router-dom";
 import LayoutMain from "components/layout/Layout/LayoutMain";
 import MainBanner from "components/Main/Main/MainBanner/MainBanner";
+import CategoryCollection from "components/Main/Main/CategoryCollection/index";
+const categories = [
+    "야채/과일",
+    "정육",
+    "수산/해산",
+    "쌀/잡곡",
+    "식품",
+    "생활용품",
+    "디저트",
+    "식음료",
+    "반려동물",
+    "기타",
+];
 
 function MainPage() {
     const navigate = useNavigate();
@@ -74,6 +87,17 @@ function MainPage() {
                     <L.Contents _cursor="default" _padding="20px 0px 20px 0px">
                         <MainBestCollection />
                     </L.Contents>
+
+                    {/* 카테고리 */}
+                    {categories.map((c, i) => (
+                        <L.Contents
+                            key={i}
+                            _cursor="default"
+                            _padding="20px 0px 20px 0px"
+                        >
+                            <CategoryCollection category={c} />
+                        </L.Contents>
+                    ))}
 
                     <L.Inner>
                         <FooterLayout />
