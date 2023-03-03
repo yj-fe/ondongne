@@ -132,19 +132,19 @@ function BusinessApplication() {
 
     useEffect(() => {
         if (
-            data.storeName.length > 0 &&
-            data.categories.length > 0 &&
-            data.address.length > 0 &&
-            data.addressDetails.length > 0 &&
-            data.delivery.length > 0 &&
-            data.ceo.length > 0 &&
-            data.businessNumber.length === 12 &&
-            data.files.length > 0 &&
-            data.banner.length > 0 &&
-            data.profile.length > 0 &&
-            data.deliveryPrice.length > 0 &&
-            data.parcelPrice.length > 0 &&
-            data.recetiveType.length > 0
+            data.storeName?.length > 0 &&
+            data.categories?.length > 0 &&
+            data.address?.length > 0 &&
+            data.addressDetails?.length > 0 &&
+            data.delivery?.length > 0 &&
+            data.ceo?.length > 0 &&
+            data.businessNumber?.length === 12 &&
+            data.files?.length > 0 &&
+            data.banner?.length > 0 &&
+            data.profile?.length > 0 &&
+            data.deliveryPrice?.length > 0 &&
+            data.parcelPrice?.length > 0 &&
+            data.recetiveType?.length > 0
         ) {
             setDisabled(true);
         } else {
