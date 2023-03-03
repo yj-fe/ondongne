@@ -1,7 +1,5 @@
 import LastDateCountDown from "hooks/LastDateCountDown";
-import moment from "moment/moment";
 import { Watch } from "react-loader-spinner";
-import Moment from "react-moment";
 import styled from "styled-components";
 
 const ContentDate = styled.div`
@@ -44,7 +42,7 @@ const ProductTimer = ({ date }) => {
             />
             <p>
                 {days > 0 && `D-${`${days}일`} ${hours}시간 ${minutes}분`}
-                {days < 0 && `D-Day`}
+                {days <= 0 && `D-Day ${hours}시간 ${minutes}분`}
             </p>
         </ContentDate>
     );

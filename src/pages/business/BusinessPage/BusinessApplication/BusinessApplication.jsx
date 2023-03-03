@@ -84,6 +84,9 @@ function BusinessApplication() {
     };
 
     const fileUpload = (e, key) => {
+        if (!e.target.files[0]) {
+            return false;
+        }
         const uploadFile = e.target.files[0];
         const valid = imageValidation(uploadFile);
 

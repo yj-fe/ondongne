@@ -71,7 +71,7 @@ function MainPage() {
                     </L.Contents>
 
                     {/* 공동구매 마지막 찬스 */}
-                    <L.Contents _padding="0px 0px 20px 0px">
+                    <L.Contents _padding="20px 0px 20px 0px">
                         <MainLastChance />
                     </L.Contents>
 

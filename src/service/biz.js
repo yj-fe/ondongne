@@ -35,7 +35,6 @@ export function getBiz() {
 export function bizSignup(bizData) {
     const headers = { "Content-Type": "multipart/form-data" };
     const data = new FormData();
-    console.log(bizData);
 
     data.append("storeName", bizData.storeName);
     data.append("address", bizData.address);

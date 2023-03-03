@@ -9,6 +9,9 @@ const BusinessFileForm = ({ data, setData }) => {
     const [error, setError] = useState("");
 
     const fileUpload = (e) => {
+        if (!e.target.files[0]) {
+            return false;
+        }
         const uploadFile = e.target.files[0];
         const valid = fileValidation(uploadFile);
 
