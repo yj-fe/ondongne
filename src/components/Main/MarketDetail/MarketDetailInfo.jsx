@@ -49,27 +49,27 @@ function MarketDetailInfo({ item }) {
                                 </tr>
                                 <tr>
                                     <th></th>
-                                    <td>화요일 : {dayweekToText("월요일")}</td>
+                                    <td>화요일 : {dayweekToText("화요일")}</td>
                                 </tr>
                                 <tr>
                                     <th></th>
-                                    <td>수요일 : {dayweekToText("월요일")}</td>
+                                    <td>수요일 : {dayweekToText("수요일")}</td>
                                 </tr>
                                 <tr>
                                     <th></th>
-                                    <td>목요일 : {dayweekToText("월요일")}</td>
+                                    <td>목요일 : {dayweekToText("목요일")}</td>
                                 </tr>
                                 <tr>
                                     <th></th>
-                                    <td>금요일 : {dayweekToText("월요일")}</td>
+                                    <td>금요일 : {dayweekToText("금요일")}</td>
                                 </tr>
                                 <tr>
                                     <th></th>
-                                    <td>토요일 : {dayweekToText("월요일")}</td>
+                                    <td>토요일 : {dayweekToText("토요일")}</td>
                                 </tr>
                                 <tr>
                                     <th></th>
-                                    <td>일요일 : {dayweekToText("월요일")}</td>
+                                    <td>일요일 : {dayweekToText("일요일")}</td>
                                 </tr>
                                 <tr>
                                     <th>전화번호</th>
