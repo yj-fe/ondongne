@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const InfoCard = styled.div`
     display: flex;
@@ -125,7 +124,7 @@ export const FloatingContentTitle = styled.div`
     font-size: 16px;
     color: #000000;
 `;
-export const FloatingLink = styled(Link)`
+export const FloatingLink = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -133,6 +132,7 @@ export const FloatingLink = styled(Link)`
     gap: 12px;
     width: max-content;
     height: 56px;
+    cursor: pointer;
 `;
 export const Display = styled.div`
     @media screen and (max-width: 500px) {

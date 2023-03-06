@@ -36,7 +36,7 @@ const FloatingUi = () => {
         }
 
         // 비즈 심사 대기 중
-        if (!data.bizStatus) {
+        if (data.bizStatus === 0) {
             return setAlert({
                 title: "비즈 심사 대기 중입니다.",
                 contents:
@@ -47,8 +47,19 @@ const FloatingUi = () => {
             });
         }
 
+        // 비즈 심사 반려
+        if (data.bizStatus === -1) {
+            return setAlert({
+                title: "심사가 반려되었습니다.",
+                contents: "자세한 내용은 1:1문의를 이용해주세요.",
+                buttonText: "확인",
+                onButtonClick: () => setAlert(false),
+                onOverlayClick: () => setAlert(false),
+            });
+        }
+
         // 비즈 홈
-        if (data.bizStatus) {
+        if (data.bizStatus === 1) {
             return navigate("/business");
         }
     };

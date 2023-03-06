@@ -69,12 +69,12 @@ const Container = styled.div`
 
     @media screen and (max-width: 728px) {
         width: 100%;
-        height: 100%;
+        height: 100vh;
     }
 
     @media screen and (max-height: 706px) {
         width: 100%;
-        height: 100%;
+        height: 100vh;
     }
 `;
 

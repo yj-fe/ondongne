@@ -7,6 +7,7 @@ import { ArrowTop, Down } from "components/commonUi/Icon";
 import {
     Scroll,
     ToggleBody,
+    ToggleText,
     ToggleDiv,
 } from "components/Login/Password/ToggleDetail/ToggleDetailStyle";
 import { faqList } from "service/border";
@@ -81,13 +82,9 @@ function FaqList({ item }) {
 
 function Toggle({ item }) {
     return (
-        <div>
-            <ToggleBody>
-                <ToggleDiv _padding="16px">
-                    <T.Text>{item.contents}</T.Text>
-                </ToggleDiv>
-            </ToggleBody>
-        </div>
+        <ToggleBody>
+            <ToggleText _height={110} value={item.contents} readOnly={true} />
+        </ToggleBody>
     );
 }
 

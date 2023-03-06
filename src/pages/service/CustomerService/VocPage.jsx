@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Layout from "components/layout/Layout/Layout";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
@@ -26,6 +26,7 @@ import { Scroll } from "./../../../components/Login/Password/ToggleDetail/Toggle
 
 function VocPage() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [confirm, setConfirm] = useState(false);
     const [btn, setBtn] = useState(false);
     const [show, setShow] = useState();
@@ -34,7 +35,7 @@ function VocPage() {
     //포스트맨 body
     const [data, setData] = useState({
         category: "VOC",
-        type: "UI/UX",
+        type: location?.state?.type ?? "UI/UX",
         title: "",
         contents: "",
         check: false,

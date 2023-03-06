@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as Trans } from "assets/icons/business/Trans.svg";
 import * as I from "./icon/Icon";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
     FloatingLink,
     FloatingContentTitle,
@@ -55,6 +55,7 @@ const Auth = ({ bizMember }) => {
                             icon={<I.Voc />}
                             to="/service/voc"
                             title="상품 제안 하기"
+                            state={{ type: "상품 제안" }}
                         />
                     </FloatingBox>
                     <FloatingBox>
@@ -86,9 +87,19 @@ const UnAuth = () => {
     );
 };
 
-const Floating = ({ icon, to, title }) => {
+const Floating = ({ icon, to, title, state = null }) => {
+    const navigate = useNavigate();
+
+    const router = () => {
+        if (state !== null) {
+            return navigate(to, { state });
+        }
+
+        return navigate(to);
+    };
+
     return (
-        <FloatingLink to={to}>
+        <FloatingLink onClick={router}>
             {icon}
             <FloatingContentTitle>{title}</FloatingContentTitle>
         </FloatingLink>
