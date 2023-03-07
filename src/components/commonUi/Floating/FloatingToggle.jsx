@@ -34,6 +34,11 @@ const Auth = ({ bizMember }) => {
                             title="상점 소식"
                         />
                         <Floating
+                            icon={<I.Store />}
+                            to="/business/timesale/upload"
+                            title="타임세일 등록"
+                        />
+                        <Floating
                             icon={<I.Product />}
                             to="/business/upload"
                             title="상품 등록"

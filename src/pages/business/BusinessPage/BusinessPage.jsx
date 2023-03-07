@@ -222,6 +222,14 @@ function BusinessPage() {
                                 </TermsIconStyle>
                             </TermsDiv>
                         </Link>
+                        <Link to="/business/timesale">
+                            <TermsDiv>
+                                <TermsTitle>타임세일 관리</TermsTitle>
+                                <TermsIconStyle>
+                                    <Right />
+                                </TermsIconStyle>
+                            </TermsDiv>
+                        </Link>
                         <Link to="/business/order">
                             <TermsDiv>
                                 <TermsTitle>주문 관리</TermsTitle>

@@ -62,6 +62,8 @@ import SearchDetailPage from "pages/main/Search/SearchDetailPage";
 import SearchResultPage from "pages/main/Search/SearchResultPage";
 import BusinessCouponUpload from "./pages/business/BusinessPage/Coupon/BusinessCouponUpload";
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
+import TimeSalePage from "pages/business/BusinessPage/timesale/TimeSalePage";
+import TimeSaleUploadPage from "pages/business/BusinessPage/timesale/TimeSaleUploadPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -162,6 +164,15 @@ function App() {
                     <Route
                         path="product"
                         element={<BusinessProductManagement />}
+                    />
+                    <Route path="timesale" element={<TimeSalePage />} />
+                    <Route
+                        path="timesale/upload"
+                        element={<TimeSaleUploadPage />}
+                    />
+                    <Route
+                        path="timesale/update/:id"
+                        element={<TimeSaleUploadPage />}
                     />
                     {/* 상품 등록 */}
                     <Route path="upload" element={<BusinessProductUpload />} />

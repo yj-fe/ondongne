@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import ko from "date-fns/locale/ko";
+import "react-calendar/dist/Calendar.css";
 import Overlay from "../layout/Overlay/Overlay";
 import { format } from "date-fns";
 
@@ -26,8 +26,9 @@ const CalendarModel = ({
     return (
         <Overlay onOverlayClick={modelClose}>
             <Calendar
-                onChange={onChangeDate}
+                className="myCalendar"
                 date={date}
+                onChange={onChangeDate}
                 dateDisplayFormat={dateFormat}
                 minDate={new Date(date.setDate(date.getDate() + 1))}
                 maxDate={new Date(date.setDate(date.getDate() + maxDay))}
