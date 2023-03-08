@@ -2,8 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
+import * as B from "components/commonUi/Button";
 import ProductCart from "../Cart/ProductCart";
 import {
+    AbsoluteTopDiv,
     AbsoluteDiv,
     ImgSizeLayout,
     RelativDiv,
@@ -14,10 +16,22 @@ import StarRate from "components/commonUi/StarRate";
 
 export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
     const navigate = useNavigate();
-    const salePercent = disRate(item.price, item.salePrice);
+    const salePercent = disRate(
+        item.price,
+        item.timeSaleStatus && item.timeSale
+            ? item.timeSale.price
+            : item.salePrice
+    );
     return (
         <L.FlexCols ref={lastRef} _gap={12} _padding={0} _width={width + "px"}>
             <RelativDiv>
+                {item.timeSaleStatus && (
+                    <AbsoluteTopDiv _top={"5px"} _left={"5px"}>
+                        <B.Badge _color="white" _bg="blue">
+                            타임 세일
+                        </B.Badge>
+                    </AbsoluteTopDiv>
+                )}
                 {isCart && (
                     <AbsoluteDiv>
                         <ProductCart id={item.itemId} count={1} type={"list"} />
@@ -29,7 +43,6 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
                         _height={width}
                         _bdr={6}
                         _object="cover"
-                        // src={ImgSize}
                         src={
                             item.images &&
                             item.images.length > 0 &&
@@ -44,15 +57,19 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
                             _height={width}
                             _bdr={6}
                             _object="cover"
-                            // src={ImgSize}
-
                             src={
                                 item.images &&
                                 item.images.length > 0 &&
                                 item.images[0]
                             }
                         />
-                        <T.SoldoutText _size={20} _weight={600} _color="white">
+                        <T.SoldoutText
+                            _size={20}
+                            _weight={600}
+                            _color="white"
+                            _width={width}
+                            _height={width}
+                        >
                             판매완료
                         </T.SoldoutText>
                     </div>
@@ -61,7 +78,7 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
 
             <L.FlexCols _gap={"4"} _padding={0}>
                 {item.type === "GROUP" && !item.soldoutStatus && (
-                    <ProductTimer date={item.endDate} />
+                    <ProductTimer endDate={item.endDate} />
                 )}
                 <L.FlexCols _gap={"0"}>
                     <T.Text _size={12} _weight={500} _color="gray600">

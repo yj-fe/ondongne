@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
 import Layout from "components/layout/Layout/Layout";
@@ -18,6 +18,8 @@ import DatePicker from "react-datepicker";
 import { ko } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import "components/datepicker/style.css";
+import { getTimeSale, createTimesale, updateTimesale } from "service/timesale";
+import Alert from "components/commonUi/Alert";
 
 const TimeSaleUploadPage = () => {
     const { id } = useParams();
@@ -31,17 +33,118 @@ const TimeSaleUploadPage = () => {
         endDateTime: "",
     });
 
-    console.log("data ; ", data);
     const [itemModal, setItemModal] = useState(false);
+    const [maxDate, setMaxDate] = useState(new Date());
 
+    const [alert, setAlert] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [active, setActive] = useState(false);
+
+    const loadData = useCallback(async () => {
+        setLoading(true);
+        await getTimeSale(id)
+            .then((response) => {
+                setData({
+                    ...response.data,
+                    price: numberFormat(response.data.price),
+                    count: numberFormat(response.data.count),
+                    item: [
+                        {
+                            itemId: response.data.itemId,
+                            name: response.data.name,
+                        },
+                    ],
+                    endDateTime: new Date(response.data.endDateTime),
+                    startDateTime: new Date(response.data.startDateTime),
+                });
+            })
+            .catch((e) => {
+                setAlert({
+                    contents: e.message,
+                    onButtonClick: () => setAlert(null),
+                });
+            })
+            .finally(() => setLoading(false));
+    }, [id]);
+
+    const updateHandler = () => {
+        setLoading(true);
+
+        updateTimesale(data)
+            .then((response) => {
+                const { message } = response.data;
+                setAlert({
+                    contents: message,
+                    onButtonClick:
+                        response.status === 200
+                            ? () => navigate("/business/timesale")
+                            : () => setAlert(null),
+                });
+            })
+            .catch((e) => {
+                setAlert({
+                    contents: e.message,
+                    onButtonClick: () => setAlert(null),
+                });
+            })
+            .finally(() => setLoading(false));
+    };
+
+    const createHandler = () => {
+        setLoading(true);
+
+        createTimesale(data)
+            .then((response) => {
+                const { message } = response.data;
+                setAlert({
+                    contents: message,
+                    onButtonClick:
+                        response.status === 200
+                            ? () => navigate("/business/timesale")
+                            : () => setAlert(null),
+                });
+            })
+            .catch((e) => {
+                setAlert({
+                    contents: e.message,
+                    onButtonClick: () => setAlert(null),
+                });
+            })
+            .finally(() => setLoading(false));
+    };
+
+    useEffect(() => {
+        if (data.startDateTime) {
+            const date = new Date(data.startDateTime);
+            setMaxDate(date.setDate(date.getDate() + 7));
+        }
+    }, [data.startDateTime]);
+
+    useEffect(() => {
+        if (
+            data.item.length > 0 &&
+            Number(data.price?.replaceAll(",", "")) > 0 &&
+            Number(data.count?.replaceAll(",", "")) > 0 &&
+            data.startDateTime &&
+            data.endDateTime
+        ) {
+            setActive(true);
+        } else {
+            setActive(false);
+        }
+    }, [data]);
+
+    useEffect(() => {
+        if (id) {
+            loadData(id);
+        }
+    }, [id, loadData]);
 
     return (
         <Layout
             title={id ? "타임세일 수정" : "타임세일 등록"}
             cart={false}
             bell={false}
-            completed={true}
             floating={false}
             bottom={"1px solid #EEEEEE"}
             onBackClick={() => navigate(-1)}
@@ -54,7 +157,11 @@ const TimeSaleUploadPage = () => {
                             <T.Text _weight={600} _size={16} _color="gray900">
                                 상품 선택
                             </T.Text>
-                            <TitleInfoDiv onClick={() => setItemModal(true)}>
+                            <TitleInfoDiv
+                                onClick={
+                                    id ? () => {} : () => setItemModal(true)
+                                }
+                            >
                                 {data.item?.length > 0 ? (
                                     <TitleInfo>{data.item[0].name}</TitleInfo>
                                 ) : (
@@ -64,6 +171,9 @@ const TimeSaleUploadPage = () => {
                                     <ArrowRightB />
                                 </RightStyle>
                             </TitleInfoDiv>
+                            <T.Text _weight={400} _size={12} _color="error">
+                                * 한번 등록 된 상품은 변경할 수 없습니다.
+                            </T.Text>
                         </L.FlexCols>
 
                         {/* 상품 가격 & 상품 수량 */}
@@ -139,6 +249,7 @@ const TimeSaleUploadPage = () => {
                                             setData((d) => ({
                                                 ...d,
                                                 startDateTime: date,
+                                                endDateTime: "",
                                             }))
                                         }
                                         startDate={new Date()}
@@ -157,18 +268,37 @@ const TimeSaleUploadPage = () => {
                                         showTimeSelect
                                         placeholderText="종료일 선택"
                                         selected={data.endDateTime}
-                                        onChange={(date) =>
+                                        onChange={(date) => {
                                             setData((d) => ({
                                                 ...d,
                                                 endDateTime: date,
-                                            }))
-                                        }
-                                        startDate={
-                                            data.startDateTime
-                                                ? data.startDateTime
-                                                : new Date()
-                                        }
-                                        minDate={new Date()}
+                                            }));
+                                        }}
+                                        onCalendarClose={() => {
+                                            if (
+                                                new Date(
+                                                    data.endDateTime
+                                                ).getTime() <=
+                                                new Date(
+                                                    data.startDateTime
+                                                ).getTime()
+                                            ) {
+                                                setAlert({
+                                                    contents:
+                                                        "기간을 올바르게 써주세요.",
+                                                    onButtonClick: () => {
+                                                        setData((d) => ({
+                                                            ...d,
+                                                            endDateTime: "",
+                                                        }));
+                                                        setAlert(null);
+                                                    },
+                                                });
+                                            }
+                                        }}
+                                        startDate={data.startDateTime}
+                                        minDate={data.startDateTime}
+                                        maxDate={maxDate}
                                         locale={ko}
                                         showPopperArrow={false}
                                         dateFormat="yy-MM-dd HH:mm"
@@ -186,8 +316,9 @@ const TimeSaleUploadPage = () => {
                 <B.FixedActionButton
                     type="button"
                     _displaymedia="none"
-                    onClick={onsubmit}
-                    disabled={loading}
+                    onClick={id ? updateHandler : createHandler}
+                    disabled={loading || !active}
+                    backgroundColor={active ? "green700" : "gray300"}
                 >
                     {id ? "수정" : "등록"}
                 </B.FixedActionButton>
@@ -198,6 +329,14 @@ const TimeSaleUploadPage = () => {
                     selected={data.item[0]?.itemId}
                     modelClose={() => setItemModal(false)}
                     dataHandler={setData}
+                />
+            )}
+            {alert && (
+                <Alert
+                    contents={alert.contents}
+                    buttonText={"확인"}
+                    onButtonClick={alert.onButtonClick}
+                    onOverlayClick={() => {}}
                 />
             )}
         </Layout>

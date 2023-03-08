@@ -12,7 +12,7 @@ import {
     ModalOutside,
     ModalTitle,
 } from "components/Main/More/ModalPageStyle";
-import { ProductCardGrid } from "components/Main/productDetails/ProductCardGrid";
+import { BizTimeSaleCard } from "components/Main/productDetails/BizTimeSaleCard";
 import { CursorDiv } from "components/Common/LayoutPageStyle";
 import { getBizTimesaleList } from "service/timesale";
 
@@ -35,7 +35,7 @@ function TimeSalePage() {
         });
 
         if (response && response.data) {
-            setItems(response.data);
+            setItems(response.data.data.items);
         }
         setLoading(false);
     }, [auth, sort]);
@@ -52,16 +52,16 @@ function TimeSalePage() {
                 title="타임세일 관리"
                 cart={false}
                 bell={false}
-                onBackClick={() => navigate(-1)}
+                onBackClick={() => navigate("/business")}
             >
                 <L.Container>
                     <L.Contents
                         _padding="24px 20px"
-                        _height={"calc(100vh - 58px)"}
+                        _height={"calc(100vh - 70px)"}
                     >
-                        <L.Scroll>
+                        <L.Scroll _height={"calc(100vh - 120px)"}>
                             <L.FlexCols _padding={0} _gap={0}>
-                                <L.FlexRows _gap={16} _content="space-between">
+                                <L.FlexRows _content="space-between">
                                     <div>
                                         <T.Text
                                             _size={16}
@@ -94,7 +94,7 @@ function TimeSalePage() {
                                 </L.FlexRows>
 
                                 <L.Contents _padding="0px" _gap={20}>
-                                    {items && items?.length === 0 && (
+                                    {items?.length === 0 && (
                                         <L.Contents _padding="50px 0px">
                                             <L.NoneDataContainer>
                                                 <T.Text
@@ -118,20 +118,15 @@ function TimeSalePage() {
                                         </L.Contents>
                                     )}
                                     <L.Grid>
-                                        {items &&
-                                            items?.length > 0 &&
+                                        {items?.length > 0 &&
                                             items.map((item) => (
                                                 <React.Fragment
-                                                    key={item.timesaleId}
+                                                    key={item.itemId}
                                                 >
-                                                    {/* <ProductCardGrid
+                                                    <BizTimeSaleCard
                                                         isCart={false}
                                                         item={item}
-                                                    /> */}
-                                                    <p>{item.itemId}</p>
-                                                    <p>{item.name}</p>
-                                                    <p>{item.startDateTime}</p>
-                                                    <p>{item.endDateTime}</p>
+                                                    />
                                                 </React.Fragment>
                                             ))}
                                     </L.Grid>

@@ -263,7 +263,7 @@ function DetailsPage(props) {
                                             {item.type === "GROUP" &&
                                                 !item.soldoutStatus && (
                                                     <ProductTimer
-                                                        date={item.endDate}
+                                                        endDate={item.endDate}
                                                     />
                                                 )}
                                             <T.Text

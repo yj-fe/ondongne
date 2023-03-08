@@ -120,7 +120,7 @@ function CustomerService() {
                                     _size={14}
                                     _color="gray800"
                                 >
-                                    pay.hyperlocality@gmail.com
+                                    cs.hyperlocality@gmail.com
                                 </T.Text>
                             </L.FlexRows>
                         </L.FlexCols>

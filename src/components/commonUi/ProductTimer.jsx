@@ -1,4 +1,4 @@
-import LastDateCountDown from "hooks/LastDateCountDown";
+import useCountDown from "hooks/useCountDown";
 import { Watch } from "react-loader-spinner";
 import styled from "styled-components";
 
@@ -9,12 +9,12 @@ const ContentDate = styled.div`
     gap: 4px;
     width: max-content !important;
     height: 22px;
-    background: #fdecee;
+    background: ${(props) => props._bg};
     border-radius: 2px;
     font-weight: 700;
     font-size: 12px;
     line-height: 18px;
-    color: #ed4f62;
+    color: ${(props) => props._color};
     margin-bottom: 4px;
 
     & div {
@@ -26,23 +26,28 @@ const ContentDate = styled.div`
     }
 `;
 
-const ProductTimer = ({ date }) => {
-    const [days, hours, minutes, seconds] = LastDateCountDown(date);
+const ProductTimer = ({ startDate = new Date(), endDate, type = false }) => {
+    const [days, hours, minutes, seconds] = useCountDown(startDate, endDate);
 
+    if (days < 0) return <></>;
     return (
-        <ContentDate>
+        <ContentDate
+            _bg={type ? "#f1faff" : "#fdecee"}
+            _color={type ? "#0095e8" : "#ed4f62"}
+        >
             <Watch
                 height="12"
                 width="12"
                 radius="48"
-                color="red"
+                color={type ? "#0095e8" : "#ed4f62"}
                 ariaLabel="watch-loading"
                 wrapperStyle={{ fontWeight: "blod" }}
                 visible={true}
             />
             <p>
-                {days > 0 && `D-${`${days}일`} ${hours}시간 ${minutes}분`}
-                {days <= 0 && `D-Day ${hours}시간 ${minutes}분`}
+                {days > 0 &&
+                    `D-${`${days}일`} ${hours}시간 ${minutes}분 ${seconds}초`}
+                {days === 0 && `D-Day ${hours}시간 ${minutes}분 ${seconds}초`}
             </p>
         </ContentDate>
     );

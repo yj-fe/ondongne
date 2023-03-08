@@ -367,7 +367,7 @@ export const Grid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     padding: 0px;
     width: 100%;
-    padding-top: 32px;
+    padding-top: 16px;
     gap: 32px 20px;
     @media screen and (max-width: 535px) {
         grid-template-columns: repeat(2, 1fr);

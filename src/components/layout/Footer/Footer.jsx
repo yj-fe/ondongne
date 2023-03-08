@@ -21,7 +21,7 @@ function FooterLayout() {
                     <br />
                     <span>고객센터: 02-6954-1685</span>
                     <br />
-                    <span>이메일문의: pay.hyperlocality@gmail.com</span>
+                    <span>이메일문의: cs.hyperlocality@gmail.com</span>
                 </FooterText>
             </Footer>
         </FooterDiv>

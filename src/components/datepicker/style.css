@@ -1,10 +1,6 @@
 .react-datepicker {
     border: 0;
     box-shadow: 0px 1px 5px 4px rgba(0, 0, 0, 0.06);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
 }
 .react-datepicker__input-container input {
@@ -23,4 +19,8 @@
 
 .react-datepicker__time-list-item {
     list-style: none;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: "Pretendard";
+    font-style: normal;
 }

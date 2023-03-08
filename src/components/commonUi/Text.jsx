@@ -55,10 +55,10 @@ export const TextMedia = styled.p`
 export const SoldoutText = styled.p`
     position: absolute;
     top: 0;
-    z-index: 9999;
+    z-index: 997;
     background: rgba(0, 0, 0, 0.6);
-    width: 100%;
-    height: 100%;
+    width: ${(props) => props._width || 216}px;
+    height: ${(props) => props._height || 216}px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,4 +71,20 @@ export const SoldoutText = styled.p`
     text-align: left;
     -webkit-text-decoration: none;
     text-decoration: none;
+    @media screen and (max-width: 678px) {
+        width: 187px;
+        height: 187px;
+    }
+    @media screen and (max-width: 578px) {
+        width: 167px;
+        height: 167px;
+    }
+    @media screen and (max-width: 360px) {
+        width: 150px;
+        height: 150px;
+    }
+    @media screen and (max-width: 340px) {
+        width: 130px;
+        height: 130px;
+    }
 `;
