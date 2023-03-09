@@ -77,9 +77,19 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
             </RelativDiv>
 
             <L.FlexCols _gap={"4"} _padding={0}>
-                {item.type === "GROUP" && !item.soldoutStatus && (
-                    <ProductTimer endDate={item.endDate} />
+                {item.timeSaleStatus ? (
+                    <ProductTimer
+                        startDate={item.timeSale.startDateTime}
+                        endDate={item.timeSale.endDateTime}
+                        type={true}
+                    />
+                ) : (
+                    item.type === "GROUP" &&
+                    !item.soldoutStatus && (
+                        <ProductTimer endDate={item.endDate} />
+                    )
                 )}
+
                 <L.FlexCols _gap={"0"}>
                     <T.Text _size={12} _weight={500} _color="gray600">
                         {item.storeName}
@@ -118,7 +128,10 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
                             _color="gray900"
                             _line="20px"
                         >
-                            {numberFormat(item.salePrice)} 원
+                            {item.timeSaleStatus && item.timeSale
+                                ? numberFormat(item.timeSale.price)
+                                : numberFormat(item.salePrice)}{" "}
+                            원
                         </T.Text>
                     </L.FlexRows>
                 </L.FlexCols>

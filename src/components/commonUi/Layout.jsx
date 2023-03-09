@@ -188,6 +188,21 @@ export const BottomColsW = styled.div`
     }
 `;
 
+export const BottomRow = styled.div`
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: ${(props) => props._width || "688px"};
+    max-width: ${(props) => props.theme.breakpoint.tablet}px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    gap: ${(props) => props._gap || 8}px;
+    padding: ${(props) => props._padding || "0px"};
+`;
+
 export const BottomCols = styled.div`
     position: fixed;
     display: flex;

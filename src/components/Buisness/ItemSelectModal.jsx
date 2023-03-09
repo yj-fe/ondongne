@@ -6,14 +6,16 @@ import { TextInput } from "components/commonUi/Input";
 import { Text } from "components/commonUi/Text";
 import Overlay from "components/layout/Overlay/Overlay";
 import { bizItemList, findByItemName } from "service/bizItem";
+import { useNavigate } from "react-router-dom";
 
 const ItemSelectModal = ({ modelClose, storeId, selected, dataHandler }) => {
+    const navigate = useNavigate();
     const [list, setList] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
     const [keyword, setKeyword] = useState("");
 
     const loadData = useCallback(async () => {
-        const response = await bizItemList(0, "create");
+        const response = await bizItemList(0, "create", "normal");
 
         if (response && response.data) {
             const { data } = response.data;
@@ -37,7 +39,11 @@ const ItemSelectModal = ({ modelClose, storeId, selected, dataHandler }) => {
         setList([]);
         setErrorMessage("");
 
-        const response = await findByItemName({ search: keyword, storeId });
+        const response = await findByItemName({
+            search: keyword,
+            storeId,
+            type: "normal",
+        });
         const { data, message } = response.data;
         if (message) setErrorMessage(message);
         if (data) {
@@ -122,10 +128,26 @@ const ItemSelectModal = ({ modelClose, storeId, selected, dataHandler }) => {
                             </Text>
                         )}
                     </FlexCols>
+
                     {/* ============ 검색리스트 ============ */}
-                    <S.List>
-                        {list.length > 0 &&
-                            list.map((item, i) => (
+                    {list.length === 0 && (
+                        <S.EmptyList>
+                            <div>
+                                <p>타임세일에 등록할 상품이 없습니다.</p>
+                                <p>상품을 등록해보세요!</p>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => navigate("/business/upload")}
+                            >
+                                상품 등록
+                            </button>
+                        </S.EmptyList>
+                    )}
+                    {/* ============ 검색리스트 ============ */}
+                    {list.length > 0 && (
+                        <S.List>
+                            {list.map((item, i) => (
                                 <S.Item
                                     key={i}
                                     checked={item.checked}
@@ -143,7 +165,8 @@ const ItemSelectModal = ({ modelClose, storeId, selected, dataHandler }) => {
                                     </S.ItemText>
                                 </S.Item>
                             ))}
-                    </S.List>
+                        </S.List>
+                    )}
                 </S.Body>
                 <S.Button onClick={onSubmit}>적용</S.Button>
             </S.AlertBox>
@@ -222,6 +245,26 @@ const S = {
         width: 48px;
         height: 48px;
         border-radius: 4px;
+    `,
+    EmptyList: styled.div`
+        width: 100%;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        & p {
+            color: #333333;
+        }
+
+        & button {
+            width: max-content;
+            background: #f5f5f5;
+            font-size: 15px;
+            border-radius: 99px;
+            padding: 8px 12px;
+        }
     `,
 };
 

@@ -26,7 +26,7 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
     return (
         <L.FlexColsGrid ref={lastRef} _gap={12} _padding={0}>
             <RelativDiv>
-                {item.timeSaleStatus && (
+                {item.timeSaleStatus && item.timeSale && (
                     <AbsoluteTopDiv _top={"5px"} _left={"5px"}>
                         <B.Badge _color="white" _bg="blue">
                             타임 세일
@@ -63,18 +63,18 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                 )}
             </RelativDiv>
             <L.FlexCols _gap={"4"} _padding={0}>
-                {item.timeSaleStatus && (
+                {item.timeSaleStatus ? (
                     <ProductTimer
                         startDate={item.timeSale.startDateTime}
                         endDate={item.timeSale.endDateTime}
                         type={true}
                     />
-                )}
-                {!item.timeSaleStatus &&
+                ) : (
                     item.type === "GROUP" &&
                     !item.soldoutStatus && (
                         <ProductTimer endDate={item.endDate} />
-                    )}
+                    )
+                )}
                 <L.FlexCols _gap={"0"}>
                     <T.Text _size={12} _weight={500} _color="gray600">
                         {item.storeName}
@@ -114,8 +114,8 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                             _line="20px"
                         >
                             {item.timeSaleStatus && item.timeSale
-                                ? item.timeSale.price
-                                : item.salePrice}{" "}
+                                ? numberFormat(item.timeSale.price)
+                                : numberFormat(item.salePrice)}{" "}
                             원
                         </T.Text>
                     </L.FlexRows>

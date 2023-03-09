@@ -1,6 +1,7 @@
 import { client } from ".";
 
 const urls = {
+    timeSale: "/item/timeSale/list",
     group: "/item/group/list",
     bestCoupon: "/store/coupon/list",
     bestItem: "/item/best/list",
@@ -18,11 +19,20 @@ export async function getBanners() {
 }
 
 /* ==============================
-    메인 페이지 쿠폰 상품 리스트
+    메인 페이지 쿠폰 상점 리스트
 ============================== */
 export function getStoreCouponList(local, limit = 9, page = 1) {
     return client.get(
         `${urls.bestCoupon}?x=${local.x}&y=${local.y}&page=${page}&limit=${limit}`
+    );
+}
+
+/* ==============================
+   우리동네 타임세일 상품 리스트
+============================== */
+export function getTimeSaleItemList(local, limit = 9, page = 1) {
+    return client.get(
+        `${urls.timeSale}?x=${local.x}&y=${local.y}&page=${page}&limit=${limit}`
     );
 }
 

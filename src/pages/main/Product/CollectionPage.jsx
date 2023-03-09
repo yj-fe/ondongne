@@ -10,6 +10,7 @@ import {
     getLastGroupItemList,
     bestItemList,
     getStoreCouponList,
+    getTimeSaleItemList,
 } from "service/main";
 import { useSelector } from "react-redux";
 import LoadingBar from "components/commonUi/LoadingBar";
@@ -43,6 +44,10 @@ function CollectionPage() {
 
         if (title === "우리동네 신규 입점") {
             return await newStoreList(local, limit);
+        }
+
+        if (title === "우리동네 타임세일") {
+            return await getTimeSaleItemList(local, limit);
         }
     };
 

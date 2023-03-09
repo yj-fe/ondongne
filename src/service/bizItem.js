@@ -13,8 +13,8 @@ const urls = {
 /* ==============================
    비즈 상점 상품 목록
 ============================== */
-export function bizItemList(page, sort) {
-    return client.get(`${urls.list}?page=${page}&sort=${sort}`);
+export function bizItemList(page, sort, type = "all") {
+    return client.get(`${urls.list}?page=${page}&sort=${sort}&type=${type}`);
 }
 
 /* ==============================
@@ -22,7 +22,7 @@ export function bizItemList(page, sort) {
 ============================== */
 export function findByItemName(data) {
     return client.get(
-        `${urls.findByName}?search=${data.search}&storeId=${data.storeId}`
+        `${urls.findByName}?search=${data.search}&storeId=${data.storeId}&type=${data.type}`
     );
 }
 

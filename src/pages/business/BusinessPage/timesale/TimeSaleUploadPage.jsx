@@ -18,14 +18,22 @@ import DatePicker from "react-datepicker";
 import { ko } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import "components/datepicker/style.css";
-import { getTimeSale, createTimesale, updateTimesale } from "service/timesale";
+import {
+    getTimeSale,
+    createTimesale,
+    updateTimesale,
+    deleteTimesale,
+} from "service/timesale";
 import Alert from "components/commonUi/Alert";
+import Confirm from "components/commonUi/Confirm";
 
 const TimeSaleUploadPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const auth = useSelector((state) => state.auth);
     const [data, setData] = useState({
+        timeSaleId: "",
+        itemId: "",
         item: [],
         price: "",
         count: "",
@@ -37,6 +45,7 @@ const TimeSaleUploadPage = () => {
     const [maxDate, setMaxDate] = useState(new Date());
 
     const [alert, setAlert] = useState(null);
+    const [confirm, setConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
     const [active, setActive] = useState(false);
 
@@ -94,6 +103,29 @@ const TimeSaleUploadPage = () => {
         setLoading(true);
 
         createTimesale(data)
+            .then((response) => {
+                const { message } = response.data;
+                setAlert({
+                    contents: message,
+                    onButtonClick:
+                        response.status === 200
+                            ? () => navigate("/business/timesale")
+                            : () => setAlert(null),
+                });
+            })
+            .catch((e) => {
+                setAlert({
+                    contents: e.message,
+                    onButtonClick: () => setAlert(null),
+                });
+            })
+            .finally(() => setLoading(false));
+    };
+
+    const deleteHanler = (id) => {
+        setLoading(true);
+
+        deleteTimesale(id)
             .then((response) => {
                 const { message } = response.data;
                 setAlert({
@@ -313,7 +345,40 @@ const TimeSaleUploadPage = () => {
                     </L.FlexCols>
                 </L.Contents>
 
-                <B.FixedActionButton
+                <L.BottomRow _width={"100%"} _padding={"8px"}>
+                    {id && (
+                        <B.Button
+                            type="button"
+                            onClick={() => setConfirm(true)}
+                            _width={"100%"}
+                            _maxWidth={"140px"}
+                            _height={"48px"}
+                            _bg={"red"}
+                            _color={"white"}
+                            _size={"18px"}
+                            _weight={700}
+                            _radius={4}
+                        >
+                            타임세일 삭제
+                        </B.Button>
+                    )}
+                    <B.Button
+                        type="button"
+                        _width={"100%"}
+                        _height={"48px"}
+                        _color={"white"}
+                        _bg={active ? "green700" : "gray300"}
+                        onClick={id ? updateHandler : createHandler}
+                        disabled={loading || !active}
+                        _size={"18px"}
+                        _weight={700}
+                        _radius={4}
+                    >
+                        {id ? "수정" : "등록"}
+                    </B.Button>
+                </L.BottomRow>
+
+                {/* <B.FixedActionButton
                     type="button"
                     _displaymedia="none"
                     onClick={id ? updateHandler : createHandler}
@@ -321,7 +386,7 @@ const TimeSaleUploadPage = () => {
                     backgroundColor={active ? "green700" : "gray300"}
                 >
                     {id ? "수정" : "등록"}
-                </B.FixedActionButton>
+                </B.FixedActionButton> */}
             </L.Container>
             {itemModal && (
                 <ItemSelectModal
@@ -337,6 +402,18 @@ const TimeSaleUploadPage = () => {
                     buttonText={"확인"}
                     onButtonClick={alert.onButtonClick}
                     onOverlayClick={() => {}}
+                />
+            )}
+            {confirm && (
+                <Confirm
+                    contents="정말로 타임세일을 삭제시키겠습니까?"
+                    confirmText="네"
+                    cancelText="아니오"
+                    onConfirmClick={() => {
+                        setConfirm(false);
+                        deleteHanler(data.timeSaleId);
+                    }}
+                    onCancelClick={() => setConfirm(false)}
                 />
             )}
         </Layout>

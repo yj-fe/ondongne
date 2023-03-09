@@ -120,7 +120,15 @@ export const storeTotalPrice = (values) => {
 // 주문 총 가격
 export const orderTotalPrice = (values) => {
     let price = 0;
-    values.map((item) => (price += Number(item.salePrice) * item.count));
+    values.map(
+        (item) =>
+            (price +=
+                Number(
+                    item.timeSaleStatus && item.timeSale
+                        ? item.timeSale.price
+                        : item.salePrice
+                ) * item.count)
+    );
     return price;
 };
 

@@ -140,7 +140,6 @@ const ReportAlert = ({ ...props }) => {
                                     name={`reportdatachecked${i}`}
                                     label={item.title}
                                     checked={item.checked}
-                                    onChange={(e) => console.log(e)}
                                 />
                             </div>
                         ))}

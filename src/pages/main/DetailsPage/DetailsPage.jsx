@@ -39,6 +39,8 @@ import { orderActions } from "store/slices/order";
 import { ImgBanner } from "components/Buisness/BusinessManagement/BusinessManagementTabStyle";
 import ProductReview from "components/Main/productDetails/ProductReview";
 import Alert from "components/commonUi/Alert";
+import * as B from "components/commonUi/Button";
+import { AbsoluteTopDiv } from "components/layout/Img/ImgSizeLayout";
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
 const STOREURL =
     "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
@@ -111,7 +113,14 @@ function DetailsPage(props) {
             }
 
             const data = {
-                items: [{ ...item, count, cartId: 0 }],
+                items: [
+                    {
+                        ...item,
+                        count,
+                        cartId: 0,
+                        timeSaleStatus: item.timeSaleStatus,
+                    },
+                ],
                 to: location.pathname,
             };
             dispatch(orderActions.save(data));
@@ -130,7 +139,12 @@ function DetailsPage(props) {
             const resData = response.data.data;
             setItem({
                 ...resData,
-                salePercent: disRate(resData.price, resData.salePrice),
+                salePercent: disRate(
+                    resData.price,
+                    resData.timeSaleStatus
+                        ? resData.timeSale.price
+                        : resData.salePrice
+                ),
             });
         }
     };
@@ -158,7 +172,14 @@ function DetailsPage(props) {
             >
                 <L.Container>
                     <L.Contents _cursor="default" _padding="0px 0px 60px 0px">
-                        <L.FlexCols>
+                        <L.FlexCols style={{ position: "relative" }}>
+                            {item.timeSaleStatus && (
+                                <AbsoluteTopDiv _top={"10px"} _left={"10px"}>
+                                    <B.Badge _color="white" _bg="blue">
+                                        타임 세일
+                                    </B.Badge>
+                                </AbsoluteTopDiv>
+                            )}
                             {item.itemImages && (
                                 <SwiperWapper spaceBetween={0}>
                                     {item.itemImages.map((image, i) => (
@@ -260,12 +281,26 @@ function DetailsPage(props) {
                                 <L.Contents _padding="16px 20px">
                                     <L.FlexCols _gap={16}>
                                         <L.FlexCols _gap={4}>
-                                            {item.type === "GROUP" &&
+                                            {item.timeSaleStatus ? (
+                                                <ProductTimer
+                                                    startDate={
+                                                        item.timeSale
+                                                            .startDateTime
+                                                    }
+                                                    endDate={
+                                                        item.timeSale
+                                                            .endDateTime
+                                                    }
+                                                    type={true}
+                                                />
+                                            ) : (
+                                                item.type === "GROUP" &&
                                                 !item.soldoutStatus && (
                                                     <ProductTimer
                                                         endDate={item.endDate}
                                                     />
-                                                )}
+                                                )
+                                            )}
                                             <T.Text
                                                 _width="100%"
                                                 _size={18}
@@ -332,91 +367,149 @@ function DetailsPage(props) {
                                                     _weight={600}
                                                     _color="gray900"
                                                 >
-                                                    {item.salePrice} 원
+                                                    {numberFormat(
+                                                        item.timeSaleStatus
+                                                            ? item.timeSale
+                                                                  .price
+                                                            : item.salePrice
+                                                    )}{" "}
+                                                    원
                                                 </T.Text>
                                             </L.FlexCols>
-                                            {item.type === "GROUP" && (
-                                                <L.FlexRows
-                                                    _items="center"
-                                                    _content="flex-start"
-                                                >
-                                                    <Badge
-                                                        _fdir="column"
-                                                        _bg="gray100"
-                                                        _padding="8px 16px"
-                                                        _width={"max-content"}
-                                                        _height="auto"
-                                                        _bdr="8px"
+                                            {!item.timeSaleStatus &&
+                                                item.type === "GROUP" && (
+                                                    <L.FlexRows
+                                                        _items="center"
+                                                        _content="flex-start"
                                                     >
-                                                        <T.Text
-                                                            _align="center"
-                                                            _size={12}
-                                                            _color="gray600"
+                                                        <Badge
+                                                            _fdir="column"
+                                                            _bg="gray100"
+                                                            _padding="8px 16px"
+                                                            _width={
+                                                                "max-content"
+                                                            }
+                                                            _height="auto"
+                                                            _bdr="8px"
                                                         >
-                                                            최소 주문량
-                                                        </T.Text>
-                                                        <T.Text
-                                                            _width="76px"
-                                                            _align="center"
-                                                            _size={16}
-                                                            _weight={600}
-                                                            _color="gray800"
+                                                            <T.Text
+                                                                _align="center"
+                                                                _size={12}
+                                                                _color="gray600"
+                                                            >
+                                                                최소 주문량
+                                                            </T.Text>
+                                                            <T.Text
+                                                                _width="76px"
+                                                                _align="center"
+                                                                _size={16}
+                                                                _weight={600}
+                                                                _color="gray800"
+                                                            >
+                                                                {item.minCount}
+                                                                개
+                                                            </T.Text>
+                                                        </Badge>
+                                                        <Badge
+                                                            _fdir="column"
+                                                            _bg="gray100"
+                                                            _padding="8px 16px"
+                                                            _width={
+                                                                "max-content"
+                                                            }
+                                                            _height="auto"
+                                                            _bdr="8px"
                                                         >
-                                                            {item.minCount}개
-                                                        </T.Text>
-                                                    </Badge>
-                                                    <Badge
-                                                        _fdir="column"
-                                                        _bg="gray100"
-                                                        _padding="8px 16px"
-                                                        _width={"max-content"}
-                                                        _height="auto"
-                                                        _bdr="8px"
+                                                            <T.Text
+                                                                _align="center"
+                                                                _size={12}
+                                                                _color="gray600"
+                                                            >
+                                                                누적 주문량
+                                                            </T.Text>
+                                                            <T.Text
+                                                                _width="76px"
+                                                                _align="center"
+                                                                _size={16}
+                                                                _weight={600}
+                                                                _color="gray800"
+                                                            >
+                                                                {
+                                                                    item.orderCount
+                                                                }
+                                                                개
+                                                            </T.Text>
+                                                        </Badge>
+                                                        <Badge
+                                                            _fdir="column"
+                                                            _bg="gray100"
+                                                            _padding="8px 16px"
+                                                            _width={
+                                                                "max-content"
+                                                            }
+                                                            _height="auto"
+                                                            _bdr="8px"
+                                                        >
+                                                            <T.Text
+                                                                _align="center"
+                                                                _size={12}
+                                                                _color="gray600"
+                                                            >
+                                                                판매 수량
+                                                            </T.Text>
+                                                            <T.Text
+                                                                _width="76px"
+                                                                _align="center"
+                                                                _size={16}
+                                                                _weight={600}
+                                                                _color="gray800"
+                                                            >
+                                                                {item.maxCount}
+                                                                개
+                                                            </T.Text>
+                                                        </Badge>
+                                                    </L.FlexRows>
+                                                )}
+                                            {item.timeSaleStatus &&
+                                                item.timeSale && (
+                                                    <L.FlexRows
+                                                        _items="center"
+                                                        _content="flex-end"
                                                     >
-                                                        <T.Text
-                                                            _align="center"
-                                                            _size={12}
-                                                            _color="gray600"
+                                                        <Badge
+                                                            _fdir="column"
+                                                            _bg="gray100"
+                                                            _padding="8px 16px"
+                                                            _width={
+                                                                "max-content"
+                                                            }
+                                                            _height="auto"
+                                                            _bdr="8px"
                                                         >
-                                                            누적 주문량
-                                                        </T.Text>
-                                                        <T.Text
-                                                            _width="76px"
-                                                            _align="center"
-                                                            _size={16}
-                                                            _weight={600}
-                                                            _color="gray800"
-                                                        >
-                                                            {item.orderCount}개
-                                                        </T.Text>
-                                                    </Badge>
-                                                    <Badge
-                                                        _fdir="column"
-                                                        _bg="gray100"
-                                                        _padding="8px 16px"
-                                                        _width={"max-content"}
-                                                        _height="auto"
-                                                        _bdr="8px"
-                                                    >
-                                                        <T.Text
-                                                            _align="center"
-                                                            _size={12}
-                                                            _color="gray600"
-                                                        >
-                                                            판매 수량
-                                                        </T.Text>
-                                                        <T.Text
-                                                            _width="76px"
-                                                            _align="center"
-                                                            _size={16}
-                                                            _weight={600}
-                                                            _color="gray800"
-                                                        >
-                                                            {item.maxCount}개
-                                                        </T.Text>
-                                                    </Badge>
-                                                </L.FlexRows>
-                                            )}
+                                                            <T.Text
+                                                                _align="center"
+                                                                _size={12}
+                                                                _color="gray600"
+                                                            >
+                                                                남은 수량
+                                                            </T.Text>
+                                                            <T.Text
+                                                                _width="76px"
+                                                                _align="center"
+                                                                _size={16}
+                                                                _weight={600}
+                                                                _color="gray800"
+                                                            >
+                                                                {
+                                                                    item
+                                                                        .timeSale
+                                                                        .count
+                                                                }
+                                                                개
+                                                            </T.Text>
+                                                        </Badge>
+                                                    </L.FlexRows>
+                                                )}
                                         </ReactiveWrap>
                                     </L.FlexCols>
                                 </L.Contents>
@@ -476,12 +569,26 @@ function DetailsPage(props) {
                                             closeOrderToggle={() =>
                                                 setOrderToggle(false)
                                             }
-                                            salePrice={item.salePrice}
+                                            salePrice={
+                                                item.timeSaleStatus &&
+                                                item.timeSale
+                                                    ? item.timeSale.price
+                                                    : item.salePrice
+                                            }
                                             type={item.type}
                                             count={count}
-                                            maxCount={item.maxCount}
+                                            maxCount={
+                                                item.timeSaleStatus &&
+                                                item.timeSale
+                                                    ? item.timeSale.count
+                                                    : item.maxCount
+                                            }
                                             orderCount={item.orderCount}
                                             setCount={setCount}
+                                            timeSale={
+                                                item.timeSale &&
+                                                item.timeSaleStatus
+                                            }
                                         />
                                     )}
                                     {item.storeId === auth.storeId ? (
@@ -499,24 +606,27 @@ function DetailsPage(props) {
                                         </DetailButtonDiv>
                                     ) : (
                                         <DetailButtonDiv>
-                                            {item.type === "NORMAL" && (
-                                                <LayerTextButton
-                                                    type="button"
-                                                    onClick={() =>
-                                                        paymentsOrder(0)
-                                                    }
-                                                    color={true}
-                                                    _padding="0px"
-                                                    _width="48px"
-                                                >
-                                                    <ProductCart
-                                                        id={item.itemId}
-                                                        count={count}
-                                                        type={"details"}
-                                                        disabled={!orderToggle}
-                                                    />
-                                                </LayerTextButton>
-                                            )}
+                                            {item.type === "NORMAL" &&
+                                                !item.timeSaleStatus && (
+                                                    <LayerTextButton
+                                                        type="button"
+                                                        onClick={() =>
+                                                            paymentsOrder(0)
+                                                        }
+                                                        color={true}
+                                                        _padding="0px"
+                                                        _width="48px"
+                                                    >
+                                                        <ProductCart
+                                                            id={item.itemId}
+                                                            count={count}
+                                                            type={"details"}
+                                                            disabled={
+                                                                !orderToggle
+                                                            }
+                                                        />
+                                                    </LayerTextButton>
+                                                )}
                                             {item.type === "NORMAL" ? (
                                                 <DetailButtonStyle
                                                     color={true}
@@ -672,13 +782,23 @@ function OrderToggle({
     maxCount,
     orderCount,
     type,
+    timeSale,
 }) {
     const counterHandler = (value) => {
         if (value == -1 && count == 1) {
             return;
         }
 
-        if (value === 1 && type === "GROUP" && maxCount - orderCount == count) {
+        if (
+            !timeSale &&
+            value === 1 &&
+            type === "GROUP" &&
+            maxCount - orderCount == count
+        ) {
+            return;
+        }
+
+        if (timeSale && maxCount === count) {
             return;
         }
 

@@ -57,9 +57,9 @@ function TimeSalePage() {
                 <L.Container>
                     <L.Contents
                         _padding="24px 20px"
-                        _height={"calc(100vh - 70px)"}
+                        _height={"calc(100vh - 60px)"}
                     >
-                        <L.Scroll _height={"calc(100vh - 120px)"}>
+                        <L.Scroll _height={"calc(100vh - 90px)"}>
                             <L.FlexCols _padding={0} _gap={0}>
                                 <L.FlexRows _content="space-between">
                                     <div>

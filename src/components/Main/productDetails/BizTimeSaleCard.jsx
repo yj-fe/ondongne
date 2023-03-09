@@ -104,18 +104,18 @@ export function BizTimeSaleCard({ item, lastRef, isCart = true }) {
                 )}
             </RelativDiv>
             <L.FlexCols _gap={"4"} _padding={0}>
-                {item.timeSaleStatus && (
+                {item.timeSaleStatus ? (
                     <ProductTimer
                         startDate={item.timeSale.startDateTime}
                         endDate={item.timeSale.endDateTime}
                         type={true}
                     />
-                )}
-                {!item.timeSaleStatus &&
+                ) : (
                     item.type === "GROUP" &&
                     !item.soldoutStatus && (
                         <ProductTimer endDate={item.endDate} />
-                    )}
+                    )
+                )}
                 <L.FlexCols _gap={"0"}>
                     <T.Text _size={12} _weight={500} _color="gray600">
                         {item.storeName}

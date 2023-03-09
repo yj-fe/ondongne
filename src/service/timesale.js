@@ -57,7 +57,6 @@ export function updateTimesale(data) {
         endDateTime: dayjs(data.endDateTime).format("YYYY-MM-DDTHH:mm:ss"),
     };
 
-    console.log("수정할 body : ", body);
     return client.patch(urls.update, body);
 }
 
