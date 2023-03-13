@@ -9,8 +9,6 @@ import {
     ImgBanner,
     Img,
     AvatarDiv,
-    RowDiv,
-    InputText,
 } from "components/Buisness/BusinessManagement/BusinessManagementTabStyle";
 import { Text } from "components/commonUi/Text";
 import Alert from "components/commonUi/Alert";
@@ -29,12 +27,7 @@ import {
 } from "./BusinessApplicationStyle";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import {
-    businessNumberFormatter,
-    imageValidation,
-    numberFormatter,
-    numberFormat,
-} from "utils/utils";
+import { businessNumberFormatter, imageValidation } from "utils/utils";
 import { bizSignup } from "service/biz";
 import Layout from "components/layout/Layout/Layout";
 import * as L from "components/commonUi/Layout";
@@ -68,8 +61,6 @@ function BusinessApplication() {
         profile: null,
         bannerImage: null,
         profileImage: null,
-        deliveryPrice: "",
-        parcelPrice: "",
         recetiveType: [],
     });
 
@@ -142,8 +133,6 @@ function BusinessApplication() {
             data.files?.length > 0 &&
             data.banner?.length > 0 &&
             data.profile?.length > 0 &&
-            data.deliveryPrice?.length > 0 &&
-            data.parcelPrice?.length > 0 &&
             data.recetiveType?.length > 0
         ) {
             setDisabled(true);
@@ -256,61 +245,6 @@ function BusinessApplication() {
                                             data={data}
                                             setData={setData}
                                         />
-
-                                        <RowDiv>
-                                            <ContentDiv>
-                                                <ContentTitle>
-                                                    배달비(원)
-                                                </ContentTitle>
-                                                <TitleInfoDiv>
-                                                    <InputText>￦ </InputText>
-                                                    <Input
-                                                        name="deliveryPrice"
-                                                        value={numberFormat(
-                                                            data.deliveryPrice
-                                                        )}
-                                                        onChange={(e) => {
-                                                            setData({
-                                                                ...data,
-                                                                deliveryPrice:
-                                                                    numberFormatter(
-                                                                        e.target
-                                                                            .value
-                                                                    ),
-                                                            });
-                                                        }}
-                                                        placeholder="0"
-                                                        maxLength={12}
-                                                    />
-                                                </TitleInfoDiv>
-                                            </ContentDiv>
-                                            <ContentDiv>
-                                                <ContentTitle>
-                                                    택배비(원)
-                                                </ContentTitle>
-                                                <TitleInfoDiv>
-                                                    <InputText>￦ </InputText>
-                                                    <Input
-                                                        name="parcelPrice"
-                                                        value={numberFormat(
-                                                            data.parcelPrice
-                                                        )}
-                                                        onChange={(e) => {
-                                                            setData({
-                                                                ...data,
-                                                                parcelPrice:
-                                                                    numberFormatter(
-                                                                        e.target
-                                                                            .value
-                                                                    ),
-                                                            });
-                                                        }}
-                                                        placeholder="0"
-                                                        maxLength={12}
-                                                    />
-                                                </TitleInfoDiv>
-                                            </ContentDiv>
-                                        </RowDiv>
 
                                         {/* ============== 배달/픽업 여부 ============== */}
                                         <L.FlexCols _gap={28}>

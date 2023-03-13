@@ -97,6 +97,24 @@ function BusinessProductUpload() {
     const onSubmit = async () => {
         setLoading(true);
 
+        if (Number(data.price.replaceAll(",", "")) < 1000) {
+            return setAlert({
+                contents: "상품 가격은 1,000원 이상이여야 합니다.",
+                buttonText: "확인",
+                onButtonClick: () => setAlert(null),
+                onOverlayClick: () => setAlert(null),
+            });
+        }
+
+        if (Number(data.salePrice.replaceAll(",", "")) < 1000) {
+            return setAlert({
+                contents: "상품 할인가격은 1,000원 이상이여야 합니다.",
+                buttonText: "확인",
+                onButtonClick: () => setAlert(null),
+                onOverlayClick: () => setAlert(null),
+            });
+        }
+
         const response = id ? await updateItem(data) : await createItem(data);
 
         if (response.data.data) {
@@ -142,7 +160,6 @@ function BusinessProductUpload() {
         if (!data.salePrice) {
             return;
         }
-
         if (!data.price) {
             return setSalePriceError("상품 가격을 입력해주세요.");
         }
@@ -186,8 +203,8 @@ function BusinessProductUpload() {
         if (!id && data.files.length == 0) return isValidtion(false);
         if (data.categories.length == 0) return isValidtion(false);
         if (data.name === "") return isValidtion(false);
-        if (data.price === 0) return isValidtion(false);
-        if (data.salePrice === 0) return isValidtion(false);
+        if (data.price) return isValidtion(false);
+        if (data.salePrice) return isValidtion(false);
         if (data.description === "") return isValidtion(false);
         if (data.type === "GROUP") {
             if (!data.minCount) return isValidtion(false);

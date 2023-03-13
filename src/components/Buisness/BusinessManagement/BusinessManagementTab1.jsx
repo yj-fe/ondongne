@@ -431,7 +431,11 @@ const DayOffForm = ({ sales, dayOffHandler }) => {
     const { dayWeek, dayOffStatus } = sales;
 
     return (
-        <DayBox onClick={() => dayOffHandler(dayWeek)} color={dayOffStatus}>
+        <DayBox
+            type="button"
+            onClick={() => dayOffHandler(dayWeek)}
+            color={dayOffStatus}
+        >
             {dayWeek.charAt(0)}
         </DayBox>
     );

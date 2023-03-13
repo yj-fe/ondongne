@@ -10,7 +10,7 @@ const Layout = (props) => {
             <Header {...props} />
             <S.Main as="main">
                 {props.children}
-                {props.floating && <FloatingUi />}
+                {props.floating && <FloatingUi footer={props.footer} />}
             </S.Main>
         </S.Wrapper>
     );
@@ -18,6 +18,7 @@ const Layout = (props) => {
 
 Layout.defaultProps = {
     floating: true,
+    footer: false,
 };
 
 Layout.props = {
@@ -33,6 +34,7 @@ Layout.props = {
     onBackClick: PropTypes.func,
     backPath: PropTypes.string,
     bottom: PropTypes.string,
+    footer: PropTypes.bool,
 };
 
 export default Layout;

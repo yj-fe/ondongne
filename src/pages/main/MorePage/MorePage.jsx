@@ -138,10 +138,16 @@ function MorePage() {
                             </MoreAccountProfile>
 
                             <MoreAccountButtonDiv>
-                                <MoreAccountButton onClick={goToMember}>
+                                <MoreAccountButton
+                                    type="button"
+                                    onClick={goToMember}
+                                >
                                     회원정보 관리
                                 </MoreAccountButton>
-                                <MoreAccountButton onClick={bizMember}>
+                                <MoreAccountButton
+                                    type="button"
+                                    onClick={bizMember}
+                                >
                                     비즈회원 전환
                                 </MoreAccountButton>
                             </MoreAccountButtonDiv>

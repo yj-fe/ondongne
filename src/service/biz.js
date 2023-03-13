@@ -54,8 +54,6 @@ export function bizSignup(bizData) {
 
     data.append("banner", bizData.bannerImage);
     data.append("profile", bizData.profileImage);
-    data.append("deliveryPrice", bizData.deliveryPrice.replaceAll(",", ""));
-    data.append("parcelPrice", bizData.parcelPrice.replaceAll(",", ""));
     data.append("recetiveType", bizData.recetiveType.join(","));
 
     return client.post(urls.signup, data, { headers });

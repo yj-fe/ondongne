@@ -299,7 +299,7 @@ export const DayDiv = styled.div`
     height: 48px;
     justify-content: space-evenly;
 `;
-export const DayBox = styled.div`
+export const DayBox = styled.button`
     display: flex;
     flex-direction: row;
     justify-content: center;

@@ -377,16 +377,6 @@ const TimeSaleUploadPage = () => {
                         {id ? "수정" : "등록"}
                     </B.Button>
                 </L.BottomRow>
-
-                {/* <B.FixedActionButton
-                    type="button"
-                    _displaymedia="none"
-                    onClick={id ? updateHandler : createHandler}
-                    disabled={loading || !active}
-                    backgroundColor={active ? "green700" : "gray300"}
-                >
-                    {id ? "수정" : "등록"}
-                </B.FixedActionButton> */}
             </L.Container>
             {itemModal && (
                 <ItemSelectModal

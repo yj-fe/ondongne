@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tosspayments/payment-sdk": "^1.2.5",
     "axios": "^1.2.1",
+    "buffer": "^6.0.3",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "html-react-parser": "^3.0.6",

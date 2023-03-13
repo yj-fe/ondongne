@@ -77,12 +77,12 @@ function MainPage() {
                     </L.Contents>
 
                     {/* 공동구매 마지막 찬스 */}
-                    <L.Contents _padding="20px 0px 20px 0px">
+                    {/* <L.Contents _padding="20px 0px 20px 0px">
                         <MainLastChance />
-                    </L.Contents>
+                    </L.Contents> */}
 
                     {/* My단골 인기 상품 */}
-                    {isAuthenticated && <MainBestProduct />}
+                    {/* {isAuthenticated && <MainBestProduct />} */}
 
                     {/* 우리동네 신규 입점 */}
                     <L.Contents _cursor="default" _padding="20px 0px 20px 0px">
@@ -90,12 +90,12 @@ function MainPage() {
                     </L.Contents>
 
                     {/* 우리동네 인기 추천 */}
-                    <L.Contents _cursor="default" _padding="20px 0px 20px 0px">
+                    {/* <L.Contents _cursor="default" _padding="20px 0px 20px 0px">
                         <MainBestCollection />
-                    </L.Contents>
+                    </L.Contents> */}
 
                     {/* 카테고리 */}
-                    {categories.map((c, i) => (
+                    {/* {categories.map((c, i) => (
                         <L.Contents
                             key={i}
                             _cursor="default"
@@ -103,7 +103,7 @@ function MainPage() {
                         >
                             <CategoryCollection category={c} />
                         </L.Contents>
-                    ))}
+                    ))} */}
 
                     <L.Inner>
                         <FooterLayout />

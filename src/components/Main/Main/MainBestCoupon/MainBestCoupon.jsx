@@ -76,7 +76,11 @@ function BestCouponCard({ item, i }) {
     return (
         <ContentProduct
             key={i}
-            onClick={() => navigate(`/market/detail/${item.storeId}`)}
+            onClick={() =>
+                navigate(`/market/detail/${item.storeId}`, {
+                    state: { type: 2 },
+                })
+            }
         >
             <ContentImg src={item.banner} />
             <ContentMarket>{item.name}</ContentMarket>

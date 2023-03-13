@@ -1,7 +1,6 @@
 import { client } from ".";
 
 const urls = {
-    logout: "/member/logout",
     get: "/member/get",
     passwordChange: "/member/change/password",
     profileChange: "/member/change/profile",
@@ -11,13 +10,6 @@ const urls = {
     marketingUpdate: "/member/marketing/update",
     pushUpdate: "/member/push/update",
 };
-
-/* ==============================
-    로그아웃
-============================== */
-export function logout() {
-    return client.post(urls.logout);
-}
 
 /* ==============================
     인증 회원 정보

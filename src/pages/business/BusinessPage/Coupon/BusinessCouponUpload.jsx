@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import Layout from "components/layout/Layout/Layout";
 import * as L from "components/commonUi/Layout";
 import * as B from "components/commonUi/Button";
-import "react-quill/dist/quill.snow.css";
 import { CouponTitleInput } from "components/commonUi/Input";
 import CouponAlert from "components/commonUi/CouponAlert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -144,7 +143,9 @@ function BusinessCouponUpload() {
                     <L.Contents _padding="0px" _height="100%" _bg="#F5F5F5">
                         <CKEditor
                             editor={ClassicEditor}
+                            data={data.contents}
                             config={{
+                                language: "ko",
                                 extraPlugins: [
                                     function (editor) {
                                         editor.plugins.get(
@@ -155,7 +156,6 @@ function BusinessCouponUpload() {
                                     },
                                 ],
                             }}
-                            data={data.contents}
                             onChange={(event, editor) => {
                                 const editorData = editor.getData();
                                 setData({

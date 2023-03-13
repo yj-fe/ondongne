@@ -15,6 +15,8 @@ import LoadingBar from "components/commonUi/LoadingBar";
 import { StoreListCard } from "components/commonUi/StoreListCard";
 import MapView from "components/Search/MapView";
 import { MapListButton } from "components/commonUi/Button";
+import { FooterStyle } from "pages/main/MainPage/MainPageStyle";
+import MainFooter from "components/Main/Main/MainFooter/MainFooter";
 
 function SearchPage() {
     const navigate = useNavigate();
@@ -85,128 +87,129 @@ function SearchPage() {
     }, [fetching]);
 
     return (
-        <div>
-            <Layout
-                title="검색"
-                cart={true}
-                bell={true}
-                search={true}
-                onBackClick={() => navigate(-1, { replace: true })}
-            >
-                <L.Container>
-                    <L.Contents _height={"100vh - 108px"} _padding="0">
-                        <L.Scroll
-                            _padding="0"
-                            _gap="0"
-                            _height="calc(100vh - 68px)"
-                        >
-                            {/* =================== 메뉴 =================== */}
-                            <CategoryTabs
-                                currentData={category}
-                                onChange={categoryHandler}
-                            />
+        <Layout
+            title="검색"
+            cart={true}
+            bell={true}
+            search={true}
+            footer={true}
+            onBackClick={() => navigate(-1, { replace: true })}
+        >
+            <L.Container>
+                <L.Contents _height={"100vh - 108px"} _padding="0">
+                    <L.Scroll
+                        _padding="0"
+                        _gap="0"
+                        _height="calc(100vh - 68px)"
+                    >
+                        {/* =================== 메뉴 =================== */}
+                        <CategoryTabs
+                            currentData={category}
+                            onChange={categoryHandler}
+                        />
 
-                            <Line />
+                        <Line />
 
-                            {pageChange ? (
-                                <MapView category={category} />
-                            ) : (
-                                <>
-                                    {/* =================== 필터 =================== */}
-                                    <L.FlexCols
-                                        _gap={32}
-                                        _padding="24px 20px 0 20px"
+                        {pageChange ? (
+                            <MapView category={category} />
+                        ) : (
+                            <>
+                                {/* =================== 필터 =================== */}
+                                <L.FlexCols
+                                    _gap={32}
+                                    _padding="24px 20px 0 20px"
+                                >
+                                    <L.FlexRows
+                                        _gap={16}
+                                        _content="space-between"
                                     >
+                                        <div>
+                                            <T.Text
+                                                _size={16}
+                                                _weight={600}
+                                                _color="gray900"
+                                            >
+                                                전체 {totalCount}
+                                            </T.Text>
+                                        </div>
                                         <L.FlexRows
-                                            _gap={16}
-                                            _content="space-between"
+                                            _gap={4}
+                                            _content="flex-end"
+                                            _width="100px"
+                                            style={{ cursor: "default" }}
+                                            onClick={() => setFilter01(true)}
                                         >
-                                            <div>
-                                                <T.Text
-                                                    _size={16}
-                                                    _weight={600}
-                                                    _color="gray900"
-                                                >
-                                                    전체 {totalCount}
-                                                </T.Text>
-                                            </div>
-                                            <L.FlexRows
-                                                _gap={4}
-                                                _content="flex-end"
-                                                _width="100px"
-                                                style={{ cursor: "default" }}
-                                                onClick={() =>
-                                                    setFilter01(true)
+                                            <T.Text
+                                                _size={13}
+                                                _weight={400}
+                                                _color="gray900"
+                                            >
+                                                {sortFormatter(sort)}
+                                            </T.Text>
+                                            <button
+                                                type="button"
+                                                _bg={
+                                                    sort !== "create" &&
+                                                    "green700"
                                                 }
                                             >
-                                                <T.Text
-                                                    _size={13}
-                                                    _weight={400}
-                                                    _color="gray900"
-                                                >
-                                                    {sortFormatter(sort)}
-                                                </T.Text>
-                                                <button
-                                                    type="button"
-                                                    _bg={
-                                                        sort !== "create" &&
-                                                        "green700"
-                                                    }
-                                                >
-                                                    <Down />
-                                                </button>
-                                            </L.FlexRows>
+                                                <Down />
+                                            </button>
                                         </L.FlexRows>
-                                    </L.FlexCols>
+                                    </L.FlexRows>
+                                </L.FlexCols>
 
-                                    <L.FlexCols _gap={32} _padding="24px 20px">
-                                        {/* =================== 상품 정보 없을 경우=================== */}
-                                        {!loading && items.length === 0 && (
-                                            <ListEmpty />
-                                        )}
+                                <L.FlexCols _gap={32} _padding="24px 20px">
+                                    {/* =================== 상품 정보 없을 경우=================== */}
+                                    {!loading && items.length === 0 && (
+                                        <ListEmpty />
+                                    )}
 
-                                        {/* =================== 상품 정보 있을 경우=================== */}
-                                        {items.length > 0 && (
-                                            <StoreListCard
-                                                list={items}
-                                                setData={setItems}
-                                                lastRef={ref}
-                                            />
-                                        )}
+                                    {/* =================== 상품 정보 있을 경우=================== */}
+                                    {items.length > 0 && (
+                                        <StoreListCard
+                                            list={items}
+                                            setData={setItems}
+                                            lastRef={ref}
+                                        />
+                                    )}
 
-                                        {/* ===================로딩=================== */}
-                                        {loading && <LoadingBar />}
-                                    </L.FlexCols>
-                                </>
-                            )}
-                        </L.Scroll>
+                                    {/* ===================로딩=================== */}
+                                    {loading && <LoadingBar />}
+                                </L.FlexCols>
+                            </>
+                        )}
+                    </L.Scroll>
 
-                        <MapListButton
-                            onClick={() => setPageChange(!pageChange)}
-                        >
-                            {pageChange ? (
-                                <>
-                                    <List />
-                                    <p>목록 보기</p>
-                                </>
-                            ) : (
-                                <>
-                                    <Map />
-                                    <p>지도 보기</p>
-                                </>
-                            )}
-                        </MapListButton>
-                    </L.Contents>
-                </L.Container>
-                {filter01 && (
-                    <SearchSortLayout
-                        CloseModal={() => setFilter01(false)}
-                        data={sort}
-                        setData={setSort}
-                    />
-                )}
-            </Layout>
-        </div>
+                    <MapListButton onClick={() => setPageChange(!pageChange)}>
+                        {pageChange ? (
+                            <>
+                                <List />
+                                <p>목록 보기</p>
+                            </>
+                        ) : (
+                            <>
+                                <Map />
+                                <p>지도 보기</p>
+                            </>
+                        )}
+                    </MapListButton>
+                </L.Contents>
+            </L.Container>
+            {pageChange && (
+                <FooterStyle>
+                    <MainFooter />
+                </FooterStyle>
+            )}
+
+            {filter01 && (
+                <SearchSortLayout
+                    CloseModal={() => setFilter01(false)}
+                    data={sort}
+                    setData={setSort}
+                />
+            )}
+        </Layout>
     );
 }
 

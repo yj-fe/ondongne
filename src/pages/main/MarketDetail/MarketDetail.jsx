@@ -11,7 +11,7 @@ import Image from "assets/main/shine.png";
 import { ImgSizeLayout } from "components/layout/Img/ImgSizeLayout";
 import FooterLayout from "components/layout/Footer/Footer";
 import Layout from "components/layout/Layout/Layout";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import MarketImg from "assets/images/marketdetail.png";
 import MarketDetailInfo from "components/Main/MarketDetail/MarketDetailInfo";
 import MarketDetailProduct from "components/Main/MarketDetail/MarketDetailProduct";
@@ -28,10 +28,11 @@ const STOREURL =
 function MarketDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { state } = useLocation();
 
     const [item, setItem] = useState({});
     const [loading, setLoading] = useState(false);
-    const [detailTab, setDetailTab] = useState(0);
+    const [detailTab, setDetailTab] = useState(state?.type ? state?.type : 0);
     const [modal, setModal] = useState(false);
 
     const getItem = useCallback(async () => {
@@ -142,7 +143,7 @@ function MarketDetail() {
                                 }}
                                 infocolor={detailTab === 0}
                             >
-                                상점정보
+                                상점 정보
                             </DetailTabInfo>
                             <DetailTabReview
                                 onClick={() => {
@@ -150,7 +151,7 @@ function MarketDetail() {
                                 }}
                                 reviewcolor={detailTab === 1}
                             >
-                                상품
+                                상품 정보
                             </DetailTabReview>
                             <DetailTabReview
                                 onClick={() => {

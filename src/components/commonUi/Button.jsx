@@ -210,7 +210,7 @@ export const MapListButton = styled.button`
     gap: 8px;
     width: 123px;
     height: 48px;
-    bottom: 24px;
+    bottom: 68px;
     background: ${(props) => props.theme.color[props._bg || "green400"]};
     border-radius: 99px;
     color: ${(props) => props.theme.color[props._color || "white"]};

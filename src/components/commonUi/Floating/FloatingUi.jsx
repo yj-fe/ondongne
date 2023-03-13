@@ -19,7 +19,7 @@ const FloatingDiv = styled.div`
     }
 `;
 
-const FloatingUi = () => {
+const FloatingUi = ({ footer }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [active, setActive] = useState(false);
@@ -67,7 +67,7 @@ const FloatingUi = () => {
     return (
         <>
             <FloatingDiv
-                _bottom={location.pathname === "/" ? "70px" : "15px"}
+                _bottom={location.pathname === "/" || footer ? "70px" : "15px"}
                 onClick={() => setActive(!active)}
             >
                 <FloatingToggle
