@@ -26,7 +26,7 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
         <L.FlexCols ref={lastRef} _gap={12} _padding={0} _width={width + "px"}>
             <RelativDiv>
                 {item.timeSaleStatus && (
-                    <AbsoluteTopDiv _top={"5px"} _left={"5px"}>
+                    <AbsoluteTopDiv _top={"5px"} _left={"5px"} _zi={99}>
                         <B.Badge _color="white" _bg="blue">
                             타임 세일
                         </B.Badge>

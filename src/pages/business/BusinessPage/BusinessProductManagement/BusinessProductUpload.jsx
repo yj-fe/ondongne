@@ -198,13 +198,16 @@ function BusinessProductUpload() {
     }, [data.minCount, data.maxCount]);
 
     useEffect(() => {
+        console.log(data);
         setFileErrorMessage("");
         if (data.type === "") return isValidtion(false);
         if (!id && data.files.length == 0) return isValidtion(false);
         if (data.categories.length == 0) return isValidtion(false);
         if (data.name === "") return isValidtion(false);
-        if (data.price) return isValidtion(false);
-        if (data.salePrice) return isValidtion(false);
+        if (data.price === 0 || data.price === "" || !data.price)
+            return isValidtion(false);
+        if (data.salePrice === 0 || data.salePrice === "" || !data.salePrice)
+            return isValidtion(false);
         if (data.description === "") return isValidtion(false);
         if (data.type === "GROUP") {
             if (!data.minCount) return isValidtion(false);

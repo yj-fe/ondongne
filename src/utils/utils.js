@@ -214,3 +214,17 @@ export const disRate = (price, disPrice) => {
 export const overNaming = (name, max) => {
     return name.length > max ? name.substring(0, max) + "..." : name;
 };
+
+export function base64toFile(base_data, filename) {
+    var arr = base_data.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+}

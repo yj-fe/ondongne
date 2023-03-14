@@ -20,6 +20,7 @@ import Moment from "react-moment";
 import "moment/locale/ko";
 import { couponDelete } from "service/coupon";
 import Alert from "../../../../components/commonUi/Alert";
+import { TextEditor } from "components/TextEditor/TextEditor.style";
 
 function BusinessCoupon() {
     const navigate = useNavigate();
@@ -117,66 +118,79 @@ function BusinessCouponEmpty() {
 
 // {/* =================== 쿠폰 있을 때 =================== */}
 function BusinessCouponContent({ list, deleteHandler }) {
-    const [modal, setModal] = useState(false);
+    const [id, setId] = useState(null);
 
-    return list.map((item) => (
-        <L.FlexCols _gap={16} style={{ marginBottom: 32 }}>
-            <L.FlexRows _align="center" _content="space-between">
-                <L.FlexCols _gap={1}>
-                    <T.Text _size={18} _weight={600} _color="gray900">
-                        {item.title}
-                    </T.Text>
-                    <T.Text _size={13} _weight={400} _color="gray500">
-                        <CreatedAt date={item.createDate} />
-                    </T.Text>
-                </L.FlexCols>
-                <button type="button" onClick={() => setModal(true)}>
-                    <More />
-                </button>
-            </L.FlexRows>
-
-            {HTMLReactParser(item.contents)}
-
-            <C.Borderbox>
-                <C.Contentbox>
-                    <L.FlexCols _gap={12}>
-                        <L.FlexCols _gap={0}>
+    return (
+        <>
+            {list.map((item) => (
+                <L.FlexCols _gap={16} style={{ marginBottom: 32 }}>
+                    <L.FlexRows _align="center" _content="space-between">
+                        <L.FlexCols _gap={1}>
                             <T.Text _size={18} _weight={600} _color="gray900">
-                                {item.coupon}
+                                {item.title}
+                            </T.Text>
+                            <T.Text _size={13} _weight={400} _color="gray500">
+                                <CreatedAt date={item.createDate} />
                             </T.Text>
                         </L.FlexCols>
-                        <L.FlexCols>
-                            <T.Text
-                                ext
-                                _size={13}
-                                _weight={400}
-                                _color="gray500"
-                            >
-                                <p>
-                                    <Moment format="YY.MM.DD">
-                                        {item.endDate}
-                                    </Moment>{" "}
-                                    까지
-                                </p>
-                                <p>방문결제 시 현장 할인</p>
-                            </T.Text>
-                        </L.FlexCols>
-                    </L.FlexCols>
-                </C.Contentbox>
-                <C.CouponUsebox _dir="column" _gap={4}>
-                    <DownloadC />
-                    쿠폰
-                </C.CouponUsebox>
-            </C.Borderbox>
-            {modal && (
+                        <button
+                            type="button"
+                            onClick={() => setId(item.storeCouponId)}
+                        >
+                            <More />
+                        </button>
+                    </L.FlexRows>
+
+                    <TextEditor>{HTMLReactParser(item.contents)}</TextEditor>
+
+                    {item.eventType === "coupon" && (
+                        <C.Borderbox>
+                            <C.Contentbox>
+                                <L.FlexCols _gap={12}>
+                                    <L.FlexCols _gap={0}>
+                                        <T.Text
+                                            _size={18}
+                                            _weight={600}
+                                            _color="gray900"
+                                        >
+                                            {item.coupon}
+                                        </T.Text>
+                                    </L.FlexCols>
+                                    <L.FlexCols>
+                                        <T.Text
+                                            ext
+                                            _size={13}
+                                            _weight={400}
+                                            _color="gray500"
+                                        >
+                                            <p>
+                                                <Moment format="YY.MM.DD">
+                                                    {item.endDate}
+                                                </Moment>{" "}
+                                                까지
+                                            </p>
+                                            <p>방문결제 시 현장 할인</p>
+                                        </T.Text>
+                                    </L.FlexCols>
+                                </L.FlexCols>
+                            </C.Contentbox>
+                            <C.CouponUsebox _dir="column" _gap={4}>
+                                <DownloadC />
+                                쿠폰
+                            </C.CouponUsebox>
+                        </C.Borderbox>
+                    )}
+                </L.FlexCols>
+            ))}
+            {id !== null && (
                 <MoreLayout
-                    PropsModal={() => setModal(false)}
+                    PropsModal={() => setId(null)}
                     deleteHandler={deleteHandler}
-                    id={item.storeCouponId}
+                    id={id}
                 />
             )}
-        </L.FlexCols>
-    ));
+        </>
+    );
 }
 
 const CreatedAt = ({ date }) => {

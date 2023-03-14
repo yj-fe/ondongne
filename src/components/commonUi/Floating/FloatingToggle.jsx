@@ -24,14 +24,14 @@ const Auth = ({ bizMember }) => {
                 <>
                     <FloatingBox>
                         <Floating
-                            icon={<I.Coupon />}
-                            to="/business/coupon/upload"
-                            title="쿠폰 등록"
-                        />
-                        <Floating
                             icon={<I.Store />}
                             to="/business/management"
-                            title="상점 소식"
+                            title="내 상점 이동"
+                        />
+                        <Floating
+                            icon={<I.Product />}
+                            to="/business/upload"
+                            title="상품 등록"
                         />
                         <Floating
                             icon={<I.Store />}
@@ -39,9 +39,16 @@ const Auth = ({ bizMember }) => {
                             title="타임세일 등록"
                         />
                         <Floating
-                            icon={<I.Product />}
-                            to="/business/upload"
-                            title="상품 등록"
+                            icon={<I.Coupon />}
+                            to="/business/coupon/upload"
+                            state={{ type: "coupon" }}
+                            title="쿠폰 등록"
+                        />
+                        <Floating
+                            icon={<I.Store />}
+                            to="/business/coupon/upload"
+                            state={{ type: "normal" }}
+                            title="상점 소식 등록"
                         />
                     </FloatingBox>
                     <FloatingBox>

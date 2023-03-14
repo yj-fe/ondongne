@@ -9,6 +9,7 @@ import "moment/locale/ko";
 import HTMLReactParser from "html-react-parser";
 import { useSelector } from "react-redux";
 import Alert from "../../commonUi/Alert";
+import { TextEditor } from "components/TextEditor/TextEditor.style";
 
 function MarketDetailCoupon({ id }) {
     const auth = useSelector((state) => state.auth);
@@ -84,54 +85,55 @@ function MarketDetailCoupon({ id }) {
                             <CreatedAt date={item.createDate} />
                         </T.Text>
                     </L.FlexRows>
-                    {HTMLReactParser(item.contents)}
+                    <TextEditor>{HTMLReactParser(item.contents)}</TextEditor>
 
-                    <C.Borderbox>
-                        <C.Contentbox>
-                            <L.FlexCols _gap={12}>
-                                <L.FlexCols _gap={0}>
-                                    <T.Text
-                                        _size={18}
-                                        _weight={600}
-                                        _color="gray900"
-                                    >
-                                        {item.coupon}
-                                    </T.Text>
+                    {item.eventType === "coupon" && (
+                        <C.Borderbox>
+                            <C.Contentbox>
+                                <L.FlexCols _gap={12}>
+                                    <L.FlexCols _gap={0}>
+                                        <T.Text
+                                            _size={18}
+                                            _weight={600}
+                                            _color="gray900"
+                                        >
+                                            {item.coupon}
+                                        </T.Text>
+                                    </L.FlexCols>
+                                    <L.FlexCols>
+                                        <T.Text
+                                            ext
+                                            _size={13}
+                                            _weight={400}
+                                            _color="gray500"
+                                        >
+                                            <p>
+                                                <Moment format="YY.MM.DD">
+                                                    {item.endDate}
+                                                </Moment>{" "}
+                                                까지
+                                            </p>
+                                            <p>방문결제 시 현장 할인</p>
+                                        </T.Text>
+                                    </L.FlexCols>
                                 </L.FlexCols>
-                                <L.FlexCols>
-                                    <T.Text
-                                        ext
-                                        _size={13}
-                                        _weight={400}
-                                        _color="gray500"
-                                    >
-                                        <p>
-                                            <Moment format="YY.MM.DD">
-                                                {item.endDate}
-                                            </Moment>{" "}
-                                            까지
-                                        </p>
-                                        <p>방문결제 시 현장 할인</p>
-                                    </T.Text>
-                                </L.FlexCols>
-                            </L.FlexCols>
-                        </C.Contentbox>
+                            </C.Contentbox>
 
-                        <C.CouponUsebox
-                            _dir="column"
-                            _gap={4}
-                            onClick={() =>
-                                downloadHandler(
-                                    item.storeCouponId,
-                                    item.storeId
-                                )
-                            }
-                        >
-                            <DownloadC />
-                            쿠폰받기
-                        </C.CouponUsebox>
+                            <C.CouponUsebox
+                                _dir="column"
+                                _gap={4}
+                                onClick={() =>
+                                    downloadHandler(
+                                        item.storeCouponId,
+                                        item.storeId
+                                    )
+                                }
+                            >
+                                <DownloadC />
+                                쿠폰받기
+                            </C.CouponUsebox>
 
-                        {/* <C.CouponUsebox
+                            {/* <C.CouponUsebox
                             _color="#9E9E9E"
                             _bg="#F5F5F5"
                             _dir="column"
@@ -140,7 +142,8 @@ function MarketDetailCoupon({ id }) {
                             <DownloadD />
                             기간 만료
                         </C.CouponUsebox> */}
-                    </C.Borderbox>
+                        </C.Borderbox>
+                    )}
                 </L.FlexCols>
             </L.Contents>
             {alert && (

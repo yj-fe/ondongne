@@ -41,6 +41,7 @@ import ProductReview from "components/Main/productDetails/ProductReview";
 import Alert from "components/commonUi/Alert";
 import * as B from "components/commonUi/Button";
 import { AbsoluteTopDiv } from "components/layout/Img/ImgSizeLayout";
+import { TextEditor } from "components/TextEditor/TextEditor.style";
 const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
 const STOREURL =
     "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
@@ -757,9 +758,9 @@ function TabContent(props) {
 
             <L.FlexCols _padding={"16px 0 0 0"}>
                 <TabInfoContentTitle>상품 정보</TabInfoContentTitle>
-                <TabInfoContentText>
+                <TextEditor>
                     {HTMLReactParser(props.item.description)}
-                </TabInfoContentText>
+                </TextEditor>
             </L.FlexCols>
         </>,
 

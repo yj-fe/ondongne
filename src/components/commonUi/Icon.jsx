@@ -146,10 +146,10 @@ export const ArrowRightB = () => (
     </svg>
 );
 
-export const ArrowTop = ({ color = "#424242" }) => (
+export const ArrowTop = ({ color = "#424242", width = 20, height = 20 }) => (
     <svg
-        width="20"
-        height="20"
+        width={width}
+        height={height}
         viewBox="0 0 20 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -313,10 +313,10 @@ export const Final = () => (
     </svg>
 );
 
-export const Down = ({ color = "#424242" }) => (
+export const Down = ({ color = "#424242", width = 20, height = 20 }) => (
     <svg
-        width="20"
-        height="20"
+        width={width}
+        height={height}
         viewBox="0 0 20 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

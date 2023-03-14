@@ -1,55 +1,38 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Layout from "components/layout/Layout/Layout";
 import * as L from "components/commonUi/Layout";
+import * as T from "components/commonUi/Text";
 import * as B from "components/commonUi/Button";
 import { CouponTitleInput } from "components/commonUi/Input";
 import CouponAlert from "components/commonUi/CouponAlert";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { editorFileUpload } from "service/common";
 import { couponSave, couponUpdate, getBizCoupon } from "service/coupon";
 import Alert from "components/commonUi/Alert";
+import TextEditor from "components/TextEditor/TextEditor";
+import CheckBox from "components/commonUi/CheckBox";
 
 function BusinessCouponUpload() {
     const { id } = useParams();
     const navigate = useNavigate();
     const auth = useSelector((state) => state.auth);
+    const { state } = useLocation();
     const [modal, setModal] = useState(false);
     const [alert, setAlert] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const [data, setData] = useState({
         storeId: auth.storeId,
+        eventType: state ? state.type : "normal",
         title: "",
         contents: "",
-        type: "",
-        coupon: "",
-        endDate: "",
+        type: null,
+        coupon: null,
+        endDate: null,
         limitStatus: false,
-        maxCount: "",
+        maxCount: 0,
         isCoupon: false,
     });
-
-    // 파일업로드 이벤트
-    const customUploadAdapter = (loader) => {
-        return {
-            upload() {
-                return new Promise((resolve, reject) => {
-                    loader.file.then(async (file) => {
-                        await editorFileUpload(file)
-                            .then((res) => {
-                                resolve({
-                                    default: res.data.data,
-                                });
-                            })
-                            .catch((err) => reject(err));
-                    });
-                });
-            },
-        };
-    };
 
     const isValid = () => {
         if (data.title.length === 0) {
@@ -58,7 +41,7 @@ function BusinessCouponUpload() {
         if (data.contents.length === 0) {
             return "내용을 입력해주세요.";
         }
-        if (!data.isCoupon) {
+        if (data.eventType === "coupon" && !data.isCoupon) {
             return "쿠폰을 등록해주세요.";
         }
         return "";
@@ -125,10 +108,42 @@ function BusinessCouponUpload() {
                 onBackClick={() => navigate(-1)}
             >
                 <L.Container>
+                    <L.Contents _padding="20px">
+                        <L.FlexCols _gap={16}>
+                            <L.FlexRows _gap={16}>
+                                <CheckBox
+                                    label="일반 소식"
+                                    name="normal"
+                                    value="normal"
+                                    checked={data.eventType === "normal"}
+                                    onChange={() =>
+                                        setData({
+                                            ...data,
+                                            eventType: "normal",
+                                        })
+                                    }
+                                />
+                                <CheckBox
+                                    label="쿠폰 소식"
+                                    name="coupon"
+                                    value="coupon"
+                                    checked={data.eventType === "coupon"}
+                                    onChange={() =>
+                                        setData({
+                                            ...data,
+                                            eventType: "coupon",
+                                        })
+                                    }
+                                />
+                            </L.FlexRows>
+                        </L.FlexCols>
+                    </L.Contents>
+                </L.Container>
+                <L.Container>
                     <L.Contents _padding="0px">
                         <CouponTitleInput
                             value={data.title}
-                            placeholder="제목을 입력해 주세요."
+                            placeholder="소식 제목을 입력해 주세요."
                             onChange={(e) =>
                                 setData({ ...data, title: e.target.value })
                             }
@@ -141,49 +156,34 @@ function BusinessCouponUpload() {
                     style={{ background: "#F5F5F5" }}
                 >
                     <L.Contents _padding="0px" _height="100%" _bg="#F5F5F5">
-                        <CKEditor
-                            editor={ClassicEditor}
-                            data={data.contents}
-                            config={{
-                                language: "ko",
-                                extraPlugins: [
-                                    function (editor) {
-                                        editor.plugins.get(
-                                            "FileRepository"
-                                        ).createUploadAdapter = (loader) => {
-                                            return customUploadAdapter(loader);
-                                        };
-                                    },
-                                ],
-                            }}
-                            onChange={(event, editor) => {
-                                const editorData = editor.getData();
+                        <TextEditor
+                            initData={data.contents}
+                            onChange={(e) =>
                                 setData({
                                     ...data,
-                                    contents: editorData,
-                                });
-                            }}
-                            onReady={(editor) => {
-                                editor.editing.view.change((writer) => {
-                                    writer.setStyle(
-                                        "height",
-                                        "calc(100vh - 280px)",
-                                        editor.editing.view.document.getRoot()
-                                    );
-                                });
-                            }}
-                        />
-                        <B.CouponButton
-                            _buttommedia="0px"
-                            onClick={() =>
-                                setModal({
-                                    onButtonClick: () => setModal(null),
-                                    onOverlayClick: () => setModal(null),
+                                    contents: e,
                                 })
                             }
-                        >
-                            {id ? "쿠폰 수정하기" : "쿠폰 등록하기"}
-                        </B.CouponButton>
+                            height={
+                                data.eventType === "coupon"
+                                    ? "calc(100vh - 350px)"
+                                    : "calc(100vh - 300px)"
+                            }
+                        />
+
+                        {data.eventType === "coupon" && (
+                            <B.CouponButton
+                                _buttommedia="0px"
+                                onClick={() =>
+                                    setModal({
+                                        onButtonClick: () => setModal(null),
+                                        onOverlayClick: () => setModal(null),
+                                    })
+                                }
+                            >
+                                {id ? "쿠폰 수정하기" : "쿠폰 등록하기"}
+                            </B.CouponButton>
+                        )}
                     </L.Contents>
                     {modal && (
                         <CouponAlert

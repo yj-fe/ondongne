@@ -20,7 +20,7 @@ export const ModalBody = styled.div`
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
-    bottom: 0;
+    bottom: 47px;
     position: absolute;
     z-index: 999;
 `;

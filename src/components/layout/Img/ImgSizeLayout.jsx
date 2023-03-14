@@ -203,7 +203,7 @@ export const AbsoluteTopDiv = styled.div`
     top: ${(props) => props._top || "-10px"};
     bottom: 0%;
     margin: 0;
-    z-index: 998;
+    z-index: ${(props) => props._zi || 998};
 `;
 export const OverlayDiv = styled.div`
     border-radius: ${(props) => props._bdr}px;

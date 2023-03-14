@@ -13,9 +13,9 @@ function FooterLayout() {
                     <FooterLogo />
                     <button type="button" onClick={() => isOpen(!open)}>
                         {open ? (
-                            <Down color="#BDBDBD" />
+                            <Down color="#BDBDBD" width={32} height={32} />
                         ) : (
-                            <ArrowTop color="#BDBDBD" />
+                            <ArrowTop color="#BDBDBD" width={32} height={32} />
                         )}
                     </button>
                 </div>
@@ -26,10 +26,11 @@ function FooterLayout() {
                     <span>개인정보관리책임자: 손종현</span>
                     <span>고객센터: 02-6954-1685</span>
                     <span>이메일문의: cs.hyperlocality@gmail.com</span>
+                    <p>Copyright 2023. 온동네마켓 All rights reserved.</p>
                 </FooterText>
             </Footer>
         </FooterDiv>
     );
 }
 
-export default FooterLayout;
+export default React.memo(FooterLayout);

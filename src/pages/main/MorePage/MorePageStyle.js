@@ -175,8 +175,14 @@ export const Footer = styled.div`
     & .footer_logo {
         width: 100%;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        gap: 4px;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
     /* > div {
@@ -188,14 +194,27 @@ export const Footer = styled.div`
     /* } */
 `;
 export const FooterText = styled.div`
-    display: ${(props) => (props._dp ? "flex" : "none")};
+    display: ${(propos) => (propos._dp ? "flex" : "none")};
     flex-direction: column;
     font-weight: 500;
     font-size: 11px;
     line-height: 18px;
     color: #bdbdbd;
     width: 100%;
+    span:first-child {
+        display: flex;
+        align-items: center;
+
+        button {
+            height: 22px;
+        }
+    }
+
+    p {
+        margin-top: 12px;
+    }
 `;
+
 export const Sticky = styled.div`
     position: sticky;
     width: 200px;
