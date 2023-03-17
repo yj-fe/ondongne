@@ -439,3 +439,13 @@ export const FlexNewScroll = styled.div`
         display: none;
     }
 `;
+
+export const MyFlexCols = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: ${(props) => props._content || "inherit"};
+    align-items: ${(props) => props._items || "inherit"};
+    gap: ${(props) => props._gap || 8}px;
+    width: ${(props) => props._width || "100%"};
+    padding: ${(props) => props._padding || "0px"};
+`;

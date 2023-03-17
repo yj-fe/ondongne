@@ -120,7 +120,7 @@ function CustomerService() {
                                     _size={14}
                                     _color="gray800"
                                 >
-                                    cs.hyperlocality@gmail.com
+                                    ondongnemarket@gamil.com
                                 </T.Text>
                             </L.FlexRows>
                         </L.FlexCols>

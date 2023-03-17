@@ -254,14 +254,22 @@ function BusinessPage() {
                                 </TermsIconStyle>
                             </TermsDiv>
                         </Link>
-                        {/* <Link to="">
+                        <Link to={`/business/membership/${auth.storeId}`}>
+                            <TermsDiv>
+                                <TermsTitle>단골 관리</TermsTitle>
+                                <TermsIconStyle>
+                                    <Right />
+                                </TermsIconStyle>
+                            </TermsDiv>
+                        </Link>
+                        <Link to={`/business/settlement/${auth.storeId}`}>
                             <TermsDiv>
                                 <TermsTitle>정산 관리</TermsTitle>
                                 <TermsIconStyle>
                                     <Right />
                                 </TermsIconStyle>
                             </TermsDiv>
-                        </Link> */}
+                        </Link>
                     </L.Contents>
                 </L.Container>
 

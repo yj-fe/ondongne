@@ -64,6 +64,8 @@ import BusinessCouponUpload from "./pages/business/BusinessPage/Coupon/BusinessC
 import ReviewUploadPage from "./pages/member/ReviewUploadPage";
 import TimeSalePage from "pages/business/BusinessPage/timesale/TimeSalePage";
 import TimeSaleUploadPage from "pages/business/BusinessPage/timesale/TimeSaleUploadPage";
+import Membership from "pages/business/BusinessPage/Membership";
+import BizSettlement from "pages/business/BusinessPage/BizSettlement";
 
 function App() {
     const dispatch = useDispatch();
@@ -159,7 +161,6 @@ function App() {
                     />
                     {/* 1주차-비즈회원-비즈정보관리(상점, 사업자) */}
                     <Route path="management" element={<BusinessManagement />} />
-                    {/* 2주차-비즈회원-비즈상품 관리/등록/수정 */}
                     {/* 상품 관리 */}
                     <Route
                         path="product"
@@ -206,6 +207,8 @@ function App() {
                         path="order/details/auth"
                         element={<OrderManagementDetailsAuthPage />}
                     />
+                    <Route path="membership/:id" element={<Membership />} />
+                    <Route path="settlement/:id" element={<BizSettlement />} />
                 </Route>
 
                 {/* ========== 로그인 ========== */}

@@ -190,8 +190,8 @@ const ProductComments = ({ id }) => {
                         </L.FlexRows>
                     )}
                     {list.length > 0 &&
-                        list.map((item) => (
-                            <>
+                        list.map((item, i) => (
+                            <React.Fragment key={i}>
                                 {/* ================ 댓글 ================= */}
                                 <Comments
                                     item={item}
@@ -221,7 +221,7 @@ const ProductComments = ({ id }) => {
                                             remove={remove}
                                         />
                                     ))}
-                            </>
+                            </React.Fragment>
                         ))}
                 </L.FlexCols>
             </L.FlexCols>
@@ -329,7 +329,32 @@ const Comments = ({ item, child, replyHandler, updateHandler, remove }) => {
         }
     }, [report]);
 
-    return (
+    return item.deleteStatus ? (
+        <>
+            <L.FlexRows
+                key={item.itemCommentId}
+                _gap={16}
+                _padding={child ? "0 0 0 36px" : "0px"}
+            >
+                <ProfileImg src={Avatar} />
+                <L.FlexRows _items="baseline">
+                    <L.FlexCols>
+                        <L.FlexRows _items="center" _content="left">
+                            <T.Text _size={16} _weight={600} _color="gray700">
+                                탈퇴회원
+                            </T.Text>
+                            <T.Text _size={12} _weight={400} _color={"gray500"}>
+                                <CreatedAt date={item.createDate} />
+                            </T.Text>
+                        </L.FlexRows>
+                        <T.Text _size={15} _weight={400} _color="gray500">
+                            (비공개된 글 입니다.)
+                        </T.Text>
+                    </L.FlexCols>
+                </L.FlexRows>
+            </L.FlexRows>
+        </>
+    ) : (
         <>
             <L.FlexRows
                 key={item.itemCommentId}

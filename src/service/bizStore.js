@@ -1,16 +1,17 @@
 import { client } from ".";
 
 const urls = {
-	get: "/biz/store/get",
-    imageUpdate: 'biz/store/image',
-	update: "/biz/store/update",
+    get: "/biz/store/get",
+    imageUpdate: "biz/store/image",
+    update: "/biz/store/update",
+    membership: "/biz/store/member",
 };
 
 /* ==============================
    비즈 상점 조회
 ============================== */
 export function getBizStore() {
-	return client.get(urls.get);
+    return client.get(urls.get);
 }
 
 /* ==============================
@@ -18,10 +19,10 @@ export function getBizStore() {
 ============================== */
 export function storeImageProfileUpdate(file, id) {
     const headers = { "Content-Type": "multipart/form-data" };
-	const data = new FormData();
+    const data = new FormData();
     data.append("storeId", id);
     data.append("storeImageType", "PROFILE");
-	data.append("file", file);
+    data.append("file", file);
     return client.post(urls.imageUpdate, data, { headers });
 }
 
@@ -30,10 +31,10 @@ export function storeImageProfileUpdate(file, id) {
 ============================== */
 export function storeImageBannerUpdate(file, id) {
     const headers = { "Content-Type": "multipart/form-data" };
-	const data = new FormData();
+    const data = new FormData();
     data.append("storeId", id);
     data.append("storeImageType", "BANNER");
-	data.append("file", file);
+    data.append("file", file);
     return client.post(urls.imageUpdate, data, { headers });
 }
 
@@ -41,6 +42,12 @@ export function storeImageBannerUpdate(file, id) {
    비즈 상점 정보 수정
 ============================== */
 export function storeUpdate(data) {
-	return client.post(urls.update, data);
+    return client.post(urls.update, data);
 }
 
+/* ==============================
+   비즈 내 단골 목록
+============================== */
+export function getStoreMembership(id) {
+    return client.get(`${urls.membership}/${id}`);
+}
