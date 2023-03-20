@@ -98,13 +98,13 @@ export const MoreAccountButton = styled.button`
     gap: 4px;
     width: 49.12%;
     height: 44px;
-    background: #f5f5f5;
+    background: ${(props) => props._bg || "#f5f5f5"};
     border-radius: 99px;
     font-weight: 500;
     font-size: 15px;
     line-height: 20px;
     text-align: center;
-    color: #424242;
+    color: ${(props) => props._color || "#424242"};
 `;
 export const MoreLoginText = styled.p`
     width: 100%;

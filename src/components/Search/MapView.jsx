@@ -83,11 +83,19 @@ function MyMap({ list, local }) {
         setItem(data);
     }
 
+    useEffect(() => {}, [item]);
+
     return (
         <NaverMap
             defaultCenter={new navermaps.LatLng(local.x, local.y)}
-            defaultZoom={15}
-            minZoom={15}
+            defaultZoom={13}
+            minZoom={10}
+            scaleControl={true}
+            zoomControl={true}
+            zoomControlOptions={{
+                position: navermaps.Position.TOP_RIGHT,
+                border: 0,
+            }}
         >
             {!isEmptyObj(list) &&
                 Object.values(list).map((newList, i) => (

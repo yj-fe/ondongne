@@ -102,7 +102,13 @@ export const StoreListCard = ({ list, setData, lastRef, isLike = true }) => {
                                 {item.recetiveType &&
                                     item.recetiveType.split(",").map((r, i) => (
                                         <React.Fragment key={i}>
-                                            <B.Badge>{r}가능</B.Badge>
+                                            <B.Badge>
+                                                {r === "배달"
+                                                    ? item.deliveryPrice === 0
+                                                        ? "무료배송"
+                                                        : `${r}가능`
+                                                    : `${r}가능`}
+                                            </B.Badge>
                                         </React.Fragment>
                                     ))}
                             </L.FlexRows>

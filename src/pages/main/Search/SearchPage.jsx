@@ -44,6 +44,7 @@ function SearchPage() {
             page,
             sort
         );
+
         const { data } = response.data;
 
         setTotalCount(data.count);
@@ -149,8 +150,9 @@ function SearchPage() {
                                             <button
                                                 type="button"
                                                 _bg={
-                                                    sort !== "create" &&
-                                                    "green700"
+                                                    sort !== "create"
+                                                        ? "green700"
+                                                        : "white"
                                                 }
                                             >
                                                 <Down />

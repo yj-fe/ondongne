@@ -25,7 +25,7 @@ function FooterLayout() {
                     <span>주소: 서울시 강서구 등촌동 14-7 1111호</span>
                     <span>개인정보관리책임자: 손종현</span>
                     <span>고객센터: 02-6954-1685</span>
-                    <span>이메일문의: ondongnemarket@gamil.com </span>
+                    <span>이메일문의: ondongnemarket@gmail.com </span>
                     <p>Copyright 2023. 온동네마켓 All rights reserved.</p>
                 </FooterText>
             </Footer>

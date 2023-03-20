@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
 import * as C from "components/commonUi/Coupon";
-import { DownloadC } from "components/commonUi/Icon";
+import { DownloadC, DownloadD } from "components/commonUi/Icon";
 import { storeConponList, couponDownload } from "service/coupon";
 import Moment from "react-moment";
 import "moment/locale/ko";
@@ -120,28 +120,33 @@ function MarketDetailCoupon({ id }) {
                             </C.Contentbox>
 
                             <C.CouponUsebox
+                                _color={
+                                    item.downloadStatus ? "#9E9E9E" : "#0B806F"
+                                }
+                                _bg={
+                                    item.downloadStatus ? "#F5F5F5" : "#E1F3F2"
+                                }
                                 _dir="column"
                                 _gap={4}
-                                onClick={() =>
-                                    downloadHandler(
-                                        item.storeCouponId,
-                                        item.storeId
-                                    )
+                                onClick={
+                                    item.downloadStatus
+                                        ? () => {}
+                                        : () =>
+                                              downloadHandler(
+                                                  item.storeCouponId,
+                                                  item.storeId
+                                              )
                                 }
                             >
-                                <DownloadC />
-                                쿠폰받기
+                                {item.downloadStatus ? (
+                                    <DownloadD />
+                                ) : (
+                                    <DownloadC />
+                                )}
+                                {item.downloadStatus
+                                    ? "받은 쿠폰"
+                                    : "쿠폰 받기"}
                             </C.CouponUsebox>
-
-                            {/* <C.CouponUsebox
-                            _color="#9E9E9E"
-                            _bg="#F5F5F5"
-                            _dir="column"
-                            _gap={4}
-                        >
-                            <DownloadD />
-                            기간 만료
-                        </C.CouponUsebox> */}
                         </C.Borderbox>
                     )}
                 </L.FlexCols>

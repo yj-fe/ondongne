@@ -145,6 +145,8 @@ function MorePage() {
                                     회원정보 관리
                                 </MoreAccountButton>
                                 <MoreAccountButton
+                                    _bg={"#0B806F"}
+                                    _color={"#fff"}
                                     type="button"
                                     onClick={bizMember}
                                 >
