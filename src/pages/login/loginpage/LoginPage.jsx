@@ -8,7 +8,7 @@ import { ReactComponent as Horizon } from "assets/horizon.svg";
 import { ReactComponent as Naver } from "assets/login/naver.svg";
 import { ReactComponent as Kakao } from "assets/login/kakao.svg";
 import { ReactComponent as Google } from "assets/login/google.svg";
-import { ReactComponent as Apple } from "assets/login/apple.svg";
+import apple from "assets/login/apple.svg";
 import {
     InputForm,
     Input,
@@ -25,6 +25,7 @@ import {
     Button,
     GapContainer,
     ArrowStyle,
+    AppleIcon,
 } from "./LoginPageStyle";
 import Alert from "components/commonUi/Alert";
 import Confirm from "components/commonUi/Confirm";
@@ -36,6 +37,7 @@ import * as T from "components/commonUi/Text";
 import { S } from "components/layout/Layout/LayoutStyle";
 import { ArrowRighteight, Logo } from "components/commonUi/Icon";
 import jwtDecode from "jwt-decode";
+import AppleLogin from "react-apple-login";
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -244,7 +246,34 @@ function LoginPage() {
                                             <Naver onClick={loginNaver} />
                                             <Kakao onClick={loginKakao} />
                                             <Google onClick={loginGoogle} />
-                                            {/* <Apple onClick={loginApple}/> */}
+                                            <AppleIcon
+                                                onClick={() => {
+                                                    document
+                                                        .getElementById(
+                                                            "appleid-signin"
+                                                        )
+                                                        .click();
+                                                }}
+                                            >
+                                                <img src={apple} alt="apple" />
+                                                <AppleLogin
+                                                    clientId={
+                                                        "com.ondongnemarket"
+                                                    }
+                                                    scope={"name email"}
+                                                    redirectURI={
+                                                        "https://ondongnemarket.com.com/login/oauth2/apple"
+                                                    }
+                                                    responseType={
+                                                        "code id_token"
+                                                    }
+                                                    responseMode={"form_post"}
+                                                    state="test"
+                                                    nonce=""
+                                                    usePopup={false}
+                                                    // de
+                                                ></AppleLogin>
+                                            </AppleIcon>
                                         </SnsIcon>
                                     </SnsStyle>
                                 </GapContainer>
