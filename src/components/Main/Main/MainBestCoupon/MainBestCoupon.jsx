@@ -82,7 +82,7 @@ function BestCouponCard({ item, i }) {
                 })
             }
         >
-            <ContentImg src={item.banner} />
+            <ContentImg src={`${item.banner}?w=150&h=150`} />
             <ContentMarket>{item.name}</ContentMarket>
             <ContentCouponDiv>
                 <Badge _bg="green50" _color="green600">

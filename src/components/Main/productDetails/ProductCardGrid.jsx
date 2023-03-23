@@ -44,7 +44,7 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                             src={
                                 item.images &&
                                 item.images.length > 0 &&
-                                item.images[0]
+                                `${item.images[0]}?w=216&h=216`
                             }
                         />
                         <T.SoldoutText _size={20} _weight={600} _color="white">
@@ -56,7 +56,7 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                         src={
                             item.images &&
                             item.images.length > 0 &&
-                            item.images[0]
+                            `${item.images[0]}?w=216&h=216`
                         }
                         onClick={() => navigate(`/details/${item.itemId}`)}
                     />

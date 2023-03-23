@@ -694,7 +694,7 @@ function BusinessProductUpload() {
 
 const FileListForm = ({ file, fileDeleteHandler }) => {
     const [confirm, setConfirm] = useState(null);
-    const url = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
+    const url = "https://cdn.ondongnemarket.com/item/";
 
     return (
         <>

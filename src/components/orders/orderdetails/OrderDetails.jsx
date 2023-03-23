@@ -12,7 +12,7 @@ import { S } from "./OrderDetailsStyle";
 import { orderCancel, orderDetails } from "service/order";
 import { numberFormat } from "utils/utils";
 import dayjs from "dayjs";
-const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+const IMGURL = "https://cdn.ondongnemarket.com/store/";
 
 const OrderDetails = (props) => {
     // id parameter

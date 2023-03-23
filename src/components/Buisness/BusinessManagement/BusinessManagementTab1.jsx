@@ -42,7 +42,7 @@ import * as T from "components/commonUi/Text";
 import { AbsoluteDiv } from "components/layout/Img/ImgSizeLayout";
 import CategoryForm from "components/commonUi/Category/CategoryForm";
 import DeliveryForm from "components/commonUi/Delivery/DeliveryForm";
-const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+const IMGURL = "https://cdn.ondongnemarket.com/store/";
 
 // 상점정보
 function BusinessManagementTab1() {

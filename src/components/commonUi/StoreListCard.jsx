@@ -8,7 +8,7 @@ import Img from "assets/images/marketdetail.png";
 import { useNavigate } from "react-router-dom";
 import { ImgCollect } from "components/Buisness/BusinessManagement/BusinessManagementTabStyle";
 import StoreLike from "./StoreLike";
-const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+const IMGURL = "https://cdn.ondongnemarket.com/store/";
 
 export const StoreListCard = ({ list, setData, lastRef, isLike = true }) => {
     const navigate = useNavigate();
@@ -32,8 +32,8 @@ export const StoreListCard = ({ list, setData, lastRef, isLike = true }) => {
                             src={
                                 item.banner != null
                                     ? item.banner.includes("https") > 0
-                                        ? item.banner
-                                        : IMGURL + item.banner
+                                        ? item.banner + "?w=98&h=98"
+                                        : IMGURL + item.banner + "?w=98&h=98"
                                     : Img
                             }
                         />

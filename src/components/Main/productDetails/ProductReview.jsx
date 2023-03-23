@@ -1,26 +1,25 @@
 import React, { memo, useEffect, useState } from "react";
 import { ReactComponent as ReviewLike } from "assets/main/reviewlike.svg";
 import { ReactComponent as Filter } from "assets/main/filter.svg";
-import * as L from 'components/commonUi/Layout';
-import * as T from 'components/commonUi/Text';
-import * as D from 'pages/main/DetailsPage/DetailsPageStyle';
-import Avatar from 'assets/common/avatar.png'
+import * as L from "components/commonUi/Layout";
+import * as T from "components/commonUi/Text";
+import * as D from "pages/main/DetailsPage/DetailsPageStyle";
+import Avatar from "assets/common/avatar.png";
 import { itemReviewList, likeReview } from "service/review";
 import Moment from "react-moment";
 import { ReviewLike0 } from "components/commonUi/Icon";
 import { useSelector } from "react-redux";
 import StarRate from "components/commonUi/StarRate";
 import SortFilter from "components/commonUi/SortFilter";
-import { sortFormatter } from 'utils/utils';
+import { sortFormatter } from "utils/utils";
 import ReportAlert from "components/commonUi/ReportAlert";
 
-const MEMBERIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/member/profile/";
-const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/review/";
-const STOREIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+const MEMBERIMGURL = "https://cdn.ondongnemarket.com/member/profile/";
+const IMGURL = "https://cdn.ondongnemarket.com/review/";
+const STOREIMGURL = "https://cdn.ondongnemarket.com/store/";
 
 const ProductReview = ({ id }) => {
-
-    const auth = useSelector(state => state.auth);
+    const auth = useSelector((state) => state.auth);
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState(false);
     const [sort, setSort] = useState("create");
@@ -49,9 +48,9 @@ const ProductReview = ({ id }) => {
     const reviewAvgRating = () => {
         let avgRating = 0;
         if (data.length > 0) {
-            data.map(d => avgRating = Number(avgRating) + Number(d.rating));
+            data.map((d) => (avgRating = Number(avgRating) + Number(d.rating)));
         }
-        return Math.floor((Number(avgRating) / data.length), -1);
+        return Math.floor(Number(avgRating) / data.length, -1);
     };
 
     useEffect(() => {
@@ -62,36 +61,71 @@ const ProductReview = ({ id }) => {
 
     return (
         <>
-            {
-                data.length == 0 &&
-                <L.FlexRows _items='center' _content='center' _height='150px'>
-                    <T.Text _size={14} _weight={400} _color={'gray600'}>등록된 리뷰정보가 없습니다.</T.Text>
+            {data.length == 0 && (
+                <L.FlexRows _items="center" _content="center" _height="150px">
+                    <T.Text _size={14} _weight={400} _color={"gray600"}>
+                        등록된 리뷰정보가 없습니다.
+                    </T.Text>
                 </L.FlexRows>
-            }
-            {
-                data.length > 0 &&
-                <L.FlexCols _gap='0px'>
-                    <L.FlexCols _gap={4} _padding='20px 0px'>
-                        <L.FlexRows _gap={4} _content='center' _items='center'>
+            )}
+            {data.length > 0 && (
+                <L.FlexCols _gap="0px">
+                    <L.FlexCols _gap={4} _padding="20px 0px">
+                        <L.FlexRows _gap={4} _content="center" _items="center">
                             <StarRate rate={reviewAvgRating()} width={24} />
                         </L.FlexRows>
-                        <L.FlexRows _gap={4} _content='center' _items='center'>
-                            <T.Text _size={20} _weight={500} _color='gray900' >{reviewAvgRating()}</T.Text>
-                            <T.Text _size={20} _weight={500} _color='gray400' >/ 5</T.Text>
+                        <L.FlexRows _gap={4} _content="center" _items="center">
+                            <T.Text _size={20} _weight={500} _color="gray900">
+                                {reviewAvgRating()}
+                            </T.Text>
+                            <T.Text _size={20} _weight={500} _color="gray400">
+                                / 5
+                            </T.Text>
                         </L.FlexRows>
                     </L.FlexCols>
 
-                    <L.FlexCols _gap={12} _padding='0px'>
-                        <L.FlexRows _content='space-between' _items='center'>
-                            <L.FlexRows _content='left' _items='center' _gap={4}>
-                                <T.Text _size={15} _weight={400} _color='gray900' >총 리뷰</T.Text>
-                                <T.Text _size={15} _weight={400} _color='gray900' >{data.length}</T.Text>
-                                <T.Text _size={15} _weight={400} _color='gray900' >건</T.Text>
+                    <L.FlexCols _gap={12} _padding="0px">
+                        <L.FlexRows _content="space-between" _items="center">
+                            <L.FlexRows
+                                _content="left"
+                                _items="center"
+                                _gap={4}
+                            >
+                                <T.Text
+                                    _size={15}
+                                    _weight={400}
+                                    _color="gray900"
+                                >
+                                    총 리뷰
+                                </T.Text>
+                                <T.Text
+                                    _size={15}
+                                    _weight={400}
+                                    _color="gray900"
+                                >
+                                    {data.length}
+                                </T.Text>
+                                <T.Text
+                                    _size={15}
+                                    _weight={400}
+                                    _color="gray900"
+                                >
+                                    건
+                                </T.Text>
                             </L.FlexRows>
-                            <L.FlexRows _content='right' _items='center' _gap={4}
+                            <L.FlexRows
+                                _content="right"
+                                _items="center"
+                                _gap={4}
                                 onClick={() => setFilter(true)}
                             >
-                                <T.Text _size={13} _weight={400} _color='gray900' >{sortFormatter(sort)}</T.Text>
+                                <T.Text
+                                    _size={13}
+                                    _weight={400}
+                                    _color="gray900"
+                                >
+                                    {sortFormatter(sort)}
+                                </T.Text>
                                 <Filter />
                             </L.FlexRows>
                         </L.FlexRows>
@@ -99,92 +133,151 @@ const ProductReview = ({ id }) => {
                         <L.Line />
 
                         {data.map((item, index) => (
-                            <React.Fragment key={index} >
+                            <React.Fragment key={index}>
                                 {/* =======Review1====== */}
-                                <L.FlexRows _content='space-between' _items='center'>
+                                <L.FlexRows
+                                    _content="space-between"
+                                    _items="center"
+                                >
                                     <L.FlexRows>
-                                        <D.ReviewProfileImg src={item.memberProfile ? MEMBERIMGURL + item.memberProfile : Avatar} />
+                                        <D.ReviewProfileImg
+                                            src={
+                                                item.memberProfile
+                                                    ? MEMBERIMGURL +
+                                                      item.memberProfile
+                                                    : Avatar
+                                            }
+                                        />
                                         <L.FlexCols _gap={4}>
-                                            <L.FlexRows _items='center' _content='left'>
-                                                <T.Text _size={16} _weight={600}>{item.memberNickname}</T.Text>
+                                            <L.FlexRows
+                                                _items="center"
+                                                _content="left"
+                                            >
+                                                <T.Text
+                                                    _size={16}
+                                                    _weight={600}
+                                                >
+                                                    {item.memberNickname}
+                                                </T.Text>
                                                 <D.ReviewDate>
-                                                    <CreatedAt date={item.createDate} />
+                                                    <CreatedAt
+                                                        date={item.createDate}
+                                                    />
                                                 </D.ReviewDate>
                                             </L.FlexRows>
-                                            <L.FlexRows _gap={8} _items='center' _content='left'>
-                                                <StarRate rate={Number(item.rating)} width={12} />
+                                            <L.FlexRows
+                                                _gap={8}
+                                                _items="center"
+                                                _content="left"
+                                            >
+                                                <StarRate
+                                                    rate={Number(item.rating)}
+                                                    width={12}
+                                                />
                                             </L.FlexRows>
                                         </L.FlexCols>
                                     </L.FlexRows>
-                                    {
-                                        auth.isAuthenticated &&
-                                        <L.FlexRows _width='50px'>
-                                            <T.Text _size={12} _color='gray400' onClick={() => setReport(item.reviewId)}>신고하기</T.Text>
+                                    {auth.isAuthenticated && (
+                                        <L.FlexRows _width="50px">
+                                            <T.Text
+                                                _size={12}
+                                                _color="gray400"
+                                                onClick={() =>
+                                                    setReport(item.reviewId)
+                                                }
+                                            >
+                                                신고하기
+                                            </T.Text>
                                         </L.FlexRows>
-                                    }
+                                    )}
                                 </L.FlexRows>
-                                {
-                                    item.images.length > 0 &&
+                                {item.images.length > 0 &&
                                     item.images.map((image, idx) => (
                                         <React.Fragment key={idx}>
-                                            <D.UploadImg _bdr={4} src={IMGURL + image.name} />
+                                            <D.UploadImg
+                                                _bdr={4}
+                                                src={IMGURL + image.name}
+                                            />
                                         </React.Fragment>
-                                    ))
-                                }
+                                    ))}
                                 <D.Comments>{item.contents}</D.Comments>
 
                                 <D.ReviewLikeStyle
                                     onClick={() => reviewLike(item.reviewId)}
                                 >
                                     <D.ReviewLikeFrame color={item.likeStatus}>
-                                        <D.ReviewLikeButton>{item.likeStatus ? <ReviewLike /> : <ReviewLike0 />}</D.ReviewLikeButton>
-                                        <D.ReviewLikeText color={item.likeStatus}>도움돼요!</D.ReviewLikeText>
-                                        <D.ReviewLikeText color={item.likeStatus}>{item.likeCount}</D.ReviewLikeText>
+                                        <D.ReviewLikeButton>
+                                            {item.likeStatus ? (
+                                                <ReviewLike />
+                                            ) : (
+                                                <ReviewLike0 />
+                                            )}
+                                        </D.ReviewLikeButton>
+                                        <D.ReviewLikeText
+                                            color={item.likeStatus}
+                                        >
+                                            도움돼요!
+                                        </D.ReviewLikeText>
+                                        <D.ReviewLikeText
+                                            color={item.likeStatus}
+                                        >
+                                            {item.likeCount}
+                                        </D.ReviewLikeText>
                                     </D.ReviewLikeFrame>
                                 </D.ReviewLikeStyle>
 
                                 {/* =======MarketReview====== */}
-                                {
-                                    item.comment &&
+                                {item.comment && (
                                     <D.MarketReviewDiv>
-                                        <D.ReviewProfileImg src={item.storeProfile ? STOREIMGURL + item.storeProfile : Avatar} />
+                                        <D.ReviewProfileImg
+                                            src={
+                                                item.storeProfile
+                                                    ? STOREIMGURL +
+                                                      item.storeProfile
+                                                    : Avatar
+                                            }
+                                        />
                                         <D.MarketCommentsStyle>
                                             <D.MarketIdDiv>
-                                                <D.MarketId>{item.storeName}</D.MarketId>
+                                                <D.MarketId>
+                                                    {item.storeName}
+                                                </D.MarketId>
                                                 <D.MarketDate>
-                                                    <CreatedAt date={item.commentDate} />
+                                                    <CreatedAt
+                                                        date={item.commentDate}
+                                                    />
                                                 </D.MarketDate>
                                             </D.MarketIdDiv>
-                                            <D.MarketComments>{item.comment}</D.MarketComments>
+                                            <D.MarketComments>
+                                                {item.comment}
+                                            </D.MarketComments>
                                         </D.MarketCommentsStyle>
                                     </D.MarketReviewDiv>
-                                }
-
+                                )}
                             </React.Fragment>
                         ))}
                     </L.FlexCols>
                 </L.FlexCols>
-            }
-            {
-                filter &&
+            )}
+            {filter && (
                 <SortFilter
                     sorts={["create", "review", "reviewLike"]}
                     close={() => setFilter(false)}
                     selectedData={sort}
-                    setSelectedData={setSort} />
-            }
-            {
-                report &&
+                    setSelectedData={setSort}
+                />
+            )}
+            {report && (
                 <ReportAlert
                     onOverlayClick={() => setReport(null)}
                     onCloseClick={() => setReport(null)}
                     id={report}
                     type={"REVIEW"}
                 />
-            }
+            )}
         </>
-    )
-}
+    );
+};
 
 const CreatedAt = ({ date }) => {
     let startTime = new Date(date);
@@ -196,12 +289,12 @@ const CreatedAt = ({ date }) => {
     }
 
     // 3일 후 날짜 표시
-    if (parseInt(startTime - nowTime) < (-86400000 * 3)) {
+    if (parseInt(startTime - nowTime) < -86400000 * 3) {
         return <Moment format="YY.MM.DD">{startTime}</Moment>;
     }
 
     // 3일전 일, 시간, 분 표시
-    if (parseInt(startTime - nowTime) > (-86400000 * 3)) {
+    if (parseInt(startTime - nowTime) > -86400000 * 3) {
         return <Moment fromNow>{startTime}</Moment>;
     }
 };

@@ -1,25 +1,40 @@
-import React from 'react'
-import * as L from 'components/commonUi/Layout';
-import * as T from 'components/commonUi/Text';
-import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { ArrowRight, Close, OrderCancel_Y, OrderDelivery, OrderEnd, OrderEnd_Y, OrderStandBy, OrderStandBy_Y, OrderSuccess, OrderSuccess_Y } from 'components/commonUi/Icon';
-import Confirm from 'components/commonUi/Confirm';
-import Overlay from 'components/layout/Overlay/Overlay';
+import React from "react";
+import * as L from "components/commonUi/Layout";
+import * as T from "components/commonUi/Text";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import {
+    ArrowRight,
+    Close,
+    OrderCancel_Y,
+    OrderDelivery,
+    OrderEnd,
+    OrderEnd_Y,
+    OrderStandBy,
+    OrderStandBy_Y,
+    OrderSuccess,
+    OrderSuccess_Y,
+} from "components/commonUi/Icon";
+import Confirm from "components/commonUi/Confirm";
+import Overlay from "components/layout/Overlay/Overlay";
 import { S } from "./OrderListStyle";
-import { useSelector } from 'react-redux';
-import { orderCancel, orderList, orderSuccess, orderUnView } from 'service/order';
-import { getDeliveryCertificate } from 'service/deliveryCertificate';
-import LoadingBar from 'components/commonUi/LoadingBar';
-import { OrderDelivery_Y } from './../../commonUi/Icon';
-import dayjs from 'dayjs';
-import Alert from 'components/commonUi/Alert';
-const DELIVERYIMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/deliveryCertificate/";
+import { useSelector } from "react-redux";
+import {
+    orderCancel,
+    orderList,
+    orderSuccess,
+    orderUnView,
+} from "service/order";
+import { getDeliveryCertificate } from "service/deliveryCertificate";
+import LoadingBar from "components/commonUi/LoadingBar";
+import { OrderDelivery_Y } from "./../../commonUi/Icon";
+import dayjs from "dayjs";
+import Alert from "components/commonUi/Alert";
+const DELIVERYIMGURL = "https://cdn.ondongnemarket.com/deliveryCertificate/";
 
 const OrderList = () => {
-
-    const auth = useSelector(state => state.auth);
+    const auth = useSelector((state) => state.auth);
 
     const [orderData, setOrderData] = useState(null);
     const [deliveryData, setDeliveryData] = useState(null);
@@ -29,7 +44,7 @@ const OrderList = () => {
     const [successOrder, setSuccessOrder] = useState(-1);
     const [alert, setAlert] = useState(null);
 
-    // 
+    //
     const navigate = useNavigate();
 
     /* ==============================
@@ -57,7 +72,7 @@ const OrderList = () => {
                 buttonText: "확인",
                 onButtonClick: () => setAlert(false),
                 onOverlayClick: () => setAlert(false),
-            })
+            });
         }
     };
 
@@ -69,7 +84,7 @@ const OrderList = () => {
         if (response && response.data.data) {
             setDeliveryData(response.data.data);
         }
-    }
+    };
 
     /* ==============================
         주문 내역 삭제
@@ -99,235 +114,372 @@ const OrderList = () => {
         if (auth.isAuthenticated) {
             loadData();
         }
-    }, [auth])
+    }, [auth]);
 
-    return (
-        orderData
-            ? (
-                orderData.length > 0
-                    ? <L.Container>
-                        <L.FlexNewScroll _cursor='default' _padding="8px 0 80px" _height='calc(100vh - 70px)' _bg="transparent">
-                            {
-                                orderData.map((item, idx) => (
-                                    <L.Contents key={idx}>
-                                        <L.FlexCols _gap={40}>
-                                            <L.FlexRows _content="space-between" _items="flex-start">
-                                                <L.FlexCols _gap={4} onClick={() => navigate(`/market/detail/${item.storeId}`)}>
-                                                    <T.Text _size={18} _weight={500}>{item.storeName}</T.Text>
-                                                    <T.Text _size={15} _color="gray800">{item.orderName}</T.Text>
-                                                    <T.Text _size={13} _color="gray500">{dayjs(item.createDate).format('YYYY/MM/DD HH:mm')}</T.Text>
-                                                </L.FlexCols>
-                                            </L.FlexRows>
-                                            <L.FlexRows _gap={0} _content="space-evenly" _items='center'>
-                                                {
-                                                    item.orderStatus == "주문취소" &&
-                                                    <L.FlexCols _width='auto'>
-                                                        <OrderCancel_Y />
-                                                        <T.Text _size={12} _align='center' _weight={600} _color={"red700"}>주문 취소</T.Text>
-                                                    </L.FlexCols>
+    return orderData ? (
+        orderData.length > 0 ? (
+            <L.Container>
+                <L.FlexNewScroll
+                    _cursor="default"
+                    _padding="8px 0 80px"
+                    _height="calc(100vh - 70px)"
+                    _bg="transparent"
+                >
+                    {orderData.map((item, idx) => (
+                        <L.Contents key={idx}>
+                            <L.FlexCols _gap={40}>
+                                <L.FlexRows
+                                    _content="space-between"
+                                    _items="flex-start"
+                                >
+                                    <L.FlexCols
+                                        _gap={4}
+                                        onClick={() =>
+                                            navigate(
+                                                `/market/detail/${item.storeId}`
+                                            )
+                                        }
+                                    >
+                                        <T.Text _size={18} _weight={500}>
+                                            {item.storeName}
+                                        </T.Text>
+                                        <T.Text _size={15} _color="gray800">
+                                            {item.orderName}
+                                        </T.Text>
+                                        <T.Text _size={13} _color="gray500">
+                                            {dayjs(item.createDate).format(
+                                                "YYYY/MM/DD HH:mm"
+                                            )}
+                                        </T.Text>
+                                    </L.FlexCols>
+                                </L.FlexRows>
+                                <L.FlexRows
+                                    _gap={0}
+                                    _content="space-evenly"
+                                    _items="center"
+                                >
+                                    {item.orderStatus == "주문취소" && (
+                                        <L.FlexCols _width="auto">
+                                            <OrderCancel_Y />
+                                            <T.Text
+                                                _size={12}
+                                                _align="center"
+                                                _weight={600}
+                                                _color={"red700"}
+                                            >
+                                                주문 취소
+                                            </T.Text>
+                                        </L.FlexCols>
+                                    )}
+                                    {item.orderStatus != "주문취소" && (
+                                        <L.FlexCols _width="auto">
+                                            {item.orderStatus == "결제완료" ? (
+                                                <OrderSuccess_Y />
+                                            ) : (
+                                                <OrderSuccess />
+                                            )}
+                                            <T.Text
+                                                _size={12}
+                                                _align="center"
+                                                _weight={
+                                                    item.orderStatus ==
+                                                    "결제완료"
+                                                        ? 600
+                                                        : 400
                                                 }
-                                                {
-                                                    item.orderStatus != "주문취소" &&
-                                                    <L.FlexCols _width='auto'>
-                                                        {
-                                                            item.orderStatus == "결제완료"
-                                                                ? <OrderSuccess_Y />
-                                                                : <OrderSuccess />
-                                                        }
-                                                        <T.Text _size={12} _align='center'
-                                                            _weight={item.orderStatus == "결제완료" ? 600 : 400}
-                                                            _color={item.orderStatus == "결제완료" ? "green700" : "gray400"}>결제 완료</T.Text>
-                                                    </L.FlexCols>
+                                                _color={
+                                                    item.orderStatus ==
+                                                    "결제완료"
+                                                        ? "green700"
+                                                        : "gray400"
                                                 }
-                                                <ArrowRight />
-                                                <L.FlexCols _width='auto'>
-                                                    {
-                                                        item.orderStatus == "상품준비"
-                                                            ? <OrderStandBy_Y />
-                                                            : <OrderStandBy />
+                                            >
+                                                결제 완료
+                                            </T.Text>
+                                        </L.FlexCols>
+                                    )}
+                                    <ArrowRight />
+                                    <L.FlexCols _width="auto">
+                                        {item.orderStatus == "상품준비" ? (
+                                            <OrderStandBy_Y />
+                                        ) : (
+                                            <OrderStandBy />
+                                        )}
+                                        <T.Text
+                                            _align="center"
+                                            _size={12}
+                                            _weight={
+                                                item.orderStatus == "상품준비"
+                                                    ? 600
+                                                    : 400
+                                            }
+                                            _color={
+                                                item.orderStatus == "상품준비"
+                                                    ? "green700"
+                                                    : "gray400"
+                                            }
+                                        >
+                                            상품 준비
+                                        </T.Text>
+                                    </L.FlexCols>
+                                    <ArrowRight />
+                                    {(item.recetiveType === "배달" ||
+                                        item.recetiveType === "택배") && (
+                                        <>
+                                            <L.FlexCols _width="auto">
+                                                {item.orderStatus ==
+                                                "배송중" ? (
+                                                    <OrderDelivery_Y />
+                                                ) : (
+                                                    <OrderDelivery />
+                                                )}
+                                                <T.Text
+                                                    _align="center"
+                                                    _size={12}
+                                                    _weight={
+                                                        item.orderStatus ==
+                                                        "배송중"
+                                                            ? 600
+                                                            : 400
                                                     }
-                                                    <T.Text
-                                                        _align='center' _size={12}
-                                                        _weight={item.orderStatus == "상품준비" ? 600 : 400}
-                                                        _color={item.orderStatus == "상품준비" ? "green700" : "gray400"}>상품 준비</T.Text>
-                                                </L.FlexCols>
-                                                <ArrowRight />
-                                                {
-                                                    (item.recetiveType === '배달' || item.recetiveType === '택배') &&
-                                                    <>
-                                                        <L.FlexCols _width='auto'>
-                                                            {
-                                                                item.orderStatus == "배송중"
-                                                                    ? <OrderDelivery_Y />
-                                                                    : <OrderDelivery />
-                                                            }
-                                                            <T.Text
-                                                                _align='center' _size={12}
-                                                                _weight={item.orderStatus == "배송중" ? 600 : 400}
-                                                                _color={item.orderStatus == "배송중" ? "green700" : "gray400"}>배송중</T.Text>
-                                                        </L.FlexCols>
-                                                        <ArrowRight />
-                                                    </>
-                                                }
-                                                <L.FlexCols _width='auto'>
-                                                    {
-                                                        item.orderStatus == "픽업완료" || item.orderStatus == "배송완료" || item.orderStatus == "상품수령완료"
-                                                            ? <OrderEnd_Y />
-                                                            : <OrderEnd />
+                                                    _color={
+                                                        item.orderStatus ==
+                                                        "배송중"
+                                                            ? "green700"
+                                                            : "gray400"
                                                     }
-                                                    <T.Text
-                                                        _align='center' _size={12}
-                                                        _weight={item.orderStatus == "픽업완료" || item.orderStatus == "배송완료" || item.orderStatus == "상품수령완료" ? 600 : 400}
-                                                        _color={item.orderStatus == "픽업완료" || item.orderStatus == "배송완료" || item.orderStatus == "상품수령완료" ? "green700" : "gray400"}>
-                                                        {(item.recetiveType == "배달" || item.recetiveType === '택배') ? '배송 완료' : '픽업 완료'}
-                                                    </T.Text>
-                                                </L.FlexCols>
-                                            </L.FlexRows>
-                                            <L.FlexCols _gap={8}>
-                                                {/* {
+                                                >
+                                                    배송중
+                                                </T.Text>
+                                            </L.FlexCols>
+                                            <ArrowRight />
+                                        </>
+                                    )}
+                                    <L.FlexCols _width="auto">
+                                        {item.orderStatus == "픽업완료" ||
+                                        item.orderStatus == "배송완료" ||
+                                        item.orderStatus == "상품수령완료" ? (
+                                            <OrderEnd_Y />
+                                        ) : (
+                                            <OrderEnd />
+                                        )}
+                                        <T.Text
+                                            _align="center"
+                                            _size={12}
+                                            _weight={
+                                                item.orderStatus ==
+                                                    "픽업완료" ||
+                                                item.orderStatus ==
+                                                    "배송완료" ||
+                                                item.orderStatus ==
+                                                    "상품수령완료"
+                                                    ? 600
+                                                    : 400
+                                            }
+                                            _color={
+                                                item.orderStatus ==
+                                                    "픽업완료" ||
+                                                item.orderStatus ==
+                                                    "배송완료" ||
+                                                item.orderStatus ==
+                                                    "상품수령완료"
+                                                    ? "green700"
+                                                    : "gray400"
+                                            }
+                                        >
+                                            {item.recetiveType == "배달" ||
+                                            item.recetiveType === "택배"
+                                                ? "배송 완료"
+                                                : "픽업 완료"}
+                                        </T.Text>
+                                    </L.FlexCols>
+                                </L.FlexRows>
+                                <L.FlexCols _gap={8}>
+                                    {/* {
                                                 item.orderStatus === '결제완료' &&
                                                 <S.Action
                                                     _type="cancel"
                                                     onClick={() => { setCancelOrder(item.orderId) }}
                                                 >주문 취소</S.Action>
                                             } */}
-                                                {
-                                                    item.orderStatus == '배송완료' &&
-                                                    <S.Action
-                                                        _type="bgb"
-                                                        onClick={() => getDeliveryAuth(item.orderId)}
-                                                    >배달 인증 확인</S.Action>
-                                                }
-                                                {
-                                                    orderData.recetiveType === '픽업' && orderData.orderStatus === '상품준비중' &&
-                                                    <S.Action
-                                                        _type="bg"
-                                                        onClick={() => setSuccessOrder(item.orderId)}
-                                                    >상품 수령</S.Action>
-                                                }
-                                                {
-                                                    !item.reviewStatus && item.orderStatus == '상품수령완료' &&
-                                                    <S.Action
-                                                        _type="bg"
-                                                        onClick={() => navigate("/member/review/upload", { state: { item: item } })}
-                                                    >리뷰작성</S.Action>
-                                                }
-                                                <S.Action
-                                                    as={Link}
-                                                    to={`/order/details/${item.orderId}`}
-                                                >주문내역 보기</S.Action>
-                                                {
-                                                    (item.orderStatus === '상품수령완료' || item.orderStatus === '주문취소') &&
-                                                    <S.Action
-                                                        _type="cancel"
-                                                        onClick={() => { setDelOrder(item.orderId) }}
-                                                    >주문 내역 삭제</S.Action>
-                                                }
-                                            </L.FlexCols>
-                                        </L.FlexCols>
-                                        {
-                                            item.orderStatus == "결제완료" &&
-                                            <L.FlexCols _padding="8px 0 0 0">
-                                                <T.Text _size={13} _color="error" _weight={500}>※ 주문 취소는 상품준비 이후 불가합니다.</T.Text>
-                                            </L.FlexCols>
-                                        }
-                                    </L.Contents>
-                                ))
-                            }
-                            <Confirm
-                                active={delOrder >= 0}
-                                contents={`주문내역을 정말로 삭제하시겠습니까? \n내역 삭제 전 나만의 단골집으로 등록해보세요!`}
-                                warn={true}
-                                confirmText="삭제"
-                                cancelText="취소"
-                                onConfirmClick={() => { handleOrderDelete() }}
-                                onCancelClick={() => { setDelOrder(-1) }}
-                            />
-                            <Confirm
-                                active={cancelOrder >= 0}
-                                contents={`주문을 정말로 취소하시겠습니까?`}
-                                warn={true}
-                                confirmText="네"
-                                cancelText="아니요"
-                                onConfirmClick={handleOrderCancel}
-                                onCancelClick={() => setCancelOrder(-1)}
-                            />
-                            <Confirm
-                                active={successOrder >= 0}
-                                contents={`정말로 상품을 수령하셨나요?\n상품을 수령하셨다면 확인버튼을 눌러주세요.`}
-                                warn={false}
-                                confirmText="네"
-                                cancelText="아니요"
-                                onConfirmClick={handleOrderSuccess}
-                                onCancelClick={() => setSuccessOrder(-1)}
-                            />
-                            {
-                                alert &&
-                                <Alert
-                                    title={alert.title}
-                                    contents={alert.contents}
-                                    desc={alert.desc}
-                                    buttonText={alert.buttonText}
-                                    onButtonClick={alert.onButtonClick}
-                                    onOverlayClick={alert.onOverlayClick}
-                                />
-                            }
-                            {
-                                deliveryData &&
-                                <Overlay>
-                                    <S.DeliveryPopup>
-                                        <button
-                                            className="close"
-                                            style={{ background: '#FFF' }}
-                                            onClick={() => setDeliveryData(null)}
-                                        >
-                                            <Close />
-                                        </button>
-                                        <div className="top">
-                                            {
-                                                deliveryData.images.map((image, index) => (
-                                                    <img
-                                                        key={index}
-                                                        className="img"
-                                                        src={DELIVERYIMGURL + image.name}
-                                                    />
-                                                ))
+                                    {item.orderStatus == "배송완료" && (
+                                        <S.Action
+                                            _type="bgb"
+                                            onClick={() =>
+                                                getDeliveryAuth(item.orderId)
                                             }
-                                        </div>
-                                        <div className="contents">
-                                            <strong>
-                                                {deliveryData.title}
-                                            </strong>
-                                            <p>{deliveryData.contents}</p>
-                                            <button
-                                                type='button'
-                                                onClick={() => setSuccessOrder(deliveryData.orderId)}
-                                            >상품 수령 완료</button>
-                                        </div>
-                                    </S.DeliveryPopup>
-                                </Overlay>
-                            }
-                        </L.FlexNewScroll>
-                    </L.Container>
-                    : <L.Container
-                        _height="100%"
-                    >
-                        <L.Contents
-                            _padding="80px 20PX"
-                            _height="calc(100vh - 80px)"
-                        >
-                            <T.Text _align="center" _color="gray600" _size={15} _weight={300}>
-                                <p>주문 내역이 없습니다.</p>
-                            </T.Text>
-                            <T.Text _align="center" _color="gray600" _size={15} _weight={300}>
-                                <p>내 주변 마켓을 이용해보세요!</p>
-                            </T.Text>
+                                        >
+                                            배달 인증 확인
+                                        </S.Action>
+                                    )}
+                                    {orderData.recetiveType === "픽업" &&
+                                        orderData.orderStatus ===
+                                            "상품준비중" && (
+                                            <S.Action
+                                                _type="bg"
+                                                onClick={() =>
+                                                    setSuccessOrder(
+                                                        item.orderId
+                                                    )
+                                                }
+                                            >
+                                                상품 수령
+                                            </S.Action>
+                                        )}
+                                    {!item.reviewStatus &&
+                                        item.orderStatus == "상품수령완료" && (
+                                            <S.Action
+                                                _type="bg"
+                                                onClick={() =>
+                                                    navigate(
+                                                        "/member/review/upload",
+                                                        {
+                                                            state: {
+                                                                item: item,
+                                                            },
+                                                        }
+                                                    )
+                                                }
+                                            >
+                                                리뷰작성
+                                            </S.Action>
+                                        )}
+                                    <S.Action
+                                        as={Link}
+                                        to={`/order/details/${item.orderId}`}
+                                    >
+                                        주문내역 보기
+                                    </S.Action>
+                                    {(item.orderStatus === "상품수령완료" ||
+                                        item.orderStatus === "주문취소") && (
+                                        <S.Action
+                                            _type="cancel"
+                                            onClick={() => {
+                                                setDelOrder(item.orderId);
+                                            }}
+                                        >
+                                            주문 내역 삭제
+                                        </S.Action>
+                                    )}
+                                </L.FlexCols>
+                            </L.FlexCols>
+                            {item.orderStatus == "결제완료" && (
+                                <L.FlexCols _padding="8px 0 0 0">
+                                    <T.Text
+                                        _size={13}
+                                        _color="error"
+                                        _weight={500}
+                                    >
+                                        ※ 주문 취소는 상품준비 이후 불가합니다.
+                                    </T.Text>
+                                </L.FlexCols>
+                            )}
                         </L.Contents>
-                    </L.Container>
-            )
+                    ))}
+                    <Confirm
+                        active={delOrder >= 0}
+                        contents={`주문내역을 정말로 삭제하시겠습니까? \n내역 삭제 전 나만의 단골집으로 등록해보세요!`}
+                        warn={true}
+                        confirmText="삭제"
+                        cancelText="취소"
+                        onConfirmClick={() => {
+                            handleOrderDelete();
+                        }}
+                        onCancelClick={() => {
+                            setDelOrder(-1);
+                        }}
+                    />
+                    <Confirm
+                        active={cancelOrder >= 0}
+                        contents={`주문을 정말로 취소하시겠습니까?`}
+                        warn={true}
+                        confirmText="네"
+                        cancelText="아니요"
+                        onConfirmClick={handleOrderCancel}
+                        onCancelClick={() => setCancelOrder(-1)}
+                    />
+                    <Confirm
+                        active={successOrder >= 0}
+                        contents={`정말로 상품을 수령하셨나요?\n상품을 수령하셨다면 확인버튼을 눌러주세요.`}
+                        warn={false}
+                        confirmText="네"
+                        cancelText="아니요"
+                        onConfirmClick={handleOrderSuccess}
+                        onCancelClick={() => setSuccessOrder(-1)}
+                    />
+                    {alert && (
+                        <Alert
+                            title={alert.title}
+                            contents={alert.contents}
+                            desc={alert.desc}
+                            buttonText={alert.buttonText}
+                            onButtonClick={alert.onButtonClick}
+                            onOverlayClick={alert.onOverlayClick}
+                        />
+                    )}
+                    {deliveryData && (
+                        <Overlay>
+                            <S.DeliveryPopup>
+                                <button
+                                    className="close"
+                                    style={{ background: "#FFF" }}
+                                    onClick={() => setDeliveryData(null)}
+                                >
+                                    <Close />
+                                </button>
+                                <div className="top">
+                                    {deliveryData.images.map((image, index) => (
+                                        <img
+                                            key={index}
+                                            className="img"
+                                            src={DELIVERYIMGURL + image.name}
+                                        />
+                                    ))}
+                                </div>
+                                <div className="contents">
+                                    <strong>{deliveryData.title}</strong>
+                                    <p>{deliveryData.contents}</p>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setSuccessOrder(
+                                                deliveryData.orderId
+                                            )
+                                        }
+                                    >
+                                        상품 수령 완료
+                                    </button>
+                                </div>
+                            </S.DeliveryPopup>
+                        </Overlay>
+                    )}
+                </L.FlexNewScroll>
+            </L.Container>
+        ) : (
+            <L.Container _height="100%">
+                <L.Contents _padding="80px 20PX" _height="calc(100vh - 80px)">
+                    <T.Text
+                        _align="center"
+                        _color="gray600"
+                        _size={15}
+                        _weight={300}
+                    >
+                        <p>주문 내역이 없습니다.</p>
+                    </T.Text>
+                    <T.Text
+                        _align="center"
+                        _color="gray600"
+                        _size={15}
+                        _weight={300}
+                    >
+                        <p>내 주변 마켓을 이용해보세요!</p>
+                    </T.Text>
+                </L.Contents>
+            </L.Container>
+        )
+    ) : (
+        <LoadingBar />
+    );
+};
 
-            : <LoadingBar />
-    )
-}
-
-export default OrderList
+export default OrderList;

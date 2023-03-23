@@ -22,8 +22,7 @@ import { numberFormat, isEmptyObj } from "utils/utils";
 import StoreLike from "components/commonUi/StoreLike";
 import { ImgBanner } from "components/Buisness/BusinessManagement/BusinessManagementTabStyle";
 
-const STOREURL =
-    "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+const STOREURL = "https://cdn.ondongnemarket.com/store/";
 
 function MarketDetail() {
     const { id } = useParams();

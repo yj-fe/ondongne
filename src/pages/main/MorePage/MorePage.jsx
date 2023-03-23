@@ -115,7 +115,7 @@ function MorePage() {
                 bell={false}
                 onBackClick={() => navigate("/")}
             >
-                <L.Container _cursor="default">
+                <L.Container _cursor="default" style={{ minHeight: "100vh" }}>
                     {auth.isAuthenticated && (
                         <MoreAccountDiv>
                             <MoreAccountProfile>

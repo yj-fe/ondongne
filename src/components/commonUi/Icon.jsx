@@ -1979,9 +1979,9 @@ export const ReviewLike0 = () => (
 );
 export const Bubble = () => (
     <svg
-        width="199"
+        width="300"
         height="91"
-        viewBox="0 0 199 91"
+        viewBox="0 0 300 91"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >
@@ -1998,7 +1998,7 @@ export const Bubble = () => (
                 id="filter0_d_2374_15094"
                 x="0"
                 y="0"
-                width="199"
+                width="300"
                 height="91"
                 filterUnits="userSpaceOnUse"
                 colorInterpolationFilters="sRGB"

@@ -85,11 +85,11 @@ function NewMarketCard({ item }) {
         <ContentProduct>
             <ContentImgDiv>
                 <ContentImgBadge>신규 입점</ContentImgBadge>
-                <ContentImg src={item.banner} />
+                <ContentImg src={`${item.banner}?w=280&h=160`} />
             </ContentImgDiv>
             <ContentStyle>
                 <ContentDiv>
-                    <ContentMarketImg src={item.profile} />
+                    <ContentMarketImg src={`${item.profile}?w=38&h=38`} />
                     <ContentTextStyle>
                         <ContentMarket>{item.name}</ContentMarket>
                         {item.description && (

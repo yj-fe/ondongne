@@ -21,7 +21,7 @@ import { getMember } from "service/member";
 import DaumPost from "components/DaumPost";
 import { requestPayment } from "service/order";
 import { orderActions } from "store/slices/order";
-const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+const IMGURL = "https://cdn.ondongnemarket.com/store/";
 
 const OrderForm = () => {
     const dispatch = useDispatch();

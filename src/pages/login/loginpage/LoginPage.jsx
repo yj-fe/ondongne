@@ -36,7 +36,6 @@ import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
 import { S } from "components/layout/Layout/LayoutStyle";
 import { ArrowRighteight, Logo } from "components/commonUi/Icon";
-import jwtDecode from "jwt-decode";
 import AppleLogin from "react-apple-login";
 
 function LoginPage() {
@@ -258,11 +257,11 @@ function LoginPage() {
                                                 <img src={apple} alt="apple" />
                                                 <AppleLogin
                                                     clientId={
-                                                        "com.ondongnemarket"
+                                                        "com.ondongne.services"
                                                     }
                                                     scope={"name email"}
                                                     redirectURI={
-                                                        "https://ondongnemarket.com.com/login/oauth2/apple"
+                                                        "https://ondongnemarket.com/api/login/apple"
                                                     }
                                                     responseType={
                                                         "code id_token"

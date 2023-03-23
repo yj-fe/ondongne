@@ -22,8 +22,7 @@ import ReportAlert from "components/commonUi/ReportAlert";
 const writerError = "댓글 등록 중 오류가 발생하였습니다.";
 const updateError = "댓글 수정 중 오류가 발생하였습니다.";
 const deleteError = "댓글 삭제 중 오류가 발생하였습니다.";
-const IMGURL =
-    "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/member/profile/";
+const IMGURL = "https://cdn.ondongnemarket.com/member/profile/";
 
 const ProductComments = ({ id }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

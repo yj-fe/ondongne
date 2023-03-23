@@ -46,7 +46,7 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
                         src={
                             item.images &&
                             item.images.length > 0 &&
-                            item.images[0]
+                            `${item.images[0]}?w=${width}&h=${width}`
                         }
                         onClick={() => navigate(`/details/${item.itemId}`)}
                     />
@@ -60,7 +60,7 @@ export function ProductCard({ item, lastRef, width = 216, isCart = true }) {
                             src={
                                 item.images &&
                                 item.images.length > 0 &&
-                                item.images[0]
+                                `${item.images[0]}?w=${width}&h=${width}`
                             }
                         />
                         <T.SoldoutText

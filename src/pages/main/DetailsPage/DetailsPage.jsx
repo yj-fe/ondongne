@@ -42,9 +42,8 @@ import Alert from "components/commonUi/Alert";
 import * as B from "components/commonUi/Button";
 import { AbsoluteTopDiv } from "components/layout/Img/ImgSizeLayout";
 import { TextEditor } from "components/TextEditor/TextEditor.style";
-const IMGURL = "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/item/";
-const STOREURL =
-    "https://ondongne-bucket.s3.ap-northeast-2.amazonaws.com/store/";
+const IMGURL = "https://cdn.ondongnemarket.com/item/";
+const STOREURL = "https://cdn.ondongnemarket.com/store/";
 
 function DetailsPage(props) {
     const location = useLocation();
