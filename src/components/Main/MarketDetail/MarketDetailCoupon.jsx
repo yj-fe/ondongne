@@ -10,11 +10,15 @@ import HTMLReactParser from "html-react-parser";
 import { useSelector } from "react-redux";
 import Alert from "../../commonUi/Alert";
 import { TextEditor } from "components/TextEditor/TextEditor.style";
+import Confirm from "components/commonUi/Confirm";
+import { useNavigate } from "react-router-dom";
 
 function MarketDetailCoupon({ id }) {
+    const navigate = useNavigate();
     const auth = useSelector((state) => state.auth);
     const [list, setList] = useState([]);
     const [alert, setAlert] = useState(null);
+    const [confirm, setConfirm] = useState(false);
 
     const getList = useCallback(async () => {
         const response = await storeConponList(id);
@@ -24,6 +28,10 @@ function MarketDetailCoupon({ id }) {
     }, [id]);
 
     const downloadHandler = async (id, storeId) => {
+        if (!auth.isAuthenticated) {
+            return setConfirm(true);
+        }
+
         if (auth.storeId === storeId) {
             return setAlert({
                 contents: "내 상점의 쿠폰은 다운 받을 수 없습니다.",
@@ -45,7 +53,7 @@ function MarketDetailCoupon({ id }) {
     };
 
     useEffect(() => {
-        getList(id);
+        getList();
     }, [getList, id]);
 
     if (list.length === 0) {
@@ -158,6 +166,19 @@ function MarketDetailCoupon({ id }) {
                     buttonText={alert.buttonText}
                     onButtonClick={alert.onButtonClick}
                     onOverlayClick={alert.onOverlayClick}
+                />
+            )}
+            {confirm && (
+                <Confirm
+                    contents="로그인 후 이용가능합니다. 로그인 페이지로 이동하시겠습니까?"
+                    confirmText="네"
+                    cancelText="아니오"
+                    onConfirmClick={() => {
+                        navigate("/login");
+                    }}
+                    onCancelClick={() => {
+                        setConfirm(false);
+                    }}
                 />
             )}
         </L.Container>

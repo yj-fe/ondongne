@@ -9,7 +9,6 @@ import * as S from "./styles";
 
 const CouponList = ({ list }) => {
     const slideRef = useRef(null);
-
     return (
         <S.SwiperWapper ref={slideRef} spaceBetween={0}>
             {list.map((item, i) => (
@@ -65,7 +64,7 @@ const CouponList = ({ list }) => {
                             </T.Text>
                             <T.Text _weight={600} _size={18}>
                                 <T.Text as="span" _weight={600} _size={18}>
-                                    0
+                                    {item.downloadCount}
                                 </T.Text>
                                 건
                             </T.Text>
@@ -76,7 +75,7 @@ const CouponList = ({ list }) => {
                             </T.Text>
                             <T.Text _weight={600} _size={18}>
                                 <T.Text as="span" _weight={600} _size={18}>
-                                    0
+                                    {item.useCount}
                                 </T.Text>
                                 건
                             </T.Text>

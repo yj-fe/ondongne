@@ -158,7 +158,7 @@ function MarketDetail() {
                                 }}
                                 reviewcolor={detailTab === 2}
                             >
-                                상점 & 쿠폰 소식
+                                쿠폰/소식
                             </DetailTabReview>
                         </TabButtonStyle>
                     </L.FlexCols>

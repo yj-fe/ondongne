@@ -216,20 +216,7 @@ export const FooterText = styled.div`
 `;
 
 export const Sticky = styled.div`
+    width: 100%;
     position: sticky;
-    width: 200px;
-    margin-right: 10%;
     animation: 2s bounce infinite;
-    @media screen and (max-width: 728px) {
-        margin-right: 7%;
-    }
-    @media screen and (max-width: 550px) {
-        margin-right: 0%;
-    }
-    @media screen and (max-width: 450px) {
-        width: 180px;
-    }
-    @media screen and (max-width: 370px) {
-        /* max-width: 170px; */
-    }
 `;

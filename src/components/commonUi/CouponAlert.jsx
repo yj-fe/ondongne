@@ -137,7 +137,7 @@ const CouponAlert = ({ active = true, data, setData, ...props }) => {
                             </FlexRows>
                             <button
                                 type="button"
-                                onClick={() => props.onOverlayClick}
+                                onClick={props.onOverlayClick}
                             >
                                 <SimpleClose />
                             </button>
