@@ -7,10 +7,12 @@ import LoadingBar from "components/commonUi/LoadingBar";
 import { useNavigate } from "react-router-dom";
 import { ProductCard } from "components/Main/productDetails/ProductCard";
 import { useQuery } from "react-query";
+import useDrag from "hooks/useDrag";
 
 function MainTimeSale() {
     const navigate = useNavigate();
     const local = useSelector((state) => state.local);
+    const { ref, isDrag, onDragStart, onDragEnd, onMove } = useDrag();
     const limit = 10;
     const page = 1;
 
@@ -49,7 +51,13 @@ function MainTimeSale() {
                 </T.Text>
             </L.FlexRows>
 
-            <L.FlexRowsCP>
+            <L.FlexRowsCP
+                ref={ref}
+                onMouseDown={onDragStart}
+                onMouseMove={isDrag ? onMove : null}
+                onMouseUp={onDragEnd}
+                onMouseLeave={onDragEnd}
+            >
                 {isLoading && <LoadingBar />}
                 {!isLoading && data?.length > 0 && (
                     <L.GridContainer _count={data?.length}>

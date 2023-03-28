@@ -18,10 +18,12 @@ import { newStoreList } from "service/main";
 import LoadingBar from "components/commonUi/LoadingBar";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
+import useDrag from "hooks/useDrag";
 
 function MainNewMarket() {
     const navigate = useNavigate();
     const local = useSelector((state) => state.local);
+    const { ref, isDrag, onDragStart, onDragEnd, onMove } = useDrag();
     const limit = 10;
     const page = 1;
 
@@ -59,7 +61,13 @@ function MainNewMarket() {
                     전체 보기
                 </T.Text>
             </L.FlexRows>
-            <L.FlexRowsCP>
+            <L.FlexRowsCP
+                ref={ref}
+                onMouseDown={onDragStart}
+                onMouseMove={isDrag ? onMove : null}
+                onMouseUp={onDragEnd}
+                onMouseLeave={onDragEnd}
+            >
                 {isLoading && <LoadingBar />}
                 {!isLoading && data?.length > 0 && (
                     <L.GridContainer _count={data.length}>

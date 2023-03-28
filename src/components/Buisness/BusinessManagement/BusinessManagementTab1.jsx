@@ -212,6 +212,7 @@ function BusinessManagementTab1() {
                     <input
                         type="file"
                         id="bannerFile"
+                        accept="image/jpeg, image/png, image/jpg"
                         onChange={bannerUpdate}
                     />
                     <ImgBanner src={store.banner} />

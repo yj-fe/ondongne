@@ -189,7 +189,7 @@ function ReviewUploadPage() {
                                 <input
                                     type="file"
                                     id="files"
-                                    accept="image/*"
+                                    accept="image/jpeg, image/png, image/jpg"
                                     style={{ display: "none" }}
                                     onChange={(e) => {
                                         if (!e.target.files[0]) return;

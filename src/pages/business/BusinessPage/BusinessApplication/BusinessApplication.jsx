@@ -26,7 +26,6 @@ import {
     FileInput,
 } from "./BusinessApplicationStyle";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { businessNumberFormatter, imageValidation } from "utils/utils";
 import { bizSignup } from "service/biz";
 import Layout from "components/layout/Layout/Layout";
@@ -43,7 +42,6 @@ function BusinessApplication() {
     const navigate = useNavigate();
     const [alert, setAlert] = useState(null);
     const [isSuccess, setIsSuccess] = useState(false);
-    const [disabled, setDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
 
     // 보낼 데이터
@@ -101,8 +99,59 @@ function BusinessApplication() {
         reader.readAsDataURL(uploadFile);
     };
 
+    // 비즈 필수 값 체크
+    const isValidation = () => {
+        console.log(data);
+        if (data.banner === null || data.banner?.length === 0) {
+            return "상단 배너 이미지를 등록해주세요.";
+        }
+        if (data.profile === null || data.profile?.length === 0) {
+            return "프로필 이미지를 등록해주세요.";
+        }
+        if (data.storeName?.length === 0) {
+            return "상점명을 입력해주세요.";
+        }
+        if (data.categories?.length === 0) {
+            return "상점 카테고리를 선택해주세요.";
+        }
+        if (data.address?.length === 0) {
+            return "상점 주소를 입력해주세요.";
+        }
+        if (data.addressDetails?.length === 0) {
+            return "상점 상세주소를 입력해주세요.";
+        }
+        if (data.delivery?.length === 0) {
+            return "상점 활동지역을 선택해주세요.";
+        }
+        if (data.recetiveType?.length === 0) {
+            return "배달/픽업 여부를 체크해주세요.";
+        }
+        if (data.ceo?.length === 0) {
+            return "대표자명을 입력해주세요.";
+        }
+        if (data.businessNumber?.length !== 12) {
+            return "정확한 사업자등록번호를 입력해주세요.";
+        }
+        if (data.files?.length === 0) {
+            return "첨부파일을 한장 이상 등록해주세요.";
+        }
+        return "";
+    };
+
     // 비즈 신청
     const onSubmit = async () => {
+        const message = isValidation();
+        console.log("isValidation message : ", message);
+
+        if (message !== "") {
+            return setAlert({
+                contents: message,
+                buttonText: "확인",
+                onButtonClick: () => setAlert(false),
+                onOverlayClick: () => setAlert(false),
+            });
+        }
+
         setLoading(true);
         const response = await bizSignup(data);
         const result = response.data;
@@ -120,26 +169,6 @@ function BusinessApplication() {
             });
         }
     };
-
-    useEffect(() => {
-        if (
-            data.storeName?.length > 0 &&
-            data.categories?.length > 0 &&
-            data.address?.length > 0 &&
-            data.addressDetails?.length > 0 &&
-            data.delivery?.length > 0 &&
-            data.ceo?.length > 0 &&
-            data.businessNumber?.length === 12 &&
-            data.files?.length > 0 &&
-            data.banner?.length > 0 &&
-            data.profile?.length > 0 &&
-            data.recetiveType?.length > 0
-        ) {
-            setDisabled(true);
-        } else {
-            setDisabled(false);
-        }
-    }, [data]);
 
     return (
         <Layout
@@ -173,6 +202,7 @@ function BusinessApplication() {
                                         </AbsoluteDiv>
                                         <input
                                             type="file"
+                                            accept="image/jpeg, image/png, image/jpg"
                                             id="bannerFile"
                                             onChange={(e) =>
                                                 fileUpload(e, "banner")
@@ -200,6 +230,7 @@ function BusinessApplication() {
                                                 </ProfileDiv>
                                                 <FileInput
                                                     type="file"
+                                                    accept="image/jpeg, image/png, image/jpg"
                                                     id="profile"
                                                     onChange={(e) =>
                                                         fileUpload(e, "profile")
@@ -341,8 +372,8 @@ function BusinessApplication() {
 
                                         <NextButton
                                             type="button"
-                                            disabled={!disabled || loading}
-                                            color={disabled}
+                                            disabled={loading}
+                                            color={true}
                                             onClick={onSubmit}
                                         >
                                             비즈 신청하기

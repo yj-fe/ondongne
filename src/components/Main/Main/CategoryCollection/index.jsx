@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { ProductCard } from "components/Main/productDetails/ProductCard";
 import { useQuery } from "react-query";
 import { getMainCategoryList } from "service/item";
+import useDrag from "hooks/useDrag";
 
 const CategoryCollection = ({ category }) => {
     const navigate = useNavigate();
     const local = useSelector((state) => state.local);
+    const { ref, isDrag, onDragStart, onDragEnd, onMove } = useDrag();
 
     const loadData = async () => {
         const response = await getMainCategoryList(category, local, 1);
@@ -41,7 +43,13 @@ const CategoryCollection = ({ category }) => {
                 </T.Text>
             </L.FlexRows>
             <L.FlexCols _gap={32}>
-                <L.FlexRowsCP>
+                <L.FlexRowsCP
+                    ref={ref}
+                    onMouseDown={onDragStart}
+                    onMouseMove={isDrag ? onMove : null}
+                    onMouseUp={onDragEnd}
+                    onMouseLeave={onDragEnd}
+                >
                     {isLoading && <LoadingBar />}
                     {!isLoading && data?.length > 0 && (
                         <L.GridContainer _count={data.length}>

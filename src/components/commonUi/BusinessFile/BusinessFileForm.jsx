@@ -49,7 +49,12 @@ const BusinessFileForm = ({ data, setData }) => {
                 <p>파일 첨부</p>
             </label>
             {error && <ErrorText _color="#D32F2F">{error}</ErrorText>}
-            <input type="file" id="files" onChange={fileUpload} />
+            <input
+                type="file"
+                id="files"
+                onChange={fileUpload}
+                accept="image/jpeg, image/png, image/jpg, .pdf"
+            />
 
             <FileForm>
                 {files.length > 0 &&

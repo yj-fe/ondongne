@@ -2572,8 +2572,8 @@ export const OrderCancel_Y = () => (
     >
         <rect width="48" height="48" rx="24" fill="#FEF6F7" />
         <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M36 15.9993H12V31.9993H36V15.9993ZM12 14.666C11.2636 14.666 10.6667 15.263 10.6667 15.9993V31.9993C10.6667 32.7357 11.2636 33.3327 12 33.3327H36C36.7364 33.3327 37.3333 32.7357 37.3333 31.9993V15.9993C37.3333 15.263 36.7364 14.666 36 14.666H12Z"
             fill="#B01225"
         />

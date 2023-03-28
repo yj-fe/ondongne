@@ -11,6 +11,7 @@ import { couponSave, couponUpdate, getBizCoupon } from "service/coupon";
 import Alert from "components/commonUi/Alert";
 import TextEditor from "components/TextEditor/TextEditor";
 import CheckBox from "components/commonUi/CheckBox";
+import CoachMark from "pages/business/BusinessPage/Coupon/CoachMark";
 
 function BusinessCouponUpload() {
     const { id } = useParams();
@@ -102,7 +103,6 @@ function BusinessCouponUpload() {
                 title={id ? "쿠폰소식 수정" : "쿠폰소식 등록"}
                 cart={false}
                 bell={false}
-                completed={true}
                 floating={false}
                 bottom={"1px solid #EEEEEE"}
                 onBackClick={() => navigate(-1)}
@@ -172,17 +172,20 @@ function BusinessCouponUpload() {
                         />
 
                         {data.eventType === "coupon" && (
-                            <B.CouponButton
-                                _buttommedia="0px"
-                                onClick={() =>
-                                    setModal({
-                                        onButtonClick: () => setModal(null),
-                                        onOverlayClick: () => setModal(null),
-                                    })
-                                }
-                            >
-                                {id ? "쿠폰 수정하기" : "쿠폰 등록하기"}
-                            </B.CouponButton>
+                            <>
+                                <B.CouponButton
+                                    onClick={() =>
+                                        setModal({
+                                            onButtonClick: () => setModal(null),
+                                            onOverlayClick: () =>
+                                                setModal(null),
+                                        })
+                                    }
+                                >
+                                    {id ? "쿠폰 수정하기" : "쿠폰 등록하기"}
+                                </B.CouponButton>
+                                <CoachMark text="새 소식과 함께 쿠폰을 등록하여 가게를 홍보해보세요!" />
+                            </>
                         )}
                     </L.Contents>
                     {modal && (
@@ -195,7 +198,6 @@ function BusinessCouponUpload() {
                     )}
                     <B.FixedActionButton
                         type="button"
-                        _displaymedia="none"
                         onClick={onsubmit}
                         disabled={loading}
                     >

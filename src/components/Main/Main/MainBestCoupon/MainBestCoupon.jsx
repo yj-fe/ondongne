@@ -13,9 +13,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Badge } from "components/commonUi/Button";
 import { useQuery } from "react-query";
+import useDrag from "hooks/useDrag";
 
 function MainBestCoupon() {
     const navigate = useNavigate();
+    const { ref, isDrag, onDragStart, onDragEnd, onMove } = useDrag();
     const local = useSelector((state) => state.local);
     const limit = 5;
     const page = 1;
@@ -55,7 +57,13 @@ function MainBestCoupon() {
                 </T.Text>
             </L.FlexRows>
 
-            <L.FlexRowsCP>
+            <L.FlexRowsCP
+                ref={ref}
+                onMouseDown={onDragStart}
+                onMouseMove={isDrag ? onMove : null}
+                onMouseUp={onDragEnd}
+                onMouseLeave={onDragEnd}
+            >
                 {isLoading && <LoadingBar />}
                 {!isLoading && data?.length > 0 && (
                     <L.GridContainer _count={data.length}>

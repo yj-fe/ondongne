@@ -24,19 +24,15 @@ const Auth = ({ bizMember }) => {
                 <>
                     <FloatingBox>
                         <Floating
-                            icon={<I.Store />}
+                            icon={<I.MyStore />}
                             to="/business/management"
                             title="내 상점 이동"
                         />
                         <Floating
-                            icon={<I.Product />}
-                            to="/business/upload"
-                            title="상품 등록"
-                        />
-                        <Floating
                             icon={<I.Store />}
-                            to="/business/timesale/upload"
-                            title="타임세일 등록"
+                            to="/business/coupon/upload"
+                            state={{ type: "normal" }}
+                            title="상점 소식"
                         />
                         <Floating
                             icon={<I.Coupon />}
@@ -45,10 +41,14 @@ const Auth = ({ bizMember }) => {
                             title="쿠폰 등록"
                         />
                         <Floating
-                            icon={<I.Store />}
-                            to="/business/coupon/upload"
-                            state={{ type: "normal" }}
-                            title="상점 소식 등록"
+                            icon={<I.Time />}
+                            to="/business/timesale/upload"
+                            title="타임세일 등록"
+                        />
+                        <Floating
+                            icon={<I.Product />}
+                            to="/business/upload"
+                            title="상품 등록"
                         />
                     </FloatingBox>
                     <FloatingBox>
@@ -68,6 +68,11 @@ const Auth = ({ bizMember }) => {
                             to="/service/voc"
                             title="상품 제안 하기"
                             state={{ type: "상품 제안" }}
+                        />
+                        <Floating
+                            icon={<I.CouponUpload />}
+                            to="/member/coupon"
+                            title="내 쿠폰함"
                         />
                     </FloatingBox>
                     <FloatingBox>

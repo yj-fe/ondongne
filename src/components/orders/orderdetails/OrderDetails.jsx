@@ -267,7 +267,7 @@ const OrderDetails = (props) => {
                         onClick={() =>
                             setConfirm({
                                 warn: true,
-                                contents: `주문을 정말로 취소하시겠습니까?`,
+                                contents: `주문을 정말로 취소하시겠습니까?\n( 모든 수수료는 무료입니다. )`,
                                 confirmText: "네",
                                 cancelText: "아니요",
                                 onConfirmClick: () => {
@@ -296,6 +296,7 @@ const OrderDetails = (props) => {
             {confirm && (
                 <Confirm
                     warn={confirm.warn}
+                    title={confirm.title}
                     contents={confirm.contents}
                     confirmText={confirm.confirmText}
                     cancelText={confirm.cancelText}

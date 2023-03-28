@@ -295,13 +295,16 @@ const OrderList = () => {
                                     </L.FlexCols>
                                 </L.FlexRows>
                                 <L.FlexCols _gap={8}>
-                                    {/* {
-                                                item.orderStatus === '결제완료' &&
-                                                <S.Action
-                                                    _type="cancel"
-                                                    onClick={() => { setCancelOrder(item.orderId) }}
-                                                >주문 취소</S.Action>
-                                            } */}
+                                    {/* {item.orderStatus === "결제완료" && (
+                                        <S.Action
+                                            _type="cancel"
+                                            onClick={() => {
+                                                setCancelOrder(item.orderId);
+                                            }}
+                                        >
+                                            주문 취소
+                                        </S.Action>
+                                    )} */}
                                     {item.orderStatus == "배송완료" && (
                                         <S.Action
                                             _type="bgb"
@@ -391,7 +394,7 @@ const OrderList = () => {
                     />
                     <Confirm
                         active={cancelOrder >= 0}
-                        contents={`주문을 정말로 취소하시겠습니까?`}
+                        contents={`주문을 정말로 취소하시겠습니까?\n( 모든 수수료는 무료입니다. )`}
                         warn={true}
                         confirmText="네"
                         cancelText="아니요"

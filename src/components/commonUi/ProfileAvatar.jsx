@@ -41,7 +41,7 @@ function ProfileAvatar({ profile, onChange = null }) {
     const [file, setFile] = useState(null);
 
     const fileUpload = async (e) => {
-        if (!e.target.file[0]) {
+        if (!e.target?.files[0]) {
             return false;
         }
         const uploadFile = e.target.files[0];
@@ -79,6 +79,7 @@ function ProfileAvatar({ profile, onChange = null }) {
             <FileInput
                 type="file"
                 id="profile"
+                accept="image/jpeg, image/png, image/jpg"
                 onChange={onChange ?? fileUpload}
             />
             {alert && (

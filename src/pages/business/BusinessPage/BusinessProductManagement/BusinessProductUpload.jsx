@@ -198,7 +198,6 @@ function BusinessProductUpload() {
     }, [data.minCount, data.maxCount]);
 
     useEffect(() => {
-        console.log(data);
         setFileErrorMessage("");
         if (data.type === "") return isValidtion(false);
         if (!id && data.files.length == 0) return isValidtion(false);
@@ -357,7 +356,7 @@ function BusinessProductUpload() {
                                     <input
                                         type="file"
                                         id="files"
-                                        accept="image/*"
+                                        accept="image/jpeg, image/png, image/jpg"
                                         onChange={(e) => {
                                             if (!e.target.files[0]) return;
                                             const valid = imageValidation(

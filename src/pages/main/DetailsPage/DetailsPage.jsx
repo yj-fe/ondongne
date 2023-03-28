@@ -397,7 +397,7 @@ function DetailsPage(props) {
                                                                 _size={12}
                                                                 _color="gray600"
                                                             >
-                                                                최소 주문량
+                                                                달성 목표
                                                             </T.Text>
                                                             <T.Text
                                                                 _width="76px"
@@ -425,7 +425,7 @@ function DetailsPage(props) {
                                                                 _size={12}
                                                                 _color="gray600"
                                                             >
-                                                                누적 주문량
+                                                                누적 주문
                                                             </T.Text>
                                                             <T.Text
                                                                 _width="76px"
@@ -455,7 +455,7 @@ function DetailsPage(props) {
                                                                 _size={12}
                                                                 _color="gray600"
                                                             >
-                                                                판매 수량
+                                                                상품 재고
                                                             </T.Text>
                                                             <T.Text
                                                                 _width="76px"
