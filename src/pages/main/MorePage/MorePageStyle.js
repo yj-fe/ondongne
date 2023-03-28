@@ -213,6 +213,12 @@ export const FooterText = styled.div`
     p {
         margin-top: 12px;
     }
+
+    a {
+        color: #bdbddb;
+        text-decoration: none;
+        text-decoration-color: #bdbdbd;
+    }
 `;
 
 export const Sticky = styled.div`

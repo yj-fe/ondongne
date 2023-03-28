@@ -26,6 +26,12 @@ function FooterLayout() {
                     <span>개인정보관리책임자: 손종현</span>
                     <span>고객센터: 02-6954-1685</span>
                     <span>이메일문의: ondongnemarket@gmail.com </span>
+                    <span>
+                        카카오 1:1문의:{" "}
+                        <a href="https://open.kakao.com/o/suc5rl8e">
+                            https://open.kakao.com/o/suc5rl8e
+                        </a>
+                    </span>
                     <p>Copyright 2023. 온동네마켓 All rights reserved.</p>
                 </FooterText>
             </Footer>
