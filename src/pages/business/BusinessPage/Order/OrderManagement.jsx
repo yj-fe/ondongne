@@ -32,6 +32,7 @@ function OrderManagement() {
     const [delOrder, setDelOrder] = useState(null);
     const [alert, setAlert] = useState(null);
     const [cancelOrder, setCancelOrder] = useState(null);
+    console.log(orderData);
 
     const loadData = async () => {
         const response = await bizOrderList(auth.storeId);
@@ -169,8 +170,68 @@ function OrderManagement() {
                                                     _size={15}
                                                     _color="gray800"
                                                 >
-                                                    {item.orderName}
+                                                    <T.Text
+                                                        as="span"
+                                                        _size={15}
+                                                        _color="gray800"
+                                                        _weight={600}
+                                                    >
+                                                        연락처
+                                                    </T.Text>
+                                                    :{" "}
+                                                    {item.memberPhone.replace(
+                                                        /(\d{3})(\d{4})(\d{4})/,
+                                                        "$1-$2-$3"
+                                                    )}
                                                 </T.Text>
+                                                <T.Text
+                                                    _size={15}
+                                                    _color="gray800"
+                                                >
+                                                    <T.Text
+                                                        as="span"
+                                                        _size={15}
+                                                        _color="gray800"
+                                                        _weight={600}
+                                                    >
+                                                        주소
+                                                    </T.Text>
+                                                    :{" "}
+                                                    {`${item.deliveryAddress} ${item.deliveryAddressDetails}`}
+                                                </T.Text>
+                                                <T.Text
+                                                    _size={15}
+                                                    _color="gray800"
+                                                >
+                                                    <T.Text
+                                                        as="span"
+                                                        _size={15}
+                                                        _color="gray800"
+                                                        _weight={600}
+                                                    >
+                                                        상품명
+                                                    </T.Text>
+                                                    : {item.orderName}
+                                                </T.Text>
+
+                                                <T.Text
+                                                    _size={15}
+                                                    _color="gray800"
+                                                >
+                                                    <T.Text
+                                                        as="span"
+                                                        _size={15}
+                                                        _color="gray800"
+                                                        _weight={600}
+                                                    >
+                                                        요청사항
+                                                    </T.Text>
+                                                    :{" "}
+                                                    {item.deliveryContents
+                                                        ? item.deliveryContents
+                                                        : "요청사항 없음"}
+                                                </T.Text>
+
                                                 <T.Text
                                                     _size={13}
                                                     _color="gray500"

@@ -12,9 +12,10 @@ import { S } from "./OrderDetailsStyle";
 import { orderCancel, orderDetails } from "service/order";
 import { numberFormat } from "utils/utils";
 import dayjs from "dayjs";
+import defaultProfile from "assets/common/Profile.png";
 const IMGURL = "https://cdn.ondongnemarket.com/store/";
 
-const OrderDetails = (props) => {
+const OrderDetails = ({ isBiz = false }) => {
     // id parameter
     const { id } = useParams();
     const [orderData, setOrderData] = useState(null);
@@ -123,7 +124,7 @@ const OrderDetails = (props) => {
     }, [id]);
 
     return orderData ? (
-        <L.Container _height="calc(100vh - 60px)">
+        <L.Container>
             {/* 주문 완료 */}
             <L.Contents>
                 <L.FlexCols _gap={24}>
@@ -169,6 +170,52 @@ const OrderDetails = (props) => {
                     </L.FlexCols>
                 </L.FlexCols>
             </L.Contents>
+
+            <L.Contents>
+                <L.FlexCols _gap={24}>
+                    <L.FlexRows _gap={0} _content="space-between">
+                        <L.FlexRows _gap={16} _width="auto" _items="center">
+                            <img
+                                src={
+                                    orderData.memberProfile
+                                        ? IMGURL + orderData.memberProfile
+                                        : defaultProfile
+                                }
+                                width="48px"
+                                height="48px"
+                            />
+                            <L.FlexCols _width="auto" _gap={4}>
+                                <T.Text _size={18} _weight={600}>
+                                    {orderData.memberNickname}
+                                </T.Text>
+                                <T.Text _size={15} _color="gray800">
+                                    {orderData.orderName}
+                                </T.Text>
+                            </L.FlexCols>
+                        </L.FlexRows>
+                        <T.Text _size={14} _weight={500} _color="gray800">
+                            {orderData.recetiveType}
+                        </T.Text>
+                    </L.FlexRows>
+                    <L.FlexCols _gap={4}>
+                        <L.FlexCols _gap={4}>
+                            <T.Text _size={14} _color="gray600">
+                                연락처:{" "}
+                                {orderData.memberPhone.replace(
+                                    /(\d{3})(\d{4})(\d{4})/,
+                                    "$1-$2-$3"
+                                )}
+                            </T.Text>
+                            <T.Text _size={14} _color="gray600">
+                                주문 일시:{" "}
+                                {dayjs(orderData.createDate).format(
+                                    "YYYY.MM.DD"
+                                )}
+                            </T.Text>
+                        </L.FlexCols>
+                    </L.FlexCols>
+                </L.FlexCols>
+            </L.Contents>
             {/* 배송지 / 요청 사항 */}
             <L.Contents>
                 <L.FlexCols _gap={16}>
@@ -189,14 +236,15 @@ const OrderDetails = (props) => {
                             </T.Text>
                         </L.FlexCols>
                     )}
-                    {orderData.deliveryContents && (
-                        <L.FlexCols _gap={4}>
-                            <T.Text _weight={600}>요청사항</T.Text>
-                            <T.Text _size={15} _color="gray800">
-                                {orderData.deliveryContents}
-                            </T.Text>
-                        </L.FlexCols>
-                    )}
+
+                    <L.FlexCols _gap={4}>
+                        <T.Text _weight={600}>요청사항</T.Text>
+                        <T.Text _size={15} _color="gray800">
+                            {orderData.deliveryContents
+                                ? orderData.deliveryContents
+                                : "요청사항 없음"}
+                        </T.Text>
+                    </L.FlexCols>
                 </L.FlexCols>
             </L.Contents>
             {/* 주문 상품 */}
