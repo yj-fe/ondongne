@@ -7,9 +7,11 @@ import { Close } from "components/commonUi/Icon";
 import moment from "moment";
 import styled from "styled-components";
 import useWindowSize from "hooks/useWindowSize";
+import { useEffect, useState } from "react";
 
-const BubbleModal = () => {
+const BubbleModal = ({ isBiz = false }) => {
     const size = useWindowSize();
+    const [show, isShow] = useState(true);
     const COOKIE_BUBBLE_KEY = "bubbleNeverWatch";
     const [cookiesBubble, setCookieBubble] = useCookies([COOKIE_BUBBLE_KEY]);
 
@@ -23,7 +25,12 @@ const BubbleModal = () => {
         });
     };
 
-    return cookiesBubble[COOKIE_BUBBLE_KEY] ? null : (
+    useEffect(() => {
+        if (cookiesBubble[COOKIE_BUBBLE_KEY]) isShow(false);
+        else isShow(true);
+    }, [cookiesBubble]);
+
+    return isBiz || !show ? null : (
         <Sticky>
             <Container>
                 <T.Text _size={13} _weight={600} _color="white">

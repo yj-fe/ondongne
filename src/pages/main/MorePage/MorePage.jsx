@@ -134,7 +134,7 @@ function MorePage() {
                                         </AccountName>
                                     </MoreAccountTextDiv>
                                 </L.FlexRows>
-                                <BubbleModal />
+                                <BubbleModal isBiz={auth.role === "ROLE_BIZ"} />
                             </MoreAccountProfile>
 
                             <MoreAccountButtonDiv>

@@ -71,10 +71,12 @@ function MarketDetailInfo({ item }) {
                                     <th></th>
                                     <td>일요일 : {dayweekToText("일요일")}</td>
                                 </tr>
-                                <tr>
-                                    <th>전화번호</th>
-                                    <td>{phoneFormatter(item.phone)}</td>
-                                </tr>
+                                {item.phone && (
+                                    <tr>
+                                        <th>전화번호</th>
+                                        <td>{phoneFormatter(item.phone)}</td>
+                                    </tr>
+                                )}
                                 <tr>
                                     <th>배달지역</th>
                                     <td>{item.deliveryAddress}</td>
