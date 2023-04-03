@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+import "./style.css";
 import { useSelector } from "react-redux";
 import {
     Container as MapDiv,
@@ -22,7 +23,6 @@ import Rice from "assets/icons/category/Rice.svg";
 import Seafood from "assets/icons/category/Seafood.svg";
 import vegetables from "assets/icons/category/vegetables.svg";
 import { groupBy, isEmptyObj } from "utils/utils";
-import "./style.css";
 import { StoreListCard } from "components/commonUi/StoreListCard";
 
 const MapView = ({ category }) => {
@@ -83,8 +83,6 @@ function MyMap({ list, local }) {
         setItem(data);
     }
 
-    useEffect(() => {}, [item]);
-
     return (
         <NaverMap
             defaultCenter={new navermaps.LatLng(local.x, local.y)}
@@ -97,7 +95,8 @@ function MyMap({ list, local }) {
                 border: 0,
             }}
         >
-            {!isEmptyObj(list) &&
+            {list &&
+                !isEmptyObj(list) &&
                 Object.values(list).map((newList, i) => (
                     <Marker
                         key={i}

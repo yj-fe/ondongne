@@ -155,7 +155,7 @@ export const normalize = css`
      */
 
     img {
-        width: 100%;
+        /* width: 100%; */
         border-style: none;
     }
 

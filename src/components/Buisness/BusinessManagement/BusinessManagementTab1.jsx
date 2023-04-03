@@ -243,7 +243,7 @@ function BusinessManagementTab1() {
                     {/* ============== 카테고리 ==============  */}
                     <CategoryForm data={store} setData={setStore} />
 
-                    {/* ============== 활동지역 ============== */}
+                    {/* ============== 배달가능지역 ============== */}
                     <DeliveryForm data={store} setData={setStore} />
 
                     {/* ============== 배달/픽업 여부 ============== */}

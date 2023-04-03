@@ -121,7 +121,7 @@ function BusinessApplication() {
             return "상점 상세주소를 입력해주세요.";
         }
         if (data.delivery?.length === 0) {
-            return "상점 활동지역을 선택해주세요.";
+            return "상점 배달가능 지역을 선택해주세요.";
         }
         if (data.recetiveType?.length === 0) {
             return "배달/픽업 여부를 체크해주세요.";
@@ -271,7 +271,7 @@ function BusinessApplication() {
                                             setData={setData}
                                         />
 
-                                        {/* =========활동지역========= */}
+                                        {/* =========배달가능지역========= */}
                                         <DeliveryForm
                                             data={data}
                                             setData={setData}

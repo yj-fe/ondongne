@@ -2,10 +2,11 @@ import * as S from "./TextEditor.style";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ImageCompress from "quill-image-compress";
+import ImageResize from "quill-image-resize-module-react";
 import { useMemo, useRef } from "react";
 import { editorFileUpload } from "service/common";
 import { base64toFile } from "utils/utils";
-
+Quill.register("modules/imageResize", ImageResize);
 Quill.register("modules/imageCompress", ImageCompress);
 
 const formats = [
@@ -41,8 +42,7 @@ function TextEditor({ initData, onChange, ...props }) {
             ],
             imageCompress: {
                 quality: 1, // default
-                maxWidth: 3000, // default
-                maxHeight: 3000, // default
+                maxWidth: 726,
                 imageType: "image/jpeg", // default
                 debug: false, // default
                 suppressErrorLogging: false, // default
@@ -63,6 +63,10 @@ function TextEditor({ initData, onChange, ...props }) {
                             console.error(error);
                         });
                 },
+            },
+            imageResize: {
+                parchment: Quill.import("parchment"),
+                modules: ["Resize", "DisplaySize", "Toolbar"],
             },
         };
     }, []);

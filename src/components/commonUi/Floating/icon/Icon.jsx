@@ -230,7 +230,7 @@ const CouponUpload = () => (
             stroke="#424242"
             strokeWidth="1.5"
             strokeLinecap="round"
-            stroke-dasharray="2.5 2.5"
+            strokeDasharray="2.5 2.5"
         />
     </svg>
 );
