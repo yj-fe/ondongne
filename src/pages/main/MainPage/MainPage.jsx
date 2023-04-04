@@ -11,13 +11,14 @@ import MainCategory from "components/Main/Main/MainCategory/MainCategory";
 import FooterLayout from "components/layout/Footer/Footer";
 import * as L from "components/commonUi/Layout";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import Alert from "components/commonUi/Alert";
 import { useNavigate } from "react-router-dom";
 import LayoutMain from "components/layout/Layout/LayoutMain";
 import MainBanner from "components/Main/Main/MainBanner/MainBanner";
 import CategoryCollection from "components/Main/Main/CategoryCollection/index";
 import MainTimeSale from "components/Main/Main/TimeSale/MainTimeSale";
+import { memberInjectToken } from "service/member";
 const categories = [
     "야채/과일",
     "정육",
@@ -33,9 +34,14 @@ const categories = [
 
 function MainPage() {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const { state } = useLocation();
     const [alert, setAlert] = useState(null);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+    const memberToken = async (token) => {
+        await memberInjectToken(token).catch((e) => console.log(e));
+    };
 
     useEffect(() => {
         if (state && state.error) {
@@ -53,6 +59,12 @@ function MainPage() {
             });
         }
     }, [state]);
+
+    useEffect(() => {
+        if (isAuthenticated && searchParams.get("token")) {
+            memberToken(searchParams.get("token"));
+        }
+    }, [searchParams]);
 
     return (
         <>

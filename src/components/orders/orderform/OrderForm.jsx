@@ -531,7 +531,10 @@ const OrderForm = () => {
                     selected={orderData.payType}
                     name="payType"
                     selectName="결제 수단"
-                    options={[{ text: "카드 결제", value: "카드" }]}
+                    options={[
+                        { text: "카드 결제", value: "카드" },
+                        // { text: "계좌이체", value: "계좌이체" },
+                    ]}
                     onChange={(e) => {
                         e.preventDefault();
                         setOrderData({

@@ -21,7 +21,12 @@ import SimpleConfirm from "components/commonUi/SimpleConfirm";
 import MemberPwd from "components/Login/Member/MemberPwd/MemberPwd";
 import ProfileAvatar from "components/commonUi/ProfileAvatar";
 import { useDispatch, useSelector } from "react-redux";
-import { getMember, logout, memberNicknameChange } from "service/member";
+import {
+    getMember,
+    logout,
+    memberLogout,
+    memberNicknameChange,
+} from "service/member";
 import { authActions } from "store/slices/auth";
 import { Text } from "components/commonUi/Text";
 import Layout from "components/layout/Layout/Layout";
@@ -48,14 +53,18 @@ function MemberManagement() {
 
     const Logout = async () => {
         setConfirm(false);
-        dispatch(authActions.logout());
-        setAlert({
-            title: "로그아웃 성공",
-            contents: "로그아웃 되었습니다.",
-            buttonText: "확인",
-            onButtonClick: () => navigate("/more", { replace: true }),
-            onOverlayClick: () => navigate("/more", { replace: true }),
-        });
+        await memberLogout()
+            .then((res) => {
+                dispatch(authActions.logout());
+                setAlert({
+                    title: "로그아웃 성공",
+                    contents: "로그아웃 되었습니다.",
+                    buttonText: "확인",
+                    onButtonClick: () => navigate("/more", { replace: true }),
+                    onOverlayClick: () => navigate("/more", { replace: true }),
+                });
+            })
+            .catch((e) => console.log("로그아웃 에러 e = ", e));
     };
 
     useEffect(() => {

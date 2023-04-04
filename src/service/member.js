@@ -9,6 +9,8 @@ const urls = {
     memberDelete: "/member/delete",
     marketingUpdate: "/member/marketing/update",
     pushUpdate: "/member/push/update",
+    tokenUpdate: "/member/token/update",
+    logout: "/member/logout",
 };
 
 /* ==============================
@@ -72,4 +74,18 @@ export function memberAgreeStatusChange(key, value) {
     }
 
     return;
+}
+
+/* ==============================
+    회원 토큰 삭제
+============================== */
+export function memberLogout() {
+    return client.post(`${urls.logout}`);
+}
+
+/* ==============================
+    회원 토큰 주입
+============================== */
+export function memberInjectToken(token) {
+    return client.patch(`${urls.tokenUpdate}/${token}`);
 }
