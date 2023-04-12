@@ -51,6 +51,13 @@ client.interceptors.response.use(
         const { config } = error;
         const originalRequest = config;
 
+        if (
+            error.response?.status === 401 &&
+            error.response?.data.message !== "자격 증명에 실패하였습니다."
+        ) {
+            window.location.href = "/login?unAuth=401";
+        }
+
         if (axios.isCancel(error)) {
             return new Promise(() => {});
         }

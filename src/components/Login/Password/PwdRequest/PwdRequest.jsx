@@ -149,7 +149,7 @@ function PwdRequest({ setFindSuccess, setId }) {
         if (phone.length > 0 && authTime == 0) {
             setAuthCode("");
             return setAlert({
-                contents: "인증시간이 초과하였습니다. 다시 시도해 주세요",
+                contents: `인증시간이 초과하였습니다.\n 다시 시도해 주세요`,
                 buttonText: "확인",
                 onButtonClick: () => setAlert(null),
                 onOverlayClick: () => setAlert(null),

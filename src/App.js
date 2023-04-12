@@ -53,9 +53,6 @@ import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAsk
 import InquiryPage from "pages/service/CustomerService/InquiryPage";
 import VocPage from "pages/service/CustomerService/VocPage";
 import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage";
-import Alert from "components/commonUi/Alert";
-import { authActions } from "store/slices/auth";
-import { getExpiry } from "utils/localStorage";
 import BusinessProductEditInfo from "./pages/business/BusinessPage/BusinessProductManagement/BusinessProductEditInfo";
 import ReviewPage from "pages/member/ReviewPage";
 import SearchDetailPage from "pages/main/Search/SearchDetailPage";
@@ -68,32 +65,9 @@ import Membership from "pages/business/BusinessPage/Membership";
 import BizSettlement from "pages/business/BusinessPage/BizSettlement";
 
 function App() {
-    const dispatch = useDispatch();
     const location = useLocation();
-    const [alert, setAlert] = useState(null);
 
-    const member = () => {
-        const data = getExpiry("accessToken");
-        if (data !== null) {
-            if (data.status) {
-                dispatch(authActions.logout());
-                return setAlert({
-                    title: "인증 기간 만료",
-                    contents:
-                        "인증 기간이 만료되었습니다.\n다시 로그인해주세요.",
-                    buttonText: "확인",
-                    onButtonClick: () => setAlert(false),
-                    onOverlayClick: () => setAlert(false),
-                });
-            }
-
-            dispatch(authActions.login(data));
-        }
-    };
-
-    // 로그인 유지
     useEffect(() => {
-        member();
         window.scrollTo(0, 0);
     }, [location]);
 
@@ -257,15 +231,6 @@ function App() {
                     <Route path="terms/privacy" element={<PrivacyTerms />} />
                 </Route>
             </Routes>
-            {alert && (
-                <Alert
-                    title={alert.title}
-                    contents={alert.contents}
-                    buttonText={alert.buttonText}
-                    onButtonClick={alert.onButtonClick}
-                    onOverlayClick={alert.onOverlayClick}
-                />
-            )}
         </>
     );
 }

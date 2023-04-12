@@ -100,7 +100,15 @@ function BusinessCouponUpload() {
     return (
         <>
             <Layout
-                title={id ? "쿠폰소식 수정" : "쿠폰소식 등록"}
+                title={
+                    id
+                        ? data.eventType === "normal"
+                            ? "상점소식 수정"
+                            : "쿠폰소식 수정"
+                        : data.eventType === "normal"
+                        ? "상점소식 등록"
+                        : "쿠폰소식 등록"
+                }
                 cart={false}
                 bell={false}
                 floating={false}

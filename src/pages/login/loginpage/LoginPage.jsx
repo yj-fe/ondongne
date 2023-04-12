@@ -44,6 +44,7 @@ function LoginPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const isAuth = searchParams.get("isAuth");
     const error = searchParams.get("error");
+    const unAuth = searchParams.get("unAuth");
     const auth = useSelector((state) => state.auth);
 
     const [account, setAccount] = useState({
@@ -66,9 +67,6 @@ function LoginPage() {
     const onSubmut = async () => {
         const response = await login(account);
         const { data, code } = response.data;
-
-        console.log(response);
-
         if (code != "200") {
             setAlert({
                 title: "로그인 실패",
@@ -145,6 +143,19 @@ function LoginPage() {
     }, [error]);
 
     useEffect(() => {
+        if (unAuth === "401") {
+            return setAlert({
+                title: "사용자 인증 기간 만료",
+                contents: "인증 기간이 만료되었습니다.\n다시 로그인해주세요.",
+                buttonText: "확인",
+                onButtonClick: () => {
+                    dispatch(authActions.logout());
+                    window.location.href = "/login";
+                },
+                onOverlayClick: () => {},
+            });
+        }
+
         if (auth.isAuthenticated) {
             if (auth.role === "ROLE_BIZ") {
                 return navigate("/business", { replace: true });
@@ -152,7 +163,7 @@ function LoginPage() {
                 return navigate("/", { replace: true });
             }
         }
-    }, [auth]);
+    }, [auth, unAuth]);
 
     return (
         <S.Wrapper>

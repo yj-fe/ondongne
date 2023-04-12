@@ -45,7 +45,7 @@ export const normalize = css`
         margin: 0.67em 0;
     }
     h2 {
-        font-size: 1.5em;
+        font-size: 1.5em !important;
         margin: 0.67em 0;
     }
 

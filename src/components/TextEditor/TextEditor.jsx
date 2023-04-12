@@ -20,7 +20,7 @@ const formats = [
     "list",
     "bullet",
     "indent",
-    "link",
+    // "link",
     "image",
     "align",
     "color",
