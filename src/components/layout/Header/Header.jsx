@@ -21,6 +21,7 @@ import MobileShare from "components/share/share";
 import ShareMobile from "components/share/share";
 import ReportAlert from "components/commonUi/ReportAlert";
 import { Search } from "./../../commonUi/Icon";
+import { isAndroid } from "react-device-detect";
 
 const Header = ({
     title = "title",
@@ -104,7 +105,14 @@ const Header = ({
                     {share && (
                         <S.UtilBtn
                             onClick={
-                                isMobile
+                                isAndroid
+                                    ? () =>
+                                          window.Android.doShare(
+                                              title,
+                                              description,
+                                              window.location.href
+                                          )
+                                    : isMobile
                                     ? () =>
                                           ShareMobile({
                                               title,
