@@ -14,24 +14,24 @@ export const isShareSupported = () => navigator.share ?? false;
  */
 
 const ShareMobile = async (data) => {
-	return new Promise(async (resolve) => {
-		if (isShareSupported()) {
-			await navigator.share(data);
-			resolve("shared");
-			return "shared";
-		}
+    return new Promise(async (resolve) => {
+        if (isShareSupported()) {
+            await navigator.share(data);
+            resolve("shared");
+            return "shared";
+        }
 
-		if (data.url) {
-			const result = await copyToClipboard(data.url);
+        if (data.url) {
+            const result = await copyToClipboard(data.url);
 
-			if (result) {
-				resolve("copiedToClipboard");
-				return "copiedToClipboard";
-			}
-		}
-		resolve("failed");
-		return "failed";
-	});
+            if (result) {
+                resolve("copiedToClipboard");
+                return "copiedToClipboard";
+            }
+        }
+        resolve("failed");
+        return "failed";
+    });
 };
 
 export default ShareMobile;

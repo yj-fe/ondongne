@@ -34,6 +34,7 @@ const color = {
     red: "#ED2A2A",
     error: "#D32F2F",
     blue: "#1E88E5",
+    blue400: "#207DEB",
     pink200: "#EF9A9A",
 };
 

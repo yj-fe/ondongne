@@ -82,6 +82,14 @@ export const AbsoluteDiv = styled.div`
         right: ${(props) => props._rightmedia};
     }
 `;
+
+export const CenterAbsDiv = styled.div`
+    position: absolute;
+    top: ${(props) => props._top || "50%"};
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
 export const AbsoluteDivGrid = styled.div`
     border-radius: ${(props) => props._bdr}px;
     width: "100%";

@@ -29,7 +29,7 @@ function FrequentlyAskedQuestion() {
     return (
         <div>
             <Layout
-                title="자주하는 질문"
+                title="자주하는 질문(FAQ)"
                 cart={false}
                 bell={false}
                 floating={false}

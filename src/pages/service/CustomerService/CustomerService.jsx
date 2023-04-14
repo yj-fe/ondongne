@@ -35,7 +35,7 @@ function CustomerService() {
                                         _size={16}
                                         _color="gray900"
                                     >
-                                        자주하는 질문
+                                        자주하는 질문(FAQ)
                                     </T.Text>
                                     <ArrowRight />
                                 </L.FlexRows>
@@ -69,7 +69,7 @@ function CustomerService() {
                                         _size={16}
                                         _color="gray900"
                                     >
-                                        Voc 의견
+                                        고객 의견
                                     </T.Text>
                                     <ArrowRight />
                                 </L.FlexRows>
@@ -79,6 +79,32 @@ function CustomerService() {
 
                     <L.Contents _padding="0px">
                         <L.FlexCols _gap="0px" _padding="8px 20px">
+                            <L.FlexRows
+                                _height="36px"
+                                _content="space-between"
+                                _items="center"
+                                _width={688}
+                                _padding="8px 0px"
+                                onClick={() =>
+                                    (window.location.href =
+                                        "https://open.kakao.com/o/suc5rl8e")
+                                }
+                            >
+                                <T.Text
+                                    _weight={400}
+                                    _size={14}
+                                    _color="gray800"
+                                >
+                                    카카오 1:1문의
+                                </T.Text>
+                                <T.Text
+                                    _weight={400}
+                                    _size={14}
+                                    _color="gray800"
+                                >
+                                    https://open.kakao.com/o/suc5rl8e
+                                </T.Text>
+                            </L.FlexRows>
                             <L.FlexRows
                                 _height="36px"
                                 _content="space-between"

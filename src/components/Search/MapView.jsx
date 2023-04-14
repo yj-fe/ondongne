@@ -143,7 +143,7 @@ function MyMap({ list, local }) {
 // 업체정보 모달
 function Modal({ close, item }) {
     return (
-        <ModalBody>
+        <ModalBody _bottom={"47px"}>
             <ModalDiv1
                 _shadow="0px 0px 16px  rgba(0, 0, 0, 0.06)"
                 _pd="0px 20px"

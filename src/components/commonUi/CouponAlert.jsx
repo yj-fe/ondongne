@@ -146,7 +146,7 @@ const CouponAlert = ({ active = true, data, setData, ...props }) => {
                         <Line />
 
                         <FlexCols _gap={32} _padding="16px 20px">
-                            <FlexCols _gap={16}>
+                            <FlexCols _gap={8}>
                                 <Text as="p">쿠폰 종류</Text>
                                 <FlexRows>
                                     <DayBox
@@ -177,7 +177,7 @@ const CouponAlert = ({ active = true, data, setData, ...props }) => {
                                     </DayBox>
                                 </FlexRows>
                             </FlexCols>
-                            <FlexCols _gap={16}>
+                            <FlexCols _gap={8}>
                                 <Text as="p">쿠폰 혜택</Text>
                                 <FlexCols>
                                     <TextInput
@@ -200,7 +200,7 @@ const CouponAlert = ({ active = true, data, setData, ...props }) => {
                                     )}
                                 </FlexCols>
                             </FlexCols>
-                            <FlexCols _gap={16}>
+                            <FlexCols _gap={8}>
                                 <Text as="p">사용 기간</Text>
                                 <BorderBox onClick={() => setCalendar(true)}>
                                     <Input
@@ -217,13 +217,16 @@ const CouponAlert = ({ active = true, data, setData, ...props }) => {
                                         }
                                     />
                                 </BorderBox>
+                                <Text _color="gray600" _size={13} as="p">
+                                    쿠폰 발급기간은 최대 3개월까지 가능합니다.
+                                </Text>
                                 {!couponData.endDate && (
                                     <Text _color="error" _size={13} as="p">
                                         쿠폰 사용시간을 선택해 주세요.
                                     </Text>
                                 )}
                             </FlexCols>
-                            <FlexCols _gap={16}>
+                            <FlexCols _gap={8}>
                                 <FlexRows _content="space-between">
                                     <Text as="p">쿠폰 갯수</Text>
                                     <FlexRows

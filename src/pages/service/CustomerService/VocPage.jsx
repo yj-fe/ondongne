@@ -111,7 +111,7 @@ function VocPage() {
     return (
         <CursorDiv>
             <Layout
-                title="Voc 의견"
+                title="고객 의견"
                 cart={false}
                 bell={false}
                 floating={false}

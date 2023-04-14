@@ -307,7 +307,7 @@ const OrderList = () => {
                                     )} */}
                                     {item.orderStatus == "배송완료" && (
                                         <S.Action
-                                            _type="bgb"
+                                            _type="bg"
                                             onClick={() =>
                                                 getDeliveryAuth(item.orderId)
                                             }

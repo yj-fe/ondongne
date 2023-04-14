@@ -20,14 +20,14 @@ export const RequestButton = styled.button`
     gap: 4px;
     width: 90px;
     height: 48px;
-    background: #e8f5e9;
+    background: #0b806f;
     border: none;
     border-radius: 4px;
     flex: none;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 14px;
     line-height: 20px;
-    color: #43a047;
+    color: #fff;
 `;
 
 export const AuthTimer = styled.div`

@@ -33,7 +33,7 @@ import * as L from "components/commonUi/Layout";
 import DeliveryForm from "components/commonUi/Delivery/DeliveryForm";
 import AddressForm from "components/commonUi/Address/AddressForm";
 import BusinessFileForm from "components/commonUi/BusinessFile/BusinessFileForm";
-import { AbsoluteDiv } from "components/layout/Img/ImgSizeLayout";
+import { AbsoluteDiv, CenterAbsDiv } from "components/layout/Img/ImgSizeLayout";
 import defaultProfile from "assets/common/Profile.png";
 import Camera from "assets/common/Camera.png";
 import CheckBox from "components/commonUi/CheckBox";
@@ -124,7 +124,7 @@ function BusinessApplication() {
             return "상점 배달가능 지역을 선택해주세요.";
         }
         if (data.recetiveType?.length === 0) {
-            return "배달/픽업 여부를 체크해주세요.";
+            return "수령 방법을 체크해주세요.";
         }
         if (data.ceo?.length === 0) {
             return "대표자명을 입력해주세요.";
@@ -186,6 +186,15 @@ function BusinessApplication() {
                                 <>
                                     {/* 배너 */}
                                     <TabProfileDiv>
+                                        <CenterAbsDiv>
+                                            <Text
+                                                _color={"gray600"}
+                                                _size={16}
+                                                _weight={600}
+                                            >
+                                                배너
+                                            </Text>
+                                        </CenterAbsDiv>
                                         <AbsoluteDiv
                                             __width="93"
                                             _height="30"
@@ -227,6 +236,15 @@ function BusinessApplication() {
                                                         }
                                                     />
                                                     <CameraStyle src={Camera} />
+                                                    <CenterAbsDiv _top={"70%"}>
+                                                        <Text
+                                                            _color={"gray600"}
+                                                            _size={14}
+                                                            _weight={600}
+                                                        >
+                                                            프로필
+                                                        </Text>
+                                                    </CenterAbsDiv>
                                                 </ProfileDiv>
                                                 <FileInput
                                                     type="file"
@@ -277,10 +295,10 @@ function BusinessApplication() {
                                             setData={setData}
                                         />
 
-                                        {/* ============== 배달/픽업 여부 ============== */}
+                                        {/* ============== 수령 방법 ============== */}
                                         <L.FlexCols _gap={28}>
                                             <ContentTitle>
-                                                배달/픽업 여부
+                                                수령 방법
                                             </ContentTitle>
                                             <L.FlexRows _gap={16}>
                                                 <CheckBox

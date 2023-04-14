@@ -341,6 +341,10 @@ const TimeSaleUploadPage = () => {
                                     </span>
                                 </TitleInfoDiv>
                             </L.FlexRows>
+                            <T.Text _color="gray600" _size={13} as="p">
+                                - 타임세일 설정 기간은 시작일로 부터 최대
+                                7일까지 가능합니다.
+                            </T.Text>
                         </L.FlexCols>
                     </L.FlexCols>
                 </L.Contents>

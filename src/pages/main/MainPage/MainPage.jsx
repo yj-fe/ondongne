@@ -11,7 +11,7 @@ import MainCategory from "components/Main/Main/MainCategory/MainCategory";
 import FooterLayout from "components/layout/Footer/Footer";
 import * as L from "components/commonUi/Layout";
 import { useSelector } from "react-redux";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import Alert from "components/commonUi/Alert";
 import { useNavigate } from "react-router-dom";
 import LayoutMain from "components/layout/Layout/LayoutMain";
@@ -19,6 +19,7 @@ import MainBanner from "components/Main/Main/MainBanner/MainBanner";
 import CategoryCollection from "components/Main/Main/CategoryCollection/index";
 import MainTimeSale from "components/Main/Main/TimeSale/MainTimeSale";
 import { memberInjectToken } from "service/member";
+import MainCoachmark from "components/coachmark/MainCoachmark";
 const categories = [
     "야채/과일",
     "정육",
@@ -69,7 +70,7 @@ function MainPage() {
     return (
         <>
             {/* 코치마크 */}
-            {/* <MainCoachmark /> */}
+            <MainCoachmark />
 
             <LayoutMain>
                 <L.Container _padding="0px">

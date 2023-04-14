@@ -96,7 +96,11 @@ function CollectionPage() {
                                             _color="gray600"
                                             _align="center"
                                         >
-                                            <p>등록된 상품이 없습니다.</p>
+                                            <p>
+                                                {title === "우리동네 인기 쿠폰"
+                                                    ? "등록된 쿠폰이 없습니다."
+                                                    : "등록된 상품이 없습니다."}
+                                            </p>
                                         </T.Text>
                                     </L.FlexRows>
                                 )}

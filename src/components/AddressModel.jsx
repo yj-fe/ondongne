@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Overlay from "./layout/Overlay/Overlay";
 import styled from "styled-components";
 import { searchLocation } from "service/common";
@@ -55,6 +55,12 @@ const AddressModel = ({ modelClose, currentData, dataHandler }) => {
         modelClose();
     };
 
+    useEffect(() => {
+        if (address) {
+            setErrorMessage("");
+        }
+    }, [address]);
+
     return (
         <Overlay onOverlayClick={modelClose}>
             <S.AlertBox>
@@ -67,7 +73,7 @@ const AddressModel = ({ modelClose, currentData, dataHandler }) => {
                             _weight={600}
                             _align="center"
                         >
-                            활동 지역 검색
+                            배달 지역 검색
                         </Text>
 
                         <S.SearchBox>
@@ -77,7 +83,7 @@ const AddressModel = ({ modelClose, currentData, dataHandler }) => {
                                 maxLength={50}
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
-                                placeholder={"시/구, 동 이름으로 검색"}
+                                placeholder={"도/시/구, 동 이름으로 검색"}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") searchHandler();
                                 }}
@@ -86,7 +92,7 @@ const AddressModel = ({ modelClose, currentData, dataHandler }) => {
                                 <Search />
                             </button>
                         </S.SearchBox>
-                        {errorMessage && (
+                        {errorMessage ? (
                             <Text
                                 as="p"
                                 _size={13}
@@ -95,12 +101,85 @@ const AddressModel = ({ modelClose, currentData, dataHandler }) => {
                             >
                                 {errorMessage}
                             </Text>
+                        ) : (
+                            <FlexCols _gap={24}>
+                                <FlexCols>
+                                    <Text
+                                        as="p"
+                                        _size={14}
+                                        _weight={600}
+                                        _color={"black"}
+                                    >
+                                        활동지역이란?
+                                    </Text>
+                                    <Text
+                                        as="p"
+                                        _size={13}
+                                        _weight={400}
+                                        _color={"gray800"}
+                                    >
+                                        활동지역 주소를 추가하시면 해당 지역에서
+                                        내 업체가 노출되며, 최대 7개까지 등록
+                                        가능합니다.
+                                    </Text>
+                                </FlexCols>
+                                <FlexCols>
+                                    <Text
+                                        as="p"
+                                        _size={14}
+                                        _weight={600}
+                                        _color={"black"}
+                                    >
+                                        주소 검색 Tip
+                                    </Text>
+                                    <FlexCols _gap={4}>
+                                        <Text
+                                            as="p"
+                                            _size={13}
+                                            _weight={400}
+                                            _color={"gray800"}
+                                        >
+                                            시/구 검색
+                                        </Text>
+                                        <Text
+                                            as="p"
+                                            _size={13}
+                                            _weight={400}
+                                            _color={"blue400"}
+                                        >
+                                            {
+                                                "예) 김포시 -> 김포 모든 지역 검색"
+                                            }
+                                        </Text>
+                                    </FlexCols>
+                                    <FlexCols _gap={4}>
+                                        <Text
+                                            as="p"
+                                            _size={13}
+                                            _weight={400}
+                                            _color={"gray800"}
+                                        >
+                                            동/면/읍 검색
+                                        </Text>
+                                        <Text
+                                            as="p"
+                                            _size={13}
+                                            _weight={400}
+                                            _color={"blue400"}
+                                        >
+                                            {
+                                                "예) 사우동 -> 해당 동/면/읍 개별 주소만 검색"
+                                            }
+                                        </Text>
+                                    </FlexCols>
+                                </FlexCols>
+                            </FlexCols>
                         )}
                     </FlexCols>
                     {/* ============ 검색리스트 ============ */}
-                    <S.List>
-                        {list.length > 0 &&
-                            list.map((item, i) => (
+                    {list.length > 0 && (
+                        <S.List>
+                            {list.map((item, i) => (
                                 <S.Item
                                     key={i}
                                     checked={item.checked}
@@ -124,7 +203,8 @@ const AddressModel = ({ modelClose, currentData, dataHandler }) => {
                                     </S.ItemText>
                                 </S.Item>
                             ))}
-                    </S.List>
+                        </S.List>
+                    )}
                 </S.Body>
                 <S.Button onClick={onSubmit}>적용</S.Button>
             </S.AlertBox>

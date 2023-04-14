@@ -83,7 +83,9 @@ function BusinessPage() {
                                 가게 정보
                             </T.Text>
                             <L.GridTwo>
-                                <InfoCard>
+                                <InfoCard
+                                    onClick={() => navigate("/business/order")}
+                                >
                                     <OrderIcon />
                                     <CardTextDiv>
                                         <CardText>신규 주문</CardText>
@@ -92,7 +94,9 @@ function BusinessPage() {
                                         </CardCount>
                                     </CardTextDiv>
                                 </InfoCard>
-                                <InfoCard>
+                                <InfoCard
+                                    onClick={() => navigate("/business/order")}
+                                >
                                     <InfoIconStyle>
                                         <Pickup />
                                     </InfoIconStyle>
@@ -103,7 +107,9 @@ function BusinessPage() {
                                         </CardCount>
                                     </CardTextDiv>
                                 </InfoCard>
-                                <InfoCard>
+                                <InfoCard
+                                    onClick={() => navigate("/business/review")}
+                                >
                                     <InfoIconStyle>
                                         <NewReview />
                                     </InfoIconStyle>

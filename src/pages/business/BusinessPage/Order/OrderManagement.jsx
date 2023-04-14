@@ -382,7 +382,7 @@ function OrderManagement() {
                                             {item.orderStatus ===
                                                 "결제완료" && (
                                                 <S.Action
-                                                    _type="bgb"
+                                                    _type="bg"
                                                     onClick={() => {
                                                         statusUpdtae(
                                                             item.orderId,

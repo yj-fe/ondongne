@@ -206,7 +206,7 @@ function BusinessManagementTab1() {
                     >
                         <ProfileBtnDiv htmlFor="bannerFile">
                             <Img src={Camera} />
-                            이미지 변경
+                            이미지 등록
                         </ProfileBtnDiv>
                     </AbsoluteDiv>
                     <input
@@ -246,10 +246,10 @@ function BusinessManagementTab1() {
                     {/* ============== 배달가능지역 ============== */}
                     <DeliveryForm data={store} setData={setStore} />
 
-                    {/* ============== 배달/픽업 여부 ============== */}
+                    {/* ============== 수령 방법 ============== */}
                     <L.FlexCols _gap={16}>
                         <T.Text _weight={600} _size={16} _color="gray900">
-                            배달/픽업 여부
+                            수령 방법
                         </T.Text>
                         <L.FlexRows _gap={16}>
                             <CheckBox
