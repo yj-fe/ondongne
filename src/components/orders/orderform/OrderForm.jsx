@@ -28,6 +28,7 @@ const OrderForm = () => {
     const navigate = useNavigate();
     const auth = useSelector((state) => state.auth);
     const orderItems = useSelector((state) => state.order.items);
+    const [member, setMembre] = useState();
     const backTo = useSelector((state) => state.order.to);
 
     const [orderData, setOrderData] = useState({
@@ -80,11 +81,14 @@ const OrderForm = () => {
         회원 조회 및 데이터 바인딩
     ============================== */
     const dataHandler = async () => {
-        if (orderItems.length === 0) return goBack("/", "비정상 접근입니다.");
+        if (orderItems.length === 0) {
+            return goBack("/", "이미 처리된 주문 상품입니다.");
+        }
 
         const response = await getMember();
         if (response && response.data.data) {
             const member = response.data.data;
+            setMembre(member);
             setOrderData({
                 ...orderData,
                 memberId: member.memberId,
@@ -141,8 +145,7 @@ const OrderForm = () => {
         if (
             (orderData.recetiveType === "배달" ||
                 orderData.recetiveType === "택배") &&
-            orderData.address === "" &&
-            orderData.addressDetails === ""
+            (orderData.address === "" || orderData.addressDetails === "")
         ) {
             return setAlert({
                 title: "배송지 입력",
@@ -365,11 +368,11 @@ const OrderForm = () => {
                                 address:
                                     e.currentTarget.value == "택배"
                                         ? ""
-                                        : orderData.address,
+                                        : member.address,
                                 addressDetails:
                                     e.currentTarget.value == "택배"
                                         ? ""
-                                        : orderData.addressDetails,
+                                        : member.addressDetails,
                             });
                             setOrderSelect(false);
                         }}

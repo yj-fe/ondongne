@@ -20,7 +20,6 @@ const formats = [
     "list",
     "bullet",
     "indent",
-    // "link",
     "image",
     "align",
     "color",
@@ -38,7 +37,7 @@ function TextEditor({ initData, onChange, ...props }) {
                 ["bold", "italic", "underline", "strike", "blockquote"],
                 [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
                 [{ list: "ordered" }, { list: "bullet" }],
-                ["link", "image"],
+                ["image"],
             ],
             imageCompress: {
                 quality: 1, // default

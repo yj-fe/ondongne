@@ -254,7 +254,7 @@ function BusinessPage() {
                         </Link>
                         <Link to="coupon">
                             <TermsDiv>
-                                <TermsTitle>상점 소식 관리</TermsTitle>
+                                <TermsTitle>쿠폰/소식 관리</TermsTitle>
                                 <TermsIconStyle>
                                     <Right />
                                 </TermsIconStyle>

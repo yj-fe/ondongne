@@ -14,7 +14,7 @@ export const StoreListCard = ({ list, setData, lastRef, isLike = true }) => {
     const navigate = useNavigate();
 
     return (
-        <L.FlexCols _gap={20}>
+        <L.FlexCols _gap={24}>
             {list.map((item, index) => (
                 <L.FlexRows
                     key={index}

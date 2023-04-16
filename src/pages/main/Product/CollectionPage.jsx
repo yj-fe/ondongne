@@ -24,7 +24,7 @@ function CollectionPage() {
 
     const [list, setList] = useState([]);
     const [totalCount] = useState(0);
-    const limit = 1000;
+    const limit = 100;
 
     const [loading, setLoading] = useState(false);
     const [ref, inView] = useInView();
@@ -79,9 +79,9 @@ function CollectionPage() {
                 onBackClick={() => navigate("/")}
             >
                 <L.Container>
-                    <L.Contents _cursor="default" _padding="0">
-                        <L.FlexCols _padding={"20px 24px"} _gap="0">
-                            <L.Scroll _height="calc(100vh - 110px)">
+                    <L.Contents _height={"100vh - 108px"} _padding="0">
+                        <L.Scroll _height="calc(100vh - 68px)">
+                            <L.FlexCols _padding={"20px 24px"} _gap="0">
                                 {/* =================== 없을때 =================== */}
                                 {!loading && list.length === 0 && (
                                     <L.FlexRows
@@ -130,8 +130,8 @@ function CollectionPage() {
                                 )}
                                 {/* =================== 로딩 =================== */}
                                 {loading && <LoadingBar />}
-                            </L.Scroll>
-                        </L.FlexCols>
+                            </L.FlexCols>
+                        </L.Scroll>
                     </L.Contents>
                 </L.Container>
             </Layout>
