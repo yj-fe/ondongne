@@ -34,4 +34,8 @@ const ShareMobile = async (data) => {
     });
 };
 
+export const ShareAndroid = async (arg1, arg2, arg3) => {
+    return window.Android.doShare(arg1, arg2, arg3);
+};
+
 export default ShareMobile;

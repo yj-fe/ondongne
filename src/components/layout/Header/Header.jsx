@@ -16,12 +16,11 @@ import { MoreStyle } from "pages/main/DetailsPage/DetailsPageStyle";
 import ModalMorePage from "components/Main/More/ModalMorePage";
 import ModalShare from "components/commonUi/ModalShare";
 import { Text } from "components/commonUi/Text";
-import { isMobile } from "react-device-detect";
-import MobileShare from "components/share/share";
+import { isMobile, isAndroid } from "react-device-detect";
+import { ShareAndroid } from "components/share/share";
 import ShareMobile from "components/share/share";
 import ReportAlert from "components/commonUi/ReportAlert";
 import { Search } from "./../../commonUi/Icon";
-import { isAndroid } from "react-device-detect";
 
 const Header = ({
     title = "title",
@@ -67,6 +66,10 @@ const Header = ({
     const ShowShareModal = () => {
         setShareModal(!shareModal);
     };
+    const getUserAgent = () => {
+        var userAgent = navigator.userAgent;
+        return userAgent.indexOf("APP_ANDROID") > -1;
+    };
 
     return (
         <S.Header _bbot={bottom}>
@@ -105,9 +108,9 @@ const Header = ({
                     {share && (
                         <S.UtilBtn
                             onClick={
-                                isAndroid
+                                getUserAgent()
                                     ? () =>
-                                          window.Android.doShare(
+                                          ShareAndroid(
                                               title,
                                               description,
                                               window.location.href
