@@ -10,12 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import CheckBox from "components/commonUi/CheckBox";
 import LayerSelect from "components/commonUi/LayerSelect";
 import Alert from "components/commonUi/Alert";
-import {
-    numberFormat,
-    orderName,
-    orderTotalPrice,
-    phoneFormatter,
-} from "utils/utils";
+import { numberFormat, orderName, orderTotalPrice, phoneFormatter } from "utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { getMember } from "service/member";
 import DaumPost from "components/DaumPost";
@@ -97,21 +92,14 @@ const OrderForm = () => {
                 nickname: member.nickname,
                 phone: member.phone,
                 address: member.address === null ? "" : member.address,
-                addressDetails:
-                    member.addressDetails === null ? "" : member.addressDetails,
-                deliveryContents:
-                    member.deliveryContents === null
-                        ? ""
-                        : member.deliveryContents,
+                addressDetails: member.addressDetails === null ? "" : member.addressDetails,
+                deliveryContents: member.deliveryContents === null ? "" : member.deliveryContents,
                 items: orderItems,
                 deliveryPrice: orderItems[0].deliveryPrice ?? 0,
                 parcelPrice: orderItems[0].parcelPrice ?? 0,
                 amount: totalOrderPrice(),
                 orderName: orderName(orderItems),
-                timeSaleId:
-                    orderItems[0].timeSaleStatus && orderItems[0].timeSale
-                        ? orderItems[0].timeSale.timeSaleId
-                        : null,
+                timeSaleId: orderItems[0].timeSaleStatus && orderItems[0].timeSale ? orderItems[0].timeSale.timeSaleId : null,
             });
         } else {
             return goBack("/", "회원 전용 페이지입니다.");
@@ -121,14 +109,10 @@ const OrderForm = () => {
     // 총가격
     const totalOrderPrice = () => {
         if (orderData.recetiveType === "배달") {
-            return Number(
-                orderItems[0]?.deliveryPrice + orderTotalPrice(orderItems)
-            );
+            return Number(orderItems[0]?.deliveryPrice + orderTotalPrice(orderItems));
         }
         if (orderData.recetiveType === "택배") {
-            return Number(
-                orderItems[0]?.parcelPrice + orderTotalPrice(orderItems)
-            );
+            return Number(orderItems[0]?.parcelPrice + orderTotalPrice(orderItems));
         }
         if (orderData.recetiveType === "픽업") {
             return Number(orderTotalPrice(orderItems));
@@ -142,11 +126,7 @@ const OrderForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (
-            (orderData.recetiveType === "배달" ||
-                orderData.recetiveType === "택배") &&
-            (orderData.address === "" || orderData.addressDetails === "")
-        ) {
+        if ((orderData.recetiveType === "배달" || orderData.recetiveType === "택배") && (orderData.address === "" || orderData.addressDetails === "")) {
             return setAlert({
                 title: "배송지 입력",
                 contents: "상세 주소를 입력해 주세요",
@@ -208,22 +188,16 @@ const OrderForm = () => {
     const orderSuccess = () => {
         setAlert({
             title: JSON.parse(status) ? "주문 완료" : "주문 실패",
-            contents: JSON.parse(status)
-                ? "주문이 완료되었습니다."
-                : "주문을 실패하였습니다.",
+            contents: JSON.parse(status) ? "주문이 완료되었습니다." : "주문을 실패하였습니다.",
             buttonText: "확인",
-            onButtonClick: () => {
-                dispatch(orderActions.remove());
-                JSON.parse(status)
-                    ? navigate("/order/all", { replace: true })
-                    : navigate(backTo, { replace: true });
-            },
-            onOverlayClick: () => {
-                dispatch(orderActions.remove());
-                JSON.parse(status)
-                    ? navigate("/order/all", { replace: true })
-                    : navigate(backTo, { replace: true });
-            },
+            onButtonClick: JSON.parse(status)
+                ? () => {
+                      dispatch(orderActions.remove());
+                      navigate("/order/all", { replace: true });
+                  }
+                : // : () => navigate(backTo, { replace: true }),
+                  () => setAlert(null),
+            onOverlayClick: null,
         });
     };
 
@@ -260,97 +234,63 @@ const OrderForm = () => {
                             <T.Text _size={15} _color="gray600">
                                 {phoneFormatter(orderData.phone)}
                             </T.Text>
-                            {orderData.recetiveType == "택배" &&
-                                !orderData.address && (
+                            {orderData.recetiveType == "택배" && !orderData.address && (
+                                <L.FlexRows>
+                                    <IP.TextInput placeholder="배송 받으실 주소를 검색해주세요." onClick={() => setIsDaumPost(true)} readOnly />
+                                </L.FlexRows>
+                            )}
+                            {orderData.recetiveType == "택배" && orderData.address && (
+                                <L.FlexCols _gap={8}>
                                     <L.FlexRows>
-                                        <IP.TextInput
-                                            placeholder="배송 받으실 주소를 검색해주세요."
-                                            onClick={() => setIsDaumPost(true)}
-                                            readOnly
-                                        />
+                                        <T.Text _size={15} _color="gray600">
+                                            {orderData.address}
+                                        </T.Text>
+                                        <B.Badge type="button" onClick={() => setIsDaumPost(true)}>
+                                            주소 변경
+                                        </B.Badge>
                                     </L.FlexRows>
-                                )}
-                            {orderData.recetiveType == "택배" &&
-                                orderData.address && (
-                                    <L.FlexCols _gap={8}>
-                                        <L.FlexRows>
-                                            <T.Text _size={15} _color="gray600">
-                                                {orderData.address}
-                                            </T.Text>
-                                            <B.Badge
-                                                type="button"
-                                                onClick={() =>
-                                                    setIsDaumPost(true)
-                                                }
-                                            >
-                                                주소 변경
-                                            </B.Badge>
-                                        </L.FlexRows>
-                                        <IP.TextInput
-                                            placeholder="상세주소를 입력해주세요."
-                                            value={
-                                                orderData.addressDetails ?? ""
-                                            }
-                                            onChange={(e) =>
-                                                setOrderData({
-                                                    ...orderData,
-                                                    addressDetails:
-                                                        e.target.value,
-                                                })
-                                            }
-                                        />
-                                    </L.FlexCols>
-                                )}
-                            {orderData.recetiveType == "배달" &&
-                                !orderData.address && (
+                                    <IP.TextInput
+                                        placeholder="상세주소를 입력해주세요."
+                                        value={orderData.addressDetails ?? ""}
+                                        onChange={(e) =>
+                                            setOrderData({
+                                                ...orderData,
+                                                addressDetails: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </L.FlexCols>
+                            )}
+                            {orderData.recetiveType == "배달" && !orderData.address && (
+                                <L.FlexRows>
+                                    <IP.TextInput placeholder="배송 받으실 주소를 검색해주세요." onClick={() => setIsDaumPost(true)} readOnly />
+                                </L.FlexRows>
+                            )}
+                            {orderData.recetiveType == "배달" && orderData.address && (
+                                <L.FlexCols _gap={8}>
                                     <L.FlexRows>
-                                        <IP.TextInput
-                                            placeholder="배송 받으실 주소를 검색해주세요."
-                                            onClick={() => setIsDaumPost(true)}
-                                            readOnly
-                                        />
+                                        <T.Text _size={15} _color="gray600">
+                                            {orderData.address}
+                                        </T.Text>
+                                        <B.Badge type="button" onClick={() => setIsDaumPost(true)}>
+                                            주소 변경
+                                        </B.Badge>
                                     </L.FlexRows>
-                                )}
-                            {orderData.recetiveType == "배달" &&
-                                orderData.address && (
-                                    <L.FlexCols _gap={8}>
-                                        <L.FlexRows>
-                                            <T.Text _size={15} _color="gray600">
-                                                {orderData.address}
-                                            </T.Text>
-                                            <B.Badge
-                                                type="button"
-                                                onClick={() =>
-                                                    setIsDaumPost(true)
-                                                }
-                                            >
-                                                주소 변경
-                                            </B.Badge>
-                                        </L.FlexRows>
-                                        <IP.TextInput
-                                            placeholder="상세주소를 입력해주세요."
-                                            value={
-                                                orderData.addressDetails ?? ""
-                                            }
-                                            onChange={(e) =>
-                                                setOrderData({
-                                                    ...orderData,
-                                                    addressDetails:
-                                                        e.target.value,
-                                                })
-                                            }
-                                        />
-                                    </L.FlexCols>
-                                )}
+                                    <IP.TextInput
+                                        placeholder="상세주소를 입력해주세요."
+                                        value={orderData.addressDetails ?? ""}
+                                        onChange={(e) =>
+                                            setOrderData({
+                                                ...orderData,
+                                                addressDetails: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </L.FlexCols>
+                            )}
                         </L.FlexCols>
                     </L.FlexCols>
-                    <B.LayerOptionButton
-                        type="button"
-                        active={orderSelect}
-                        onClick={() =>
-                            setOrderSelect((orderSelect) => !orderSelect)
-                        }
-                    >
+                    <B.LayerOptionButton type="button" active={orderSelect} onClick={() => setOrderSelect((orderSelect) => !orderSelect)}>
                         {orderData.recetiveType}(으)로 주문
                     </B.LayerOptionButton>
                     <LayerSelect
@@ -365,14 +305,8 @@ const OrderForm = () => {
                             setOrderData({
                                 ...orderData,
                                 recetiveType: e.currentTarget.value,
-                                address:
-                                    e.currentTarget.value == "택배"
-                                        ? ""
-                                        : member.address,
-                                addressDetails:
-                                    e.currentTarget.value == "택배"
-                                        ? ""
-                                        : member.addressDetails,
+                                address: e.currentTarget.value == "택배" ? "" : member.address,
+                                addressDetails: e.currentTarget.value == "택배" ? "" : member.addressDetails,
                             });
                             setOrderSelect(false);
                         }}
@@ -415,15 +349,8 @@ const OrderForm = () => {
                     <L.FlexCols _gap={2}>
                         <L.Contents>
                             <L.FlexRows _gap={16}>
-                                <P.CameraStyle
-                                    src={
-                                        orderData.items[0].storeProfile &&
-                                        IMGURL + orderData.items[0].storeProfile
-                                    }
-                                />
-                                <T.Text _weight={600}>
-                                    {orderData.items[0].storeName}
-                                </T.Text>
+                                <P.CameraStyle src={orderData.items[0].storeProfile && IMGURL + orderData.items[0].storeProfile} />
+                                <T.Text _weight={600}>{orderData.items[0].storeName}</T.Text>
                             </L.FlexRows>
                         </L.Contents>
                         {orderData.items.length > 0 &&
@@ -431,25 +358,11 @@ const OrderForm = () => {
                                 <L.Contents key={o.itemId}>
                                     <L.FlexCols _gap={8}>
                                         <L.FlexCols _gap={8}>
-                                            <T.Text _weight={600}>
-                                                {o.itemName}
-                                            </T.Text>
+                                            <T.Text _weight={600}>{o.itemName}</T.Text>
                                             <L.FlexCols _gap={4}>
+                                                <T.Text _color="gray600">수량: {o.count}개</T.Text>
                                                 <T.Text _color="gray600">
-                                                    수량: {o.count}개
-                                                </T.Text>
-                                                <T.Text _color="gray600">
-                                                    기본:{" "}
-                                                    {numberFormat(
-                                                        Number(
-                                                            o.timeSaleStatus &&
-                                                                o.timeSale
-                                                                ? o.timeSale
-                                                                      .price
-                                                                : o.salePrice
-                                                        ) * o.count
-                                                    )}{" "}
-                                                    원
+                                                    기본: {numberFormat(Number(o.timeSaleStatus && o.timeSale ? o.timeSale.price : o.salePrice) * o.count)} 원
                                                 </T.Text>
                                             </L.FlexCols>
                                         </L.FlexCols>
@@ -467,33 +380,18 @@ const OrderForm = () => {
                                 <tbody>
                                     <tr>
                                         <th>상품 주문 금액</th>
-                                        <td>
-                                            {numberFormat(
-                                                orderTotalPrice(orderData.items)
-                                            )}{" "}
-                                            원
-                                        </td>
+                                        <td>{numberFormat(orderTotalPrice(orderData.items))} 원</td>
                                     </tr>
                                     {orderData.recetiveType == "배달" && (
                                         <tr>
                                             <th>배달비</th>
-                                            <td>
-                                                {numberFormat(
-                                                    orderData.deliveryPrice
-                                                )}{" "}
-                                                원
-                                            </td>
+                                            <td>{numberFormat(orderData.deliveryPrice)} 원</td>
                                         </tr>
                                     )}
                                     {orderData.recetiveType == "택배" && (
                                         <tr>
                                             <th>택배비</th>
-                                            <td>
-                                                {numberFormat(
-                                                    orderData.parcelPrice
-                                                )}{" "}
-                                                원
-                                            </td>
+                                            <td>{numberFormat(orderData.parcelPrice)} 원</td>
                                         </tr>
                                     )}
                                     {/* <tr>
@@ -504,10 +402,7 @@ const OrderForm = () => {
                                 <tfoot>
                                     <tr>
                                         <th>총 결제금액</th>
-                                        <td>
-                                            {numberFormat(orderData.amount) +
-                                                "원"}
-                                        </td>
+                                        <td>{numberFormat(orderData.amount) + "원"}</td>
                                     </tr>
                                 </tfoot>
                             </Tb.ReciptTable>
@@ -521,10 +416,7 @@ const OrderForm = () => {
                     <T.Text _size={18} _weight={600}>
                         결제 수단
                     </T.Text>
-                    <B.LayerOptionButton
-                        type="button"
-                        onClick={() => setPaySelect((paySelect) => !paySelect)}
-                    >
+                    <B.LayerOptionButton type="button" onClick={() => setPaySelect((paySelect) => !paySelect)}>
                         {orderData.payType}
                     </B.LayerOptionButton>
                 </L.FlexCols>
@@ -551,9 +443,7 @@ const OrderForm = () => {
                     }}
                 />
             </L.Contents>
-            <B.FixedActionButton onClick={handleSubmit}>
-                결제하기
-            </B.FixedActionButton>
+            <B.FixedActionButton onClick={handleSubmit}>결제하기</B.FixedActionButton>
             {isDaumPost && (
                 <DaumPost
                     closeModel={() => setIsDaumPost(false)}
