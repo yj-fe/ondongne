@@ -228,15 +228,17 @@ const OrderForm = () => {
             title: JSON.parse(status) ? "주문 완료" : "주문 실패",
             contents: JSON.parse(status)
                 ? "주문이 완료되었습니다."
-                : "주문을 실패하였습니다.",
+                : "주문을 취소하였습니다!",
             buttonText: "확인",
             onButtonClick: JSON.parse(status)
                 ? () => {
                       dispatch(orderActions.remove());
                       navigate("/order/all", { replace: true });
                   }
-                : // : () => navigate(backTo, { replace: true }),
-                  () => setAlert(null),
+                : () => {
+                      dispatch(orderActions.remove());
+                      navigate(backTo, { replace: true });
+                  },
             onOverlayClick: null,
         });
     };

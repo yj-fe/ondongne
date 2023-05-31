@@ -173,11 +173,18 @@ function DetailsPage(props) {
                 setAlert({
                     contents: "삭제되었습니다.",
                     buttonText: "확인",
-                    onButtonClick: () => navigate(-1),
-                    onOverlayClick: () => navigate(-1),
+                    onButtonClick: () => goBack(),
+                    onOverlayClick: () => goBack(),
                 });
             })
             .catch((e) => console.log(e));
+    };
+
+    // 뒤로가기
+    const goBack = () => {
+        return navigate(history.to || "/", {
+            state: { category: history.state || "전체" },
+        });
     };
 
     useEffect(() => {
@@ -185,19 +192,24 @@ function DetailsPage(props) {
     }, [id]);
 
     useEffect(() => {
+        const handleBeforeUnload = (event) => {
+            event.preventDefault();
+            event.returnValue = ""; // Chrome 브라우저에서 필요한 추가 설정
+        };
+
         const handleBackButton = (event) => {
             event.preventDefault(); // 뒤로가기 동작 막기
-            navigate(history.to || "/", {
-                state: { category: history.state || "전체" },
-            });
+            return goBack();
         };
 
         window.history.pushState(null, null, window.location.pathname); // 브라우저 히스토리에 현재 페이지 추가
 
         window.addEventListener("popstate", handleBackButton); // 뒤로가기 버튼 이벤트에 핸들러 추가
+        window.addEventListener("beforeunload", handleBeforeUnload);
 
         return () => {
             window.removeEventListener("popstate", handleBackButton); // 컴포넌트가 언마운트될 때 이벤트 핸들러 제거
+            window.removeEventListener("beforeunload", handleBeforeUnload);
         };
     }, []);
 
@@ -214,11 +226,7 @@ function DetailsPage(props) {
                 share={true}
                 floating={false}
                 more={true}
-                onBackClick={() =>
-                    navigate(history.to || "/", {
-                        state: { category: history.state || "전체" },
-                    })
-                }>
+                onBackClick={goBack}>
                 <L.Container>
                     <L.Contents _cursor="default" _padding="0px 0px 60px 0px">
                         <L.FlexCols style={{ position: "relative" }}>
