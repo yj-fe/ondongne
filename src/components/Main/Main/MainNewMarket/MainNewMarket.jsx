@@ -49,11 +49,7 @@ function MainNewMarket() {
 
     return (
         <div>
-            <L.FlexRows
-                _content="space-between"
-                _items="center"
-                _padding="0px 20px 0px 20px"
-            >
+            <L.FlexRows _content="space-between" _items="center" _padding="0px 20px 0px 20px">
                 <T.Text _size={18} _weight={700} _color="black">
                     우리동네 신규 입점
                 </T.Text>
@@ -61,23 +57,12 @@ function MainNewMarket() {
                     전체 보기
                 </T.Text>
             </L.FlexRows>
-            <L.FlexRowsCP
-                ref={ref}
-                onMouseDown={onDragStart}
-                onMouseMove={isDrag ? onMove : null}
-                onMouseUp={onDragEnd}
-                onMouseLeave={onDragEnd}
-            >
+            <L.FlexRowsCP ref={ref} onMouseDown={onDragStart} onMouseMove={isDrag ? onMove : null} onMouseUp={onDragEnd} onMouseLeave={onDragEnd}>
                 {isLoading && <LoadingBar />}
                 {!isLoading && data?.length > 0 && (
                     <L.GridContainer _count={data.length}>
                         {data.map((item, index) => (
-                            <div
-                                key={index}
-                                onClick={() =>
-                                    navigate(`/market/detail/${item.storeId}`)
-                                }
-                            >
+                            <div key={index} onClick={() => navigate(`/market/detail/${item.storeId}`)}>
                                 <NewMarketCard item={item} />
                             </div>
                         ))}
@@ -93,16 +78,14 @@ function NewMarketCard({ item }) {
         <ContentProduct>
             <ContentImgDiv>
                 <ContentImgBadge>신규 입점</ContentImgBadge>
-                <ContentImg src={`${item.banner}?w=280&h=160`} />
+                <ContentImg src={`${item.banner}?w=280&h=160`} onError={(e) => (e.target.src = item.banner)} />
             </ContentImgDiv>
             <ContentStyle>
                 <ContentDiv>
-                    <ContentMarketImg src={`${item.profile}?w=38&h=38`} />
+                    <ContentMarketImg src={`${item.profile}?w=38&h=38`} onError={(e) => (e.target.src = item.profile)} />
                     <ContentTextStyle>
                         <ContentMarket>{item.name}</ContentMarket>
-                        {item.description && (
-                            <ContentInfo>{item.description}</ContentInfo>
-                        )}
+                        {item.description && <ContentInfo>{item.description}</ContentInfo>}
                     </ContentTextStyle>
                 </ContentDiv>
             </ContentStyle>

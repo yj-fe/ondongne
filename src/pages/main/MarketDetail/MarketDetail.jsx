@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
-import { DetailTabInfo, DetailTabReview, TabButtonStyle, TabContentStyle } from "pages/main/DetailsPage/DetailsPageStyle";
+import {
+    DetailTabInfo,
+    DetailTabReview,
+    TabButtonStyle,
+    TabContentStyle,
+} from "pages/main/DetailsPage/DetailsPageStyle";
 import Image from "assets/main/shine.png";
 import { ImgSizeLayout } from "components/layout/Img/ImgSizeLayout";
 import FooterLayout from "components/layout/Footer/Footer";
@@ -48,27 +53,70 @@ function MarketDetail() {
     if (loading) return <></>;
 
     return (
-        <Layout title={item.name} bell={false} cart={true} share={true} more={true} description={window.location.href} onBackClick={() => navigate(-1)}>
+        <Layout
+            title={item.name}
+            bell={false}
+            cart={true}
+            share={true}
+            more={true}
+            description={window.location.href}
+            onBackClick={() => navigate(-1)}>
             <L.Container>
                 <L.Contents _cursor="default" _padding="0">
-                    <ImgBanner _height="390px" src={item.banner ? STOREURL + item.banner : MarketImg} />
+                    <ImgBanner
+                        _height="390px"
+                        src={item.banner ? STOREURL + item.banner : MarketImg}
+                    />
                     <L.FlexCols _padding={0} _gap={0}>
                         <L.Contents _padding="16px 20px">
-                            <L.FlexRows _content="space-between" _items="center" _gap={12}>
+                            <L.FlexRows
+                                _content="space-between"
+                                _items="center"
+                                _gap={12}>
                                 <L.FlexRows>
-                                    <ImgSizeLayout _width={40} _height={40} _bdr={50} src={item.profile ? STOREURL + item.profile : Image} />
+                                    <ImgSizeLayout
+                                        _width={40}
+                                        _height={40}
+                                        _bdr={50}
+                                        src={
+                                            item.profile
+                                                ? STOREURL + item.profile
+                                                : Image
+                                        }
+                                    />
                                     <L.FlexCols _padding={0} _gap={4}>
-                                        <T.Text _weight={600} _size={18} _color="gray900">
+                                        <T.Text
+                                            _weight={600}
+                                            _size={18}
+                                            _color="gray900">
                                             {item.name}
                                         </T.Text>
-                                        <T.Text _weight={400} _size={14} _color="gray800">
-                                            배달비 {item.deliveryPrice ? numberFormat(item.deliveryPrice) : 0}
-                                            원, 최소주문 {item.orderMinPrice ? numberFormat(item.orderMinPrice) : 0}원
+                                        <T.Text
+                                            _weight={400}
+                                            _size={14}
+                                            _color="gray800">
+                                            배달비{" "}
+                                            {item.deliveryPrice
+                                                ? numberFormat(
+                                                      item.deliveryPrice
+                                                  )
+                                                : 0}
+                                            원, 최소주문{" "}
+                                            {item.orderMinPrice
+                                                ? numberFormat(
+                                                      item.orderMinPrice
+                                                  )
+                                                : 0}
+                                            원
                                         </T.Text>
                                     </L.FlexCols>
                                 </L.FlexRows>
 
-                                <L.FlexRows _padding={0} _gap={16} _items="center" _width={64}>
+                                <L.FlexRows
+                                    _padding={0}
+                                    _gap={16}
+                                    _items="center"
+                                    _width={64}>
                                     <StoreLike
                                         id={item.storeId}
                                         checked={item.likeStatus}

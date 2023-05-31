@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as L from "components/commonUi/Layout";
 import * as T from "components/commonUi/Text";
 import * as B from "components/commonUi/Button";
@@ -13,8 +13,12 @@ import {
 import ProductTimer from "components/commonUi/ProductTimer";
 import { disRate, numberFormat, overNaming } from "utils/utils";
 import StarRate from "components/commonUi/StarRate";
+import { useDispatch } from "react-redux";
+import { historyActions } from "store/slices/history";
 
 export function ProductCardGrid({ item, lastRef, isCart = true }) {
+    const dispatch = useDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
     const salePercent = disRate(
         item.price,
@@ -46,6 +50,12 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                                 item.images.length > 0 &&
                                 `${item.images[0]}?w=216&h=216`
                             }
+                            onError={(e) =>
+                                (e.target.src =
+                                    item.images &&
+                                    item.images.length > 0 &&
+                                    item.images[0])
+                            }
                         />
                         <T.SoldoutText _size={20} _weight={600} _color="white">
                             판매완료
@@ -58,7 +68,24 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                             item.images.length > 0 &&
                             `${item.images[0]}?w=216&h=216`
                         }
-                        onClick={() => navigate(`/details/${item.itemId}`)}
+                        onError={(e) =>
+                            (e.target.src =
+                                item.images &&
+                                item.images.length > 0 &&
+                                item.images[0])
+                        }
+                        onClick={() => {
+                            dispatch(
+                                historyActions.save({
+                                    to: location.pathname,
+                                    state:
+                                        location.pathname === "/categories"
+                                            ? location.state?.category
+                                            : "",
+                                })
+                            );
+                            navigate(`/details/${item.itemId}`);
+                        }}
                     />
                 )}
             </RelativDiv>
@@ -91,8 +118,7 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                                 _size={15}
                                 _weight={600}
                                 _color="red"
-                                _line="20px"
-                            >
+                                _line="20px">
                                 {salePercent}%
                             </T.Text>
                             <T.Text
@@ -100,8 +126,7 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                                 _weight={400}
                                 _color="gray500"
                                 _decoration={"line-through"}
-                                _line="20px"
-                            >
+                                _line="20px">
                                 {numberFormat(item.price)}원
                             </T.Text>
                         </L.FlexRows>
@@ -111,8 +136,7 @@ export function ProductCardGrid({ item, lastRef, isCart = true }) {
                             _size={16}
                             _weight={600}
                             _color="gray900"
-                            _line="20px"
-                        >
+                            _line="20px">
                             {item.timeSaleStatus && item.timeSale
                                 ? numberFormat(item.timeSale.price)
                                 : numberFormat(item.salePrice)}{" "}

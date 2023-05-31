@@ -24,8 +24,9 @@ export function BizTimeSaleCard({ item, lastRef, isCart = true }) {
     return (
         <L.FlexColsGrid ref={lastRef} _gap={12} _padding={0}>
             <RelativDiv
-                onClick={() => navigate(`./update/${item.timeSale.timeSaleId}`)}
-            >
+                onClick={() =>
+                    navigate(`./update/${item.timeSale.timeSaleId}`)
+                }>
                 {item.timeSale && (
                     <AbsoluteTopDiv _top={"5px"} _left={"5px"}>
                         <B.Badge _color="white" _bg="blue">
@@ -46,6 +47,12 @@ export function BizTimeSaleCard({ item, lastRef, isCart = true }) {
                                 item.images.length > 0 &&
                                 item.images[0]
                             }
+                            onError={(e) =>
+                                (e.target.src =
+                                    item.images &&
+                                    item.images.length > 0 &&
+                                    item.images[0])
+                            }
                         />
                         <T.SoldoutText _size={20} _weight={600} _color="white">
                             판매완료
@@ -58,6 +65,12 @@ export function BizTimeSaleCard({ item, lastRef, isCart = true }) {
                                 item.images &&
                                 item.images.length > 0 &&
                                 item.images[0]
+                            }
+                            onError={(e) =>
+                                (e.target.src =
+                                    item.images &&
+                                    item.images.length > 0 &&
+                                    item.images[0])
                             }
                         />
                         <T.SoldoutText _size={20} _weight={600} _color="white">
@@ -132,8 +145,7 @@ export function BizTimeSaleCard({ item, lastRef, isCart = true }) {
                                 _size={15}
                                 _weight={600}
                                 _color="red"
-                                _line="20px"
-                            >
+                                _line="20px">
                                 {salePercent}%
                             </T.Text>
                             <T.Text
@@ -141,8 +153,7 @@ export function BizTimeSaleCard({ item, lastRef, isCart = true }) {
                                 _weight={400}
                                 _color="gray500"
                                 _decoration={"line-through"}
-                                _line="20px"
-                            >
+                                _line="20px">
                                 {numberFormat(item.price)}원
                             </T.Text>
                         </L.FlexRows>
@@ -152,8 +163,7 @@ export function BizTimeSaleCard({ item, lastRef, isCart = true }) {
                             _size={16}
                             _weight={600}
                             _color="gray900"
-                            _line="20px"
-                        >
+                            _line="20px">
                             {item.timeSale
                                 ? item.timeSale.price
                                 : item.salePrice}{" "}

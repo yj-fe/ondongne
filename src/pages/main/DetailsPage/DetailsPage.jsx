@@ -82,10 +82,13 @@ function DetailsPage(props) {
     const [orderToggle, setOrderToggle] = useState(false);
     const navigate = useNavigate();
     const auth = useSelector((state) => state.auth);
+    const history = useSelector((state) => state.history);
     const [confirm, setConfirm] = useState(false);
     const [deleteConfirm, setDeleteConfirm] = useState(false);
     const [alert, setAlert] = useState(false);
     const [btn, setBtn] = useState(true);
+
+    console.log("history : ", history);
 
     const slideRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -109,7 +112,9 @@ function DetailsPage(props) {
             // 최소금액 체크
             if (Number(account) * count < Number(item.orderMinPrice)) {
                 return setAlert({
-                    contents: `상점 최소주문 금액은 ${numberFormat(item.orderMinPrice)}입니다.`,
+                    contents: `상점 최소주문 금액은 ${numberFormat(
+                        item.orderMinPrice
+                    )}입니다.`,
                     buttonText: "확인",
                     onButtonClick: () => setAlert(false),
                     onOverlayClick: () => setAlert(false),
@@ -143,7 +148,12 @@ function DetailsPage(props) {
             const resData = response.data.data;
             setItem({
                 ...resData,
-                salePercent: disRate(resData.price, resData.timeSaleStatus ? resData.timeSale.price : resData.salePrice),
+                salePercent: disRate(
+                    resData.price,
+                    resData.timeSaleStatus
+                        ? resData.timeSale.price
+                        : resData.salePrice
+                ),
             });
         }
     };
@@ -171,10 +181,23 @@ function DetailsPage(props) {
     };
 
     useEffect(() => {
-        if (id) {
-            getItem();
-        }
+        if (id) getItem();
     }, [id]);
+
+    useEffect(() => {
+        const handleBackButton = (event) => {
+            event.preventDefault(); // 뒤로가기 동작 막기
+            navigate(-1);
+        };
+
+        window.history.pushState(null, null, window.location.pathname); // 브라우저 히스토리에 현재 페이지 추가
+
+        window.addEventListener("popstate", handleBackButton); // 뒤로가기 버튼 이벤트에 핸들러 추가
+
+        return () => {
+            window.removeEventListener("popstate", handleBackButton); // 컴포넌트가 언마운트될 때 이벤트 핸들러 제거
+        };
+    }, []);
 
     if (!item.itemId) return <></>;
 
@@ -182,14 +205,18 @@ function DetailsPage(props) {
         <div>
             <Layout
                 title={item.storeName}
-                description={`${item.storeName} - ${window.location.href}`}
+                description={`${window.location.href}`}
                 img={IMGURL + item.itemImages[0]}
                 bell={false}
                 cart={true}
                 share={true}
                 floating={false}
                 more={true}
-                onBackClick={() => navigate(-1)}>
+                onBackClick={() =>
+                    navigate(history.to || "/", {
+                        state: { category: history.state || "전체" },
+                    })
+                }>
                 <L.Container>
                     <L.Contents _cursor="default" _padding="0px 0px 60px 0px">
                         <L.FlexCols style={{ position: "relative" }}>
@@ -201,18 +228,27 @@ function DetailsPage(props) {
                                 </AbsoluteTopDiv>
                             )}
                             {item.itemImages && (
-                                <>
+                                <L.FlexCols style={{ position: "relative" }}>
                                     <SwiperWapper
                                         ref={slideRef}
                                         spaceBetween={0}
                                         pagination={{ clickable: true }}
                                         style={{
-                                            "--swiper-pagination-color": "#0B806F",
+                                            "--swiper-pagination-color":
+                                                "#0B806F",
                                         }}
-                                        onSlideChange={(swiperCore) => setCurrentIndex(swiperCore.activeIndex)}>
+                                        onSlideChange={(swiperCore) =>
+                                            setCurrentIndex(
+                                                swiperCore.activeIndex
+                                            )
+                                        }>
                                         {item.itemImages.map((image, i) => (
                                             <SwiperSlide key={i}>
-                                                <ImgBanner _height="390px" _bdr={0} src={IMGURL + image} />
+                                                <ImgBanner
+                                                    _height="390px"
+                                                    _bdr={0}
+                                                    src={IMGURL + image}
+                                                />
                                             </SwiperSlide>
                                         ))}
                                     </SwiperWapper>
@@ -220,30 +256,70 @@ function DetailsPage(props) {
                                         <span>{currentIndex + 1}</span>
                                         <span>/{item.itemImages.length}</span>
                                     </CurrentNumberBox>
-                                </>
+                                </L.FlexCols>
                             )}
                             <L.FlexCols>
-                                <L.FlexRows _content="space-between" _items="center" _padding=" 16px 20px">
-                                    <L.FlexRows _width="calc(100% - 50px)" _content="left" onClick={() => navigate(`/market/detail/${item.storeId}`)}>
+                                <L.FlexRows
+                                    _content="space-between"
+                                    _items="center"
+                                    _padding=" 16px 20px">
+                                    <L.FlexRows
+                                        _width="calc(100% - 50px)"
+                                        _content="left"
+                                        onClick={() =>
+                                            navigate(
+                                                `/market/detail/${item.storeId}`
+                                            )
+                                        }>
                                         <ImgSizeLayout
                                             _object="cover"
                                             _bdr={99}
                                             _width={40}
                                             _height={40}
-                                            src={item.storeProfile && STOREURL + item.storeProfile}
+                                            src={
+                                                item.storeProfile &&
+                                                STOREURL + item.storeProfile
+                                            }
                                         />
-                                        <L.FlexCols _gap={1} _width="calc(100% - 50px)">
-                                            <T.Text _size={16} _weight={500} _color="gray900">
+                                        <L.FlexCols
+                                            _gap={1}
+                                            _width="calc(100% - 50px)">
+                                            <T.Text
+                                                _size={16}
+                                                _weight={500}
+                                                _color="gray900">
                                                 {item.storeName}
                                             </T.Text>
-                                            {item.address && item.address.split(" ").length >= 3 && (
-                                                <T.Text _size={13} _weight={400} _color="gray600">
-                                                    {item.address.split(" ")[0]} {item.address.split(" ")[1]} {item.address.split(" ")[2]}
-                                                </T.Text>
-                                            )}
+                                            {item.address &&
+                                                item.address.split(" ")
+                                                    .length >= 3 && (
+                                                    <T.Text
+                                                        _size={13}
+                                                        _weight={400}
+                                                        _color="gray600">
+                                                        {
+                                                            item.address.split(
+                                                                " "
+                                                            )[0]
+                                                        }{" "}
+                                                        {
+                                                            item.address.split(
+                                                                " "
+                                                            )[1]
+                                                        }{" "}
+                                                        {
+                                                            item.address.split(
+                                                                " "
+                                                            )[2]
+                                                        }
+                                                    </T.Text>
+                                                )}
                                         </L.FlexCols>
                                     </L.FlexRows>
-                                    <L.FlexRows _width="50px" _content="right" _gap="0px">
+                                    <L.FlexRows
+                                        _width="50px"
+                                        _content="right"
+                                        _gap="0px">
                                         {auth.isAuthenticated && (
                                             <StoreLike
                                                 id={item.storeId}
@@ -251,7 +327,8 @@ function DetailsPage(props) {
                                                 onChange={(id) => {
                                                     setItem({
                                                         ...item,
-                                                        likeStatus: !item.likeStatus,
+                                                        likeStatus:
+                                                            !item.likeStatus,
                                                     });
                                                 }}
                                             />
@@ -264,84 +341,222 @@ function DetailsPage(props) {
                                     <L.FlexCols _gap={16}>
                                         <L.FlexCols _gap={4}>
                                             {item.timeSaleStatus ? (
-                                                <ProductTimer startDate={item.timeSale.startDateTime} endDate={item.timeSale.endDateTime} type={true} />
+                                                <ProductTimer
+                                                    startDate={
+                                                        item.timeSale
+                                                            .startDateTime
+                                                    }
+                                                    endDate={
+                                                        item.timeSale
+                                                            .endDateTime
+                                                    }
+                                                    type={true}
+                                                />
                                             ) : (
-                                                item.type === "GROUP" && !item.soldoutStatus && <ProductTimer endDate={item.endDate} />
+                                                item.type === "GROUP" &&
+                                                !item.soldoutStatus && (
+                                                    <ProductTimer
+                                                        endDate={item.endDate}
+                                                    />
+                                                )
                                             )}
-                                            <T.Text _width="100%" _size={18} _weight={500} _color="gray900">
+                                            <T.Text
+                                                _width="100%"
+                                                _size={18}
+                                                _weight={500}
+                                                _color="gray900">
                                                 {item.itemName}
                                             </T.Text>
-                                            <L.FlexRows _items="center" width="16">
-                                                {item.itemRating !== "" && <StarRate rate={item.itemRating} />}
-                                                <T.Text _size={11} _weight={400} _color="gray800">
+                                            <L.FlexRows
+                                                _items="center"
+                                                width="16">
+                                                {item.itemRating !== "" && (
+                                                    <StarRate
+                                                        rate={item.itemRating}
+                                                    />
+                                                )}
+                                                <T.Text
+                                                    _size={11}
+                                                    _weight={400}
+                                                    _color="gray800">
                                                     ({item.itemRating})
                                                 </T.Text>
                                             </L.FlexRows>
                                         </L.FlexCols>
 
-                                        <ReactiveWrap _gap={12} _items="flex-start">
+                                        <ReactiveWrap
+                                            _gap={12}
+                                            _items="flex-start">
                                             <L.FlexCols _gap={4}>
                                                 {item.salePercent !== 0 && (
-                                                    <L.FlexRows _gap={4} _padding={0} _items="center">
-                                                        <T.Text _size={16} _weight={600} _color="red">
+                                                    <L.FlexRows
+                                                        _gap={4}
+                                                        _padding={0}
+                                                        _items="center">
+                                                        <T.Text
+                                                            _size={16}
+                                                            _weight={600}
+                                                            _color="red">
                                                             {item.salePercent}%
                                                         </T.Text>
-                                                        <T.Text _size={16} _weight={400} _color="gray500" _decoration={"line-through"}>
-                                                            {numberFormat(item.price)}원
+                                                        <T.Text
+                                                            _size={16}
+                                                            _weight={400}
+                                                            _color="gray500"
+                                                            _decoration={
+                                                                "line-through"
+                                                            }>
+                                                            {numberFormat(
+                                                                item.price
+                                                            )}
+                                                            원
                                                         </T.Text>
                                                     </L.FlexRows>
                                                 )}
 
-                                                <T.Text _size={20} _weight={600} _color="gray900">
-                                                    {numberFormat(item.timeSaleStatus ? item.timeSale.price : item.salePrice)} 원
+                                                <T.Text
+                                                    _size={20}
+                                                    _weight={600}
+                                                    _color="gray900">
+                                                    {numberFormat(
+                                                        item.timeSaleStatus
+                                                            ? item.timeSale
+                                                                  .price
+                                                            : item.salePrice
+                                                    )}{" "}
+                                                    원
                                                 </T.Text>
                                             </L.FlexCols>
-                                            {!item.timeSaleStatus && item.type === "GROUP" && (
-                                                <L.FlexRows _items="center" _content="flex-start">
-                                                    <Badge _fdir="column" _bg="gray100" _padding="8px 16px" _width={"max-content"} _height="auto" _bdr="8px">
-                                                        <T.Text _align="center" _size={12} _color="gray600">
-                                                            달성 목표
-                                                        </T.Text>
-                                                        <T.Text _width="76px" _align="center" _size={16} _weight={600} _color="gray800">
-                                                            {item.minCount}개
-                                                        </T.Text>
-                                                    </Badge>
-                                                    <Badge _fdir="column" _bg="gray100" _padding="8px 16px" _width={"max-content"} _height="auto" _bdr="8px">
-                                                        <T.Text _align="center" _size={12} _color="gray600">
-                                                            누적 주문
-                                                        </T.Text>
-                                                        <T.Text _width="76px" _align="center" _size={16} _weight={600} _color="gray800">
-                                                            {item.orderCount}개
-                                                        </T.Text>
-                                                    </Badge>
-                                                    <Badge _fdir="column" _bg="gray100" _padding="8px 16px" _width={"max-content"} _height="auto" _bdr="8px">
-                                                        <T.Text _align="center" _size={12} _color="gray600">
-                                                            상품 재고
-                                                        </T.Text>
-                                                        <T.Text _width="76px" _align="center" _size={16} _weight={600} _color="gray800">
-                                                            {item.maxCount}개
-                                                        </T.Text>
-                                                    </Badge>
-                                                </L.FlexRows>
-                                            )}
-                                            {item.timeSaleStatus && item.timeSale && (
-                                                <L.FlexRows _items="center" _content="flex-end">
-                                                    <Badge _fdir="column" _bg="gray100" _padding="8px 16px" _width={"max-content"} _height="auto" _bdr="8px">
-                                                        <T.Text _align="center" _size={12} _color="gray600">
-                                                            남은 수량
-                                                        </T.Text>
-                                                        <T.Text _width="76px" _align="center" _size={16} _weight={600} _color="gray800">
-                                                            {item.timeSale.count}개
-                                                        </T.Text>
-                                                    </Badge>
-                                                </L.FlexRows>
-                                            )}
+                                            {!item.timeSaleStatus &&
+                                                item.type === "GROUP" && (
+                                                    <L.FlexRows
+                                                        _items="center"
+                                                        _content="flex-start">
+                                                        <Badge
+                                                            _fdir="column"
+                                                            _bg="gray100"
+                                                            _padding="8px 16px"
+                                                            _width={
+                                                                "max-content"
+                                                            }
+                                                            _height="auto"
+                                                            _bdr="8px">
+                                                            <T.Text
+                                                                _align="center"
+                                                                _size={12}
+                                                                _color="gray600">
+                                                                달성 목표
+                                                            </T.Text>
+                                                            <T.Text
+                                                                _width="76px"
+                                                                _align="center"
+                                                                _size={16}
+                                                                _weight={600}
+                                                                _color="gray800">
+                                                                {item.minCount}
+                                                                개
+                                                            </T.Text>
+                                                        </Badge>
+                                                        <Badge
+                                                            _fdir="column"
+                                                            _bg="gray100"
+                                                            _padding="8px 16px"
+                                                            _width={
+                                                                "max-content"
+                                                            }
+                                                            _height="auto"
+                                                            _bdr="8px">
+                                                            <T.Text
+                                                                _align="center"
+                                                                _size={12}
+                                                                _color="gray600">
+                                                                누적 주문
+                                                            </T.Text>
+                                                            <T.Text
+                                                                _width="76px"
+                                                                _align="center"
+                                                                _size={16}
+                                                                _weight={600}
+                                                                _color="gray800">
+                                                                {
+                                                                    item.orderCount
+                                                                }
+                                                                개
+                                                            </T.Text>
+                                                        </Badge>
+                                                        <Badge
+                                                            _fdir="column"
+                                                            _bg="gray100"
+                                                            _padding="8px 16px"
+                                                            _width={
+                                                                "max-content"
+                                                            }
+                                                            _height="auto"
+                                                            _bdr="8px">
+                                                            <T.Text
+                                                                _align="center"
+                                                                _size={12}
+                                                                _color="gray600">
+                                                                상품 재고
+                                                            </T.Text>
+                                                            <T.Text
+                                                                _width="76px"
+                                                                _align="center"
+                                                                _size={16}
+                                                                _weight={600}
+                                                                _color="gray800">
+                                                                {item.maxCount}
+                                                                개
+                                                            </T.Text>
+                                                        </Badge>
+                                                    </L.FlexRows>
+                                                )}
+                                            {item.timeSaleStatus &&
+                                                item.timeSale && (
+                                                    <L.FlexRows
+                                                        _items="center"
+                                                        _content="flex-end">
+                                                        <Badge
+                                                            _fdir="column"
+                                                            _bg="gray100"
+                                                            _padding="8px 16px"
+                                                            _width={
+                                                                "max-content"
+                                                            }
+                                                            _height="auto"
+                                                            _bdr="8px">
+                                                            <T.Text
+                                                                _align="center"
+                                                                _size={12}
+                                                                _color="gray600">
+                                                                남은 수량
+                                                            </T.Text>
+                                                            <T.Text
+                                                                _width="76px"
+                                                                _align="center"
+                                                                _size={16}
+                                                                _weight={600}
+                                                                _color="gray800">
+                                                                {
+                                                                    item
+                                                                        .timeSale
+                                                                        .count
+                                                                }
+                                                                개
+                                                            </T.Text>
+                                                        </Badge>
+                                                    </L.FlexRows>
+                                                )}
                                         </ReactiveWrap>
                                     </L.FlexCols>
                                 </L.Contents>
                             </L.FlexCols>
 
-                            <L.FlexRows _content="center" _items="center" _gap="0px" _height="40px">
+                            <L.FlexRows
+                                _content="center"
+                                _items="center"
+                                _gap="0px"
+                                _height="40px">
                                 <DetailTabInfo
                                     onClick={() => {
                                         setDetailTab(0);
@@ -371,7 +586,11 @@ function DetailsPage(props) {
                                 </DetailTabReview>
                             </L.FlexRows>
 
-                            <L.Contents _content="center" _items="center" _gap="0px" _padding="16px 20px">
+                            <L.Contents
+                                _content="center"
+                                _items="center"
+                                _gap="0px"
+                                _padding="16px 20px">
                                 <TabContent detailTab={detailTab} item={item} />
                             </L.Contents>
 
@@ -379,42 +598,98 @@ function DetailsPage(props) {
                                 <ButtonStyle>
                                     {orderToggle && (
                                         <OrderToggle
-                                            closeOrderToggle={() => setOrderToggle(false)}
-                                            salePrice={item.timeSaleStatus && item.timeSale ? item.timeSale.price : item.salePrice}
+                                            closeOrderToggle={() =>
+                                                setOrderToggle(false)
+                                            }
+                                            salePrice={
+                                                item.timeSaleStatus &&
+                                                item.timeSale
+                                                    ? item.timeSale.price
+                                                    : item.salePrice
+                                            }
                                             type={item.type}
                                             count={count}
-                                            maxCount={item.timeSaleStatus && item.timeSale ? item.timeSale.count : item.maxCount}
+                                            maxCount={
+                                                item.timeSaleStatus &&
+                                                item.timeSale
+                                                    ? item.timeSale.count
+                                                    : item.maxCount
+                                            }
                                             orderCount={item.orderCount}
                                             setCount={setCount}
-                                            timeSale={item.timeSale && item.timeSaleStatus}
+                                            timeSale={
+                                                item.timeSale &&
+                                                item.timeSaleStatus
+                                            }
                                         />
                                     )}
                                     {item.storeId === auth.storeId ? (
                                         <DetailButtonDiv>
-                                            <DetailButtonStyle color={true} onClick={() => setDeleteConfirm(true)} style={{ background: "red" }}>
+                                            <DetailButtonStyle
+                                                color={true}
+                                                onClick={() =>
+                                                    setDeleteConfirm(true)
+                                                }
+                                                style={{ background: "red" }}>
                                                 삭제
                                             </DetailButtonStyle>
-                                            <DetailButtonStyle color={true} onClick={() => navigate(`/business/edit/${id}`)}>
+                                            <DetailButtonStyle
+                                                color={true}
+                                                onClick={() =>
+                                                    navigate(
+                                                        `/business/edit/${id}`
+                                                    )
+                                                }>
                                                 수정하기
                                             </DetailButtonStyle>
                                         </DetailButtonDiv>
                                     ) : (
                                         <DetailButtonDiv>
-                                            {item.type === "NORMAL" && !item.timeSaleStatus && (
-                                                <LayerTextButton type="button" onClick={() => paymentsOrder(0)} color={true} _padding="0px" _width="48px">
-                                                    <ProductCart id={item.itemId} count={count} type={"details"} disabled={!orderToggle} />
-                                                </LayerTextButton>
-                                            )}
+                                            {item.type === "NORMAL" &&
+                                                !item.timeSaleStatus && (
+                                                    <LayerTextButton
+                                                        type="button"
+                                                        onClick={() =>
+                                                            paymentsOrder(0)
+                                                        }
+                                                        color={true}
+                                                        _padding="0px"
+                                                        _width="48px">
+                                                        <ProductCart
+                                                            id={item.itemId}
+                                                            count={count}
+                                                            type={"details"}
+                                                            disabled={
+                                                                !orderToggle
+                                                            }
+                                                        />
+                                                    </LayerTextButton>
+                                                )}
                                             {item.type === "NORMAL" ? (
-                                                <DetailButtonStyle color={true} onClick={() => paymentsOrder(1)}>
+                                                <DetailButtonStyle
+                                                    color={true}
+                                                    onClick={() =>
+                                                        paymentsOrder(1)
+                                                    }>
                                                     구매하기
                                                 </DetailButtonStyle>
                                             ) : (
                                                 <DetailButtonStyle
-                                                    disabled={item.orderCount >= item.maxCount}
-                                                    color={item.orderCount < item.maxCount}
-                                                    onClick={() => paymentsOrder(1)}>
-                                                    {item.orderCount >= item.maxCount ? "판매종료" : "구매하기"}
+                                                    disabled={
+                                                        item.orderCount >=
+                                                        item.maxCount
+                                                    }
+                                                    color={
+                                                        item.orderCount <
+                                                        item.maxCount
+                                                    }
+                                                    onClick={() =>
+                                                        paymentsOrder(1)
+                                                    }>
+                                                    {item.orderCount >=
+                                                    item.maxCount
+                                                        ? "판매종료"
+                                                        : "구매하기"}
                                                 </DetailButtonStyle>
                                             )}
                                         </DetailButtonDiv>
@@ -428,7 +703,9 @@ function DetailsPage(props) {
             {modal && <ModalMorePage PropsModal={PropsModal} />}
             {confirm && (
                 <Confirm
-                    contents={"로그인 후 이용가능합니다.\n로그인 페이지로 이동하시겠습니까?"}
+                    contents={
+                        "로그인 후 이용가능합니다.\n로그인 페이지로 이동하시겠습니까?"
+                    }
                     confirmText="네"
                     cancelText="아니오"
                     onConfirmClick={() => {
@@ -475,7 +752,11 @@ function TabContent(props) {
                 <tbody>
                     <tr>
                         <th>구매 형태</th>
-                        <td>{props.item.type === "GROUP" ? "공동구매 상품" : "일반 상품"}</td>
+                        <td>
+                            {props.item.type === "GROUP"
+                                ? "공동구매 상품"
+                                : "일반 상품"}
+                        </td>
                     </tr>
                     <tr>
                         <th>카테고리</th>
@@ -489,8 +770,16 @@ function TabContent(props) {
                         <th>주문금액</th>
                         <td>
                             최소주문 {numberFormat(props.item.orderMinPrice)}원
-                            {props.item.deliveryPrice ? `, 배달비 ${numberFormat(props.item.deliveryPrice)}원` : ""}
-                            {props.item.parcelPrice ? `, 택배비 ${numberFormat(props.item.parcelPrice)}원` : ""}
+                            {props.item.deliveryPrice
+                                ? `, 배달비 ${numberFormat(
+                                      props.item.deliveryPrice
+                                  )}원`
+                                : ""}
+                            {props.item.parcelPrice
+                                ? `, 택배비 ${numberFormat(
+                                      props.item.parcelPrice
+                                  )}원`
+                                : ""}
                         </td>
                     </tr>
                     {props.item.couponStatus ? (
@@ -501,7 +790,9 @@ function TabContent(props) {
                             </tr>
                             <tr>
                                 <th>쿠폰</th>
-                                <td>상점(스토어) {">"} 소식을 확인해 주세요.</td>
+                                <td>
+                                    상점(스토어) {">"} 소식을 확인해 주세요.
+                                </td>
                             </tr>
                         </>
                     ) : (
@@ -517,7 +808,9 @@ function TabContent(props) {
 
             <L.FlexCols _padding={"16px 0 0 0"}>
                 <TabInfoContentTitle>상품 정보</TabInfoContentTitle>
-                <TextEditor>{HTMLReactParser(props.item.description)}</TextEditor>
+                <TextEditor>
+                    {HTMLReactParser(props.item.description)}
+                </TextEditor>
             </L.FlexCols>
         </>,
 
@@ -532,13 +825,27 @@ function TabContent(props) {
     ][props.detailTab];
 }
 
-function OrderToggle({ closeOrderToggle, count, setCount, salePrice, maxCount, orderCount, type, timeSale }) {
+function OrderToggle({
+    closeOrderToggle,
+    count,
+    setCount,
+    salePrice,
+    maxCount,
+    orderCount,
+    type,
+    timeSale,
+}) {
     const counterHandler = (value) => {
         if (value == -1 && count == 1) {
             return;
         }
 
-        if (!timeSale && value === 1 && type === "GROUP" && maxCount - orderCount == count) {
+        if (
+            !timeSale &&
+            value === 1 &&
+            type === "GROUP" &&
+            maxCount - orderCount == count
+        ) {
             return;
         }
 
@@ -557,23 +864,41 @@ function OrderToggle({ closeOrderToggle, count, setCount, salePrice, maxCount, o
                         <ArrowBottom />
                     </L.FlexRows>
                 </button>
-                <L.FlexRows _height="56px" _content="space-between" _gap={16} _items="center" _padding="12px 0px">
+                <L.FlexRows
+                    _height="56px"
+                    _content="space-between"
+                    _gap={16}
+                    _items="center"
+                    _padding="12px 0px">
                     <T.Text _size={16} _weight={500} _color="gray800">
                         수량 선택
                     </T.Text>
-                    <L.FlexRows _content="right" _gap="0px" _items="center" _width="114px">
-                        <CountButton type="button" onClick={() => counterHandler(-1)}>
+                    <L.FlexRows
+                        _content="right"
+                        _gap="0px"
+                        _items="center"
+                        _width="114px">
+                        <CountButton
+                            type="button"
+                            onClick={() => counterHandler(-1)}>
                             <MinusB />
                         </CountButton>
                         <T.Text _align="center" _width="50px" _weight={500}>
                             {numberFormat(count)}
                         </T.Text>
-                        <CountButton type="button" onClick={() => counterHandler(1)}>
+                        <CountButton
+                            type="button"
+                            onClick={() => counterHandler(1)}>
                             <PlusB />
                         </CountButton>
                     </L.FlexRows>
                 </L.FlexRows>
-                <L.FlexRows _height="56px" _content="space-between" _gap={16} _items="center" _padding="12px 0px">
+                <L.FlexRows
+                    _height="56px"
+                    _content="space-between"
+                    _gap={16}
+                    _items="center"
+                    _padding="12px 0px">
                     <T.Text _size={16} _weight={500} _color="gray800">
                         상품 금액
                     </T.Text>
