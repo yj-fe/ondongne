@@ -187,7 +187,9 @@ function DetailsPage(props) {
     useEffect(() => {
         const handleBackButton = (event) => {
             event.preventDefault(); // 뒤로가기 동작 막기
-            navigate(-1);
+            navigate(history.to || "/", {
+                state: { category: history.state || "전체" },
+            });
         };
 
         window.history.pushState(null, null, window.location.pathname); // 브라우저 히스토리에 현재 페이지 추가
