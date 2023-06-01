@@ -184,6 +184,7 @@ function DetailsPage(props) {
     const goBack = () => {
         return navigate(history.to || "/", {
             state: { category: history.state || "전체" },
+            replace: true,
         });
     };
 
@@ -194,7 +195,7 @@ function DetailsPage(props) {
     useEffect(() => {
         const handleBeforeUnload = (event) => {
             event.preventDefault();
-            event.returnValue = ""; // Chrome 브라우저에서 필요한 추가 설정
+            // event.returnValue = ""; // Chrome 브라우저에서 필요한 추가 설정
         };
 
         const handleBackButton = (event) => {

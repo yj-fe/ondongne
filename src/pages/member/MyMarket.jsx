@@ -99,8 +99,7 @@ function MyMarket() {
                 title="My 단골"
                 cart={true}
                 bell={true}
-                onBackClick={() => navigate(-1)}
-            >
+                onBackClick={() => navigate(-1)}>
                 <L.Contents _padding="0px">
                     <L.FlexRows _gap="0px">
                         <DetailTabInfo
@@ -110,8 +109,7 @@ function MyMarket() {
                                 setSort("create");
                                 setDetailTab(0);
                             }}
-                            infocolor={detailTab === 0}
-                        >
+                            infocolor={detailTab === 0}>
                             상품
                         </DetailTabInfo>
                         <DetailTabReview
@@ -121,8 +119,7 @@ function MyMarket() {
                                 setSort("create");
                                 setDetailTab(1);
                             }}
-                            reviewcolor={detailTab === 1}
-                        >
+                            reviewcolor={detailTab === 1}>
                             상점
                         </DetailTabReview>
                     </L.FlexRows>
@@ -134,14 +131,12 @@ function MyMarket() {
                                 _content="space-between"
                                 _gap="16"
                                 _items="center"
-                                _width="auto"
-                            >
+                                _width="auto">
                                 <L.FlexRows
                                     _content="flex-start"
                                     _gap="12"
                                     _items="center"
-                                    _width="calc(100% - 120px)"
-                                >
+                                    _width="calc(100% - 120px)">
                                     <B.FilterButton
                                         type="button"
                                         _bg={type === "normal" && "green700"}
@@ -151,8 +146,7 @@ function MyMarket() {
                                                     ? "all"
                                                     : "normal"
                                             )
-                                        }
-                                    >
+                                        }>
                                         <T.Text
                                             _weight={400}
                                             _size={13}
@@ -161,8 +155,7 @@ function MyMarket() {
                                                     ? "white"
                                                     : "gray900"
                                             }
-                                            _align="center"
-                                        >
+                                            _align="center">
                                             일반 상품
                                         </T.Text>
                                     </B.FilterButton>
@@ -175,8 +168,7 @@ function MyMarket() {
                                                     ? "all"
                                                     : "group"
                                             )
-                                        }
-                                    >
+                                        }>
                                         <T.Text
                                             _weight={400}
                                             _size={13}
@@ -185,8 +177,7 @@ function MyMarket() {
                                                     ? "white"
                                                     : "gray900"
                                             }
-                                            _align="center"
-                                        >
+                                            _align="center">
                                             공동구매 상품
                                         </T.Text>
                                     </B.FilterButton>
@@ -196,19 +187,16 @@ function MyMarket() {
                                     _gap={4}
                                     _content="flex-end"
                                     _width="120px"
-                                    onClick={() => setFilter02(true)}
-                                >
+                                    onClick={() => setFilter02(true)}>
                                     <T.Text
                                         _size={13}
                                         _weight={400}
-                                        _color="gray900"
-                                    >
+                                        _color="gray900">
                                         {sortFormatter(sort)}
                                     </T.Text>
                                     <button
                                         type="button"
-                                        _bg={sort !== "create" && "green700"}
-                                    >
+                                        _bg={sort !== "create" && "green700"}>
                                         <L.FlexRows>
                                             <Down />
                                         </L.FlexRows>
@@ -221,8 +209,7 @@ function MyMarket() {
                                     <T.Text
                                         _size={16}
                                         _weight={600}
-                                        _color="gray900"
-                                    >
+                                        _color="gray900">
                                         전체 {totalCount}
                                     </T.Text>
                                 </div>
@@ -230,19 +217,16 @@ function MyMarket() {
                                     _gap={4}
                                     _content="flex-end"
                                     _width="100px"
-                                    onClick={() => setFilter01(true)}
-                                >
+                                    onClick={() => setFilter01(true)}>
                                     <T.Text
                                         _size={13}
                                         _weight={400}
-                                        _color="gray900"
-                                    >
+                                        _color="gray900">
                                         {sortFormatter(sort)}
                                     </T.Text>
                                     <button
                                         type="button"
-                                        _bg={sort !== "create" && "green700"}
-                                    >
+                                        _bg={sort !== "create" && "green700"}>
                                         <Down />
                                     </button>
                                 </L.FlexRows>
@@ -307,28 +291,24 @@ function TabContent({ detailTab, items, setData, loading, lastRef, type }) {
                         _weight={300}
                         _size={15}
                         _color="gray600"
-                        _align="center"
-                    >
+                        _align="center">
                         아직 단골가게가 없습니다.
                     </T.Text>
                     <T.Text
                         _weight={300}
                         _size={15}
                         _color="gray600"
-                        _align="center"
-                    >
+                        _align="center">
                         주변 단골가게를 추가해보세요!
                     </T.Text>
                     <B.FilterButton
                         style={{ margin: "16px auto" }}
-                        onClick={() => navigate("/search")}
-                    >
+                        onClick={() => navigate("/search")}>
                         <T.Text
                             _weight={400}
                             _size={13}
                             _color={"gray900"}
-                            _align="center"
-                        >
+                            _align="center">
                             둘러보기
                         </T.Text>
                     </B.FilterButton>
@@ -370,28 +350,24 @@ function TabContent({ detailTab, items, setData, loading, lastRef, type }) {
                         _weight={300}
                         _size={15}
                         _color="gray600"
-                        _align="center"
-                    >
+                        _align="center">
                         아직 단골가게가 없습니다.
                     </T.Text>
                     <T.Text
                         _weight={300}
                         _size={15}
                         _color="gray600"
-                        _align="center"
-                    >
+                        _align="center">
                         주변 단골가게를 추가해보세요!
                     </T.Text>
                     <B.FilterButton
                         style={{ margin: "16px auto" }}
-                        onClick={() => navigate("/search")}
-                    >
+                        onClick={() => navigate("/search")}>
                         <T.Text
                             _weight={400}
                             _size={13}
                             _color={"gray900"}
-                            _align="center"
-                        >
+                            _align="center">
                             둘러보기
                         </T.Text>
                     </B.FilterButton>
