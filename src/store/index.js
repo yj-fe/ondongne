@@ -5,27 +5,25 @@ import storage from "redux-persist/lib/storage";
 import localSlice from "./slices/location";
 import authSlice from "./slices/auth";
 import orderSlice from "./slices/order";
-import historySlice from "./slices/history";
 
 const reducers = combineReducers({
-    auth: authSlice.reducer,
-    local: localSlice.reducer,
-    order: orderSlice.reducer,
-    history: historySlice.reducer,
+  auth: authSlice.reducer,
+  local: localSlice.reducer,
+  order: orderSlice.reducer,
 });
 
 const persistConfig = {
-    key: "root",
-    storage,
-    whitelist: ["auth", "local", "order", "history"],
+  key: "root",
+  storage,
+  whitelist: ["auth", "local", "order"],
 };
 
 const reducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-    reducer: reducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({ serializableCheck: false }),
+  reducer: reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export default store;
