@@ -1,73 +1,71 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 /* ========= MEMBER ========= */
-import LocationSetting from "pages/login/LocationSetting/LocationSetting";
-import MemberManagement from "pages/member/MemberManagement/MemberManagement";
-import MemberWithdrawal from "pages/member/MemberWithdrawal/MemberWithdrawal";
-import MyCoupon from "pages/member/MyCoupon";
-import MyMarket from "pages/member/MyMarket";
-import MemberNews from "pages/member/MemberNews";
+import LocationSetting from 'pages/login/LocationSetting/LocationSetting';
+import MemberManagement from 'pages/member/MemberManagement/MemberManagement';
+import MemberWithdrawal from 'pages/member/MemberWithdrawal/MemberWithdrawal';
+import MyCoupon from 'pages/member/MyCoupon';
+import MyMarket from 'pages/member/MyMarket';
+import MemberNews from 'pages/member/MemberNews';
 /* ========== BUSINESS ========== */
-import BusinessPage from "pages/business/BusinessPage/BusinessPage";
-import BusinessApplication from "pages/business/BusinessPage/BusinessApplication/BusinessApplication";
-import BusinessManagement from "pages/business/BusinessPage/BusinessManagement";
-import BusinessProductManagement from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagement";
-import BusinessCoupon from "pages/business/BusinessPage/Coupon/BusinessCoupon";
-import BusinessReview from "pages/business/BusinessReview";
-import BusinessProductUpload from "pages/business/BusinessPage/BusinessProductManagement/BusinessProductUpload";
-import BusinessNews from "pages/business/BusinessPage/BusinessNews/BusinessNews";
-import OrderManagement from "pages/business/BusinessPage/Order/OrderManagement";
-import OrderManagementDetailsAuthPage from "pages/business/BusinessPage/Order/OrderManagementDetailsAuthPage";
+import BusinessPage from 'pages/business/BusinessPage/BusinessPage';
+import BusinessApplication from 'pages/business/BusinessPage/BusinessApplication/BusinessApplication';
+import BusinessManagement from 'pages/business/BusinessPage/BusinessManagement';
+import BusinessProductManagement from 'pages/business/BusinessPage/BusinessProductManagement/BusinessProductManagement';
+import BusinessCoupon from 'pages/business/BusinessPage/Coupon/BusinessCoupon';
+import BusinessReview from 'pages/business/BusinessReview';
+import BusinessProductUpload from 'pages/business/BusinessPage/BusinessProductManagement/BusinessProductUpload';
+import BusinessNews from 'pages/business/BusinessPage/BusinessNews/BusinessNews';
+import OrderManagement from 'pages/business/BusinessPage/Order/OrderManagement';
+import OrderManagementDetailsAuthPage from 'pages/business/BusinessPage/Order/OrderManagementDetailsAuthPage';
 /* ========== LOGIN ========== */
-import LoginPage from "pages/login/loginpage/LoginPage";
-import FindEmail from "pages/login/email/FindEmail";
-import FindPwd from "pages/login/password/FindPwd";
+import LoginPage from 'pages/login/loginpage/LoginPage';
+import FindEmail from 'pages/login/email/FindEmail';
+import FindPwd from 'pages/login/password/FindPwd';
 /* ========== MAIN ========== */
-import MainPage from "pages/main/MainPage/MainPage";
-import DetailsPage from "pages/main/DetailsPage/DetailsPage";
-import CollectionPage from "pages/main/Product/CollectionPage";
-import CategoryPage from "pages/main/Product/CategoryPage";
-import CartPage from "pages/main/CartPage/CartPage";
-import MorePage from "pages/main/MorePage/MorePage";
-import MarketDetail from "pages/main/MarketDetail/MarketDetail";
-import SearchPage from "pages/main/Search/SearchPage";
+import MainPage from 'pages/main/MainPage/MainPage';
+import DetailsPage from 'pages/main/DetailsPage/DetailsPage';
+import CollectionPage from 'pages/main/Product/CollectionPage';
+import CategoryPage from 'pages/main/Product/CategoryPage';
+import CartPage from 'pages/main/CartPage/CartPage';
+import MorePage from 'pages/main/MorePage/MorePage';
+import MarketDetail from 'pages/main/MarketDetail/MarketDetail';
+import SearchPage from 'pages/main/Search/SearchPage';
 /* ========== ORDER ========== */
-import OrderListPage from "pages/orders/OrderListPage";
-import OrderFormPage from "pages/orders/OrderFormPage";
-import OrderDetailsPage from "pages/orders/OrderDetailsPage";
-import SignupPage from "pages/login/signup/SignupPage";
+import OrderListPage from 'pages/orders/OrderListPage';
+import OrderFormPage from 'pages/orders/OrderFormPage';
+import OrderDetailsPage from 'pages/orders/OrderDetailsPage';
+import SignupPage from 'pages/login/signup/SignupPage';
 /* ========== SETTING ========== */
-import SettingPage from "pages/setting/SettingPage";
+import SettingPage from 'pages/setting/SettingPage';
 /* ========== NOTICE ========== */
-import NoticePage from "pages/notice/NoticePage";
-import NoticeDetailsPage from "pages/notice/NoticeDetailsPage";
+import NoticePage from 'pages/notice/NoticePage';
+import NoticeDetailsPage from 'pages/notice/NoticeDetailsPage';
 /* ========== SERVICE ========== */
-import CustomerService from "pages/service/CustomerService/CustomerService";
-import TermsPage from "pages/service/TermsPage/TermsPage";
-import ServiceTerms from "components/service/TermsPage/ServiceTerms";
-import LocationTerms from "components/service/TermsPage/LocationTerms";
-import PrivacyTerms from "components/service/TermsPage/PrivacyTerms";
-import FrequentlyAskedQuestion from "pages/service/CustomerService/FrequentlyAskedQuestion";
-import InquiryPage from "pages/service/CustomerService/InquiryPage";
-import VocPage from "pages/service/CustomerService/VocPage";
-import InquiryDetailsPage from "pages/service/CustomerService/InquiryDetailsPage";
-import BusinessProductEditInfo from "./pages/business/BusinessPage/BusinessProductManagement/BusinessProductEditInfo";
-import ReviewPage from "pages/member/ReviewPage";
-import SearchDetailPage from "pages/main/Search/SearchDetailPage";
-import SearchResultPage from "pages/main/Search/SearchResultPage";
-import BusinessCouponUpload from "./pages/business/BusinessPage/Coupon/BusinessCouponUpload";
-import ReviewUploadPage from "./pages/member/ReviewUploadPage";
-import TimeSalePage from "pages/business/BusinessPage/timesale/TimeSalePage";
-import TimeSaleUploadPage from "pages/business/BusinessPage/timesale/TimeSaleUploadPage";
-import Membership from "pages/business/BusinessPage/Membership";
-import BizSettlement from "pages/business/BusinessPage/BizSettlement";
+import CustomerService from 'pages/service/CustomerService/CustomerService';
+import TermsPage from 'pages/service/TermsPage/TermsPage';
+import ServiceTerms from 'components/service/TermsPage/ServiceTerms';
+import LocationTerms from 'components/service/TermsPage/LocationTerms';
+import PrivacyTerms from 'components/service/TermsPage/PrivacyTerms';
+import FrequentlyAskedQuestion from 'pages/service/CustomerService/FrequentlyAskedQuestion';
+import InquiryPage from 'pages/service/CustomerService/InquiryPage';
+import VocPage from 'pages/service/CustomerService/VocPage';
+import InquiryDetailsPage from 'pages/service/CustomerService/InquiryDetailsPage';
+import BusinessProductEditInfo from './pages/business/BusinessPage/BusinessProductManagement/BusinessProductEditInfo';
+import ReviewPage from 'pages/member/ReviewPage';
+import SearchDetailPage from 'pages/main/Search/SearchDetailPage';
+import SearchResultPage from 'pages/main/Search/SearchResultPage';
+import BusinessCouponUpload from './pages/business/BusinessPage/Coupon/BusinessCouponUpload';
+import ReviewUploadPage from './pages/member/ReviewUploadPage';
+import TimeSalePage from 'pages/business/BusinessPage/timesale/TimeSalePage';
+import TimeSaleUploadPage from 'pages/business/BusinessPage/timesale/TimeSaleUploadPage';
+import Membership from 'pages/business/BusinessPage/Membership';
+import BizSettlement from 'pages/business/BusinessPage/BizSettlement';
 
 function App() {
   const location = useLocation();
-
-  console.log("history", window.history);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -143,10 +141,7 @@ function App() {
           <Route path="news" element={<BusinessNews />} />
           {/* 주문관리 */}
           <Route path="order" element={<OrderManagement />} />
-          <Route
-            path="order/details/auth"
-            element={<OrderManagementDetailsAuthPage />}
-          />
+          <Route path="order/details/auth" element={<OrderManagementDetailsAuthPage />} />
           <Route path="membership/:id" element={<Membership />} />
           <Route path="settlement/:id" element={<BizSettlement />} />
         </Route>

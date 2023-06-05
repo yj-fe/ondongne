@@ -22,9 +22,7 @@ export function bizItemList(page, sort, type = "all") {
    상품 이름으로 검색
 ============================== */
 export function findByItemName(data) {
-  return client.get(
-    `${urls.findByName}?search=${data.search}&storeId=${data.storeId}&type=${data.type}`
-  );
+  return client.get(`${urls.findByName}?search=${data.search}&storeId=${data.storeId}&type=${data.type}`);
 }
 
 /* ==============================
@@ -89,6 +87,7 @@ export function updateItem(data) {
   formData.append("minCount", data.minCount);
   formData.append("maxCount", data.maxCount);
   formData.append("endDate", data.endDate);
+  formData.append("soldoutStatus", data.soldoutStatus);
 
   data.categories.forEach((category) => {
     formData.append("categories", category);

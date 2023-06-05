@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import * as L from "components/commonUi/Layout";
-import * as T from "components/commonUi/Text";
-import * as B from "components/commonUi/Button";
-import * as C from "components/commonUi/CommonStyles";
-import CheckBox from "components/commonUi/CheckBox";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import * as L from 'components/commonUi/Layout';
+import * as T from 'components/commonUi/Text';
+import * as B from 'components/commonUi/Button';
+import * as C from 'components/commonUi/CommonStyles';
+import CheckBox from 'components/commonUi/CheckBox';
 import {
   ContentDiv,
   Input,
@@ -12,22 +12,17 @@ import {
   TitleInfo,
   TitleInfoDiv,
   FileListScroll,
-} from "components/Buisness/BusinessManagement/BusinessManagementTabStyle";
-import { ArrowRightB, Delete, Calendar } from "components/commonUi/Icon";
-import { imageValidation, numberFormat, numberFormatter } from "utils/utils";
-import BusinessProductEditInfo from "./BusinessProductEditInfo";
-import {
-  bizItemdeleteFile,
-  createItem,
-  getBizItem,
-  updateItem,
-} from "service/bizItem";
-import Alert from "components/commonUi/Alert";
-import CalendarModel from "components/commonUi/CalendarModel";
-import Confirm from "components/commonUi/Confirm";
-import { useSelector } from "react-redux";
-import Layout from "components/layout/Layout/Layout";
-import CategoryForm from "components/commonUi/Category/CategoryForm";
+} from 'components/Buisness/BusinessManagement/BusinessManagementTabStyle';
+import { ArrowRightB, Delete, Calendar, SwitchC, Switch } from 'components/commonUi/Icon';
+import { imageValidation, numberFormat, numberFormatter } from 'utils/utils';
+import BusinessProductEditInfo from './BusinessProductEditInfo';
+import { createItem, getBizItem, updateItem } from 'service/bizItem';
+import Alert from 'components/commonUi/Alert';
+import CalendarModel from 'components/commonUi/CalendarModel';
+import Confirm from 'components/commonUi/Confirm';
+import { useSelector } from 'react-redux';
+import Layout from 'components/layout/Layout/Layout';
+import CategoryForm from 'components/commonUi/Category/CategoryForm';
 
 function BusinessProductUpload() {
   const { id } = useParams();
@@ -37,24 +32,25 @@ function BusinessProductUpload() {
   const [alert, setAlert] = useState(null);
   const [confirm, setConfirm] = useState(null);
   const [calendar, setCalendar] = useState(false);
-  const [fileErrorMessage, setFileErrorMessage] = useState("");
+  const [fileErrorMessage, setFileErrorMessage] = useState('');
   const [validtion, isValidtion] = useState(false);
-  const [salePriceError, setSalePriceError] = useState("");
-  const [maxCountError, setMaxCountError] = useState("");
+  const [salePriceError, setSalePriceError] = useState('');
+  const [maxCountError, setMaxCountError] = useState('');
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
-    type: "",
+    type: '',
     files: [],
     images: [],
     categories: id ? [] : [auth.category],
-    name: "",
+    name: '',
     price: 0,
     salePrice: 0,
     minCount: 0,
     maxCount: 0,
-    endDate: "",
-    description: "",
+    endDate: '',
+    description: '',
     deleteFileIds: [],
+    soldoutStatus: false,
   });
 
   // 파일 삭제
@@ -102,19 +98,19 @@ function BusinessProductUpload() {
   const onSubmit = async () => {
     setLoading(true);
 
-    if (Number(data.price.replaceAll(",", "")) < 1000) {
+    if (Number(data.price.replaceAll(',', '')) < 1000) {
       return setAlert({
-        contents: "상품 가격은 1,000원 이상이여야 합니다.",
-        buttonText: "확인",
+        contents: '상품 가격은 1,000원 이상이여야 합니다.',
+        buttonText: '확인',
         onButtonClick: () => setAlert(null),
         onOverlayClick: () => setAlert(null),
       });
     }
 
-    if (Number(data.salePrice.replaceAll(",", "")) < 1000) {
+    if (Number(data.salePrice.replaceAll(',', '')) < 1000) {
       return setAlert({
-        contents: "상품 할인가격은 1,000원 이상이여야 합니다.",
-        buttonText: "확인",
+        contents: '상품 할인가격은 1,000원 이상이여야 합니다.',
+        buttonText: '확인',
         onButtonClick: () => setAlert(null),
         onOverlayClick: () => setAlert(null),
       });
@@ -125,7 +121,7 @@ function BusinessProductUpload() {
     if (response.data.data) {
       setAlert({
         contents: response.data.message,
-        buttonText: "확인",
+        buttonText: '확인',
         onButtonClick: () => navigate(-1),
         onOverlayClick: () => navigate(-1),
       });
@@ -147,9 +143,10 @@ function BusinessProductUpload() {
       salePrice: numberFormat(responseData.salePrice),
       minCount: responseData.maxCount ? numberFormat(responseData.minCount) : 0,
       maxCount: responseData.maxCount ? numberFormat(responseData.maxCount) : 0,
-      endDate: responseData.endDate ? responseData.endDate : "",
+      endDate: responseData.endDate ? responseData.endDate : '',
       description: responseData.description,
       deleteFileIds: [],
+      soldoutStatus: responseData?.soldoutStatus,
     });
   };
 
@@ -163,16 +160,16 @@ function BusinessProductUpload() {
       return;
     }
     if (!data.price) {
-      return setSalePriceError("상품 가격을 입력해주세요.");
+      return setSalePriceError('상품 가격을 입력해주세요.');
     }
-    const maxValue = data.salePrice.replaceAll(",", "");
-    const price = data.price.replaceAll(",", "");
+    const maxValue = data.salePrice.replaceAll(',', '');
+    const price = data.price.replaceAll(',', '');
 
     if (Number(maxValue) > Number(price)) {
-      return setSalePriceError("할인 가격은 상품 가격보다 높을 수 없습니다.");
+      return setSalePriceError('할인 가격은 상품 가격보다 높을 수 없습니다.');
     }
 
-    setSalePriceError("");
+    setSalePriceError('');
   }, [data.salePrice, data.price]);
 
   // 최대 수량 체크
@@ -182,36 +179,34 @@ function BusinessProductUpload() {
     }
 
     if (!data.minCount) {
-      return setMaxCountError("최소 수량을 입력해주세요.");
+      return setMaxCountError('최소 수량을 입력해주세요.');
     }
 
-    const maxValue = data.maxCount.replaceAll(",", "");
-    const minCount = data.minCount.replaceAll(",", "");
+    const maxValue = data.maxCount.replaceAll(',', '');
+    const minCount = data.minCount.replaceAll(',', '');
 
     if (Number(maxValue) < Number(minCount)) {
-      return setMaxCountError("최대 수량은 최소 수량보다 낮을 수 없습니다.");
+      return setMaxCountError('최대 수량은 최소 수량보다 낮을 수 없습니다.');
     }
 
-    setMaxCountError("");
+    setMaxCountError('');
   }, [data.minCount, data.maxCount]);
 
   useEffect(() => {
-    setFileErrorMessage("");
-    if (data.type === "") return isValidtion(false);
+    setFileErrorMessage('');
+    if (data.type === '') return isValidtion(false);
     if (!id && data.files.length == 0) return isValidtion(false);
     if (data.categories.length == 0) return isValidtion(false);
-    if (data.name === "") return isValidtion(false);
-    if (data.price === 0 || data.price === "" || !data.price)
-      return isValidtion(false);
-    if (data.salePrice === 0 || data.salePrice === "" || !data.salePrice)
-      return isValidtion(false);
-    if (data.description === "") return isValidtion(false);
-    if (data.type === "GROUP") {
+    if (data.name === '') return isValidtion(false);
+    if (data.price === 0 || data.price === '' || !data.price) return isValidtion(false);
+    if (data.salePrice === 0 || data.salePrice === '' || !data.salePrice) return isValidtion(false);
+    if (data.description === '') return isValidtion(false);
+    if (data.type === 'GROUP') {
       if (!data.minCount) return isValidtion(false);
       if (!data.endDate) return isValidtion(false);
     }
-    if (salePriceError !== "") return isValidtion(false);
-    if (maxCountError !== "") return isValidtion(false);
+    if (salePriceError !== '') return isValidtion(false);
+    if (maxCountError !== '') return isValidtion(false);
 
     if (id && data.images.length === 0 && data.files.length === 0) {
       return isValidtion(false);
@@ -225,14 +220,13 @@ function BusinessProductUpload() {
   return (
     <>
       <Layout
-        title={id ? "상품 수정" : "상품 등록"}
+        title={id ? '상품 수정' : '상품 등록'}
         cart={false}
         bell={false}
         floating={false}
-        onBackClick={() => navigate(-1)}
-      >
+        onBackClick={() => navigate(-1)}>
         <L.Container _padding="0">
-          <L.Contents _padding="0" _height={"calc(100vh - 70px)"}>
+          <L.Contents _padding="0" _height={'calc(100vh - 70px)'}>
             <L.Scroll>
               <L.FlexCols _gap={40} _padding="20px 16px 60px">
                 <L.FlexCols _gap={16}>
@@ -244,11 +238,11 @@ function BusinessProductUpload() {
                       label="일반상품"
                       name="normal"
                       value="NORMAL"
-                      checked={data.type === "NORMAL"}
+                      checked={data.type === 'NORMAL'}
                       onChange={() =>
                         setData({
                           ...data,
-                          type: "NORMAL",
+                          type: 'NORMAL',
                         })
                       }
                     />
@@ -256,11 +250,11 @@ function BusinessProductUpload() {
                       label="공동구매 상품"
                       name="group"
                       value="GROUP"
-                      checked={data.type === "GROUP"}
+                      checked={data.type === 'GROUP'}
                       onChange={() =>
                         setData({
                           ...data,
-                          type: "GROUP",
+                          type: 'GROUP',
                         })
                       }
                     />
@@ -273,31 +267,19 @@ function BusinessProductUpload() {
                       상품 이미지
                     </T.Text>
                     <T.Text _weight={400} _size={14} _color="gray600">
-                      상세페이지 상단에 노출할 상품 이미지를 등록해주세요. (최대
-                      7장)
+                      상세페이지 상단에 노출할 상품 이미지를 등록해주세요. (최대 7장)
                     </T.Text>
                   </L.FlexCols>
                   <B.LayerTextButton>
                     <B.Label htmlFor="files">
-                      <T.Text
-                        _weight={400}
-                        _size={15}
-                        _color="gray900"
-                        _align="center"
-                        _content="center"
-                      >
+                      <T.Text _weight={400} _size={15} _color="gray900" _align="center" _content="center">
                         이미지 업로드
                       </T.Text>
                     </B.Label>
                   </B.LayerTextButton>
 
                   {fileErrorMessage && (
-                    <T.Text
-                      as="p"
-                      _size={13}
-                      _weight={400}
-                      style={{ color: "#D32F2F" }}
-                    >
+                    <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }}>
                       {fileErrorMessage}
                     </T.Text>
                   )}
@@ -312,20 +294,14 @@ function BusinessProductUpload() {
                               deleteFile={() =>
                                 setData({
                                   ...data,
-                                  files: data.files.filter(
-                                    (item) => item !== file
-                                  ),
+                                  files: data.files.filter((item) => item !== file),
                                 })
                               }
                             />
                           ))}
                         {data.images.length > 0 &&
                           data.images.map((file, index) => (
-                            <FileListForm
-                              key={index}
-                              file={file}
-                              fileDeleteHandler={fileDeleteHandler}
-                            />
+                            <FileListForm key={index} file={file} fileDeleteHandler={fileDeleteHandler} />
                           ))}
                       </L.FlexRows>
                     </FileListScroll>
@@ -340,9 +316,7 @@ function BusinessProductUpload() {
                       if (valid) return setFileErrorMessage(valid);
 
                       if (data.images.length + data.files.length === 7) {
-                        return setFileErrorMessage(
-                          "최대 7개까지 추가 가능합니다."
-                        );
+                        return setFileErrorMessage('최대 7개까지 추가 가능합니다.');
                       }
 
                       setData({
@@ -408,7 +382,7 @@ function BusinessProductUpload() {
                         <Input
                           placeholder="0"
                           style={{
-                            background: "#fff",
+                            background: '#fff',
                           }}
                           value={numberFormat(data.salePrice)}
                           maxLength={15}
@@ -424,18 +398,13 @@ function BusinessProductUpload() {
                     </L.FlexCols>
                   </L.FlexRows>
                   {salePriceError && (
-                    <T.Text
-                      as="p"
-                      _size={13}
-                      _weight={400}
-                      style={{ color: "#D32F2F" }}
-                    >
+                    <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }}>
                       {salePriceError}
                     </T.Text>
                   )}
                 </L.FlexCols>
 
-                {data.type === "GROUP" && (
+                {data.type === 'GROUP' && (
                   <>
                     <L.FlexCols>
                       <L.FlexRows>
@@ -482,12 +451,7 @@ function BusinessProductUpload() {
                         </L.FlexCols>
                       </L.FlexRows>
                       {maxCountError && (
-                        <T.Text
-                          as="p"
-                          _size={13}
-                          _weight={400}
-                          style={{ color: "#D32F2F" }}
-                        >
+                        <T.Text as="p" _size={13} _weight={400} style={{ color: '#D32F2F' }}>
                           {maxCountError}
                         </T.Text>
                       )}
@@ -502,9 +466,9 @@ function BusinessProductUpload() {
                           name="endDate"
                           placeholder="판매 종료일 선택"
                           style={{
-                            background: "#fff",
+                            background: '#fff',
                           }}
-                          value={data.endDate ? data.endDate : ""}
+                          value={data.endDate ? data.endDate : ''}
                         />
                         <span>
                           <Calendar />
@@ -525,18 +489,33 @@ function BusinessProductUpload() {
                     </RightStyle>
                   </TitleInfoDiv>
                 </L.FlexCols>
+
+                {id && (
+                  <L.FlexCols _gap={16}>
+                    <L.FlexRows _gap={16}>
+                      <L.FlexRows
+                        _content="space-between"
+                        onClick={() => setData((d) => ({ ...d, soldoutStatus: !d.soldoutStatus }))}>
+                        <T.Text _weight={600} _size={16} _color="gray900">
+                          판매 종료
+                        </T.Text>
+                        {data?.soldoutStatus ? <SwitchC /> : <Switch />}
+                      </L.FlexRows>
+                    </L.FlexRows>
+                  </L.FlexCols>
+                )}
               </L.FlexCols>
               <B.FixedActionButton
                 type="button"
                 disabled={!validtion || loading}
-                backgroundColor={validtion ? "green700" : "gray300"}
+                backgroundColor={validtion ? 'green700' : 'gray300'}
                 onClick={() => {
                   if (id) {
                     setConfirm({
                       warn: false,
                       contents: `수정하신 정보를 저장하시겠습니까?`,
-                      confirmText: "네",
-                      cancelText: "취소",
+                      confirmText: '네',
+                      cancelText: '취소',
                       onConfirmClick: () => {
                         setConfirm(null);
                         onSubmit();
@@ -546,9 +525,8 @@ function BusinessProductUpload() {
                   } else {
                     onSubmit();
                   }
-                }}
-              >
-                {id ? "수정하기" : "등록하기"}
+                }}>
+                {id ? '수정하기' : '등록하기'}
               </B.FixedActionButton>
             </L.Scroll>
           </L.Contents>
@@ -583,7 +561,7 @@ function BusinessProductUpload() {
         <CalendarModel
           modelClose={() => setCalendar(false)}
           onChange={(date) => setData({ ...data, endDate: date })}
-          dateFormat={"yyyy-MM-dd"}
+          dateFormat={'yyyy-MM-dd'}
           maxDay={7}
         />
       )}
@@ -593,7 +571,7 @@ function BusinessProductUpload() {
 
 const FileListForm = ({ file, fileDeleteHandler }) => {
   const [confirm, setConfirm] = useState(null);
-  const url = "https://cdn.ondongnemarket.com/item/";
+  const url = 'https://cdn.ondongnemarket.com/item/';
 
   return (
     <>
@@ -603,19 +581,18 @@ const FileListForm = ({ file, fileDeleteHandler }) => {
             setConfirm({
               warn: true,
               contents: `사진을 삭제하시겠습니까?`,
-              confirmText: "삭제",
-              cancelText: "취소",
+              confirmText: '삭제',
+              cancelText: '취소',
               onConfirmClick: () => {
                 setConfirm(null);
                 fileDeleteHandler(file);
               },
               onCancelClick: () => setConfirm(null),
             });
-          }}
-        >
+          }}>
           <Delete />
         </C.DeleteBtn>
-        <img src={url + file.name} width={"100%"} height={"100%"} alt="" />
+        <img src={url + file.name} width={'100%'} height={'100%'} alt="" />
       </C.ImageBox>
       {confirm && (
         <Confirm
@@ -649,7 +626,7 @@ const FileList = ({ file, deleteFile }) => {
       <C.DeleteBtn onClick={deleteFile}>
         <Delete />
       </C.DeleteBtn>
-      <img src={image?.result} width={"100%"} height={"100%"} alt="" />
+      <img src={image?.result} width={'100%'} height={'100%'} alt="" />
     </C.ImageBox>
   );
 };
