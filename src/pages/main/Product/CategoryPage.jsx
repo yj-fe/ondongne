@@ -122,28 +122,6 @@ function CategoryPage(props) {
                                 <L.FlexRows _width={"max-content"}>
                                     <B.FilterButton
                                         type="button"
-                                        _bg={type === "normal" && "green700"}
-                                        onClick={() =>
-                                            setType(
-                                                type === "normal"
-                                                    ? "all"
-                                                    : "normal"
-                                            )
-                                        }>
-                                        <T.Text
-                                            _weight={400}
-                                            _size={13}
-                                            _color={
-                                                type === "normal"
-                                                    ? "white"
-                                                    : "gray900"
-                                            }
-                                            _align="center">
-                                            일반 상품
-                                        </T.Text>
-                                    </B.FilterButton>
-                                    <B.FilterButton
-                                        type="button"
                                         _bg={type === "group" && "green700"}
                                         onClick={() =>
                                             setType(
@@ -162,6 +140,28 @@ function CategoryPage(props) {
                                             }
                                             _align="center">
                                             공동구매 상품
+                                        </T.Text>
+                                    </B.FilterButton>
+                                    <B.FilterButton
+                                        type="button"
+                                        _bg={type === "normal" && "green700"}
+                                        onClick={() =>
+                                            setType(
+                                                type === "normal"
+                                                    ? "all"
+                                                    : "normal"
+                                            )
+                                        }>
+                                        <T.Text
+                                            _weight={400}
+                                            _size={13}
+                                            _color={
+                                                type === "normal"
+                                                    ? "white"
+                                                    : "gray900"
+                                            }
+                                            _align="center">
+                                            일반 상품
                                         </T.Text>
                                     </B.FilterButton>
                                 </L.FlexRows>

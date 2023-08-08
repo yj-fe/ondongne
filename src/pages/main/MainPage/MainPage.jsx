@@ -79,6 +79,11 @@ function MainPage() {
                         <MainCategory />
                     </L.Container>
 
+                    {/* 공동구매 마지막 찬스 */}
+                    <L.Contents _padding="20px 0px 20px 0px">
+                        <MainLastChance />
+                    </L.Contents>
+
                     {/* 우리동네 인기 쿠폰 */}
                     <L.Contents _padding="20px 0px 20px 0px">
                         <MainBestCoupon />
@@ -87,11 +92,6 @@ function MainPage() {
                     {/* 우리동네 타임세일 */}
                     <L.Contents _padding="20px 0px 20px 0px">
                         <MainTimeSale />
-                    </L.Contents>
-
-                    {/* 공동구매 마지막 찬스 */}
-                    <L.Contents _padding="20px 0px 20px 0px">
-                        <MainLastChance />
                     </L.Contents>
 
                     {/* My단골 인기 상품 */}
